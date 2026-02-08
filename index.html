@@ -4,12 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
-<meta name="description" content="The ultimate directory of 470 free tools, open source software, AI projects, and hidden gems across 21 categories.">
+<meta name="description" content="The ultimate directory of 470 free tools, open source software, AI projects, and hidden gems across 25 categories.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* ── Shared vars ── */
   :root {
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-display: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  /* ── OLED Dark (default) ── */
+  [data-theme="oled"], :root {
     --bg-primary: #08090d;
     --bg-secondary: #0e1017;
     --bg-card: #12141c;
@@ -26,12 +37,247 @@
     --accent-tertiary: #e5484d;
     --accent-amber: #f5a623;
     --accent-cyan: #05c8e8;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-lg: 16px;
-    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --font-display: 'Outfit', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --header-bg: rgba(8, 9, 13, 0.8);
+    --scrollbar-thumb: rgba(255,255,255,0.1);
+    --scrollbar-hover: rgba(255,255,255,0.2);
+    --glow-purple: var(--accent);
+    --glow-green: var(--accent-secondary);
+    --glow-cyan: var(--accent-cyan);
+    --noise-opacity: 0.03;
+    --card-shadow: rgba(0,0,0,0.3);
+    --filter-active-text: #fff;
+  }
+
+  /* ── Catppuccin Mocha ── */
+  [data-theme="catppuccin"] {
+    --bg-primary: #1e1e2e;
+    --bg-secondary: #181825;
+    --bg-card: #24243a;
+    --bg-card-hover: #2a2a42;
+    --bg-glass: rgba(30, 30, 46, 0.7);
+    --border: rgba(205, 214, 244, 0.08);
+    --border-hover: rgba(205, 214, 244, 0.15);
+    --text-primary: #cdd6f4;
+    --text-secondary: #a6adc8;
+    --text-muted: #6c7086;
+    --accent: #cba6f7;
+    --accent-glow: rgba(203, 166, 247, 0.2);
+    --accent-secondary: #a6e3a1;
+    --accent-tertiary: #f38ba8;
+    --accent-amber: #f9e2af;
+    --accent-cyan: #89dceb;
+    --header-bg: rgba(30, 30, 46, 0.85);
+    --scrollbar-thumb: rgba(205, 214, 244, 0.1);
+    --scrollbar-hover: rgba(205, 214, 244, 0.2);
+    --glow-purple: #cba6f7;
+    --glow-green: #a6e3a1;
+    --glow-cyan: #89dceb;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.25);
+    --filter-active-text: #1e1e2e;
+  }
+
+  /* ── Nord ── */
+  [data-theme="nord"] {
+    --bg-primary: #2e3440;
+    --bg-secondary: #272c36;
+    --bg-card: #3b4252;
+    --bg-card-hover: #434c5e;
+    --bg-glass: rgba(46, 52, 64, 0.75);
+    --border: rgba(216, 222, 233, 0.08);
+    --border-hover: rgba(216, 222, 233, 0.15);
+    --text-primary: #eceff4;
+    --text-secondary: #d8dee9;
+    --text-muted: #7b88a1;
+    --accent: #88c0d0;
+    --accent-glow: rgba(136, 192, 208, 0.2);
+    --accent-secondary: #a3be8c;
+    --accent-tertiary: #bf616a;
+    --accent-amber: #ebcb8b;
+    --accent-cyan: #8fbcbb;
+    --header-bg: rgba(46, 52, 64, 0.85);
+    --scrollbar-thumb: rgba(216, 222, 233, 0.1);
+    --scrollbar-hover: rgba(216, 222, 233, 0.2);
+    --glow-purple: #b48ead;
+    --glow-green: #a3be8c;
+    --glow-cyan: #88c0d0;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.25);
+    --filter-active-text: #2e3440;
+  }
+
+  /* ── Dracula ── */
+  [data-theme="dracula"] {
+    --bg-primary: #282a36;
+    --bg-secondary: #21222c;
+    --bg-card: #2e303e;
+    --bg-card-hover: #363848;
+    --bg-glass: rgba(40, 42, 54, 0.75);
+    --border: rgba(248, 248, 242, 0.08);
+    --border-hover: rgba(248, 248, 242, 0.14);
+    --text-primary: #f8f8f2;
+    --text-secondary: #c0bfbc;
+    --text-muted: #6272a4;
+    --accent: #bd93f9;
+    --accent-glow: rgba(189, 147, 249, 0.2);
+    --accent-secondary: #50fa7b;
+    --accent-tertiary: #ff5555;
+    --accent-amber: #f1fa8c;
+    --accent-cyan: #8be9fd;
+    --header-bg: rgba(40, 42, 54, 0.85);
+    --scrollbar-thumb: rgba(248, 248, 242, 0.1);
+    --scrollbar-hover: rgba(248, 248, 242, 0.2);
+    --glow-purple: #bd93f9;
+    --glow-green: #50fa7b;
+    --glow-cyan: #8be9fd;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.3);
+    --filter-active-text: #282a36;
+  }
+
+  /* ── GitHub Dark ── */
+  [data-theme="github-dark"] {
+    --bg-primary: #0d1117;
+    --bg-secondary: #0a0e14;
+    --bg-card: #161b22;
+    --bg-card-hover: #1c2129;
+    --bg-glass: rgba(13, 17, 23, 0.75);
+    --border: rgba(240, 246, 252, 0.06);
+    --border-hover: rgba(240, 246, 252, 0.12);
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #525a63;
+    --accent: #58a6ff;
+    --accent-glow: rgba(88, 166, 255, 0.2);
+    --accent-secondary: #3fb950;
+    --accent-tertiary: #f85149;
+    --accent-amber: #d29922;
+    --accent-cyan: #39d2f5;
+    --header-bg: rgba(13, 17, 23, 0.85);
+    --scrollbar-thumb: rgba(240, 246, 252, 0.08);
+    --scrollbar-hover: rgba(240, 246, 252, 0.15);
+    --glow-purple: #bc8cff;
+    --glow-green: #3fb950;
+    --glow-cyan: #39d2f5;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.35);
+    --filter-active-text: #fff;
+  }
+
+  /* ── Midnight Blue ── */
+  [data-theme="midnight"] {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #0f1424;
+    --bg-card: #141a2e;
+    --bg-card-hover: #1a2038;
+    --bg-glass: rgba(10, 14, 26, 0.75);
+    --border: rgba(120, 160, 255, 0.08);
+    --border-hover: rgba(120, 160, 255, 0.15);
+    --text-primary: #e0e6f0;
+    --text-secondary: #8892a8;
+    --text-muted: #505870;
+    --accent: #5b8def;
+    --accent-glow: rgba(91, 141, 239, 0.2);
+    --accent-secondary: #4ecdc4;
+    --accent-tertiary: #ff6b6b;
+    --accent-amber: #ffd93d;
+    --accent-cyan: #45b7d1;
+    --header-bg: rgba(10, 14, 26, 0.85);
+    --scrollbar-thumb: rgba(120, 160, 255, 0.1);
+    --scrollbar-hover: rgba(120, 160, 255, 0.2);
+    --glow-purple: #7c5bf5;
+    --glow-green: #4ecdc4;
+    --glow-cyan: #45b7d1;
+    --noise-opacity: 0.025;
+    --card-shadow: rgba(0,0,0,0.35);
+    --filter-active-text: #fff;
+  }
+
+  /* ── Solarized Dark ── */
+  [data-theme="solarized"] {
+    --bg-primary: #002b36;
+    --bg-secondary: #00252f;
+    --bg-card: #073642;
+    --bg-card-hover: #0a3f4e;
+    --bg-glass: rgba(0, 43, 54, 0.75);
+    --border: rgba(131, 148, 150, 0.12);
+    --border-hover: rgba(131, 148, 150, 0.22);
+    --text-primary: #fdf6e3;
+    --text-secondary: #93a1a1;
+    --text-muted: #657b83;
+    --accent: #268bd2;
+    --accent-glow: rgba(38, 139, 210, 0.2);
+    --accent-secondary: #859900;
+    --accent-tertiary: #dc322f;
+    --accent-amber: #b58900;
+    --accent-cyan: #2aa198;
+    --header-bg: rgba(0, 43, 54, 0.85);
+    --scrollbar-thumb: rgba(131, 148, 150, 0.15);
+    --scrollbar-hover: rgba(131, 148, 150, 0.25);
+    --glow-purple: #6c71c4;
+    --glow-green: #859900;
+    --glow-cyan: #2aa198;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.3);
+    --filter-active-text: #fdf6e3;
+  }
+
+  /* ── Light ── */
+  [data-theme="light"] {
+    --bg-primary: #f8f9fc;
+    --bg-secondary: #eef0f5;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f0f2f7;
+    --bg-glass: rgba(248, 249, 252, 0.85);
+    --border: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.15);
+    --text-primary: #1a1d26;
+    --text-secondary: #5a5e6e;
+    --text-muted: #8c8fa0;
+    --accent: #6e56cf;
+    --accent-glow: rgba(110, 86, 207, 0.12);
+    --accent-secondary: #2a9d6e;
+    --accent-tertiary: #d13438;
+    --accent-amber: #c08a00;
+    --accent-cyan: #0891b2;
+    --header-bg: rgba(248, 249, 252, 0.9);
+    --scrollbar-thumb: rgba(0,0,0,0.12);
+    --scrollbar-hover: rgba(0,0,0,0.2);
+    --glow-purple: #6e56cf;
+    --glow-green: #2a9d6e;
+    --glow-cyan: #0891b2;
+    --noise-opacity: 0.015;
+    --card-shadow: rgba(0,0,0,0.06);
+    --filter-active-text: #fff;
+  }
+
+  /* ── Rosé Pine ── */
+  [data-theme="rose-pine"] {
+    --bg-primary: #191724;
+    --bg-secondary: #1f1d2e;
+    --bg-card: #26233a;
+    --bg-card-hover: #2d2a42;
+    --bg-glass: rgba(25, 23, 36, 0.75);
+    --border: rgba(224, 222, 244, 0.08);
+    --border-hover: rgba(224, 222, 244, 0.14);
+    --text-primary: #e0def4;
+    --text-secondary: #908caa;
+    --text-muted: #6e6a86;
+    --accent: #c4a7e7;
+    --accent-glow: rgba(196, 167, 231, 0.2);
+    --accent-secondary: #9ccfd8;
+    --accent-tertiary: #eb6f92;
+    --accent-amber: #f6c177;
+    --accent-cyan: #9ccfd8;
+    --header-bg: rgba(25, 23, 36, 0.85);
+    --scrollbar-thumb: rgba(224, 222, 244, 0.08);
+    --scrollbar-hover: rgba(224, 222, 244, 0.15);
+    --glow-purple: #c4a7e7;
+    --glow-green: #9ccfd8;
+    --glow-cyan: #31748f;
+    --noise-opacity: 0.02;
+    --card-shadow: rgba(0,0,0,0.3);
+    --filter-active-text: #191724;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,22 +314,22 @@
     pointer-events: none;
     z-index: 0;
   }
-  .ambient-glow--purple { background: var(--accent); top: -200px; left: -100px; }
-  .ambient-glow--green { background: var(--accent-secondary); bottom: -200px; right: -100px; }
-  .ambient-glow--cyan { background: var(--accent-cyan); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.04; }
+  .ambient-glow--purple { background: var(--glow-purple); top: -200px; left: -100px; }
+  .ambient-glow--green { background: var(--glow-green); bottom: -200px; right: -100px; }
+  .ambient-glow--cyan { background: var(--glow-cyan); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.04; }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
 
   /* ── Header ── */
   .header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(8, 9, 13, 0.8);
+    background: var(--header-bg);
     backdrop-filter: blur(20px) saturate(1.2);
     -webkit-backdrop-filter: blur(20px) saturate(1.2);
     border-bottom: 1px solid var(--border);
@@ -265,7 +511,7 @@
   .filter-btn.active {
     background: var(--accent);
     border-color: var(--accent);
-    color: #fff;
+    color: var(--filter-active-text);
     box-shadow: 0 2px 12px var(--accent-glow);
   }
   .filter-count {
@@ -352,7 +598,7 @@
     border-color: var(--border-hover);
     background: var(--bg-card-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 32px var(--card-shadow);
   }
 
   .card-preview {
@@ -542,7 +788,7 @@
     z-index: 1000;
     transition: transform 0.3s ease;
     backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 32px var(--card-shadow);
   }
   .toast.visible { transform: translateX(-50%) translateY(0); }
 
@@ -557,6 +803,156 @@
   .footer a { color: var(--text-secondary); text-decoration: none; }
   .footer a:hover { color: var(--accent); }
 
+
+  /* ── Light theme overrides for elements with hardcoded rgba ── */
+  [data-theme="light"] .search-shortcut {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.12);
+  }
+  [data-theme="light"] .filter-btn:hover {
+    background: rgba(0,0,0,0.04);
+  }
+  [data-theme="light"] .filter-count {
+    background: rgba(0,0,0,0.06);
+  }
+  [data-theme="light"] .filter-btn.active .filter-count {
+    background: rgba(255,255,255,0.25);
+  }
+  [data-theme="light"] .view-btn.active {
+    background: rgba(0,0,0,0.05);
+  }
+  [data-theme="light"] .card-action:hover {
+    background: rgba(110, 86, 207, 0.08);
+  }
+  [data-theme="light"] .card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  [data-theme="light"] .card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  [data-theme="light"] body::before {
+    opacity: 0.015;
+  }
+  [data-theme="light"] .ambient-glow {
+    opacity: 0.04;
+  }
+  [data-theme="light"] .domain-icon {
+    background: rgba(0,0,0,0.04) !important;
+  }
+  [data-theme="light"] .github-link:hover {
+    background: rgba(0,0,0,0.04);
+  }
+
+  /* ── Theme Picker ── */
+  .theme-picker {
+    position: relative;
+  }
+  .theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .theme-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.03);
+  }
+  .theme-btn svg { width: 16px; height: 16px; }
+  [data-theme="light"] .theme-btn:hover {
+    background: rgba(0,0,0,0.04);
+  }
+
+  .theme-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius);
+    padding: 6px;
+    min-width: 180px;
+    box-shadow: 0 12px 40px var(--card-shadow);
+    backdrop-filter: blur(16px);
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .theme-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+  }
+  .theme-option:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-primary);
+  }
+  [data-theme="light"] .theme-option:hover {
+    background: rgba(0,0,0,0.05);
+  }
+  .theme-option.active {
+    color: var(--accent);
+  }
+  .theme-option .swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border-hover);
+    flex-shrink: 0;
+  }
+  .theme-option.active .swatch {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+  }
+  .theme-option .check {
+    margin-left: auto;
+    opacity: 0;
+    color: var(--accent);
+  }
+  .theme-option.active .check {
+    opacity: 1;
+  }
+  .theme-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 6px;
+  }
+  .theme-section-label {
+    padding: 6px 12px 4px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     .header-stats .stat { display: none; }
@@ -570,6 +966,13 @@
     .search-shortcut { display: none; }
   }
 </style>
+<script>
+(function(){
+  var t = localStorage.getItem('coolsites-theme') || 'system';
+  if (t === 'system') t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 </head>
 <body>
 
@@ -587,7 +990,68 @@
     <div class="header-stats">
       <div class="stat"><strong id="totalCount">0</strong> sites</div>
       <div class="stat"><strong id="catCount">0</strong> categories</div>
-      <a href="https://github.com" class="github-link" target="_blank" rel="noopener">
+      <div class="theme-picker">
+        <button class="theme-btn" id="themeToggle" title="Change theme" aria-label="Change theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </button>
+        <div class="theme-dropdown" id="themeDropdown">
+          <div class="theme-section-label">Dark</div>
+          <button class="theme-option" data-theme="oled">
+            <span class="swatch" style="background: #08090d;"></span>
+            OLED Dark
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="catppuccin">
+            <span class="swatch" style="background: #1e1e2e;"></span>
+            Catppuccin Mocha
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="dracula">
+            <span class="swatch" style="background: #282a36;"></span>
+            Dracula
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="rose-pine">
+            <span class="swatch" style="background: #191724;"></span>
+            Rosé Pine
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="nord">
+            <span class="swatch" style="background: #2e3440;"></span>
+            Nord
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="github-dark">
+            <span class="swatch" style="background: #0d1117;"></span>
+            GitHub Dark
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="midnight">
+            <span class="swatch" style="background: #0a0e1a;"></span>
+            Midnight Blue
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <button class="theme-option" data-theme="solarized">
+            <span class="swatch" style="background: #002b36;"></span>
+            Solarized Dark
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <div class="theme-divider"></div>
+          <div class="theme-section-label">Light</div>
+          <button class="theme-option" data-theme="light">
+            <span class="swatch" style="background: #f8f9fc; border-color: rgba(0,0,0,0.2);"></span>
+            Light
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <div class="theme-divider"></div>
+          <button class="theme-option" data-theme="system">
+            <span class="swatch" style="background: linear-gradient(135deg, #08090d 50%, #f8f9fc 50%); border-color: rgba(128,128,128,0.3);"></span>
+            System
+            <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <a href="https://github.com/SysAdminDoc/CoolSites" class="github-link" target="_blank" rel="noopener">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
       </a>
@@ -630,7 +1094,8 @@
 
 <!-- Footer -->
 <footer class="footer">
-  <p>Built for sysadmins, devs, creators, homelabbers, and the endlessly curious. <a href="#">Suggest a site</a></p>
+  <p>Built for sysadmins, devs, creators, homelabbers, and the endlessly curious.</p>
+  <p style="margin-top: 0.5rem"><a href="https://github.com/SysAdminDoc/CoolSites/issues" target="_blank" rel="noopener">Suggest a site</a> &middot; <a href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener">GitHub</a></p>
 </footer>
 
 <script>
@@ -4168,7 +4633,83 @@ document.getElementById('listViewBtn').addEventListener('click', () => {
   renderGrid();
 });
 
+
+// ── Theme System ──
+const THEMES = {
+  'oled': 'OLED Dark',
+  'catppuccin': 'Catppuccin Mocha',
+  'dracula': 'Dracula',
+  'rose-pine': 'Ros\u00e9 Pine',
+  'nord': 'Nord',
+  'github-dark': 'GitHub Dark',
+  'midnight': 'Midnight Blue',
+  'solarized': 'Solarized Dark',
+  'light': 'Light',
+  'system': 'System'
+};
+
+function getSystemTheme() {
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
+}
+
+function applyTheme(themeId) {
+  const resolved = themeId === 'system' ? getSystemTheme() : themeId;
+  document.documentElement.setAttribute('data-theme', resolved);
+  updateThemeIcon(resolved);
+  updateThemeDropdown(themeId);
+}
+
+function updateThemeIcon(resolved) {
+  const btn = document.getElementById('themeToggle');
+  const isLight = resolved === 'light';
+  btn.innerHTML = isLight
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
+}
+
+function updateThemeDropdown(activeId) {
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.theme === activeId);
+  });
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('coolsites-theme');
+  const themeId = saved || 'system';
+  applyTheme(themeId);
+}
+
+// Toggle dropdown
+document.getElementById('themeToggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('themeDropdown').classList.toggle('open');
+});
+
+// Theme selection
+document.querySelectorAll('.theme-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const themeId = opt.dataset.theme;
+    localStorage.setItem('coolsites-theme', themeId);
+    applyTheme(themeId);
+    document.getElementById('themeDropdown').classList.remove('open');
+  });
+});
+
+// Close dropdown on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.theme-picker')) {
+    document.getElementById('themeDropdown').classList.remove('open');
+  }
+});
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+  const saved = localStorage.getItem('coolsites-theme');
+  if (!saved || saved === 'system') applyTheme('system');
+});
+
 // ── Init ──
+initTheme();
 buildFilters();
 renderGrid();
 </script>
