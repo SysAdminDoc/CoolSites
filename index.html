@@ -1,0 +1,4176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoolSites | Curated Web Tools & Resources</title>
+<meta name="description" content="The ultimate directory of 470 free tools, open source software, AI projects, and hidden gems across 21 categories.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #08090d;
+    --bg-secondary: #0e1017;
+    --bg-card: #12141c;
+    --bg-card-hover: #181b25;
+    --bg-glass: rgba(18, 20, 28, 0.7);
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+    --text-primary: #e8e9ed;
+    --text-secondary: #8b8d98;
+    --text-muted: #5a5c66;
+    --accent: #6e56cf;
+    --accent-glow: rgba(110, 86, 207, 0.25);
+    --accent-secondary: #3ecf8e;
+    --accent-tertiary: #e5484d;
+    --accent-amber: #f5a623;
+    --accent-cyan: #05c8e8;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-display: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-display);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Noise overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── Ambient glow ── */
+  .ambient-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ambient-glow--purple { background: var(--accent); top: -200px; left: -100px; }
+  .ambient-glow--green { background: var(--accent-secondary); bottom: -200px; right: -100px; }
+  .ambient-glow--cyan { background: var(--accent-cyan); top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.04; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── Header ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 9, 13, 0.8);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-mono);
+  }
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+  }
+  .logo-text span { color: var(--text-muted); font-weight: 400; }
+
+  .header-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .stat {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .stat strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+  .github-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .github-link:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.03);
+  }
+  .github-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 2rem;
+  }
+
+  /* ── Search ── */
+  .search-container {
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+  }
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 14px 16px 14px 46px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .search-shortcut {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  /* ── Filters ── */
+  .filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+  }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .filter-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.03);
+  }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 12px var(--accent-glow);
+  }
+  .filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.08);
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    margin-left: 6px;
+  }
+  .filter-btn.active .filter-count {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ── Grid ── */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+  .results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 0 4px;
+  }
+  .results-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .view-toggles {
+    display: flex;
+    gap: 4px;
+  }
+  .view-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+  .view-btn:hover { border-color: var(--border-hover); color: var(--text-secondary); }
+  .view-btn.active { background: rgba(255,255,255,0.05); border-color: var(--border-hover); color: var(--text-primary); }
+  .view-btn svg { width: 16px; height: 16px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* ── Card ── */
+  .card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    animation: cardIn 0.4s ease backwards;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .card-preview {
+    width: 100%;
+    height: 180px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+  .card-preview iframe {
+    width: 200%;
+    height: 200%;
+    border: none;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+  }
+  .card-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, var(--bg-card) 100%);
+    pointer-events: none;
+  }
+  .card-preview-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .card-preview-placeholder .domain-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .card-body {
+    padding: 16px 20px 20px;
+  }
+  .card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title img {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-url {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+  }
+  .card-url:hover { color: var(--accent); }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+  }
+  .card-action {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+  .card-action:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .card-action svg { width: 14px; height: 14px; }
+
+  /* ── Category colors ── */
+  .cat-speed { background: rgba(110, 86, 207, 0.15); color: #a78bfa; }
+  .cat-ip { background: rgba(62, 207, 142, 0.15); color: #3ecf8e; }
+  .cat-dns { background: rgba(5, 200, 232, 0.15); color: #05c8e8; }
+  .cat-security { background: rgba(229, 72, 77, 0.15); color: #e5484d; }
+  .cat-osint { background: rgba(138, 180, 248, 0.12); color: #8ab4f8; }
+  .cat-dev { background: rgba(255, 120, 198, 0.15); color: #ff78c6; }
+  .cat-desktop { background: rgba(255, 165, 0, 0.15); color: #ffa500; }
+  .cat-ai { background: rgba(0, 200, 150, 0.15); color: #00c896; }
+  .cat-aicreative { background: rgba(255, 100, 255, 0.15); color: #ff64ff; }
+  .cat-automation { background: rgba(255, 200, 50, 0.15); color: #ffc832; }
+  .cat-homelab { background: rgba(100, 180, 255, 0.15); color: #64b4ff; }
+  .cat-creative { background: rgba(255, 140, 60, 0.15); color: #ff8c3c; }
+  .cat-music { background: rgba(200, 100, 255, 0.15); color: #c864ff; }
+  .cat-privacy { background: rgba(171, 140, 255, 0.15); color: #ab8cff; }
+  .cat-sysadmin { background: rgba(245, 166, 35, 0.15); color: #f5a623; }
+  .cat-data { background: rgba(50, 200, 200, 0.15); color: #32c8c8; }
+  .cat-education { background: rgba(100, 220, 100, 0.15); color: #64dc64; }
+  .cat-productivity { background: rgba(169, 220, 118, 0.15); color: #a9dc76; }
+  .cat-file { background: rgba(200, 180, 140, 0.15); color: #c8b48c; }
+  .cat-fun { background: rgba(245, 208, 66, 0.15); color: #f5d042; }
+  .cat-news { background: rgba(180, 180, 200, 0.15); color: #b4b4c8; }
+  .cat-gaming { background: rgba(255, 80, 80, 0.15); color: #ff5050; }
+  .cat-cli { background: rgba(0, 255, 180, 0.15); color: #00ffb4; }
+  .cat-networking { background: rgba(80, 160, 255, 0.15); color: #50a0ff; }
+  .cat-containers { background: rgba(0, 180, 230, 0.15); color: #00b4e6; }
+
+  /* ── List view adjustments ── */
+  .grid.list-view .card { display: flex; flex-direction: row; }
+  .grid.list-view .card-preview { width: 200px; min-width: 200px; height: auto; min-height: 100px; border-bottom: none; border-right: 1px solid var(--border); }
+  .grid.list-view .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 14px 20px; }
+  .grid.list-view .card-desc { margin-bottom: 8px; }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: var(--text-muted);
+  }
+  .empty-state svg { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.4; }
+  .empty-state h3 { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+  .empty-state p { font-size: 0.9rem; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-family: var(--font-display);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .toast.visible { transform: translateX(-50%) translateY(0); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .footer a { color: var(--text-secondary); text-decoration: none; }
+  .footer a:hover { color: var(--accent); }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header-stats .stat { display: none; }
+    .hero { padding: 3rem 1rem 2rem; }
+    .hero h1 { font-size: 2rem; }
+    .grid { grid-template-columns: 1fr; }
+    .grid.list-view .card { flex-direction: column; }
+    .grid.list-view .card-preview { width: 100%; min-height: 120px; border-right: none; border-bottom: 1px solid var(--border); }
+    .container { padding: 0 1rem 4rem; }
+    .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+    .search-shortcut { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-glow ambient-glow--purple"></div>
+<div class="ambient-glow ambient-glow--green"></div>
+<div class="ambient-glow ambient-glow--cyan"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">//</div>
+      <div class="logo-text">CoolSites <span>directory</span></div>
+    </a>
+    <div class="header-stats">
+      <div class="stat"><strong id="totalCount">0</strong> sites</div>
+      <div class="stat"><strong id="catCount">0</strong> categories</div>
+      <a href="https://github.com" class="github-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>The Internet's Best Kept Secrets</h1>
+  <p>The ultimate directory of free tools, open source software, AI projects, and hidden gems. 470 curated picks across 25 categories.</p>
+
+  <div class="search-container">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search sites, categories, descriptions..." autocomplete="off">
+    <span class="search-shortcut">/</span>
+  </div>
+
+  <div class="filters" id="filters"></div>
+</section>
+
+<!-- Content -->
+<main class="container">
+  <div class="results-bar">
+    <div class="results-count" id="resultsCount">Loading...</div>
+    <div class="view-toggles">
+      <button class="view-btn active" id="gridViewBtn" title="Grid view">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </button>
+      <button class="view-btn" id="listViewBtn" title="List view">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>Built for sysadmins, devs, creators, homelabbers, and the endlessly curious. <a href="#">Suggest a site</a></p>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  SITE DATABASE — Edit this array to add/remove/modify entries
+// ════════════════════════════════════════════════════════════════
+const SITES = [
+  // ── Speed Tests ──
+  {
+    name: "Cloudflare Speed Test",
+    url: "https://speed.cloudflare.com",
+    description: "Comprehensive speed test with jitter, latency, packet loss, and download/upload metrics. Goes way beyond a single number.",
+    category: "Speed Tests",
+    tags: ["speed", "latency", "jitter", "cloudflare"]
+  },
+  {
+    name: "Fast.com",
+    url: "https://fast.com",
+    description: "Netflix-powered speed test. Zero clutter. Useful for detecting content-based throttling since it tests against Netflix servers.",
+    category: "Speed Tests",
+    tags: ["speed", "netflix", "bandwidth"]
+  },
+  {
+    name: "Waveform Bufferbloat Test",
+    url: "https://www.waveform.com/tools/bufferbloat",
+    description: "Tests for bufferbloat — the hidden cause of laggy connections even on fast links. Measures loaded vs unloaded latency.",
+    category: "Speed Tests",
+    tags: ["bufferbloat", "latency", "quality"]
+  },
+  {
+    name: "OpenSpeedTest",
+    url: "https://openspeedtest.com",
+    description: "Open source HTML5 speed test. No ads. You can deploy your own server for internal network testing.",
+    category: "Speed Tests",
+    tags: ["speed", "open source", "self-hosted"]
+  },
+  {
+    name: "Speedof.me",
+    url: "https://speedof.me",
+    description: "HTML5-based speed test with a clean visual graph showing your speed over time. Pure browser-based.",
+    category: "Speed Tests",
+    tags: ["speed", "html5", "bandwidth"]
+  },
+  {
+    name: "WiFiman",
+    url: "https://wifiman.com",
+    description: "Ubiquiti\'s speed test tool. Clean interface, no ads. Powerful with UniFi gear but works standalone.",
+    category: "Speed Tests",
+    tags: ["speed", "wifi", "ubiquiti"]
+  },
+  {
+    name: "LibreSpeed",
+    url: "https://librespeed.org",
+    description: "Self-hostable speed test. Run your own instance for LAN/WAN testing. Truly private.",
+    category: "Speed Tests",
+    tags: ["speed", "self-hosted", "privacy"]
+  },
+  {
+    name: "M-Lab NDT",
+    url: "https://speed.measurementlab.net",
+    description: "Google-backed network diagnostic tool. Feeds into open data research on global internet performance.",
+    category: "Speed Tests",
+    tags: ["speed", "google", "research"]
+  },
+  // ── IP & Network ──
+  {
+    name: "IPChicken",
+    url: "https://ipchicken.com",
+    description: "The classic. Just your IP address and a chicken. A sysadmin tradition.",
+    category: "IP & Network",
+    tags: ["ip", "lookup", "classic"]
+  },
+  {
+    name: "BGP.Tools",
+    url: "https://bgp.tools",
+    description: "Beautiful BGP looking glass. Visualize AS paths, prefix announcements, and routing in real time.",
+    category: "IP & Network",
+    tags: ["bgp", "routing", "network"]
+  },
+  {
+    name: "Hurricane Electric BGP",
+    url: "https://bgp.he.net",
+    description: "The most comprehensive BGP toolkit available. AS info, prefix lists, IRR data, DNS — all in one.",
+    category: "IP & Network",
+    tags: ["bgp", "routing", "dns"]
+  },
+  {
+    name: "IPinfo.io",
+    url: "https://ipinfo.io",
+    description: "IP geolocation, ASN data, and network details. Generous free tier with a clean API.",
+    category: "IP & Network",
+    tags: ["ip", "geolocation", "api"]
+  },
+  {
+    name: "ping.pe",
+    url: "https://ping.pe",
+    description: "Global ping and MTR from 30+ worldwide locations simultaneously. Instant network reachability check.",
+    category: "IP & Network",
+    tags: ["ping", "mtr", "global"]
+  },
+  {
+    name: "Robtex",
+    url: "https://www.robtex.com",
+    description: "Swiss army knife for DNS and IP research. Visualizes relationships between IPs, domains, and ASNs.",
+    category: "IP & Network",
+    tags: ["dns", "ip", "visualization"]
+  },
+  {
+    name: "ViewDNS.info",
+    url: "https://viewdns.info",
+    description: "20+ DNS and network tools in one place. Reverse IP, port scanner, firewall test, and more.",
+    category: "IP & Network",
+    tags: ["dns", "tools", "port scan"]
+  },
+  {
+    name: "HackerTarget",
+    url: "https://hackertarget.com",
+    description: "Free online vulnerability scanners and network tools. Nmap, traceroute, subnet calculator, and more.",
+    category: "IP & Network",
+    tags: ["scanner", "nmap", "tools"]
+  },
+  {
+    name: "RIPEstat",
+    url: "https://stat.ripe.net",
+    description: "RIPE NCC\'s data dashboard. Visualize routing, DNS, abuse contacts, and geolocation for any IP or ASN.",
+    category: "IP & Network",
+    tags: ["ripe", "bgp", "data"]
+  },
+  // ── DNS Tools ──
+  {
+    name: "whatsmydns.net",
+    url: "https://www.whatsmydns.net",
+    description: "Global DNS propagation checker. See how your DNS changes have spread across the world.",
+    category: "DNS Tools",
+    tags: ["dns", "propagation", "global"]
+  },
+  {
+    name: "DNSViz",
+    url: "https://dnsviz.net",
+    description: "Visualizes DNSSEC authentication chains. See exactly where validation breaks down.",
+    category: "DNS Tools",
+    tags: ["dnssec", "visualization", "security"]
+  },
+  {
+    name: "MXToolbox",
+    url: "https://mxtoolbox.com",
+    description: "The go-to for email deliverability. Blacklist checks, MX lookups, SPF/DKIM validation.",
+    category: "DNS Tools",
+    tags: ["email", "blacklist", "mx"]
+  },
+  {
+    name: "nslookup.io",
+    url: "https://www.nslookup.io",
+    description: "Clean, modern DNS lookup tool. Shows all record types with a beautiful interface.",
+    category: "DNS Tools",
+    tags: ["dns", "lookup", "records"]
+  },
+  {
+    name: "DNS Leak Test",
+    url: "https://www.dnsleaktest.com",
+    description: "Tests whether your VPN is leaking DNS queries. Essential for privacy verification.",
+    category: "DNS Tools",
+    tags: ["dns", "leak", "vpn", "privacy"]
+  },
+  {
+    name: "IntoDNS",
+    url: "https://intodns.com",
+    description: "Full DNS health check for your domain. Reports configuration issues and best practices.",
+    category: "DNS Tools",
+    tags: ["dns", "health", "audit"]
+  },
+  // ── Security ──
+  {
+    name: "BrowserLeaks",
+    url: "https://browserleaks.com",
+    description: "Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.",
+    category: "Security",
+    tags: ["fingerprint", "privacy", "browser"]
+  },
+  {
+    name: "Cover Your Tracks (EFF)",
+    url: "https://coveryourtracks.eff.org",
+    description: "EFF\'s tracker testing tool. See how unique your browser fingerprint is and how trackable you are.",
+    category: "Security",
+    tags: ["eff", "tracking", "fingerprint"]
+  },
+  {
+    name: "Qualys SSL Labs",
+    url: "https://www.ssllabs.com/ssltest/",
+    description: "The gold standard for SSL/TLS testing. Deep analysis of certificate chains and configuration.",
+    category: "Security",
+    tags: ["ssl", "tls", "certificate"]
+  },
+  {
+    name: "SecurityHeaders",
+    url: "https://securityheaders.com",
+    description: "Grades your HTTP security headers. Quick way to find missing CSP, HSTS, and other protections.",
+    category: "Security",
+    tags: ["headers", "http", "hardening"]
+  },
+  {
+    name: "Mozilla Observatory",
+    url: "https://observatory.mozilla.org",
+    description: "Mozilla\'s website security scanner. Tests headers, TLS, cookies, and content security policies.",
+    category: "Security",
+    tags: ["mozilla", "scanner", "http"]
+  },
+  {
+    name: "GRC ShieldsUP!",
+    url: "https://www.grc.com/shieldsup",
+    description: "Steve Gibson\'s classic port scanner. Tests your firewall from the outside. A legend since 2001.",
+    category: "Security",
+    tags: ["firewall", "ports", "scanner"]
+  },
+  {
+    name: "urlscan.io",
+    url: "https://urlscan.io",
+    description: "Scans and analyzes websites. See every request, cookie, and connection a page makes. Catches phishing.",
+    category: "Security",
+    tags: ["phishing", "analysis", "scanner"]
+  },
+  {
+    name: "Hardenize",
+    url: "https://www.hardenize.com",
+    description: "Comprehensive security assessment. Tests email, web, DNS, and network security in one sweep.",
+    category: "Security",
+    tags: ["hardening", "assessment", "email"]
+  },
+  {
+    name: "Have I Been Pwned",
+    url: "https://haveibeenpwned.com",
+    description: "Troy Hunt\'s breach database. Check if your email or password has appeared in data breaches.",
+    category: "Security",
+    tags: ["breach", "password", "email"]
+  },
+  {
+    name: "VirusTotal",
+    url: "https://www.virustotal.com",
+    description: "Scan files and URLs with 70+ antivirus engines simultaneously. The definitive malware checker.",
+    category: "Security",
+    tags: ["malware", "antivirus", "scan"]
+  },
+  {
+    name: "CyberChef",
+    url: "https://gchq.github.io/CyberChef",
+    description: "GCHQ\'s data Swiss Army knife. Encode, decode, encrypt, compress, parse — chain operations visually.",
+    category: "Security",
+    tags: ["encode", "decode", "crypto", "gchq"]
+  },
+  // ── OSINT ──
+  {
+    name: "Shodan",
+    url: "https://www.shodan.io",
+    description: "The search engine for internet-connected devices. Find exposed services, cameras, databases, and more.",
+    category: "OSINT",
+    tags: ["iot", "devices", "search"]
+  },
+  {
+    name: "Censys",
+    url: "https://search.censys.io",
+    description: "Internet-wide scan data. Search every public-facing device and certificate on the internet.",
+    category: "OSINT",
+    tags: ["scan", "certificates", "search"]
+  },
+  {
+    name: "crt.sh",
+    url: "https://crt.sh",
+    description: "Certificate transparency log search. Discover all SSL certs ever issued for a domain — reveals subdomains.",
+    category: "OSINT",
+    tags: ["certificates", "subdomains", "recon"]
+  },
+  {
+    name: "DNSDumpster",
+    url: "https://dnsdumpster.com",
+    description: "Domain research tool. Maps DNS records, finds subdomains, and visualizes a domain\'s infrastructure.",
+    category: "OSINT",
+    tags: ["dns", "recon", "subdomains"]
+  },
+  {
+    name: "AbuseIPDB",
+    url: "https://www.abuseipdb.com",
+    description: "Community-driven IP abuse database. Check and report malicious IPs. Essential for firewall rules.",
+    category: "OSINT",
+    tags: ["abuse", "ip", "blacklist"]
+  },
+  {
+    name: "GreyNoise",
+    url: "https://viz.greynoise.io",
+    description: "Separates targeted attacks from internet background noise. Identifies mass scanners and benign crawlers.",
+    category: "OSINT",
+    tags: ["noise", "scanning", "threat"]
+  },
+  {
+    name: "Pulsedive",
+    url: "https://pulsedive.com",
+    description: "Threat intelligence platform. Correlate IPs, domains, and URLs with known threat indicators.",
+    category: "OSINT",
+    tags: ["threat", "intelligence", "ioc"]
+  },
+  {
+    name: "PublicWWW",
+    url: "https://publicwww.com",
+    description: "Source code search engine. Find websites using specific JavaScript, analytics codes, or HTML snippets.",
+    category: "OSINT",
+    tags: ["source code", "search", "analytics"]
+  },
+  {
+    name: "SpiderFoot",
+    url: "https://www.spiderfoot.net",
+    description: "Open source OSINT automation. Scans 200+ data sources to map an entity\'s digital footprint.",
+    category: "OSINT",
+    tags: ["automation", "recon", "footprint"]
+  },
+  // ── Dev Tools ──
+  {
+    name: "Regex101",
+    url: "https://regex101.com",
+    description: "The best regex tester. Real-time matching, explanation of every token, and a massive community library.",
+    category: "Dev Tools",
+    tags: ["regex", "testing", "patterns"]
+  },
+  {
+    name: "IT-Tools",
+    url: "https://it-tools.tech",
+    description: "70+ developer utilities in one clean interface. Hash generators, JWT decoders, cron parsers, UUID generators.",
+    category: "Dev Tools",
+    tags: ["utilities", "hash", "converter"]
+  },
+  {
+    name: "Hoppscotch",
+    url: "https://hoppscotch.io",
+    description: "Open source API development ecosystem. Lightweight, fast Postman alternative that runs in your browser.",
+    category: "Dev Tools",
+    tags: ["api", "testing", "postman"]
+  },
+  {
+    name: "Compiler Explorer",
+    url: "https://godbolt.org",
+    description: "See how compilers turn your code into assembly. Supports 30+ languages. Mind-blowing for understanding optimization.",
+    category: "Dev Tools",
+    tags: ["compiler", "assembly", "optimization"]
+  },
+  {
+    name: "Webhook.site",
+    url: "https://webhook.site",
+    description: "Instantly creates unique webhook URLs to inspect incoming requests. Debug APIs without writing a server.",
+    category: "Dev Tools",
+    tags: ["webhook", "debug", "api"]
+  },
+  {
+    name: "httpbin.org",
+    url: "https://httpbin.org",
+    description: "HTTP request and response testing service. Echo back headers, methods, and auth — great for debugging.",
+    category: "Dev Tools",
+    tags: ["http", "testing", "debug"]
+  },
+  {
+    name: "ExplainShell",
+    url: "https://explainshell.com",
+    description: "Paste any shell command and get a visual breakdown of every flag and argument. No more man page diving.",
+    category: "Dev Tools",
+    tags: ["shell", "bash", "learning"]
+  },
+  {
+    name: "DB Fiddle",
+    url: "https://www.db-fiddle.com",
+    description: "Online SQL playground. Test queries against MySQL, PostgreSQL, and SQLite without installing anything.",
+    category: "Dev Tools",
+    tags: ["sql", "database", "playground"]
+  },
+  {
+    name: "JSONCrack",
+    url: "https://jsoncrack.com",
+    description: "Visualize JSON, YAML, and XML as interactive graphs. Makes complex nested data instantly readable.",
+    category: "Dev Tools",
+    tags: ["json", "visualization", "data"]
+  },
+  {
+    name: "Crontab.guru",
+    url: "https://crontab.guru",
+    description: "The cron expression editor. Translates cron syntax to plain English. Never get scheduling wrong again.",
+    category: "Dev Tools",
+    tags: ["cron", "scheduling", "sysadmin"]
+  },
+  {
+    name: "DevDocs",
+    url: "https://devdocs.io",
+    description: "Fast, offline-capable API documentation browser. Combines 500+ docs into one searchable interface.",
+    category: "Dev Tools",
+    tags: ["documentation", "api", "reference"]
+  },
+  // ── Desktop Software ──
+  {
+    name: "DevToys",
+    url: "https://devtoys.app",
+    description: "Swiss Army knife for developers. 30+ offline tools — JSON formatter, JWT decoder, hash generator, regex tester — all in one native app.",
+    category: "Desktop Software",
+    tags: ["developer", "utilities", "offline", "windows"]
+  },
+  {
+    name: "PowerToys",
+    url: "https://learn.microsoft.com/en-us/windows/powertoys/",
+    description: "Microsoft\'s power-user toolkit for Windows. FancyZones, PowerRename, Color Picker, Run launcher, and 25+ more utilities.",
+    category: "Desktop Software",
+    tags: ["windows", "productivity", "microsoft"]
+  },
+  {
+    name: "Files",
+    url: "https://files.community",
+    description: "Beautiful open source file manager for Windows. Tabs, dual pane, cloud integration, and a gorgeous modern UI.",
+    category: "Desktop Software",
+    tags: ["file manager", "windows", "modern"]
+  },
+  {
+    name: "WingetUI",
+    url: "https://www.marticliment.com/wingetui/",
+    description: "GUI for Windows package managers (winget, Scoop, Chocolatey). Install, update, and manage all your software from one interface.",
+    category: "Desktop Software",
+    tags: ["package manager", "windows", "gui"]
+  },
+  {
+    name: "EarTrumpet",
+    url: "https://eartrumpet.app",
+    description: "Per-app volume control for Windows. The volume mixer Microsoft should have built. Lives in your system tray.",
+    category: "Desktop Software",
+    tags: ["audio", "volume", "windows"]
+  },
+  {
+    name: "ShareX",
+    url: "https://getsharex.com",
+    description: "Screenshot and screen recording powerhouse. Auto-upload, annotation, OCR, GIF capture, and workflows.",
+    category: "Desktop Software",
+    tags: ["screenshot", "recording", "capture"]
+  },
+  {
+    name: "Ditto",
+    url: "https://ditto-cp.sourceforge.io",
+    description: "Clipboard manager that saves everything you copy. Search history, paste formatted, sync across machines.",
+    category: "Desktop Software",
+    tags: ["clipboard", "productivity", "windows"]
+  },
+  {
+    name: "Everything",
+    url: "https://www.voidtools.com",
+    description: "Instant file search for Windows. Indexes your entire drive in seconds. Finds any file by name instantly.",
+    category: "Desktop Software",
+    tags: ["search", "files", "instant"]
+  },
+  {
+    name: "Flameshot",
+    url: "https://flameshot.org",
+    description: "Powerful screenshot tool with built-in annotation. Open source, works on Linux and Windows.",
+    category: "Desktop Software",
+    tags: ["screenshot", "annotation", "linux"]
+  },
+  {
+    name: "Syncthing",
+    url: "https://syncthing.net",
+    description: "Peer-to-peer file synchronization. No cloud, no accounts, just encrypted sync between your devices.",
+    category: "Desktop Software",
+    tags: ["sync", "p2p", "privacy"]
+  },
+  {
+    name: "KeePassXC",
+    url: "https://keepassxc.org",
+    description: "Offline-first password manager. Full control over your vault. No cloud dependency, cross-platform.",
+    category: "Desktop Software",
+    tags: ["passwords", "security", "offline"]
+  },
+  {
+    name: "Bitwarden",
+    url: "https://bitwarden.com",
+    description: "Open source password manager. Self-hostable, cross-platform, with browser extensions and auto-fill.",
+    category: "Desktop Software",
+    tags: ["passwords", "security", "self-hosted"]
+  },
+  {
+    name: "WizTree",
+    url: "https://diskanalyzer.com",
+    description: "Fastest disk space analyzer for Windows. Reads the MFT directly — scans a 1TB drive in seconds.",
+    category: "Desktop Software",
+    tags: ["disk", "storage", "analyzer"]
+  },
+  {
+    name: "Tabby",
+    url: "https://tabby.sh",
+    description: "Modern terminal emulator. SSH client, serial port, tabs, splits, themes. Cross-platform and highly customizable.",
+    category: "Desktop Software",
+    tags: ["terminal", "ssh", "cross-platform"]
+  },
+  {
+    name: "Alacritty",
+    url: "https://alacritty.org",
+    description: "GPU-accelerated terminal emulator. Blazing fast, minimal, and cross-platform. Written in Rust.",
+    category: "Desktop Software",
+    tags: ["terminal", "gpu", "rust"]
+  },
+  // ── AI & ML ──
+  {
+    name: "Ollama",
+    url: "https://ollama.com",
+    description: "Run large language models locally with one command. Dead simple CLI. Supports Llama, Mistral, Gemma, and dozens more.",
+    category: "AI & ML",
+    tags: ["llm", "local", "privacy"]
+  },
+  {
+    name: "Open WebUI",
+    url: "https://openwebui.com",
+    description: "Beautiful self-hosted ChatGPT-like interface for local LLMs. Connects to Ollama. RAG, web search, voice — everything.",
+    category: "AI & ML",
+    tags: ["chat", "ui", "self-hosted"]
+  },
+  {
+    name: "LM Studio",
+    url: "https://lmstudio.ai",
+    description: "Desktop app to discover, download, and run local LLMs. Clean UI, no command line needed, OpenAI-compatible API.",
+    category: "AI & ML",
+    tags: ["llm", "desktop", "local"]
+  },
+  {
+    name: "Jan",
+    url: "https://jan.ai",
+    description: "Open source ChatGPT alternative that runs 100% offline. Privacy-first, supports multiple models, clean interface.",
+    category: "AI & ML",
+    tags: ["chat", "offline", "privacy"]
+  },
+  {
+    name: "LocalAI",
+    url: "https://localai.io",
+    description: "Self-hosted OpenAI-compatible API. Text, image, audio, video, voice cloning. Drop-in replacement, runs on CPU.",
+    category: "AI & ML",
+    tags: ["api", "self-hosted", "multimodal"]
+  },
+  {
+    name: "ComfyUI",
+    url: "https://www.comfy.org",
+    description: "Node-based Stable Diffusion GUI. Visual workflow editor for AI image generation pipelines. Infinitely extensible.",
+    category: "AI & ML",
+    tags: ["image generation", "stable diffusion", "nodes"]
+  },
+  {
+    name: "AUTOMATIC1111 WebUI",
+    url: "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+    description: "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting, upscaling — everything in one UI.",
+    category: "AI & ML",
+    tags: ["stable diffusion", "image", "webui"]
+  },
+  {
+    name: "Hugging Face",
+    url: "https://huggingface.co",
+    description: "The GitHub of AI. Millions of models, datasets, and spaces. The open source AI community hub.",
+    category: "AI & ML",
+    tags: ["models", "datasets", "community"]
+  },
+  {
+    name: "TensorFlow Playground",
+    url: "https://playground.tensorflow.org",
+    description: "Tinker with neural networks in your browser. Visualize how layers, neurons, and features affect learning.",
+    category: "AI & ML",
+    tags: ["neural network", "visualization", "learning"]
+  },
+  {
+    name: "Chatbot Arena",
+    url: "https://lmarena.ai",
+    description: "Head-to-head LLM comparisons with blind voting. The most credible LLM benchmark based on human preference.",
+    category: "AI & ML",
+    tags: ["benchmark", "comparison", "leaderboard"]
+  },
+  {
+    name: "AnythingLLM",
+    url: "https://anythingllm.com",
+    description: "All-in-one AI desktop app. Chat with documents, RAG, multiple model support. Self-hosted knowledge assistant.",
+    category: "AI & ML",
+    tags: ["rag", "documents", "assistant"]
+  },
+  {
+    name: "Perplexity",
+    url: "https://perplexity.ai",
+    description: "AI-powered search engine that cites its sources. Combines web search with LLM synthesis. Free tier available.",
+    category: "AI & ML",
+    tags: ["search", "ai", "citations"]
+  },
+  {
+    name: "Whisper",
+    url: "https://github.com/openai/whisper",
+    description: "OpenAI\'s speech-to-text model. Runs locally, supports 99 languages, incredibly accurate transcription.",
+    category: "AI & ML",
+    tags: ["speech", "transcription", "openai"]
+  },
+  {
+    name: "Kokoro TTS",
+    url: "https://huggingface.co/hexgrad/Kokoro-82M",
+    description: "Ultra-lightweight text-to-speech. Runs on a Raspberry Pi at real-time speed. 14 voices, no GPU needed.",
+    category: "AI & ML",
+    tags: ["tts", "voice", "lightweight"]
+  },
+  {
+    name: "Chatterbox TTS",
+    url: "https://github.com/resemble-ai/chatterbox",
+    description: "High-quality open source TTS with emotion control and voice cloning from short samples. MIT licensed.",
+    category: "AI & ML",
+    tags: ["tts", "voice cloning", "emotion"]
+  },
+  // ── AI Creative ──
+  {
+    name: "Khroma",
+    url: "https://www.khroma.co",
+    description: "AI color palette generator. Learns your preferences and generates infinite palettes you\'ll actually like.",
+    category: "AI Creative",
+    tags: ["color", "palette", "ai"]
+  },
+  {
+    name: "Cleanup.pictures",
+    url: "https://cleanup.pictures",
+    description: "AI-powered object removal from photos. Just brush over what you want gone. Magic inpainting.",
+    category: "AI Creative",
+    tags: ["image", "inpainting", "removal"]
+  },
+  {
+    name: "Recraft",
+    url: "https://www.recraft.ai",
+    description: "AI vector and raster image generation with style control. Create icons, illustrations, and 3D renders from text.",
+    category: "AI Creative",
+    tags: ["vector", "illustration", "generation"]
+  },
+  {
+    name: "Suno",
+    url: "https://suno.com",
+    description: "AI music generation from text prompts. Create full songs with vocals, instruments, and structure. Free tier.",
+    category: "AI Creative",
+    tags: ["music", "generation", "audio"]
+  },
+  {
+    name: "Udio",
+    url: "https://www.udio.com",
+    description: "AI music creation platform. Generate high-quality tracks in any genre from text descriptions.",
+    category: "AI Creative",
+    tags: ["music", "audio", "generation"]
+  },
+  {
+    name: "ElevenLabs",
+    url: "https://elevenlabs.io",
+    description: "Hyper-realistic AI voice synthesis and cloning. Free tier for personal projects.",
+    category: "AI Creative",
+    tags: ["voice", "tts", "cloning"]
+  },
+  {
+    name: "Midjourney",
+    url: "https://www.midjourney.com",
+    description: "AI image generation with extraordinary artistic quality. The standard for creative AI imagery.",
+    category: "AI Creative",
+    tags: ["image", "art", "generation"]
+  },
+  // ── Automation ──
+  {
+    name: "n8n",
+    url: "https://n8n.io",
+    description: "Self-hosted workflow automation with 400+ integrations. Visual node editor. The open source Zapier killer.",
+    category: "Automation",
+    tags: ["workflow", "automation", "self-hosted"]
+  },
+  {
+    name: "Node-RED",
+    url: "https://nodered.org",
+    description: "Flow-based programming for IoT and automation. Wire together APIs, devices, and services visually.",
+    category: "Automation",
+    tags: ["iot", "flow", "programming"]
+  },
+  {
+    name: "Huginn",
+    url: "https://github.com/huginn/huginn",
+    description: "Build agents that monitor the web and act on your behalf. The self-hosted IFTTT for power users.",
+    category: "Automation",
+    tags: ["agents", "monitoring", "scraping"]
+  },
+  {
+    name: "Activepieces",
+    url: "https://www.activepieces.com",
+    description: "Open source no-code automation platform. Clean UI, 100+ integrations, self-hostable Zapier alternative.",
+    category: "Automation",
+    tags: ["no-code", "workflow", "self-hosted"]
+  },
+  {
+    name: "Windmill",
+    url: "https://www.windmill.dev",
+    description: "Open source developer platform for scripts, workflows, and UIs. Turn scripts into production-grade internal tools.",
+    category: "Automation",
+    tags: ["scripts", "workflows", "internal tools"]
+  },
+  // ── Homelab ──
+  {
+    name: "Awesome-Selfhosted",
+    url: "https://awesome-selfhosted.net",
+    description: "The definitive list of self-hostable software. Hundreds of categorized alternatives to commercial services.",
+    category: "Homelab",
+    tags: ["list", "self-hosted", "directory"]
+  },
+  {
+    name: "Uptime Kuma",
+    url: "https://uptime.kuma.pet",
+    description: "Beautiful self-hosted monitoring. Track uptime, ping, HTTP, DNS, and more. Gorgeous dashboard with notifications.",
+    category: "Homelab",
+    tags: ["monitoring", "uptime", "dashboard"]
+  },
+  {
+    name: "Nginx Proxy Manager",
+    url: "https://nginxproxymanager.com",
+    description: "Dead simple reverse proxy with free SSL. Beautiful web UI for managing Nginx without touching config files.",
+    category: "Homelab",
+    tags: ["nginx", "proxy", "ssl"]
+  },
+  {
+    name: "Homepage",
+    url: "https://gethomepage.dev",
+    description: "Highly customizable homelab dashboard. Service widgets, bookmarks, and real-time stats from your stack.",
+    category: "Homelab",
+    tags: ["dashboard", "homepage", "widgets"]
+  },
+  {
+    name: "Portainer",
+    url: "https://www.portainer.io",
+    description: "Docker and Kubernetes management GUI. Deploy, manage, and troubleshoot containers without CLI.",
+    category: "Homelab",
+    tags: ["docker", "kubernetes", "management"]
+  },
+  {
+    name: "Dockge",
+    url: "https://dockge.kuma.pet",
+    description: "Beautiful Docker Compose manager. Edit, create, start, and stop compose stacks from a clean web UI.",
+    category: "Homelab",
+    tags: ["docker", "compose", "management"]
+  },
+  {
+    name: "Proxmox VE",
+    url: "https://www.proxmox.com/en/proxmox-virtual-environment",
+    description: "Enterprise-grade virtualization platform. VMs, containers, clustering, backups — all open source and free.",
+    category: "Homelab",
+    tags: ["virtualization", "hypervisor", "enterprise"]
+  },
+  {
+    name: "Tailscale",
+    url: "https://tailscale.com",
+    description: "Zero-config mesh VPN built on WireGuard. Connect all your devices like they\'re on one LAN. Generous free tier.",
+    category: "Homelab",
+    tags: ["vpn", "wireguard", "mesh"]
+  },
+  {
+    name: "Cloudflare Tunnel",
+    url: "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/",
+    description: "Expose local services to the internet securely without port forwarding. Free, encrypted, and zero-trust.",
+    category: "Homelab",
+    tags: ["tunnel", "cloudflare", "zero-trust"]
+  },
+  {
+    name: "Pi-hole",
+    url: "https://pi-hole.net",
+    description: "Network-wide ad blocker. DNS sinkhole that blocks ads and trackers for every device on your network.",
+    category: "Homelab",
+    tags: ["ad blocker", "dns", "network"]
+  },
+  {
+    name: "Vaultwarden",
+    url: "https://github.com/dani-garcia/vaultwarden",
+    description: "Lightweight self-hosted Bitwarden server. Full compatibility with all Bitwarden clients using minimal resources.",
+    category: "Homelab",
+    tags: ["passwords", "bitwarden", "self-hosted"]
+  },
+  // ── Creative ──
+  {
+    name: "Blender",
+    url: "https://www.blender.org",
+    description: "The free 3D creation suite. Modeling, animation, rendering, VFX, video editing — an entire studio in one app.",
+    category: "Creative",
+    tags: ["3d", "modeling", "animation", "vfx"]
+  },
+  {
+    name: "GIMP",
+    url: "https://www.gimp.org",
+    description: "The open source Photoshop. Advanced image editing, retouching, and composition. Endlessly extensible with plugins.",
+    category: "Creative",
+    tags: ["image editing", "photoshop", "plugins"]
+  },
+  {
+    name: "Inkscape",
+    url: "https://inkscape.org",
+    description: "Professional vector graphics editor. Create logos, icons, illustrations, and diagrams. SVG-native.",
+    category: "Creative",
+    tags: ["vector", "svg", "illustration"]
+  },
+  {
+    name: "Krita",
+    url: "https://krita.org",
+    description: "Digital painting and 2D animation. Built by artists for artists. Brushes, layers, and animation timeline.",
+    category: "Creative",
+    tags: ["painting", "drawing", "animation"]
+  },
+  {
+    name: "Kdenlive",
+    url: "https://kdenlive.org",
+    description: "Professional non-linear video editor. Multi-track, effects, transitions, proxy editing. Cross-platform.",
+    category: "Creative",
+    tags: ["video editing", "multi-track", "effects"]
+  },
+  {
+    name: "DaVinci Resolve",
+    url: "https://www.blackmagicdesign.com/products/davinciresolve/",
+    description: "Hollywood-grade video editing, color grading, VFX, and audio — free version is insanely powerful.",
+    category: "Creative",
+    tags: ["video", "color grading", "hollywood"]
+  },
+  {
+    name: "Audacity",
+    url: "https://www.audacityteam.org",
+    description: "The classic audio editor. Record, edit, mix, and process audio. Simple enough for beginners, powerful enough for pros.",
+    category: "Creative",
+    tags: ["audio", "recording", "editing"]
+  },
+  {
+    name: "OBS Studio",
+    url: "https://obsproject.com",
+    description: "Open source streaming and recording. The industry standard for live streaming and screen capture.",
+    category: "Creative",
+    tags: ["streaming", "recording", "live"]
+  },
+  {
+    name: "fffuel.co",
+    url: "https://fffuel.co",
+    description: "Collection of SVG generators for gradients, patterns, shapes, and backgrounds. Beautiful, customizable assets.",
+    category: "Creative",
+    tags: ["svg", "generators", "backgrounds"]
+  },
+  {
+    name: "Photopea",
+    url: "https://www.photopea.com",
+    description: "Full Photoshop clone that runs entirely in your browser. Supports PSD, XCF, Sketch files. Free.",
+    category: "Creative",
+    tags: ["photoshop", "browser", "psd"]
+  },
+  {
+    name: "Squoosh",
+    url: "https://squoosh.app",
+    description: "Google\'s image compression tool. Compare codecs side by side, resize, and optimize — all in the browser.",
+    category: "Creative",
+    tags: ["compression", "images", "optimization"]
+  },
+  {
+    name: "Excalidraw",
+    url: "https://excalidraw.com",
+    description: "Virtual whiteboard with a hand-drawn feel. Perfect for diagrams, wireframes, and collaborative sketching.",
+    category: "Creative",
+    tags: ["whiteboard", "diagrams", "collaboration"]
+  },
+  // ── Music & Audio ──
+  {
+    name: "Ardour",
+    url: "https://ardour.org",
+    description: "Professional digital audio workstation. Full multi-track recording, editing, and mixing. Open source.",
+    category: "Music & Audio",
+    tags: ["daw", "recording", "mixing"]
+  },
+  {
+    name: "LMMS",
+    url: "https://lmms.io",
+    description: "Free digital audio workstation for music production. Beat sequencer, synthesizers, and effects. Cross-platform.",
+    category: "Music & Audio",
+    tags: ["daw", "beats", "synthesizer"]
+  },
+  {
+    name: "AudioMass",
+    url: "https://audiomass.co",
+    description: "Full audio editor right in your browser. Cut, trim, apply effects — no install, no account, no ads.",
+    category: "Music & Audio",
+    tags: ["audio", "browser", "editor"]
+  },
+  {
+    name: "Vital",
+    url: "https://vital.audio",
+    description: "Spectral warping wavetable synthesizer. Stunning visuals, professional sound design. Free version is full-featured.",
+    category: "Music & Audio",
+    tags: ["synthesizer", "wavetable", "sound design"]
+  },
+  {
+    name: "Mixxx",
+    url: "https://mixxx.org",
+    description: "Open source DJ software. Beat matching, effects, vinyl control. Everything you need to perform live mixes.",
+    category: "Music & Audio",
+    tags: ["dj", "mixing", "live"]
+  },
+  // ── Privacy ──
+  {
+    name: "addy.io",
+    url: "https://addy.io",
+    description: "Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking.",
+    category: "Privacy",
+    tags: ["email", "aliases", "forwarding"]
+  },
+  {
+    name: "SimpleLogin",
+    url: "https://simplelogin.io",
+    description: "Email alias service. Generate unique emails for every service. Open source, self-hostable.",
+    category: "Privacy",
+    tags: ["email", "aliases", "open source"]
+  },
+  {
+    name: "PrivateBin",
+    url: "https://privatebin.info",
+    description: "Encrypted pastebin. Zero-knowledge — the server never sees your content. Self-hostable.",
+    category: "Privacy",
+    tags: ["pastebin", "encrypted", "zero-knowledge"]
+  },
+  {
+    name: "CryptPad",
+    url: "https://cryptpad.org",
+    description: "Encrypted collaborative office suite. Docs, sheets, slides, polls — all zero-knowledge encrypted.",
+    category: "Privacy",
+    tags: ["office", "encrypted", "collaboration"]
+  },
+  {
+    name: "SearXNG",
+    url: "https://searxng.org",
+    description: "Privacy-respecting metasearch engine. Aggregates results from 70+ engines without tracking you.",
+    category: "Privacy",
+    tags: ["search", "metasearch", "self-hosted"]
+  },
+  {
+    name: "privacy.sexy",
+    url: "https://privacy.sexy",
+    description: "Scripts to harden Windows and macOS privacy settings. Checkbox UI generates ready-to-run scripts.",
+    category: "Privacy",
+    tags: ["hardening", "windows", "scripts"]
+  },
+  {
+    name: "LibRedirect",
+    url: "https://libredirect.github.io",
+    description: "Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.).",
+    category: "Privacy",
+    tags: ["redirect", "frontends", "browser"]
+  },
+  {
+    name: "Mullvad VPN",
+    url: "https://mullvad.net",
+    description: "Privacy-focused VPN. No email, no accounts — just a number. Pay with cash or crypto. Audited and trusted.",
+    category: "Privacy",
+    tags: ["vpn", "anonymous", "audited"]
+  },
+  {
+    name: "Tor Project",
+    url: "https://www.torproject.org",
+    description: "Anonymous browsing network. Onion routing prevents anyone from tracing your internet activity.",
+    category: "Privacy",
+    tags: ["anonymity", "tor", "onion"]
+  },
+  // ── Sysadmin ──
+  {
+    name: "Healthchecks.io",
+    url: "https://healthchecks.io",
+    description: "Cron job monitoring. Get alerted when your scheduled tasks fail to check in. Open source, self-hostable.",
+    category: "Sysadmin",
+    tags: ["cron", "monitoring", "alerts"]
+  },
+  {
+    name: "GoAccess",
+    url: "https://goaccess.io",
+    description: "Real-time web log analyzer. Beautiful terminal and HTML dashboards from your access logs.",
+    category: "Sysadmin",
+    tags: ["logs", "analytics", "terminal"]
+  },
+  {
+    name: "NGINXConfig",
+    url: "https://www.digitalocean.com/community/tools/nginx",
+    description: "DigitalOcean\'s NGINX config generator. Answer questions, get a production-ready config file.",
+    category: "Sysadmin",
+    tags: ["nginx", "config", "generator"]
+  },
+  {
+    name: "Mozilla SSL Config",
+    url: "https://ssl-config.mozilla.org",
+    description: "SSL/TLS configuration generator. Best-practice configs for Apache, Nginx, HAProxy, and more.",
+    category: "Sysadmin",
+    tags: ["ssl", "tls", "configuration"]
+  },
+  {
+    name: "Cloudflare Radar",
+    url: "https://radar.cloudflare.com",
+    description: "Real-time internet intelligence. Traffic patterns, outages, routing changes, and attack trends globally.",
+    category: "Sysadmin",
+    tags: ["internet", "traffic", "intelligence"]
+  },
+  {
+    name: "Dozzle",
+    url: "https://dozzle.dev",
+    description: "Real-time Docker log viewer in the browser. Lightweight, no database, just instant container logs.",
+    category: "Sysadmin",
+    tags: ["docker", "logs", "viewer"]
+  },
+  {
+    name: "Grafana",
+    url: "https://grafana.com",
+    description: "The observability platform. Beautiful dashboards for metrics, logs, and traces. Connects to everything.",
+    category: "Sysadmin",
+    tags: ["monitoring", "dashboards", "metrics"]
+  },
+  {
+    name: "Netdata",
+    url: "https://www.netdata.cloud",
+    description: "Real-time infrastructure monitoring. Zero-config, per-second granularity, gorgeous auto-generated dashboards.",
+    category: "Sysadmin",
+    tags: ["monitoring", "real-time", "auto"]
+  },
+  // ── Data & Viz ──
+  {
+    name: "RAWGraphs",
+    url: "https://www.rawgraphs.io",
+    description: "Open source data visualization. Paste your data, choose a chart type, customize, and export. No coding.",
+    category: "Data & Viz",
+    tags: ["charts", "visualization", "no-code"]
+  },
+  {
+    name: "Datawrapper",
+    url: "https://www.datawrapper.de",
+    description: "Create beautiful charts, maps, and tables. Used by the New York Times, Washington Post, and others.",
+    category: "Data & Viz",
+    tags: ["charts", "maps", "journalism"]
+  },
+  {
+    name: "Flourish",
+    url: "https://flourish.studio",
+    description: "Interactive data visualization and storytelling. Race charts, network graphs, 3D maps. Free for public data.",
+    category: "Data & Viz",
+    tags: ["interactive", "storytelling", "animated"]
+  },
+  {
+    name: "Observable",
+    url: "https://observablehq.com",
+    description: "Reactive notebook for data exploration and visualization. D3.js-powered, collaborative, and shareable.",
+    category: "Data & Viz",
+    tags: ["notebooks", "d3", "exploration"]
+  },
+  {
+    name: "Kepler.gl",
+    url: "https://kepler.gl",
+    description: "Uber\'s open source geospatial analysis tool. Visualize large datasets on maps with zero coding.",
+    category: "Data & Viz",
+    tags: ["maps", "geospatial", "uber"]
+  },
+  // ── Education ──
+  {
+    name: "Algorithm Visualizer",
+    url: "https://algorithm-visualizer.org",
+    description: "Interactive animations of algorithms and data structures. See sorting, pathfinding, and trees come alive.",
+    category: "Education",
+    tags: ["algorithms", "visualization", "interactive"]
+  },
+  {
+    name: "VisuAlgo",
+    url: "https://visualgo.net",
+    description: "Animated visualizations for data structures and algorithms. Step through operations one at a time.",
+    category: "Education",
+    tags: ["algorithms", "data structures", "animation"]
+  },
+  {
+    name: "Exercism",
+    url: "https://exercism.org",
+    description: "Code practice in 70+ languages with mentored feedback. Structured tracks from beginner to advanced.",
+    category: "Education",
+    tags: ["coding", "practice", "mentoring"]
+  },
+  {
+    name: "PhET Simulations",
+    url: "https://phet.colorado.edu",
+    description: "Free interactive science simulations from CU Boulder. Physics, chemistry, math, biology — all visual.",
+    category: "Education",
+    tags: ["science", "physics", "simulations"]
+  },
+  {
+    name: "Desmos",
+    url: "https://www.desmos.com",
+    description: "The best graphing calculator on the internet. Instant, interactive, beautiful mathematical visualization.",
+    category: "Education",
+    tags: ["math", "graphing", "calculator"]
+  },
+  {
+    name: "freeCodeCamp",
+    url: "https://www.freecodecamp.org",
+    description: "Learn to code for free. 11,000+ hours of curriculum covering web dev, data science, and more. Fully interactive.",
+    category: "Education",
+    tags: ["coding", "web dev", "free"]
+  },
+  {
+    name: "The Odin Project",
+    url: "https://www.theodinproject.com",
+    description: "Full-stack web development curriculum. Project-based learning path from zero to job-ready.",
+    category: "Education",
+    tags: ["web dev", "full stack", "projects"]
+  },
+  {
+    name: "Roadmap.sh",
+    url: "https://roadmap.sh",
+    description: "Developer roadmaps, guides, and skill trees. Visual paths for frontend, backend, DevOps, and more.",
+    category: "Education",
+    tags: ["roadmaps", "career", "guides"]
+  },
+  {
+    name: "Learn X in Y Minutes",
+    url: "https://learnxinyminutes.com",
+    description: "Quick-start guides for every programming language. See all the syntax in one page, learn the basics fast.",
+    category: "Education",
+    tags: ["languages", "quick start", "reference"]
+  },
+  // ── Productivity ──
+  {
+    name: "Draw.io",
+    url: "https://app.diagrams.net",
+    description: "Full-featured diagramming tool. Flowcharts, network diagrams, UML, wireframes — all in the browser, all free.",
+    category: "Productivity",
+    tags: ["diagrams", "flowcharts", "uml"]
+  },
+  {
+    name: "tldraw",
+    url: "https://www.tldraw.com",
+    description: "Infinite canvas drawing tool. Collaborative whiteboard with shapes, arrows, text — clean and fast.",
+    category: "Productivity",
+    tags: ["canvas", "drawing", "collaboration"]
+  },
+  {
+    name: "Obsidian",
+    url: "https://obsidian.md",
+    description: "Knowledge base on local markdown files. Graph view, backlinks, plugins. Your second brain, offline-first.",
+    category: "Productivity",
+    tags: ["notes", "markdown", "knowledge"]
+  },
+  {
+    name: "Logseq",
+    url: "https://logseq.com",
+    description: "Open source outliner and knowledge management. Block-based, bidirectional links, privacy-first.",
+    category: "Productivity",
+    tags: ["outliner", "knowledge", "open source"]
+  },
+  {
+    name: "Joplin",
+    url: "https://joplinapp.org",
+    description: "Open source note-taking with end-to-end encryption. Markdown, sync, web clipper. Evernote alternative.",
+    category: "Productivity",
+    tags: ["notes", "encrypted", "evernote"]
+  },
+  {
+    name: "StackEdit",
+    url: "https://stackedit.io",
+    description: "In-browser Markdown editor. WYSIWYG, sync with Google Drive and GitHub, LaTeX math support.",
+    category: "Productivity",
+    tags: ["markdown", "editor", "sync"]
+  },
+  {
+    name: "Stirling PDF",
+    url: "https://stirlingpdf.io",
+    description: "Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR, convert — every PDF operation in one tool.",
+    category: "Productivity",
+    tags: ["pdf", "tools", "self-hosted"]
+  },
+  {
+    name: "Grist",
+    url: "https://www.getgrist.com",
+    description: "Open source spreadsheet-database hybrid. Like Airtable but self-hostable. Formulas, dashboards, APIs.",
+    category: "Productivity",
+    tags: ["spreadsheet", "database", "airtable"]
+  },
+  {
+    name: "NocoDB",
+    url: "https://nocodb.com",
+    description: "Turn any database into a smart spreadsheet. Open source Airtable alternative with API generation.",
+    category: "Productivity",
+    tags: ["database", "spreadsheet", "no-code"]
+  },
+  {
+    name: "Appsmith",
+    url: "https://www.appsmith.com",
+    description: "Open source low-code platform. Build internal tools with drag-and-drop, connected to any database or API.",
+    category: "Productivity",
+    tags: ["low-code", "internal tools", "dashboard"]
+  },
+  // ── File Tools ──
+  {
+    name: "CloudConvert",
+    url: "https://cloudconvert.com",
+    description: "Convert anything to anything. 200+ formats supported. Audio, video, documents, images, ebooks.",
+    category: "File Tools",
+    tags: ["converter", "formats", "media"]
+  },
+  {
+    name: "Cobalt",
+    url: "https://cobalt.tools",
+    description: "Clean media downloader. Save videos and audio from YouTube, Twitter, Reddit, and more. No ads, no tracking.",
+    category: "File Tools",
+    tags: ["downloader", "video", "audio"]
+  },
+  {
+    name: "yt-dlp",
+    url: "https://github.com/yt-dlp/yt-dlp",
+    description: "The definitive video downloader. Fork of youtube-dl with tons of fixes and features. Supports 1000+ sites.",
+    category: "File Tools",
+    tags: ["video", "downloader", "command line"]
+  },
+  {
+    name: "FFmpeg",
+    url: "https://ffmpeg.org",
+    description: "The universal media Swiss Army knife. Record, convert, and stream audio and video. Powers most media tools.",
+    category: "File Tools",
+    tags: ["media", "conversion", "encoding"]
+  },
+  {
+    name: "HandBrake",
+    url: "https://handbrake.fr",
+    description: "Open source video transcoder. Convert nearly any format with presets optimized for every device.",
+    category: "File Tools",
+    tags: ["video", "transcoding", "compression"]
+  },
+  // ── Fun & Culture ──
+  {
+    name: "Neal.fun",
+    url: "https://neal.fun",
+    description: "Mind-bending interactive experiences. The Deep Sea, Size of Space, Spend Bill Gates\' Money — endlessly fascinating.",
+    category: "Fun & Culture",
+    tags: ["interactive", "educational", "creative"]
+  },
+  {
+    name: "Radio Garden",
+    url: "https://radio.garden",
+    description: "Spin a 3D globe and tune into live radio stations worldwide. Like Google Earth for radio. Mesmerizing.",
+    category: "Fun & Culture",
+    tags: ["radio", "globe", "worldwide"]
+  },
+  {
+    name: "Shadertoy",
+    url: "https://www.shadertoy.com",
+    description: "Create and share real-time GPU shaders. Mind-blowing visual experiments in fragment shaders.",
+    category: "Fun & Culture",
+    tags: ["shaders", "gpu", "creative coding"]
+  },
+  {
+    name: "The Useless Web",
+    url: "https://theuselessweb.com",
+    description: "Takes you to a random useless website. Perfect for procrastination. A time-honored internet tradition.",
+    category: "Fun & Culture",
+    tags: ["random", "fun", "procrastination"]
+  },
+  {
+    name: "Window Swap",
+    url: "https://www.window-swap.com",
+    description: "Look through random windows around the world. Simple, meditative, surprisingly moving.",
+    category: "Fun & Culture",
+    tags: ["windows", "travel", "zen"]
+  },
+  {
+    name: "Patatap",
+    url: "https://www.patatap.com",
+    description: "Portable animation and sound kit. Each key triggers a unique animation and sound. Pure audiovisual joy.",
+    category: "Fun & Culture",
+    tags: ["music", "animation", "interactive"]
+  },
+  {
+    name: "Internet Archive",
+    url: "https://archive.org",
+    description: "The library of the internet. Wayback Machine, millions of free books, movies, music, software, and games.",
+    category: "Fun & Culture",
+    tags: ["archive", "wayback", "library"]
+  },
+  {
+    name: "Dwitter",
+    url: "https://www.dwitter.net",
+    description: "Social network for JavaScript demos in 140 characters. Incredible creativity in minimal code.",
+    category: "Fun & Culture",
+    tags: ["code golf", "javascript", "creative"]
+  },
+  {
+    name: "Neocities",
+    url: "https://neocities.org",
+    description: "Free web hosting inspired by GeoCities. The indie web revival. Build weird personal sites again.",
+    category: "Fun & Culture",
+    tags: ["hosting", "indie web", "geocities"]
+  },
+  {
+    name: "Web Design Museum",
+    url: "https://www.webdesignmuseum.org",
+    description: "Archive of vintage web design. See how the internet looked from the 90s to the 2000s. Pure nostalgia.",
+    category: "Fun & Culture",
+    tags: ["history", "design", "nostalgia"]
+  },
+  // ── News & Reference ──
+  {
+    name: "Hacker News",
+    url: "https://news.ycombinator.com",
+    description: "Y Combinator\'s tech news aggregator. The front page of the startup and hacker world.",
+    category: "News & Reference",
+    tags: ["tech", "news", "startups"]
+  },
+  {
+    name: "Lobsters",
+    url: "https://lobste.rs",
+    description: "Computing-focused link aggregation. Invite-only community means higher signal-to-noise than most.",
+    category: "News & Reference",
+    tags: ["tech", "news", "curated"]
+  },
+  {
+    name: "Devhints.io",
+    url: "https://devhints.io",
+    description: "Beautiful cheatsheets for developers. Bash, React, Git, Vim, CSS — gorgeous one-page references.",
+    category: "News & Reference",
+    tags: ["cheatsheets", "reference", "developer"]
+  },
+  {
+    name: "QuickRef.ME",
+    url: "https://quickref.me",
+    description: "Quick reference cheatsheets for everything. Programming, tools, and Linux commands in clean format.",
+    category: "News & Reference",
+    tags: ["cheatsheets", "reference", "quick"]
+  },
+  {
+    name: "public-apis",
+    url: "https://github.com/public-apis/public-apis",
+    description: "Massive categorized list of free APIs. Weather, music, sports, finance — if it exists, there\'s an API for it.",
+    category: "News & Reference",
+    tags: ["apis", "directory", "free"]
+  },
+  {
+    name: "Free Programming Books",
+    url: "https://ebookfoundation.github.io/free-programming-books/",
+    description: "Thousands of free programming books and resources. Every language and framework. Community-maintained.",
+    category: "News & Reference",
+    tags: ["books", "programming", "free"]
+  },
+  {
+    name: "Hackaday",
+    url: "https://hackaday.com",
+    description: "Hardware hacking and electronics projects. Fresh builds, teardowns, and tutorials daily.",
+    category: "News & Reference",
+    tags: ["hardware", "electronics", "diy"]
+  },
+  {
+    name: "daily.dev",
+    url: "https://daily.dev",
+    description: "Developer news aggregator. Personalized feed from tech blogs, GitHub trending, and community picks.",
+    category: "News & Reference",
+    tags: ["news", "developer", "feed"]
+  },
+  // ── Speed Tests ──
+  {
+    name: "Packet Loss Test",
+    url: "https://packetlosstest.com",
+    description: "Tests for packet loss between you and the server. Critical for diagnosing VoIP and gaming issues.",
+    category: "Speed Tests",
+    tags: ["packet loss", "voip", "gaming"]
+  },
+  {
+    name: "TestMy.net",
+    url: "https://testmy.net",
+    description: "Independent speed test with historical tracking. Compare your results over time and against your ISP\'s claims.",
+    category: "Speed Tests",
+    tags: ["speed", "history", "isp"]
+  },
+  // ── IP & Network ──
+  {
+    name: "IP.me",
+    url: "https://ip.me",
+    description: "Minimalist IP lookup. Just your IP, nothing else. Also works perfectly with curl from the command line.",
+    category: "IP & Network",
+    tags: ["ip", "minimal", "curl"]
+  },
+  {
+    name: "icanhazip.com",
+    url: "https://icanhazip.com",
+    description: "Returns just your IP as plain text. The go-to for scripts and automation. Created by Major Hayden.",
+    category: "IP & Network",
+    tags: ["ip", "api", "plain text"]
+  },
+  {
+    name: "Whois Lookup",
+    url: "https://who.is",
+    description: "Complete WHOIS records for any domain. Registration dates, nameservers, registrar info at a glance.",
+    category: "IP & Network",
+    tags: ["whois", "domain", "registration"]
+  },
+  {
+    name: "IPVoid",
+    url: "https://www.ipvoid.com",
+    description: "30+ IP tools in one place. Blacklist check, geolocation, reverse DNS, WHOIS, port scan, and more.",
+    category: "IP & Network",
+    tags: ["tools", "blacklist", "geolocation"]
+  },
+  {
+    name: "WhatIsMyIPAddress",
+    url: "https://whatismyipaddress.com",
+    description: "IP lookup with detailed geolocation, proxy detection, and email header analysis tools.",
+    category: "IP & Network",
+    tags: ["ip", "geolocation", "proxy"]
+  },
+  {
+    name: "Subnet Calculator",
+    url: "https://www.subnet-calculator.com",
+    description: "Visual subnet calculator. Plan IP addressing schemes with CIDR notation breakdown.",
+    category: "IP & Network",
+    tags: ["subnet", "cidr", "calculator"]
+  },
+  // ── DNS Tools ──
+  {
+    name: "DNSChecker",
+    url: "https://dnschecker.org",
+    description: "Check DNS propagation across 100+ global servers. Supports all record types with map visualization.",
+    category: "DNS Tools",
+    tags: ["dns", "propagation", "global"]
+  },
+  {
+    name: "dig (web)",
+    url: "https://www.digwebinterface.com",
+    description: "Web-based dig command. Query DNS records from multiple nameservers without touching the CLI.",
+    category: "DNS Tools",
+    tags: ["dig", "query", "web"]
+  },
+  {
+    name: "Zonemaster",
+    url: "https://www.zonemaster.net",
+    description: "AFNIC\'s DNS testing tool. Validates your zone configuration against best practices and RFCs.",
+    category: "DNS Tools",
+    tags: ["dns", "validation", "rfc"]
+  },
+  {
+    name: "DMARC Analyzer",
+    url: "https://mxtoolbox.com/dmarc.aspx",
+    description: "Check your DMARC record configuration. Essential for preventing email spoofing of your domain.",
+    category: "DNS Tools",
+    tags: ["dmarc", "email", "spoofing"]
+  },
+  // ── Security ──
+  {
+    name: "Pentest-Tools",
+    url: "https://pentest-tools.com",
+    description: "Online penetration testing toolkit. Subdomain finder, port scanner, CMS detection, and vulnerability scanning.",
+    category: "Security",
+    tags: ["pentest", "scanner", "vulnerability"]
+  },
+  {
+    name: "Shodan Monitor",
+    url: "https://monitor.shodan.io",
+    description: "Keep tabs on your organization\'s internet-facing devices. Alerts when new services appear.",
+    category: "Security",
+    tags: ["monitoring", "iot", "exposure"]
+  },
+  {
+    name: "DeHashed",
+    url: "https://dehashed.com",
+    description: "Breach database search engine. Search by email, username, IP, name, phone, or address.",
+    category: "Security",
+    tags: ["breach", "search", "credentials"]
+  },
+  {
+    name: "JWT.io",
+    url: "https://jwt.io",
+    description: "JSON Web Token decoder and debugger. Paste a JWT and instantly see its header, payload, and verify signatures.",
+    category: "Security",
+    tags: ["jwt", "tokens", "debug"]
+  },
+  {
+    name: "HashKiller",
+    url: "https://hashkiller.io",
+    description: "Online hash cracker and identifier. Supports MD5, SHA1, SHA256. Also identifies unknown hash types.",
+    category: "Security",
+    tags: ["hash", "cracker", "identifier"]
+  },
+  {
+    name: "SSL Checker",
+    url: "https://www.sslshopper.com/ssl-checker.html",
+    description: "Quick SSL certificate diagnostic. Shows cert chain, expiration dates, and common configuration problems.",
+    category: "Security",
+    tags: ["ssl", "certificate", "diagnostic"]
+  },
+  {
+    name: "Immuniweb",
+    url: "https://www.immuniweb.com/ssl/",
+    description: "Free SSL/TLS test with PCI DSS and HIPAA compliance checking. Goes beyond basic cert validation.",
+    category: "Security",
+    tags: ["ssl", "compliance", "pci"]
+  },
+  {
+    name: "Report URI",
+    url: "https://report-uri.com",
+    description: "Collect and analyze CSP, HPKP, and other security header violation reports. Free tier available.",
+    category: "Security",
+    tags: ["csp", "headers", "reporting"]
+  },
+  {
+    name: "Sucuri SiteCheck",
+    url: "https://sitecheck.sucuri.net",
+    description: "Free website malware and security scanner. Checks for blocklisting, injections, and defacements.",
+    category: "Security",
+    tags: ["malware", "scanner", "website"]
+  },
+  {
+    name: "OWASP ZAP",
+    url: "https://www.zaproxy.org",
+    description: "World\'s most popular free security tool for finding vulnerabilities in web applications.",
+    category: "Security",
+    tags: ["owasp", "scanner", "webapp"]
+  },
+  // ── OSINT ──
+  {
+    name: "IntelligenceX",
+    url: "https://intelx.io",
+    description: "Search engine for leaked databases, darknet, WHOIS, and more. Powerful for deep OSINT investigations.",
+    category: "OSINT",
+    tags: ["search", "darknet", "leaks"]
+  },
+  {
+    name: "Wayback Machine",
+    url: "https://web.archive.org",
+    description: "See how any website looked at any point in history. Billions of pages archived since 1996.",
+    category: "OSINT",
+    tags: ["archive", "history", "web"]
+  },
+  {
+    name: "OSINT Framework",
+    url: "https://osintframework.com",
+    description: "Interactive tree of OSINT tools organized by category. The starting point for any investigation.",
+    category: "OSINT",
+    tags: ["framework", "directory", "tools"]
+  },
+  {
+    name: "Maltego CE",
+    url: "https://www.maltego.com/maltego-community/",
+    description: "Visual link analysis for OSINT investigations. Map relationships between people, companies, domains, and IPs.",
+    category: "OSINT",
+    tags: ["link analysis", "graph", "investigation"]
+  },
+  {
+    name: "Hunter.io",
+    url: "https://hunter.io",
+    description: "Find professional email addresses associated with any domain. Verify deliverability too.",
+    category: "OSINT",
+    tags: ["email", "finder", "verification"]
+  },
+  {
+    name: "PhoneInfoga",
+    url: "https://github.com/sundowndev/phoneinfoga",
+    description: "Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.",
+    category: "OSINT",
+    tags: ["phone", "recon", "scanner"]
+  },
+  {
+    name: "TinEye",
+    url: "https://tineye.com",
+    description: "Reverse image search engine. Find where an image appears online, track modifications, and find higher resolutions.",
+    category: "OSINT",
+    tags: ["image", "reverse search", "tracking"]
+  },
+  {
+    name: "Wigle.net",
+    url: "https://wigle.net",
+    description: "Worldwide map of wireless networks. Database of Wi-Fi and cell towers submitted by wardrivers.",
+    category: "OSINT",
+    tags: ["wifi", "wardriving", "map"]
+  },
+  {
+    name: "BuiltWith",
+    url: "https://builtwith.com",
+    description: "Technology profiler for websites. See what CMS, analytics, CDN, hosting, and frameworks any site uses.",
+    category: "OSINT",
+    tags: ["technology", "profiler", "web"]
+  },
+  {
+    name: "Epieos",
+    url: "https://epieos.com",
+    description: "Find accounts linked to an email address or phone number across social platforms. Free OSINT tool.",
+    category: "OSINT",
+    tags: ["email", "social", "accounts"]
+  },
+  // ── Dev Tools ──
+  {
+    name: "CodePen",
+    url: "https://codepen.io",
+    description: "Social development environment for frontend. Build, test, and share HTML/CSS/JS snippets. Huge community.",
+    category: "Dev Tools",
+    tags: ["frontend", "playground", "community"]
+  },
+  {
+    name: "CodeSandbox",
+    url: "https://codesandbox.io",
+    description: "Instant online IDE for web development. Full Node.js environment, npm support, live collaboration.",
+    category: "Dev Tools",
+    tags: ["ide", "online", "collaboration"]
+  },
+  {
+    name: "StackBlitz",
+    url: "https://stackblitz.com",
+    description: "Full-stack web IDE powered by WebContainers. Run Node.js natively in the browser. Instant environments.",
+    category: "Dev Tools",
+    tags: ["ide", "node", "webcontainers"]
+  },
+  {
+    name: "Carbon",
+    url: "https://carbon.now.sh",
+    description: "Create beautiful images of your source code. Perfect for blog posts, presentations, and social media.",
+    category: "Dev Tools",
+    tags: ["code", "screenshots", "sharing"]
+  },
+  {
+    name: "Can I Use",
+    url: "https://caniuse.com",
+    description: "Browser compatibility tables for every web feature. Essential before using any modern API or CSS property.",
+    category: "Dev Tools",
+    tags: ["browser", "compatibility", "css"]
+  },
+  {
+    name: "Bundlephobia",
+    url: "https://bundlephobia.com",
+    description: "Know the cost of adding a npm package before you install it. See size, download time, and composition.",
+    category: "Dev Tools",
+    tags: ["npm", "size", "performance"]
+  },
+  {
+    name: "ray.so",
+    url: "https://ray.so",
+    description: "Create beautiful code images with syntax highlighting, custom themes, backgrounds, and padding.",
+    category: "Dev Tools",
+    tags: ["code", "images", "design"]
+  },
+  {
+    name: "Responsively",
+    url: "https://responsively.app",
+    description: "Modified browser for responsive web development. Preview across multiple devices simultaneously.",
+    category: "Dev Tools",
+    tags: ["responsive", "testing", "browser"]
+  },
+  {
+    name: "Playwright",
+    url: "https://playwright.dev",
+    description: "Microsoft\'s end-to-end testing framework. Test across Chromium, Firefox, WebKit with one API.",
+    category: "Dev Tools",
+    tags: ["testing", "e2e", "automation"]
+  },
+  {
+    name: "Insomnia",
+    url: "https://insomnia.rest",
+    description: "Open source API client and design tool. REST, GraphQL, gRPC testing with a beautiful interface.",
+    category: "Dev Tools",
+    tags: ["api", "rest", "graphql"]
+  },
+  {
+    name: "WakaTime",
+    url: "https://wakatime.com",
+    description: "Automatic programming metrics. Tracks time spent coding by project, language, and editor. Free tier.",
+    category: "Dev Tools",
+    tags: ["metrics", "time tracking", "productivity"]
+  },
+  {
+    name: "Gitpod",
+    url: "https://www.gitpod.io",
+    description: "Cloud development environments. Spin up a full dev workspace from any Git repo in seconds.",
+    category: "Dev Tools",
+    tags: ["cloud ide", "git", "workspace"]
+  },
+  {
+    name: "TypeScript Playground",
+    url: "https://www.typescriptlang.org/play",
+    description: "Official TypeScript compiler in the browser. Test types, explore compiler options, share snippets.",
+    category: "Dev Tools",
+    tags: ["typescript", "compiler", "playground"]
+  },
+  {
+    name: "Zed",
+    url: "https://zed.dev",
+    description: "High-performance code editor from the creators of Atom. Built in Rust, multiplayer editing, AI-powered.",
+    category: "Dev Tools",
+    tags: ["editor", "rust", "multiplayer"]
+  },
+  {
+    name: "Cursor",
+    url: "https://cursor.com",
+    description: "AI-first code editor built on VS Code. Tab to complete, chat with your codebase, intelligent edits.",
+    category: "Dev Tools",
+    tags: ["editor", "ai", "vscode"]
+  },
+  {
+    name: "Transform.tools",
+    url: "https://transform.tools",
+    description: "Convert between code formats. JSON to TypeScript, HTML to JSX, GraphQL to TypeScript, and dozens more.",
+    category: "Dev Tools",
+    tags: ["converter", "json", "typescript"]
+  },
+  {
+    name: "SmallDev.tools",
+    url: "https://smalldev.tools",
+    description: "Collection of developer tools — diff checker, lorem ipsum, markdown preview, JWT decoder, and more.",
+    category: "Dev Tools",
+    tags: ["utilities", "collection", "free"]
+  },
+  {
+    name: "AST Explorer",
+    url: "https://astexplorer.net",
+    description: "Explore the abstract syntax tree of your code. Supports JavaScript, TypeScript, CSS, HTML, and more.",
+    category: "Dev Tools",
+    tags: ["ast", "parser", "code"]
+  },
+  // ── Desktop Software ──
+  {
+    name: "Warp",
+    url: "https://www.warp.dev",
+    description: "AI-powered terminal for Mac and Linux. Block-based interface, command search, workflows. Modern shell experience.",
+    category: "Desktop Software",
+    tags: ["terminal", "ai", "modern"]
+  },
+  {
+    name: "Flow Launcher",
+    url: "https://www.flowlauncher.com",
+    description: "Quick file search and app launcher for Windows. Plugin ecosystem, everything search integration.",
+    category: "Desktop Software",
+    tags: ["launcher", "search", "windows"]
+  },
+  {
+    name: "Espanso",
+    url: "https://espanso.org",
+    description: "Cross-platform text expander. Define abbreviations that auto-expand into anything. Open source, privacy-first.",
+    category: "Desktop Software",
+    tags: ["text expander", "automation", "typing"]
+  },
+  {
+    name: "AutoHotkey",
+    url: "https://www.autohotkey.com",
+    description: "Scripting language for Windows automation. Hotkeys, macros, text expansion, GUI automation — infinitely flexible.",
+    category: "Desktop Software",
+    tags: ["automation", "macros", "scripting"]
+  },
+  {
+    name: "Greenshot",
+    url: "https://getgreenshot.org",
+    description: "Lightweight screenshot tool for Windows. Capture, annotate, and export in seconds. No bloat.",
+    category: "Desktop Software",
+    tags: ["screenshot", "lightweight", "windows"]
+  },
+  {
+    name: "7-Zip",
+    url: "https://www.7-zip.org",
+    description: "The file archiver with the highest compression ratio. Supports every format. Free, open source, legendary.",
+    category: "Desktop Software",
+    tags: ["compression", "archive", "zip"]
+  },
+  {
+    name: "VLC",
+    url: "https://www.videolan.org",
+    description: "The universal media player. Plays everything — every format, every codec, every protocol. No questions asked.",
+    category: "Desktop Software",
+    tags: ["media player", "video", "audio"]
+  },
+  {
+    name: "mpv",
+    url: "https://mpv.io",
+    description: "Minimalist media player for the power user. GPU-accelerated, scriptable, supports every format.",
+    category: "Desktop Software",
+    tags: ["media player", "minimal", "gpu"]
+  },
+  {
+    name: "Ventoy",
+    url: "https://www.ventoy.net",
+    description: "Create a bootable USB with multiple ISOs. Just copy ISO files to the USB — no reformatting needed.",
+    category: "Desktop Software",
+    tags: ["bootable", "usb", "iso"]
+  },
+  {
+    name: "Rufus",
+    url: "https://rufus.ie",
+    description: "Create bootable USB drives fast. Format, partition, and write ISOs. The Windows USB tool standard.",
+    category: "Desktop Software",
+    tags: ["bootable", "usb", "formatting"]
+  },
+  {
+    name: "Bulk Crap Uninstaller",
+    url: "https://www.bcuninstaller.com",
+    description: "Remove programs in bulk, clean leftovers, detect orphaned entries. The uninstaller Windows deserves.",
+    category: "Desktop Software",
+    tags: ["uninstaller", "cleanup", "windows"]
+  },
+  {
+    name: "TranslucentTB",
+    url: "https://github.com/TranslucentTB/TranslucentTB",
+    description: "Make your Windows taskbar transparent, blur, or acrylic. Lightweight, open source customization.",
+    category: "Desktop Software",
+    tags: ["taskbar", "transparency", "customization"]
+  },
+  {
+    name: "WindHawk",
+    url: "https://windhawk.net",
+    description: "Customize Windows programs and the OS itself. Community-made mods for Explorer, taskbar, and more.",
+    category: "Desktop Software",
+    tags: ["customization", "mods", "windows"]
+  },
+  {
+    name: "Twinkle Tray",
+    url: "https://twinkletray.com",
+    description: "Control monitor brightness from your system tray. Essential for multi-monitor setups.",
+    category: "Desktop Software",
+    tags: ["brightness", "monitor", "tray"]
+  },
+  {
+    name: "QuickLook",
+    url: "https://github.com/QL-Win/QuickLook",
+    description: "Bring macOS-style Quick Look to Windows. Press Space to preview any file instantly.",
+    category: "Desktop Software",
+    tags: ["preview", "quicklook", "macos"]
+  },
+  {
+    name: "Barrier",
+    url: "https://github.com/debauchee/barrier",
+    description: "Open source KVM software. Share mouse and keyboard between multiple computers. Cross-platform.",
+    category: "Desktop Software",
+    tags: ["kvm", "mouse", "keyboard"]
+  },
+  {
+    name: "Notepads",
+    url: "https://github.com/0x7c13/Notepads",
+    description: "Modern, lightweight text editor for Windows. Tabs, Markdown preview, clean fluent design.",
+    category: "Desktop Software",
+    tags: ["text editor", "modern", "windows"]
+  },
+  {
+    name: "CrystalDiskInfo",
+    url: "https://crystalmark.info/en/software/crystaldiskinfo/",
+    description: "Monitor SSD and HDD health. SMART data, temperature, and remaining lifespan at a glance.",
+    category: "Desktop Software",
+    tags: ["disk", "health", "smart"]
+  },
+  {
+    name: "HWiNFO",
+    url: "https://www.hwinfo.com",
+    description: "Comprehensive hardware analysis and monitoring. Every sensor, every component, real-time data.",
+    category: "Desktop Software",
+    tags: ["hardware", "monitoring", "sensors"]
+  },
+  {
+    name: "Process Hacker",
+    url: "https://processhacker.sourceforge.io",
+    description: "Advanced task manager and system monitor. See everything running, memory usage, disk I/O, and network.",
+    category: "Desktop Software",
+    tags: ["task manager", "process", "system"]
+  },
+  // ── AI & ML ──
+  {
+    name: "OpenRouter",
+    url: "https://openrouter.ai",
+    description: "Unified API for 200+ LLMs. One endpoint to access Claude, GPT, Gemini, Llama, Mistral, and more. Pay-as-you-go.",
+    category: "AI & ML",
+    tags: ["api", "unified", "multi-model"]
+  },
+  {
+    name: "Groq",
+    url: "https://groq.com",
+    description: "LLM inference at insane speeds on custom LPU chips. Free API tier with blazing-fast Llama and Mixtral.",
+    category: "AI & ML",
+    tags: ["inference", "fast", "api"]
+  },
+  {
+    name: "Together AI",
+    url: "https://www.together.ai",
+    description: "Run and fine-tune open source models. Fast inference API with competitive pricing. Research-friendly.",
+    category: "AI & ML",
+    tags: ["inference", "fine-tune", "open source"]
+  },
+  {
+    name: "Replicate",
+    url: "https://replicate.com",
+    description: "Run ML models in the cloud with one line of code. Huge library of open source models on demand.",
+    category: "AI & ML",
+    tags: ["models", "cloud", "api"]
+  },
+  {
+    name: "Weights & Biases",
+    url: "https://wandb.ai",
+    description: "ML experiment tracking and visualization. Log metrics, compare runs, and share results. Free for individuals.",
+    category: "AI & ML",
+    tags: ["experiment", "tracking", "mlops"]
+  },
+  {
+    name: "Papers With Code",
+    url: "https://paperswithcode.com",
+    description: "Every ML paper with its code implementation. Benchmarks, leaderboards, and state-of-the-art tracker.",
+    category: "AI & ML",
+    tags: ["papers", "research", "benchmarks"]
+  },
+  {
+    name: "Civitai",
+    url: "https://civitai.com",
+    description: "Community hub for Stable Diffusion models. LoRAs, checkpoints, embeddings — the modding scene for AI art.",
+    category: "AI & ML",
+    tags: ["stable diffusion", "models", "community"]
+  },
+  {
+    name: "InvokeAI",
+    url: "https://invoke.ai",
+    description: "Professional creative AI platform. Polished Stable Diffusion interface with canvas, layers, and ControlNet.",
+    category: "AI & ML",
+    tags: ["stable diffusion", "professional", "canvas"]
+  },
+  {
+    name: "Flowise",
+    url: "https://flowiseai.com",
+    description: "Visual LangChain builder. Drag and drop LLM apps with RAG, agents, and chains. No code needed.",
+    category: "AI & ML",
+    tags: ["langchain", "visual", "no-code"]
+  },
+  {
+    name: "LangFlow",
+    url: "https://www.langflow.org",
+    description: "Visual framework for building multi-agent and RAG applications. React Flow-based editor for AI pipelines.",
+    category: "AI & ML",
+    tags: ["langchain", "agents", "visual"]
+  },
+  {
+    name: "Dify",
+    url: "https://dify.ai",
+    description: "Open source LLM app development platform. RAG, agents, workflow orchestration with a visual canvas.",
+    category: "AI & ML",
+    tags: ["platform", "rag", "agents"]
+  },
+  {
+    name: "LibreChat",
+    url: "https://www.librechat.ai",
+    description: "Self-hosted multi-provider chat UI. Connect OpenAI, Anthropic, Google, local models — all in one interface.",
+    category: "AI & ML",
+    tags: ["chat", "multi-provider", "self-hosted"]
+  },
+  {
+    name: "GPT4All",
+    url: "https://www.nomic.ai/gpt4all",
+    description: "Run LLMs on consumer hardware. Simple installer, offline-capable, privacy-focused. By Nomic AI.",
+    category: "AI & ML",
+    tags: ["local", "desktop", "offline"]
+  },
+  {
+    name: "Phidata",
+    url: "https://www.phidata.com",
+    description: "Build AI agents with memory, knowledge, and tools. Python framework for production-ready AI assistants.",
+    category: "AI & ML",
+    tags: ["agents", "framework", "python"]
+  },
+  {
+    name: "CrewAI",
+    url: "https://www.crewai.com",
+    description: "Framework for orchestrating AI agents working together. Define roles, goals, and tasks for multi-agent systems.",
+    category: "AI & ML",
+    tags: ["agents", "multi-agent", "orchestration"]
+  },
+  {
+    name: "NotebookLM",
+    url: "https://notebooklm.google.com",
+    description: "Google\'s AI research assistant. Upload documents and chat with them. Generates podcast-style audio summaries.",
+    category: "AI & ML",
+    tags: ["research", "documents", "google"]
+  },
+  {
+    name: "Llamafile",
+    url: "https://github.com/Mozilla-Ocho/llamafile",
+    description: "Single-file executable LLMs. Download one file and run a chatbot. No Python, no Docker, no dependencies.",
+    category: "AI & ML",
+    tags: ["local", "portable", "single-file"]
+  },
+  // ── AI Creative ──
+  {
+    name: "Ideogram",
+    url: "https://ideogram.ai",
+    description: "AI image generator that excels at typography and text rendering in images. Free tier available.",
+    category: "AI Creative",
+    tags: ["image", "text", "typography"]
+  },
+  {
+    name: "Leonardo.ai",
+    url: "https://leonardo.ai",
+    description: "AI creative suite for game assets, concept art, and design. Fine-tuned models, real-time canvas.",
+    category: "AI Creative",
+    tags: ["gaming", "art", "design"]
+  },
+  {
+    name: "Pika",
+    url: "https://pika.art",
+    description: "AI video generation from text or images. Create and edit videos with simple prompts.",
+    category: "AI Creative",
+    tags: ["video", "generation", "editing"]
+  },
+  {
+    name: "Luma AI",
+    url: "https://lumalabs.ai",
+    description: "3D capture and generation from photos and text. Dream Machine for video generation.",
+    category: "AI Creative",
+    tags: ["3d", "video", "generation"]
+  },
+  {
+    name: "Krea.ai",
+    url: "https://www.krea.ai",
+    description: "Real-time AI image generation. See results update as you type. Canvas mode for editing.",
+    category: "AI Creative",
+    tags: ["real-time", "canvas", "image"]
+  },
+  {
+    name: "Pixlr",
+    url: "https://pixlr.com",
+    description: "AI-powered online photo editor. Background removal, object eraser, batch editing. Free tier.",
+    category: "AI Creative",
+    tags: ["photo", "editor", "background"]
+  },
+  {
+    name: "Remove.bg",
+    url: "https://www.remove.bg",
+    description: "Instant background removal from photos using AI. One click, perfect results, free for preview quality.",
+    category: "AI Creative",
+    tags: ["background", "removal", "instant"]
+  },
+  {
+    name: "Runway",
+    url: "https://runwayml.com",
+    description: "Creative AI toolkit for video. Gen-3 Alpha for video generation, motion brush, green screen, and more.",
+    category: "AI Creative",
+    tags: ["video", "generation", "creative"]
+  },
+  // ── Automation ──
+  {
+    name: "Make (Integromat)",
+    url: "https://www.make.com",
+    description: "Visual automation platform. Connect apps and design workflows with a flowchart-style interface. Generous free tier.",
+    category: "Automation",
+    tags: ["workflow", "visual", "integrations"]
+  },
+  {
+    name: "Pipedream",
+    url: "https://pipedream.com",
+    description: "Developer-first automation platform. Connect APIs with code steps. Free tier with 100+ connectors.",
+    category: "Automation",
+    tags: ["api", "code", "developer"]
+  },
+  {
+    name: "Temporal",
+    url: "https://temporal.io",
+    description: "Durable execution platform. Build reliable workflows that survive failures. Open source core.",
+    category: "Automation",
+    tags: ["durable", "workflows", "reliable"]
+  },
+  {
+    name: "Prefect",
+    url: "https://www.prefect.io",
+    description: "Modern workflow orchestration. Schedule, monitor, and manage data pipelines. Python-native.",
+    category: "Automation",
+    tags: ["orchestration", "data", "python"]
+  },
+  {
+    name: "Apache Airflow",
+    url: "https://airflow.apache.org",
+    description: "The industry standard for data pipeline orchestration. Schedule, monitor, and manage complex workflows.",
+    category: "Automation",
+    tags: ["pipelines", "scheduling", "data"]
+  },
+  // ── Homelab ──
+  {
+    name: "CasaOS",
+    url: "https://casaos.zimaspace.com",
+    description: "Beautiful personal cloud OS. One-click app installs, file management, Docker container GUI. Perfect for beginners.",
+    category: "Homelab",
+    tags: ["os", "personal cloud", "docker"]
+  },
+  {
+    name: "Homarr",
+    url: "https://homarr.dev",
+    description: "Customizable homelab dashboard. Drag-and-drop widgets, service integrations, and a gorgeous dark theme.",
+    category: "Homelab",
+    tags: ["dashboard", "widgets", "dark theme"]
+  },
+  {
+    name: "Yacht",
+    url: "https://yacht.sh",
+    description: "Docker container management with templates. Deploy popular self-hosted apps in one click.",
+    category: "Homelab",
+    tags: ["docker", "templates", "deployment"]
+  },
+  {
+    name: "Authentik",
+    url: "https://goauthentik.io",
+    description: "Open source identity provider. SSO, MFA, user management for all your self-hosted services.",
+    category: "Homelab",
+    tags: ["sso", "identity", "authentication"]
+  },
+  {
+    name: "Traefik",
+    url: "https://traefik.io",
+    description: "Cloud-native reverse proxy and load balancer. Auto-discovers services, auto-provisions SSL. Docker-native.",
+    category: "Homelab",
+    tags: ["proxy", "load balancer", "docker"]
+  },
+  {
+    name: "WireGuard",
+    url: "https://www.wireguard.com",
+    description: "Modern, fast VPN protocol. Simple, lean, and cryptographically sound. Built into the Linux kernel.",
+    category: "Homelab",
+    tags: ["vpn", "fast", "kernel"]
+  },
+  {
+    name: "Ansible",
+    url: "https://www.ansible.com",
+    description: "IT automation that everyone can use. Agentless, YAML-based configuration management and deployment.",
+    category: "Homelab",
+    tags: ["automation", "config", "deployment"]
+  },
+  {
+    name: "Plex",
+    url: "https://www.plex.tv",
+    description: "Organize and stream your personal media library. Movies, TV, music, photos — beautifully presented.",
+    category: "Homelab",
+    tags: ["media", "streaming", "library"]
+  },
+  {
+    name: "Jellyfin",
+    url: "https://jellyfin.org",
+    description: "Free open source media system. The privacy-respecting Plex alternative with no accounts or tracking.",
+    category: "Homelab",
+    tags: ["media", "streaming", "open source"]
+  },
+  {
+    name: "Immich",
+    url: "https://immich.app",
+    description: "Self-hosted Google Photos alternative. AI-powered face recognition, mobile backup, beautiful timeline.",
+    category: "Homelab",
+    tags: ["photos", "backup", "ai"]
+  },
+  {
+    name: "Paperless-ngx",
+    url: "https://docs.paperless-ngx.com",
+    description: "Document management system that transforms physical docs into searchable digital archives. OCR and tagging.",
+    category: "Homelab",
+    tags: ["documents", "ocr", "archive"]
+  },
+  {
+    name: "Gotify",
+    url: "https://gotify.net",
+    description: "Self-hosted push notifications. Simple REST API to send messages to your devices. No third-party dependencies.",
+    category: "Homelab",
+    tags: ["notifications", "push", "api"]
+  },
+  {
+    name: "Ntfy",
+    url: "https://ntfy.sh",
+    description: "Simple push notifications via HTTP PUT/POST. Subscribe to topics, send from any tool. Self-hostable.",
+    category: "Homelab",
+    tags: ["notifications", "http", "simple"]
+  },
+  {
+    name: "Linkwarden",
+    url: "https://linkwarden.app",
+    description: "Self-hosted collaborative bookmark manager. Archive pages, tag links, share collections.",
+    category: "Homelab",
+    tags: ["bookmarks", "archive", "collaborative"]
+  },
+  {
+    name: "Mealie",
+    url: "https://mealie.io",
+    description: "Self-hosted recipe manager. Import recipes from URLs, meal planning, shopping lists. Beautiful UI.",
+    category: "Homelab",
+    tags: ["recipes", "meal planning", "food"]
+  },
+  {
+    name: "Actual Budget",
+    url: "https://actualbudget.org",
+    description: "Privacy-focused budgeting app. Envelope budgeting, bank sync, self-hostable. YNAB alternative.",
+    category: "Homelab",
+    tags: ["budget", "finance", "privacy"]
+  },
+  {
+    name: "FreshRSS",
+    url: "https://freshrss.org",
+    description: "Self-hosted RSS aggregator. Follow any website or blog. Fast, lightweight, and extensible.",
+    category: "Homelab",
+    tags: ["rss", "reader", "news"]
+  },
+  {
+    name: "Miniflux",
+    url: "https://miniflux.app",
+    description: "Minimalist and opinionated RSS reader. Fast, clean, no tracking. The RSS reader for purists.",
+    category: "Homelab",
+    tags: ["rss", "minimal", "fast"]
+  },
+  {
+    name: "Navidrome",
+    url: "https://www.navidrome.org",
+    description: "Self-hosted music server compatible with Subsonic apps. Stream your music library from anywhere.",
+    category: "Homelab",
+    tags: ["music", "streaming", "subsonic"]
+  },
+  {
+    name: "Firefly III",
+    url: "https://www.firefly-iii.org",
+    description: "Free, open source personal finance manager. Track expenses, budgets, and accounts. Self-hosted.",
+    category: "Homelab",
+    tags: ["finance", "budgeting", "self-hosted"]
+  },
+  // ── Creative ──
+  {
+    name: "Figma",
+    url: "https://www.figma.com",
+    description: "Collaborative interface design tool. Real-time multiplayer editing, prototyping, and developer handoff. Free tier.",
+    category: "Creative",
+    tags: ["design", "ui", "prototyping"]
+  },
+  {
+    name: "Canva",
+    url: "https://www.canva.com",
+    description: "Design anything — presentations, social media, posters, logos. Drag-and-drop with massive template library.",
+    category: "Creative",
+    tags: ["design", "templates", "easy"]
+  },
+  {
+    name: "Penpot",
+    url: "https://penpot.app",
+    description: "Open source design and prototyping platform. Figma alternative that\'s web-based and self-hostable.",
+    category: "Creative",
+    tags: ["design", "prototyping", "open source"]
+  },
+  {
+    name: "Coolors",
+    url: "https://coolors.co",
+    description: "Super fast color palette generator. Press space for new combos. Export to any format. Wildly addictive.",
+    category: "Creative",
+    tags: ["colors", "palette", "generator"]
+  },
+  {
+    name: "Realtime Colors",
+    url: "https://www.realtimecolors.com",
+    description: "Visualize your color palette on a real website layout. See how your colors actually look before committing.",
+    category: "Creative",
+    tags: ["colors", "preview", "website"]
+  },
+  {
+    name: "unDraw",
+    url: "https://undraw.co",
+    description: "Free SVG illustrations that you can customize colors on. Huge library of modern, flat-style graphics.",
+    category: "Creative",
+    tags: ["illustrations", "svg", "free"]
+  },
+  {
+    name: "Heroicons",
+    url: "https://heroicons.com",
+    description: "Beautiful hand-crafted SVG icons by Tailwind CSS creators. Free, MIT licensed, ready for React and Vue.",
+    category: "Creative",
+    tags: ["icons", "svg", "tailwind"]
+  },
+  {
+    name: "Lucide",
+    url: "https://lucide.dev",
+    description: "Beautiful and consistent icon set. Fork of Feather Icons with more icons and active development.",
+    category: "Creative",
+    tags: ["icons", "svg", "open source"]
+  },
+  {
+    name: "SVG Repo",
+    url: "https://www.svgrepo.com",
+    description: "500,000+ free SVG icons and vectors. Searchable, customizable, and categorized.",
+    category: "Creative",
+    tags: ["svg", "icons", "vectors"]
+  },
+  {
+    name: "Shots.so",
+    url: "https://shots.so",
+    description: "Create beautiful mockups for your screenshots. Browser frames, device mockups, custom backgrounds.",
+    category: "Creative",
+    tags: ["mockups", "screenshots", "browser"]
+  },
+  {
+    name: "Lottiefiles",
+    url: "https://lottiefiles.com",
+    description: "Lightweight animations for web and mobile. Thousands of free JSON animations. Tiny file sizes.",
+    category: "Creative",
+    tags: ["animation", "lottie", "json"]
+  },
+  {
+    name: "TinyPNG",
+    url: "https://tinypng.com",
+    description: "Smart lossy compression for PNG and JPEG. Dramatically reduces file size with minimal quality loss.",
+    category: "Creative",
+    tags: ["compression", "images", "optimization"]
+  },
+  {
+    name: "Haikei",
+    url: "https://haikei.app",
+    description: "Generate unique SVG backgrounds and design assets. Waves, blobs, gradients, stacked layers.",
+    category: "Creative",
+    tags: ["svg", "backgrounds", "generators"]
+  },
+  {
+    name: "Shape Divider",
+    url: "https://www.shapedivider.app",
+    description: "Generate custom section dividers for your website. Waves, curves, triangles — export as SVG or CSS.",
+    category: "Creative",
+    tags: ["svg", "dividers", "web design"]
+  },
+  // ── Music & Audio ──
+  {
+    name: "Freesound",
+    url: "https://freesound.org",
+    description: "Collaborative database of Creative Commons licensed sounds. 500,000+ clips for any project.",
+    category: "Music & Audio",
+    tags: ["sounds", "samples", "creative commons"]
+  },
+  {
+    name: "Sonic Pi",
+    url: "https://sonic-pi.net",
+    description: "Code-based music creation. Live code beats and melodies with Ruby. Used from classrooms to clubs.",
+    category: "Music & Audio",
+    tags: ["live coding", "music", "ruby"]
+  },
+  {
+    name: "MuseScore",
+    url: "https://musescore.org",
+    description: "Free music notation software. Write, play, and print sheet music. Massive community sheet music library.",
+    category: "Music & Audio",
+    tags: ["notation", "sheet music", "free"]
+  },
+  {
+    name: "Soundtrap",
+    url: "https://www.soundtrap.com",
+    description: "Online collaborative music studio. Record, mix, and share music directly in the browser.",
+    category: "Music & Audio",
+    tags: ["studio", "online", "collaboration"]
+  },
+  {
+    name: "Bandlab",
+    url: "https://www.bandlab.com",
+    description: "Free online DAW and music social network. Record, produce, and share music. No limits, no subscriptions.",
+    category: "Music & Audio",
+    tags: ["daw", "social", "free"]
+  },
+  // ── Privacy ──
+  {
+    name: "Standard Notes",
+    url: "https://standardnotes.com",
+    description: "End-to-end encrypted notes. 100% open source, extensible with editors and themes. Free sync.",
+    category: "Privacy",
+    tags: ["notes", "encrypted", "open source"]
+  },
+  {
+    name: "Signal",
+    url: "https://signal.org",
+    description: "The gold standard for private messaging. End-to-end encrypted, open source, no ads, no tracking.",
+    category: "Privacy",
+    tags: ["messaging", "encrypted", "open source"]
+  },
+  {
+    name: "ProtonMail",
+    url: "https://proton.me",
+    description: "Encrypted email, calendar, drive, and VPN. Swiss privacy, open source apps, zero-access encryption.",
+    category: "Privacy",
+    tags: ["email", "encrypted", "swiss"]
+  },
+  {
+    name: "Tails",
+    url: "https://tails.net",
+    description: "Portable Linux OS that routes everything through Tor. Boots from USB, leaves no trace on the host.",
+    category: "Privacy",
+    tags: ["os", "tor", "portable"]
+  },
+  {
+    name: "Whonix",
+    url: "https://www.whonix.org",
+    description: "Desktop OS designed for advanced security and privacy. Runs inside a VM, all traffic through Tor.",
+    category: "Privacy",
+    tags: ["os", "tor", "vm"]
+  },
+  {
+    name: "uBlock Origin",
+    url: "https://ublockorigin.com",
+    description: "The most efficient ad and content blocker. Low CPU and memory usage. Open source, community-maintained.",
+    category: "Privacy",
+    tags: ["ad blocker", "browser", "efficient"]
+  },
+  {
+    name: "Prism Break",
+    url: "https://prism-break.org",
+    description: "Directory of privacy-respecting alternatives to proprietary software. Organized by platform and use case.",
+    category: "Privacy",
+    tags: ["alternatives", "directory", "foss"]
+  },
+  {
+    name: "Privacy Guides",
+    url: "https://www.privacyguides.org",
+    description: "Community-driven resource for digital privacy. Recommendations for VPNs, browsers, email, and more.",
+    category: "Privacy",
+    tags: ["guides", "recommendations", "community"]
+  },
+  {
+    name: "CalyxOS",
+    url: "https://calyxos.org",
+    description: "Privacy-focused Android alternative. De-Googled, includes a built-in VPN. For Pixel phones.",
+    category: "Privacy",
+    tags: ["android", "degoogled", "mobile"]
+  },
+  // ── Sysadmin ──
+  {
+    name: "Semaphore",
+    url: "https://semaphoreui.com",
+    description: "Modern UI for Ansible. Schedule playbooks, manage inventories, track task history. Beautiful web interface.",
+    category: "Sysadmin",
+    tags: ["ansible", "ui", "automation"]
+  },
+  {
+    name: "AWX",
+    url: "https://github.com/ansible/awx",
+    description: "Open source version of Ansible Tower. Web interface for Ansible with RBAC, scheduling, and inventories.",
+    category: "Sysadmin",
+    tags: ["ansible", "tower", "management"]
+  },
+  {
+    name: "Terraform",
+    url: "https://www.terraform.io",
+    description: "Infrastructure as code. Define cloud resources in declarative config files. The industry standard.",
+    category: "Sysadmin",
+    tags: ["iac", "cloud", "provisioning"]
+  },
+  {
+    name: "Cockpit",
+    url: "https://cockpit-project.org",
+    description: "Web-based Linux server administration. Manage storage, networking, containers, and users through your browser.",
+    category: "Sysadmin",
+    tags: ["linux", "web", "management"]
+  },
+  {
+    name: "Webmin",
+    url: "https://webmin.com",
+    description: "Web-based system administration for Unix. Manage users, disk quotas, services, config files, and more.",
+    category: "Sysadmin",
+    tags: ["linux", "web", "administration"]
+  },
+  {
+    name: "Zabbix",
+    url: "https://www.zabbix.com",
+    description: "Enterprise-class monitoring solution. Servers, networks, applications, cloud — all open source.",
+    category: "Sysadmin",
+    tags: ["monitoring", "enterprise", "open source"]
+  },
+  {
+    name: "Prometheus",
+    url: "https://prometheus.io",
+    description: "Monitoring and alerting toolkit. Time-series database with powerful query language. Cloud-native standard.",
+    category: "Sysadmin",
+    tags: ["monitoring", "metrics", "cloud-native"]
+  },
+  {
+    name: "Loki",
+    url: "https://grafana.com/oss/loki/",
+    description: "Log aggregation system by Grafana Labs. Like Prometheus, but for logs. Pairs perfectly with Grafana.",
+    category: "Sysadmin",
+    tags: ["logs", "aggregation", "grafana"]
+  },
+  {
+    name: "Teleport",
+    url: "https://goteleport.com",
+    description: "Secure access to SSH, Kubernetes, databases, and web apps. Zero-trust, identity-aware proxy. Open source.",
+    category: "Sysadmin",
+    tags: ["access", "zero-trust", "ssh"]
+  },
+  {
+    name: "Wazuh",
+    url: "https://wazuh.com",
+    description: "Open source security platform. SIEM, XDR, threat detection, compliance monitoring. Unified security.",
+    category: "Sysadmin",
+    tags: ["siem", "security", "threat"]
+  },
+  {
+    name: "Checkmk",
+    url: "https://checkmk.com",
+    description: "IT monitoring that works. Auto-discovery, 2000+ plugins, beautiful dashboards. Free raw edition.",
+    category: "Sysadmin",
+    tags: ["monitoring", "auto-discovery", "plugins"]
+  },
+  {
+    name: "Glances",
+    url: "https://nicolargo.github.io/glances/",
+    description: "Cross-platform system monitoring tool. All your metrics in one terminal view. Written in Python.",
+    category: "Sysadmin",
+    tags: ["system", "terminal", "python"]
+  },
+  {
+    name: "btop",
+    url: "https://github.com/aristocratos/btop",
+    description: "Resource monitor with a gorgeous TUI. CPU, memory, disk, network — beautifully rendered in terminal.",
+    category: "Sysadmin",
+    tags: ["terminal", "monitor", "beautiful"]
+  },
+  // ── Data & Viz ──
+  {
+    name: "Metabase",
+    url: "https://www.metabase.com",
+    description: "Open source business intelligence. Ask questions about your data and get answers as charts. No SQL needed.",
+    category: "Data & Viz",
+    tags: ["bi", "analytics", "no-code"]
+  },
+  {
+    name: "Apache Superset",
+    url: "https://superset.apache.org",
+    description: "Modern data exploration and visualization platform. Create dashboards from any SQL database.",
+    category: "Data & Viz",
+    tags: ["dashboards", "sql", "exploration"]
+  },
+  {
+    name: "D3.js",
+    url: "https://d3js.org",
+    description: "The most powerful data visualization library for the web. Complete control over every pixel.",
+    category: "Data & Viz",
+    tags: ["library", "javascript", "custom"]
+  },
+  {
+    name: "Plotly",
+    url: "https://plotly.com/javascript/",
+    description: "Interactive charts for the web. Scatter, bar, 3D, maps, financial — gorgeous out of the box.",
+    category: "Data & Viz",
+    tags: ["charts", "interactive", "3d"]
+  },
+  {
+    name: "Mermaid Live",
+    url: "https://mermaid.live",
+    description: "Create diagrams and flowcharts from text. Markdown-like syntax renders as beautiful SVG diagrams.",
+    category: "Data & Viz",
+    tags: ["diagrams", "text", "flowcharts"]
+  },
+  {
+    name: "DB Diagram",
+    url: "https://dbdiagram.io",
+    description: "Draw database relationship diagrams using simple DSL. Export to SQL, PDF, or image.",
+    category: "Data & Viz",
+    tags: ["database", "erd", "diagrams"]
+  },
+  {
+    name: "Chartbrew",
+    url: "https://chartbrew.com",
+    description: "Open source platform to connect databases and APIs and create live dashboards and charts.",
+    category: "Data & Viz",
+    tags: ["dashboards", "api", "live"]
+  },
+  // ── Education ──
+  {
+    name: "Brilliant",
+    url: "https://brilliant.org",
+    description: "Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition.",
+    category: "Education",
+    tags: ["stem", "interactive", "puzzles"]
+  },
+  {
+    name: "Khan Academy",
+    url: "https://www.khanacademy.org",
+    description: "Free world-class education. Math, science, computing, arts — from kindergarten to college level.",
+    category: "Education",
+    tags: ["free", "comprehensive", "courses"]
+  },
+  {
+    name: "MIT OpenCourseWare",
+    url: "https://ocw.mit.edu",
+    description: "Free lecture notes, exams, and videos from MIT. Almost every course MIT has ever taught.",
+    category: "Education",
+    tags: ["mit", "courses", "lectures"]
+  },
+  {
+    name: "3Blue1Brown",
+    url: "https://www.3blue1brown.com",
+    description: "Math videos that make your brain tingle. Beautiful animations that build deep understanding.",
+    category: "Education",
+    tags: ["math", "visualization", "youtube"]
+  },
+  {
+    name: "LeetCode",
+    url: "https://leetcode.com",
+    description: "Coding interview preparation platform. 3000+ problems, contests, and discussion. Industry standard.",
+    category: "Education",
+    tags: ["coding", "interview", "practice"]
+  },
+  {
+    name: "HackerRank",
+    url: "https://www.hackerrank.com",
+    description: "Coding challenges and skill certification. Practice algorithms, data structures, and domain-specific skills.",
+    category: "Education",
+    tags: ["coding", "challenges", "certification"]
+  },
+  {
+    name: "Codecademy",
+    url: "https://www.codecademy.com",
+    description: "Interactive coding lessons. Learn Python, JavaScript, SQL, and more with hands-on exercises. Free tier.",
+    category: "Education",
+    tags: ["interactive", "coding", "lessons"]
+  },
+  {
+    name: "W3Schools",
+    url: "https://www.w3schools.com",
+    description: "Web development tutorials and references. HTML, CSS, JavaScript, Python, SQL — the classic learning resource.",
+    category: "Education",
+    tags: ["web", "tutorials", "reference"]
+  },
+  {
+    name: "Full Stack Open",
+    url: "https://fullstackopen.com",
+    description: "University of Helsinki\'s full-stack web dev course. React, Node, TypeScript, GraphQL — completely free.",
+    category: "Education",
+    tags: ["full stack", "react", "university"]
+  },
+  {
+    name: "CS50",
+    url: "https://cs50.harvard.edu",
+    description: "Harvard\'s legendary intro to CS. The most popular course at Harvard, available free online.",
+    category: "Education",
+    tags: ["harvard", "cs", "programming"]
+  },
+  {
+    name: "Scrimba",
+    url: "https://scrimba.com",
+    description: "Interactive coding screencasts. Pause the video and edit the code directly. Revolutionary format.",
+    category: "Education",
+    tags: ["interactive", "screencasts", "coding"]
+  },
+  {
+    name: "Nand2Tetris",
+    url: "https://www.nand2tetris.org",
+    description: "Build a computer from scratch. Start with logic gates, end with a full operating system. Mind-expanding.",
+    category: "Education",
+    tags: ["hardware", "computer science", "fundamentals"]
+  },
+  // ── Productivity ──
+  {
+    name: "Notion",
+    url: "https://www.notion.so",
+    description: "All-in-one workspace. Notes, docs, wikis, databases, kanban boards. The productivity Swiss Army knife.",
+    category: "Productivity",
+    tags: ["workspace", "notes", "databases"]
+  },
+  {
+    name: "Anytype",
+    url: "https://anytype.io",
+    description: "Local-first, encrypted alternative to Notion. Offline-capable, peer-to-peer sync. Privacy-respecting.",
+    category: "Productivity",
+    tags: ["workspace", "encrypted", "local-first"]
+  },
+  {
+    name: "Linear",
+    url: "https://linear.app",
+    description: "Issue tracking that doesn\'t suck. Fast, keyboard-driven, opinionated. Free for small teams.",
+    category: "Productivity",
+    tags: ["issues", "tracking", "project management"]
+  },
+  {
+    name: "Cal.com",
+    url: "https://cal.com",
+    description: "Open source Calendly alternative. Self-hostable scheduling with deep calendar integrations.",
+    category: "Productivity",
+    tags: ["scheduling", "calendar", "open source"]
+  },
+  {
+    name: "Docuseal",
+    url: "https://www.docuseal.co",
+    description: "Open source document signing platform. Create, fill, and sign documents. DocuSign alternative.",
+    category: "Productivity",
+    tags: ["signing", "documents", "open source"]
+  },
+  {
+    name: "Plane",
+    url: "https://plane.so",
+    description: "Open source project management. Issues, cycles, modules, analytics. Jira and Linear alternative.",
+    category: "Productivity",
+    tags: ["project management", "issues", "open source"]
+  },
+  {
+    name: "Huly",
+    url: "https://huly.io",
+    description: "Open source all-in-one project management. Combines Linear, Jira, Slack, and Notion concepts.",
+    category: "Productivity",
+    tags: ["project management", "all-in-one", "open source"]
+  },
+  {
+    name: "Typst",
+    url: "https://typst.app",
+    description: "Modern LaTeX alternative. Write papers and documents with a clean syntax. Real-time collaboration.",
+    category: "Productivity",
+    tags: ["latex", "typesetting", "academic"]
+  },
+  {
+    name: "Overleaf",
+    url: "https://www.overleaf.com",
+    description: "Online LaTeX editor with real-time collaboration. The standard for academic papers and technical documents.",
+    category: "Productivity",
+    tags: ["latex", "academic", "collaboration"]
+  },
+  {
+    name: "Trilium Notes",
+    url: "https://github.com/zadam/trilium",
+    description: "Hierarchical note-taking app with powerful scripting. Relation maps, book notes, task management. Self-hostable.",
+    category: "Productivity",
+    tags: ["notes", "hierarchical", "scripting"]
+  },
+  {
+    name: "HedgeDoc",
+    url: "https://hedgedoc.org",
+    description: "Real-time collaborative Markdown editor. Open source, self-hosted. CodiMD successor.",
+    category: "Productivity",
+    tags: ["markdown", "collaborative", "real-time"]
+  },
+  {
+    name: "Mattermost",
+    url: "https://mattermost.com",
+    description: "Open source Slack alternative. Self-hosted team messaging with integrations, bots, and DevOps workflows.",
+    category: "Productivity",
+    tags: ["messaging", "team", "self-hosted"]
+  },
+  {
+    name: "Zulip",
+    url: "https://zulip.com",
+    description: "Chat with threaded conversations. Open source, combines the immediacy of chat with email-style organization.",
+    category: "Productivity",
+    tags: ["chat", "threaded", "open source"]
+  },
+  {
+    name: "Leantime",
+    url: "https://leantime.io",
+    description: "Open source project management for non-project managers. Designed for teams that find Jira overwhelming.",
+    category: "Productivity",
+    tags: ["project management", "simple", "lean"]
+  },
+  // ── File Tools ──
+  {
+    name: "file.io",
+    url: "https://www.file.io",
+    description: "Ephemeral file sharing. Upload a file, share the link — file deletes after first download. Zero-knowledge.",
+    category: "File Tools",
+    tags: ["sharing", "ephemeral", "privacy"]
+  },
+  {
+    name: "WeTransfer",
+    url: "https://wetransfer.com",
+    description: "Send large files up to 2GB for free. No signup required. Simple, clean, just works.",
+    category: "File Tools",
+    tags: ["transfer", "large files", "simple"]
+  },
+  {
+    name: "Send (Mozilla)",
+    url: "https://send.vis.ee",
+    description: "Community-maintained fork of Firefox Send. Encrypted file sharing with auto-expiring links.",
+    category: "File Tools",
+    tags: ["encrypted", "sharing", "auto-expire"]
+  },
+  {
+    name: "OnionShare",
+    url: "https://onionshare.org",
+    description: "Securely share files, host websites, and chat using the Tor network. Complete anonymity.",
+    category: "File Tools",
+    tags: ["tor", "sharing", "anonymous"]
+  },
+  {
+    name: "Wormhole",
+    url: "https://wormhole.app",
+    description: "End-to-end encrypted file transfer. Files get a shareable link that auto-expires. Simple and secure.",
+    category: "File Tools",
+    tags: ["encrypted", "transfer", "simple"]
+  },
+  {
+    name: "ImageMagick",
+    url: "https://imagemagick.org",
+    description: "Command-line image manipulation powerhouse. Convert, resize, crop, transform — batch process thousands.",
+    category: "File Tools",
+    tags: ["images", "cli", "batch"]
+  },
+  {
+    name: "PDF24",
+    url: "https://tools.pdf24.org",
+    description: "Free online PDF tools. Merge, compress, convert, edit, sign, protect — every PDF operation imaginable.",
+    category: "File Tools",
+    tags: ["pdf", "tools", "free"]
+  },
+  {
+    name: "Pandoc",
+    url: "https://pandoc.org",
+    description: "Universal document converter. Markdown, LaTeX, HTML, DOCX, EPUB — converts between 40+ formats.",
+    category: "File Tools",
+    tags: ["converter", "documents", "universal"]
+  },
+  {
+    name: "Croc",
+    url: "https://github.com/schollz/croc",
+    description: "Send files securely between computers from the CLI. End-to-end encrypted, cross-platform, dead simple.",
+    category: "File Tools",
+    tags: ["transfer", "cli", "encrypted"]
+  },
+  {
+    name: "Magic Wormhole",
+    url: "https://magic-wormhole.readthedocs.io",
+    description: "Get things from one computer to another, safely. Simple CLI file transfer with human-pronounceable codes.",
+    category: "File Tools",
+    tags: ["transfer", "cli", "codes"]
+  },
+  // ── Fun & Culture ──
+  {
+    name: "This Person Does Not Exist",
+    url: "https://thispersondoesnotexist.com",
+    description: "AI-generated human faces. Refresh for a new person who has never existed. Fascinating and unsettling.",
+    category: "Fun & Culture",
+    tags: ["ai", "faces", "generative"]
+  },
+  {
+    name: "Pointer Pointer",
+    url: "https://pointerpointer.com",
+    description: "Point your cursor anywhere and a photo appears with someone pointing at it. Internet magic.",
+    category: "Fun & Culture",
+    tags: ["pointer", "photos", "weird"]
+  },
+  {
+    name: "Geoguessr",
+    url: "https://www.geoguessr.com",
+    description: "Guess your location from Google Street View. Addictive geography game. Free limited daily plays.",
+    category: "Fun & Culture",
+    tags: ["geography", "game", "streetview"]
+  },
+  {
+    name: "Little Alchemy 2",
+    url: "https://littlealchemy2.com",
+    description: "Combine elements to discover new ones. Start with earth, fire, water, air — end with 720 items.",
+    category: "Fun & Culture",
+    tags: ["game", "puzzle", "elements"]
+  },
+  {
+    name: "Infinite Craft",
+    url: "https://neal.fun/infinite-craft",
+    description: "Combine words to create anything. AI-powered element crafting with infinite possibilities.",
+    category: "Fun & Culture",
+    tags: ["ai", "crafting", "infinite"]
+  },
+  {
+    name: "Stellarium Web",
+    url: "https://stellarium-web.org",
+    description: "Online planetarium. See exactly what\'s in the sky right now from your location. Stars, planets, constellations.",
+    category: "Fun & Culture",
+    tags: ["astronomy", "stars", "planetarium"]
+  },
+  {
+    name: "Noclip",
+    url: "https://noclip.website",
+    description: "Explore video game levels in your browser. Wander through Zelda, Mario, Metroid worlds freely.",
+    category: "Fun & Culture",
+    tags: ["gaming", "exploration", "3d"]
+  },
+  {
+    name: "Scale of the Universe",
+    url: "https://scaleofuniverse.com",
+    description: "Interactive visualization from quantum foam to the observable universe. Zoom through 60+ orders of magnitude.",
+    category: "Fun & Culture",
+    tags: ["science", "scale", "interactive"]
+  },
+  {
+    name: "Quick Draw (Google)",
+    url: "https://quickdraw.withgoogle.com",
+    description: "You draw, neural network guesses. Google\'s AI doodle recognition game. Simple, addictive, and educational.",
+    category: "Fun & Culture",
+    tags: ["ai", "drawing", "game"]
+  },
+  {
+    name: "xkcd",
+    url: "https://xkcd.com",
+    description: "A webcomic of romance, sarcasm, math, and language. Randall Munroe\'s beloved stick-figure comics.",
+    category: "Fun & Culture",
+    tags: ["comics", "math", "humor"]
+  },
+  {
+    name: "Hacker Typer",
+    url: "https://hackertyper.net",
+    description: "Mash the keyboard and look like a movie hacker. Streams realistic-looking code as you type random keys.",
+    category: "Fun & Culture",
+    tags: ["hacker", "typing", "fake"]
+  },
+  {
+    name: "Poolside FM",
+    url: "https://poolside.fm",
+    description: "Retro-styled internet radio and video player. 90s aesthetics, vaporwave vibes, poolside relaxation.",
+    category: "Fun & Culture",
+    tags: ["music", "retro", "vaporwave"]
+  },
+  {
+    name: "Windows93",
+    url: "https://www.windows93.net",
+    description: "Simulates a fictional Windows 93 in your browser. Fully interactive OS with apps, games, and secrets.",
+    category: "Fun & Culture",
+    tags: ["retro", "os", "simulation"]
+  },
+  {
+    name: "ooh.directory",
+    url: "https://ooh.directory",
+    description: "Directory of blogs that are still being updated. Discover real people writing about real things.",
+    category: "Fun & Culture",
+    tags: ["blogs", "directory", "indie"]
+  },
+  {
+    name: "Marginalia",
+    url: "https://search.marginalia.nu",
+    description: "Search engine that favors text-heavy, non-commercial content. Find the indie web that Google ignores.",
+    category: "Fun & Culture",
+    tags: ["search", "indie", "non-commercial"]
+  },
+  {
+    name: "Wiby",
+    url: "https://wiby.me",
+    description: "Search engine for the old web. Returns classic-style personal homepages and hand-crafted websites.",
+    category: "Fun & Culture",
+    tags: ["search", "old web", "nostalgia"]
+  },
+  // ── News & Reference ──
+  {
+    name: "tldr pages",
+    url: "https://tldr.sh",
+    description: "Simplified man pages with practical examples. Community-maintained, covers 1000+ commands.",
+    category: "News & Reference",
+    tags: ["man pages", "cli", "examples"]
+  },
+  {
+    name: "ArchWiki",
+    url: "https://wiki.archlinux.org",
+    description: "The best Linux documentation on the internet. Useful regardless of which distro you run.",
+    category: "News & Reference",
+    tags: ["linux", "wiki", "documentation"]
+  },
+  {
+    name: "Stack Overflow",
+    url: "https://stackoverflow.com",
+    description: "Q&A for programmers. 23 million questions answered. The bedrock of developer knowledge sharing.",
+    category: "News & Reference",
+    tags: ["qa", "programming", "community"]
+  },
+  {
+    name: "Product Hunt",
+    url: "https://www.producthunt.com",
+    description: "Discover new tech products daily. Launches, votes, and reviews. Where new tools get their first users.",
+    category: "News & Reference",
+    tags: ["products", "launches", "discovery"]
+  },
+  {
+    name: "AlternativeTo",
+    url: "https://alternativeto.net",
+    description: "Find alternatives to any software. Community-driven recommendations with platform and license filters.",
+    category: "News & Reference",
+    tags: ["alternatives", "software", "directory"]
+  },
+  {
+    name: "Slant",
+    url: "https://www.slant.co",
+    description: "Product recommendation community. Compare tools with ranked pros and cons from real users.",
+    category: "News & Reference",
+    tags: ["recommendations", "comparisons", "community"]
+  },
+  {
+    name: "Killed by Google",
+    url: "https://killedbygoogle.com",
+    description: "Graveyard of Google products and services. 290+ discontinued projects, with dates and descriptions.",
+    category: "News & Reference",
+    tags: ["google", "history", "discontinued"]
+  },
+  {
+    name: "Explain XKCD",
+    url: "https://www.explainxkcd.com",
+    description: "Wiki explaining every XKCD comic. Because sometimes the math jokes need a footnote.",
+    category: "News & Reference",
+    tags: ["xkcd", "explanations", "wiki"]
+  },
+  {
+    name: "The Changelog",
+    url: "https://changelog.com",
+    description: "News and podcasts for developers. Open source, software development, and the people behind it.",
+    category: "News & Reference",
+    tags: ["podcasts", "open source", "news"]
+  },
+  {
+    name: "Smashing Magazine",
+    url: "https://www.smashingmagazine.com",
+    description: "Professional web design and development articles. In-depth guides, tutorials, and resources.",
+    category: "News & Reference",
+    tags: ["web dev", "design", "articles"]
+  },
+  {
+    name: "CSS-Tricks",
+    url: "https://css-tricks.com",
+    description: "Tips, tricks, and techniques on using CSS. Almanac of every CSS property. Now part of DigitalOcean.",
+    category: "News & Reference",
+    tags: ["css", "web", "tutorials"]
+  },
+  {
+    name: "free-for.dev",
+    url: "https://free-for.dev",
+    description: "Massive list of free-tier developer services. SaaS, PaaS, IaaS — everything with a free option.",
+    category: "News & Reference",
+    tags: ["free tier", "saas", "directory"]
+  },
+  // ── Gaming ──
+  {
+    name: "RetroArch",
+    url: "https://www.retroarch.com",
+    description: "Frontend for emulators, game engines, and media players. Play classics from every console ever made.",
+    category: "Gaming",
+    tags: ["emulation", "retro", "multi-platform"]
+  },
+  {
+    name: "itch.io",
+    url: "https://itch.io",
+    description: "Indie game marketplace. Thousands of free games from independent creators. Weird, wonderful, and experimental.",
+    category: "Gaming",
+    tags: ["indie", "free", "marketplace"]
+  },
+  {
+    name: "GBA Online",
+    url: "https://gba.js.org",
+    description: "Play Game Boy Advance games in your browser. JavaScript-based emulator, nothing to install.",
+    category: "Gaming",
+    tags: ["emulator", "gba", "browser"]
+  },
+  {
+    name: "Lichess",
+    url: "https://lichess.org",
+    description: "Free, open source chess server. No ads, no premium tiers, just chess. Puzzles, tournaments, analysis.",
+    category: "Gaming",
+    tags: ["chess", "open source", "free"]
+  },
+  {
+    name: "Board Game Arena",
+    url: "https://boardgamearena.com",
+    description: "Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.",
+    category: "Gaming",
+    tags: ["board games", "multiplayer", "free"]
+  },
+  {
+    name: "OpenTTD",
+    url: "https://www.openttd.org",
+    description: "Open source simulation of Transport Tycoon Deluxe. Build transport empires. Endlessly replayable.",
+    category: "Gaming",
+    tags: ["simulation", "tycoon", "open source"]
+  },
+  {
+    name: "Citra / Lime3DS",
+    url: "https://lime3ds.github.io",
+    description: "Nintendo 3DS emulator. Play 3DS games on PC with enhanced graphics and controls.",
+    category: "Gaming",
+    tags: ["emulator", "3ds", "enhanced"]
+  },
+  {
+    name: "RPCS3",
+    url: "https://rpcs3.net",
+    description: "PlayStation 3 emulator for PC. Thousands of PS3 games playable with active development.",
+    category: "Gaming",
+    tags: ["emulator", "ps3", "playstation"]
+  },
+  // ── CLI Tools ──
+  {
+    name: "fzf",
+    url: "https://github.com/junegunn/fzf",
+    description: "Command-line fuzzy finder. Search through any list — files, history, processes — interactively and fast.",
+    category: "CLI Tools",
+    tags: ["fuzzy", "search", "terminal"]
+  },
+  {
+    name: "ripgrep",
+    url: "https://github.com/BurntSushi/ripgrep",
+    description: "Line-oriented search tool (like grep but way faster). Respects .gitignore, Unicode-aware, blazing fast.",
+    category: "CLI Tools",
+    tags: ["search", "grep", "fast"]
+  },
+  {
+    name: "bat",
+    url: "https://github.com/sharkdp/bat",
+    description: "A cat clone with wings. Syntax highlighting, line numbers, git integration, and automatic paging.",
+    category: "CLI Tools",
+    tags: ["cat", "syntax", "highlighting"]
+  },
+  {
+    name: "exa / eza",
+    url: "https://github.com/eza-community/eza",
+    description: "Modern replacement for ls. Colors, icons, git integration, tree view. Makes directory listings beautiful.",
+    category: "CLI Tools",
+    tags: ["ls", "files", "modern"]
+  },
+  {
+    name: "fd",
+    url: "https://github.com/sharkdp/fd",
+    description: "Simple, fast alternative to find. Intuitive syntax, colorized output, respects .gitignore.",
+    category: "CLI Tools",
+    tags: ["find", "search", "fast"]
+  },
+  {
+    name: "dust",
+    url: "https://github.com/bootandy/dust",
+    description: "Intuitive disk usage tool. Like du but with a visual bar chart. Instantly see what\'s eating your disk.",
+    category: "CLI Tools",
+    tags: ["disk", "usage", "visual"]
+  },
+  {
+    name: "delta",
+    url: "https://github.com/dandavison/delta",
+    description: "Syntax-highlighting pager for git, diff, and grep. Beautiful side-by-side diffs in your terminal.",
+    category: "CLI Tools",
+    tags: ["git", "diff", "syntax"]
+  },
+  {
+    name: "zoxide",
+    url: "https://github.com/ajeetdsouza/zoxide",
+    description: "Smarter cd command. Learns your habits and jumps to directories with fuzzy matching.",
+    category: "CLI Tools",
+    tags: ["cd", "navigation", "smart"]
+  },
+  {
+    name: "tldr",
+    url: "https://github.com/tldr-pages/tldr",
+    description: "Simplified, community-driven man pages. Practical examples for every command. Cut the noise.",
+    category: "CLI Tools",
+    tags: ["man pages", "examples", "community"]
+  },
+  {
+    name: "lazygit",
+    url: "https://github.com/jesseduffield/lazygit",
+    description: "Terminal UI for git commands. Stage, commit, rebase, cherry-pick — all from an interactive TUI.",
+    category: "CLI Tools",
+    tags: ["git", "tui", "interactive"]
+  },
+  {
+    name: "lazydocker",
+    url: "https://github.com/jesseduffield/lazydocker",
+    description: "Terminal UI for Docker. Manage containers, images, volumes, and networks without memorizing commands.",
+    category: "CLI Tools",
+    tags: ["docker", "tui", "management"]
+  },
+  {
+    name: "httpie",
+    url: "https://httpie.io",
+    description: "Human-friendly CLI HTTP client. Colorized output, intuitive syntax, JSON support. Better than curl for APIs.",
+    category: "CLI Tools",
+    tags: ["http", "api", "curl"]
+  },
+  {
+    name: "jq",
+    url: "https://jqlang.github.io/jq/",
+    description: "Command-line JSON processor. Slice, filter, map, and transform JSON data. Essential for API work.",
+    category: "CLI Tools",
+    tags: ["json", "processor", "filter"]
+  },
+  {
+    name: "yq",
+    url: "https://github.com/mikefarah/yq",
+    description: "Like jq but for YAML, XML, and TOML. Process config files from the command line.",
+    category: "CLI Tools",
+    tags: ["yaml", "processor", "config"]
+  },
+  {
+    name: "tmux",
+    url: "https://github.com/tmux/tmux",
+    description: "Terminal multiplexer. Split panes, multiple windows, session persistence. Essential for remote work.",
+    category: "CLI Tools",
+    tags: ["multiplexer", "sessions", "panes"]
+  },
+  {
+    name: "neovim",
+    url: "https://neovim.io",
+    description: "Vim-based text editor with Lua extensibility. Modern features, LSP support, massive plugin ecosystem.",
+    category: "CLI Tools",
+    tags: ["editor", "vim", "lua"]
+  },
+  {
+    name: "starship",
+    url: "https://starship.rs",
+    description: "Minimal, blazing-fast, infinitely customizable prompt for any shell. Written in Rust. Beautiful defaults.",
+    category: "CLI Tools",
+    tags: ["prompt", "shell", "rust"]
+  },
+  {
+    name: "nushell",
+    url: "https://www.nushell.sh",
+    description: "Modern shell that treats data as structured tables. Pipelines output real data, not text. Mind-bending.",
+    category: "CLI Tools",
+    tags: ["shell", "structured", "modern"]
+  },
+  {
+    name: "atuin",
+    url: "https://atuin.sh",
+    description: "Magical shell history. Search, sync, and analyze your command history across machines. Encrypted.",
+    category: "CLI Tools",
+    tags: ["history", "sync", "search"]
+  },
+  {
+    name: "chezmoi",
+    url: "https://www.chezmoi.io",
+    description: "Manage your dotfiles across multiple machines. Templates, secrets, encryption. The dotfile manager.",
+    category: "CLI Tools",
+    tags: ["dotfiles", "management", "sync"]
+  },
+  // ── Networking ──
+  {
+    name: "Wireshark",
+    url: "https://www.wireshark.org",
+    description: "The world\'s foremost network protocol analyzer. Deep packet inspection for troubleshooting and analysis.",
+    category: "Networking",
+    tags: ["packet", "analysis", "protocol"]
+  },
+  {
+    name: "nmap",
+    url: "https://nmap.org",
+    description: "Network discovery and security auditing. Port scanning, OS detection, service versioning. The classic.",
+    category: "Networking",
+    tags: ["scanner", "ports", "security"]
+  },
+  {
+    name: "mtr",
+    url: "https://github.com/traviscross/mtr",
+    description: "Combines traceroute and ping. Continuous monitoring shows exactly where packets are dropping.",
+    category: "Networking",
+    tags: ["traceroute", "ping", "diagnostic"]
+  },
+  {
+    name: "iperf3",
+    url: "https://iperf.fr",
+    description: "Network bandwidth measurement tool. Test throughput between two endpoints. The standard for LAN testing.",
+    category: "Networking",
+    tags: ["bandwidth", "throughput", "testing"]
+  },
+  {
+    name: "Angry IP Scanner",
+    url: "https://angryip.org",
+    description: "Fast network scanner. Ping IPs, resolve hostnames, detect MAC addresses, scan ports.",
+    category: "Networking",
+    tags: ["scanner", "ip", "fast"]
+  },
+  {
+    name: "Zenmap",
+    url: "https://nmap.org/zenmap/",
+    description: "Official nmap GUI. Visual topology maps, host details, saved scans. Makes nmap accessible.",
+    category: "Networking",
+    tags: ["nmap", "gui", "topology"]
+  },
+  {
+    name: "PuTTY",
+    url: "https://www.putty.org",
+    description: "The classic SSH and telnet client for Windows. Lightweight, portable, battle-tested for decades.",
+    category: "Networking",
+    tags: ["ssh", "telnet", "windows"]
+  },
+  {
+    name: "mRemoteNG",
+    url: "https://mremoteng.org",
+    description: "Multi-remote connection manager. SSH, RDP, VNC, Telnet — all in one tabbed interface.",
+    category: "Networking",
+    tags: ["remote", "multi-protocol", "tabs"]
+  },
+  {
+    name: "Termius",
+    url: "https://termius.com",
+    description: "Modern SSH client. Cross-platform, sync between devices, SFTP, port forwarding. Free tier.",
+    category: "Networking",
+    tags: ["ssh", "modern", "cross-platform"]
+  },
+  {
+    name: "WinSCP",
+    url: "https://winscp.net",
+    description: "SFTP, FTP, and SCP client for Windows. File transfer and remote editing with a dual-pane interface.",
+    category: "Networking",
+    tags: ["sftp", "ftp", "file transfer"]
+  },
+  {
+    name: "FileZilla",
+    url: "https://filezilla-project.org",
+    description: "Cross-platform FTP, FTPS, and SFTP client. Drag-and-drop file transfers with queue management.",
+    category: "Networking",
+    tags: ["ftp", "sftp", "cross-platform"]
+  },
+  {
+    name: "NetBox",
+    url: "https://netboxlabs.com",
+    description: "Open source IPAM and DCIM. Document networks, racks, devices, IP addresses, VLANS, circuits.",
+    category: "Networking",
+    tags: ["ipam", "dcim", "documentation"]
+  },
+  {
+    name: "Netbird",
+    url: "https://netbird.io",
+    description: "Open source WireGuard-based VPN. Zero-config mesh networking with SSO integration. Tailscale alternative.",
+    category: "Networking",
+    tags: ["vpn", "wireguard", "mesh"]
+  },
+  // ── Containers ──
+  {
+    name: "Docker",
+    url: "https://www.docker.com",
+    description: "The platform that started the container revolution. Build, ship, and run applications in containers.",
+    category: "Containers",
+    tags: ["docker", "containers", "platform"]
+  },
+  {
+    name: "Podman",
+    url: "https://podman.io",
+    description: "Daemonless container engine. Drop-in Docker replacement that runs rootless. No daemon required.",
+    category: "Containers",
+    tags: ["containers", "rootless", "docker"]
+  },
+  {
+    name: "Rancher",
+    url: "https://www.rancher.com",
+    description: "Complete container management platform. Deploy and manage Kubernetes clusters anywhere.",
+    category: "Containers",
+    tags: ["kubernetes", "management", "multi-cluster"]
+  },
+  {
+    name: "k3s",
+    url: "https://k3s.io",
+    description: "Lightweight Kubernetes. Perfect for edge, IoT, CI, ARM. Single binary under 100MB.",
+    category: "Containers",
+    tags: ["kubernetes", "lightweight", "edge"]
+  },
+  {
+    name: "Lens",
+    url: "https://k8slens.dev",
+    description: "The Kubernetes IDE. Manage clusters, workloads, and Helm charts with a beautiful desktop app.",
+    category: "Containers",
+    tags: ["kubernetes", "ide", "desktop"]
+  },
+  {
+    name: "Kompose",
+    url: "https://kompose.io",
+    description: "Convert Docker Compose files to Kubernetes manifests. Migrate from Docker to K8s with one command.",
+    category: "Containers",
+    tags: ["kubernetes", "docker compose", "migration"]
+  },
+  {
+    name: "Helm",
+    url: "https://helm.sh",
+    description: "The package manager for Kubernetes. Define, install, and upgrade applications with charts.",
+    category: "Containers",
+    tags: ["kubernetes", "packages", "charts"]
+  },
+  {
+    name: "ArgoCD",
+    url: "https://argo-cd.readthedocs.io",
+    description: "Declarative GitOps CD for Kubernetes. Auto-sync your cluster state with Git repositories.",
+    category: "Containers",
+    tags: ["gitops", "cd", "kubernetes"]
+  },
+  {
+    name: "Harbor",
+    url: "https://goharbor.io",
+    description: "Open source container registry. Store, sign, and scan container images. Enterprise features, CNCF graduated.",
+    category: "Containers",
+    tags: ["registry", "images", "security"]
+  },
+
+];
+
+// ════════════════════════════════════════════════════════════════
+//  CATEGORY CONFIG
+// ════════════════════════════════════════════════════════════════
+const CATEGORY_MAP = {
+  "Speed Tests": "cat-speed",
+  "IP & Network": "cat-ip",
+  "DNS Tools": "cat-dns",
+  "Security": "cat-security",
+  "OSINT": "cat-osint",
+  "Dev Tools": "cat-dev",
+  "Desktop Software": "cat-desktop",
+  "AI & ML": "cat-ai",
+  "AI Creative": "cat-aicreative",
+  "Automation": "cat-automation",
+  "Homelab": "cat-homelab",
+  "Creative": "cat-creative",
+  "Music & Audio": "cat-music",
+  "Privacy": "cat-privacy",
+  "Sysadmin": "cat-sysadmin",
+  "Data & Viz": "cat-data",
+  "Education": "cat-education",
+  "Productivity": "cat-productivity",
+  "File Tools": "cat-file",
+  "Fun & Culture": "cat-fun",
+  "News & Reference": "cat-news",
+  "Gaming": "cat-gaming",
+  "CLI Tools": "cat-cli",
+  "Networking": "cat-networking",
+  "Containers": "cat-containers",
+
+};
+
+// ════════════════════════════════════════════════════════════════
+//  APP STATE & LOGIC
+// ════════════════════════════════════════════════════════════════
+let activeFilter = "All";
+let searchTerm = "";
+let viewMode = "grid";
+
+function getDomain(url) {
+  try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
+}
+
+function getFavicon(url) {
+  const domain = getDomain(url);
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+}
+
+function getInitial(name) {
+  return name.charAt(0).toUpperCase();
+}
+
+function buildFilters() {
+  const cats = {};
+  SITES.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
+  const container = document.getElementById('filters');
+
+  let html = `<button class="filter-btn active" data-cat="All">All<span class="filter-count">${SITES.length}</span></button>`;
+  Object.entries(cats)
+    .sort((a, b) => b[1] - a[1])
+    .forEach(([cat, count]) => {
+      html += `<button class="filter-btn" data-cat="${cat}">${cat}<span class="filter-count">${count}</span></button>`;
+    });
+  container.innerHTML = html;
+
+  container.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      renderGrid();
+    });
+  });
+
+  document.getElementById('catCount').textContent = Object.keys(cats).length;
+  document.getElementById('totalCount').textContent = SITES.length;
+}
+
+function getFiltered() {
+  return SITES.filter(site => {
+    const matchCat = activeFilter === "All" || site.category === activeFilter;
+    if (!searchTerm) return matchCat;
+    const q = searchTerm.toLowerCase();
+    const matchSearch =
+      site.name.toLowerCase().includes(q) ||
+      site.description.toLowerCase().includes(q) ||
+      site.category.toLowerCase().includes(q) ||
+      site.url.toLowerCase().includes(q) ||
+      site.tags.some(t => t.toLowerCase().includes(q));
+    return matchCat && matchSearch;
+  });
+}
+
+function buildCard(site, index) {
+  const catClass = CATEGORY_MAP[site.category] || 'cat-network';
+  const domain = getDomain(site.url);
+  const delay = Math.min(index * 40, 400);
+
+  return `
+    <article class="card" style="animation-delay: ${delay}ms">
+      <div class="card-preview">
+        <div class="card-preview-placeholder">
+          <div class="domain-icon">
+            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" onerror="this.style.display='none';this.parentElement.textContent='${getInitial(site.name)}'">
+          </div>
+          <span>${domain}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-category ${catClass}">${site.category}</div>
+        <h3 class="card-title">${site.name}</h3>
+        <p class="card-desc">${site.description}</p>
+        <div class="card-footer">
+          <a href="${site.url}" class="card-url" target="_blank" rel="noopener">${domain}</a>
+          <div class="card-actions">
+            <button class="card-action" title="Copy URL" onclick="copyUrl('${site.url}')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            </button>
+            <a href="${site.url}" class="card-action" title="Open site" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const filtered = getFiltered();
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column: 1 / -1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <h3>No sites found</h3>
+        <p>Try adjusting your search or filter criteria.</p>
+      </div>
+    `;
+  } else {
+    grid.innerHTML = filtered.map((s, i) => buildCard(s, i)).join('');
+  }
+
+  document.getElementById('resultsCount').textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
+
+  grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+}
+
+function copyUrl(url) {
+  navigator.clipboard.writeText(url).then(() => showToast('URL copied to clipboard'));
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  setTimeout(() => toast.classList.remove('visible'), 2000);
+}
+
+// ── Search ──
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.trim();
+  renderGrid();
+});
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if (e.key === 'Escape') {
+    document.getElementById('searchInput').blur();
+  }
+});
+
+// ── View toggles ──
+document.getElementById('gridViewBtn').addEventListener('click', () => {
+  viewMode = 'grid';
+  document.getElementById('gridViewBtn').classList.add('active');
+  document.getElementById('listViewBtn').classList.remove('active');
+  renderGrid();
+});
+document.getElementById('listViewBtn').addEventListener('click', () => {
+  viewMode = 'list';
+  document.getElementById('listViewBtn').classList.add('active');
+  document.getElementById('gridViewBtn').classList.remove('active');
+  renderGrid();
+});
+
+// ── Init ──
+buildFilters();
+renderGrid();
+</script>
+</body>
+</html>
