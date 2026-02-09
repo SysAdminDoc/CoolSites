@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
-<meta name="description" content="The ultimate directory of 470 free tools, open source software, AI projects, and hidden gems across 25 categories.">
+<meta name="description" content="The ultimate directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -755,6 +755,524 @@
   .cat-cli { background: rgba(0, 255, 180, 0.15); color: #00ffb4; }
   .cat-networking { background: rgba(80, 160, 255, 0.15); color: #50a0ff; }
   .cat-containers { background: rgba(0, 180, 230, 0.15); color: #00b4e6; }
+  .cat-torrenting { background: rgba(255, 140, 0, 0.15); color: #ff8c00; }
+  .cat-mediadownloads { background: rgba(0, 200, 255, 0.15); color: #00c8ff; }
+  .cat-reading { background: rgba(180, 130, 80, 0.15); color: #b48250; }
+  .cat-indexes { background: rgba(255, 215, 0, 0.15); color: #ffd700; }
+  .cat-arr { background: rgba(255, 90, 90, 0.15); color: #ff5a5a; }
+
+
+
+  /* ════════════════════════════════════════════════════════════
+     BOOKMARKS DOCK v2 — drag-and-drop quick-launch bar
+     ════════════════════════════════════════════════════════════ */
+  .dock-wrapper {
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+  .dock-wrapper.collapsed .dock { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-color: transparent; opacity: 0; pointer-events: none; }
+  .dock-wrapper.empty .dock { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-color: transparent; opacity: 0; pointer-events: none; }
+  .dock-wrapper.empty .dock-toggle-bar { display: none; }
+
+  .dock {
+    max-height: 500px;
+    background: var(--header-bg);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 2rem 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease, border-color 0.2s;
+    opacity: 1;
+  }
+  .dock::-webkit-scrollbar { width: 4px; }
+  .dock::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+
+  .dock-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .dock-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .dock-title {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+  }
+  .dock-title svg { width: 13px; height: 13px; opacity: 0.7; }
+  .dock-count {
+    background: var(--accent-glow);
+    color: var(--accent);
+    padding: 1px 7px;
+    border-radius: 100px;
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+
+  .dock-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dock-action-btn {
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+  }
+  .dock-action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .dock-action-btn svg { width: 12px; height: 12px; }
+
+  /* ── Dock Groups ── */
+  .dock-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dock-group {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .dock-group:hover { border-color: var(--border-hover); }
+
+  /* Group drag states */
+  .dock-group.dragging-group {
+    opacity: 0.4;
+    border-style: dashed;
+  }
+  .dock-group.drag-over-group {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+  }
+  .dock-group-drop-indicator {
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 2px 0;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .dock-group-drop-indicator.visible { opacity: 1; }
+
+  .dock-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    cursor: grab;
+    user-select: none;
+    border-radius: 6px;
+    padding: 2px 4px;
+    margin: -2px -4px 4px;
+    transition: background 0.15s;
+  }
+  .dock-group-header:hover { background: rgba(255,255,255,0.03); }
+  .dock-group-header:active { cursor: grabbing; }
+
+  .dock-group-name {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dock-group-name .group-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dock-group-name .group-chip-count {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.62rem;
+  }
+  .dock-group-name .drag-handle {
+    color: var(--text-muted);
+    opacity: 0.4;
+    display: flex;
+    margin-right: 2px;
+  }
+  .dock-group-name .drag-handle svg { width: 10px; height: 10px; }
+  .dock-group-header:hover .drag-handle { opacity: 0.8; }
+
+  .dock-group-actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .dock-group:hover .dock-group-actions { opacity: 1; }
+  .dock-group-action {
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+  .dock-group-action:hover {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+  }
+  .dock-group-action.danger:hover { color: var(--accent-tertiary); background: rgba(229,72,77,0.1); }
+  .dock-group-action svg { width: 12px; height: 12px; }
+
+  /* ── Site Chips (draggable) ── */
+  .dock-group-sites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    min-height: 28px;
+    padding: 2px 0;
+    border-radius: 6px;
+    transition: background 0.15s, outline 0.15s;
+  }
+  .dock-group-sites.chip-drag-over {
+    background: rgba(255,255,255,0.02);
+    outline: 1px dashed var(--border-hover);
+    outline-offset: 2px;
+  }
+
+  .site-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px 5px 7px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    cursor: grab;
+    position: relative;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .site-chip:active { cursor: grabbing; }
+  .site-chip:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .site-chip img {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+  .site-chip .chip-text { pointer-events: none; }
+
+  /* Chip drag states */
+  .site-chip.chip-dragging {
+    opacity: 0.3;
+    transform: scale(0.95);
+    border-style: dashed;
+  }
+  .site-chip.chip-drop-left::before,
+  .site-chip.chip-drop-right::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: dropPulse 0.8s ease infinite;
+  }
+  .site-chip.chip-drop-left::before { left: -5px; }
+  .site-chip.chip-drop-right::after { right: -5px; }
+  @keyframes dropPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Chip remove button */
+  .site-chip .chip-remove {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-tertiary);
+    color: #fff;
+    border: 2px solid var(--bg-card);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    line-height: 1;
+    padding: 0;
+    z-index: 2;
+  }
+  .site-chip:hover .chip-remove { display: flex; }
+
+  /* Chip click overlay (opens url) */
+  .chip-open {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .dock-empty-hint {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-style: italic;
+    padding: 2px 4px;
+    user-select: none;
+  }
+
+  /* ── Collapse toggle bar ── */
+  .dock-toggle-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--header-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    padding: 2px 0;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .dock-toggle-bar:hover { background: rgba(255,255,255,0.02); }
+  .dock-toggle-bar svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    transition: transform 0.3s;
+  }
+  .dock-wrapper.collapsed .dock-toggle-bar svg {
+    transform: rotate(180deg);
+  }
+
+  /* ── Card bookmark star ── */
+  .card-bookmark {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+  }
+  .card-bookmark:hover {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+    background: rgba(245, 166, 35, 0.1);
+  }
+  .card-bookmark.bookmarked {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+    background: rgba(245, 166, 35, 0.15);
+  }
+  .card-bookmark.bookmarked svg { fill: var(--accent-amber); }
+  .card-bookmark svg { width: 14px; height: 14px; }
+
+  /* ── Card bookmarked glow ── */
+  .card.is-bookmarked { border-color: rgba(245, 166, 35, 0.15); }
+  .card.is-bookmarked::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-amber), var(--accent) 50%, var(--accent-cyan));
+    opacity: 0.6;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  /* ── Bookmarks filter pill ── */
+  .filter-btn[data-cat="Bookmarks"] { border-color: rgba(245, 166, 35, 0.3); color: var(--accent-amber); }
+  .filter-btn[data-cat="Bookmarks"].active { background: var(--accent-amber); border-color: var(--accent-amber); color: #000; }
+  .filter-btn[data-cat="Bookmarks"] .filter-count { background: rgba(245, 166, 35, 0.2); }
+
+  /* ── Group create/edit modal ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    width: 100%;
+    max-width: 380px;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal h3 { font-size: 1rem; margin-bottom: 16px; color: var(--text-primary); }
+  .modal input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+  .modal-colors { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .modal-color {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .modal-color:hover { transform: scale(1.1); }
+  .modal-color.selected { border-color: var(--text-primary); transform: scale(1.15); box-shadow: 0 0 8px rgba(255,255,255,0.1); }
+  .modal-btns { display: flex; justify-content: flex-end; gap: 8px; }
+  .modal-btn {
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .modal-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .modal-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .modal-btn.primary:hover { opacity: 0.9; }
+  .modal-btn.danger { border-color: rgba(229,72,77,0.3); color: var(--accent-tertiary); }
+  .modal-btn.danger:hover { background: rgba(229,72,77,0.1); border-color: var(--accent-tertiary); }
+
+  /* ── Assign-to-group dropdown ── */
+  .assign-dropdown {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px;
+    min-width: 170px;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: none;
+    animation: ddIn 0.15s ease;
+  }
+  @keyframes ddIn { from { opacity: 0; transform: translateY(4px); } }
+  .assign-dropdown.open { display: block; }
+  .assign-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-family: var(--font-display);
+    cursor: pointer;
+    border-radius: 6px;
+    width: 100%;
+    text-align: left;
+    transition: background 0.12s, color 0.12s;
+  }
+  .assign-option:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+  .assign-option .group-color { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .assign-option.active { color: var(--accent); font-weight: 600; }
+  .assign-option.active::after { content: '\2713'; margin-left: auto; font-size: 0.7rem; }
+
+  /* ── Drag ghost (custom drag image) ── */
+  .drag-ghost {
+    position: fixed;
+    top: -1000px;
+    left: -1000px;
+    padding: 6px 14px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .dock { padding: 10px 1rem 8px; }
+    .dock-header { flex-wrap: wrap; gap: 6px; }
+    .dock-actions { flex-wrap: wrap; }
+    .site-chip { font-size: 0.72rem; padding: 4px 8px 4px 6px; }
+    .site-chip img { width: 12px; height: 12px; }
+    .dock-group-header { cursor: default; }
+    .dock-group-name .drag-handle { display: none; }
+  }
 
   /* ── List view adjustments ── */
   .grid.list-view .card { display: flex; flex-direction: row; }
@@ -1059,10 +1577,51 @@
   </div>
 </header>
 
+
+<!-- Bookmarks Dock -->
+<div class="dock-wrapper empty" id="dockWrapper">
+  <div class="dock" id="dock">
+    <div class="dock-inner">
+      <div class="dock-header">
+        <div class="dock-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          Quick Launch <span class="dock-count" id="dockCount">0</span>
+        </div>
+        <div class="dock-actions">
+          <button class="dock-action-btn" id="newGroupBtn" title="Create a new group">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            New Group
+          </button>
+        </div>
+      </div>
+      <div class="dock-groups" id="dockGroups"></div>
+    </div>
+  </div>
+  <div class="dock-toggle-bar" id="dockToggle" title="Toggle bookmarks bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+</div>
+
+<!-- Group Modal -->
+<div class="modal-overlay" id="groupModal">
+  <div class="modal">
+    <h3 id="modalTitle">New Group</h3>
+    <input type="text" id="groupNameInput" placeholder="Group name..." maxlength="30" autocomplete="off">
+    <div class="modal-colors" id="modalColors"></div>
+    <div class="modal-btns" id="modalBtns">
+      <button class="modal-btn" id="modalCancel">Cancel</button>
+      <button class="modal-btn primary" id="modalSave">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- Drag ghost element -->
+<div class="drag-ghost" id="dragGhost"></div>
+
 <!-- Hero -->
 <section class="hero">
   <h1>The Internet's Best Kept Secrets</h1>
-  <p>The ultimate directory of free tools, open source software, AI projects, and hidden gems. 470 curated picks across 25 categories.</p>
+  <p>Your personal launchpad. Bookmark your favorites, organize into groups, and discover hidden gems. 593 curated picks across 30 categories.</p>
 
   <div class="search-container">
     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -4439,7 +4998,867 @@ const SITES = [
     category: "Containers",
     tags: ["registry", "images", "security"]
   },
-
+  {
+    name: 'qBittorrent',
+    url: "https://www.qbittorrent.org/",
+    description: 'Feature-rich open source torrent client with built-in search, RSS, sequential downloading, and IP filtering. The community\'s top pick.',
+    category: 'Torrenting',
+    tags: ["torrent", "client", "p2p", "download", "open-source"]
+  },
+  {
+    name: 'Deluge',
+    url: "https://www.deluge-torrent.org/",
+    description: 'Lightweight cross-platform torrent client with a powerful plugin system. Supports web UI and daemon mode for remote management.',
+    category: 'Torrenting',
+    tags: ["torrent", "client", "lightweight", "plugins", "cross-platform"]
+  },
+  {
+    name: 'Transmission',
+    url: "https://transmissionbt.com/",
+    description: 'Minimal, resource-efficient torrent client loved by Linux and macOS users. Clean interface, zero bloat, just works.',
+    category: 'Torrenting',
+    tags: ["torrent", "client", "minimal", "linux", "macos"]
+  },
+  {
+    name: 'BiglyBT',
+    url: "https://www.biglybt.com/",
+    description: 'Feature-rich open source torrent client with swarm merging, I2P integration, and decentralized chat. Azureus/Vuze successor.',
+    category: 'Torrenting',
+    tags: ["torrent", "client", "i2p", "swarm", "open-source"]
+  },
+  {
+    name: 'PikaTorrent',
+    url: "https://www.pikatorrent.com/",
+    description: 'Modern cross-platform torrent client with a clean UI. Works on desktop and mobile with a built-in web interface.',
+    category: 'Torrenting',
+    tags: ["torrent", "client", "modern", "mobile", "cross-platform"]
+  },
+  {
+    name: 'Knaben',
+    url: "https://knaben.org/",
+    description: 'Torrent meta-search aggregator. Searches multiple torrent indexes simultaneously from one clean, ad-free interface.',
+    category: 'Torrenting',
+    tags: ["torrent", "search", "aggregator", "meta-search"]
+  },
+  {
+    name: 'BTDigg',
+    url: "https://btdig.com/",
+    description: 'DHT-based torrent search engine. Indexes the distributed hash table directly, great for finding rare and hard-to-find content.',
+    category: 'Torrenting',
+    tags: ["torrent", "search", "dht", "index"]
+  },
+  {
+    name: 'snowfl',
+    url: "https://snowfl.com/",
+    description: 'Real-time torrent aggregator with a clean, instant interface. Searches multiple sources and displays results as they come in.',
+    category: 'Torrenting',
+    tags: ["torrent", "search", "aggregator", "real-time"]
+  },
+  {
+    name: 'ExT',
+    url: "https://ext.to/",
+    description: 'Torrent aggregator that searches across multiple indexes. Clean interface with filtering by category, size, and seeders.',
+    category: 'Torrenting',
+    tags: ["torrent", "search", "aggregator", "index"]
+  },
+  {
+    name: 'Seedr',
+    url: "https://www.seedr.cc/",
+    description: 'Cloud-based torrent client. Download torrents in the cloud and stream or direct-download the files. 2GB free tier.',
+    category: 'Torrenting',
+    tags: ["torrent", "cloud", "streaming", "remote"]
+  },
+  {
+    name: 'webtor',
+    url: "https://webtor.io/",
+    description: 'Stream torrent content directly in your browser. No client install, no sign-up, no limits. Just paste a magnet link.',
+    category: 'Torrenting',
+    tags: ["torrent", "streaming", "browser", "no-install"]
+  },
+  {
+    name: 'TorBox',
+    url: "https://torbox.app/",
+    description: 'Freemium cloud torrent service with 10GB free storage. Download and stream torrents remotely without a local client.',
+    category: 'Torrenting',
+    tags: ["torrent", "cloud", "debrid", "remote"]
+  },
+  {
+    name: 'Torrent Parts',
+    url: "https://torrent.parts/",
+    description: 'Edit and inspect .torrent files directly in the browser. View trackers, file lists, piece sizes, and metadata.',
+    category: 'Torrenting',
+    tags: ["torrent", "editor", "metadata", "inspect"]
+  },
+  {
+    name: 'Stremio',
+    url: "https://www.stremio.com/",
+    description: 'Media center with a huge addon ecosystem. Supports torrent streaming, content discovery, and Trakt integration out of the box.',
+    category: 'Torrenting',
+    tags: ["streaming", "media-center", "addons", "torrent"]
+  },
+  {
+    name: 'cross-seed',
+    url: "https://www.cross-seed.org/",
+    description: 'Automatically cross-seed torrents across multiple trackers. Maximizes your ratio by finding matching content you already have.',
+    category: 'Torrenting',
+    tags: ["torrent", "cross-seed", "ratio", "automation"]
+  },
+  {
+    name: 'Torrents CSV',
+    url: "https://torrents-csv.com/",
+    description: 'Self-hostable torrent search engine built on a collaborative CSV database. Lightweight, fast, and completely open source.',
+    category: 'Torrenting',
+    tags: ["torrent", "search", "self-hosted", "open-source"]
+  },
+  {
+    name: 'BitMagnet',
+    url: "https://bitmagnet.io/",
+    description: 'Self-hosted DHT torrent search engine and crawler. Indexes the DHT network and provides a modern web UI for searching.',
+    category: 'Torrenting',
+    tags: ["torrent", "self-hosted", "dht", "crawler"]
+  },
+  {
+    name: 'Flood',
+    url: "https://flood.js.org/",
+    description: 'Beautiful web UI for rTorrent, qBittorrent, and Transmission. Modern dark interface with real-time stats and management.',
+    category: 'Torrenting',
+    tags: ["torrent", "webui", "frontend", "management"]
+  },
+  {
+    name: 'JDownloader',
+    url: "https://jdownloader.org/",
+    description: 'Open source download manager with support for hundreds of file hosts. Auto-extracts, CAPTCHA solving, and link decryption.',
+    category: 'Media Downloads',
+    tags: ["download", "manager", "file-host", "automation"]
+  },
+  {
+    name: 'gallery-dl',
+    url: "https://github.com/mikf/gallery-dl",
+    description: 'Command-line tool for downloading image galleries and collections from hundreds of sites. Supports DeviantArt, Imgur, Reddit, and more.',
+    category: 'Media Downloads',
+    tags: ["download", "images", "gallery", "cli"]
+  },
+  {
+    name: 'SpotDL',
+    url: "https://spotdl.readthedocs.io/",
+    description: 'Download Spotify playlists, albums, and songs with metadata. Matches tracks from YouTube and downloads with proper tags and artwork.',
+    category: 'Media Downloads',
+    tags: ["spotify", "music", "download", "metadata"]
+  },
+  {
+    name: 'Parabolic',
+    url: "https://nickvision.org/parabolic.html",
+    description: 'Beautiful GTK GUI for yt-dlp. Download video and audio from thousands of sites with a clean, native interface.',
+    category: 'Media Downloads',
+    tags: ["download", "video", "gui", "yt-dlp"]
+  },
+  {
+    name: 'Hitomi Downloader',
+    url: "https://github.com/KurtBesworWorthy/hitomi-dl",
+    description: 'Multi-site downloader supporting hundreds of platforms. Download videos, images, and music with a desktop GUI or CLI.',
+    category: 'Media Downloads',
+    tags: ["download", "multi-site", "gui", "images"]
+  },
+  {
+    name: 'Kodi',
+    url: "https://kodi.tv/",
+    description: 'Open source media center for organizing and playing local and network media. Massive addon ecosystem with thousands of plugins.',
+    category: 'Media Downloads',
+    tags: ["media-center", "player", "addons", "open-source"]
+  },
+  {
+    name: 'Video DownloadHelper',
+    url: "https://www.downloadhelper.net/",
+    description: 'Browser extension for downloading videos from any website. Detects video streams and offers multiple quality and format options.',
+    category: 'Media Downloads',
+    tags: ["download", "video", "extension", "browser"]
+  },
+  {
+    name: 'SponsorBlock',
+    url: "https://sponsor.ajay.app/",
+    description: 'Community-driven browser extension that auto-skips sponsored segments, intros, and outros on YouTube. Open source and crowdsourced.',
+    category: 'Media Downloads',
+    tags: ["youtube", "adblock", "extension", "community"]
+  },
+  {
+    name: 'MAS (Microsoft Activation)',
+    url: "https://massgrave.dev/",
+    description: 'Open source Windows and Office activation scripts. Also provides genuine Windows ISO downloads and clean install guides.',
+    category: 'Media Downloads',
+    tags: ["windows", "activation", "office", "iso"]
+  },
+  {
+    name: 'Spicetify',
+    url: "https://spicetify.app/",
+    description: 'Command-line tool to customize Spotify. Themes, extensions, custom apps, and ad-blocking for the desktop client.',
+    category: 'Media Downloads',
+    tags: ["spotify", "customization", "themes", "extensions"]
+  },
+  {
+    name: 'ReVanced Manager',
+    url: "https://revanced.app/",
+    description: 'Patch Android apps like YouTube, Reddit, and Twitter to remove ads and add features. Open source Vanced successor.',
+    category: 'Media Downloads',
+    tags: ["android", "youtube", "adblock", "patching"]
+  },
+  {
+    name: 'NewPipe',
+    url: "https://newpipe.net/",
+    description: 'Lightweight YouTube frontend for Android. No ads, background playback, downloads, and no Google account needed.',
+    category: 'Media Downloads',
+    tags: ["android", "youtube", "privacy", "lightweight"]
+  },
+  {
+    name: 'FreeTube',
+    url: "https://freetubeapp.io/",
+    description: 'Open source desktop YouTube client focused on privacy. No ads, subscriptions without an account, and local data storage.',
+    category: 'Media Downloads',
+    tags: ["youtube", "privacy", "desktop", "open-source"]
+  },
+  {
+    name: 'Invidious',
+    url: "https://invidious.io/",
+    description: 'Privacy-respecting frontend for YouTube. No tracking, no ads, lightweight. Self-hostable with many public instances available.',
+    category: 'Media Downloads',
+    tags: ["youtube", "privacy", "frontend", "self-hosted"]
+  },
+  {
+    name: 'Calibre',
+    url: "https://calibre-ebook.com/",
+    description: 'The ultimate ebook management tool. Convert between formats, edit metadata, sync to devices, and host your own ebook server.',
+    category: 'Reading',
+    tags: ["ebooks", "library", "converter", "management"]
+  },
+  {
+    name: 'Kavita',
+    url: "https://www.kavitareader.com/",
+    description: 'Self-hosted digital library for manga, comics, and ebooks. Beautiful reading UI with OPDS support and user management.',
+    category: 'Reading',
+    tags: ["manga", "comics", "self-hosted", "library"]
+  },
+  {
+    name: 'Komga',
+    url: "https://komga.org/",
+    description: 'Free and open source comics and manga server. OPDS feed, web reader, metadata editing, and multi-user support.',
+    category: 'Reading',
+    tags: ["comics", "manga", "server", "self-hosted"]
+  },
+  {
+    name: 'Project Gutenberg',
+    url: "https://www.gutenberg.org/",
+    description: 'Over 70,000 free ebooks. Public domain classics in every format. The oldest digital library, running since 1971.',
+    category: 'Reading',
+    tags: ["ebooks", "free", "public-domain", "classics"]
+  },
+  {
+    name: 'Standard Ebooks',
+    url: "https://standardebooks.org/",
+    description: 'Beautifully formatted public domain ebooks. Professional typography, cover art, and metadata. The premium Gutenberg alternative.',
+    category: 'Reading',
+    tags: ["ebooks", "free", "public-domain", "typography"]
+  },
+  {
+    name: 'Open Library',
+    url: "https://openlibrary.org/",
+    description: 'Internet Archive\'s library catalog with millions of records. Borrow and read ebooks online for free with a library card.',
+    category: 'Reading',
+    tags: ["ebooks", "library", "borrow", "catalog"]
+  },
+  {
+    name: 'Anna\'s Archive',
+    url: "https://annas-archive.org/",
+    description: 'Search engine for shadow libraries. Indexes millions of books, papers, and documents across multiple sources.',
+    category: 'Reading',
+    tags: ["ebooks", "search", "library", "papers"]
+  },
+  {
+    name: 'Mihon',
+    url: "https://mihon.app/",
+    description: 'Free and open source manga reader for Android. Tachiyomi successor with extension support for hundreds of manga sources.',
+    category: 'Reading',
+    tags: ["manga", "android", "reader", "extensions"]
+  },
+  {
+    name: 'Readarr',
+    url: "https://readarr.com/",
+    description: 'Ebook and audiobook collection manager. Automated downloading, organization, and metadata management. Part of the *arr stack.',
+    category: 'Reading',
+    tags: ["ebooks", "audiobooks", "automation", "arr"]
+  },
+  {
+    name: 'Wotaku',
+    url: "https://wotaku.wiki/",
+    description: 'Comprehensive index for anime, manga, and Japanese media. Curated guides, tools, and resource lists for otaku culture.',
+    category: 'Reading',
+    tags: ["anime", "manga", "index", "wiki"]
+  },
+  {
+    name: 'Libby',
+    url: "https://libbyapp.com/",
+    description: 'Borrow ebooks and audiobooks free from your local library. Beautiful reading experience on any device with your library card.',
+    category: 'Reading',
+    tags: ["ebooks", "audiobooks", "library", "free"]
+  },
+  {
+    name: 'Koodo Reader',
+    url: "https://koodo.960960.xyz/",
+    description: 'Cross-platform ebook reader supporting EPUB, PDF, MOBI, and more. Highlights, notes, syncing, and a beautiful reading UI.',
+    category: 'Reading',
+    tags: ["ebooks", "reader", "cross-platform", "epub"]
+  },
+  {
+    name: 'FMHY',
+    url: "https://fmhy.net/",
+    description: 'The largest collection of free stuff on the internet. Massive curated wiki of tools, apps, sites, and resources across every category.',
+    category: 'Indexes & Wikis',
+    tags: ["index", "wiki", "free", "resources", "curated"]
+  },
+  {
+    name: 'Awesome Selfhosted',
+    url: "https://awesome-selfhosted.net/",
+    description: 'Comprehensive list of self-hosted software and services. Searchable, categorized, and community-maintained on GitHub.',
+    category: 'Indexes & Wikis',
+    tags: ["selfhosted", "index", "awesome", "github"]
+  },
+  {
+    name: 'Awesome Privacy',
+    url: "https://awesome-privacy.xyz/",
+    description: 'Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage.',
+    category: 'Indexes & Wikis',
+    tags: ["privacy", "index", "awesome", "alternatives"]
+  },
+  {
+    name: 'Awesome Windows 11',
+    url: "https://github.com/awesome-windows11/windows11",
+    description: 'Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.',
+    category: 'Indexes & Wikis',
+    tags: ["windows", "index", "awesome", "apps"]
+  },
+  {
+    name: 'Awesome Open Source',
+    url: "https://awesomeopensource.com/",
+    description: 'Find and compare open source projects across every language and category. Millions of projects indexed and searchable.',
+    category: 'Indexes & Wikis',
+    tags: ["open-source", "index", "search", "projects"]
+  },
+  {
+    name: 'FMHY SafeGuard',
+    url: "https://github.com/fmhy/FMHY-SafeGuard",
+    description: 'Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY\'s unsafe sites list.',
+    category: 'Indexes & Wikis',
+    tags: ["safety", "extension", "blocklist", "malware"]
+  },
+  {
+    name: 'Awesome Piracy',
+    url: "https://shakil-shahadat.github.io/awesome-piracy/",
+    description: 'Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.',
+    category: 'Indexes & Wikis',
+    tags: ["piracy", "index", "tools", "curated"]
+  },
+  {
+    name: 'degoogle',
+    url: "https://tycrek.github.io/degoogle/",
+    description: 'Massive list of Google alternatives for every service. Search, email, maps, drive, docs, photos, and more. All privacy-focused.',
+    category: 'Indexes & Wikis',
+    tags: ["google", "alternatives", "privacy", "degoogle"]
+  },
+  {
+    name: 'MediaSavvy',
+    url: "https://mediasavvy.pages.dev/",
+    description: 'Quality-focused wiki for piracy and media management. Guides on torrent clients, formats, VPNs, anonymity, and media servers.',
+    category: 'Indexes & Wikis',
+    tags: ["media", "wiki", "piracy", "guides"]
+  },
+  {
+    name: 'Sonarr',
+    url: "https://sonarr.tv/",
+    description: 'Automated TV show management. Monitors for new episodes, downloads them, renames files, and organizes your media library.',
+    category: 'Arr Stack',
+    tags: ["automation", "tv", "download", "media"]
+  },
+  {
+    name: 'Radarr',
+    url: "https://radarr.video/",
+    description: 'Automated movie management. Monitors for releases, grabs the best quality, and organizes your movie collection. Sonarr for films.',
+    category: 'Arr Stack',
+    tags: ["automation", "movies", "download", "media"]
+  },
+  {
+    name: 'Prowlarr',
+    url: "https://prowlarr.com/",
+    description: 'Indexer manager for the *arr stack. One place to configure all your torrent and Usenet indexers, syncs with Sonarr/Radarr.',
+    category: 'Arr Stack',
+    tags: ["indexer", "automation", "torrent", "usenet"]
+  },
+  {
+    name: 'Lidarr',
+    url: "https://lidarr.audio/",
+    description: 'Automated music collection manager. Monitors for new albums, downloads, tags, and organizes your music library. Sonarr for music.',
+    category: 'Arr Stack',
+    tags: ["automation", "music", "download", "library"]
+  },
+  {
+    name: 'Bazarr',
+    url: "https://www.bazarr.media/",
+    description: 'Automated subtitle downloader. Companion app for Sonarr and Radarr that finds and downloads matching subtitles for your media.',
+    category: 'Arr Stack',
+    tags: ["subtitles", "automation", "companion", "media"]
+  },
+  {
+    name: 'Overseerr',
+    url: "https://overseerr.dev/",
+    description: 'Media request management for Plex. Users can browse and request movies and TV shows which auto-feed into Sonarr/Radarr.',
+    category: 'Arr Stack',
+    tags: ["requests", "plex", "management", "media"]
+  },
+  {
+    name: 'Tautulli',
+    url: "https://tautulli.com/",
+    description: 'Plex server monitoring and statistics dashboard. Track who\'s watching what, server performance, and viewing history.',
+    category: 'Arr Stack',
+    tags: ["plex", "monitoring", "statistics", "dashboard"]
+  },
+  {
+    name: 'Recyclarr',
+    url: "https://recyclarr.dev/",
+    description: 'Automatically sync TRaSH Guides quality profiles and custom formats to Sonarr and Radarr. Set and forget optimal settings.',
+    category: 'Arr Stack',
+    tags: ["automation", "quality", "profiles", "arr"]
+  },
+  {
+    name: 'Flaresolverr',
+    url: "https://github.com/FlareSolverr/FlareSolverr",
+    description: 'Proxy server to bypass Cloudflare protection for Prowlarr and Jackett. Enables *arr apps to access protected indexers.',
+    category: 'Arr Stack',
+    tags: ["proxy", "cloudflare", "bypass", "arr"]
+  },
+  {
+    name: 'Unpackerr',
+    url: "https://unpackerr.zip/",
+    description: 'Extracts downloaded archives for the *arr stack. Watches download folders and automatically unpacks compressed media files.',
+    category: 'Arr Stack',
+    tags: ["extraction", "automation", "archives", "arr"]
+  },
+  {
+    name: 'Sysinternals',
+    url: "https://learn.microsoft.com/en-us/sysinternals/",
+    description: 'Microsoft\'s legendary advanced system tools. Process Explorer, Autoruns, TCPView, and dozens more. Every sysadmin\'s must-have.',
+    category: 'Desktop Software',
+    tags: ["windows", "system", "tools", "microsoft"]
+  },
+  {
+    name: 'Open Shell',
+    url: "https://open-shell.github.io/Open-Shell-Menu/",
+    description: 'Bring back the classic Windows Start Menu. Fully customizable with skinning support. Works on Windows 10 and 11.',
+    category: 'Desktop Software',
+    tags: ["windows", "start-menu", "customization", "classic"]
+  },
+  {
+    name: 'GlazeWM',
+    url: "https://github.com/glzr-io/glazewm",
+    description: 'Tiling window manager for Windows inspired by i3wm. Keyboard-driven workflow with workspaces and customizable layouts.',
+    category: 'Desktop Software',
+    tags: ["windows", "tiling", "window-manager", "productivity"]
+  },
+  {
+    name: 'Scoop',
+    url: "https://scoop.sh/",
+    description: 'Command-line package manager for Windows. Installs apps from the command line, keeps them updated, and avoids PATH pollution.',
+    category: 'Desktop Software',
+    tags: ["windows", "package-manager", "cli", "installer"]
+  },
+  {
+    name: 'Chocolatey',
+    url: "https://chocolatey.org/",
+    description: 'Software management for Windows. Install, upgrade, and manage thousands of packages from the command line or GUI.',
+    category: 'Desktop Software',
+    tags: ["windows", "package-manager", "automation", "installer"]
+  },
+  {
+    name: 'BleachBit',
+    url: "https://www.bleachbit.org/",
+    description: 'Open source system cleaner. Free disk space, reduce clutter, and protect privacy by clearing caches, logs, and temp files.',
+    category: 'Desktop Software',
+    tags: ["cleaner", "privacy", "disk-space", "open-source"]
+  },
+  {
+    name: 'FanControl',
+    url: "https://getfancontrol.com/",
+    description: 'Highly customizable PC fan controller. Create custom fan curves based on any temperature sensor. Clean modern interface.',
+    category: 'Desktop Software',
+    tags: ["hardware", "fans", "cooling", "monitoring"]
+  },
+  {
+    name: 'AltSnap',
+    url: "https://github.com/RamonUnch/AltSnap",
+    description: 'Hold Alt to drag, resize, minimize, or snap any window. Lightweight Linux-style window management for Windows.',
+    category: 'Desktop Software',
+    tags: ["windows", "window-management", "productivity", "utility"]
+  },
+  {
+    name: 'EverythingToolbar',
+    url: "https://github.com/srwi/EverythingToolbar",
+    description: 'Replace the Windows taskbar search with Everything\'s instant file search. Find any file on your system in milliseconds.',
+    category: 'Desktop Software',
+    tags: ["windows", "search", "taskbar", "productivity"]
+  },
+  {
+    name: 'Parsec',
+    url: "https://parsec.app/",
+    description: 'Ultra-low latency remote desktop for gaming and work. Stream your PC at 60fps with near-zero lag. Free for personal use.',
+    category: 'Desktop Software',
+    tags: ["remote-desktop", "gaming", "streaming", "low-latency"]
+  },
+  {
+    name: 'RustDesk',
+    url: "https://rustdesk.com/",
+    description: 'Open source remote desktop with self-hosted relay server option. TeamViewer/AnyDesk alternative with full control over your data.',
+    category: 'Desktop Software',
+    tags: ["remote-desktop", "open-source", "self-hosted", "teamviewer"]
+  },
+  {
+    name: 'VirtualBox',
+    url: "https://www.virtualbox.org/",
+    description: 'Free and open source virtualization for x86 hardware. Run multiple operating systems simultaneously on your machine.',
+    category: 'Desktop Software',
+    tags: ["virtualization", "vm", "open-source", "cross-platform"]
+  },
+  {
+    name: 'UniGetUI',
+    url: "https://www.marticliment.com/unigetui/",
+    description: 'Beautiful GUI for Windows package managers. Manage winget, Scoop, Chocolatey, pip, and npm packages from one interface.',
+    category: 'Desktop Software',
+    tags: ["package-manager", "gui", "windows", "management"]
+  },
+  {
+    name: 'StartAllBack',
+    url: "https://www.startallback.com/",
+    description: 'Restore the classic taskbar and Start Menu on Windows 11. Customizable styling, drag-and-drop, and uncombined buttons.',
+    category: 'Desktop Software',
+    tags: ["windows", "taskbar", "start-menu", "customization"]
+  },
+  {
+    name: 'Shell (Nilesoft)',
+    url: "https://nilesoft.org/",
+    description: 'Powerful custom context menu manager for Windows. Add, remove, and restyle right-click menu items with a simple config.',
+    category: 'Desktop Software',
+    tags: ["windows", "context-menu", "customization", "shell"]
+  },
+  {
+    name: 'AdGuard Home',
+    url: "https://adguard.com/en/adguard-home/overview.html",
+    description: 'Network-wide ad and tracker blocker. Self-hosted DNS server that filters ads for every device on your network. Pi-hole alternative.',
+    category: 'Privacy',
+    tags: ["adblock", "dns", "self-hosted", "network"]
+  },
+  {
+    name: 'Portmaster',
+    url: "https://safing.io/portmaster/",
+    description: 'Free application firewall with built-in DNS privacy, tracker blocking, and per-app network controls. Beautiful dashboard.',
+    category: 'Privacy',
+    tags: ["firewall", "dns", "tracker-blocking", "network"]
+  },
+  {
+    name: 'ClearURLs',
+    url: "https://clearurls.xyz/",
+    description: 'Browser extension that removes tracking parameters from URLs automatically. Clean links when you copy, share, or click.',
+    category: 'Privacy',
+    tags: ["browser", "extension", "tracking", "urls"]
+  },
+  {
+    name: 'AnonAddy',
+    url: "https://addy.io/",
+    description: 'Anonymous email forwarding service. Create unlimited aliases on the fly to protect your real address. Open source and self-hostable.',
+    category: 'Privacy',
+    tags: ["email", "alias", "privacy", "forwarding"]
+  },
+  {
+    name: 'Cryptomator',
+    url: "https://cryptomator.org/",
+    description: 'Client-side encryption for your cloud storage. Encrypt files before they leave your device. Works with Dropbox, Drive, and more.',
+    category: 'Privacy',
+    tags: ["encryption", "cloud", "files", "open-source"]
+  },
+  {
+    name: 'VeraCrypt',
+    url: "https://www.veracrypt.fr/",
+    description: 'Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems.',
+    category: 'Privacy',
+    tags: ["encryption", "disk", "volumes", "security"]
+  },
+  {
+    name: 'GrapheneOS',
+    url: "https://grapheneos.org/",
+    description: 'Hardened Android-based mobile OS focused on privacy and security. Sandboxed Google Play, per-app permissions, and exploit mitigations.',
+    category: 'Privacy',
+    tags: ["android", "mobile", "hardened", "security"]
+  },
+  {
+    name: 'Proton Pass',
+    url: "https://proton.me/pass",
+    description: 'End-to-end encrypted password manager from Proton. Built-in 2FA, email aliases, and dark web monitoring. Free tier with unlimited passwords.',
+    category: 'Privacy',
+    tags: ["password", "manager", "encrypted", "proton"]
+  },
+  {
+    name: 'TrueNAS',
+    url: "https://www.truenas.com/",
+    description: 'Enterprise-grade open source storage OS. ZFS file system, snapshots, replication, plugins, and a powerful web UI.',
+    category: 'Homelab',
+    tags: ["storage", "nas", "zfs", "open-source"]
+  },
+  {
+    name: 'Netboot.xyz',
+    url: "https://netboot.xyz/",
+    description: 'PXE boot various operating system installers and utilities over the network. Boot ISOs without USB drives.',
+    category: 'Homelab',
+    tags: ["pxe", "boot", "network", "installer"]
+  },
+  {
+    name: 'Komodo',
+    url: "https://komo.do/",
+    description: 'Open source tool to build and manage infrastructure. Deploy Docker containers, manage servers, and automate with a beautiful UI.',
+    category: 'Homelab',
+    tags: ["docker", "management", "deployment", "automation"]
+  },
+  {
+    name: 'Beszel',
+    url: "https://beszel.dev/",
+    description: 'Lightweight server monitoring hub with Docker stats, historical data, and alerts. Agent-based with a minimal resource footprint.',
+    category: 'Homelab',
+    tags: ["monitoring", "docker", "lightweight", "alerts"]
+  },
+  {
+    name: 'Stirling-PDF',
+    url: "https://stirlingtools.com/",
+    description: 'Self-hosted PDF manipulation tool. Merge, split, convert, compress, sign, and OCR your PDFs. No data leaves your server.',
+    category: 'Homelab',
+    tags: ["pdf", "self-hosted", "manipulation", "privacy"]
+  },
+  {
+    name: 'Cosmos Cloud',
+    url: "https://cosmos-cloud.io/",
+    description: 'Self-hosted platform that auto-secures your apps with HTTPS, authentication, and firewall. One-click app marketplace included.',
+    category: 'Homelab',
+    tags: ["self-hosted", "security", "marketplace", "docker"]
+  },
+  {
+    name: 'Pangolin',
+    url: "https://github.com/fosrl/pangolin",
+    description: 'Expose your self-hosted services to the internet without port forwarding. Free, encrypted tunnels through Cloudflare\'s network.',
+    category: 'Homelab',
+    tags: ["tunnel", "reverse-proxy", "self-hosted", "wireguard"]
+  },
+  {
+    name: 'Changedetection.io',
+    url: "https://changedetection.io/",
+    description: 'Self-hosted website change detection and notification tool. Monitor any webpage for changes and get alerted instantly.',
+    category: 'Homelab',
+    tags: ["monitoring", "website", "changes", "notifications"]
+  },
+  {
+    name: 'Playnite',
+    url: "https://playnite.link/",
+    description: 'Open source game library manager. Unifies Steam, GOG, Epic, Origin, and emulator games into one beautiful interface.',
+    category: 'Gaming',
+    tags: ["games", "library", "launcher", "open-source"]
+  },
+  {
+    name: 'Heroic Games Launcher',
+    url: "https://heroicgameslauncher.com/",
+    description: 'Open source launcher for Epic Games, GOG, and Amazon Games on Linux, macOS, and Windows. Wine/Proton integration.',
+    category: 'Gaming',
+    tags: ["games", "launcher", "linux", "epic"]
+  },
+  {
+    name: 'Lutris',
+    url: "https://lutris.net/",
+    description: 'Open source gaming platform for Linux. Install and manage games from Steam, GOG, Humble, and community scripts.',
+    category: 'Gaming',
+    tags: ["games", "linux", "launcher", "wine"]
+  },
+  {
+    name: 'ProtonDB',
+    url: "https://www.protondb.com/",
+    description: 'Community reports on Steam game compatibility with Proton on Linux. Check if your games work before buying.',
+    category: 'Gaming',
+    tags: ["steam", "linux", "proton", "compatibility"]
+  },
+  {
+    name: 'PCSX2',
+    url: "https://pcsx2.net/",
+    description: 'PlayStation 2 emulator with high compatibility. Upscale to 4K, use custom shaders, and play with modern controllers.',
+    category: 'Gaming',
+    tags: ["emulator", "playstation", "ps2", "retro"]
+  },
+  {
+    name: 'Dolphin Emulator',
+    url: "https://dolphin-emu.org/",
+    description: 'GameCube and Wii emulator with excellent compatibility. HD rendering, netplay, and save states. Runs on most platforms.',
+    category: 'Gaming',
+    tags: ["emulator", "gamecube", "wii", "nintendo"]
+  },
+  {
+    name: 'DuckStation',
+    url: "https://www.duckstation.org/",
+    description: 'PlayStation 1 emulator focused on accuracy, speed, and modern features. PGXP, upscaling, widescreen hacks, and more.',
+    category: 'Gaming',
+    tags: ["emulator", "playstation", "ps1", "retro"]
+  },
+  {
+    name: 'SteamGridDB',
+    url: "https://www.steamgriddb.com/",
+    description: 'Community-driven database of custom game artwork. Grids, heroes, logos, and icons for your Steam and Playnite libraries.',
+    category: 'Gaming',
+    tags: ["steam", "artwork", "customization", "community"]
+  },
+  {
+    name: 'Guacamole',
+    url: "https://guacamole.apache.org/",
+    description: 'Clientless remote desktop gateway. Access SSH, VNC, and RDP servers through your web browser with no plugins needed.',
+    category: 'Sysadmin',
+    tags: ["remote-desktop", "ssh", "vnc", "web-gateway"]
+  },
+  {
+    name: 'MeshCentral',
+    url: "https://meshcentral.com/",
+    description: 'Full-featured open source remote management. Remote desktop, terminal, file transfer, and device management for any OS.',
+    category: 'Sysadmin',
+    tags: ["remote-management", "self-hosted", "rdp", "open-source"]
+  },
+  {
+    name: 'Graylog',
+    url: "https://graylog.org/",
+    description: 'Open source log management platform. Collect, index, and analyze structured and unstructured data from any source.',
+    category: 'Sysadmin',
+    tags: ["logging", "analysis", "siem", "monitoring"]
+  },
+  {
+    name: 'CrowdSec',
+    url: "https://www.crowdsec.net/",
+    description: 'Open source collaborative security engine. Detect attacks, share threat intelligence, and protect your infrastructure with the crowd.',
+    category: 'Sysadmin',
+    tags: ["ids", "firewall", "collaborative", "open-source"]
+  },
+  {
+    name: 'ss64',
+    url: "https://ss64.com/",
+    description: 'Command line reference for every platform. Bash, PowerShell, CMD, macOS, SQL, and more. The sysadmin\'s cheat sheet.',
+    category: 'Sysadmin',
+    tags: ["reference", "command-line", "powershell", "bash"]
+  },
+  {
+    name: 'Rundeck',
+    url: "https://www.rundeck.com/",
+    description: 'Operations automation platform. Schedule and run jobs across your infrastructure with role-based access and audit logging.',
+    category: 'Sysadmin',
+    tags: ["automation", "runbook", "jobs", "operations"]
+  },
+  {
+    name: 'Hugo',
+    url: "https://gohugo.io/",
+    description: 'The world\'s fastest static site generator. Build sites in milliseconds with Go-powered templating and zero dependencies.',
+    category: 'Dev Tools',
+    tags: ["static-site", "go", "generator", "fast"]
+  },
+  {
+    name: 'Astro',
+    url: "https://astro.build/",
+    description: 'The web framework for content-driven sites. Ship zero JavaScript by default, use any UI framework, and get insane performance.',
+    category: 'Dev Tools',
+    tags: ["framework", "static-site", "javascript", "performance"]
+  },
+  {
+    name: 'Coolify',
+    url: "https://coolify.io/",
+    description: 'Self-hostable Heroku/Netlify/Vercel alternative. Deploy apps, databases, and services with Git push. No vendor lock-in.',
+    category: 'Dev Tools',
+    tags: ["deployment", "self-hosted", "paas", "docker"]
+  },
+  {
+    name: 'Gitea',
+    url: "https://about.gitea.com/",
+    description: 'Lightweight self-hosted Git service. Repositories, issues, pull requests, CI/CD, and packages. GitHub in a single binary.',
+    category: 'Dev Tools',
+    tags: ["git", "self-hosted", "github", "lightweight"]
+  },
+  {
+    name: 'Forgejo',
+    url: "https://forgejo.org/",
+    description: 'Community-driven self-hosted Git forge. Gitea fork focused on sustainability and openness. Lightweight, fast, and fully featured.',
+    category: 'Dev Tools',
+    tags: ["git", "self-hosted", "forge", "community"]
+  },
+  {
+    name: 'Woodpecker CI',
+    url: "https://woodpecker-ci.org/",
+    description: 'Simple yet powerful open source CI/CD engine. Container-native, multi-platform, and compatible with Gitea, Forgejo, and GitHub.',
+    category: 'Dev Tools',
+    tags: ["ci-cd", "automation", "containers", "open-source"]
+  },
+  {
+    name: 'Fail2ban',
+    url: "https://github.com/fail2ban/fail2ban",
+    description: 'Intrusion prevention that bans IPs showing malicious signs. Monitors logs and updates firewall rules automatically.',
+    category: 'Security',
+    tags: ["intrusion-prevention", "firewall", "banning", "logs"]
+  },
+  {
+    name: 'Trivy',
+    url: "https://trivy.dev/",
+    description: 'Comprehensive security scanner for containers, filesystems, Git repos, and Kubernetes. Find vulnerabilities and misconfigurations.',
+    category: 'Security',
+    tags: ["scanner", "containers", "vulnerabilities", "kubernetes"]
+  },
+  {
+    name: 'Snyk',
+    url: "https://snyk.io/",
+    description: 'Developer security platform. Find and fix vulnerabilities in code, open source dependencies, containers, and infrastructure.',
+    category: 'Security',
+    tags: ["security", "dependencies", "vulnerabilities", "devsecops"]
+  },
+  {
+    name: 'Wappalyzer',
+    url: "https://www.wappalyzer.com/",
+    description: 'Identify technologies used on any website. Detect CMS, frameworks, analytics, CDNs, and more. Essential for recon and research.',
+    category: 'Security',
+    tags: ["fingerprinting", "recon", "technology", "detection"]
+  },
+  {
+    name: 'Nuclei',
+    url: "https://projectdiscovery.io/",
+    description: 'Fast vulnerability scanner driven by YAML templates. Community-powered with thousands of detection templates for every CVE.',
+    category: 'Security',
+    tags: ["scanner", "vulnerability", "templates", "automation"]
+  },
+  {
+    name: 'Paint.NET',
+    url: "https://www.getpaint.net/",
+    description: 'Fast, intuitive image editor for Windows. Layers, effects, plugins, and GPU acceleration. Lighter than Photoshop, more powerful than Paint.',
+    category: 'Creative',
+    tags: ["photo-editing", "windows", "layers", "plugins"]
+  },
+  {
+    name: 'Motion Canvas',
+    url: "https://motioncanvas.io/",
+    description: 'Create code-driven animations and videos programmatically. TypeScript-based with a live preview editor. Perfect for explainer and tech videos.',
+    category: 'Creative',
+    tags: ["animation", "code-driven", "video", "typescript"]
+  },
+  {
+    name: 'Rive',
+    url: "https://rive.app/",
+    description: 'Create interactive animations for apps and games. State machines, runtime integration, and real-time collaboration. Free tier available.',
+    category: 'Creative',
+    tags: ["animation", "interactive", "design", "runtime"]
+  },
+  {
+    name: 'Vectornator (Linearity Curve)',
+    url: "https://www.linearity.io/curve/",
+    description: 'Free vector design tool with pen, node, and shape tools. Create illustrations, logos, and UI designs with a modern, intuitive interface.',
+    category: 'Creative',
+    tags: ["vector", "design", "illustration", "logos"]
+  }
 ];
 
 // ════════════════════════════════════════════════════════════════
@@ -4471,6 +5890,11 @@ const CATEGORY_MAP = {
   "CLI Tools": "cat-cli",
   "Networking": "cat-networking",
   "Containers": "cat-containers",
+  "Torrenting": "cat-torrenting",
+  "Media Downloads": "cat-mediadownloads",
+  "Reading": "cat-reading",
+  "Indexes & Wikis": "cat-indexes",
+  "Arr Stack": "cat-arr",
 
 };
 
@@ -4498,8 +5922,15 @@ function buildFilters() {
   const cats = {};
   SITES.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
   const container = document.getElementById('filters');
+  const bmCount = Object.keys(bookmarks).length;
 
   let html = `<button class="filter-btn active" data-cat="All">All<span class="filter-count">${SITES.length}</span></button>`;
+
+  // Bookmarks filter (only show if there are bookmarks)
+  if (bmCount > 0) {
+    html += `<button class="filter-btn" data-cat="Bookmarks">Bookmarks<span class="filter-count">${bmCount}</span></button>`;
+  }
+
   Object.entries(cats)
     .sort((a, b) => b[1] - a[1])
     .forEach(([cat, count]) => {
@@ -4516,13 +5947,26 @@ function buildFilters() {
     });
   });
 
+  // Keep active state if still valid
+  const activeBtn = container.querySelector(`.filter-btn[data-cat="${activeFilter}"]`);
+  if (activeBtn) {
+    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    activeBtn.classList.add('active');
+  }
+
   document.getElementById('catCount').textContent = Object.keys(cats).length;
   document.getElementById('totalCount').textContent = SITES.length;
 }
 
 function getFiltered() {
-  return SITES.filter(site => {
-    const matchCat = activeFilter === "All" || site.category === activeFilter;
+  let results = SITES.filter(site => {
+    const matchCat = activeFilter === "All" || activeFilter === "Bookmarks"
+      ? true
+      : site.category === activeFilter;
+
+    // Bookmarks filter
+    if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
+
     if (!searchTerm) return matchCat;
     const q = searchTerm.toLowerCase();
     const matchSearch =
@@ -4533,15 +5977,31 @@ function getFiltered() {
       site.tags.some(t => t.toLowerCase().includes(q));
     return matchCat && matchSearch;
   });
+
+  // Sort: bookmarked sites float to top when not in Bookmarks filter
+  if (activeFilter !== "Bookmarks") {
+    results.sort((a, b) => {
+      const aBm = isBookmarked(a.url) ? 1 : 0;
+      const bBm = isBookmarked(b.url) ? 1 : 0;
+      return bBm - aBm;
+    });
+  }
+
+  return results;
 }
 
 function buildCard(site, index) {
   const catClass = CATEGORY_MAP[site.category] || 'cat-network';
   const domain = getDomain(site.url);
   const delay = Math.min(index * 40, 400);
+  const bm = isBookmarked(site.url);
+  const bmClass = bm ? ' is-bookmarked' : '';
+  const starClass = bm ? ' bookmarked' : '';
+  const starFill = bm ? 'currentColor' : 'none';
+  const escUrl = site.url.replace(/'/g, "\\'");
 
   return `
-    <article class="card" style="animation-delay: ${delay}ms">
+    <article class="card${bmClass}" style="animation-delay: ${delay}ms">
       <div class="card-preview">
         <div class="card-preview-placeholder">
           <div class="domain-icon">
@@ -4557,7 +6017,13 @@ function buildCard(site, index) {
         <div class="card-footer">
           <a href="${site.url}" class="card-url" target="_blank" rel="noopener">${domain}</a>
           <div class="card-actions">
-            <button class="card-action" title="Copy URL" onclick="copyUrl('${site.url}')">
+            <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark this site'}" onclick="toggleBookmark('${escUrl}')">
+              <svg viewBox="0 0 24 24" fill="${starFill}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </button>
+            ${bm ? `<button class="card-action" title="Move to group" onclick="showAssignDropdown('${escUrl}', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+            </button>` : ''}
+            <button class="card-action" title="Copy URL" onclick="copyUrl('${escUrl}')">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             </button>
             <a href="${site.url}" class="card-action" title="Open site" target="_blank" rel="noopener">
@@ -4708,10 +6174,566 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ()
   if (!saved || saved === 'system') applyTheme('system');
 });
 
+
+// ════════════════════════════════════════════════════════════════
+//  BOOKMARKS ENGINE v2 — drag-and-drop, ordered groups & chips
+// ════════════════════════════════════════════════════════════════
+const STORAGE_KEY = 'coolsites-bookmarks-v2';
+const GROUPS_KEY = 'coolsites-groups-v2';
+const DOCK_STATE_KEY = 'coolsites-dock-state';
+
+const GROUP_COLORS = ['#f5a623','#6e56cf','#3ecf8e','#05c8e8','#e5484d','#ff78c6','#ff8c3c','#a9dc76','#64b4ff','#c864ff'];
+
+// ── Data Migration from v1 ──
+(function migrateV1() {
+  const oldBm = localStorage.getItem('coolsites-bookmarks');
+  const oldGr = localStorage.getItem('coolsites-groups');
+  if (oldBm && !localStorage.getItem(STORAGE_KEY)) {
+    try {
+      const bm = JSON.parse(oldBm);
+      // Convert v1 format { url: { group, addedAt } } to v2 { url: { group, order, addedAt } }
+      let order = 0;
+      Object.keys(bm).forEach(url => {
+        if (!bm[url].order && bm[url].order !== 0) bm[url].order = order++;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(bm));
+    } catch(e) {}
+  }
+  if (oldGr && !localStorage.getItem(GROUPS_KEY)) {
+    try { localStorage.setItem(GROUPS_KEY, oldGr); } catch(e) {}
+  }
+})();
+
+// ── State ──
+// bookmarks: { url: { group: 'groupId', order: number, addedAt: timestamp } }
+let bookmarks = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+let groups = JSON.parse(localStorage.getItem(GROUPS_KEY) || 'null') || [
+  { id: 'default', name: 'Favorites', color: '#f5a623' }
+];
+let dockCollapsed = localStorage.getItem(DOCK_STATE_KEY) === 'collapsed';
+
+function saveBookmarks() { localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks)); }
+function saveGroups() { localStorage.setItem(GROUPS_KEY, JSON.stringify(groups)); }
+function isBookmarked(url) { return !!bookmarks[url]; }
+
+function getGroupSites(groupId) {
+  return Object.entries(bookmarks)
+    .filter(([_, bm]) => bm.group === groupId)
+    .sort((a, b) => (a[1].order ?? 9999) - (b[1].order ?? 9999))
+    .map(([url]) => url);
+}
+
+function reindexGroupOrder(groupId) {
+  const urls = getGroupSites(groupId);
+  urls.forEach((url, i) => { bookmarks[url].order = i; });
+}
+
+function getNextOrder(groupId) {
+  const urls = getGroupSites(groupId);
+  if (urls.length === 0) return 0;
+  return Math.max(...urls.map(u => bookmarks[u].order ?? 0)) + 1;
+}
+
+function toggleBookmark(url, groupId) {
+  if (bookmarks[url]) {
+    delete bookmarks[url];
+  } else {
+    const gid = groupId || (groups.length > 0 ? groups[0].id : 'default');
+    bookmarks[url] = { group: gid, order: getNextOrder(gid), addedAt: Date.now() };
+  }
+  saveBookmarks();
+  renderDock();
+  renderGrid();
+  buildFilters();
+  showToast(bookmarks[url] ? 'Bookmarked' : 'Removed');
+}
+
+function moveToGroup(url, newGroupId) {
+  if (!bookmarks[url]) return;
+  const oldGroup = bookmarks[url].group;
+  bookmarks[url].group = newGroupId;
+  bookmarks[url].order = getNextOrder(newGroupId);
+  reindexGroupOrder(oldGroup);
+  saveBookmarks();
+  renderDock();
+}
+
+function removeBookmark(url, evt) {
+  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+  const gid = bookmarks[url]?.group;
+  delete bookmarks[url];
+  if (gid) reindexGroupOrder(gid);
+  saveBookmarks();
+  renderDock();
+  renderGrid();
+  buildFilters();
+  showToast('Removed');
+}
+
+function getSiteByUrl(url) { return SITES.find(s => s.url === url); }
+
+// ════════════════════════════════════════════════════════════════
+//  DOCK RENDERING
+// ════════════════════════════════════════════════════════════════
+function renderDock() {
+  const wrapper = document.getElementById('dockWrapper');
+  const container = document.getElementById('dockGroups');
+  const countEl = document.getElementById('dockCount');
+  const bmCount = Object.keys(bookmarks).length;
+
+  countEl.textContent = bmCount;
+
+  if (bmCount === 0) {
+    wrapper.classList.add('empty');
+    container.innerHTML = '';
+    return;
+  }
+  wrapper.classList.remove('empty');
+  wrapper.classList.toggle('collapsed', dockCollapsed);
+
+  // Reassign orphaned bookmarks
+  Object.keys(bookmarks).forEach(url => {
+    if (!groups.find(g => g.id === bookmarks[url].group)) {
+      bookmarks[url].group = groups[0]?.id || 'default';
+    }
+  });
+
+  let html = '';
+  groups.forEach((group, gi) => {
+    const siteUrls = getGroupSites(group.id);
+
+    const chips = siteUrls.map(url => {
+      const site = getSiteByUrl(url);
+      if (!site) return '';
+      return `
+        <div class="site-chip" draggable="true" data-url="${site.url}" data-group="${group.id}" title="${site.name} — ${site.description}">
+          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" onerror="this.style.display='none'" draggable="false">
+          <span class="chip-text">${site.name}</span>
+          <a href="${site.url}" class="chip-open" target="_blank" rel="noopener" draggable="false"></a>
+          <button class="chip-remove" onclick="removeBookmark('${site.url.replace(/'/g, "\\'")}', event)" title="Remove bookmark">&times;</button>
+        </div>
+      `;
+    }).join('');
+
+    html += `
+      <div class="dock-group" data-group-id="${group.id}" data-group-index="${gi}" draggable="true">
+        <div class="dock-group-header" data-group-drag="${group.id}">
+          <span class="dock-group-name">
+            <span class="drag-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg></span>
+            <span class="group-color" style="background: ${group.color}"></span>
+            ${group.name}
+            <span class="group-chip-count">(${siteUrls.length})</span>
+          </span>
+          <div class="dock-group-actions">
+            <button class="dock-group-action" title="Edit group" onclick="event.stopPropagation(); openGroupModal('${group.id}')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            ${groups.length > 1 ? `<button class="dock-group-action danger" title="Delete group" onclick="event.stopPropagation(); deleteGroup('${group.id}')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            </button>` : ''}
+          </div>
+        </div>
+        <div class="dock-group-sites" data-drop-group="${group.id}">
+          ${chips || '<span class="dock-empty-hint">Drag sites here or bookmark from cards below</span>'}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+  initChipDragAndDrop();
+  initGroupDragAndDrop();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  CHIP DRAG & DROP — reorder within group + move between groups
+// ════════════════════════════════════════════════════════════════
+let chipDragUrl = null;
+let chipDragSourceGroup = null;
+
+function initChipDragAndDrop() {
+  const allChips = document.querySelectorAll('.site-chip[draggable]');
+  const allDropZones = document.querySelectorAll('.dock-group-sites[data-drop-group]');
+
+  allChips.forEach(chip => {
+    chip.addEventListener('dragstart', (e) => {
+      chipDragUrl = chip.dataset.url;
+      chipDragSourceGroup = chip.dataset.group;
+      chip.classList.add('chip-dragging');
+
+      // Custom ghost
+      const ghost = document.getElementById('dragGhost');
+      ghost.textContent = chip.querySelector('.chip-text')?.textContent || '';
+      ghost.style.top = '0px';
+      ghost.style.left = '0px';
+      e.dataTransfer.setDragImage(ghost, 40, 14);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', chip.dataset.url);
+
+      // Highlight all drop zones
+      requestAnimationFrame(() => {
+        allDropZones.forEach(z => z.classList.add('chip-drag-over'));
+      });
+    });
+
+    chip.addEventListener('dragend', () => {
+      chip.classList.remove('chip-dragging');
+      clearAllDropIndicators();
+      chipDragUrl = null;
+      chipDragSourceGroup = null;
+    });
+
+    chip.addEventListener('dragover', (e) => {
+      if (!chipDragUrl || chipDragUrl === chip.dataset.url) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+
+      // Determine left/right insertion
+      const rect = chip.getBoundingClientRect();
+      const midX = rect.left + rect.width / 2;
+      const isLeft = e.clientX < midX;
+
+      // Clear indicators on siblings
+      chip.parentElement.querySelectorAll('.site-chip').forEach(c => {
+        c.classList.remove('chip-drop-left', 'chip-drop-right');
+      });
+      chip.classList.add(isLeft ? 'chip-drop-left' : 'chip-drop-right');
+    });
+
+    chip.addEventListener('dragleave', () => {
+      chip.classList.remove('chip-drop-left', 'chip-drop-right');
+    });
+
+    chip.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (!chipDragUrl || chipDragUrl === chip.dataset.url) return;
+
+      const targetGroup = chip.dataset.group;
+      const rect = chip.getBoundingClientRect();
+      const insertBefore = e.clientX < rect.left + rect.width / 2;
+
+      // Move/reorder
+      const targetUrl = chip.dataset.url;
+      performChipMove(chipDragUrl, chipDragSourceGroup, targetGroup, targetUrl, insertBefore);
+      clearAllDropIndicators();
+    });
+  });
+
+  // Drop on empty area of group
+  allDropZones.forEach(zone => {
+    zone.addEventListener('dragover', (e) => {
+      if (!chipDragUrl) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    });
+
+    zone.addEventListener('dragleave', (e) => {
+      if (!e.relatedTarget || !zone.contains(e.relatedTarget)) {
+        zone.classList.remove('chip-drag-over');
+      }
+    });
+
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (!chipDragUrl) return;
+      const targetGroup = zone.dataset.dropGroup;
+
+      // If dropped on zone itself (not on a chip), append to end
+      if (e.target === zone || e.target.classList.contains('dock-empty-hint')) {
+        performChipMove(chipDragUrl, chipDragSourceGroup, targetGroup, null, false);
+      }
+      clearAllDropIndicators();
+    });
+  });
+}
+
+function performChipMove(dragUrl, sourceGroup, targetGroup, targetUrl, insertBefore) {
+  // Get ordered lists
+  let targetList = getGroupSites(targetGroup).filter(u => u !== dragUrl);
+
+  if (targetUrl) {
+    const targetIdx = targetList.indexOf(targetUrl);
+    const insertIdx = insertBefore ? targetIdx : targetIdx + 1;
+    targetList.splice(insertIdx, 0, dragUrl);
+  } else {
+    targetList.push(dragUrl);
+  }
+
+  // Update bookmark
+  bookmarks[dragUrl].group = targetGroup;
+
+  // Reindex target group
+  targetList.forEach((url, i) => { bookmarks[url].order = i; });
+
+  // Reindex source if different
+  if (sourceGroup !== targetGroup) {
+    reindexGroupOrder(sourceGroup);
+  }
+
+  saveBookmarks();
+  renderDock();
+}
+
+function clearAllDropIndicators() {
+  document.querySelectorAll('.chip-drop-left, .chip-drop-right').forEach(el => {
+    el.classList.remove('chip-drop-left', 'chip-drop-right');
+  });
+  document.querySelectorAll('.chip-drag-over').forEach(el => {
+    el.classList.remove('chip-drag-over');
+  });
+  document.querySelectorAll('.chip-dragging').forEach(el => {
+    el.classList.remove('chip-dragging');
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+//  GROUP DRAG & DROP — reorder groups themselves
+// ════════════════════════════════════════════════════════════════
+let groupDragId = null;
+
+function initGroupDragAndDrop() {
+  const groupEls = document.querySelectorAll('.dock-group[draggable]');
+
+  groupEls.forEach(groupEl => {
+    // Only start drag from the header (drag handle area)
+    const header = groupEl.querySelector('.dock-group-header');
+
+    header.addEventListener('mousedown', () => { groupEl.setAttribute('draggable', 'true'); });
+
+    groupEl.addEventListener('dragstart', (e) => {
+      // Only allow group drag from header
+      if (!e.target.closest('.dock-group-header') && e.target.classList.contains('site-chip')) {
+        return; // Let chip drag handle it
+      }
+      if (chipDragUrl) return; // Don't interfere with chip drag
+
+      groupDragId = groupEl.dataset.groupId;
+      groupEl.classList.add('dragging-group');
+
+      const ghost = document.getElementById('dragGhost');
+      const gname = groups.find(g => g.id === groupDragId)?.name || '';
+      ghost.textContent = gname;
+      ghost.style.top = '0px';
+      ghost.style.left = '0px';
+      e.dataTransfer.setDragImage(ghost, 40, 14);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/x-group', groupDragId);
+    });
+
+    groupEl.addEventListener('dragend', () => {
+      groupEl.classList.remove('dragging-group');
+      groupDragId = null;
+      document.querySelectorAll('.drag-over-group').forEach(el => el.classList.remove('drag-over-group'));
+    });
+
+    groupEl.addEventListener('dragover', (e) => {
+      if (!groupDragId || groupDragId === groupEl.dataset.groupId) return;
+      if (chipDragUrl) return; // Don't highlight for chip drags
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+
+      document.querySelectorAll('.drag-over-group').forEach(el => el.classList.remove('drag-over-group'));
+      groupEl.classList.add('drag-over-group');
+    });
+
+    groupEl.addEventListener('dragleave', (e) => {
+      if (!e.relatedTarget || !groupEl.contains(e.relatedTarget)) {
+        groupEl.classList.remove('drag-over-group');
+      }
+    });
+
+    groupEl.addEventListener('drop', (e) => {
+      if (!groupDragId || chipDragUrl) return;
+      e.preventDefault();
+
+      const targetId = groupEl.dataset.groupId;
+      if (groupDragId === targetId) return;
+
+      // Reorder groups array
+      const fromIdx = groups.findIndex(g => g.id === groupDragId);
+      const toIdx = groups.findIndex(g => g.id === targetId);
+      if (fromIdx === -1 || toIdx === -1) return;
+
+      const [moved] = groups.splice(fromIdx, 1);
+      groups.splice(toIdx, 0, moved);
+
+      saveGroups();
+      renderDock();
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+//  GROUP MANAGEMENT — create, edit, delete
+// ════════════════════════════════════════════════════════════════
+let editingGroupId = null;
+let selectedColor = GROUP_COLORS[0];
+
+function openGroupModal(editId) {
+  const modal = document.getElementById('groupModal');
+  const titleEl = document.getElementById('modalTitle');
+  const inputEl = document.getElementById('groupNameInput');
+  const saveBtn = document.getElementById('modalSave');
+  const btnsEl = document.getElementById('modalBtns');
+
+  editingGroupId = editId || null;
+
+  // Remove old delete button if present
+  const oldDel = btnsEl.querySelector('.modal-btn.danger');
+  if (oldDel) oldDel.remove();
+
+  if (editId) {
+    const g = groups.find(g => g.id === editId);
+    titleEl.textContent = 'Edit Group';
+    inputEl.value = g ? g.name : '';
+    selectedColor = g ? g.color : GROUP_COLORS[0];
+    saveBtn.textContent = 'Save';
+
+    // Add delete button if more than one group
+    if (groups.length > 1) {
+      const delBtn = document.createElement('button');
+      delBtn.className = 'modal-btn danger';
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', () => {
+        deleteGroup(editId);
+        closeGroupModal();
+      });
+      btnsEl.insertBefore(delBtn, btnsEl.firstChild);
+    }
+  } else {
+    titleEl.textContent = 'New Group';
+    inputEl.value = '';
+    selectedColor = GROUP_COLORS[Math.floor(Math.random() * GROUP_COLORS.length)];
+    saveBtn.textContent = 'Create';
+  }
+
+  renderModalColors();
+  modal.classList.add('open');
+  setTimeout(() => { inputEl.focus(); inputEl.select(); }, 100);
+}
+
+function renderModalColors() {
+  const container = document.getElementById('modalColors');
+  container.innerHTML = GROUP_COLORS.map(c =>
+    `<div class="modal-color ${c === selectedColor ? 'selected' : ''}" style="background: ${c}" data-color="${c}"></div>`
+  ).join('');
+  container.querySelectorAll('.modal-color').forEach(el => {
+    el.addEventListener('click', () => {
+      selectedColor = el.dataset.color;
+      renderModalColors();
+    });
+  });
+}
+
+function closeGroupModal() {
+  document.getElementById('groupModal').classList.remove('open');
+  editingGroupId = null;
+}
+
+function saveGroupFromModal() {
+  const name = document.getElementById('groupNameInput').value.trim();
+  if (!name) return;
+
+  if (editingGroupId) {
+    const g = groups.find(g => g.id === editingGroupId);
+    if (g) { g.name = name; g.color = selectedColor; }
+  } else {
+    const id = 'g_' + Date.now();
+    groups.push({ id, name, color: selectedColor });
+  }
+  saveGroups();
+  closeGroupModal();
+  renderDock();
+  showToast(editingGroupId ? 'Group updated' : 'Group created');
+}
+
+function deleteGroup(id) {
+  if (groups.length <= 1) return;
+  // Find another group to absorb bookmarks
+  const fallback = groups.find(g => g.id !== id);
+  if (!fallback) return;
+
+  const groupName = groups.find(g => g.id === id)?.name || '';
+  Object.keys(bookmarks).forEach(url => {
+    if (bookmarks[url].group === id) {
+      bookmarks[url].group = fallback.id;
+      bookmarks[url].order = getNextOrder(fallback.id);
+    }
+  });
+  groups = groups.filter(g => g.id !== id);
+  saveGroups();
+  saveBookmarks();
+  renderDock();
+  showToast(`"${groupName}" deleted`);
+}
+
+// ── Assign dropdown on cards ──
+function showAssignDropdown(url, btnEl) {
+  document.querySelectorAll('.assign-dropdown').forEach(d => d.remove());
+
+  const wrapper = btnEl.closest('.card-actions');
+  const dd = document.createElement('div');
+  dd.className = 'assign-dropdown open';
+  dd.innerHTML = groups.map(g => `
+    <button class="assign-option ${bookmarks[url]?.group === g.id ? 'active' : ''}" data-gid="${g.id}">
+      <span class="group-color" style="background: ${g.color}"></span>
+      ${g.name}
+    </button>
+  `).join('');
+
+  dd.querySelectorAll('.assign-option').forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      moveToGroup(url, opt.dataset.gid);
+      dd.remove();
+      showToast(`Moved to ${groups.find(g => g.id === opt.dataset.gid)?.name}`);
+    });
+  });
+
+  wrapper.style.position = 'relative';
+  wrapper.appendChild(dd);
+
+  setTimeout(() => {
+    const closer = (e) => {
+      if (!dd.contains(e.target) && !btnEl.contains(e.target)) {
+        dd.remove();
+        document.removeEventListener('click', closer);
+      }
+    };
+    document.addEventListener('click', closer);
+  }, 10);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  EVENT BINDINGS
+// ════════════════════════════════════════════════════════════════
+
+// Dock toggle
+document.getElementById('dockToggle').addEventListener('click', () => {
+  dockCollapsed = !dockCollapsed;
+  localStorage.setItem(DOCK_STATE_KEY, dockCollapsed ? 'collapsed' : 'expanded');
+  document.getElementById('dockWrapper').classList.toggle('collapsed', dockCollapsed);
+});
+
+// New group
+document.getElementById('newGroupBtn').addEventListener('click', () => openGroupModal());
+
+// Modal
+document.getElementById('modalCancel').addEventListener('click', closeGroupModal);
+document.getElementById('modalSave').addEventListener('click', saveGroupFromModal);
+document.getElementById('groupModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeGroupModal();
+});
+document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') saveGroupFromModal();
+  if (e.key === 'Escape') closeGroupModal();
+});
+
 // ── Init ──
 initTheme();
 buildFilters();
 renderGrid();
+renderDock();
 </script>
 </body>
 </html>
