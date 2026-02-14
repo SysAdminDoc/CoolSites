@@ -11,8 +11,6 @@
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
-![CoolSites Screenshot](screenshot.png)
-
 ## Features
 
 - **470 curated sites** across 25 categories — every entry hand-picked and described
