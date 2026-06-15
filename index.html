@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="theme-color" content="#1e1e2e">
 <meta charset="UTF-8">
+<meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
 <meta name="description" content="The ultimate directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.">
@@ -450,7 +450,7 @@
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: 500;
-    transition: var(--transition);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
   .github-link:hover {
     border-color: var(--border-hover);
@@ -615,8 +615,9 @@
     font-family: var(--font-mono);
     font-size: 0.75rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: border-color 0.15s ease;
   }
+  .sort-select option { background: var(--bg-card); color: var(--text-primary); }
   .sort-select:hover { border-color: var(--border-hover); }
   .sort-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .view-toggles {
@@ -634,7 +635,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
   .view-btn:hover { border-color: var(--border-hover); color: var(--text-secondary); }
   .view-btn.active { background: rgba(255,255,255,0.05); border-color: var(--border-hover); color: var(--text-primary); }
@@ -753,6 +754,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex: 1;
     min-width: 0;
   }
   .card-url:hover { color: var(--accent); }
@@ -828,7 +830,7 @@
      ════════════════════════════════════════════════════════════ */
   .dock-wrapper {
     position: sticky;
-    top: 56px;
+    top: 64px;
     z-index: 90;
   }
   .dock-wrapper.collapsed .dock { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-color: transparent; opacity: 0; pointer-events: none; }
@@ -896,7 +898,7 @@
     font-family: var(--font-mono);
     font-size: 0.68rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -1009,7 +1011,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    transition: background 0.12s ease, color 0.12s ease;
   }
   .dock-group-action:hover {
     background: rgba(255,255,255,0.06);
@@ -1259,7 +1261,7 @@
     font-family: var(--font-display);
     font-size: 0.85rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
   }
   .modal-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
   .modal-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -1461,6 +1463,14 @@
   [data-theme="light"] .github-link:hover {
     background: rgba(0,0,0,0.04);
   }
+  [data-theme="light"] .dock-group { background: rgba(0,0,0,0.02); }
+  [data-theme="light"] .dock-group-header:hover { background: rgba(0,0,0,0.03); }
+  [data-theme="light"] .dock-group-action:hover { background: rgba(0,0,0,0.06); }
+  [data-theme="light"] .dock-toggle-bar:hover { background: rgba(0,0,0,0.03); }
+  [data-theme="light"] .site-chip:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  [data-theme="light"] .assign-option:hover { background: rgba(0,0,0,0.05); }
+  [data-theme="light"] .card-bookmark:hover { background: rgba(245, 166, 35, 0.08); }
+  [data-theme="light"] .sort-select option { background: #fff; }
   [data-theme="light"] .cat-speed { color: #6e46c9; }
   [data-theme="light"] .cat-ip { color: #1a8a5a; }
   [data-theme="light"] .cat-dns { color: #0882a0; }
@@ -1507,7 +1517,7 @@
     background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
-    transition: var(--transition);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
   .theme-btn:hover {
     border-color: var(--border-hover);
@@ -1555,7 +1565,7 @@
     font-size: 0.82rem;
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: background 0.12s ease, color 0.12s ease;
     text-align: left;
   }
   .theme-option:hover {
@@ -1629,8 +1639,12 @@
     .filters::-webkit-scrollbar { display: none; }
     .search-shortcut { display: none; }
     .card-actions-overflow { opacity: 1; }
-    .card-bookmark { opacity: 1; }
+    .card-bookmark { opacity: 1; width: 40px; height: 40px; }
+    .card-action { width: 40px; height: 40px; }
     .results-bar { flex-wrap: wrap; gap: 8px; }
+    .header-inner { height: 56px; }
+    .dock-wrapper { top: 56px; }
+    .header { padding: 0 1rem; }
   }
 </style>
 <script>
@@ -6319,7 +6333,16 @@ function renderGrid() {
 }
 
 function copyUrl(url) {
-  navigator.clipboard.writeText(url).then(() => showToast('URL copied to clipboard'));
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('URL copied')).catch(() => _fallbackCopy(url));
+  } else { _fallbackCopy(url); }
+}
+function _fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('URL copied'); } catch { showToast('Copy failed'); }
+  ta.remove();
 }
 function shareUrl(name, url) {
   if (navigator.share) {
@@ -6329,11 +6352,13 @@ function shareUrl(name, url) {
   }
 }
 
+let _toastTimer;
 function showToast(msg) {
+  clearTimeout(_toastTimer);
   const toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 2000);
+  _toastTimer = setTimeout(() => toast.classList.remove('visible'), 2000);
 }
 
 // ── Search ──
@@ -6416,9 +6441,12 @@ function getSystemTheme() {
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
 }
 
+const THEME_COLORS = {'oled':'#08090d','catppuccin':'#1e1e2e','nord':'#2e3440','dracula':'#282a36','github-dark':'#0d1117','midnight':'#0a0e1a','solarized':'#002b36','light':'#f8f9fc','rose-pine':'#191724'};
 function applyTheme(themeId) {
   const resolved = themeId === 'system' ? getSystemTheme() : themeId;
   document.documentElement.setAttribute('data-theme', resolved);
+  const mc = document.getElementById('metaThemeColor');
+  if (mc) mc.setAttribute('content', THEME_COLORS[resolved] || '#08090d');
   updateThemeIcon(resolved);
   updateThemeDropdown(themeId);
 }
