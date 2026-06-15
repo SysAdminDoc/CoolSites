@@ -1805,6 +1805,9 @@
       <option value="shuffle">Shuffle</option>
     </select>
     <div class="view-toggles" role="group" aria-label="View mode">
+      <button class="view-btn" id="copyMdBtn" title="Copy as Markdown" aria-label="Copy filtered list as Markdown">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </button>
       <button class="view-btn" id="randomBtn" title="Random site" aria-label="Open a random site">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
       </button>
@@ -7028,6 +7031,13 @@ document.getElementById('groupModal').addEventListener('click', (e) => {
 document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') saveGroupFromModal();
   if (e.key === 'Escape') closeGroupModal();
+});
+
+// ── Copy as Markdown ──
+document.getElementById('copyMdBtn').addEventListener('click', () => {
+  const filtered = getFiltered();
+  const md = filtered.map(s => `- [${s.name}](${s.url}) — ${s.description}`).join('\n');
+  navigator.clipboard.writeText(md).then(() => showToast(`Copied ${filtered.length} sites as Markdown`));
 });
 
 // ── Sort ──
