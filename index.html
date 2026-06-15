@@ -375,6 +375,10 @@
     top: 8px;
   }
 
+  /* ── Search highlight ── */
+  mark { background: var(--accent-glow); color: var(--text-primary); border-radius: 2px; padding: 0 1px; }
+  [data-theme="light"] mark { background: rgba(110, 86, 207, 0.15); }
+
   /* ── Header ── */
   .header {
     position: sticky;
@@ -1587,6 +1591,19 @@
     letter-spacing: 0.08em;
     color: var(--text-muted);
     pointer-events: none;
+  }
+
+  /* ── Forced colors (Windows High Contrast) ── */
+  @media (forced-colors: active) {
+    .card { border: 1px solid ButtonBorder; }
+    .card:hover { border-color: Highlight; }
+    .filter-btn { border: 1px solid ButtonBorder; }
+    .filter-btn.active { outline: 2px solid Highlight; background: Highlight; color: HighlightText; }
+    .card-bookmark.bookmarked svg { color: Highlight; }
+    .search-input { border: 1px solid ButtonBorder; }
+    .search-input:focus { border-color: Highlight; }
+    .back-to-top { border: 1px solid ButtonBorder; }
+    mark { background: Highlight; color: HighlightText; }
   }
 
   /* ── Responsive ── */
@@ -6098,28 +6115,40 @@ function buildFilters() {
   document.getElementById('totalCount').textContent = SITES.length;
 }
 
+function fuzzyScore(query, text) {
+  const q = query.toLowerCase();
+  const t = text.toLowerCase();
+  if (t.includes(q)) return 100 + (q.length / t.length) * 50;
+  let qi = 0, score = 0, streak = 0;
+  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+    if (t[ti] === q[qi]) { qi++; streak++; score += streak * 2; } else { streak = 0; }
+  }
+  return qi === q.length ? score : 0;
+}
+
+function bestScore(query, site) {
+  const fields = [site.name, site.description, site.category, site.url, ...site.tags];
+  let best = 0;
+  for (const f of fields) { const s = fuzzyScore(query, f); if (s > best) best = s; }
+  if (fuzzyScore(query, site.name) > 0) best += 50;
+  return best;
+}
+
 function getFiltered() {
   let results = SITES.filter(site => {
     const matchCat = activeFilter === "All" || activeFilter === "Bookmarks"
       ? true
       : site.category === activeFilter;
 
-    // Bookmarks filter
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
 
     if (!searchTerm) return matchCat;
-    const q = searchTerm.toLowerCase();
-    const matchSearch =
-      site.name.toLowerCase().includes(q) ||
-      site.description.toLowerCase().includes(q) ||
-      site.category.toLowerCase().includes(q) ||
-      site.url.toLowerCase().includes(q) ||
-      site.tags.some(t => t.toLowerCase().includes(q));
-    return matchCat && matchSearch;
+    return matchCat && bestScore(searchTerm, site) > 0;
   });
 
-  // Sort: bookmarked sites float to top when not in Bookmarks filter
-  if (activeFilter !== "Bookmarks") {
+  if (searchTerm) {
+    results.sort((a, b) => bestScore(searchTerm, b) - bestScore(searchTerm, a));
+  } else if (activeFilter !== "Bookmarks") {
     results.sort((a, b) => {
       const aBm = isBookmarked(a.url) ? 1 : 0;
       const bBm = isBookmarked(b.url) ? 1 : 0;
@@ -6128,6 +6157,14 @@ function getFiltered() {
   }
 
   return results;
+}
+
+function highlightMatch(text, query) {
+  if (!query) return escHtml(text);
+  const safe = escHtml(text);
+  const q = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(${q})`, 'gi');
+  return safe.replace(re, '<mark>$1</mark>');
 }
 
 function buildCard(site, index) {
@@ -6152,8 +6189,8 @@ function buildCard(site, index) {
       </div>
       <div class="card-body">
         <div class="card-category ${catClass}">${site.category}</div>
-        <h3 class="card-title">${site.name}</h3>
-        <p class="card-desc">${site.description}</p>
+        <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}</h3>
+        <p class="card-desc">${searchTerm ? highlightMatch(site.description, searchTerm) : escHtml(site.description)}</p>
         <div class="card-footer">
           <a href="${site.url}" class="card-url" target="_blank" rel="noopener noreferrer">${domain}</a>
           <div class="card-actions">
