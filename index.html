@@ -1200,19 +1200,21 @@
 
   /* ── Group create/edit modal ── */
   .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    z-index: 200;
+    border: none;
+    background: transparent;
+    padding: 0;
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
   }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-overlay::backdrop {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
   .modal {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -1220,10 +1222,7 @@
     padding: 24px;
     width: 100%;
     max-width: 380px;
-    transform: translateY(20px) scale(0.97);
-    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
   }
-  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
   .modal h3 { font-size: 1rem; margin-bottom: 16px; color: var(--text-primary); }
   .modal input[type="text"] {
     width: 100%;
@@ -1716,6 +1715,15 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
             New Group
           </button>
+          <button class="dock-action-btn" id="exportBtn" title="Export bookmarks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+          <button class="dock-action-btn" id="importBtn" title="Import bookmarks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Import
+          </button>
+          <input type="file" id="importFile" accept=".json" style="display:none">
         </div>
       </div>
       <div class="dock-groups" id="dockGroups"></div>
@@ -1727,7 +1735,7 @@
 </aside>
 
 <!-- Group Modal -->
-<div class="modal-overlay" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<dialog class="modal-overlay" id="groupModal" aria-labelledby="modalTitle">
   <div class="modal">
     <h3 id="modalTitle">New Group</h3>
     <input type="text" id="groupNameInput" placeholder="Group name..." maxlength="30" autocomplete="off" aria-label="Group name">
@@ -1737,7 +1745,7 @@
       <button class="modal-btn primary" id="modalSave">Create</button>
     </div>
   </div>
-</div>
+</dialog>
 
 <!-- Drag ghost element -->
 <div class="drag-ghost" id="dragGhost"></div>
@@ -6137,7 +6145,7 @@ function buildCard(site, index) {
       <div class="card-preview">
         <div class="card-preview-placeholder">
           <div class="domain-icon">
-            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='${getFaviconFallback(site.url)}'}else{this.style.display='none';this.parentElement.textContent='${getInitial(site.name)}'}">
+            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
           </div>
           <span>${domain}</span>
         </div>
@@ -6168,7 +6176,18 @@ function buildCard(site, index) {
   `;
 }
 
-function renderGrid() {
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (img.tagName !== 'IMG' || !img.classList.contains('favicon-img')) return;
+  if (!img.dataset.retry) {
+    img.dataset.retry = '1';
+    if (img.dataset.fallback) { img.src = img.dataset.fallback; return; }
+  }
+  img.style.display = 'none';
+  if (img.dataset.initial) img.parentElement.textContent = img.dataset.initial;
+}, true);
+
+function _renderGridInner() {
   const grid = document.getElementById('grid');
   const filtered = getFiltered();
 
@@ -6187,6 +6206,13 @@ function renderGrid() {
   document.getElementById('resultsCount').textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+}
+function renderGrid() {
+  if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.startViewTransition(() => _renderGridInner());
+  } else {
+    _renderGridInner();
+  }
 }
 
 function copyUrl(url) {
@@ -6449,7 +6475,7 @@ function renderDock() {
       if (!site) return '';
       return `
         <div class="site-chip" draggable="true" data-url="${site.url}" data-group="${group.id}" title="${site.name} — ${site.description}">
-          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='${getFaviconFallback(site.url)}'}else{this.style.display='none'}" draggable="false">
+          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" data-fallback="${getFaviconFallback(site.url)}" class="favicon-img" draggable="false">
           <span class="chip-text">${site.name}</span>
           <a href="${site.url}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
           <button class="chip-remove" onclick="removeBookmark('${site.url.replace(/'/g, "\\'")}', event)" title="Remove bookmark">&times;</button>
@@ -6752,9 +6778,7 @@ function openGroupModal(editId) {
 
   renderModalColors();
   modalTrigger = document.activeElement;
-  modal.classList.add('open');
-  document.querySelector('main').setAttribute('inert', '');
-  document.querySelector('.header').setAttribute('inert', '');
+  modal.showModal();
   setTimeout(() => { inputEl.focus(); inputEl.select(); }, 100);
 }
 
@@ -6772,9 +6796,7 @@ function renderModalColors() {
 }
 
 function closeGroupModal() {
-  document.getElementById('groupModal').classList.remove('open');
-  document.querySelector('main').removeAttribute('inert');
-  document.querySelector('.header').removeAttribute('inert');
+  document.getElementById('groupModal').close();
   editingGroupId = null;
   if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
 }
@@ -6877,6 +6899,47 @@ document.getElementById('groupModal').addEventListener('click', (e) => {
 document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') saveGroupFromModal();
   if (e.key === 'Escape') closeGroupModal();
+});
+
+// ── Bookmark export/import ──
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const data = { bookmarks, groups, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'coolsites-bookmarks.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Bookmarks exported');
+});
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+document.getElementById('importFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (data.bookmarks && typeof data.bookmarks === 'object') {
+        Object.assign(bookmarks, data.bookmarks);
+        saveBookmarks();
+      }
+      if (Array.isArray(data.groups)) {
+        data.groups.forEach(g => {
+          if (!groups.find(eg => eg.id === g.id)) groups.push(g);
+        });
+        saveGroups();
+      }
+      renderDock();
+      renderGrid();
+      buildFilters();
+      showToast(`Imported ${Object.keys(data.bookmarks || {}).length} bookmarks`);
+    } catch { showToast('Invalid bookmark file'); }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
 });
 
 // ── Back to top ──
