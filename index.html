@@ -1786,6 +1786,9 @@
   <div class="results-bar">
     <div class="results-count" id="resultsCount" aria-live="polite" aria-atomic="true">Loading...</div>
     <div class="view-toggles" role="group" aria-label="View mode">
+      <button class="view-btn" id="randomBtn" title="Random site" aria-label="Open a random site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+      </button>
       <button class="view-btn active" id="gridViewBtn" title="Grid view" aria-label="Grid view" aria-pressed="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       </button>
@@ -6055,9 +6058,22 @@ const CATEGORY_MAP = {
 // ════════════════════════════════════════════════════════════════
 //  APP STATE & LOGIC
 // ════════════════════════════════════════════════════════════════
-let activeFilter = "All";
-let searchTerm = "";
-let viewMode = "grid";
+function readUrlState() {
+  const p = new URLSearchParams(location.search);
+  return { q: p.get('q') || '', cat: p.get('cat') || 'All', view: p.get('view') || 'grid' };
+}
+function writeUrlState() {
+  const p = new URLSearchParams();
+  if (searchTerm) p.set('q', searchTerm);
+  if (activeFilter !== 'All') p.set('cat', activeFilter);
+  if (viewMode !== 'grid') p.set('view', viewMode);
+  const qs = p.toString();
+  history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+}
+const _initState = readUrlState();
+let activeFilter = _initState.cat;
+let searchTerm = _initState.q;
+let viewMode = _initState.view;
 
 function getDomain(url) {
   try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
@@ -6182,7 +6198,7 @@ function buildCard(site, index) {
       <div class="card-preview">
         <div class="card-preview-placeholder">
           <div class="domain-icon">
-            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
+            <img data-src="${getFavicon(site.url)}" alt="" width="24" height="24" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
           </div>
           <span>${domain}</span>
         </div>
@@ -6227,6 +6243,16 @@ document.addEventListener('error', (e) => {
   if (img.dataset.initial) img.parentElement.textContent = img.dataset.initial;
 }, true);
 
+const _faviconObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+      _faviconObserver.unobserve(img);
+    }
+  });
+}, { rootMargin: '200px' });
+
 function _renderGridInner() {
   const grid = document.getElementById('grid');
   const filtered = getFiltered();
@@ -6246,6 +6272,8 @@ function _renderGridInner() {
   document.getElementById('resultsCount').textContent = `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+  grid.querySelectorAll('img.favicon-img[data-src]').forEach(img => _faviconObserver.observe(img));
+  writeUrlState();
 }
 function renderGrid() {
   if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -6281,7 +6309,7 @@ document.getElementById('searchInput').addEventListener('input', e => {
   _searchTimer = setTimeout(() => { searchTerm = val; renderGrid(); }, 200);
 });
 
-// Keyboard shortcut
+// Keyboard shortcuts
 document.addEventListener('keydown', e => {
   if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
     e.preventDefault();
@@ -6289,6 +6317,30 @@ document.addEventListener('keydown', e => {
   }
   if (e.key === 'Escape') {
     document.getElementById('searchInput').blur();
+  }
+
+  // Arrow key navigation between cards
+  const card = document.activeElement?.closest('.card');
+  if (!card) return;
+  const grid = document.getElementById('grid');
+  const cards = Array.from(grid.querySelectorAll('.card'));
+  const idx = cards.indexOf(card);
+  if (idx === -1) return;
+  const cols = Math.max(1, Math.round(grid.offsetWidth / cards[0]?.offsetWidth) || 1);
+  let next = -1;
+  if (e.key === 'ArrowRight') next = Math.min(cards.length - 1, idx + 1);
+  else if (e.key === 'ArrowLeft') next = Math.max(0, idx - 1);
+  else if (e.key === 'ArrowDown') next = Math.min(cards.length - 1, idx + cols);
+  else if (e.key === 'ArrowUp') next = Math.max(0, idx - cols);
+  else if (e.key === 'Enter' && e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') {
+    const link = card.querySelector('.card-url');
+    if (link) { if (e.shiftKey) window.open(link.href, '_blank'); else link.click(); }
+    e.preventDefault(); return;
+  } else return;
+  if (next >= 0 && next !== idx) {
+    e.preventDefault();
+    const target = cards[next].querySelector('a, button') || cards[next];
+    target.focus();
   }
 });
 
@@ -6948,6 +7000,15 @@ document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeGroupModal();
 });
 
+// ── Random site ──
+document.getElementById('randomBtn').addEventListener('click', () => {
+  const pool = getFiltered();
+  if (pool.length === 0) return;
+  const site = pool[Math.floor(Math.random() * pool.length)];
+  window.open(site.url, '_blank', 'noopener,noreferrer');
+  showToast(`Random pick: ${site.name}`);
+});
+
 // ── Bookmark export/import ──
 document.getElementById('exportBtn').addEventListener('click', () => {
   const data = { bookmarks, groups, exportedAt: new Date().toISOString() };
@@ -7001,6 +7062,13 @@ _btt.addEventListener('click', () => {
 
 // ── Init ──
 initTheme();
+if (searchTerm) document.getElementById('searchInput').value = searchTerm;
+if (viewMode === 'list') {
+  document.getElementById('listViewBtn').classList.add('active');
+  document.getElementById('listViewBtn').setAttribute('aria-pressed', 'true');
+  document.getElementById('gridViewBtn').classList.remove('active');
+  document.getElementById('gridViewBtn').setAttribute('aria-pressed', 'false');
+}
 buildFilters();
 renderGrid();
 renderDock();
