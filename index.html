@@ -795,37 +795,38 @@
   }
   .card-action svg { width: 13px; height: 13px; }
 
-  /* ── Category colors ── */
-  .cat-speed { background: rgba(110, 86, 207, 0.15); color: #a78bfa; }
-  .cat-ip { background: rgba(62, 207, 142, 0.15); color: #3ecf8e; }
-  .cat-dns { background: rgba(5, 200, 232, 0.15); color: #05c8e8; }
-  .cat-security { background: rgba(229, 72, 77, 0.15); color: #e5484d; }
-  .cat-osint { background: rgba(138, 180, 248, 0.12); color: #8ab4f8; }
-  .cat-dev { background: rgba(255, 120, 198, 0.15); color: #ff78c6; }
-  .cat-desktop { background: rgba(255, 165, 0, 0.15); color: #ffa500; }
-  .cat-ai { background: rgba(0, 200, 150, 0.15); color: #00c896; }
-  .cat-aicreative { background: rgba(255, 100, 255, 0.15); color: #ff64ff; }
-  .cat-automation { background: rgba(255, 200, 50, 0.15); color: #ffc832; }
-  .cat-homelab { background: rgba(100, 180, 255, 0.15); color: #64b4ff; }
-  .cat-creative { background: rgba(255, 140, 60, 0.15); color: #ff8c3c; }
-  .cat-music { background: rgba(200, 100, 255, 0.15); color: #c864ff; }
-  .cat-privacy { background: rgba(171, 140, 255, 0.15); color: #ab8cff; }
-  .cat-sysadmin { background: rgba(245, 166, 35, 0.15); color: #f5a623; }
-  .cat-data { background: rgba(50, 200, 200, 0.15); color: #32c8c8; }
-  .cat-education { background: rgba(100, 220, 100, 0.15); color: #64dc64; }
-  .cat-productivity { background: rgba(169, 220, 118, 0.15); color: #a9dc76; }
-  .cat-file { background: rgba(200, 180, 140, 0.15); color: #c8b48c; }
-  .cat-fun { background: rgba(245, 208, 66, 0.15); color: #f5d042; }
-  .cat-news { background: rgba(180, 180, 200, 0.15); color: #b4b4c8; }
-  .cat-gaming { background: rgba(255, 80, 80, 0.15); color: #ff5050; }
-  .cat-cli { background: rgba(0, 255, 180, 0.15); color: #00ffb4; }
-  .cat-networking { background: rgba(80, 160, 255, 0.15); color: #50a0ff; }
-  .cat-containers { background: rgba(0, 180, 230, 0.15); color: #00b4e6; }
-  .cat-torrenting { background: rgba(255, 140, 0, 0.15); color: #ff8c00; }
-  .cat-mediadownloads { background: rgba(0, 200, 255, 0.15); color: #00c8ff; }
-  .cat-reading { background: rgba(180, 130, 80, 0.15); color: #b48250; }
-  .cat-indexes { background: rgba(255, 215, 0, 0.15); color: #ffd700; }
-  .cat-arr { background: rgba(255, 90, 90, 0.15); color: #ff5a5a; }
+  /* ── Category colors (color-mix derived) ── */
+  [class*="cat-"] { background: color-mix(in srgb, var(--cat-c) 15%, transparent); color: var(--cat-c); }
+  .cat-speed { --cat-c: #a78bfa; }
+  .cat-ip { --cat-c: #3ecf8e; }
+  .cat-dns { --cat-c: #05c8e8; }
+  .cat-security { --cat-c: #e5484d; }
+  .cat-osint { --cat-c: #8ab4f8; }
+  .cat-dev { --cat-c: #ff78c6; }
+  .cat-desktop { --cat-c: #ffa500; }
+  .cat-ai { --cat-c: #00c896; }
+  .cat-aicreative { --cat-c: #ff64ff; }
+  .cat-automation { --cat-c: #ffc832; }
+  .cat-homelab { --cat-c: #64b4ff; }
+  .cat-creative { --cat-c: #ff8c3c; }
+  .cat-music { --cat-c: #c864ff; }
+  .cat-privacy { --cat-c: #ab8cff; }
+  .cat-sysadmin { --cat-c: #f5a623; }
+  .cat-data { --cat-c: #32c8c8; }
+  .cat-education { --cat-c: #64dc64; }
+  .cat-productivity { --cat-c: #a9dc76; }
+  .cat-file { --cat-c: #c8b48c; }
+  .cat-fun { --cat-c: #f5d042; }
+  .cat-news { --cat-c: #b4b4c8; }
+  .cat-gaming { --cat-c: #ff5050; }
+  .cat-cli { --cat-c: #00ffb4; }
+  .cat-networking { --cat-c: #50a0ff; }
+  .cat-containers { --cat-c: #00b4e6; }
+  .cat-torrenting { --cat-c: #ff8c00; }
+  .cat-mediadownloads { --cat-c: #00c8ff; }
+  .cat-reading { --cat-c: #b48250; }
+  .cat-indexes { --cat-c: #ffd700; }
+  .cat-arr { --cat-c: #ff5a5a; }
 
 
 
@@ -1491,36 +1492,7 @@
   [data-theme="light"] .assign-option:hover { background: rgba(0,0,0,0.05); }
   [data-theme="light"] .card-bookmark:hover { background: rgba(245, 166, 35, 0.08); }
   [data-theme="light"] .sort-select option { background: #fff; }
-  [data-theme="light"] .cat-speed { color: #6e46c9; }
-  [data-theme="light"] .cat-ip { color: #1a8a5a; }
-  [data-theme="light"] .cat-dns { color: #0882a0; }
-  [data-theme="light"] .cat-security { color: #c32b30; }
-  [data-theme="light"] .cat-osint { color: #3060c0; }
-  [data-theme="light"] .cat-dev { color: #c03090; }
-  [data-theme="light"] .cat-desktop { color: #b07000; }
-  [data-theme="light"] .cat-ai { color: #008860; }
-  [data-theme="light"] .cat-aicreative { color: #a020c0; }
-  [data-theme="light"] .cat-automation { color: #9a7000; }
-  [data-theme="light"] .cat-homelab { color: #2060c0; }
-  [data-theme="light"] .cat-creative { color: #c06020; }
-  [data-theme="light"] .cat-music { color: #8030c0; }
-  [data-theme="light"] .cat-privacy { color: #6040c0; }
-  [data-theme="light"] .cat-sysadmin { color: #a07010; }
-  [data-theme="light"] .cat-data { color: #1a8080; }
-  [data-theme="light"] .cat-education { color: #208020; }
-  [data-theme="light"] .cat-productivity { color: #507010; }
-  [data-theme="light"] .cat-file { color: #806838; }
-  [data-theme="light"] .cat-fun { color: #8a7010; }
-  [data-theme="light"] .cat-news { color: #505070; }
-  [data-theme="light"] .cat-gaming { color: #c02020; }
-  [data-theme="light"] .cat-cli { color: #008858; }
-  [data-theme="light"] .cat-networking { color: #2060c0; }
-  [data-theme="light"] .cat-containers { color: #0070a0; }
-  [data-theme="light"] .cat-torrenting { color: #b06000; }
-  [data-theme="light"] .cat-mediadownloads { color: #0080a0; }
-  [data-theme="light"] .cat-reading { color: #705020; }
-  [data-theme="light"] .cat-indexes { color: #8a7000; }
-  [data-theme="light"] .cat-arr { color: #c02020; }
+  [data-theme="light"] [class*="cat-"] { color: color-mix(in srgb, var(--cat-c) 65%, black); }
 
   /* ── Theme Picker ── */
   .theme-picker {
