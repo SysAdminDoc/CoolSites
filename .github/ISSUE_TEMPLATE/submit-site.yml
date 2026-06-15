@@ -1,0 +1,86 @@
+name: Submit a Site
+description: Suggest a new site for the CoolSites directory
+title: "[SUBMISSION] "
+labels: ["submission", "needs-review"]
+body:
+  - type: input
+    id: site_name
+    attributes:
+      label: Site Name
+      placeholder: "e.g. Excalidraw"
+    validations:
+      required: true
+
+  - type: input
+    id: site_url
+    attributes:
+      label: Site URL
+      placeholder: "https://excalidraw.com"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description (one or two sentences)
+      placeholder: "A virtual collaborative whiteboard for sketching hand-drawn diagrams. Open source and privacy-focused."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - AI & ML
+        - AI Creative
+        - Arr Stack
+        - Automation
+        - CLI Tools
+        - Containers
+        - Creative
+        - DNS Tools
+        - Data & Viz
+        - Desktop Software
+        - Dev Tools
+        - Education
+        - File Tools
+        - Fun & Culture
+        - Gaming
+        - Homelab
+        - IP & Network
+        - Indexes & Wikis
+        - Media Downloads
+        - Music & Audio
+        - Networking
+        - News & Reference
+        - OSINT
+        - Privacy
+        - Productivity
+        - Reading
+        - Security
+        - Speed Tests
+        - Sysadmin
+        - Torrenting
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma-separated)
+      placeholder: "whiteboard, drawing, collaboration, open-source"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Submission Checklist
+      options:
+        - label: Site is free to use (or has a meaningful free tier)
+          required: true
+        - label: Site is not already in the directory
+          required: true
+        - label: I have verified the URL works
+          required: true
