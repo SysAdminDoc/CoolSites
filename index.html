@@ -6530,9 +6530,12 @@ const GROUP_COLORS = ['#f5a623','#6e56cf','#3ecf8e','#05c8e8','#e5484d','#ff78c6
 })();
 
 // ── State ──
-// bookmarks: { url: { group: 'groupId', order: number, addedAt: timestamp } }
-let bookmarks = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-let groups = JSON.parse(localStorage.getItem(GROUPS_KEY) || 'null') || [
+function safeParse(key, fallback) {
+  try { const v = JSON.parse(localStorage.getItem(key)); return v != null ? v : fallback; }
+  catch { return fallback; }
+}
+let bookmarks = safeParse(STORAGE_KEY, {});
+let groups = safeParse(GROUPS_KEY, null) || [
   { id: 'default', name: 'Favorites', color: '#f5a623' }
 ];
 let dockCollapsed = localStorage.getItem(DOCK_STATE_KEY) === 'collapsed';
