@@ -604,6 +604,19 @@
     color: var(--text-muted);
     font-family: var(--font-mono);
   }
+  .sort-select {
+    padding: 6px 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .sort-select:hover { border-color: var(--border-hover); }
+  .sort-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .view-toggles {
     display: flex;
     gap: 4px;
@@ -1785,6 +1798,12 @@
 <main class="container">
   <div class="results-bar">
     <div class="results-count" id="resultsCount" aria-live="polite" aria-atomic="true">Loading...</div>
+    <select class="sort-select" id="sortSelect" aria-label="Sort order">
+      <option value="default">Default</option>
+      <option value="az">A &rarr; Z</option>
+      <option value="za">Z &rarr; A</option>
+      <option value="shuffle">Shuffle</option>
+    </select>
     <div class="view-toggles" role="group" aria-label="View mode">
       <button class="view-btn" id="randomBtn" title="Random site" aria-label="Open a random site">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
@@ -6060,13 +6079,14 @@ const CATEGORY_MAP = {
 // ════════════════════════════════════════════════════════════════
 function readUrlState() {
   const p = new URLSearchParams(location.search);
-  return { q: p.get('q') || '', cat: p.get('cat') || 'All', view: p.get('view') || 'grid' };
+  return { q: p.get('q') || '', cat: p.get('cat') || 'All', view: p.get('view') || 'grid', sort: p.get('sort') || 'default' };
 }
 function writeUrlState() {
   const p = new URLSearchParams();
   if (searchTerm) p.set('q', searchTerm);
   if (activeFilter !== 'All') p.set('cat', activeFilter);
   if (viewMode !== 'grid') p.set('view', viewMode);
+  if (sortMode !== 'default') p.set('sort', sortMode);
   const qs = p.toString();
   history.replaceState(null, '', qs ? '?' + qs : location.pathname);
 }
@@ -6074,6 +6094,7 @@ const _initState = readUrlState();
 let activeFilter = _initState.cat;
 let searchTerm = _initState.q;
 let viewMode = _initState.view;
+let sortMode = _initState.sort;
 
 function getDomain(url) {
   try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
@@ -6164,6 +6185,15 @@ function getFiltered() {
 
   if (searchTerm) {
     results.sort((a, b) => bestScore(searchTerm, b) - bestScore(searchTerm, a));
+  } else if (sortMode === 'az') {
+    results.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortMode === 'za') {
+    results.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortMode === 'shuffle') {
+    for (let i = results.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [results[i], results[j]] = [results[j], results[i]];
+    }
   } else if (activeFilter !== "Bookmarks") {
     results.sort((a, b) => {
       const aBm = isBookmarked(a.url) ? 1 : 0;
@@ -7000,6 +7030,12 @@ document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeGroupModal();
 });
 
+// ── Sort ──
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+  sortMode = e.target.value;
+  renderGrid();
+});
+
 // ── Random site ──
 document.getElementById('randomBtn').addEventListener('click', () => {
   const pool = getFiltered();
@@ -7063,6 +7099,7 @@ _btt.addEventListener('click', () => {
 // ── Init ──
 initTheme();
 if (searchTerm) document.getElementById('searchInput').value = searchTerm;
+if (sortMode !== 'default') document.getElementById('sortSelect').value = sortMode;
 if (viewMode === 'list') {
   document.getElementById('listViewBtn').classList.add('active');
   document.getElementById('listViewBtn').setAttribute('aria-pressed', 'true');
