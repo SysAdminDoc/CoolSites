@@ -308,7 +308,7 @@
     inset: 0;
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
-    z-index: 9999;
+    z-index: 150;
   }
 
   /* ── Ambient glow ── */
@@ -462,17 +462,17 @@
   /* ── Hero ── */
   .hero {
     position: relative;
-    padding: 5rem 2rem 3rem;
+    padding: 3.5rem 2rem 2rem;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
   }
   .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 800;
     letter-spacing: -0.04em;
-    line-height: 1.1;
-    margin-bottom: 1rem;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
     background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -480,10 +480,11 @@
   }
   .hero p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    font-weight: 300;
-    max-width: 520px;
-    margin: 0 auto 2rem;
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 480px;
+    margin: 0 auto 1.75rem;
+    line-height: 1.5;
   }
 
   /* ── Search ── */
@@ -504,15 +505,15 @@
   }
   .search-input {
     width: 100%;
-    padding: 14px 16px 14px 46px;
+    padding: 13px 16px 13px 44px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text-primary);
     font-family: var(--font-display);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     outline: none;
-    transition: var(--transition);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .search-input::placeholder { color: var(--text-muted); }
   .search-input:focus {
@@ -539,22 +540,22 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
-    max-width: 900px;
-    margin: 0 auto 3rem;
+    gap: 6px;
+    max-width: 960px;
+    margin: 0 auto 2.5rem;
     padding: 0 1rem;
   }
   .filter-btn {
-    padding: 7px 16px;
+    padding: 6px 14px;
     border-radius: 100px;
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-secondary);
     font-family: var(--font-display);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.15s ease;
     white-space: nowrap;
     user-select: none;
   }
@@ -595,14 +596,15 @@
   .results-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding: 0 4px;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    padding: 0 2px;
   }
   .results-count {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
+    margin-right: auto;
   }
   .sort-select {
     padding: 6px 10px;
@@ -640,12 +642,12 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
   }
   .grid.list-view {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 6px;
   }
 
   /* ── Card ── */
@@ -653,15 +655,14 @@
     position: relative;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: var(--transition);
-    animation: cardIn 0.4s ease backwards;
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.3s ease;
+    animation: cardIn 0.35s ease backwards;
     content-visibility: auto;
-    contain-intrinsic-size: auto 320px;
+    contain-intrinsic-size: auto 160px;
   }
   @keyframes cardIn {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -675,137 +676,118 @@
   .card:hover {
     border-color: var(--border-hover);
     background: var(--bg-card-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px var(--card-shadow);
+    box-shadow: 0 4px 20px var(--card-shadow);
   }
+  .card:hover .card-actions-overflow { opacity: 1; }
 
-  .card-preview {
-    width: 100%;
-    height: 180px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-secondary);
-    position: relative;
-    overflow: hidden;
+  .card-body {
+    padding: 18px 20px;
   }
-  .card-preview iframe {
-    width: 200%;
-    height: 200%;
-    border: none;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-    pointer-events: none;
-  }
-  .card-preview-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 50%, var(--bg-card) 100%);
-    pointer-events: none;
-  }
-  .card-preview-placeholder {
-    width: 100%;
-    height: 100%;
+  .card-header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--text-muted);
-    font-size: 0.8rem;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
   }
-  .card-preview-placeholder .domain-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius);
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
     background: rgba(255,255,255,0.04);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-mono);
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-secondary);
+    flex-shrink: 0;
+    overflow: hidden;
   }
-
-  .card-body {
-    padding: 16px 20px 20px;
-  }
+  .card-icon img { width: 20px; height: 20px; border-radius: 3px; }
+  .card-header-text { flex: 1; min-width: 0; }
   .card-category {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 3px 10px;
+    padding: 2px 8px;
     border-radius: 100px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .card-title {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card-title img {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
+    margin-bottom: 4px;
+    line-height: 1.3;
   }
   .card-desc {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--text-secondary);
     line-height: 1.5;
-    margin-bottom: 14px;
-    font-weight: 300;
+    margin-bottom: 12px;
+    font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
   }
   .card-url {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-decoration: none;
-    transition: var(--transition);
+    transition: color 0.15s ease;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 70%;
+    min-width: 0;
   }
   .card-url:hover { color: var(--accent); }
 
   .card-actions {
     display: flex;
-    gap: 6px;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .card-actions-overflow {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
   }
   .card-action {
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid transparent;
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    transition: all 0.15s ease;
     text-decoration: none;
   }
   .card-action:hover {
-    border-color: var(--accent);
+    border-color: var(--border-hover);
     color: var(--accent);
     background: var(--accent-glow);
   }
-  .card-action svg { width: 14px; height: 14px; }
+  .card-action svg { width: 13px; height: 13px; }
 
   /* ── Category colors ── */
   .cat-speed { background: rgba(110, 86, 207, 0.15); color: #a78bfa; }
@@ -1172,42 +1154,43 @@
 
   /* ── Card bookmark star ── */
   .card-bookmark {
-    width: 30px;
-    height: 30px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    transition: color 0.15s ease, background 0.15s ease;
+    flex-shrink: 0;
+    opacity: 0.5;
   }
+  .card:hover .card-bookmark { opacity: 1; }
   .card-bookmark:hover {
-    border-color: var(--accent-amber);
     color: var(--accent-amber);
     background: rgba(245, 166, 35, 0.1);
   }
   .card-bookmark.bookmarked {
-    border-color: var(--accent-amber);
     color: var(--accent-amber);
-    background: rgba(245, 166, 35, 0.15);
+    opacity: 1;
   }
   .card-bookmark.bookmarked svg { fill: var(--accent-amber); }
   .card-bookmark svg { width: 14px; height: 14px; }
 
-  /* ── Card bookmarked glow ── */
-  .card.is-bookmarked { border-color: rgba(245, 166, 35, 0.15); }
+  /* ── Card bookmarked indicator ── */
+  .card.is-bookmarked { border-color: rgba(245, 166, 35, 0.12); }
   .card.is-bookmarked::after {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-amber), var(--accent) 50%, var(--accent-cyan));
-    opacity: 0.6;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-amber), var(--accent));
+    opacity: 0.5;
+    border-radius: var(--radius) var(--radius) 0 0;
   }
 
   /* ── Bookmarks filter pill ── */
@@ -1336,7 +1319,7 @@
     font-weight: 600;
     white-space: nowrap;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 150;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
 
@@ -1352,10 +1335,9 @@
   }
 
   /* ── List view adjustments ── */
-  .grid.list-view .card { display: flex; flex-direction: row; }
-  .grid.list-view .card-preview { width: 200px; min-width: 200px; height: auto; min-height: 100px; border-bottom: none; border-right: 1px solid var(--border); }
-  .grid.list-view .card-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 14px 20px; }
-  .grid.list-view .card-desc { margin-bottom: 8px; }
+  .grid.list-view .card-body { padding: 14px 20px; }
+  .grid.list-view .card-header { margin-bottom: 6px; }
+  .grid.list-view .card-desc { -webkit-line-clamp: 1; margin-bottom: 8px; }
 
   /* ── Empty state ── */
   .empty-state {
@@ -1363,29 +1345,42 @@
     padding: 5rem 2rem;
     color: var(--text-muted);
   }
-  .empty-state svg { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.4; }
-  .empty-state h3 { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
-  .empty-state p { font-size: 0.9rem; }
+  .empty-state svg { width: 40px; height: 40px; margin-bottom: 1rem; opacity: 0.3; }
+  .empty-state h3 { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 500; }
+  .empty-state p { font-size: 0.85rem; margin-bottom: 1.25rem; }
+  .empty-state-btn {
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-hover);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .empty-state-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 
   /* ── Toast ── */
   .toast {
     position: fixed;
-    bottom: 2rem;
+    bottom: 1.5rem;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    padding: 10px 20px;
+    transform: translateX(-50%) translateY(60px);
+    padding: 10px 18px;
     background: var(--bg-card);
     border: 1px solid var(--border-hover);
-    border-radius: var(--radius);
+    border-radius: var(--radius-sm);
     color: var(--text-primary);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-family: var(--font-display);
     z-index: 1000;
-    transition: transform 0.3s ease;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px var(--card-shadow);
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px var(--card-shadow);
+    opacity: 0;
   }
-  .toast.visible { transform: translateX(-50%) translateY(0); }
+  .toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
 
   /* ── Back to top ── */
   .back-to-top {
@@ -1418,12 +1413,13 @@
   /* ── Footer ── */
   .footer {
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem 3rem;
     border-top: 1px solid var(--border);
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    line-height: 1.6;
   }
-  .footer a { color: var(--text-secondary); text-decoration: none; }
+  .footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease; }
   .footer a:hover { color: var(--accent); }
 
 
@@ -1448,19 +1444,19 @@
     background: rgba(110, 86, 207, 0.08);
   }
   [data-theme="light"] .card {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
   }
   [data-theme="light"] .card:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  [data-theme="light"] .card-icon {
+    background: rgba(0,0,0,0.04);
   }
   [data-theme="light"] body::before {
     opacity: 0.015;
   }
   [data-theme="light"] .ambient-glow {
     opacity: 0.04;
-  }
-  [data-theme="light"] .domain-icon {
-    background: rgba(0,0,0,0.04) !important;
   }
   [data-theme="light"] .github-link:hover {
     background: rgba(0,0,0,0.04);
@@ -1625,14 +1621,16 @@
   }
   @media (max-width: 768px) {
     .header-stats .stat { display: none; }
-    .hero { padding: 3rem 1rem 2rem; }
-    .hero h1 { font-size: 2rem; }
+    .hero { padding: 2.5rem 1rem 1.5rem; }
+    .hero h1 { font-size: 1.6rem; }
     .grid { grid-template-columns: 1fr; }
-    .grid.list-view .card { flex-direction: column; }
-    .grid.list-view .card-preview { width: 100%; min-height: 120px; border-right: none; border-bottom: 1px solid var(--border); }
     .container { padding: 0 1rem 4rem; }
-    .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+    .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
     .search-shortcut { display: none; }
+    .card-actions-overflow { opacity: 1; }
+    .card-bookmark { opacity: 1; }
+    .results-bar { flex-wrap: wrap; gap: 8px; }
   }
 </style>
 <script>
@@ -6228,39 +6226,38 @@ function buildCard(site, index) {
 
   return `
     <article class="card${bmClass}" style="animation-delay: ${delay}ms">
-      <div class="card-preview">
-        <div class="card-preview-placeholder">
-          <div class="domain-icon">
-            <img data-src="${getFavicon(site.url)}" alt="" width="24" height="24" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
-          </div>
-          <span>${domain}</span>
-        </div>
-      </div>
       <div class="card-body">
-        <div class="card-category ${catClass}">${site.category}</div>
-        <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}</h3>
+        <div class="card-header">
+          <div class="card-icon">
+            <img data-src="${getFavicon(site.url)}" alt="" width="20" height="20" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
+          </div>
+          <div class="card-header-text">
+            <div class="card-category ${catClass}">${site.category}</div>
+            <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}</h3>
+          </div>
+          <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escHtml(site.name)}" aria-pressed="${bm}" onclick="toggleBookmark('${escUrl}')">
+            <svg viewBox="0 0 24 24" fill="${starFill}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </button>
+        </div>
         <p class="card-desc">${searchTerm ? highlightMatch(site.description, searchTerm) : escHtml(site.description)}</p>
         <div class="card-footer">
           <a href="${site.url}" class="card-url" target="_blank" rel="noopener noreferrer">${domain}</a>
           <div class="card-actions">
-            <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark this site'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escHtml(site.name)}" aria-pressed="${bm}" onclick="toggleBookmark('${escUrl}')">
-              <svg viewBox="0 0 24 24" fill="${starFill}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </button>
-            ${bm ? `<button class="card-action" title="Move to group" onclick="showAssignDropdown('${escUrl}', this)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-            </button>` : ''}
+            <a href="${site.url}" class="card-action" title="Open" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
             <button class="card-action" title="Copy URL" onclick="copyUrl('${escUrl}')">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             </button>
-            ${navigator.share ? `<button class="card-action" title="Share" onclick="shareUrl('${escHtml(site.name)}','${escUrl}')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            </button>` : ''}
-            <a href="${site.url}" class="card-action" title="Open site" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <a href="https://web.archive.org/web/*/${site.url}" class="card-action" title="Wayback Machine" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </a>
+            <div class="card-actions-overflow">
+              ${bm ? `<button class="card-action" title="Move to group" onclick="showAssignDropdown('${escUrl}', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+              </button>` : ''}${navigator.share ? `<button class="card-action" title="Share" onclick="shareUrl('${escHtml(site.name)}','${escUrl}')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              </button>` : ''}<a href="https://web.archive.org/web/*/${site.url}" class="card-action" title="Wayback Machine" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -6294,11 +6291,13 @@ function _renderGridInner() {
   const filtered = getFiltered();
 
   if (filtered.length === 0) {
+    const hint = searchTerm ? `No results for "${escHtml(searchTerm)}"` : 'No sites match this filter';
     grid.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <h3>No sites found</h3>
-        <p>Try adjusting your search or filter criteria.</p>
+        <h3>${hint}</h3>
+        <p>Try a different search term or category.</p>
+        ${searchTerm ? '<button class="empty-state-btn" onclick="document.getElementById(\'searchInput\').value=\'\';searchTerm=\'\';renderGrid();">Clear search</button>' : ''}
       </div>
     `;
   } else {
