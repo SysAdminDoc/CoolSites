@@ -11,6 +11,8 @@
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
+**Live site:** https://sysadmindoc.github.io/CoolSites/
+
 ## Features
 
 - **593 curated sites** across 30 categories — every entry hand-picked and described
@@ -150,6 +152,7 @@ To contribute directly, edit the `SITES` array inside `index.html`:
 | `Arrow keys` | Navigate between cards |
 | `Enter` | Open focused card's link |
 | `Shift+Enter` | Open in new tab |
+| `?` | Show keyboard shortcuts help |
 
 ## Contributing
 
@@ -173,3 +176,5 @@ MIT License. See [LICENSE](LICENSE) for details.
 ---
 
 **[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 593 sites and counting.
+
+https://sysadmindoc.github.io/CoolSites/
