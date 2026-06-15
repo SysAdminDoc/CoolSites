@@ -660,14 +660,15 @@
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.3s ease;
-    animation: cardIn 0.35s ease backwards;
+    opacity: 1;
+    transform: translateY(0);
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     content-visibility: auto;
     contain-intrinsic-size: auto 160px;
-  }
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    @starting-style {
+      opacity: 0;
+      transform: translateY(8px);
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -6240,7 +6241,6 @@ function highlightMatch(text, query) {
 function buildCard(site, index) {
   const catClass = CATEGORY_MAP[site.category] || 'cat-network';
   const domain = getDomain(site.url);
-  const delay = Math.min(index * 40, 400);
   const bm = isBookmarked(site.url);
   const bmClass = bm ? ' is-bookmarked' : '';
   const starClass = bm ? ' bookmarked' : '';
@@ -6248,7 +6248,7 @@ function buildCard(site, index) {
   const escUrl = site.url.replace(/'/g, "\\'");
 
   return `
-    <article class="card${bmClass}" style="animation-delay: ${delay}ms">
+    <article class="card${bmClass}">
       <div class="card-body">
         <div class="card-header">
           <div class="card-icon">
@@ -6258,7 +6258,7 @@ function buildCard(site, index) {
             <div class="card-category ${catClass}">${site.category}</div>
             <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}</h3>
           </div>
-          <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escHtml(site.name)}" aria-pressed="${bm}" onclick="toggleBookmark('${escUrl}')">
+          <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escHtml(site.name)}" aria-pressed="${bm}" data-action="bookmark" data-url="${escUrl}">
             <svg viewBox="0 0 24 24" fill="${starFill}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </button>
         </div>
@@ -6269,13 +6269,13 @@ function buildCard(site, index) {
             <a href="${site.url}" class="card-action" title="Open" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
-            <button class="card-action" title="Copy URL" onclick="copyUrl('${escUrl}')">
+            <button class="card-action" title="Copy URL" data-action="copy" data-url="${escUrl}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             </button>
             <div class="card-actions-overflow">
-              ${bm ? `<button class="card-action" title="Move to group" onclick="showAssignDropdown('${escUrl}', this)">
+              ${bm ? `<button class="card-action" title="Move to group" data-action="assign" data-url="${escUrl}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
-              </button>` : ''}${navigator.share ? `<button class="card-action" title="Share" onclick="shareUrl('${escHtml(site.name)}','${escUrl}')">
+              </button>` : ''}${navigator.share ? `<button class="card-action" title="Share" data-action="share" data-url="${escUrl}" data-name="${escHtml(site.name)}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
               </button>` : ''}<a href="https://web.archive.org/web/*/${site.url}" class="card-action" title="Wayback Machine" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -7142,6 +7142,18 @@ document.getElementById('importFile').addEventListener('change', (e) => {
     e.target.value = '';
   };
   reader.readAsText(file);
+});
+
+// ── Delegated card actions ──
+document.getElementById('grid').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const action = btn.dataset.action;
+  const url = btn.dataset.url;
+  if (action === 'bookmark') toggleBookmark(url);
+  else if (action === 'copy') copyUrl(url);
+  else if (action === 'assign') showAssignDropdown(url, btn);
+  else if (action === 'share') shareUrl(btn.dataset.name, url);
 });
 
 // ── Back to top ──
