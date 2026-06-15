@@ -1,60 +1,73 @@
 # CoolSites
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Sites](https://img.shields.io/badge/sites-470-blueviolet)
-![Categories](https://img.shields.io/badge/categories-25-orange)
+![Sites](https://img.shields.io/badge/sites-593-blueviolet)
+![Categories](https://img.shields.io/badge/categories-30-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
-> The ultimate curated directory of 470 free tools, open source software, AI projects, and hidden gems across 25 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
+> The ultimate curated directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
 ## Features
 
-- **470 curated sites** across 25 categories — every entry hand-picked and described
-- **Instant search** — filter by name, description, category, URL, or tags
+- **593 curated sites** across 30 categories — every entry hand-picked and described
+- **Fuzzy search** with match highlighting — typo-tolerant, ranked by relevance
 - **Category filters** with live counts — drill into any category instantly
-- **Grid and list views** — toggle between card layout and compact list
-- **Keyboard navigation** — press `/` to focus search, `Escape` to clear
-- **One-click URL copy** — share any link without opening it first
+- **Sort modes** — alphabetical (A-Z / Z-A), shuffle, or default with bookmarks on top
+- **10 themes** — 8 dark (OLED, Catppuccin, Dracula, Nord, Rosé Pine, GitHub Dark, Midnight, Solarized), 1 light, plus system auto
+- **Bookmarks with groups** — star sites, organize into color-coded groups, drag to reorder
+- **Bookmark export/import** — download as JSON, restore on any device
+- **Grid and list views** — toggle layouts, persisted in URL state
+- **Shareable URLs** — filter state encoded in `?q=&cat=&sort=&view=` for bookmarkable views
+- **Keyboard navigation** — `/` to search, arrows to move, Enter to open, `?` for help
+- **Copy as Markdown** — export the current filtered list as a markdown bullet list
+- **Random site** — discover something new from the current filter
+- **Web Share** — native share sheet on supported devices
+- **Wayback Machine** — one-click archive lookup on every card
+- **Back-to-top** — appears after scrolling, returns to search
 - **Zero dependencies** — single HTML file, no frameworks, no build step, no backend
-- **OLED dark theme** — deep blacks, glassmorphism, ambient glow effects
-- **Responsive** — works on desktop, tablet, and mobile
-- **Favicon detection** — auto-fetches site icons via Google's favicon API
-- **Staggered card animations** — smooth entrance animations on load and filter
+- **Responsive** — desktop, tablet (1024px breakpoint), and mobile layouts
+- **Accessible** — ARIA roles, live regions, focus management, skip-to-content, forced-colors support, reduced-motion support
+- **Favicon fallback** — Google → DuckDuckGo → initial letter
 - **Self-hostable** — drop `index.html` anywhere and it just works
 
 ## Categories
 
 | Category | Sites | Highlights |
 |----------|:-----:|-----------|
-| Desktop Software | 35 | DevToys, PowerToys, Files, Everything, ShareX, VLC, Ventoy, HWiNFO |
+| Desktop Software | 50 | DevToys, PowerToys, Files, Everything, ShareX, VLC, Ventoy, HWiNFO |
+| Homelab | 39 | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
+| Dev Tools | 35 | Regex101, Hoppscotch, CodePen, StackBlitz, Zed, Cursor, Playwright |
 | AI & ML | 32 | Ollama, Open WebUI, LM Studio, ComfyUI, Hugging Face, Groq, Dify |
-| Homelab | 31 | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
-| Dev Tools | 29 | Regex101, Hoppscotch, CodePen, StackBlitz, Zed, Cursor, Playwright |
-| Creative | 26 | Blender, Figma, Photopea, Excalidraw, Penpot, Coolors, fffuel.co |
+| Creative | 30 | Blender, Figma, Photopea, Excalidraw, Penpot, Coolors, fffuel.co |
+| Sysadmin | 27 | Grafana, Netdata, Prometheus, Terraform, Wazuh, Cockpit, btop |
+| Security | 26 | CyberChef, Have I Been Pwned, VirusTotal, OWASP ZAP, Qualys SSL Labs |
+| Privacy | 26 | Mullvad, Tor, Signal, ProtonMail, SearXNG, uBlock Origin, Tails |
 | Fun & Culture | 26 | Neal.fun, Radio Garden, Shadertoy, Geoguessr, xkcd, Noclip, Wiby |
 | Productivity | 24 | Obsidian, Notion, Linear, Cal.com, Stirling PDF, NocoDB, Typst |
-| Security | 21 | CyberChef, Have I Been Pwned, VirusTotal, OWASP ZAP, Qualys SSL Labs |
-| Sysadmin | 21 | Grafana, Netdata, Prometheus, Terraform, Wazuh, Cockpit, btop |
 | Education | 21 | freeCodeCamp, Khan Academy, MIT OCW, CS50, LeetCode, Nand2Tetris |
-| News & Reference | 20 | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
 | CLI Tools | 20 | fzf, ripgrep, bat, eza, lazygit, lazydocker, neovim, starship |
+| News & Reference | 20 | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
 | OSINT | 19 | Shodan, Censys, Wayback Machine, SpiderFoot, TinEye, BuiltWith |
-| Privacy | 18 | Mullvad, Tor, Signal, ProtonMail, SearXNG, uBlock Origin, Tails |
+| Torrenting | 18 | qBittorrent, Transmission, Deluge, Jackett, Prowlarr, Stremio |
+| Gaming | 16 | RetroArch, itch.io, Lichess, Board Game Arena, OpenTTD, RPCS3 |
 | IP & Network | 15 | BGP.Tools, IPinfo.io, ping.pe, Robtex, HackerTarget, ViewDNS |
 | AI Creative | 15 | Midjourney, Suno, Runway, ElevenLabs, Remove.bg, Recraft, Pika |
 | File Tools | 15 | Cobalt, yt-dlp, FFmpeg, HandBrake, Pandoc, Croc, PDF24 |
+| Media Downloads | 14 | yt-dlp, Cobalt, JDownloader, gallery-dl, Stremio |
 | Networking | 13 | Wireshark, nmap, PuTTY, mRemoteNG, NetBox, Netbird, WinSCP |
 | Data & Viz | 12 | Metabase, Apache Superset, Datawrapper, D3.js, Mermaid Live, Kepler.gl |
-| Speed Tests | 10 | Cloudflare, Fast.com, Waveform Bufferbloat, LibreSpeed, M-Lab |
+| Reading | 12 | Calibre, Readarr, Kavita, Libby, Standard Ebooks |
 | DNS Tools | 10 | whatsmydns.net, DNSViz, MXToolbox, DNS Leak Test, Zonemaster |
 | Automation | 10 | n8n, Node-RED, Huginn, Apache Airflow, Pipedream, Make, Temporal |
 | Music & Audio | 10 | Ardour, LMMS, Vital, Mixxx, MuseScore, Bandlab, Freesound |
+| Speed Tests | 10 | Cloudflare, Fast.com, Waveform Bufferbloat, LibreSpeed, M-Lab |
+| Arr Stack | 10 | Sonarr, Radarr, Lidarr, Prowlarr, Bazarr, Overseerr |
 | Containers | 9 | Docker, Podman, k3s, Lens, Helm, ArgoCD, Harbor, Rancher |
-| Gaming | 8 | RetroArch, itch.io, Lichess, Board Game Arena, OpenTTD, RPCS3 |
+| Indexes & Wikis | 9 | ArchWiki, Gentoo Wiki, FMHY, awesome-selfhosted |
 
 ## Quick Start
 
@@ -87,22 +100,24 @@ Drop `index.html` into any web server's document root. Works with Nginx, Apache,
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   SITES Array    │────>│   Filter Engine  │────>│   Card Renderer  │
 │                  │     │                  │     │                  │
-│  470 entries     │     │  Category match  │     │  Grid / List     │
-│  Name, URL,      │     │  + Fuzzy search  │     │  + Animations    │
-│  Desc, Tags      │     │  across fields   │     │  + Favicons      │
+│  593 entries     │     │  Category match  │     │  Grid / List     │
+│  Name, URL,      │     │  + Fuzzy search  │     │  + View Trans.   │
+│  Desc, Tags      │     │  + Sort modes    │     │  + Lazy favicons │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
 Everything lives in a single `index.html`:
-- **CSS** — custom properties, glassmorphism, OLED dark theme, responsive grid
-- **HTML** — semantic structure with header, hero search, filter bar, card grid, footer
-- **JavaScript** — the `SITES` data array, category mapping, search/filter logic, and card rendering
+- **CSS** — 10 themes via custom properties, glassmorphism, responsive grid, forced-colors support
+- **HTML** — semantic structure with ARIA, skip link, native `<dialog>`, `<noscript>` fallback
+- **JavaScript** — fuzzy search, bookmark engine with groups and drag-drop, URL state, view transitions
 
-No external API calls (except Google Favicons). No tracking. No cookies. No analytics.
+No tracking. No cookies. No analytics. External calls: Google Favicons (with DuckDuckGo fallback) and Google Fonts.
 
 ## Adding Sites
 
-Edit the `SITES` array inside `index.html`:
+The easiest way is to [open a submission issue](https://github.com/SysAdminDoc/CoolSites/issues/new?template=submit-site.yml) — fill in the form and we'll add it.
+
+To contribute directly, edit the `SITES` array inside `index.html`:
 
 ```javascript
 {
@@ -114,26 +129,27 @@ Edit the `SITES` array inside `index.html`:
 },
 ```
 
-If you're adding a new category, also add it to the `CATEGORY_MAP` object and create a corresponding CSS class:
-
-```javascript
-// In CATEGORY_MAP:
-"New Category": "cat-newcat",
-
-// In CSS:
-.cat-newcat { background: rgba(R, G, B, 0.15); color: #hex; }
-```
-
 ## Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
-| Structure | Semantic HTML5 |
-| Styling | Vanilla CSS with custom properties |
+| Structure | Semantic HTML5 with ARIA |
+| Styling | Vanilla CSS (custom properties, content-visibility, forced-colors) |
 | Logic | Vanilla JavaScript (ES6+) |
 | Fonts | Outfit (display) + JetBrains Mono (monospace) |
-| Icons | Inline SVGs + Google Favicon API |
+| Icons | Inline SVGs + Google Favicon API + DuckDuckGo fallback |
 | Hosting | GitHub Pages (static) |
+| CI | Lighthouse CI + weekly lychee link checker |
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `/` | Focus search |
+| `Escape` | Clear search / close dropdown |
+| `Arrow keys` | Navigate between cards |
+| `Enter` | Open focused card's link |
+| `Shift+Enter` | Open in new tab |
 
 ## Contributing
 
@@ -156,4 +172,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 470 sites and counting.
+**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 593 sites and counting.
