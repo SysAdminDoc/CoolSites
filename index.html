@@ -1273,6 +1273,22 @@
   .modal-btn.danger { border-color: rgba(229,72,77,0.3); color: var(--accent-tertiary); }
   .modal-btn.danger:hover { background: rgba(229,72,77,0.1); border-color: var(--accent-tertiary); }
 
+  .shortcuts-table { width: 100%; border-collapse: collapse; }
+  .shortcuts-table td { padding: 6px 0; font-size: 0.85rem; color: var(--text-secondary); }
+  .shortcuts-table td:first-child { white-space: nowrap; padding-right: 16px; }
+  .shortcuts-table tr + tr td { border-top: 1px solid var(--border); }
+  kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
   /* ── Assign-to-group dropdown ── */
   .assign-dropdown {
     position: absolute;
@@ -1789,6 +1805,24 @@
     <div class="modal-btns" id="modalBtns">
       <button class="modal-btn" id="modalCancel">Cancel</button>
       <button class="modal-btn primary" id="modalSave">Create</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Shortcuts Help -->
+<dialog class="modal-overlay" id="shortcutsModal" aria-labelledby="shortcutsTitle">
+  <div class="modal" style="max-width:340px">
+    <h3 id="shortcutsTitle">Keyboard Shortcuts</h3>
+    <table class="shortcuts-table">
+      <tr><td><kbd>/</kbd></td><td>Focus search</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Clear search / close dropdown</td></tr>
+      <tr><td><kbd>&uarr;</kbd> <kbd>&darr;</kbd> <kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Navigate cards</td></tr>
+      <tr><td><kbd>Enter</kbd></td><td>Open focused site</td></tr>
+      <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Open in new tab</td></tr>
+      <tr><td><kbd>?</kbd></td><td>Show this help</td></tr>
+    </table>
+    <div class="modal-btns" style="margin-top:16px">
+      <button class="modal-btn primary" id="shortcutsClose">Close</button>
     </div>
   </div>
 </dialog>
@@ -6387,6 +6421,10 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.getElementById('searchInput').blur();
   }
+  if (e.key === '?' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+    e.preventDefault();
+    document.getElementById('shortcutsModal').showModal();
+  }
 
   // Arrow key navigation between cards
   const card = document.activeElement?.closest('.card');
@@ -7165,6 +7203,10 @@ _btt.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   document.getElementById('searchInput').focus();
 });
+
+// ── Shortcuts modal ──
+document.getElementById('shortcutsClose').addEventListener('click', () => document.getElementById('shortcutsModal').close());
+document.getElementById('shortcutsModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 
 // ── Init ──
 initTheme();
