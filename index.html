@@ -6,6 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
 <meta name="description" content="The ultimate directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<meta property="og:title" content="CoolSites — Curated Web Tools & Resources">
+<meta property="og:description" content="593 curated free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sysadmindoc.github.io/CoolSites/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CoolSites — Curated Web Tools & Resources">
+<meta name="twitter:description" content="593 curated free tools, open source software, AI projects, and hidden gems across 30 categories.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -633,6 +640,8 @@
     overflow: hidden;
     transition: var(--transition);
     animation: cardIn 0.4s ease backwards;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 320px;
   }
   @keyframes cardIn {
     from { opacity: 0; transform: translateY(16px); }
@@ -1362,6 +1371,34 @@
   }
   .toast.visible { transform: translateX(-50%) translateY(0); }
 
+  /* ── Back to top ── */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hover);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 500;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+  .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
+  .back-to-top svg { width: 18px; height: 18px; }
+
   /* ── Footer ── */
   .footer {
     text-align: center;
@@ -1412,6 +1449,36 @@
   [data-theme="light"] .github-link:hover {
     background: rgba(0,0,0,0.04);
   }
+  [data-theme="light"] .cat-speed { color: #6e46c9; }
+  [data-theme="light"] .cat-ip { color: #1a8a5a; }
+  [data-theme="light"] .cat-dns { color: #0882a0; }
+  [data-theme="light"] .cat-security { color: #c32b30; }
+  [data-theme="light"] .cat-osint { color: #3060c0; }
+  [data-theme="light"] .cat-dev { color: #c03090; }
+  [data-theme="light"] .cat-desktop { color: #b07000; }
+  [data-theme="light"] .cat-ai { color: #008860; }
+  [data-theme="light"] .cat-aicreative { color: #a020c0; }
+  [data-theme="light"] .cat-automation { color: #9a7000; }
+  [data-theme="light"] .cat-homelab { color: #2060c0; }
+  [data-theme="light"] .cat-creative { color: #c06020; }
+  [data-theme="light"] .cat-music { color: #8030c0; }
+  [data-theme="light"] .cat-privacy { color: #6040c0; }
+  [data-theme="light"] .cat-sysadmin { color: #a07010; }
+  [data-theme="light"] .cat-data { color: #1a8080; }
+  [data-theme="light"] .cat-education { color: #208020; }
+  [data-theme="light"] .cat-productivity { color: #507010; }
+  [data-theme="light"] .cat-file { color: #806838; }
+  [data-theme="light"] .cat-fun { color: #8a7010; }
+  [data-theme="light"] .cat-news { color: #505070; }
+  [data-theme="light"] .cat-gaming { color: #c02020; }
+  [data-theme="light"] .cat-cli { color: #008858; }
+  [data-theme="light"] .cat-networking { color: #2060c0; }
+  [data-theme="light"] .cat-containers { color: #0070a0; }
+  [data-theme="light"] .cat-torrenting { color: #b06000; }
+  [data-theme="light"] .cat-mediadownloads { color: #0080a0; }
+  [data-theme="light"] .cat-reading { color: #705020; }
+  [data-theme="light"] .cat-indexes { color: #8a7000; }
+  [data-theme="light"] .cat-arr { color: #c02020; }
 
   /* ── Theme Picker ── */
   .theme-picker {
@@ -1524,6 +1591,9 @@
   }
 
   /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 768px) {
     .header-stats .stat { display: none; }
     .hero { padding: 3rem 1rem 2rem; }
@@ -1703,7 +1773,12 @@
 </main>
 
 <!-- Toast -->
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- Footer -->
 <footer class="footer">
@@ -5967,6 +6042,9 @@ function getFavicon(url) {
   const domain = getDomain(url);
   return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
 }
+function getFaviconFallback(url) {
+  return `https://icons.duckduckgo.com/ip3/${getDomain(url)}.ico`;
+}
 
 function getInitial(name) {
   return name.charAt(0).toUpperCase();
@@ -6059,7 +6137,7 @@ function buildCard(site, index) {
       <div class="card-preview">
         <div class="card-preview-placeholder">
           <div class="domain-icon">
-            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" onerror="this.style.display='none';this.parentElement.textContent='${getInitial(site.name)}'">
+            <img src="${getFavicon(site.url)}" alt="" width="24" height="24" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='${getFaviconFallback(site.url)}'}else{this.style.display='none';this.parentElement.textContent='${getInitial(site.name)}'}">
           </div>
           <span>${domain}</span>
         </div>
@@ -6123,9 +6201,11 @@ function showToast(msg) {
 }
 
 // ── Search ──
+let _searchTimer;
 document.getElementById('searchInput').addEventListener('input', e => {
-  searchTerm = e.target.value.trim();
-  renderGrid();
+  clearTimeout(_searchTimer);
+  const val = e.target.value.trim();
+  _searchTimer = setTimeout(() => { searchTerm = val; renderGrid(); }, 200);
 });
 
 // Keyboard shortcut
@@ -6369,7 +6449,7 @@ function renderDock() {
       if (!site) return '';
       return `
         <div class="site-chip" draggable="true" data-url="${site.url}" data-group="${group.id}" title="${site.name} — ${site.description}">
-          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" onerror="this.style.display='none'" draggable="false">
+          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='${getFaviconFallback(site.url)}'}else{this.style.display='none'}" draggable="false">
           <span class="chip-text">${site.name}</span>
           <a href="${site.url}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
           <button class="chip-remove" onclick="removeBookmark('${site.url.replace(/'/g, "\\'")}', event)" title="Remove bookmark">&times;</button>
@@ -6630,6 +6710,7 @@ function initGroupDragAndDrop() {
 // ════════════════════════════════════════════════════════════════
 let editingGroupId = null;
 let selectedColor = GROUP_COLORS[0];
+let modalTrigger = null;
 
 function openGroupModal(editId) {
   const modal = document.getElementById('groupModal');
@@ -6670,7 +6751,10 @@ function openGroupModal(editId) {
   }
 
   renderModalColors();
+  modalTrigger = document.activeElement;
   modal.classList.add('open');
+  document.querySelector('main').setAttribute('inert', '');
+  document.querySelector('.header').setAttribute('inert', '');
   setTimeout(() => { inputEl.focus(); inputEl.select(); }, 100);
 }
 
@@ -6689,7 +6773,10 @@ function renderModalColors() {
 
 function closeGroupModal() {
   document.getElementById('groupModal').classList.remove('open');
+  document.querySelector('main').removeAttribute('inert');
+  document.querySelector('.header').removeAttribute('inert');
   editingGroupId = null;
+  if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
 }
 
 function saveGroupFromModal() {
@@ -6790,6 +6877,16 @@ document.getElementById('groupModal').addEventListener('click', (e) => {
 document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') saveGroupFromModal();
   if (e.key === 'Escape') closeGroupModal();
+});
+
+// ── Back to top ──
+const _btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  _btt.classList.toggle('visible', window.scrollY > window.innerHeight * 1.5);
+}, { passive: true });
+_btt.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('searchInput').focus();
 });
 
 // ── Init ──
