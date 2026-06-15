@@ -13,6 +13,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoolSites — Curated Web Tools & Resources">
 <meta name="twitter:description" content="593 curated free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='16' fill='white'%3E//%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"CoolSites","url":"https://sysadmindoc.github.io/CoolSites/","description":"Curated directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.","potentialAction":{"@type":"SearchAction","target":"https://sysadmindoc.github.io/CoolSites/?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1831,6 +1835,12 @@
     </div>
   </div>
   <div class="grid" id="grid"></div>
+  <noscript>
+    <div class="empty-state" style="grid-column:1/-1; padding:4rem 2rem">
+      <h3>JavaScript Required</h3>
+      <p>CoolSites needs JavaScript to search, filter, and display the directory. Please enable JavaScript and reload the page.</p>
+    </div>
+  </noscript>
 </main>
 
 <!-- Toast -->
@@ -7109,12 +7119,18 @@ document.getElementById('importFile').addEventListener('change', (e) => {
     try {
       const data = JSON.parse(reader.result);
       if (data.bookmarks && typeof data.bookmarks === 'object') {
-        Object.assign(bookmarks, data.bookmarks);
-        saveBookmarks();
+        let imported = 0;
+        Object.entries(data.bookmarks).forEach(([url, bm]) => {
+          if (url && typeof bm === 'object' && bm.group) {
+            bookmarks[url] = { group: bm.group, order: bm.order ?? 0, addedAt: bm.addedAt ?? Date.now() };
+            imported++;
+          }
+        });
+        if (imported) saveBookmarks();
       }
       if (Array.isArray(data.groups)) {
         data.groups.forEach(g => {
-          if (!groups.find(eg => eg.id === g.id)) groups.push(g);
+          if (g && g.id && g.name && !groups.find(eg => eg.id === g.id)) groups.push(g);
         });
         saveGroups();
       }
