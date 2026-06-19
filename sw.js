@@ -1,9 +1,13 @@
 // CoolSites Service Worker — offline-first caching
-const CACHE_NAME = 'coolsites-v1';
+const CACHE_NAME = 'coolsites-v2';
 const ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './fonts/outfit-latin.woff2',
+  './fonts/outfit-latin-ext.woff2',
+  './fonts/jetbrains-mono-latin.woff2',
+  './fonts/jetbrains-mono-latin-ext.woff2'
 ];
 
 // Pre-cache core assets on install
@@ -28,12 +32,10 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
 
-  // Skip cross-origin requests except fonts and favicons
+  // Skip cross-origin requests except favicon APIs
   if (url.origin !== location.origin) {
-    // Cache Google Fonts and favicon responses
-    if (url.hostname.includes('fonts.googleapis.com') ||
-        url.hostname.includes('fonts.gstatic.com') ||
-        url.hostname.includes('google.com') ||
+    // Cache favicon responses (Google/DuckDuckGo)
+    if (url.hostname.includes('google.com') ||
         url.hostname.includes('duckduckgo.com')) {
       e.respondWith(
         caches.match(e.request).then(cached => {
