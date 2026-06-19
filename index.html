@@ -871,6 +871,27 @@
   .cat-indexes { --cat-c: #ffd700; }
   .cat-arr { --cat-c: #ff5a5a; }
 
+  /* ── Editor's Pick badge ── */
+  .editors-pick-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    border-radius: 100px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: color-mix(in srgb, var(--accent-amber) 18%, transparent);
+    color: var(--accent-amber);
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .editors-pick-badge svg { width: 10px; height: 10px; flex-shrink: 0; }
+  .card.is-editors-pick { border-color: color-mix(in srgb, var(--accent-amber) 20%, transparent); }
+  .card.is-editors-pick:hover { border-color: color-mix(in srgb, var(--accent-amber) 35%, transparent); }
+
 
 
   /* ════════════════════════════════════════════════════════════
@@ -1872,6 +1893,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
       No account
     </button>
+    <button class="metadata-toggle" id="picksOnlyBtn" type="button" aria-pressed="false" data-meta-filter="picksOnly">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Staff Picks
+    </button>
   </div>
 </section>
 
@@ -1936,6 +1961,7 @@ const SITES = [
     category: "Speed Tests",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["speed", "latency", "jitter", "cloudflare"]
   },
   {
@@ -2018,6 +2044,7 @@ const SITES = [
     category: "IP & Network",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["bgp", "routing", "network"]
   },
   {
@@ -2036,6 +2063,7 @@ const SITES = [
     category: "IP & Network",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ip", "geolocation", "api"]
   },
   {
@@ -2109,6 +2137,7 @@ const SITES = [
     category: "DNS Tools",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["email", "blacklist", "mx"]
   },
   {
@@ -2164,6 +2193,7 @@ const SITES = [
     category: "Security",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ssl", "tls", "certificate"]
   },
   {
@@ -2218,6 +2248,7 @@ const SITES = [
     category: "Security",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["breach", "password", "email"]
   },
   {
@@ -2236,6 +2267,7 @@ const SITES = [
     category: "Security",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["encode", "decode", "crypto", "gchq"]
   },
   // ── OSINT ──
@@ -2246,6 +2278,7 @@ const SITES = [
     category: "OSINT",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["iot", "devices", "search"]
   },
   {
@@ -2318,6 +2351,7 @@ const SITES = [
     category: "OSINT",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["automation", "recon", "footprint"]
   },
   // ── Dev Tools ──
@@ -2328,6 +2362,7 @@ const SITES = [
     category: "Dev Tools",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["regex", "testing", "patterns"]
   },
   {
@@ -2346,6 +2381,7 @@ const SITES = [
     category: "Dev Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["api", "testing", "postman"]
   },
   {
@@ -2437,6 +2473,7 @@ const SITES = [
     category: "Desktop Software",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["windows", "productivity", "microsoft"]
   },
   {
@@ -2473,6 +2510,7 @@ const SITES = [
     category: "Desktop Software",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["screenshot", "recording", "capture"]
   },
   {
@@ -2491,6 +2529,7 @@ const SITES = [
     category: "Desktop Software",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["search", "files", "instant"]
   },
   {
@@ -2518,6 +2557,7 @@ const SITES = [
     category: "Desktop Software",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["passwords", "security", "offline"]
   },
   {
@@ -2564,6 +2604,7 @@ const SITES = [
     category: "AI & ML",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["llm", "local", "privacy"]
   },
   {
@@ -2573,6 +2614,7 @@ const SITES = [
     category: "AI & ML",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["chat", "ui", "self-hosted"]
   },
   {
@@ -2627,6 +2669,7 @@ const SITES = [
     category: "AI & ML",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["models", "datasets", "community"]
   },
   {
@@ -2663,6 +2706,7 @@ const SITES = [
     category: "AI & ML",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["search", "ai", "citations"]
   },
   {
@@ -2727,6 +2771,7 @@ const SITES = [
     category: "AI Creative",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["music", "generation", "audio"]
   },
   {
@@ -2745,6 +2790,7 @@ const SITES = [
     category: "AI Creative",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["voice", "tts", "cloning"]
   },
   {
@@ -2754,6 +2800,7 @@ const SITES = [
     category: "AI Creative",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["image", "art", "generation"]
   },
   // ── Automation ──
@@ -2764,6 +2811,7 @@ const SITES = [
     category: "Automation",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["workflow", "automation", "self-hosted"]
   },
   {
@@ -2773,6 +2821,7 @@ const SITES = [
     category: "Automation",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["iot", "flow", "programming"]
   },
   {
@@ -2819,6 +2868,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["monitoring", "uptime", "dashboard"]
   },
   {
@@ -2864,6 +2914,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["virtualization", "hypervisor", "enterprise"]
   },
   {
@@ -2873,6 +2924,7 @@ const SITES = [
     category: "Homelab",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["vpn", "wireguard", "mesh"]
   },
   {
@@ -2891,6 +2943,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ad blocker", "dns", "network"]
   },
   {
@@ -2910,6 +2963,7 @@ const SITES = [
     category: "Creative",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["3d", "modeling", "animation", "vfx"]
   },
   {
@@ -2973,6 +3027,7 @@ const SITES = [
     category: "Creative",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["streaming", "recording", "live"]
   },
   {
@@ -2991,6 +3046,7 @@ const SITES = [
     category: "Creative",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["photoshop", "browser", "psd"]
   },
   {
@@ -3009,6 +3065,7 @@ const SITES = [
     category: "Creative",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["whiteboard", "diagrams", "collaboration"]
   },
   // ── Music & Audio ──
@@ -3019,6 +3076,7 @@ const SITES = [
     category: "Music & Audio",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["daw", "recording", "mixing"]
   },
   {
@@ -3128,6 +3186,7 @@ const SITES = [
     category: "Privacy",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["vpn", "anonymous", "audited"]
   },
   {
@@ -3201,6 +3260,7 @@ const SITES = [
     category: "Sysadmin",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["monitoring", "dashboards", "metrics"]
   },
   {
@@ -3311,6 +3371,7 @@ const SITES = [
     category: "Education",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["coding", "web dev", "free"]
   },
   {
@@ -3366,6 +3427,7 @@ const SITES = [
     category: "Productivity",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["notes", "markdown", "knowledge"]
   },
   {
@@ -3402,6 +3464,7 @@ const SITES = [
     category: "Productivity",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["pdf", "tools", "self-hosted"]
   },
   {
@@ -3448,6 +3511,7 @@ const SITES = [
     category: "File Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["downloader", "video", "audio"]
   },
   {
@@ -3457,6 +3521,7 @@ const SITES = [
     category: "File Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["video", "downloader", "command line"]
   },
   {
@@ -3466,6 +3531,7 @@ const SITES = [
     category: "File Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["media", "conversion", "encoding"]
   },
   {
@@ -3485,6 +3551,7 @@ const SITES = [
     category: "Fun & Culture",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["interactive", "educational", "creative"]
   },
   {
@@ -3494,6 +3561,7 @@ const SITES = [
     category: "Fun & Culture",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["radio", "globe", "worldwide"]
   },
   {
@@ -3539,6 +3607,7 @@ const SITES = [
     category: "Fun & Culture",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["archive", "wayback", "library"]
   },
   {
@@ -3576,6 +3645,7 @@ const SITES = [
     category: "News & Reference",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["tech", "news", "startups"]
   },
   {
@@ -3860,6 +3930,7 @@ const SITES = [
     category: "OSINT",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["archive", "history", "web"]
   },
   {
@@ -3960,6 +4031,7 @@ const SITES = [
     category: "Dev Tools",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ide", "node", "webcontainers"]
   },
   {
@@ -4014,6 +4086,7 @@ const SITES = [
     category: "Dev Tools",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["testing", "e2e", "automation"]
   },
   {
@@ -4159,6 +4232,7 @@ const SITES = [
     category: "Desktop Software",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["media player", "video", "audio"]
   },
   {
@@ -4613,6 +4687,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["automation", "config", "deployment"]
   },
   {
@@ -4631,6 +4706,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["media", "streaming", "open source"]
   },
   {
@@ -4640,6 +4716,7 @@ const SITES = [
     category: "Homelab",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["photos", "backup", "ai"]
   },
   {
@@ -4740,6 +4817,7 @@ const SITES = [
     category: "Creative",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["design", "ui", "prototyping"]
   },
   {
@@ -4885,6 +4963,7 @@ const SITES = [
     category: "Music & Audio",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["notation", "sheet music", "free"]
   },
   {
@@ -4922,6 +5001,7 @@ const SITES = [
     category: "Privacy",
     openSource: true,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["messaging", "encrypted", "open source"]
   },
   {
@@ -4931,6 +5011,7 @@ const SITES = [
     category: "Privacy",
     openSource: true,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["email", "encrypted", "swiss"]
   },
   {
@@ -4958,6 +5039,7 @@ const SITES = [
     category: "Privacy",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ad blocker", "browser", "efficient"]
   },
   {
@@ -5013,6 +5095,7 @@ const SITES = [
     category: "Sysadmin",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["iac", "cloud", "provisioning"]
   },
   {
@@ -5049,6 +5132,7 @@ const SITES = [
     category: "Sysadmin",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["monitoring", "metrics", "cloud-native"]
   },
   {
@@ -5113,6 +5197,7 @@ const SITES = [
     category: "Data & Viz",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["bi", "analytics", "no-code"]
   },
   {
@@ -5131,6 +5216,7 @@ const SITES = [
     category: "Data & Viz",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["library", "javascript", "custom"]
   },
   {
@@ -5186,6 +5272,7 @@ const SITES = [
     category: "Education",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["free", "comprehensive", "courses"]
   },
   {
@@ -5195,6 +5282,7 @@ const SITES = [
     category: "Education",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["mit", "courses", "lectures"]
   },
   {
@@ -5258,6 +5346,7 @@ const SITES = [
     category: "Education",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["harvard", "cs", "programming"]
   },
   {
@@ -5286,6 +5375,7 @@ const SITES = [
     category: "Productivity",
     openSource: false,
     requiresAuth: true,
+    editorsPick: true,
     tags: ["workspace", "notes", "databases"]
   },
   {
@@ -5313,6 +5403,7 @@ const SITES = [
     category: "Productivity",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["scheduling", "calendar", "open source"]
   },
   {
@@ -5476,6 +5567,7 @@ const SITES = [
     category: "File Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["converter", "documents", "universal"]
   },
   {
@@ -5658,6 +5750,7 @@ const SITES = [
     category: "News & Reference",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["linux", "wiki", "documentation"]
   },
   {
@@ -5748,6 +5841,7 @@ const SITES = [
     category: "News & Reference",
     openSource: false,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["free tier", "saas", "directory"]
   },
   // ── Gaming ──
@@ -5758,6 +5852,7 @@ const SITES = [
     category: "Gaming",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["emulation", "retro", "multi-platform"]
   },
   {
@@ -5785,6 +5880,7 @@ const SITES = [
     category: "Gaming",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["chess", "open source", "free"]
   },
   {
@@ -5831,6 +5927,7 @@ const SITES = [
     category: "CLI Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["fuzzy", "search", "terminal"]
   },
   {
@@ -5840,6 +5937,7 @@ const SITES = [
     category: "CLI Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["search", "grep", "fast"]
   },
   {
@@ -5912,6 +6010,7 @@ const SITES = [
     category: "CLI Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["git", "tui", "interactive"]
   },
   {
@@ -5966,6 +6065,7 @@ const SITES = [
     category: "CLI Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["editor", "vim", "lua"]
   },
   {
@@ -5975,6 +6075,7 @@ const SITES = [
     category: "CLI Tools",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["prompt", "shell", "rust"]
   },
   {
@@ -6012,6 +6113,7 @@ const SITES = [
     category: "Networking",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["packet", "analysis", "protocol"]
   },
   {
@@ -6021,6 +6123,7 @@ const SITES = [
     category: "Networking",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["scanner", "ports", "security"]
   },
   {
@@ -6111,6 +6214,7 @@ const SITES = [
     category: "Networking",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["ipam", "dcim", "documentation"]
   },
   {
@@ -6130,6 +6234,7 @@ const SITES = [
     category: "Containers",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["docker", "containers", "platform"]
   },
   {
@@ -6157,6 +6262,7 @@ const SITES = [
     category: "Containers",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["kubernetes", "lightweight", "edge"]
   },
   {
@@ -6193,6 +6299,7 @@ const SITES = [
     category: "Containers",
     openSource: true,
     requiresAuth: false,
+    editorsPick: true,
     tags: ["gitops", "cd", "kubernetes"]
   },
   {
@@ -7361,7 +7468,8 @@ function readUrlState() {
     view: p.get('view') || 'grid',
     sort: p.get('sort') || 'default',
     oss: p.get('oss') === '1',
-    noauth: p.get('noauth') === '1'
+    noauth: p.get('noauth') === '1',
+    picks: p.get('picks') === '1'
   };
 }
 function writeUrlState() {
@@ -7372,6 +7480,7 @@ function writeUrlState() {
   if (sortMode !== 'default') p.set('sort', sortMode);
   if (openSourceOnly) p.set('oss', '1');
   if (noAuthOnly) p.set('noauth', '1');
+  if (picksOnly) p.set('picks', '1');
   const qs = p.toString();
   history.replaceState(null, '', qs ? '?' + qs : location.pathname);
 }
@@ -7382,6 +7491,7 @@ let viewMode = _initState.view;
 let sortMode = _initState.sort;
 let openSourceOnly = _initState.oss;
 let noAuthOnly = _initState.noauth;
+let picksOnly = _initState.picks;
 
 function getDomain(url) {
   try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
@@ -7472,7 +7582,8 @@ function getFiltered() {
       ? true
       : site.category === activeFilter;
     const matchMetadata = (!openSourceOnly || site.openSource) &&
-      (!noAuthOnly || !site.requiresAuth);
+      (!noAuthOnly || !site.requiresAuth) &&
+      (!picksOnly || site.editorsPick);
 
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
     if (!matchMetadata) return false;
@@ -7516,12 +7627,14 @@ function buildCard(site, index) {
   const domain = getDomain(site.url);
   const bm = isBookmarked(site.url);
   const bmClass = bm ? ' is-bookmarked' : '';
+  const pickClass = site.editorsPick ? ' is-editors-pick' : '';
   const starClass = bm ? ' bookmarked' : '';
   const starFill = bm ? 'currentColor' : 'none';
   const escUrl = site.url.replace(/'/g, "\\'");
+  const pickBadge = site.editorsPick ? '<span class="editors-pick-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Pick</span>' : '';
 
   return `
-    <article class="card${bmClass}">
+    <article class="card${bmClass}${pickClass}">
       <div class="card-body">
         <div class="card-header">
           <div class="card-icon">
@@ -7529,7 +7642,7 @@ function buildCard(site, index) {
           </div>
           <div class="card-header-text">
             <div class="card-category ${catClass}">${site.category}</div>
-            <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}</h3>
+            <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}${pickBadge}</h3>
           </div>
           <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escHtml(site.name)}" aria-pressed="${bm}" data-action="bookmark" data-url="${escUrl}">
             <svg viewBox="0 0 24 24" fill="${starFill}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -7646,7 +7759,8 @@ function showToast(msg) {
 function updateMetadataFilters() {
   const states = {
     openSourceOnlyBtn: openSourceOnly,
-    noAuthOnlyBtn: noAuthOnly
+    noAuthOnlyBtn: noAuthOnly,
+    picksOnlyBtn: picksOnly
   };
   Object.entries(states).forEach(([id, active]) => {
     const btn = document.getElementById(id);
@@ -7659,6 +7773,7 @@ document.querySelectorAll('[data-meta-filter]').forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.dataset.metaFilter === 'openSourceOnly') openSourceOnly = !openSourceOnly;
     if (btn.dataset.metaFilter === 'noAuthOnly') noAuthOnly = !noAuthOnly;
+    if (btn.dataset.metaFilter === 'picksOnly') picksOnly = !picksOnly;
     updateMetadataFilters();
     renderGrid();
   });
