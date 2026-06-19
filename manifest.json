@@ -1,0 +1,19 @@
+{
+  "name": "CoolSites — Curated Web Tools & Resources",
+  "short_name": "CoolSites",
+  "description": "The ultimate directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08090d",
+  "theme_color": "#6e56cf",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='256' fill='white'%3E//%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "education", "productivity"]
+}
