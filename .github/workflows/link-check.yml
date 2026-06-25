@@ -27,7 +27,6 @@ jobs:
             --max-cache-age 7d
             --max-concurrency 10
             --accept 200,206,429
-            --exclude-mail
             --github-token ${{ secrets.GITHUB_TOKEN }}
             index.html
           fail: false

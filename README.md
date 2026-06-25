@@ -1,13 +1,13 @@
 # CoolSites
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.1.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Sites](https://img.shields.io/badge/sites-593-blueviolet)
+![Sites](https://img.shields.io/badge/sites-589-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
-> The ultimate curated directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
+> The ultimate curated directory of 589 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
@@ -15,15 +15,16 @@
 
 ## Features
 
-- **593 curated sites** across 30 categories — every entry hand-picked and described
+- **589 curated sites** across 30 categories — every entry hand-picked and described
 - **Fuzzy search** with match highlighting — typo-tolerant, ranked by relevance
 - **Category filters** with live counts — drill into any category instantly
+- **Metadata filters** — toggle open source only or no account required views
 - **Sort modes** — alphabetical (A-Z / Z-A), shuffle, or default with bookmarks on top
 - **10 themes** — 8 dark (OLED, Catppuccin, Dracula, Nord, Rosé Pine, GitHub Dark, Midnight, Solarized), 1 light, plus system auto
 - **Bookmarks with groups** — star sites, organize into color-coded groups, drag to reorder
 - **Bookmark export/import** — download as JSON, restore on any device
 - **Grid and list views** — toggle layouts, persisted in URL state
-- **Shareable URLs** — filter state encoded in `?q=&cat=&sort=&view=` for bookmarkable views
+- **Shareable URLs** — filter state encoded in `?q=&cat=&sort=&view=&oss=&noauth=` for bookmarkable views
 - **Keyboard navigation** — `/` to search, arrows to move, Enter to open, `?` for help
 - **Copy as Markdown** — export the current filtered list as a markdown bullet list
 - **Random site** — discover something new from the current filter
@@ -102,16 +103,17 @@ Drop `index.html` into any web server's document root. Works with Nginx, Apache,
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   SITES Array    │────>│   Filter Engine  │────>│   Card Renderer  │
 │                  │     │                  │     │                  │
-│  593 entries     │     │  Category match  │     │  Grid / List     │
+│  589 entries     │     │  Category match  │     │  Grid / List     │
 │  Name, URL,      │     │  + Fuzzy search  │     │  + View Trans.   │
-│  Desc, Tags      │     │  + Sort modes    │     │  + Lazy favicons │
+│  Desc, Tags,     │     │  + Sort modes    │     │  + Lazy favicons │
+│  Metadata        │     │  + Metadata      │     │                  │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
 Everything lives in a single `index.html`:
 - **CSS** — 10 themes via custom properties, glassmorphism, responsive grid, forced-colors support
 - **HTML** — semantic structure with ARIA, skip link, native `<dialog>`, `<noscript>` fallback
-- **JavaScript** — fuzzy search, bookmark engine with groups and drag-drop, URL state, view transitions
+- **JavaScript** — fuzzy search, metadata filters, bookmark engine with groups and drag-drop, URL state, view transitions
 
 No tracking. No cookies. No analytics. External calls: Google Favicons (with DuckDuckGo fallback) and Google Fonts.
 
@@ -127,6 +129,8 @@ To contribute directly, edit the `SITES` array inside `index.html`:
   url: "https://example.com",
   description: "What it does and why it's cool.",
   category: "Category Name",
+  openSource: true,
+  requiresAuth: false,
   tags: ["tag1", "tag2", "tag3"]
 },
 ```
@@ -175,6 +179,6 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 593 sites and counting.
+**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 589 sites and counting.
 
 https://sysadmindoc.github.io/CoolSites/
