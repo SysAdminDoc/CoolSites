@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Homelab Starter Pack",
+    "slug": "homelab-starter-pack",
+    "description": "Core services for monitoring, DNS, media, remote access, and document capture.",
+    "urls": [
+      "https://uptime.kuma.pet",
+      "https://www.proxmox.com/en/",
+      "https://tailscale.com",
+      "https://pi-hole.net",
+      "https://jellyfin.org",
+      "https://immich.app",
+      "https://docs.paperless-ngx.com"
+    ]
+  },
+  {
+    "name": "OSINT 101",
+    "slug": "osint-101",
+    "description": "Fast starting points for infrastructure, certificates, archives, image checks, and public exposure.",
+    "urls": [
+      "https://www.shodan.io",
+      "https://search.censys.io",
+      "https://crt.sh",
+      "https://web.archive.org",
+      "https://tineye.com",
+      "https://builtwith.com"
+    ]
+  },
+  {
+    "name": "Privacy Toolkit",
+    "slug": "privacy-toolkit",
+    "description": "Practical defaults for private browsing, messaging, email, search, and tracking protection.",
+    "urls": [
+      "https://mullvad.net",
+      "https://www.torproject.org",
+      "https://signal.org",
+      "https://proton.me/mail",
+      "https://github.com/searxng/searxng",
+      "https://ublockorigin.com"
+    ]
+  },
+  {
+    "name": "Browser Creative Studio",
+    "slug": "browser-creative-studio",
+    "description": "Design, diagrams, color, image editing, and vector workflows that run in the browser.",
+    "urls": [
+      "https://www.figma.com",
+      "https://www.photopea.com",
+      "https://excalidraw.com",
+      "https://coolors.co",
+      "https://www.penpot.app",
+      "https://fffuel.co"
+    ]
+  },
+  {
+    "name": "Terminal Upgrade",
+    "slug": "terminal-upgrade",
+    "description": "High-impact command-line tools for search, navigation, prompts, Git, containers, and daily shell work.",
+    "urls": [
+      "https://github.com/junegunn/fzf",
+      "https://github.com/BurntSushi/ripgrep",
+      "https://github.com/sharkdp/bat",
+      "https://github.com/eza-community/eza",
+      "https://github.com/jesseduffield/lazygit",
+      "https://starship.rs"
+    ]
+  }
+]

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08090d">
+<title>CoolSites Collections</title>
+<meta name="description" content="Curated CoolSites collections for homelab, OSINT, privacy, creative, and terminal workflows.">
+<link rel="manifest" href="manifest.json">
+<style>
+  :root{color-scheme:dark;--bg:#08090d;--panel:#12141c;--panel2:#181b25;--border:rgba(255,255,255,.08);--text:#e8e9ed;--muted:#8b8d98;--accent:#6e56cf;--green:#3ecf8e}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  header{position:sticky;top:0;z-index:1;background:rgba(8,9,13,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  nav{max-width:1160px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{font-weight:800;letter-spacing:.02em}
+  a{color:inherit}
+  .nav-link{color:var(--muted);text-decoration:none}
+  .nav-link:hover{color:var(--text)}
+  main{max-width:1160px;margin:0 auto;padding:42px 20px 64px}
+  h1{font-size:clamp(2rem,5vw,4rem);line-height:1;margin:0 0 12px}
+  .lede{color:var(--muted);max-width:720px;margin:0 0 32px}
+  .collections{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .collection{border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:18px}
+  .collection h2{font-size:1.05rem;margin:0 0 6px}
+  .collection p{color:var(--muted);margin:0 0 14px}
+  .sites{display:grid;gap:8px}
+  .site{display:block;text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.025);border-radius:6px;padding:10px}
+  .site:hover{border-color:color-mix(in srgb,var(--accent) 55%,transparent);background:var(--panel2)}
+  .site strong{display:block;font-size:.95rem}
+  .site span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
+  .badge{display:inline-flex;color:#08090d;background:var(--green);font-size:.72rem;font-weight:800;border-radius:4px;padding:2px 6px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="brand">CoolSites Collections</div>
+    <a class="nav-link" href="./">Directory</a>
+  </nav>
+</header>
+<main>
+  <h1>Curated Starting Points</h1>
+  <p class="lede">Focused sub-lists for common workflows, built from the same validated CoolSites data.</p>
+  <section class="collections" id="collections" aria-live="polite"></section>
+</main>
+<script>
+const $collections = document.getElementById('collections');
+Promise.all([
+  fetch('./collections.json').then(r => r.json()),
+  fetch('./sites.json').then(r => r.json())
+]).then(([collections, sites]) => {
+  const byUrl = new Map(sites.map(site => [site.url, site]));
+  $collections.innerHTML = collections.map(collection => {
+    const entries = collection.urls.map(url => byUrl.get(url)).filter(Boolean);
+    return `<article class="collection">
+      <span class="badge">${entries.length} sites</span>
+      <h2>${esc(collection.name)}</h2>
+      <p>${esc(collection.description)}</p>
+      <div class="sites">${entries.map(site => `<a class="site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(site.name)}</strong><span>${esc(site.category)}</span></a>`).join('')}</div>
+    </article>`;
+  }).join('');
+}).catch(() => {
+  $collections.innerHTML = '<p class="lede">Collections could not be loaded.</p>';
+});
+function esc(value){return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+</script>
+</body>
+</html>

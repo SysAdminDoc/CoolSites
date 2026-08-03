@@ -1,0 +1,19 @@
+{
+  "name": "coolsites",
+  "version": "2.2.0",
+  "description": "Curated static directory of free tools, open source software, AI projects, and hidden gems.",
+  "license": "MIT",
+  "type": "commonjs",
+  "private": false,
+  "scripts": {
+    "lint": "node scripts/lint-data.js",
+    "generate": "node scripts/generate-assets.js",
+    "build": "npm run lint && npm run generate",
+    "package": "node scripts/package-release.js",
+    "update:stars": "node scripts/update-stars.js",
+    "update:favicons": "node scripts/generate-favicon-cache.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Speed Tests",
+    "slug": "speed-tests",
+    "className": "cat-speed",
+    "color": "#a78bfa",
+    "blurb": "Connection speed, latency, jitter, and quality diagnostics.",
+    "count": 10
+  },
+  {
+    "name": "IP & Network",
+    "slug": "ip-and-network",
+    "className": "cat-ip",
+    "color": "#3ecf8e",
+    "blurb": "IP intelligence, routing visibility, and internet path tools.",
+    "count": 15
+  },
+  {
+    "name": "DNS Tools",
+    "slug": "dns-tools",
+    "className": "cat-dns",
+    "color": "#05c8e8",
+    "blurb": "DNS propagation, validation, lookup, and leak testing.",
+    "count": 10
+  },
+  {
+    "name": "Security",
+    "slug": "security",
+    "className": "cat-security",
+    "color": "#e5484d",
+    "blurb": "Security scanners, hardening utilities, and incident response helpers.",
+    "count": 25
+  },
+  {
+    "name": "OSINT",
+    "slug": "osint",
+    "className": "cat-osint",
+    "color": "#8ab4f8",
+    "blurb": "Open-source intelligence tools for domains, people, images, and infrastructure.",
+    "count": 19
+  },
+  {
+    "name": "Dev Tools",
+    "slug": "dev-tools",
+    "className": "cat-dev",
+    "color": "#ff78c6",
+    "blurb": "Developer sandboxes, API clients, editors, and build helpers.",
+    "count": 34
+  },
+  {
+    "name": "Desktop Software",
+    "slug": "desktop-software",
+    "className": "cat-desktop",
+    "color": "#ffa500",
+    "blurb": "High-value desktop apps for Windows, Linux, and macOS.",
+    "count": 50
+  },
+  {
+    "name": "AI & ML",
+    "slug": "ai-and-ml",
+    "className": "cat-ai",
+    "color": "#00c896",
+    "blurb": "Local and hosted AI tools, model hubs, and machine learning workflows.",
+    "count": 32
+  },
+  {
+    "name": "AI Creative",
+    "slug": "ai-creative",
+    "className": "cat-aicreative",
+    "color": "#ff64ff",
+    "blurb": "AI-assisted image, video, audio, and media generation tools.",
+    "count": 15
+  },
+  {
+    "name": "Automation",
+    "slug": "automation",
+    "className": "cat-automation",
+    "color": "#ffc832",
+    "blurb": "Workflow automation, schedulers, and integration platforms.",
+    "count": 10
+  },
+  {
+    "name": "Homelab",
+    "slug": "homelab",
+    "className": "cat-homelab",
+    "color": "#64b4ff",
+    "blurb": "Self-hosted infrastructure, dashboards, storage, and service management.",
+    "count": 39
+  },
+  {
+    "name": "Creative",
+    "slug": "creative",
+    "className": "cat-creative",
+    "color": "#ff8c3c",
+    "blurb": "Design, illustration, color, animation, and visual production tools.",
+    "count": 30
+  },
+  {
+    "name": "Music & Audio",
+    "slug": "music-and-audio",
+    "className": "cat-music",
+    "color": "#c864ff",
+    "blurb": "Audio editing, music creation, notation, and sound resources.",
+    "count": 10
+  },
+  {
+    "name": "Privacy",
+    "slug": "privacy",
+    "className": "cat-privacy",
+    "color": "#ab8cff",
+    "blurb": "Private communications, browsing, email, search, and anonymity tools.",
+    "count": 26
+  },
+  {
+    "name": "Sysadmin",
+    "slug": "sysadmin",
+    "className": "cat-sysadmin",
+    "color": "#f5a623",
+    "blurb": "Operations, observability, configuration, and fleet management tools.",
+    "count": 27
+  },
+  {
+    "name": "Data & Viz",
+    "slug": "data-and-viz",
+    "className": "cat-data",
+    "color": "#32c8c8",
+    "blurb": "Databases, dashboards, diagrams, and data visualization tools.",
+    "count": 12
+  },
+  {
+    "name": "Education",
+    "slug": "education",
+    "className": "cat-education",
+    "color": "#64dc64",
+    "blurb": "Courses, practice platforms, textbooks, and learning resources.",
+    "count": 21
+  },
+  {
+    "name": "Productivity",
+    "slug": "productivity",
+    "className": "cat-productivity",
+    "color": "#a9dc76",
+    "blurb": "Notes, docs, calendars, project planning, and personal workflow tools.",
+    "count": 24
+  },
+  {
+    "name": "File Tools",
+    "slug": "file-tools",
+    "className": "cat-file",
+    "color": "#c8b48c",
+    "blurb": "Conversion, compression, transfer, PDF, and media processing utilities.",
+    "count": 15
+  },
+  {
+    "name": "Fun & Culture",
+    "slug": "fun-and-culture",
+    "className": "cat-fun",
+    "color": "#f5d042",
+    "blurb": "Playful web experiments, culture archives, maps, and exploration sites.",
+    "count": 26
+  },
+  {
+    "name": "News & Reference",
+    "slug": "news-and-reference",
+    "className": "cat-news",
+    "color": "#b4b4c8",
+    "blurb": "Technical references, indexes, documentation, and discovery sources.",
+    "count": 20
+  },
+  {
+    "name": "Gaming",
+    "slug": "gaming",
+    "className": "cat-gaming",
+    "color": "#ff5050",
+    "blurb": "Games, emulators, launchers, preservation, and gaming utilities.",
+    "count": 16
+  },
+  {
+    "name": "CLI Tools",
+    "slug": "cli-tools",
+    "className": "cat-cli",
+    "color": "#00ffb4",
+    "blurb": "Terminal utilities, shells, prompts, and command-line productivity.",
+    "count": 20
+  },
+  {
+    "name": "Networking",
+    "slug": "networking",
+    "className": "cat-networking",
+    "color": "#50a0ff",
+    "blurb": "Network clients, scanners, remote access, and infrastructure mapping.",
+    "count": 13
+  },
+  {
+    "name": "Containers",
+    "slug": "containers",
+    "className": "cat-containers",
+    "color": "#00b4e6",
+    "blurb": "Container engines, registries, Kubernetes, and deployment tooling.",
+    "count": 9
+  },
+  {
+    "name": "Torrenting",
+    "slug": "torrenting",
+    "className": "cat-torrenting",
+    "color": "#ff8c00",
+    "blurb": "Torrent clients, index helpers, and self-hosted search tools.",
+    "count": 18
+  },
+  {
+    "name": "Media Downloads",
+    "slug": "media-downloads",
+    "className": "cat-mediadownloads",
+    "color": "#00c8ff",
+    "blurb": "Video, audio, gallery, and file download utilities.",
+    "count": 13
+  },
+  {
+    "name": "Reading",
+    "slug": "reading",
+    "className": "cat-reading",
+    "color": "#b48250",
+    "blurb": "Ebook, audiobook, library, and reading management resources.",
+    "count": 11
+  },
+  {
+    "name": "Indexes & Wikis",
+    "slug": "indexes-and-wikis",
+    "className": "cat-indexes",
+    "color": "#ffd700",
+    "blurb": "Curated indexes, technical wikis, and community knowledge bases.",
+    "count": 9
+  },
+  {
+    "name": "Arr Stack",
+    "slug": "arr-stack",
+    "className": "cat-arr",
+    "color": "#ff5a5a",
+    "blurb": "Media automation apps for collection, indexing, and request workflows.",
+    "count": 10
+  }
+]
