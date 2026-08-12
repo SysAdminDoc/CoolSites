@@ -2206,7 +2206,7 @@ function formatDataAge() {
 
 function showDataStatus() {
   const status = document.getElementById('dataStatus');
-  if (DATA_SOURCE !== 'cache') {
+  if (DATA_SOURCE !== 'cache' && navigator.onLine !== false) {
     status.hidden = true;
     status.replaceChildren();
     return;
@@ -2689,7 +2689,7 @@ function openCompareModal() {
       </tbody>
     </table>
   `;
-  document.getElementById('compareModal').showModal();
+  openTrackedDialog(document.getElementById('compareModal'));
 }
 
 function updateMetadataFilters() {
@@ -2734,7 +2734,7 @@ document.addEventListener('keydown', e => {
   }
   if (e.key === '?' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
     e.preventDefault();
-    document.getElementById('shortcutsModal').showModal();
+    openTrackedDialog(document.getElementById('shortcutsModal'));
   }
 
   // Arrow key navigation between cards
@@ -3400,7 +3400,20 @@ function initGroupDragAndDrop() {
 // ════════════════════════════════════════════════════════════════
 let editingGroupId = null;
 let selectedColor = GROUP_COLORS[0];
-let modalTrigger = null;
+const dialogFocusTargets = new WeakMap();
+
+function openTrackedDialog(dialog, trigger = document.activeElement) {
+  dialogFocusTargets.set(dialog, trigger instanceof HTMLElement && trigger.isConnected ? trigger : null);
+  dialog.showModal();
+}
+
+function registerDialogFocus(dialog) {
+  dialog.addEventListener('close', () => {
+    const trigger = dialogFocusTargets.get(dialog);
+    dialogFocusTargets.delete(dialog);
+    if (trigger?.isConnected) trigger.focus();
+  });
+}
 
 function openGroupModal(editId) {
   const modal = document.getElementById('groupModal');
@@ -3441,8 +3454,7 @@ function openGroupModal(editId) {
   }
 
   renderModalColors();
-  modalTrigger = document.activeElement;
-  modal.showModal();
+  openTrackedDialog(modal);
   setTimeout(() => { inputEl.focus(); inputEl.select(); }, 100);
 }
 
@@ -3460,9 +3472,9 @@ function renderModalColors() {
 }
 
 function closeGroupModal() {
-  document.getElementById('groupModal').close();
+  const modal = document.getElementById('groupModal');
+  if (modal.open) modal.close();
   editingGroupId = null;
-  if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
 }
 
 function saveGroupFromModal() {
@@ -3566,6 +3578,9 @@ document.getElementById('dockGroups').addEventListener('click', (e) => {
 document.getElementById('newGroupBtn').addEventListener('click', () => openGroupModal());
 
 // Modal
+registerDialogFocus(document.getElementById('groupModal'));
+registerDialogFocus(document.getElementById('shortcutsModal'));
+registerDialogFocus(document.getElementById('compareModal'));
 document.getElementById('modalCancel').addEventListener('click', closeGroupModal);
 document.getElementById('modalSave').addEventListener('click', saveGroupFromModal);
 document.getElementById('groupModal').addEventListener('click', (e) => {

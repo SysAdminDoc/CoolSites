@@ -18,8 +18,8 @@ const MIME_TYPES = {
 const requestedPort = Number.parseInt(process.env.PORT || process.argv[2] || '4173', 10);
 const host = process.env.HOST || '127.0.0.1';
 
-if (!Number.isInteger(requestedPort) || requestedPort < 1 || requestedPort > 65535) {
-  console.error('PORT must be an integer between 1 and 65535.');
+if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 65535) {
+  console.error('PORT must be an integer between 0 and 65535.');
   process.exitCode = 1;
 } else {
   const server = http.createServer((request, response) => {
