@@ -5,7 +5,7 @@
     "description": "Core services for monitoring, DNS, media, remote access, and document capture.",
     "urls": [
       "https://uptime.kuma.pet",
-      "https://www.proxmox.com/en/",
+      "https://www.proxmox.com/en/proxmox-virtual-environment",
       "https://tailscale.com",
       "https://pi-hole.net",
       "https://jellyfin.org",
@@ -34,8 +34,8 @@
       "https://mullvad.net",
       "https://www.torproject.org",
       "https://signal.org",
-      "https://proton.me/mail",
-      "https://github.com/searxng/searxng",
+      "https://proton.me",
+      "https://searxng.org",
       "https://ublockorigin.com"
     ]
   },
@@ -48,7 +48,7 @@
       "https://www.photopea.com",
       "https://excalidraw.com",
       "https://coolors.co",
-      "https://www.penpot.app",
+      "https://penpot.app",
       "https://fffuel.co"
     ]
   },

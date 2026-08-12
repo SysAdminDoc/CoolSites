@@ -8003,7 +8003,7 @@
   },
   {
     "name": "Stirling-PDF",
-    "url": "https://stirlingpdf.io",
+    "url": "https://github.com/Stirling-Tools/Stirling-PDF",
     "description": "Self-hosted PDF manipulation tool. Merge, split, convert, compress, sign, and OCR your PDFs. No data leaves your server.",
     "category": "Homelab",
     "openSource": true,
