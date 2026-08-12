@@ -46,6 +46,9 @@
 </main>
 <script>
 const $collections = document.getElementById('collections');
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
 Promise.all([
   fetch('./collections.json').then(r => r.json()),
   fetch('./sites.json').then(r => r.json())

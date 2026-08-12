@@ -1,7 +1,7 @@
 {
   "name": "CoolSites — Curated Web Tools & Resources",
   "short_name": "CoolSites",
-  "description": "The ultimate directory of 593 free tools, open source software, AI projects, and hidden gems across 30 categories.",
+  "description": "The ultimate directory of 589 free tools, open source software, AI projects, and hidden gems across 30 categories.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

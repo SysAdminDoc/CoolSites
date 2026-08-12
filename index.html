@@ -1422,10 +1422,26 @@
     align-items: center;
     justify-content: center;
   }
+  .modal-overlay:not([open]) { display: none; }
   .modal-overlay::backdrop {
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(4px);
   }
+  .data-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border: 1px solid color-mix(in srgb, var(--accent-amber) 35%, var(--border));
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--accent-amber) 8%, transparent);
+    font-size: 0.82rem;
+  }
+  .data-status[hidden] { display: none; }
+  .data-status button { flex: 0 0 auto; }
   .modal {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -1851,7 +1867,8 @@
 </style>
 <script>
 (function(){
-  var t = localStorage.getItem('coolsites-theme') || 'system';
+  var t = 'system';
+  try { t = localStorage.getItem('coolsites-theme') || 'system'; } catch (e) {}
   if (t === 'system') t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
   document.documentElement.setAttribute('data-theme', t);
 })();
@@ -2083,6 +2100,7 @@
       </button>
     </div>
   </div>
+  <div class="data-status" id="dataStatus" role="status" aria-live="polite" hidden></div>
   <div class="compare-tray" id="compareTray" hidden>
     <span id="compareCount">0 selected</span>
     <div class="compare-tray-actions">
@@ -2122,6 +2140,7 @@ let CATEGORIES = [];
 let CATEGORY_META = new Map();
 let STAR_COUNTS = {};
 let FAVICON_CACHE = {};
+let DATA_SOURCE = 'network';
 
 const DATA_FILES = {
   sites: './sites.json',
@@ -2134,6 +2153,7 @@ async function loadJson(url, fallback) {
   try {
     const response = await fetch(url, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+    if (response.headers.get('X-CoolSites-Cache') === 'cache') DATA_SOURCE = 'cache';
     return await response.json();
   } catch (error) {
     if (fallback !== undefined) return fallback;
@@ -2161,15 +2181,55 @@ async function loadAppData() {
 
 function showDataError(error) {
   const grid = document.getElementById('grid');
+  const fileProtocol = location.protocol === 'file:';
   document.getElementById('resultsCount').textContent = 'Data failed to load';
   grid.innerHTML = `
     <div class="empty-state" style="grid-column:1/-1">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <h3>Directory data could not be loaded</h3>
-      <p>Run CoolSites from a static web server so the browser can fetch sites.json and categories.json.</p>
+      <p>${fileProtocol ? 'Opening index.html directly is not supported. Run <code>npm run serve</code> from the repository, then open the printed address.' : 'Check the local server and reload so the browser can fetch sites.json and categories.json.'}</p>
+      <button class="empty-state-btn" type="button" id="dataRetryBtn">Retry</button>
     </div>
   `;
+  document.getElementById('dataRetryBtn').addEventListener('click', retryDataLoad);
   console.error(error);
+}
+
+function formatDataAge() {
+  const dates = SITES.map(site => Date.parse(site.updatedAt)).filter(Number.isFinite);
+  if (!dates.length) return 'an undated snapshot';
+  const newest = new Date(Math.max(...dates));
+  const ageDays = Math.max(0, Math.floor((Date.now() - newest.getTime()) / 86400000));
+  const formattedDate = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(newest);
+  return `${formattedDate} (${ageDays} day${ageDays === 1 ? '' : 's'} ago)`;
+}
+
+function showDataStatus() {
+  const status = document.getElementById('dataStatus');
+  if (DATA_SOURCE !== 'cache') {
+    status.hidden = true;
+    status.replaceChildren();
+    return;
+  }
+  status.hidden = false;
+  status.innerHTML = `<span>Offline: showing cached directory data last reviewed ${formatDataAge()}.</span><button class="empty-state-btn" type="button" id="dataStatusRetryBtn">Retry</button>`;
+  document.getElementById('dataStatusRetryBtn').addEventListener('click', retryDataLoad);
+}
+
+async function retryDataLoad() {
+  const buttons = document.querySelectorAll('#dataRetryBtn, #dataStatusRetryBtn');
+  buttons.forEach(button => { button.disabled = true; button.textContent = 'Retrying…'; });
+  DATA_SOURCE = 'network';
+  try {
+    await loadAppData();
+    buildFilters();
+    renderGrid();
+    renderDock();
+    showDataStatus();
+    showToast('Directory data refreshed');
+  } catch (error) {
+    showDataError(error);
+  }
 }
 
 
@@ -2771,7 +2831,7 @@ function updateThemeDropdown(activeId) {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem('coolsites-theme');
+  const saved = storageGet('coolsites-theme');
   const themeId = saved || 'system';
   applyTheme(themeId);
 }
@@ -2780,7 +2840,7 @@ function initTheme() {
 document.querySelectorAll('.theme-option').forEach(opt => {
   opt.addEventListener('click', () => {
     const themeId = opt.dataset.theme;
-    localStorage.setItem('coolsites-theme', themeId);
+    storageSet('coolsites-theme', themeId);
     applyTheme(themeId);
     document.getElementById('themeDropdown').hidePopover();
   });
@@ -2788,7 +2848,7 @@ document.querySelectorAll('.theme-option').forEach(opt => {
 
 // Listen for system theme changes
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-  const saved = localStorage.getItem('coolsites-theme');
+  const saved = storageGet('coolsites-theme');
   if (!saved || saved === 'system') applyTheme('system');
 });
 
@@ -2799,14 +2859,149 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ()
 const STORAGE_KEY = 'coolsites-bookmarks-v2';
 const GROUPS_KEY = 'coolsites-groups-v2';
 const DOCK_STATE_KEY = 'coolsites-dock-state';
+const STORAGE_SCHEMA_VERSION = 2;
+const MAX_BOOKMARKS = 1000;
+const MAX_GROUPS = 50;
+const MAX_IMPORT_BYTES = 1024 * 1024;
+const STORAGE_BACKUP_SUFFIX = ':last-good';
 
 const GROUP_COLORS = ['#f5a623','#6e56cf','#3ecf8e','#05c8e8','#e5484d','#ff78c6','#ff8c3c','#a9dc76','#64b4ff','#c864ff'];
 
+function getStorage() {
+  try { return window.localStorage; } catch { return null; }
+}
+
+function storageGet(key) {
+  try { return getStorage()?.getItem(key) ?? null; } catch { return null; }
+}
+
+function storageSet(key, value) {
+  try {
+    const storage = getStorage();
+    if (!storage) return false;
+    storage.setItem(key, String(value));
+    return true;
+  } catch { return false; }
+}
+
+function encodeStoredValue(value) {
+  return JSON.stringify({ schemaVersion: STORAGE_SCHEMA_VERSION, data: value });
+}
+
+function decodeStoredValue(raw) {
+  const parsed = JSON.parse(raw);
+  if (parsed && !Array.isArray(parsed) && typeof parsed === 'object' && 'data' in parsed) {
+    if (!Number.isInteger(parsed.schemaVersion) || parsed.schemaVersion > STORAGE_SCHEMA_VERSION) return null;
+    return parsed.data;
+  }
+  return parsed;
+}
+
+function readStoredValue(key, fallback) {
+  const storage = getStorage();
+  if (!storage) return fallback;
+  for (const candidate of [key, `${key}${STORAGE_BACKUP_SUFFIX}`]) {
+    try {
+      const raw = storage.getItem(candidate);
+      if (raw == null) continue;
+      const value = decodeStoredValue(raw);
+      if (value != null) return value;
+    } catch {}
+  }
+  return fallback;
+}
+
+function writeStoredValue(key, value) {
+  const storage = getStorage();
+  if (!storage) return false;
+  try {
+    const previous = storage.getItem(key);
+    if (previous != null) storage.setItem(`${key}${STORAGE_BACKUP_SUFFIX}`, previous);
+    storage.setItem(key, encodeStoredValue(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function isSafeBookmarkUrl(value) {
+  if (typeof value !== 'string' || value.length === 0 || value.length > 2048) return false;
+  try {
+    const parsed = new URL(value);
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:') && parsed.username === '' && parsed.password === '';
+  } catch { return false; }
+}
+
+function normalizeGroups(value) {
+  const result = [];
+  let skipped = 0;
+  if (value != null && !Array.isArray(value)) return { groups: [{ id: 'default', name: 'Favorites', color: GROUP_COLORS[0] }], skipped: 1 };
+  const source = Array.isArray(value) ? value : [];
+  source.slice(0, MAX_GROUPS).forEach(group => {
+    if (!group || typeof group !== 'object') { skipped++; return; }
+    const id = typeof group.id === 'string' ? group.id.trim() : '';
+    const name = typeof group.name === 'string' ? group.name.trim() : '';
+    const color = typeof group.color === 'string' ? group.color.trim() : '';
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !name || name.length > 80 || !/^#[0-9A-Fa-f]{6}$/.test(color) || result.some(existing => existing.id === id)) {
+      skipped++;
+      return;
+    }
+    result.push({ id, name, color });
+  });
+  skipped += Math.max(0, source.length - MAX_GROUPS);
+  if (!result.some(group => group.id === 'default')) result.unshift({ id: 'default', name: 'Favorites', color: GROUP_COLORS[0] });
+  return { groups: result.slice(0, MAX_GROUPS), skipped };
+}
+
+function normalizeBookmarks(value, groupIds, knownUrls) {
+  const result = {};
+  let skipped = 0;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return { bookmarks: result, skipped: 1 };
+  Object.entries(value).slice(0, MAX_BOOKMARKS).forEach(([url, bookmark]) => {
+    if (!isSafeBookmarkUrl(url) || (knownUrls && !knownUrls.has(url)) || !bookmark || typeof bookmark !== 'object' || Array.isArray(bookmark)) {
+      skipped++;
+      return;
+    }
+    const group = typeof bookmark.group === 'string' ? bookmark.group : '';
+    const order = bookmark.order == null ? 0 : bookmark.order;
+    const addedAt = bookmark.addedAt == null ? Date.now() : bookmark.addedAt;
+    if (!groupIds.has(group) || !Number.isSafeInteger(order) || order < 0 || order > MAX_BOOKMARKS || !Number.isFinite(addedAt) || addedAt < 0) {
+      skipped++;
+      return;
+    }
+    result[url] = { group, order, addedAt };
+  });
+  skipped += Math.max(0, Object.keys(value).length - MAX_BOOKMARKS);
+  return { bookmarks: result, skipped };
+}
+
+function persistBookmarkState(nextBookmarks, nextGroups) {
+  const storage = getStorage();
+  if (!storage) return false;
+  const oldBookmarks = storageGet(STORAGE_KEY);
+  const oldGroups = storageGet(GROUPS_KEY);
+  try {
+    if (oldBookmarks != null) storage.setItem(`${STORAGE_KEY}${STORAGE_BACKUP_SUFFIX}`, oldBookmarks);
+    if (oldGroups != null) storage.setItem(`${GROUPS_KEY}${STORAGE_BACKUP_SUFFIX}`, oldGroups);
+    storage.setItem(STORAGE_KEY, encodeStoredValue(nextBookmarks));
+    storage.setItem(GROUPS_KEY, encodeStoredValue(nextGroups));
+    return true;
+  } catch {
+    try {
+      if (oldBookmarks == null) storage.removeItem(STORAGE_KEY);
+      else storage.setItem(STORAGE_KEY, oldBookmarks);
+      if (oldGroups == null) storage.removeItem(GROUPS_KEY);
+      else storage.setItem(GROUPS_KEY, oldGroups);
+    } catch {}
+    return false;
+  }
+}
+
 // ── Data Migration from v1 ──
 (function migrateV1() {
-  const oldBm = localStorage.getItem('coolsites-bookmarks');
-  const oldGr = localStorage.getItem('coolsites-groups');
-  if (oldBm && !localStorage.getItem(STORAGE_KEY)) {
+  const oldBm = storageGet('coolsites-bookmarks');
+  const oldGr = storageGet('coolsites-groups');
+  if (oldBm && !storageGet(STORAGE_KEY)) {
     try {
       const bm = JSON.parse(oldBm);
       // Convert v1 format { url: { group, addedAt } } to v2 { url: { group, order, addedAt } }
@@ -2814,27 +3009,34 @@ const GROUP_COLORS = ['#f5a623','#6e56cf','#3ecf8e','#05c8e8','#e5484d','#ff78c6
       Object.keys(bm).forEach(url => {
         if (!bm[url].order && bm[url].order !== 0) bm[url].order = order++;
       });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(bm));
+      writeStoredValue(STORAGE_KEY, bm);
     } catch(e) {}
   }
-  if (oldGr && !localStorage.getItem(GROUPS_KEY)) {
-    try { localStorage.setItem(GROUPS_KEY, oldGr); } catch(e) {}
+  if (oldGr && !storageGet(GROUPS_KEY)) {
+    try { writeStoredValue(GROUPS_KEY, JSON.parse(oldGr)); } catch(e) {}
   }
 })();
 
 // ── State ──
-function safeParse(key, fallback) {
-  try { const v = JSON.parse(localStorage.getItem(key)); return v != null ? v : fallback; }
-  catch { return fallback; }
-}
-let bookmarks = safeParse(STORAGE_KEY, {});
-let groups = safeParse(GROUPS_KEY, null) || [
-  { id: 'default', name: 'Favorites', color: '#f5a623' }
-];
-let dockCollapsed = localStorage.getItem(DOCK_STATE_KEY) === 'collapsed';
+const normalizedGroups = normalizeGroups(readStoredValue(GROUPS_KEY, []));
+let groups = normalizedGroups.groups;
+const normalizedBookmarks = normalizeBookmarks(readStoredValue(STORAGE_KEY, {}), new Set(groups.map(group => group.id)));
+let bookmarks = normalizedBookmarks.bookmarks;
+let dockCollapsed = storageGet(DOCK_STATE_KEY) === 'collapsed';
 
-function saveBookmarks() { localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks)); }
-function saveGroups() { localStorage.setItem(GROUPS_KEY, JSON.stringify(groups)); }
+function saveBookmarks(next = bookmarks) {
+  if (writeStoredValue(STORAGE_KEY, next)) return true;
+  bookmarks = normalizeBookmarks(readStoredValue(STORAGE_KEY, {}), new Set(groups.map(group => group.id))).bookmarks;
+  showToast('Bookmarks could not be saved');
+  return false;
+}
+
+function saveGroups(next = groups) {
+  if (writeStoredValue(GROUPS_KEY, next)) return true;
+  groups = normalizeGroups(readStoredValue(GROUPS_KEY, [])).groups;
+  showToast('Groups could not be saved');
+  return false;
+}
 function isBookmarked(url) { return !!bookmarks[url]; }
 
 function getGroupSites(groupId) {
@@ -2870,7 +3072,7 @@ function toggleBookmark(url, groupId) {
 }
 
 function moveToGroup(url, newGroupId) {
-  if (!bookmarks[url]) return;
+  if (!bookmarks[url] || !groups.some(group => group.id === newGroupId)) return;
   const oldGroup = bookmarks[url].group;
   bookmarks[url].group = newGroupId;
   bookmarks[url].order = getNextOrder(newGroupId);
@@ -2917,12 +3119,15 @@ function renderDock() {
   wrapper.classList.remove('empty');
   wrapper.classList.toggle('collapsed', dockCollapsed);
 
-  // Reassign orphaned bookmarks
+  // Reassign orphaned bookmarks without allowing an invalid imported group to reach the DOM.
+  let reassigned = false;
   Object.keys(bookmarks).forEach(url => {
     if (!groups.find(g => g.id === bookmarks[url].group)) {
       bookmarks[url].group = groups[0]?.id || 'default';
+      reassigned = true;
     }
   });
+  if (reassigned) saveBookmarks();
 
   let html = '';
   groups.forEach((group, gi) => {
@@ -2931,22 +3136,23 @@ function renderDock() {
     const chips = siteUrls.map(url => {
       const site = getSiteByUrl(url);
       if (!site) return '';
+      const siteUrl = escAttr(site.url);
       return `
-        <div class="site-chip" draggable="true" data-url="${site.url}" data-group="${group.id}" title="${site.name} — ${site.description}">
-          <img src="${getFavicon(site.url)}" alt="" width="14" height="14" data-fallback="${getFaviconFallback(site.url)}" class="favicon-img" draggable="false">
-          <span class="chip-text">${site.name}</span>
-          <a href="${site.url}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
-          <button class="chip-remove" data-dock-action="remove" data-url="${escAttr(site.url)}" title="Remove bookmark">&times;</button>
+        <div class="site-chip" draggable="true" data-url="${siteUrl}" data-group="${escAttr(group.id)}" title="${escAttr(`${site.name} — ${site.description}`)}">
+          <img src="${escAttr(getFavicon(site.url))}" alt="" width="14" height="14" data-fallback="${escAttr(getFaviconFallback(site.url))}" class="favicon-img" draggable="false">
+          <span class="chip-text">${escHtml(site.name)}</span>
+          <a href="${siteUrl}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
+          <button class="chip-remove" data-dock-action="remove" data-url="${siteUrl}" title="Remove bookmark">&times;</button>
         </div>
       `;
     }).join('');
 
     html += `
-      <div class="dock-group" data-group-id="${group.id}" data-group-index="${gi}" draggable="true">
-        <div class="dock-group-header" data-group-drag="${group.id}">
+      <div class="dock-group" data-group-id="${escAttr(group.id)}" data-group-index="${gi}" draggable="true">
+        <div class="dock-group-header" data-group-drag="${escAttr(group.id)}">
           <span class="dock-group-name">
             <span class="drag-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg></span>
-            <span class="group-color" style="background: ${group.color}"></span>
+            <span class="group-color" style="background: ${escAttr(group.color)}"></span>
             ${escHtml(group.name)}
             <span class="group-chip-count">(${siteUrls.length})</span>
           </span>
@@ -2959,7 +3165,7 @@ function renderDock() {
             </button>` : ''}
           </div>
         </div>
-        <div class="dock-group-sites" data-drop-group="${group.id}">
+        <div class="dock-group-sites" data-drop-group="${escAttr(group.id)}">
           ${chips || '<span class="dock-empty-hint">Drag sites here or bookmark from cards below</span>'}
         </div>
       </div>
@@ -3260,8 +3466,9 @@ function closeGroupModal() {
 }
 
 function saveGroupFromModal() {
-  const name = document.getElementById('groupNameInput').value.trim();
+  const name = document.getElementById('groupNameInput').value.trim().slice(0, 80);
   if (!name) return;
+  const wasEditing = Boolean(editingGroupId);
 
   if (editingGroupId) {
     const g = groups.find(g => g.id === editingGroupId);
@@ -3270,10 +3477,10 @@ function saveGroupFromModal() {
     const id = 'g_' + Date.now();
     groups.push({ id, name, color: selectedColor });
   }
-  saveGroups();
+  if (!saveGroups()) return;
   closeGroupModal();
   renderDock();
-  showToast(editingGroupId ? 'Group updated' : 'Group created');
+  showToast(wasEditing ? 'Group updated' : 'Group created');
 }
 
 function deleteGroup(id) {
@@ -3304,8 +3511,8 @@ function showAssignDropdown(url, btnEl) {
   const dd = document.createElement('div');
   dd.className = 'assign-dropdown open';
   dd.innerHTML = groups.map(g => `
-    <button class="assign-option ${bookmarks[url]?.group === g.id ? 'active' : ''}" data-gid="${g.id}">
-      <span class="group-color" style="background: ${g.color}"></span>
+    <button class="assign-option ${bookmarks[url]?.group === g.id ? 'active' : ''}" data-gid="${escAttr(g.id)}">
+      <span class="group-color" style="background: ${escAttr(g.color)}"></span>
       ${escHtml(g.name)}
     </button>
   `).join('');
@@ -3340,7 +3547,7 @@ function showAssignDropdown(url, btnEl) {
 // Dock toggle
 document.getElementById('dockToggle').addEventListener('click', () => {
   dockCollapsed = !dockCollapsed;
-  localStorage.setItem(DOCK_STATE_KEY, dockCollapsed ? 'collapsed' : 'expanded');
+  storageSet(DOCK_STATE_KEY, dockCollapsed ? 'collapsed' : 'expanded');
   document.getElementById('dockWrapper').classList.toggle('collapsed', dockCollapsed);
   document.getElementById('dockToggle').setAttribute('aria-expanded', String(!dockCollapsed));
 });
@@ -3393,7 +3600,13 @@ document.getElementById('randomBtn').addEventListener('click', () => {
 
 // ── Bookmark export/import ──
 document.getElementById('exportBtn').addEventListener('click', () => {
-  const data = { bookmarks, groups, exportedAt: new Date().toISOString() };
+  const data = {
+    app: 'coolsites-bookmarks',
+    schemaVersion: STORAGE_SCHEMA_VERSION,
+    bookmarks,
+    groups,
+    exportedAt: new Date().toISOString()
+  };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -3408,31 +3621,44 @@ document.getElementById('importBtn').addEventListener('click', () => {
 document.getElementById('importFile').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
+  if (file.size > MAX_IMPORT_BYTES) {
+    showToast('Import rejected: file exceeds the 1 MB limit');
+    e.target.value = '';
+    return;
+  }
   const reader = new FileReader();
   reader.onload = () => {
     try {
       const data = JSON.parse(reader.result);
-      if (data.bookmarks && typeof data.bookmarks === 'object') {
-        let imported = 0;
-        Object.entries(data.bookmarks).forEach(([url, bm]) => {
-          if (url && typeof bm === 'object' && bm.group) {
-            bookmarks[url] = { group: bm.group, order: bm.order ?? 0, addedAt: bm.addedAt ?? Date.now() };
-            imported++;
-          }
-        });
-        if (imported) saveBookmarks();
+      if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('invalid shape');
+      if (!data.bookmarks || typeof data.bookmarks !== 'object' || Array.isArray(data.bookmarks)) throw new Error('invalid shape');
+      const version = data.schemaVersion == null ? 1 : data.schemaVersion;
+      if (!Number.isInteger(version) || version < 1 || version > STORAGE_SCHEMA_VERSION) throw new Error('unsupported version');
+
+      const importedGroups = normalizeGroups(data.groups);
+      const nextGroups = groups.map(group => ({ ...group }));
+      importedGroups.groups.forEach(group => {
+        if (!nextGroups.some(existing => existing.id === group.id)) nextGroups.push(group);
+      });
+      const knownUrls = new Set(SITES.map(site => site.url));
+      const importedBookmarks = normalizeBookmarks(data.bookmarks, new Set(nextGroups.map(group => group.id)), knownUrls);
+      const nextBookmarks = { ...bookmarks, ...importedBookmarks.bookmarks };
+      const skipped = importedGroups.skipped + importedBookmarks.skipped;
+      if (!Object.keys(importedBookmarks.bookmarks).length && importedGroups.skipped > 0) throw new Error('no valid entries');
+      if (!persistBookmarkState(nextBookmarks, nextGroups)) {
+        showToast('Import could not be saved; previous bookmarks were kept');
+        return;
       }
-      if (Array.isArray(data.groups)) {
-        data.groups.forEach(g => {
-          if (g && g.id && g.name && !groups.find(eg => eg.id === g.id)) groups.push(g);
-        });
-        saveGroups();
-      }
+      bookmarks = nextBookmarks;
+      groups = nextGroups;
       renderDock();
       renderGrid();
       buildFilters();
-      showToast(`Imported ${Object.keys(data.bookmarks || {}).length} bookmarks`);
-    } catch { showToast('Invalid bookmark file'); }
+      const accepted = Object.keys(importedBookmarks.bookmarks).length;
+      showToast(`Imported ${accepted} bookmark${accepted === 1 ? '' : 's'}${skipped ? `; skipped ${skipped} invalid entr${skipped === 1 ? 'y' : 'ies'}` : ''}`);
+    } catch (error) {
+      showToast(error.message === 'unsupported version' ? 'Import rejected: unsupported schema version' : 'Invalid bookmark file');
+    }
     e.target.value = '';
   };
   reader.readAsText(file);
@@ -3493,14 +3719,18 @@ async function boot() {
     buildFilters();
     renderGrid();
     renderDock();
+    showDataStatus();
   } catch (error) {
     showDataError(error);
     return;
   }
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
+}
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('./sw.js').catch(error => {
+    console.warn('CoolSites offline cache unavailable:', error);
+  });
 }
 
 boot();

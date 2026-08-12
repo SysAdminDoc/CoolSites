@@ -1,6 +1,6 @@
 # CoolSites
 
-![Version](https://img.shields.io/badge/version-2.1.1-blue)
+![Version](https://img.shields.io/badge/version-2.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Sites](https://img.shields.io/badge/sites-589-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
@@ -31,11 +31,11 @@
 - **Web Share** — native share sheet on supported devices
 - **Wayback Machine** — one-click archive lookup on every card
 - **Back-to-top** — appears after scrolling, returns to search
-- **Zero dependencies** — single HTML file, no frameworks, no build step, no backend
+- **Zero runtime dependencies** — static HTML, JSON, CSS, and JavaScript; no framework or backend
 - **Responsive** — desktop, tablet (1024px breakpoint), and mobile layouts
 - **Accessible** — ARIA roles, live regions, focus management, skip-to-content, forced-colors support, reduced-motion support
-- **Favicon fallback** — Google → DuckDuckGo → initial letter
-- **Self-hostable** — drop `index.html` anywhere and it just works
+- **Favicon fallback** — locally cached icons first, then Google → DuckDuckGo → initial letter
+- **Self-hostable** — serve the repository from GitHub Pages, Nginx, Docker, or the included local server
 
 ## Categories
 
@@ -74,7 +74,7 @@
 
 ## Quick Start
 
-CoolSites is a single HTML file — no build tools, no dependencies, no server required.
+CoolSites is a static site with no runtime dependencies. The directory loads its validated data from companion JSON files, so use an HTTP server for local development.
 
 ### GitHub Pages (recommended)
 
@@ -88,20 +88,20 @@ CoolSites is a single HTML file — no build tools, no dependencies, no server r
 ```bash
 git clone https://github.com/SysAdminDoc/CoolSites.git
 cd CoolSites
-open index.html
+npm run serve
 ```
 
-Or just download `index.html` and open it in any browser.
+Open the printed `http://127.0.0.1:4173/` address. Opening `index.html` directly with `file://` cannot load the companion JSON files in browsers that restrict local fetches; the page displays this local-server instruction if attempted.
 
 ### Self-hosted
 
-Drop `index.html` into any web server's document root. Works with Nginx, Apache, Caddy, or even `python3 -m http.server`.
+Copy the repository contents into any web server's document root. Works with Nginx, Apache, Caddy, or `python3 -m http.server`.
 
 ## How It Works
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   SITES Array    │────>│   Filter Engine  │────>│   Card Renderer  │
+│   sites.json     │────>│   Filter Engine  │────>│   Card Renderer  │
 │                  │     │                  │     │                  │
 │  589 entries     │     │  Category match  │     │  Grid / List     │
 │  Name, URL,      │     │  + Fuzzy search  │     │  + View Trans.   │
@@ -110,18 +110,18 @@ Drop `index.html` into any web server's document root. Works with Nginx, Apache,
 └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
-Everything lives in a single `index.html`:
+The runtime stays dependency-free while data and generated feeds live beside `index.html`:
 - **CSS** — 10 themes via custom properties, glassmorphism, responsive grid, forced-colors support
 - **HTML** — semantic structure with ARIA, skip link, native `<dialog>`, `<noscript>` fallback
 - **JavaScript** — fuzzy search, metadata filters, bookmark engine with groups and drag-drop, URL state, view transitions
 
-No tracking. No cookies. No analytics. External calls: Google Favicons (with DuckDuckGo fallback) and Google Fonts.
+No tracking. No cookies. No analytics. Most favicon metadata is bundled locally; uncached icons may use Google or DuckDuckGo fallback endpoints.
 
 ## Adding Sites
 
 The easiest way is to [open a submission issue](https://github.com/SysAdminDoc/CoolSites/issues/new?template=submit-site.yml) — fill in the form and we'll add it.
 
-To contribute directly, edit the `SITES` array inside `index.html`:
+To contribute directly, edit `sites.json` and run `npm run lint`:
 
 ```javascript
 {
@@ -145,7 +145,7 @@ To contribute directly, edit the `SITES` array inside `index.html`:
 | Fonts | Outfit (display) + JetBrains Mono (monospace) |
 | Icons | Inline SVGs + Google Favicon API + DuckDuckGo fallback |
 | Hosting | GitHub Pages (static) |
-| CI | Lighthouse CI + weekly lychee link checker |
+| Local tooling | Node.js 20+ lint, build, package, and server scripts |
 
 ## Keyboard Shortcuts
 
@@ -163,7 +163,7 @@ To contribute directly, edit the `SITES` array inside `index.html`:
 Contributions are welcome. To add a site:
 
 1. Fork the repository
-2. Add your entry to the `SITES` array in `index.html`
+2. Add your entry to `sites.json`
 3. Ensure the URL is valid and the description is concise
 4. Submit a pull request
 
