@@ -2,12 +2,12 @@
 
 ![Version](https://img.shields.io/badge/version-2.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Sites](https://img.shields.io/badge/sites-589-blueviolet)
+![Sites](https://img.shields.io/badge/sites-590-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
-> The ultimate curated directory of 589 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
+> The ultimate curated directory of 590 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
@@ -15,7 +15,7 @@
 
 ## Features
 
-- **589 curated sites** across 30 categories — every entry hand-picked and described
+- **590 curated sites** across 30 categories — every entry hand-picked and described
 - **Fuzzy search** with match highlighting — typo-tolerant, ranked by relevance
 - **Category filters** with live counts — drill into any category instantly
 - **Metadata filters** — toggle open source only or no account required views
@@ -103,7 +103,7 @@ Copy the repository contents into any web server's document root. Works with Ngi
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   sites.json     │────>│   Filter Engine  │────>│   Card Renderer  │
 │                  │     │                  │     │                  │
-│  589 entries     │     │  Category match  │     │  Grid / List     │
+│  590 entries     │     │  Category match  │     │  Grid / List     │
 │  Name, URL,      │     │  + Fuzzy search  │     │  + View Trans.   │
 │  Desc, Tags,     │     │  + Sort modes    │     │  + Lazy favicons │
 │  Metadata        │     │  + Metadata      │     │                  │
@@ -179,6 +179,6 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 589 sites and counting.
+**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 590 sites and counting.
 
 https://sysadmindoc.github.io/CoolSites/

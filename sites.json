@@ -8495,5 +8495,21 @@
       "illustration",
       "logos"
     ]
+  },
+  {
+    "name": "Agent QA",
+    "url": "https://github.com/vostride/agent-qa",
+    "description": "Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage.",
+    "category": "Dev Tools",
+    "openSource": false,
+    "requiresAuth": true,
+    "updatedAt": "2026-08-16",
+    "tags": [
+      "ai",
+      "qa",
+      "testing",
+      "automation",
+      "mcp"
+    ]
   }
 ]
