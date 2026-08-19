@@ -2868,6 +2868,21 @@
     ]
   },
   {
+    "name": "Zero Dollar Domains",
+    "url": "https://arynjennen1989-stack.github.io/",
+    "description": "Live RDAP hunter for unused cheap TLD names plus a catalog of still-free domain programs (eu.org, is-a.dev). Not an expired-.com dump.",
+    "category": "DNS Tools",
+    "openSource": true,
+    "requiresAuth": false,
+    "updatedAt": "2026-08-19",
+    "tags": [
+      "rdap",
+      "whois",
+      "domains",
+      "dns"
+    ]
+  },
+  {
     "name": "Pentest-Tools",
     "url": "https://pentest-tools.com",
     "description": "Online penetration testing toolkit. Subdomain finder, port scanner, CMS detection, and vulnerability scanning.",
