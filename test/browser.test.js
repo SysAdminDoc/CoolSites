@@ -9,6 +9,7 @@ const { test } = require('node:test');
 
 const ROOT = path.resolve(__dirname, '..');
 const WAIT_STEP_MS = 100;
+const SITES = JSON.parse(fs.readFileSync(path.join(ROOT, 'sites.json'), 'utf8'));
 
 test('CoolSites golden path works in a real browser', { timeout: 90000 }, async () => {
   let server = await startLocalServer();
@@ -54,7 +55,46 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       input.dispatchEvent(new Event('input', { bubbles: true }));
     })()`);
     await waitFor(page, "document.querySelector('#grid .card .card-title')?.textContent.includes('Cloudflare')");
-    assert.match(await page.evaluate("document.getElementById('resultsCount').textContent"), /of 590/);
+    const searchResults = await page.evaluate("document.querySelectorAll('#grid .card').length");
+    assert.ok(searchResults > 0, 'a real query should return matches');
+    assert.ok(
+      searchResults < SITES.length / 2,
+      `a single-word query should narrow the directory, got ${searchResults} of ${SITES.length}`
+    );
+    const searchNames = await page.evaluate("[...document.querySelectorAll('#grid .card-title')].map(node => node.textContent.trim())");
+    assert.ok(searchNames[0].toLowerCase().includes('cloudflare'), 'the best name match should rank first');
+
+    // Every token has to match, so adding a word narrows rather than widens.
+    await page.evaluate(`(() => {
+      const input = document.getElementById('searchInput');
+      input.value = 'cloudflare speed';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    })()`);
+    await delay(400);
+    const narrowed = await page.evaluate("document.querySelectorAll('#grid .card').length");
+    assert.ok(narrowed > 0 && narrowed <= searchResults, `extra tokens must narrow: ${narrowed} vs ${searchResults}`);
+
+    // Search must survive regex metacharacters and ampersands in the highlighter.
+    for (const probe of ['a+b(', '&', 'c*']) {
+      await page.evaluate(`(() => {
+        const input = document.getElementById('searchInput');
+        input.value = ${JSON.stringify(probe)};
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      })()`);
+      await delay(300);
+      assert.equal(
+        await page.evaluate("document.getElementById('resultsCount').textContent.includes('Data failed')"),
+        false,
+        `search must not break on ${probe}`
+      );
+    }
+
+    // A hostile category in the URL used to reach querySelector unescaped.
+    await page.send('Page.navigate', { url: `${server.url}?cat=${encodeURIComponent('a"]')}` });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+    assert.equal(await page.evaluate("document.querySelectorAll('.filter-btn.active').length"), 1, 'an unknown category must fall back to All');
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
 
     await page.evaluate(`(() => {
       const input = document.getElementById('searchInput');
@@ -71,8 +111,53 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       return names[0] === [...names].sort((a, b) => a.localeCompare(b))[0];
     })()`), true, 'A-Z sort should reorder the visible cards');
 
+    await page.evaluate(`(() => {
+      const first = document.querySelector('#grid .card .card-url');
+      first.focus();
+      first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    })()`);
+    assert.ok(
+      await page.evaluate("document.activeElement.classList.contains('card-url')"),
+      'arrow navigation should focus the site link so Enter opens it'
+    );
+
     await page.evaluate("document.querySelector('.theme-option[data-theme=\"light\"]').click()");
     assert.equal(await page.evaluate("document.documentElement.dataset.theme"), 'light');
+    assert.equal(
+      await page.evaluate("document.querySelector('.theme-option[data-theme=\"light\"]').getAttribute('aria-checked')"),
+      'true',
+      'the selected theme should report its state'
+    );
+
+    // Every theme has to keep body text readable against the body background.
+    const contrast = await page.evaluate(`(() => {
+      const themes = ['oled','catppuccin','dracula','rose-pine','nord','github-dark','midnight','solarized','light'];
+      const previous = document.documentElement.dataset.theme;
+      const parse = value => {
+        const parts = (value.match(/[\\d.]+/g) || ['0', '0', '0']).map(Number);
+        return parts.slice(0, 3);
+      };
+      const channel = c => { const s = c / 255; return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4); };
+      const luminance = rgb => 0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2]);
+      const ratio = (a, b) => {
+        const la = luminance(a), lb = luminance(b);
+        return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+      };
+      const failures = [];
+      for (const theme of themes) {
+        document.documentElement.dataset.theme = theme;
+        const body = parse(getComputedStyle(document.body).backgroundColor);
+        for (const selector of ['.card-title', '.card-desc', '.results-count', '.footer p']) {
+          const node = document.querySelector(selector);
+          if (!node) continue;
+          const value = ratio(parse(getComputedStyle(node).color), body);
+          if (value < 4.5) failures.push(theme + ' ' + selector + ' ' + value.toFixed(2));
+        }
+      }
+      document.documentElement.dataset.theme = previous;
+      return failures;
+    })()`);
+    assert.deepEqual(contrast, [], 'body text must clear WCAG AA in every theme');
 
     await page.evaluate("document.querySelector('#compareModeBtn').click()");
     await waitFor(page, "document.querySelectorAll('[data-action=compare]').length >= 2");
@@ -90,6 +175,16 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       return { schemaVersion: stored.schemaVersion, hasBookmark: Boolean(stored.data['${escapeForExpression(firstUrl)}']) };
     })()`);
     assert.deepEqual(savedBookmark, { schemaVersion: 2, hasBookmark: true });
+
+    await page.evaluate("document.querySelector('.site-chip .chip-remove').click()");
+    await waitFor(page, "!document.getElementById('toastAction').hidden");
+    await page.evaluate("document.getElementById('toastAction').click()");
+    await waitFor(page, `Object.keys(JSON.parse(localStorage.getItem('coolsites-bookmarks-v2')).data).length === 1`);
+    assert.equal(
+      await page.evaluate("document.querySelectorAll('.site-chip').length"),
+      1,
+      'undo should restore a removed bookmark'
+    );
 
     await page.evaluate("localStorage.setItem('coolsites-bookmarks-v2', '{broken')");
     await page.send('Page.reload', { ignoreCache: true });
@@ -189,7 +284,11 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     if (connection) connection.close();
     await stopProcess(chrome.process);
     await stopProcess(server.process);
-    fs.rmSync(chrome.profile, { recursive: true, force: true });
+    // Windows keeps the profile locked briefly after Chrome exits. A leftover
+    // temp directory is not a test failure, so never let cleanup throw.
+    try {
+      fs.rmSync(chrome.profile, { recursive: true, force: true, maxRetries: 20, retryDelay: 250 });
+    } catch {}
   }
 });
 

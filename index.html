@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="CoolSites v2.2.1">
 <title>CoolSites | Curated Web Tools & Resources</title>
-<meta name="description" content="The ultimate directory of 590 free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<meta name="description" content="A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.">
 <meta property="og:title" content="CoolSites — Curated Web Tools & Resources">
-<meta property="og:description" content="590 curated free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<meta property="og:description" content="588 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sysadmindoc.github.io/CoolSites/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoolSites — Curated Web Tools & Resources">
-<meta name="twitter:description" content="590 curated free tools, open source software, AI projects, and hidden gems across 30 categories.">
+<meta name="twitter:description" content="588 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='16' fill='white'%3E//%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <link rel="alternate" type="application/atom+xml" title="CoolSites Recently Added" href="feeds/recent.atom">
@@ -20,7 +21,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"CoolSites","url":"https://sysadmindoc.github.io/CoolSites/","description":"Curated directory of 590 free tools, open source software, AI projects, and hidden gems across 30 categories.","potentialAction":{"@type":"SearchAction","target":"https://sysadmindoc.github.io/CoolSites/?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"CoolSites","url":"https://sysadmindoc.github.io/CoolSites/","description":"A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.","potentialAction":{"@type":"SearchAction","target":"https://sysadmindoc.github.io/CoolSites/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <style>
   /* Self-hosted fonts — eliminates Google Fonts CDN dependency */
@@ -78,7 +79,7 @@
     --border-hover: rgba(255, 255, 255, 0.12);
     --text-primary: #e8e9ed;
     --text-secondary: #8b8d98;
-    --text-muted: #5a5c66;
+    --text-muted: #7c7f8b;
     --accent: #6e56cf;
     --accent-glow: rgba(110, 86, 207, 0.25);
     --accent-secondary: #3ecf8e;
@@ -93,7 +94,10 @@
     --glow-cyan: var(--accent-cyan);
 
     --card-shadow: rgba(0,0,0,0.3);
-    --filter-active-text: #fff;
+    --on-accent: #ffffff;
+    --accent-text: #8470d6;
+    --amber-text: #f5a623;
+    --danger-text: #e5484d;
   }
 
   /* ── Catppuccin Mocha ── */
@@ -107,7 +111,7 @@
     --border-hover: rgba(205, 214, 244, 0.15);
     --text-primary: #cdd6f4;
     --text-secondary: #a6adc8;
-    --text-muted: #6c7086;
+    --text-muted: #8a8da0;
     --accent: #cba6f7;
     --accent-glow: rgba(203, 166, 247, 0.2);
     --accent-secondary: #a6e3a1;
@@ -122,7 +126,10 @@
     --glow-cyan: #89dceb;
 
     --card-shadow: rgba(0,0,0,0.25);
-    --filter-active-text: #1e1e2e;
+    --on-accent: #1e1e2e;
+    --accent-text: #cba6f7;
+    --amber-text: #f9e2af;
+    --danger-text: #f38ba8;
   }
 
   /* ── Nord ── */
@@ -136,7 +143,7 @@
     --border-hover: rgba(216, 222, 233, 0.15);
     --text-primary: #eceff4;
     --text-secondary: #d8dee9;
-    --text-muted: #7b88a1;
+    --text-muted: #a8b0c1;
     --accent: #88c0d0;
     --accent-glow: rgba(136, 192, 208, 0.2);
     --accent-secondary: #a3be8c;
@@ -151,7 +158,10 @@
     --glow-cyan: #88c0d0;
 
     --card-shadow: rgba(0,0,0,0.25);
-    --filter-active-text: #2e3440;
+    --on-accent: #2e3440;
+    --accent-text: #88c0d0;
+    --amber-text: #eed29a;
+    --danger-text: #d9a2a8;
   }
 
   /* ── Dracula ── */
@@ -165,7 +175,7 @@
     --border-hover: rgba(248, 248, 242, 0.14);
     --text-primary: #f8f8f2;
     --text-secondary: #c0bfbc;
-    --text-muted: #6272a4;
+    --text-muted: #8e99bd;
     --accent: #bd93f9;
     --accent-glow: rgba(189, 147, 249, 0.2);
     --accent-secondary: #50fa7b;
@@ -180,7 +190,10 @@
     --glow-cyan: #8be9fd;
 
     --card-shadow: rgba(0,0,0,0.3);
-    --filter-active-text: #282a36;
+    --on-accent: #282a36;
+    --accent-text: #bd93f9;
+    --amber-text: #f1fa8c;
+    --danger-text: #ff6969;
   }
 
   /* ── GitHub Dark ── */
@@ -194,7 +207,7 @@
     --border-hover: rgba(240, 246, 252, 0.12);
     --text-primary: #e6edf3;
     --text-secondary: #8b949e;
-    --text-muted: #525a63;
+    --text-muted: #7a8591;
     --accent: #58a6ff;
     --accent-glow: rgba(88, 166, 255, 0.2);
     --accent-secondary: #3fb950;
@@ -209,7 +222,10 @@
     --glow-cyan: #39d2f5;
 
     --card-shadow: rgba(0,0,0,0.35);
-    --filter-active-text: #fff;
+    --on-accent: #0d1117;
+    --accent-text: #58a6ff;
+    --amber-text: #d29922;
+    --danger-text: #f85149;
   }
 
   /* ── Midnight Blue ── */
@@ -223,7 +239,7 @@
     --border-hover: rgba(120, 160, 255, 0.15);
     --text-primary: #e0e6f0;
     --text-secondary: #8892a8;
-    --text-muted: #505870;
+    --text-muted: #7b84a1;
     --accent: #5b8def;
     --accent-glow: rgba(91, 141, 239, 0.2);
     --accent-secondary: #4ecdc4;
@@ -238,7 +254,10 @@
     --glow-cyan: #45b7d1;
 
     --card-shadow: rgba(0,0,0,0.35);
-    --filter-active-text: #fff;
+    --on-accent: #0a0e1a;
+    --accent-text: #5b8def;
+    --amber-text: #ffd93d;
+    --danger-text: #ff6b6b;
   }
 
   /* ── Solarized Dark ── */
@@ -252,7 +271,7 @@
     --border-hover: rgba(131, 148, 150, 0.22);
     --text-primary: #fdf6e3;
     --text-secondary: #93a1a1;
-    --text-muted: #657b83;
+    --text-muted: #8a9ea5;
     --accent: #268bd2;
     --accent-glow: rgba(38, 139, 210, 0.2);
     --accent-secondary: #859900;
@@ -267,7 +286,10 @@
     --glow-cyan: #2aa198;
 
     --card-shadow: rgba(0,0,0,0.3);
-    --filter-active-text: #fdf6e3;
+    --on-accent: #00212b;
+    --accent-text: #4aa1de;
+    --amber-text: #c9a945;
+    --danger-text: #e87977;
   }
 
   /* ── Light ── */
@@ -281,7 +303,7 @@
     --border-hover: rgba(0, 0, 0, 0.15);
     --text-primary: #1a1d26;
     --text-secondary: #5a5e6e;
-    --text-muted: #8c8fa0;
+    --text-muted: #6c6f83;
     --accent: #6e56cf;
     --accent-glow: rgba(110, 86, 207, 0.12);
     --accent-secondary: #2a9d6e;
@@ -296,7 +318,10 @@
     --glow-cyan: #0891b2;
 
     --card-shadow: rgba(0,0,0,0.06);
-    --filter-active-text: #fff;
+    --on-accent: #ffffff;
+    --accent-text: #6e56cf;
+    --amber-text: #886200;
+    --danger-text: #d13438;
   }
 
   /* ── Rosé Pine ── */
@@ -310,7 +335,7 @@
     --border-hover: rgba(224, 222, 244, 0.14);
     --text-primary: #e0def4;
     --text-secondary: #908caa;
-    --text-muted: #6e6a86;
+    --text-muted: #8f8ca4;
     --accent: #c4a7e7;
     --accent-glow: rgba(196, 167, 231, 0.2);
     --accent-secondary: #9ccfd8;
@@ -325,7 +350,10 @@
     --glow-cyan: #31748f;
 
     --card-shadow: rgba(0,0,0,0.3);
-    --filter-active-text: #191724;
+    --on-accent: #191724;
+    --accent-text: #c4a7e7;
+    --amber-text: #f6c177;
+    --danger-text: #eb6f92;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -402,7 +430,7 @@
     transform: translateX(-50%);
     padding: 8px 20px;
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.85rem;
@@ -455,7 +483,7 @@
     justify-content: center;
     font-size: 16px;
     font-weight: 700;
-    color: #fff;
+    color: var(--on-accent);
     font-family: var(--font-mono);
   }
   .logo-text {
@@ -586,8 +614,9 @@
     padding: 0 1rem;
   }
   .filter-btn {
+    min-height: 34px;
     padding: 6px 14px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-secondary);
@@ -607,9 +636,10 @@
   .filter-btn.active {
     background: var(--accent);
     border-color: var(--accent);
-    color: var(--filter-active-text);
+    color: var(--on-accent);
     box-shadow: 0 2px 12px var(--accent-glow);
   }
+  .filter-btn.active:focus-visible { outline-color: var(--text-primary); }
   .filter-count {
     display: inline-flex;
     align-items: center;
@@ -642,7 +672,7 @@
     padding: 7px 11px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
-    background: rgba(255,255,255,0.02);
+    background: color-mix(in srgb, var(--text-primary) 3%, transparent);
     color: var(--text-secondary);
     font-family: var(--font-display);
     font-size: 0.78rem;
@@ -653,7 +683,7 @@
   .metadata-toggle:hover {
     border-color: var(--border-hover);
     color: var(--text-primary);
-    background: rgba(255,255,255,0.04);
+    background: var(--bg-card-hover);
   }
   .metadata-toggle.active {
     border-color: var(--accent);
@@ -801,7 +831,18 @@
     letter-spacing: 0.05em;
     margin-bottom: 6px;
     background: color-mix(in srgb, var(--cat-c) 15%, transparent);
-    color: var(--cat-c);
+    color: var(--text-primary);
+  }
+  .card-category::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex: none;
+    background: color-mix(in srgb, var(--cat-c) 85%, #ffffff);
+  }
+  [data-theme="light"] .card-category::before {
+    background: color-mix(in srgb, var(--cat-c) 45%, #000000);
   }
 
   .card-title {
@@ -840,7 +881,7 @@
     flex: 1;
     min-width: 0;
   }
-  .card-url:hover { color: var(--accent); }
+  .card-url:hover { color: var(--accent-text); }
 
   .card-actions {
     display: flex;
@@ -853,10 +894,11 @@
     opacity: 0;
     transition: opacity 0.15s ease;
   }
+  .card:focus-within .card-actions-overflow { opacity: 1; }
   .card-action {
     width: 28px;
     height: 28px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     border: 1px solid transparent;
     background: transparent;
     color: var(--text-muted);
@@ -869,7 +911,7 @@
   }
   .card-action:hover {
     border-color: var(--border-hover);
-    color: var(--accent);
+    color: var(--accent-text);
     background: var(--accent-glow);
   }
   .card-action svg { width: 13px; height: 13px; }
@@ -881,39 +923,6 @@
     gap: 5px;
     min-height: 18px;
   }
-
-  /* ── Category colors (color-mix derived) ── */
-  [class*="cat-"] { background: color-mix(in srgb, var(--cat-c) 15%, transparent); color: var(--cat-c); }
-  .cat-speed { --cat-c: #a78bfa; }
-  .cat-ip { --cat-c: #3ecf8e; }
-  .cat-dns { --cat-c: #05c8e8; }
-  .cat-security { --cat-c: #e5484d; }
-  .cat-osint { --cat-c: #8ab4f8; }
-  .cat-dev { --cat-c: #ff78c6; }
-  .cat-desktop { --cat-c: #ffa500; }
-  .cat-ai { --cat-c: #00c896; }
-  .cat-aicreative { --cat-c: #ff64ff; }
-  .cat-automation { --cat-c: #ffc832; }
-  .cat-homelab { --cat-c: #64b4ff; }
-  .cat-creative { --cat-c: #ff8c3c; }
-  .cat-music { --cat-c: #c864ff; }
-  .cat-privacy { --cat-c: #ab8cff; }
-  .cat-sysadmin { --cat-c: #f5a623; }
-  .cat-data { --cat-c: #32c8c8; }
-  .cat-education { --cat-c: #64dc64; }
-  .cat-productivity { --cat-c: #a9dc76; }
-  .cat-file { --cat-c: #c8b48c; }
-  .cat-fun { --cat-c: #f5d042; }
-  .cat-news { --cat-c: #b4b4c8; }
-  .cat-gaming { --cat-c: #ff5050; }
-  .cat-cli { --cat-c: #00ffb4; }
-  .cat-networking { --cat-c: #50a0ff; }
-  .cat-containers { --cat-c: #00b4e6; }
-  .cat-torrenting { --cat-c: #ff8c00; }
-  .cat-mediadownloads { --cat-c: #00c8ff; }
-  .cat-reading { --cat-c: #b48250; }
-  .cat-indexes { --cat-c: #ffd700; }
-  .cat-arr { --cat-c: #ff5a5a; }
 
   /* ── Editor's Pick badge ── */
   .editors-pick-badge {
@@ -928,7 +937,7 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
     background: color-mix(in srgb, var(--accent-amber) 18%, transparent);
-    color: var(--accent-amber);
+    color: var(--amber-text);
     margin-left: 6px;
     vertical-align: middle;
   }
@@ -947,15 +956,15 @@
     font-family: var(--font-mono);
     font-weight: 700;
     color: var(--text-secondary);
-    background: rgba(255,255,255,0.045);
+    background: color-mix(in srgb, var(--text-primary) 7%, transparent);
   }
-  .star-badge { color: var(--accent-amber); }
+  .star-badge { color: var(--amber-text); }
 
   .compare-select {
     width: 28px;
     height: 28px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
@@ -967,7 +976,7 @@
   .compare-select:hover,
   .compare-select.selected {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent-text);
     background: var(--accent-glow);
   }
   .compare-select svg { width: 13px; height: 13px; }
@@ -992,7 +1001,7 @@
   .compare-tray .empty-state-btn { padding: 6px 12px; font-size: 0.75rem; }
   .compare-tray .empty-state-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-  .compare-modal {
+  .modal.compare-modal {
     width: min(920px, calc(100vw - 32px));
     max-width: 920px;
   }
@@ -1005,7 +1014,7 @@
   }
   .compare-table th,
   .compare-table td {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-hover);
     padding: 10px;
     text-align: left;
     vertical-align: top;
@@ -1015,7 +1024,7 @@
     font-weight: 700;
   }
   .compare-table td { color: var(--text-secondary); }
-  .compare-table a { color: var(--accent); text-decoration: none; }
+  .compare-table a { color: var(--accent-text); text-decoration: none; }
 
   .load-more-card {
     min-height: 96px;
@@ -1028,7 +1037,7 @@
   }
   .load-more-card:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent-text);
     background: var(--accent-glow);
   }
 
@@ -1086,7 +1095,7 @@
   .dock-title svg { width: 13px; height: 13px; opacity: 0.7; }
   .dock-count {
     background: var(--accent-glow);
-    color: var(--accent);
+    color: var(--text-primary);
     padding: 1px 7px;
     border-radius: 100px;
     font-size: 0.65rem;
@@ -1099,7 +1108,8 @@
     gap: 6px;
   }
   .dock-action-btn {
-    padding: 4px 10px;
+    min-height: 30px;
+    padding: 5px 10px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: transparent;
@@ -1115,7 +1125,7 @@
   }
   .dock-action-btn:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent-text);
     background: var(--accent-glow);
   }
   .dock-action-btn svg { width: 12px; height: 12px; }
@@ -1208,10 +1218,11 @@
     opacity: 0;
     transition: opacity 0.15s;
   }
-  .dock-group:hover .dock-group-actions { opacity: 1; }
+  .dock-group:hover .dock-group-actions,
+  .dock-group:focus-within .dock-group-actions { opacity: 1; }
   .dock-group-action {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     border: none;
     background: transparent;
     color: var(--text-muted);
@@ -1223,10 +1234,10 @@
     transition: background 0.12s ease, color 0.12s ease;
   }
   .dock-group-action:hover {
-    background: rgba(255,255,255,0.06);
-    color: var(--text-secondary);
+    background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+    color: var(--text-primary);
   }
-  .dock-group-action.danger:hover { color: var(--accent-tertiary); background: rgba(229,72,77,0.1); }
+  .dock-group-action.danger:hover { color: var(--danger-text); background: color-mix(in srgb, var(--accent-tertiary) 14%, transparent); }
   .dock-group-action svg { width: 12px; height: 12px; }
 
   /* ── Site Chips (draggable) ── */
@@ -1240,7 +1251,7 @@
     transition: background 0.15s, outline 0.15s;
   }
   .dock-group-sites.chip-drag-over {
-    background: rgba(255,255,255,0.02);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
     outline: 1px dashed var(--border-hover);
     outline-offset: 2px;
   }
@@ -1307,22 +1318,36 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    width: 15px;
-    height: 15px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: var(--accent-tertiary);
-    color: #fff;
-    border: 2px solid var(--bg-card);
+    background: var(--bg-card-hover);
+    color: var(--text-muted);
+    border: 1px solid var(--border-hover);
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: 12px;
     line-height: 1;
     padding: 0;
     z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
-  .site-chip:hover .chip-remove { display: flex; }
+  .site-chip:hover .chip-remove,
+  .site-chip:focus-within .chip-remove {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .site-chip .chip-remove:hover,
+  .site-chip .chip-remove:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    color: var(--danger-text);
+    background: color-mix(in srgb, var(--accent-tertiary) 16%, var(--bg-card));
+  }
 
   /* Chip click overlay (opens url) */
   .chip-open {
@@ -1352,7 +1377,7 @@
     transition: background 0.2s;
     user-select: none;
   }
-  .dock-toggle-bar:hover { background: rgba(255,255,255,0.02); }
+  .dock-toggle-bar:hover { background: color-mix(in srgb, var(--text-primary) 4%, transparent); }
   .dock-toggle-bar svg {
     width: 16px;
     height: 16px;
@@ -1367,8 +1392,8 @@
   .card-bookmark {
     width: 28px;
     height: 28px;
-    border-radius: 6px;
-    border: none;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
@@ -1379,20 +1404,21 @@
     flex-shrink: 0;
     opacity: 0.5;
   }
-  .card:hover .card-bookmark { opacity: 1; }
+  .card:hover .card-bookmark,
+  .card:focus-within .card-bookmark { opacity: 1; }
   .card-bookmark:hover {
-    color: var(--accent-amber);
-    background: rgba(245, 166, 35, 0.1);
+    color: var(--amber-text);
+    background: color-mix(in srgb, var(--accent-amber) 12%, transparent);
   }
   .card-bookmark.bookmarked {
-    color: var(--accent-amber);
+    color: var(--amber-text);
     opacity: 1;
   }
-  .card-bookmark.bookmarked svg { fill: var(--accent-amber); }
+  .card-bookmark.bookmarked svg { fill: var(--amber-text); }
   .card-bookmark svg { width: 14px; height: 14px; }
 
   /* ── Card bookmarked indicator ── */
-  .card.is-bookmarked { border-color: rgba(245, 166, 35, 0.12); }
+  .card.is-bookmarked { border-color: color-mix(in srgb, var(--accent-amber) 38%, transparent); }
   .card.is-bookmarked::after {
     content: '';
     position: absolute;
@@ -1405,9 +1431,10 @@
   }
 
   /* ── Bookmarks filter pill ── */
-  .filter-btn[data-cat="Bookmarks"] { border-color: rgba(245, 166, 35, 0.3); color: var(--accent-amber); }
+  .filter-btn[data-cat="Bookmarks"] { border-color: color-mix(in srgb, var(--accent-amber) 40%, transparent); color: var(--amber-text); }
   .filter-btn[data-cat="Bookmarks"].active { background: var(--accent-amber); border-color: var(--accent-amber); color: #000; }
-  .filter-btn[data-cat="Bookmarks"] .filter-count { background: rgba(245, 166, 35, 0.2); }
+  .filter-btn[data-cat="Bookmarks"].active:focus-visible { outline-color: var(--text-primary); }
+  .filter-btn[data-cat="Bookmarks"] .filter-count { background: color-mix(in srgb, var(--accent-amber) 22%, transparent); }
 
   /* ── Group create/edit modal ── */
   .modal-overlay {
@@ -1436,7 +1463,7 @@
     padding: 10px 12px;
     border: 1px solid color-mix(in srgb, var(--accent-amber) 35%, var(--border));
     border-radius: var(--radius);
-    color: var(--text-muted);
+    color: var(--text-secondary);
     background: color-mix(in srgb, var(--accent-amber) 8%, transparent);
     font-size: 0.82rem;
   }
@@ -1455,7 +1482,7 @@
     width: 100%;
     padding: 10px 14px;
     background: var(--bg-secondary);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-hover);
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     font-family: var(--font-display);
@@ -1467,6 +1494,8 @@
   .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
   .modal-colors { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
   .modal-color {
+    padding: 0;
+    appearance: none;
     width: 26px;
     height: 26px;
     border-radius: 50%;
@@ -1475,7 +1504,7 @@
     transition: transform 0.15s, border-color 0.15s;
   }
   .modal-color:hover { transform: scale(1.1); }
-  .modal-color.selected { border-color: var(--text-primary); transform: scale(1.15); box-shadow: 0 0 8px rgba(255,255,255,0.1); }
+  .modal-color.selected { border-color: var(--text-primary); transform: scale(1.15); box-shadow: 0 0 0 3px var(--accent-glow); }
   .modal-btns { display: flex; justify-content: flex-end; gap: 8px; }
   .modal-btn {
     padding: 8px 18px;
@@ -1489,10 +1518,10 @@
     transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
   }
   .modal-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
-  .modal-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .modal-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .modal-btn.primary:hover { opacity: 0.9; }
-  .modal-btn.danger { border-color: rgba(229,72,77,0.3); color: var(--accent-tertiary); }
-  .modal-btn.danger:hover { background: rgba(229,72,77,0.1); border-color: var(--accent-tertiary); }
+  .modal-btn.danger { border-color: color-mix(in srgb, var(--accent-tertiary) 45%, transparent); color: var(--danger-text); }
+  .modal-btn.danger:hover { background: color-mix(in srgb, var(--accent-tertiary) 14%, transparent); border-color: var(--accent-tertiary); }
 
   .shortcuts-table { width: 100%; border-collapse: collapse; }
   .shortcuts-table td { padding: 6px 0; font-size: 0.85rem; color: var(--text-secondary); }
@@ -1515,13 +1544,13 @@
     position: absolute;
     bottom: calc(100% + 6px);
     right: 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-hover);
     border-radius: var(--radius);
     padding: 6px;
     min-width: 170px;
-    z-index: 100;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 200;
+    box-shadow: 0 8px 24px var(--card-shadow);
     display: none;
     animation: ddIn 0.15s ease;
   }
@@ -1543,9 +1572,9 @@
     text-align: left;
     transition: background 0.12s, color 0.12s;
   }
-  .assign-option:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+  .assign-option:hover { background: color-mix(in srgb, var(--text-primary) 8%, transparent); color: var(--text-primary); }
   .assign-option .group-color { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .assign-option.active { color: var(--accent); font-weight: 600; }
+  .assign-option.active { color: var(--accent-text); font-weight: 600; }
   .assign-option.active::after { content: '\2713'; margin-left: auto; font-size: 0.7rem; }
 
   /* ── Drag ghost (custom drag image) ── */
@@ -1555,7 +1584,7 @@
     left: -1000px;
     padding: 6px 14px;
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     border-radius: var(--radius-sm);
     font-size: 0.78rem;
     font-family: var(--font-display);
@@ -1563,7 +1592,7 @@
     white-space: nowrap;
     pointer-events: none;
     z-index: 150;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px var(--card-shadow);
   }
 
   /* ── Mobile ── */
@@ -1571,7 +1600,10 @@
     .dock { padding: 10px 1rem 8px; }
     .dock-header { flex-wrap: wrap; gap: 6px; }
     .dock-actions { flex-wrap: wrap; }
-    .site-chip { font-size: 0.72rem; padding: 4px 8px 4px 6px; }
+    .site-chip { font-size: 0.72rem; padding: 6px 8px 6px 6px; }
+    .site-chip .chip-remove { opacity: 1; pointer-events: auto; }
+    .compare-select { width: 40px; height: 40px; }
+    .dock-group-action { width: 34px; height: 34px; }
     .site-chip img { width: 12px; height: 12px; }
     .dock-group-header { cursor: default; }
     .dock-group-name .drag-handle { display: none; }
@@ -1619,11 +1651,30 @@
     font-family: var(--font-display);
     z-index: 1000;
     transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
-    backdrop-filter: blur(16px);
     box-shadow: 0 4px 24px var(--card-shadow);
     opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-  .toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+  .toast-action {
+    flex: none;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-hover);
+    background: var(--bg-card-hover);
+    color: var(--accent-text);
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .toast-action:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+  .toast-action[hidden] { display: none; }
 
   /* ── Back to top ── */
   .back-to-top {
@@ -1650,7 +1701,7 @@
     justify-content: center;
   }
   .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-  .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
+  .back-to-top:hover { border-color: var(--accent); color: var(--accent-text); }
   .back-to-top svg { width: 18px; height: 18px; }
 
   /* ── Footer ── */
@@ -1663,7 +1714,7 @@
     line-height: 1.6;
   }
   .footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s ease; }
-  .footer a:hover { color: var(--accent); }
+  .footer a:hover { color: var(--accent-text); }
 
 
   /* ── Light theme overrides for elements with hardcoded rgba ── */
@@ -1706,13 +1757,8 @@
   }
   [data-theme="light"] .dock-group { background: rgba(0,0,0,0.02); }
   [data-theme="light"] .dock-group-header:hover { background: rgba(0,0,0,0.03); }
-  [data-theme="light"] .dock-group-action:hover { background: rgba(0,0,0,0.06); }
-  [data-theme="light"] .dock-toggle-bar:hover { background: rgba(0,0,0,0.03); }
   [data-theme="light"] .site-chip:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-  [data-theme="light"] .assign-option:hover { background: rgba(0,0,0,0.05); }
-  [data-theme="light"] .card-bookmark:hover { background: rgba(245, 166, 35, 0.08); }
   [data-theme="light"] .sort-select option { background: #fff; }
-  [data-theme="light"] [class*="cat-"] { color: color-mix(in srgb, var(--cat-c) 65%, black); }
 
   /* ── Theme Picker ── */
   .theme-picker {
@@ -1832,6 +1878,7 @@
 
   /* ── Forced colors (Windows High Contrast) ── */
   @media (forced-colors: active) {
+    .hero h1 { -webkit-text-fill-color: currentColor; background: none; }
     .card { border: 1px solid ButtonBorder; }
     .card:hover { border-color: Highlight; }
     .filter-btn { border: 1px solid ButtonBorder; }
@@ -1893,60 +1940,60 @@
       <div class="stat"><strong id="totalCount">0</strong> sites</div>
       <div class="stat"><strong id="catCount">0</strong> categories</div>
       <div class="theme-picker">
-        <button class="theme-btn" id="themeToggle" popovertarget="themeDropdown" title="Change theme" aria-label="Change theme">
+        <button class="theme-btn" id="themeToggle" popovertarget="themeDropdown" title="Change theme" aria-label="Change theme" aria-haspopup="menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </button>
-        <div class="theme-dropdown" id="themeDropdown" popover>
-          <div class="theme-section-label">Dark</div>
-          <button class="theme-option" data-theme="oled">
+        <div class="theme-dropdown" id="themeDropdown" popover role="menu" aria-label="Theme">
+          <div class="theme-section-label" role="presentation">Dark</div>
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="oled">
             <span class="swatch" style="background: #08090d;"></span>
             OLED Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="catppuccin">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="catppuccin">
             <span class="swatch" style="background: #1e1e2e;"></span>
             Catppuccin Mocha
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="dracula">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="dracula">
             <span class="swatch" style="background: #282a36;"></span>
             Dracula
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="rose-pine">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="rose-pine">
             <span class="swatch" style="background: #191724;"></span>
             Rosé Pine
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="nord">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="nord">
             <span class="swatch" style="background: #2e3440;"></span>
             Nord
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="github-dark">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="github-dark">
             <span class="swatch" style="background: #0d1117;"></span>
             GitHub Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="midnight">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="midnight">
             <span class="swatch" style="background: #0a0e1a;"></span>
             Midnight Blue
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" data-theme="solarized">
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="solarized">
             <span class="swatch" style="background: #002b36;"></span>
             Solarized Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <div class="theme-divider"></div>
-          <div class="theme-section-label">Light</div>
-          <button class="theme-option" data-theme="light">
+          <div class="theme-divider" role="separator"></div>
+          <div class="theme-section-label" role="presentation">Light</div>
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="light">
             <span class="swatch" style="background: #f8f9fc; border-color: rgba(0,0,0,0.2);"></span>
             Light
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <div class="theme-divider"></div>
-          <button class="theme-option" data-theme="system">
+          <div class="theme-divider" role="separator"></div>
+          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="system">
             <span class="swatch" style="background: linear-gradient(135deg, #08090d 50%, #f8f9fc 50%); border-color: rgba(128,128,128,0.3);"></span>
             System
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2003,7 +2050,7 @@
   <div class="modal">
     <h3 id="modalTitle">New Group</h3>
     <input type="text" id="groupNameInput" placeholder="Group name..." maxlength="30" autocomplete="off" aria-label="Group name">
-    <div class="modal-colors" id="modalColors"></div>
+    <div class="modal-colors" id="modalColors" role="radiogroup" aria-label="Group color"></div>
     <div class="modal-btns" id="modalBtns">
       <button class="modal-btn" id="modalCancel">Cancel</button>
       <button class="modal-btn primary" id="modalSave">Create</button>
@@ -2046,7 +2093,7 @@
 <!-- Hero -->
 <section class="hero">
   <h1>The Internet's Best Kept Secrets</h1>
-  <p>Your personal launchpad. Bookmark your favorites, organize into groups, and discover hidden gems. 590 curated picks across 30 categories.</p>
+  <p id="heroTagline">Your personal launchpad. Bookmark what you like, sort it into groups, and go find something new. 588 picks across 30 categories.</p>
 
   <div class="search-container">
     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -2118,7 +2165,10 @@
 </main>
 
 <!-- Toast -->
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span id="toastMessage"></span>
+  <button type="button" class="toast-action" id="toastAction" hidden>Undo</button>
+</div>
 
 <!-- Back to top -->
 <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -2138,6 +2188,7 @@
 let SITES = [];
 let CATEGORIES = [];
 let CATEGORY_META = new Map();
+let SITE_BY_URL = new Map();
 let STAR_COUNTS = {};
 let FAVICON_CACHE = {};
 let DATA_SOURCE = 'network';
@@ -2171,6 +2222,7 @@ async function loadAppData() {
     tags: Array.isArray(site.tags) ? site.tags : [],
     alternativeTo: Array.isArray(site.alternativeTo) ? site.alternativeTo : []
   }));
+  SITE_BY_URL = new Map(SITES.map(site => [site.url, site]));
   CATEGORIES = categories;
   CATEGORY_META = new Map(CATEGORIES.map(category => [category.name, category]));
   [STAR_COUNTS, FAVICON_CACHE] = await Promise.all([
@@ -2236,13 +2288,21 @@ async function retryDataLoad() {
 // ════════════════════════════════════════════════════════════════
 //  APP STATE & LOGIC
 // ════════════════════════════════════════════════════════════════
+const VIEW_MODES = ['grid', 'list'];
+const SORT_MODES = ['default', 'az', 'za', 'shuffle', 'recent'];
+const MAX_QUERY_LENGTH = 120;
+
+function oneOf(value, allowed, fallback) {
+  return allowed.includes(value) ? value : fallback;
+}
+
 function readUrlState() {
   const p = new URLSearchParams(location.search);
   return {
-    q: p.get('q') || '',
+    q: (p.get('q') || '').slice(0, MAX_QUERY_LENGTH),
     cat: p.get('cat') || 'All',
-    view: p.get('view') || 'grid',
-    sort: p.get('sort') || 'default',
+    view: oneOf(p.get('view'), VIEW_MODES, 'grid'),
+    sort: oneOf(p.get('sort'), SORT_MODES, 'default'),
     oss: p.get('oss') === '1',
     noauth: p.get('noauth') === '1',
     picks: p.get('picks') === '1'
@@ -2269,13 +2329,14 @@ let openSourceOnly = _initState.oss;
 let noAuthOnly = _initState.noauth;
 let picksOnly = _initState.picks;
 let compareMode = false;
+let shuffleSeed = (Date.now() >>> 0) || 1;
 const selectedCompare = new Set();
 const RENDER_BATCH_SIZE = 200;
 let visibleLimit = RENDER_BATCH_SIZE;
 let lastRenderKey = '';
 
 function getDomain(url) {
-  try { return new URL(url).hostname.replace('www.', ''); } catch { return url; }
+  try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; }
 }
 
 function getFavicon(url) {
@@ -2328,8 +2389,9 @@ function buildFilters() {
   const cats = {};
   SITES.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
   const container = document.getElementById('filters');
-  const bmCount = Object.keys(bookmarks).length;
+  const bmCount = resolvedBookmarkUrls().length;
 
+  if (activeFilter === 'Bookmarks' && bmCount === 0) activeFilter = 'All';
   if (activeFilter !== 'All' && activeFilter !== 'Bookmarks' && !cats[activeFilter]) activeFilter = 'All';
 
   let html = `<button class="filter-btn active" data-cat="All" aria-pressed="true">All<span class="filter-count">${SITES.length}</span></button>`;
@@ -2357,7 +2419,7 @@ function buildFilters() {
     });
   });
 
-  const activeBtn = container.querySelector(`.filter-btn[data-cat="${activeFilter}"]`);
+  const activeBtn = [...container.querySelectorAll('.filter-btn')].find(button => button.dataset.cat === activeFilter);
   if (activeBtn) {
     container.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
     activeBtn.classList.add('active');
@@ -2368,35 +2430,84 @@ function buildFilters() {
   document.getElementById('totalCount').textContent = SITES.length;
 }
 
-function fuzzyScore(query, text) {
-  const q = query.toLowerCase();
-  const t = text.toLowerCase();
-  if (t.includes(q)) return 100 + (q.length / t.length) * 50;
-  let qi = 0, score = 0, streak = 0;
-  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
-    if (t[ti] === q[qi]) { qi++; streak++; score += streak * 2; } else { streak = 0; }
-  }
-  return qi === q.length ? score : 0;
+const MIN_FUZZY_TOKEN = 3;
+
+function buildSearchIndex(site) {
+  return {
+    name: site.name.toLowerCase(),
+    tags: site.tags.map(tag => String(tag).toLowerCase()),
+    haystack: [
+      site.description,
+      site.category,
+      site.url,
+      site.openSource ? 'open source oss foss' : 'proprietary closed source',
+      site.requiresAuth ? 'account required login sign in' : 'no account no login',
+      ...(site.alternativeTo || []).map(item => `alternative to ${item}`),
+      ...site.tags
+    ].join(' ').toLowerCase()
+  };
 }
 
-function bestScore(query, site) {
-  const fields = [
-    site.name,
-    site.description,
-    site.category,
-    site.url,
-    site.openSource ? 'open source oss foss' : '',
-    site.requiresAuth ? 'account required login sign in' : 'no account no login',
-    ...(site.alternativeTo || []).map(item => `alternative to ${item}`),
-    ...site.tags
-  ];
-  let best = 0;
-  for (const f of fields) { const s = fuzzyScore(query, f); if (s > best) best = s; }
-  if (fuzzyScore(query, site.name) > 0) best += 50;
+// Literal match. Earlier and proportionally longer matches rank higher.
+function substringScore(token, text) {
+  if (!text) return 0;
+  const index = text.indexOf(token);
+  if (index === -1) return 0;
+  return 100 + (token.length / text.length) * 50 + (index === 0 ? 25 : 0);
+}
+
+// Typo tolerance: every character of the token appears in order. Only ever run
+// against short fields, because on a 200-character description it matches
+// almost anything.
+function subsequenceScore(token, text) {
+  let ti = 0, score = 0, streak = 0;
+  for (let index = 0; index < text.length && ti < token.length; index++) {
+    if (text[index] === token[ti]) { ti++; streak++; score += streak * 2; } else { streak = 0; }
+  }
+  return ti === token.length ? score : 0;
+}
+
+function tokenScore(token, index) {
+  let best = substringScore(token, index.name) * 3;
+  if (!best && token.length >= MIN_FUZZY_TOKEN) best = subsequenceScore(token, index.name);
+  for (const tag of index.tags) {
+    const hit = substringScore(token, tag) * 2;
+    if (hit > best) best = hit;
+  }
+  const hit = substringScore(token, index.haystack);
+  if (hit > best) best = hit;
   return best;
 }
 
+function tokenize(query) {
+  return query.toLowerCase().split(/\s+/).filter(Boolean);
+}
+
+// Every token must match somewhere, so adding words narrows results.
+function searchScore(tokens, site) {
+  const index = site._search || (site._search = buildSearchIndex(site));
+  let total = 0;
+  for (const token of tokens) {
+    const score = tokenScore(token, index);
+    if (!score) return 0;
+    total += score;
+  }
+  return total;
+}
+
+// Deterministic per-URL ordering so "Show more" and re-renders keep the shuffle.
+function shuffleRank(url) {
+  let hash = shuffleSeed >>> 0;
+  for (let i = 0; i < url.length; i++) {
+    hash = (Math.imul(hash ^ url.charCodeAt(i), 0x01000193) >>> 0);
+  }
+  return hash;
+}
+
 function getFiltered() {
+  const tokens = searchTerm ? tokenize(searchTerm) : [];
+  const scores = tokens.length ? new Map() : null;
+
   let results = SITES.filter(site => {
     const matchCat = activeFilter === "All" || activeFilter === "Bookmarks"
       ? true
@@ -2407,22 +2518,23 @@ function getFiltered() {
 
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
     if (!matchMetadata) return false;
+    if (!matchCat) return false;
+    if (!tokens.length) return true;
 
-    if (!searchTerm) return matchCat;
-    return matchCat && bestScore(searchTerm, site) > 0;
+    const score = searchScore(tokens, site);
+    if (score <= 0) return false;
+    scores.set(site.url, score);
+    return true;
   });
 
-  if (searchTerm) {
-    results.sort((a, b) => bestScore(searchTerm, b) - bestScore(searchTerm, a));
+  if (scores) {
+    results.sort((a, b) => (scores.get(b.url) - scores.get(a.url)) || a.name.localeCompare(b.name));
   } else if (sortMode === 'az') {
     results.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortMode === 'za') {
     results.sort((a, b) => b.name.localeCompare(a.name));
   } else if (sortMode === 'shuffle') {
-    for (let i = results.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [results[i], results[j]] = [results[j], results[i]];
-    }
+    results.sort((a, b) => shuffleRank(a.url) - shuffleRank(b.url) || a.name.localeCompare(b.name));
   } else if (sortMode === 'recent') {
     results.sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || '') || a.name.localeCompare(b.name));
   } else if (activeFilter !== "Bookmarks") {
@@ -2437,11 +2549,25 @@ function getFiltered() {
 }
 
 function highlightMatch(text, query) {
-  if (!query) return escHtml(text);
-  const safe = escHtml(text);
-  const q = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const re = new RegExp(`(${q})`, 'gi');
-  return safe.replace(re, '<mark>$1</mark>');
+  const raw = String(text);
+  const tokens = query ? tokenize(query) : [];
+  if (!tokens.length) return escHtml(raw);
+  const pattern = tokens
+    .slice()
+    .sort((a, b) => b.length - a.length)
+    .map(token => token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('|');
+  let matcher;
+  try { matcher = new RegExp(pattern, 'gi'); } catch { return escHtml(raw); }
+  let out = '';
+  let last = 0;
+  let match;
+  while ((match = matcher.exec(raw)) !== null) {
+    if (match[0] === '') { matcher.lastIndex++; continue; }
+    out += escHtml(raw.slice(last, match.index)) + '<mark>' + escHtml(match[0]) + '</mark>';
+    last = match.index + match[0].length;
+  }
+  return out + escHtml(raw.slice(last));
 }
 
 function buildCard(site, index) {
@@ -2479,9 +2605,9 @@ function buildCard(site, index) {
         </div>
         <p class="card-desc">${searchTerm ? highlightMatch(site.description, searchTerm) : escHtml(site.description)}</p>
         <div class="card-footer">
-          <a href="${site.url}" class="card-url" target="_blank" rel="noopener noreferrer">${domain}</a>
+          <a href="${escUrl}" class="card-url" target="_blank" rel="noopener noreferrer">${escHtml(domain)}</a>
           <div class="card-actions">
-            <a href="${site.url}" class="card-action" title="Open" target="_blank" rel="noopener noreferrer">
+            <a href="${escUrl}" class="card-action" title="Open ${escAttr(site.name)}" aria-label="Open ${escAttr(site.name)}" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
             <button class="card-action" title="Copy URL" data-action="copy" data-url="${escUrl}">
@@ -2492,7 +2618,7 @@ function buildCard(site, index) {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
               </button>` : ''}${navigator.share ? `<button class="card-action" title="Share" data-action="share" data-url="${escUrl}" data-name="${escAttr(site.name)}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              </button>` : ''}<a href="https://web.archive.org/web/*/${site.url}" class="card-action" title="Wayback Machine" target="_blank" rel="noopener noreferrer">
+              </button>` : ''}<a href="https://web.archive.org/web/*/${escAttr(site.url)}" class="card-action" title="Wayback Machine" aria-label="View ${escAttr(site.name)} in the Wayback Machine" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </a>
             </div>
@@ -2577,6 +2703,8 @@ function _renderGridInner() {
     : `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+  _faviconObserver.disconnect();
+  _loadMoreObserver.disconnect();
   grid.querySelectorAll('img.favicon-img[data-src]').forEach(img => _faviconObserver.observe(img));
   const moreButton = grid.querySelector('.load-more-card');
   if (moreButton) _loadMoreObserver.observe(moreButton);
@@ -2591,16 +2719,23 @@ function renderGrid() {
   }
 }
 
-function copyUrl(url) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => showToast('URL copied')).catch(() => _fallbackCopy(url));
-  } else { _fallbackCopy(url); }
+function copyText(text, successMessage) {
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(() => showToast(successMessage))
+      .catch(() => _fallbackCopy(text, successMessage));
+    return;
+  }
+  _fallbackCopy(text, successMessage);
 }
-function _fallbackCopy(text) {
+function copyUrl(url) {
+  copyText(url, 'URL copied');
+}
+function _fallbackCopy(text, successMessage) {
   const ta = document.createElement('textarea');
   ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); showToast('URL copied'); } catch { showToast('Copy failed'); }
+  try { document.execCommand('copy'); showToast(successMessage); } catch { showToast('Copy failed'); }
   ta.remove();
 }
 function shareUrl(name, url) {
@@ -2612,13 +2747,31 @@ function shareUrl(name, url) {
 }
 
 let _toastTimer;
-function showToast(msg) {
+let _undoAction = null;
+
+function hideToast() {
+  clearTimeout(_toastTimer);
+  _undoAction = null;
+  document.getElementById('toastAction').hidden = true;
+  document.getElementById('toast').classList.remove('visible');
+}
+
+function showToast(message, undo) {
   clearTimeout(_toastTimer);
   const toast = document.getElementById('toast');
-  toast.textContent = msg;
+  const action = document.getElementById('toastAction');
+  document.getElementById('toastMessage').textContent = message;
+  _undoAction = typeof undo === 'function' ? undo : null;
+  action.hidden = !_undoAction;
   toast.classList.add('visible');
-  _toastTimer = setTimeout(() => toast.classList.remove('visible'), 2000);
+  _toastTimer = setTimeout(hideToast, _undoAction ? 7000 : 2000);
 }
+
+document.getElementById('toastAction').addEventListener('click', () => {
+  const undo = _undoAction;
+  hideToast();
+  if (undo) undo();
+});
 
 function getCompareSites() {
   return [...selectedCompare].map(url => getSiteByUrl(url)).filter(Boolean);
@@ -2673,16 +2826,17 @@ function openCompareModal() {
   ];
   document.getElementById('compareTableWrap').innerHTML = `
     <table class="compare-table">
+      <caption class="sr-only">Comparing ${escHtml(sites.map(site => site.name).join(', '))}</caption>
       <thead>
         <tr>
-          <th>Attribute</th>
-          ${sites.map(site => `<th><a href="${escAttr(site.url)}" target="_blank" rel="noopener noreferrer">${escHtml(site.name)}</a></th>`).join('')}
+          <th scope="col">Attribute</th>
+          ${sites.map(site => `<th scope="col"><a href="${escAttr(site.url)}" target="_blank" rel="noopener noreferrer">${escHtml(site.name)}</a></th>`).join('')}
         </tr>
       </thead>
       <tbody>
         ${rows.map(([label, getter]) => `
           <tr>
-            <th>${escHtml(label)}</th>
+            <th scope="row">${escHtml(label)}</th>
             ${sites.map(site => `<td>${escHtml(getter(site))}</td>`).join('')}
           </tr>
         `).join('')}
@@ -2730,7 +2884,15 @@ document.addEventListener('keydown', e => {
     document.getElementById('searchInput').focus();
   }
   if (e.key === 'Escape') {
-    document.getElementById('searchInput').blur();
+    document.querySelectorAll('.assign-dropdown').forEach(dropdown => dropdown.remove());
+    const input = document.getElementById('searchInput');
+    if (input.value) {
+      input.value = '';
+      searchTerm = '';
+      clearTimeout(_searchTimer);
+      renderGrid();
+    }
+    input.blur();
   }
   if (e.key === '?' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
     e.preventDefault();
@@ -2757,8 +2919,9 @@ document.addEventListener('keydown', e => {
   } else return;
   if (next >= 0 && next !== idx) {
     e.preventDefault();
-    const target = cards[next].querySelector('a, button') || cards[next];
+    const target = cards[next].querySelector('.card-url') || cards[next];
     target.focus();
+    target.scrollIntoView({ block: 'nearest', behavior: 'auto' });
   }
 });
 
@@ -2826,9 +2989,15 @@ function updateThemeIcon(resolved) {
 
 function updateThemeDropdown(activeId) {
   document.querySelectorAll('.theme-option').forEach(opt => {
-    opt.classList.toggle('active', opt.dataset.theme === activeId);
+    const isActive = opt.dataset.theme === activeId;
+    opt.classList.toggle('active', isActive);
+    opt.setAttribute('aria-checked', String(isActive));
   });
 }
+
+document.getElementById('themeDropdown').addEventListener('toggle', event => {
+  document.getElementById('themeToggle').setAttribute('aria-expanded', String(event.newState === 'open'));
+});
 
 function initTheme() {
   const saved = storageGet('coolsites-theme');
@@ -3081,19 +3250,38 @@ function moveToGroup(url, newGroupId) {
   renderDock();
 }
 
-function removeBookmark(url, evt) {
-  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
-  const gid = bookmarks[url]?.group;
-  delete bookmarks[url];
-  if (gid) reindexGroupOrder(gid);
-  saveBookmarks();
+function refreshBookmarkViews() {
   renderDock();
   renderGrid();
   buildFilters();
-  showToast('Removed');
 }
 
-function getSiteByUrl(url) { return SITES.find(s => s.url === url); }
+function removeBookmark(url, evt) {
+  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+  const previous = bookmarks[url];
+  if (!previous) return;
+  const name = getSiteByUrl(url)?.name;
+  delete bookmarks[url];
+  reindexGroupOrder(previous.group);
+  saveBookmarks();
+  refreshBookmarkViews();
+  showToast(name ? `Removed ${name}` : 'Removed', () => {
+    bookmarks[url] = previous;
+    reindexGroupOrder(previous.group);
+    saveBookmarks();
+    refreshBookmarkViews();
+    showToast(name ? `Restored ${name}` : 'Restored');
+  });
+}
+
+function getSiteByUrl(url) { return SITE_BY_URL.get(url); }
+
+// Bookmarks can outlive the entry they point at when a site leaves the
+// directory. Those stay in storage in case it comes back, but they must not be
+// counted in any UI total or the dock header disagrees with the chips below it.
+function resolvedBookmarkUrls() {
+  return Object.keys(bookmarks).filter(url => SITE_BY_URL.has(url));
+}
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -3107,7 +3295,7 @@ function renderDock() {
   const wrapper = document.getElementById('dockWrapper');
   const container = document.getElementById('dockGroups');
   const countEl = document.getElementById('dockCount');
-  const bmCount = Object.keys(bookmarks).length;
+  const bmCount = resolvedBookmarkUrls().length;
 
   countEl.textContent = bmCount;
 
@@ -3131,11 +3319,9 @@ function renderDock() {
 
   let html = '';
   groups.forEach((group, gi) => {
-    const siteUrls = getGroupSites(group.id);
+    const groupSites = getGroupSites(group.id).map(getSiteByUrl).filter(Boolean);
 
-    const chips = siteUrls.map(url => {
-      const site = getSiteByUrl(url);
-      if (!site) return '';
+    const chips = groupSites.map(site => {
       const siteUrl = escAttr(site.url);
       return `
         <div class="site-chip" draggable="true" data-url="${siteUrl}" data-group="${escAttr(group.id)}" title="${escAttr(`${site.name} — ${site.description}`)}">
@@ -3154,7 +3340,7 @@ function renderDock() {
             <span class="drag-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg></span>
             <span class="group-color" style="background: ${escAttr(group.color)}"></span>
             ${escHtml(group.name)}
-            <span class="group-chip-count">(${siteUrls.length})</span>
+            <span class="group-chip-count">(${groupSites.length})</span>
           </span>
           <div class="dock-group-actions">
             <button class="dock-group-action" title="Edit group" data-dock-action="edit-group" data-group-id="${escAttr(group.id)}">
@@ -3458,18 +3644,39 @@ function openGroupModal(editId) {
   setTimeout(() => { inputEl.focus(); inputEl.select(); }, 100);
 }
 
+const COLOR_NAMES = {
+  '#f5a623': 'Amber', '#6e56cf': 'Violet', '#3ecf8e': 'Green', '#05c8e8': 'Cyan',
+  '#e5484d': 'Red', '#ff78c6': 'Pink', '#ff8c3c': 'Orange', '#a9dc76': 'Lime',
+  '#64b4ff': 'Blue', '#c864ff': 'Purple'
+};
+
+function selectModalColor(color, moveFocus) {
+  selectedColor = color;
+  renderModalColors();
+  if (moveFocus) document.querySelector(`.modal-color[data-color="${CSS.escape(color)}"]`)?.focus();
+}
+
 function renderModalColors() {
   const container = document.getElementById('modalColors');
-  container.innerHTML = GROUP_COLORS.map(c =>
-    `<div class="modal-color ${c === selectedColor ? 'selected' : ''}" style="background: ${c}" data-color="${c}"></div>`
-  ).join('');
+  container.innerHTML = GROUP_COLORS.map(color => {
+    const isSelected = color === selectedColor;
+    return `<button type="button" role="radio" class="modal-color${isSelected ? ' selected' : ''}" style="background: ${escAttr(color)}" data-color="${escAttr(color)}" aria-checked="${isSelected}" tabindex="${isSelected ? '0' : '-1'}" aria-label="${escAttr(COLOR_NAMES[color] || color)}"></button>`;
+  }).join('');
   container.querySelectorAll('.modal-color').forEach(el => {
-    el.addEventListener('click', () => {
-      selectedColor = el.dataset.color;
-      renderModalColors();
-    });
+    el.addEventListener('click', () => selectModalColor(el.dataset.color, false));
   });
 }
+
+// Arrow keys move between swatches the way a radio group is expected to behave.
+document.getElementById('modalColors').addEventListener('keydown', event => {
+  const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+  const step = keys[event.key];
+  if (!step) return;
+  event.preventDefault();
+  const current = GROUP_COLORS.indexOf(selectedColor);
+  const next = (current + step + GROUP_COLORS.length) % GROUP_COLORS.length;
+  selectModalColor(GROUP_COLORS[next], true);
+});
 
 function closeGroupModal() {
   const modal = document.getElementById('groupModal');
@@ -3502,6 +3709,11 @@ function deleteGroup(id) {
   if (!fallback) return;
 
   const groupName = groups.find(g => g.id === id)?.name || '';
+  const previousGroups = groups.map(group => ({ ...group }));
+  const previousBookmarks = Object.fromEntries(
+    Object.entries(bookmarks).map(([url, bookmark]) => [url, { ...bookmark }])
+  );
+
   Object.keys(bookmarks).forEach(url => {
     if (bookmarks[url].group === id) {
       bookmarks[url].group = fallback.id;
@@ -3511,8 +3723,15 @@ function deleteGroup(id) {
   groups = groups.filter(g => g.id !== id);
   saveGroups();
   saveBookmarks();
-  renderDock();
-  showToast(`"${groupName}" deleted`);
+  refreshBookmarkViews();
+  showToast(`"${groupName}" deleted`, () => {
+    groups = previousGroups;
+    bookmarks = previousBookmarks;
+    saveGroups();
+    saveBookmarks();
+    refreshBookmarkViews();
+    showToast(`"${groupName}" restored`);
+  });
 }
 
 // ── Assign dropdown on cards ──
@@ -3594,13 +3813,15 @@ document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
 // ── Copy as Markdown ──
 document.getElementById('copyMdBtn').addEventListener('click', () => {
   const filtered = getFiltered();
+  if (!filtered.length) { showToast('Nothing to copy'); return; }
   const md = filtered.map(s => `- [${s.name}](${s.url}) — ${s.description}`).join('\n');
-  navigator.clipboard.writeText(md).then(() => showToast(`Copied ${filtered.length} sites as Markdown`));
+  copyText(md, `Copied ${filtered.length} site${filtered.length === 1 ? '' : 's'} as Markdown`);
 });
 
 // ── Sort ──
 document.getElementById('sortSelect').addEventListener('change', (e) => {
   sortMode = e.target.value;
+  if (sortMode === 'shuffle') shuffleSeed = (Math.floor(Math.random() * 0xffffffff) >>> 0) || 1;
   renderGrid();
 });
 
@@ -3626,8 +3847,9 @@ document.getElementById('exportBtn').addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'coolsites-bookmarks.json';
+  const objectUrl = a.href;
   a.click();
-  URL.revokeObjectURL(a.href);
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 10000);
   showToast('Bookmarks exported');
 });
 document.getElementById('importBtn').addEventListener('click', () => {
@@ -3705,9 +3927,10 @@ const _btt = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
   _btt.classList.toggle('visible', window.scrollY > window.innerHeight * 1.5);
 }, { passive: true });
-_btt.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('searchInput').focus();
+_btt.addEventListener('click', event => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  if (event.detail === 0) document.getElementById('searchInput').focus();
 });
 
 // ── Shortcuts modal ──
