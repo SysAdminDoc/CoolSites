@@ -230,6 +230,15 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await page.send('Page.navigate', { url: `${server.url}collections.html` });
     await waitFor(page, "document.querySelectorAll('#collections .collection').length > 0");
     assert.ok(await page.evaluate("document.querySelectorAll('#collections .site').length > 0"));
+    // The theme picked in the directory has to carry across to this page.
+    const collectionsTheme = await page.evaluate(`({
+      theme: document.documentElement.getAttribute('data-theme'),
+      background: getComputedStyle(document.body).backgroundColor,
+      badge: document.querySelector('.badge')?.textContent.trim()
+    })`);
+    assert.equal(collectionsTheme.theme, 'light', 'collections should follow the stored theme');
+    assert.equal(collectionsTheme.background, 'rgb(248, 249, 252)', 'collections should paint the light background');
+    assert.match(collectionsTheme.badge, /^\d+ sites?$/, 'each collection should count its resolvable entries');
 
     await page.send('Page.navigate', { url: server.url });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
@@ -266,12 +275,31 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await page.send('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 1, mobile: true });
     await page.send('Page.reload', { ignoreCache: false });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
-    const mobile = await page.evaluate(`({
-      columns: getComputedStyle(document.getElementById('grid')).gridTemplateColumns,
-      overflow: document.documentElement.scrollWidth <= window.innerWidth + 1
-    })`);
+    const mobile = await page.evaluate(`(() => {
+      // Under CDP emulation window.innerWidth reports the window, not the
+      // layout viewport, so it is useless here. body also has
+      // overflow-x:hidden, which hides real overflow from scrollWidth. Measure
+      // the elements against clientWidth instead.
+      const viewport = document.documentElement.clientWidth;
+      const clipped = ['.header-inner', '.logo', '.github-link', '.hero h1', '.results-bar', '#grid .card']
+        .map(selector => {
+          const node = document.querySelector(selector);
+          if (!node) return null;
+          const box = node.getBoundingClientRect();
+          return box.right > viewport + 1 || box.left < -1 ? selector + ' ' + Math.round(box.left) + '..' + Math.round(box.right) : null;
+        })
+        .filter(Boolean);
+      return {
+        viewport,
+        columns: getComputedStyle(document.getElementById('grid')).gridTemplateColumns,
+        overflow: document.documentElement.scrollWidth <= viewport + 1,
+        clipped
+      };
+    })()`);
+    assert.equal(mobile.viewport, 375, 'device metrics override should apply');
     assert.equal(mobile.columns.split(' ').length, 1, 'mobile layout should use one card column');
     assert.equal(mobile.overflow, true, 'mobile layout should not overflow horizontally');
+    assert.deepEqual(mobile.clipped, [], `no element may be clipped at ${mobile.viewport}px`);
     await page.send('Emulation.clearDeviceMetricsOverride');
     await page.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
     await page.send('Page.reload', { ignoreCache: false });

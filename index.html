@@ -358,6 +358,12 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* Controls take their box from the components below, not the UA stylesheet.
+     Without this a button that only sets border-bottom keeps the platform
+     border on the other three sides. */
+  button, input, select, textarea { font-family: inherit; }
+  button { border: 0; background: none; color: inherit; }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -470,6 +476,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
     text-decoration: none;
     color: var(--text-primary);
   }
@@ -490,6 +497,9 @@
     font-weight: 700;
     font-size: 1.15rem;
     letter-spacing: -0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .logo-text span { color: var(--text-muted); font-weight: 400; }
 
@@ -764,6 +774,7 @@
   /* ── Card ── */
   .card {
     position: relative;
+    min-width: 0;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -800,6 +811,7 @@
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 10px;
+    min-width: 0;
   }
   .card-icon {
     width: 36px;
@@ -868,6 +880,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+    min-width: 0;
+    flex-wrap: wrap;
   }
   .card-url {
     font-family: var(--font-mono);
@@ -887,6 +901,8 @@
     display: flex;
     gap: 4px;
     flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   .card-actions-overflow {
     display: flex;
@@ -1024,6 +1040,7 @@
     font-weight: 700;
   }
   .compare-table td { color: var(--text-secondary); }
+  .compare-table td.compare-empty { color: var(--text-muted); font-style: italic; }
   .compare-table a { color: var(--accent-text); text-decoration: none; }
 
   .load-more-card {
@@ -1052,8 +1069,17 @@
     z-index: 90;
   }
   .dock-wrapper.collapsed .dock { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-color: transparent; opacity: 0; pointer-events: none; }
-  .dock-wrapper.empty .dock { max-height: 0; padding-top: 0; padding-bottom: 0; border-bottom-color: transparent; opacity: 0; pointer-events: none; }
-  .dock-wrapper.empty .dock-toggle-bar { display: none; }
+  .dock-wrapper.empty .dock-groups { display: none; }
+  .dock-wrapper.empty #exportBtn { display: none; }
+  .dock-wrapper.empty .dock-header { margin-bottom: 0; }
+  .dock-wrapper:not(.empty) .dock-hint { display: none; }
+  .dock-hint {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+  .dock-hint kbd { margin: 0 2px; }
 
   .dock {
     max-height: 500px;
@@ -1368,6 +1394,7 @@
   /* ── Collapse toggle bar ── */
   .dock-toggle-bar {
     display: flex;
+    width: 100%;
     justify-content: center;
     background: var(--header-bg);
     backdrop-filter: blur(16px);
@@ -1619,6 +1646,12 @@
     text-align: center;
     padding: 5rem 2rem;
     color: var(--text-muted);
+  }
+  .empty-state-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .empty-state svg { width: 40px; height: 40px; margin-bottom: 1rem; opacity: 0.3; }
   .empty-state h3 { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.4rem; font-weight: 500; }
@@ -1907,9 +1940,20 @@
     .card-bookmark { opacity: 1; width: 40px; height: 40px; }
     .card-action { width: 40px; height: 40px; }
     .results-bar { flex-wrap: wrap; gap: 8px; }
-    .header-inner { height: 56px; }
+    .header-inner { height: 56px; gap: 8px; }
     .dock-wrapper { top: 56px; }
-    .header { padding: 0 1rem; }
+    .header { padding: 0 0.75rem; }
+    .header-stats { gap: 8px; }
+    .logo-text span { display: none; }
+    .github-link { padding: 6px 10px; font-size: 0.75rem; }
+    .empty-state { padding: 3rem 1rem; }
+  }
+  @media (max-width: 480px) {
+    .logo-text { font-size: 1rem; }
+    .github-link .github-link-label { display: none; }
+    .github-link { padding: 8px; }
+    .metadata-toggle { min-height: 40px; }
+    .filter-btn { min-height: 40px; }
   }
 </style>
 <script>
@@ -2003,9 +2047,9 @@
       <a href="collections.html" class="github-link">
         Collections
       </a>
-      <a href="https://github.com/SysAdminDoc/CoolSites" class="github-link" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        GitHub
+      <a href="https://github.com/SysAdminDoc/CoolSites" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="CoolSites on GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span class="github-link-label">GitHub</span>
       </a>
     </div>
   </div>
@@ -2026,11 +2070,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
             New Group
           </button>
-          <button class="dock-action-btn" id="exportBtn" title="Export bookmarks">
+          <button class="dock-action-btn" id="exportBtn" title="Export bookmarks to a JSON file">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export
           </button>
-          <button class="dock-action-btn" id="importBtn" title="Import bookmarks">
+          <button class="dock-action-btn" id="importBtn" title="Import bookmarks from a JSON file">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             Import
           </button>
@@ -2038,6 +2082,7 @@
         </div>
       </div>
       <div class="dock-groups" id="dockGroups"></div>
+      <p class="dock-hint">Star any site to pin it here, then drag the chips into groups. Already have an export? Use Import.</p>
     </div>
   </div>
   <button class="dock-toggle-bar" id="dockToggle" title="Toggle bookmarks bar" aria-label="Toggle bookmarks bar" aria-expanded="true">
@@ -2544,6 +2589,11 @@ function getFiltered() {
   return results;
 }
 
+function joinList(items) {
+  if (items.length === 1) return items[0];
+  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+}
+
 function highlightMatch(text, query) {
   const raw = String(text);
   const tokens = query ? tokenize(query) : [];
@@ -2672,13 +2722,25 @@ function _renderGridInner() {
   }
 
   if (filtered.length === 0) {
-    const hint = searchTerm ? `No results for "${escHtml(searchTerm)}"` : 'No sites match this filter';
+    const active = [];
+    if (activeFilter === 'Bookmarks') active.push('your bookmarks');
+    else if (activeFilter !== 'All') active.push(`the ${activeFilter} category`);
+    if (openSourceOnly) active.push('open source only');
+    if (noAuthOnly) active.push('no account needed');
+    if (picksOnly) active.push('staff picks');
+    const hint = searchTerm ? `No results for "${escHtml(searchTerm)}"` : 'Nothing matches these filters';
+    const detail = active.length
+      ? `Nothing here matches ${escHtml(joinList(active))}. Drop a filter and try again.`
+      : 'Try a shorter search term, or fewer words.';
     grid.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <h3>${hint}</h3>
-        <p>Try a different search term, category, or metadata filter.</p>
-        ${searchTerm ? '<button class="empty-state-btn" data-action="clear-search" type="button">Clear search</button>' : ''}
+        <p>${detail}</p>
+        <div class="empty-state-actions">
+          ${searchTerm ? '<button class="empty-state-btn" data-action="clear-search" type="button">Clear search</button>' : ''}
+          ${active.length ? '<button class="empty-state-btn" data-action="reset-filters" type="button">Reset filters</button>' : ''}
+        </div>
       </div>
     `;
   } else {
@@ -2831,7 +2893,10 @@ function openCompareModal() {
         ${rows.map(([label, getter]) => `
           <tr>
             <th scope="row">${escHtml(label)}</th>
-            ${sites.map(site => `<td>${escHtml(getter(site))}</td>`).join('')}
+            ${sites.map(site => {
+              const value = getter(site);
+              return value ? `<td>${escHtml(value)}</td>` : '<td class="compare-empty">Not listed</td>';
+            }).join('')}
           </tr>
         `).join('')}
       </tbody>
@@ -3293,13 +3358,12 @@ function renderDock() {
 
   countEl.textContent = bmCount;
 
+  wrapper.classList.toggle('empty', bmCount === 0);
+  wrapper.classList.toggle('collapsed', dockCollapsed);
   if (bmCount === 0) {
-    wrapper.classList.add('empty');
     container.innerHTML = '';
     return;
   }
-  wrapper.classList.remove('empty');
-  wrapper.classList.toggle('collapsed', dockCollapsed);
 
   // Reassign orphaned bookmarks without allowing an invalid imported group to reach the DOM.
   let reassigned = false;
@@ -3913,6 +3977,14 @@ document.getElementById('grid').addEventListener('click', (e) => {
   } else if (action === 'clear-search') {
     document.getElementById('searchInput').value = '';
     searchTerm = '';
+    renderGrid();
+  } else if (action === 'reset-filters') {
+    activeFilter = 'All';
+    openSourceOnly = false;
+    noAuthOnly = false;
+    picksOnly = false;
+    updateMetadataFilters();
+    buildFilters();
     renderGrid();
   }
 });
