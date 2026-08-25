@@ -13,6 +13,14 @@ const output = path.join(root, 'favicons.json');
 const cache = fs.existsSync(output) ? JSON.parse(fs.readFileSync(output, 'utf8')) : {};
 
 const REQUEST_TIMEOUT_MS = 12000;
+const MAX_HTML_BYTES = 400 * 1024;
+const MAX_PAGE_ICONS = 6;
+// The three icon services and a bare /favicon.ico cover most of the web. What
+// they miss is sites that declare an icon somewhere else entirely, which is why
+// the page itself is worth reading. Plenty of those hosts also refuse a
+// script-shaped user agent, so this one asks the way a browser would.
+const BROWSER_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+const ICON_REL = /(?:^|\s)(?:shortcut\s+)?(?:icon|apple-touch-icon|apple-touch-icon-precomposed|mask-icon|fluid-icon)(?:\s|$)/i;
 const MAX_ICON_BYTES = 200 * 1024;
 const MIN_ICON_BYTES = 64;
 // Browsers render all of these in an <img>. Base64 SVG in an img element is
@@ -58,11 +66,11 @@ function looksLikeImage(bytes) {
   return text.includes('<svg') || text.trimStart().startsWith('<?xml');
 }
 
-async function fetchIcon(url) {
+async function fetchIcon(url, userAgent = 'CoolSites-favicon-cache') {
   const response = await fetch(url, {
     redirect: 'follow',
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-    headers: { 'User-Agent': 'CoolSites-favicon-cache' }
+    headers: { 'User-Agent': userAgent }
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const type = normalizeType(response.headers.get('content-type'));
@@ -76,7 +84,48 @@ async function fetchIcon(url) {
   return `data:${type};base64,${bytes.toString('base64')}`;
 }
 
-async function fetchFavicon(domain) {
+// Pulls every icon a page declares. Written against the raw HTML rather than a
+// parser because adding a dependency to read four link tags is not a trade worth
+// making in a project with none.
+function iconLinksFromHtml(html, baseUrl) {
+  const links = [];
+  for (const tag of html.matchAll(/<link\b[^>]*>/gi)) {
+    const rel = /\brel\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(tag[0]);
+    const href = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(tag[0]);
+    if (!rel || !href) continue;
+    const relValue = (rel[1] ?? rel[2] ?? rel[3] ?? '').trim();
+    if (!ICON_REL.test(relValue)) continue;
+    const hrefValue = (href[1] ?? href[2] ?? href[3] ?? '').trim();
+    if (!hrefValue) continue;
+    try {
+      links.push(new URL(hrefValue, baseUrl).toString());
+    } catch {
+      // A malformed href is the page's problem, not a reason to stop.
+    }
+  }
+  // A site that lists ten sizes of the same icon should not cost ten requests.
+  return [...new Set(links)].slice(0, MAX_PAGE_ICONS);
+}
+
+async function iconsDeclaredByPage(pageUrl) {
+  const response = await fetch(pageUrl, {
+    redirect: 'follow',
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    headers: {
+      'User-Agent': BROWSER_USER_AGENT,
+      Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    }
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const contentType = (response.headers.get('content-type') || '').toLowerCase();
+  if (!contentType.includes('html') && !contentType.includes('xml')) throw new Error(`not a page (${contentType || 'no content type'})`);
+  const html = (await response.text()).slice(0, MAX_HTML_BYTES);
+  const links = iconLinksFromHtml(html, response.url);
+  if (!links.length) throw new Error('page declares no icon');
+  return links;
+}
+
+async function fetchFavicon(domain, pageUrl) {
   const failures = [];
   for (const source of sourcesFor(domain)) {
     try {
@@ -85,11 +134,42 @@ async function fetchFavicon(domain) {
       failures.push(`${new URL(source).hostname}: ${error.message}`);
     }
   }
+
+  // Last resort: read the page and use whatever icon it points at. This is the
+  // one source that finds icons on project pages, where the domain root has no
+  // favicon.ico because the project lives on a path.
+  try {
+    for (const link of await iconsDeclaredByPage(pageUrl)) {
+      try {
+        return await fetchIcon(link, BROWSER_USER_AGENT);
+      } catch (error) {
+        failures.push(`declared ${link.slice(0, 60)}: ${error.message}`);
+      }
+    }
+  } catch (error) {
+    failures.push(`page: ${error.message}`);
+  }
+
   throw new Error(`${domain} (${failures.join('; ')})`);
 }
 
+// Exported for the tests. Reading link tags out of arbitrary HTML with a regex
+// is the kind of thing that quietly matches nothing, so it gets exercised
+// against awkward markup rather than trusted.
+module.exports = { iconLinksFromHtml, looksLikeImage, domainFromUrl };
+
+if (require.main !== module) return;
+
 (async () => {
-  const domains = [...new Set(sites.map(site => domainFromUrl(site.url)).filter(Boolean))].sort();
+  // Keep a real entry URL per domain. The domain root is often not where the
+  // site lives, and asking a project page for its icon works where asking
+  // github.io for one does not.
+  const pageForDomain = new Map();
+  for (const site of sites) {
+    const domain = domainFromUrl(site.url);
+    if (domain && !pageForDomain.has(domain)) pageForDomain.set(domain, site.url);
+  }
+  const domains = [...pageForDomain.keys()].sort();
   const known = new Set(domains);
   let updated = 0;
   const failed = [];
@@ -97,7 +177,7 @@ async function fetchFavicon(domain) {
   for (const domain of domains) {
     if (cache[domain]) continue;
     try {
-      cache[domain] = await fetchFavicon(domain);
+      cache[domain] = await fetchFavicon(domain, pageForDomain.get(domain));
       updated++;
     } catch (error) {
       failed.push(domain);
