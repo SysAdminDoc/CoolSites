@@ -594,6 +594,59 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
     assert.ok(Number.parseFloat(await page.evaluate("getComputedStyle(document.querySelector('#grid .card')).animationDuration")) < 0.001, 'reduced motion should disable card animation');
 
+    // Diagnostics. Opens only with ?debug=1, reports real state, and must not
+    // reach for the network: the whole point is a health surface that does not
+    // phone anywhere.
+    await page.send('Emulation.setEmulatedMedia', { features: [] });
+    await page.send('Page.navigate', { url: `${server.url}?debug=1` });
+    await waitFor(page, "document.getElementById('debugModal') && document.getElementById('debugModal').open");
+    const diagnostics = await page.evaluate(`(() => {
+      const body = document.getElementById('debugBody');
+      // Read the rows rather than textContent: the label and value concatenate
+      // into "sites588" there, which is a trap for anything regex-based.
+      const values = {};
+      for (const row of body.querySelectorAll('.debug-row')) {
+        values[row.querySelector('dt').textContent] = row.querySelector('dd').textContent;
+      }
+      return {
+        open: document.getElementById('debugModal').open,
+        values,
+        groups: [...body.querySelectorAll('.debug-group h4')].map(h => h.textContent.replace(/ \\(\\d+\\)$/, '')),
+        hasActions: ['debugCopy', 'debugReset', 'debugClose'].every(id => document.getElementById(id))
+      };
+    })()`);
+    assert.equal(diagnostics.open, true, '?debug=1 should open the diagnostics panel');
+    assert.deepEqual(diagnostics.groups, ['App', 'Data', 'Cache', 'Errors'], 'every diagnostics section should render');
+    assert.equal(diagnostics.values.sites, String(SITES.length), 'diagnostics should report the real entry count');
+    assert.match(diagnostics.values.version, /^CoolSites v\d+\.\d+\.\d+$/, 'diagnostics should report the app version');
+    assert.match(diagnostics.values.serviceWorker, /^(active|installing|waiting|registered)$/, 'diagnostics should report the worker state');
+    assert.match(diagnostics.values.caches, /coolsites-v\d+\.\d+\.\d+/, 'diagnostics should name the cache actually in use');
+    assert.ok(Number(diagnostics.values.entries) > 0, 'diagnostics should count what the cache holds');
+    assert.equal(diagnostics.values.lastLoad === 'never completed', false, 'a successful load must be recorded');
+    assert.equal(diagnostics.hasActions, true, 'recovery actions must be present');
+
+    // Escape must close the dialog without also wiping the search behind it.
+    await page.evaluate("document.getElementById('debugModal').close()");
+
+    // The panel is developer-only: a normal load must not open it.
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+    assert.equal(
+      await page.evaluate("document.getElementById('debugModal').open"),
+      false,
+      'the diagnostics panel must stay shut without ?debug=1'
+    );
+
+    // A failed data load has to be recorded rather than swallowed, because that
+    // is exactly the case someone opens diagnostics to understand.
+    const recorded = await page.evaluate(`(async () => {
+      const before = DIAGNOSTICS.errors.length;
+      await loadJson('./definitely-not-here.json', {});
+      return { before, after: DIAGNOSTICS.errors.length, last: DIAGNOSTICS.errors.at(-1) };
+    })()`);
+    assert.equal(recorded.after, recorded.before + 1, 'a fallback must not hide the failure from diagnostics');
+    assert.match(recorded.last.scope, /definitely-not-here/);
+
     // The policy ships in a meta tag, so it is enforced on GitHub Pages where no
     // response header can reach. Drive the surfaces it could plausibly block:
     // the inline boot script, the inline stylesheet, the data: favicons, the

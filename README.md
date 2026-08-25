@@ -160,6 +160,19 @@ match the data, and fails when any version or count string in `index.html`,
 `manifest.json`, `sw.js` or this README has drifted from `package.json` and
 `sites.json`.
 
+### Diagnostics
+
+Add `?debug=1` to the URL and a panel opens with the app version, where the data
+came from, how old it is, the service worker state, which caches exist and how
+much they hold, and every error since the page loaded. Two recovery actions sit
+at the bottom: copy the report, or clear the caches, unregister the worker and
+reload.
+
+It reads this browser and shows you what it found. Nothing is sent anywhere,
+there is no analytics of any kind in this project, and the panel never opens
+without the parameter. It is most useful on a self-hosted copy that is serving
+stale data, which is almost always an old cache the worker is still holding.
+
 ### Checking links
 
 `npm run check:links` walks every URL in `sites.json` and writes a JSON report to

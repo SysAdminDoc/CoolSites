@@ -64,7 +64,9 @@ const PAIRS = [
   ['text-muted', ['bg-primary', 'bg-secondary', 'bg-card', 'bg-card-hover']],
   ['accent-text', ['bg-primary', 'bg-card', 'bg-card-hover']],
   ['amber-text', ['bg-primary', 'bg-card']],
-  ['danger-text', ['bg-primary', 'bg-card']],
+  // bg-secondary carries danger-text in the diagnostics panel's error list, and
+  // bg-card-hover carries it on a hovered card's destructive action.
+  ['danger-text', ['bg-primary', 'bg-card', 'bg-secondary', 'bg-card-hover']],
   ['on-accent', ['accent']]
 ];
 

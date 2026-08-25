@@ -104,7 +104,7 @@
     --on-accent: #ffffff;
     --accent-text: #8875d7;
     --amber-text: #f5a623;
-    --danger-text: #e5484d;
+    --danger-text: #e64e53;
   }
 
   /* ── Catppuccin Mocha ── */
@@ -168,7 +168,7 @@
     --on-accent: #2e3440;
     --accent-text: #91c5d3;
     --amber-text: #eed29a;
-    --danger-text: #d9a2a8;
+    --danger-text: #dfb1b6;
   }
 
   /* ── Dracula ── */
@@ -200,7 +200,7 @@
     --on-accent: #282a36;
     --accent-text: #bd93f9;
     --amber-text: #f1fa8c;
-    --danger-text: #ff6969;
+    --danger-text: #ff7a7a;
   }
 
   /* ── GitHub Dark ── */
@@ -296,7 +296,7 @@
     --on-accent: #00212b;
     --accent-text: #5dabe1;
     --amber-text: #c9a945;
-    --danger-text: #e87977;
+    --danger-text: #eb8886;
   }
 
   /* ── Light ── */
@@ -328,7 +328,7 @@
     --on-accent: #ffffff;
     --accent-text: #6e56cf;
     --amber-text: #886200;
-    --danger-text: #d13438;
+    --danger-text: #c62b2f;
   }
 
   /* ── Rosé Pine ── */
@@ -1028,6 +1028,70 @@
     width: min(920px, calc(100vw - 32px));
     max-width: 920px;
   }
+
+  .modal.debug-modal {
+    width: min(680px, calc(100vw - 32px));
+    max-width: 680px;
+  }
+  .debug-note {
+    margin: 0 0 12px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+  .debug-body {
+    /* Scrolls on its own so a long error list never pushes the buttons off
+       screen, and stays keyboard reachable because it scrolls. */
+    overflow: auto;
+    max-height: 55vh;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--bg-secondary);
+  }
+  .debug-body:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .debug-group { margin: 0 0 14px; }
+  .debug-group:last-child { margin-bottom: 0; }
+  .debug-group h4 {
+    margin: 0 0 6px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .debug-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 0.8rem;
+  }
+  .debug-row dt { color: var(--text-secondary); }
+  .debug-row dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-primary);
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+  .debug-error {
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.76rem;
+  }
+  .debug-error:first-of-type { border-top: 0; }
+  .debug-error strong { color: var(--danger-text); }
+  .debug-error span {
+    display: block;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    overflow-wrap: anywhere;
+  }
+  .debug-empty { color: var(--text-muted); font-size: 0.8rem; }
   .compare-table-wrap { overflow: auto; max-height: 70vh; }
   .compare-table {
     width: 100%;
@@ -2161,6 +2225,21 @@
   </div>
 </dialog>
 
+<!-- Diagnostics. Only ever opened with ?debug=1, and everything in it is read
+     from this browser. Nothing is sent anywhere. -->
+<dialog class="modal-overlay" id="debugModal" aria-labelledby="debugTitle">
+  <div class="modal debug-modal">
+    <h3 id="debugTitle">Diagnostics</h3>
+    <p class="debug-note">Everything here is read from this browser. Nothing is sent anywhere.</p>
+    <div class="debug-body" id="debugBody" tabindex="0" role="region" aria-labelledby="debugTitle"></div>
+    <div class="modal-btns" style="margin-top:16px">
+      <button class="modal-btn" type="button" id="debugCopy">Copy report</button>
+      <button class="modal-btn" type="button" id="debugReset">Clear cache and reload</button>
+      <button class="modal-btn primary" type="button" id="debugClose">Close</button>
+    </div>
+  </div>
+</dialog>
+
 <!-- Drag ghost element -->
 <div class="drag-ghost" id="dragGhost"></div>
 
@@ -2267,6 +2346,29 @@ let STAR_COUNTS = {};
 let FAVICON_CACHE = {};
 let DATA_SOURCE = 'network';
 
+// Everything the diagnostics panel reports. Kept in memory only: no beacon, no
+// storage, no third party. Failures used to go to console.warn and vanish, so
+// a self-hosted copy serving a stale worker looked identical to a healthy one.
+const DIAGNOSTICS = {
+  errors: [],
+  lastLoadAt: null,
+  serviceWorker: 'not registered'
+};
+const MAX_RECORDED_ERRORS = 25;
+
+function recordError(scope, error) {
+  DIAGNOSTICS.errors.push({
+    at: new Date().toISOString(),
+    scope,
+    message: error && error.message ? error.message : String(error)
+  });
+  // Oldest first out. A boot failure that repeats on every retry would
+  // otherwise push the original cause out of view.
+  if (DIAGNOSTICS.errors.length > MAX_RECORDED_ERRORS) {
+    DIAGNOSTICS.errors.splice(0, DIAGNOSTICS.errors.length - MAX_RECORDED_ERRORS);
+  }
+}
+
 const DATA_FILES = {
   sites: './sites.json',
   categories: './categories.json',
@@ -2281,6 +2383,9 @@ async function loadJson(url, fallback) {
     if (response.headers.get('X-CoolSites-Cache') === 'cache') DATA_SOURCE = 'cache';
     return await response.json();
   } catch (error) {
+    // Recorded even when a fallback rescues the call. A missing stars.json is
+    // invisible in the UI but is exactly what you want to see in diagnostics.
+    recordError(url, error);
     if (fallback !== undefined) return fallback;
     throw error;
   }
@@ -2303,6 +2408,7 @@ async function loadAppData() {
     loadJson(DATA_FILES.stars, {}),
     loadJson(DATA_FILES.favicons, {})
   ]);
+  DIAGNOSTICS.lastLoadAt = new Date().toISOString();
 }
 
 function showDataError(error) {
@@ -2318,6 +2424,7 @@ function showDataError(error) {
     </div>
   `;
   document.getElementById('dataRetryBtn').addEventListener('click', retryDataLoad);
+  recordError('data load', error);
   console.error(error);
 }
 
@@ -4240,6 +4347,128 @@ document.getElementById('shortcutsModal').addEventListener('click', (e) => { if 
 document.getElementById('compareClose').addEventListener('click', () => document.getElementById('compareModal').close());
 document.getElementById('compareModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 
+// ── Diagnostics (?debug=1) ──
+// Reads the state of this browser and shows it. It sends nothing anywhere,
+// which is the whole point: a self-hosted copy has no other way to explain
+// itself when the data is stale or the worker is stuck on an old cache.
+async function collectDiagnostics() {
+  const generator = document.querySelector('meta[name="generator"]');
+  const report = {
+    app: {
+      version: generator ? generator.content : 'unknown',
+      url: location.origin + location.pathname,
+      online: navigator.onLine !== false
+    },
+    data: {
+      source: DATA_SOURCE === 'cache' ? 'service worker cache' : 'network',
+      sites: SITES.length,
+      categories: CATEGORIES.length,
+      stars: Object.keys(STAR_COUNTS).length,
+      favicons: Object.keys(FAVICON_CACHE).length,
+      lastLoad: DIAGNOSTICS.lastLoadAt || 'never completed',
+      newestEntry: SITES.length ? formatDataAge() : 'no data'
+    },
+    cache: { serviceWorker: DIAGNOSTICS.serviceWorker },
+    errors: DIAGNOSTICS.errors
+  };
+
+  if ('caches' in window) {
+    try {
+      const names = await caches.keys();
+      report.cache.caches = names.length ? names.join(', ') : 'none';
+      // A cache left over from an older version is the usual reason a
+      // self-hosted copy keeps serving yesterday's data.
+      const expected = names.filter(name => name.startsWith('coolsites-'));
+      if (expected.length) {
+        const cache = await caches.open(expected[expected.length - 1]);
+        report.cache.entries = (await cache.keys()).length;
+      }
+      const stale = names.filter(name => name.startsWith('coolsites-') && !name.endsWith(report.app.version.replace('CoolSites ', '')));
+      if (stale.length) report.cache.stale = stale.join(', ');
+    } catch (error) {
+      report.cache.caches = `unreadable: ${error.message}`;
+    }
+  } else {
+    report.cache.caches = 'the Cache API is not available here';
+  }
+
+  return report;
+}
+
+function renderDiagnostics(report) {
+  const rows = (title, entries) => `
+    <div class="debug-group">
+      <h4>${escHtml(title)}</h4>
+      <dl style="margin:0">
+        ${Object.entries(entries).map(([key, value]) => `
+          <div class="debug-row"><dt>${escHtml(key)}</dt><dd>${escHtml(value)}</dd></div>
+        `).join('')}
+      </dl>
+    </div>`;
+
+  const errors = report.errors.length
+    ? report.errors.map(entry => `
+        <div class="debug-error">
+          <strong>${escHtml(entry.scope)}</strong>
+          <span>${escHtml(entry.at)} - ${escHtml(entry.message)}</span>
+        </div>`).join('')
+    : '<p class="debug-empty">Nothing has failed since this page loaded.</p>';
+
+  document.getElementById('debugBody').innerHTML =
+    rows('App', report.app) + rows('Data', report.data) + rows('Cache', report.cache)
+    + `<div class="debug-group"><h4>Errors (${report.errors.length})</h4>${errors}</div>`;
+}
+
+async function openDiagnostics() {
+  renderDiagnostics(await collectDiagnostics());
+  const modal = document.getElementById('debugModal');
+  if (!modal.open) modal.showModal();
+}
+
+document.getElementById('debugClose').addEventListener('click', () => document.getElementById('debugModal').close());
+document.getElementById('debugModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+
+document.getElementById('debugCopy').addEventListener('click', async (event) => {
+  const button = event.currentTarget;
+  const text = JSON.stringify(await collectDiagnostics(), null, 2);
+  try {
+    // Not available on an insecure origin, which a self-hosted copy often is.
+    if (!navigator.clipboard) throw new Error('clipboard unavailable');
+    await navigator.clipboard.writeText(text);
+    showToast('Diagnostics copied');
+  } catch {
+    // Falling back to a selection is more useful than an error: the reader can
+    // still copy it by hand.
+    const body = document.getElementById('debugBody');
+    body.textContent = text;
+    body.focus();
+    getSelection().selectAllChildren(body);
+    showToast('Copying is blocked here, so the report is selected instead');
+  }
+  button.blur();
+});
+
+document.getElementById('debugReset').addEventListener('click', async (event) => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  button.textContent = 'Clearing…';
+  try {
+    if ('caches' in window) {
+      const names = await caches.keys();
+      await Promise.all(names.filter(name => name.startsWith('coolsites-')).map(name => caches.delete(name)));
+    }
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(registration => registration.unregister()));
+    }
+  } catch (error) {
+    recordError('cache reset', error);
+  }
+  // Reloads either way. A partial clear still leaves the page in a better
+  // state than the one the reader opened this panel to escape.
+  location.reload();
+});
+
 // Init
 async function boot() {
   initTheme();
@@ -4261,15 +4490,30 @@ async function boot() {
     showDataStatus();
   } catch (error) {
     showDataError(error);
-    return;
   }
 
+  // Opened last so it reports the state after boot, and opened even when the
+  // data failed, since that is when someone most needs to see why.
+  if (new URLSearchParams(location.search).get('debug') === '1') {
+    openDiagnostics();
+  }
 }
 
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-  navigator.serviceWorker.register('./sw.js').catch(error => {
+  DIAGNOSTICS.serviceWorker = 'registering';
+  navigator.serviceWorker.register('./sw.js').then(registration => {
+    DIAGNOSTICS.serviceWorker = registration.active ? 'active'
+      : registration.installing ? 'installing'
+      : registration.waiting ? 'waiting' : 'registered';
+  }).catch(error => {
+    DIAGNOSTICS.serviceWorker = 'failed';
+    recordError('service worker', error);
     console.warn('CoolSites offline cache unavailable:', error);
   });
+} else {
+  DIAGNOSTICS.serviceWorker = location.protocol === 'file:'
+    ? 'not registered (file: protocol)'
+    : 'not supported by this browser';
 }
 
 boot();
