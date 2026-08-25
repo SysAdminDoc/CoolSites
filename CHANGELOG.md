@@ -11,6 +11,11 @@ All notable changes to CoolSites will be documented in this file.
 - A `Referrer-Policy` of `strict-origin-when-cross-origin`, so following a link off the directory no longer leaks the full URL you came from.
 - Tests that gate all of the above: one drives a real browser and fails if the policy blocks anything the app does, four check the policy itself for drift between pages, wildcard hosts, and `unsafe-inline` turning up somewhere it wasn't reviewed.
 
+### Changed
+
+- **Ten entries now point where the project actually lives.** Every destination was confirmed by opening it and reading the page, not by trusting the redirect: llamafile and Trilium Notes moved GitHub org, jq moved off GitHub Pages to `jqlang.org`, DocuSeal went from `.co` to `.com`, Paint.NET dropped the `getpaint` prefix, VeraCrypt moved from `.fr` to `.io`, Runway dropped the `ml`, `terraform.io` retired into the HashiCorp developer portal, the Mozilla Observatory moved into MDN, and Cloudflare reorganised its tunnel docs. Redirects that only add a locale or a marketing path were deliberately left alone, since the URL on file is the better canonical address.
+- Refreshed `favicons.json` and `stars.json` for the domains and repos that changed. One icon was dropped on the way: `sonic-pi.net` had been serving a macOS alias file as an icon, and the magic-byte check now catches it.
+
 ### Removed
 
 - **Docker support.** The `Dockerfile`, `.dockerignore` and the nginx configs are gone. Building the image for the first time turned up the reason to be suspicious of it: `try_files ... /index.html` answered every missing path with a 200 and a copy of the homepage, so `/CLAUDE.md` and `/Dockerfile` looked like real pages to a crawler. CoolSites has no client-side routing and needs no rewrite rule. Copy the files into any document root instead, which the README now explains.

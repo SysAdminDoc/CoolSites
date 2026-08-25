@@ -386,7 +386,7 @@
   },
   {
     "name": "Mozilla Observatory",
-    "url": "https://observatory.mozilla.org",
+    "url": "https://developer.mozilla.org/en-US/observatory",
     "description": "Mozilla's website security scanner. Tests headers, TLS, cookies, and content security policies.",
     "category": "Security",
     "openSource": false,
@@ -1491,7 +1491,7 @@
   },
   {
     "name": "Cloudflare Tunnel",
-    "url": "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/",
+    "url": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
     "description": "Expose local services to the internet securely without port forwarding. Free, encrypted, and zero-trust.",
     "category": "Homelab",
     "openSource": false,
@@ -3884,7 +3884,7 @@
   },
   {
     "name": "Llamafile",
-    "url": "https://github.com/Mozilla-Ocho/llamafile",
+    "url": "https://github.com/mozilla-ai/llamafile",
     "description": "Single-file executable LLMs. Download one file and run a chatbot. No Python, no Docker, no dependencies.",
     "category": "AI & ML",
     "openSource": true,
@@ -3996,7 +3996,7 @@
   },
   {
     "name": "Runway",
-    "url": "https://runwayml.com",
+    "url": "https://runway.com/",
     "description": "Creative AI toolkit for video. Gen-3 Alpha for video generation, motion brush, green screen, and more.",
     "category": "AI Creative",
     "openSource": false,
@@ -4791,7 +4791,7 @@
   },
   {
     "name": "Terraform",
-    "url": "https://www.terraform.io",
+    "url": "https://developer.hashicorp.com/terraform",
     "description": "Infrastructure as code. Define cloud resources in declarative config files. The industry standard.",
     "category": "Sysadmin",
     "openSource": false,
@@ -5279,7 +5279,7 @@
   },
   {
     "name": "Docuseal",
-    "url": "https://www.docuseal.co",
+    "url": "https://www.docuseal.com",
     "description": "Open source document signing platform. Create, fill, and sign documents. DocuSign alternative.",
     "category": "Productivity",
     "openSource": true,
@@ -5353,7 +5353,7 @@
   },
   {
     "name": "Trilium Notes",
-    "url": "https://github.com/zadam/trilium",
+    "url": "https://github.com/TriliumNext/Trilium",
     "description": "Hierarchical note-taking app with powerful scripting. Relation maps, book notes, task management. Self-hostable.",
     "category": "Productivity",
     "openSource": true,
@@ -6246,7 +6246,7 @@
   },
   {
     "name": "jq",
-    "url": "https://jqlang.github.io/jq/",
+    "url": "https://jqlang.org/",
     "description": "Command-line JSON processor. Slice, filter, map, and transform JSON data. Essential for API work.",
     "category": "CLI Tools",
     "openSource": true,
@@ -7868,7 +7868,7 @@
   },
   {
     "name": "VeraCrypt",
-    "url": "https://www.veracrypt.fr/",
+    "url": "https://veracrypt.io/",
     "description": "Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems.",
     "category": "Privacy",
     "openSource": true,
@@ -8408,7 +8408,7 @@
   },
   {
     "name": "Paint.NET",
-    "url": "https://www.getpaint.net/",
+    "url": "https://paint.net/",
     "description": "Fast, intuitive image editor for Windows. Layers, effects, plugins, and GPU acceleration. Lighter than Photoshop, more powerful than Paint.",
     "category": "Creative",
     "openSource": false,
