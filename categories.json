@@ -109,7 +109,7 @@
     "className": "cat-privacy",
     "color": "#ab8cff",
     "blurb": "Private communications, browsing, email, search, and anonymity tools.",
-    "count": 26
+    "count": 25
   },
   {
     "name": "Sysadmin",
@@ -229,7 +229,7 @@
     "className": "cat-indexes",
     "color": "#ffd700",
     "blurb": "Curated indexes, technical wikis, and community knowledge bases.",
-    "count": 9
+    "count": 8
   },
   {
     "name": "Arr Stack",

@@ -1,5 +1,8 @@
+'use strict';
+
 const fs = require('node:fs');
 const path = require('node:path');
+const { computeMetadata, renderTargets } = require('./lib/metadata');
 
 const root = path.resolve(__dirname, '..');
 const feedsDir = path.join(root, 'feeds');
@@ -26,10 +29,14 @@ function slug(value) {
 }
 
 const siteUrl = 'https://sysadmindoc.github.io/CoolSites/';
+function freshness(site) {
+  return site.lastReviewedAt || site.updatedAt;
+}
+
 const recent = [...sites]
-  .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.name.localeCompare(b.name))
+  .sort((a, b) => freshness(b).localeCompare(freshness(a)) || a.name.localeCompare(b.name))
   .slice(0, 50);
-const feedUpdated = `${recent[0]?.updatedAt || '2026-06-25'}T00:00:00Z`;
+const feedUpdated = `${recent[0] ? freshness(recent[0]) : '2026-06-25'}T00:00:00Z`;
 
 const atom = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -43,7 +50,7 @@ ${recent.map(site => `  <entry>
     <title>${xml(site.name)}</title>
     <id>${xml(site.url)}</id>
     <link href="${xml(site.url)}"/>
-    <updated>${site.updatedAt}T00:00:00Z</updated>
+    <updated>${freshness(site)}T00:00:00Z</updated>
     <category term="${xml(site.category)}"/>
     <summary>${xml(site.description)}</summary>
   </entry>`).join('\n')}
@@ -61,7 +68,7 @@ const jsonFeed = {
     url: site.url,
     title: site.name,
     summary: site.description,
-    date_modified: `${site.updatedAt}T00:00:00Z`,
+    date_modified: `${freshness(site)}T00:00:00Z`,
     tags: [site.category, ...site.tags],
     _coolsites_category: site.category,
     _coolsites_slug: slug(site.name)
@@ -70,4 +77,16 @@ const jsonFeed = {
 
 fs.writeFileSync(path.join(feedsDir, 'recent.atom'), atom);
 fs.writeFileSync(path.join(feedsDir, 'recent.json'), `${JSON.stringify(jsonFeed, null, 2)}\n`);
+const meta = computeMetadata();
+const { results, problems } = renderTargets(meta);
+if (problems.length) {
+  console.error(problems.join('\n'));
+  process.exit(1);
+}
+const rewritten = results.filter(result => result.changed);
+for (const result of rewritten) fs.writeFileSync(result.absolute, result.next);
+
 console.log(`Generated feeds for ${recent.length} recent entries`);
+console.log(rewritten.length
+  ? `Synced v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories into ${rewritten.map(result => result.file).join(', ')}`
+  : `Metadata already in sync (v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories)`);

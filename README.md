@@ -2,12 +2,12 @@
 
 ![Version](https://img.shields.io/badge/version-2.2.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Sites](https://img.shields.io/badge/sites-590-blueviolet)
+![Sites](https://img.shields.io/badge/sites-588-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
-> The ultimate curated directory of 590 free tools, open source software, AI projects, and hidden gems across 30 categories — built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
+> A curated directory of 588 free tools, open source projects, and hidden gems across 30 categories, built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 ### **[Browse the Directory](https://sysadmindoc.github.io/CoolSites/)**
 
@@ -15,7 +15,7 @@
 
 ## Features
 
-- **590 curated sites** across 30 categories — every entry hand-picked and described
+- **588 curated sites** across 30 categories, every entry hand-picked and described
 - **Fuzzy search** with match highlighting — typo-tolerant, ranked by relevance
 - **Category filters** with live counts — drill into any category instantly
 - **Metadata filters** — toggle open source only or no account required views
@@ -39,38 +39,38 @@
 
 ## Categories
 
-| Category | Sites | Highlights |
-|----------|:-----:|-----------|
-| Desktop Software | 50 | DevToys, PowerToys, Files, Everything, ShareX, VLC, Ventoy, HWiNFO |
-| Homelab | 39 | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
-| Dev Tools | 35 | Regex101, Hoppscotch, CodePen, StackBlitz, Zed, Cursor, Playwright |
-| AI & ML | 32 | Ollama, Open WebUI, LM Studio, ComfyUI, Hugging Face, Groq, Dify |
-| Creative | 30 | Blender, Figma, Photopea, Excalidraw, Penpot, Coolors, fffuel.co |
-| Sysadmin | 27 | Grafana, Netdata, Prometheus, Terraform, Wazuh, Cockpit, btop |
-| Security | 26 | CyberChef, Have I Been Pwned, VirusTotal, OWASP ZAP, Qualys SSL Labs |
-| Privacy | 26 | Mullvad, Tor, Signal, ProtonMail, SearXNG, uBlock Origin, Tails |
-| Fun & Culture | 26 | Neal.fun, Radio Garden, Shadertoy, Geoguessr, xkcd, Noclip, Wiby |
-| Productivity | 24 | Obsidian, Notion, Linear, Cal.com, Stirling PDF, NocoDB, Typst |
-| Education | 21 | freeCodeCamp, Khan Academy, MIT OCW, CS50, LeetCode, Nand2Tetris |
-| CLI Tools | 20 | fzf, ripgrep, bat, eza, lazygit, lazydocker, neovim, starship |
-| News & Reference | 20 | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
-| OSINT | 19 | Shodan, Censys, Wayback Machine, SpiderFoot, TinEye, BuiltWith |
-| Torrenting | 18 | qBittorrent, Transmission, Deluge, Jackett, Prowlarr, Stremio |
-| Gaming | 16 | RetroArch, itch.io, Lichess, Board Game Arena, OpenTTD, RPCS3 |
-| IP & Network | 15 | BGP.Tools, IPinfo.io, ping.pe, Robtex, HackerTarget, ViewDNS |
-| AI Creative | 15 | Midjourney, Suno, Runway, ElevenLabs, Remove.bg, Recraft, Pika |
-| File Tools | 15 | Cobalt, yt-dlp, FFmpeg, HandBrake, Pandoc, Croc, PDF24 |
-| Media Downloads | 14 | yt-dlp, Cobalt, JDownloader, gallery-dl, Stremio |
-| Networking | 13 | Wireshark, nmap, PuTTY, mRemoteNG, NetBox, Netbird, WinSCP |
-| Data & Viz | 12 | Metabase, Apache Superset, Datawrapper, D3.js, Mermaid Live, Kepler.gl |
-| Reading | 12 | Calibre, Readarr, Kavita, Libby, Standard Ebooks |
-| DNS Tools | 10 | whatsmydns.net, DNSViz, MXToolbox, DNS Leak Test, Zonemaster |
-| Automation | 10 | n8n, Node-RED, Huginn, Apache Airflow, Pipedream, Make, Temporal |
-| Music & Audio | 10 | Ardour, LMMS, Vital, Mixxx, MuseScore, Bandlab, Freesound |
-| Speed Tests | 10 | Cloudflare, Fast.com, Waveform Bufferbloat, LibreSpeed, M-Lab |
-| Arr Stack | 10 | Sonarr, Radarr, Lidarr, Prowlarr, Bazarr, Overseerr |
-| Containers | 9 | Docker, Podman, k3s, Lens, Helm, ArgoCD, Harbor, Rancher |
-| Indexes & Wikis | 9 | ArchWiki, Gentoo Wiki, FMHY, awesome-selfhosted |
+| Category         | Sites | Highlights |
+|------------------|:-----:|-----------|
+| Desktop Software | 50    | DevToys, PowerToys, Files, Everything, ShareX, VLC, Ventoy, HWiNFO |
+| Homelab          | 39    | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
+| Dev Tools        | 35    | Regex101, Hoppscotch, CodePen, StackBlitz, Zed, Cursor, Playwright |
+| AI & ML          | 32    | Ollama, Open WebUI, LM Studio, ComfyUI, Hugging Face, Groq, Dify |
+| Creative         | 30    | Blender, Figma, Photopea, Excalidraw, Penpot, Coolors, fffuel.co |
+| Sysadmin         | 27    | Grafana, Netdata, Prometheus, Terraform, Wazuh, Cockpit, btop |
+| Fun & Culture    | 26    | Neal.fun, Radio Garden, Shadertoy, Geoguessr, xkcd, Noclip, Wiby |
+| Privacy          | 25    | Mullvad, Tor, Signal, ProtonMail, SearXNG, uBlock Origin, Tails |
+| Security         | 25    | CyberChef, Have I Been Pwned, VirusTotal, OWASP ZAP, Qualys SSL Labs |
+| Productivity     | 24    | Obsidian, Notion, Linear, Cal.com, Stirling PDF, NocoDB, Typst |
+| Education        | 21    | freeCodeCamp, Khan Academy, MIT OCW, CS50, LeetCode, Nand2Tetris |
+| CLI Tools        | 20    | fzf, ripgrep, bat, eza, lazygit, lazydocker, neovim, starship |
+| News & Reference | 20    | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
+| OSINT            | 19    | Shodan, Censys, Wayback Machine, SpiderFoot, TinEye, BuiltWith |
+| Torrenting       | 18    | qBittorrent, Transmission, Deluge, Jackett, Prowlarr, Stremio |
+| Gaming           | 16    | RetroArch, itch.io, Lichess, Board Game Arena, OpenTTD, RPCS3 |
+| AI Creative      | 15    | Midjourney, Suno, Runway, ElevenLabs, Remove.bg, Recraft, Pika |
+| File Tools       | 15    | Cobalt, yt-dlp, FFmpeg, HandBrake, Pandoc, Croc, PDF24 |
+| IP & Network     | 15    | BGP.Tools, IPinfo.io, ping.pe, Robtex, HackerTarget, ViewDNS |
+| Media Downloads  | 13    | yt-dlp, Cobalt, JDownloader, gallery-dl, Stremio |
+| Networking       | 13    | Wireshark, nmap, PuTTY, mRemoteNG, NetBox, Netbird, WinSCP |
+| Data & Viz       | 12    | Metabase, Apache Superset, Datawrapper, D3.js, Mermaid Live, Kepler.gl |
+| Reading          | 11    | Calibre, Readarr, Kavita, Libby, Standard Ebooks |
+| Arr Stack        | 10    | Sonarr, Radarr, Lidarr, Prowlarr, Bazarr, Overseerr |
+| Automation       | 10    | n8n, Node-RED, Huginn, Apache Airflow, Pipedream, Make, Temporal |
+| DNS Tools        | 10    | whatsmydns.net, DNSViz, MXToolbox, DNS Leak Test, Zonemaster |
+| Music & Audio    | 10    | Ardour, LMMS, Vital, Mixxx, MuseScore, Bandlab, Freesound |
+| Speed Tests      | 10    | Cloudflare, Fast.com, Waveform Bufferbloat, LibreSpeed, M-Lab |
+| Containers       | 9     | Docker, Podman, k3s, Lens, Helm, ArgoCD, Harbor, Rancher |
+| Indexes & Wikis  | 8     | ArchWiki, Gentoo Wiki, FMHY, Awesome Privacy |
 
 ## Quick Start
 
@@ -103,7 +103,7 @@ Copy the repository contents into any web server's document root. Works with Ngi
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │   sites.json     │────>│   Filter Engine  │────>│   Card Renderer  │
 │                  │     │                  │     │                  │
-│  590 entries     │     │  Category match  │     │  Grid / List     │
+│  One JSON entry  │     │  Category match  │     │  Grid / List     │
 │  Name, URL,      │     │  + Fuzzy search  │     │  + View Trans.   │
 │  Desc, Tags,     │     │  + Sort modes    │     │  + Lazy favicons │
 │  Metadata        │     │  + Metadata      │     │                  │
@@ -179,6 +179,6 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** — 590 sites and counting.
+**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** with all 588 sites.
 
 https://sysadmindoc.github.io/CoolSites/

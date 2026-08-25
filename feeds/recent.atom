@@ -111,14 +111,6 @@
     <summary>Fast network scanner. Ping IPs, resolve hostnames, detect MAC addresses, scan ports.</summary>
   </entry>
   <entry>
-    <title>AnonAddy</title>
-    <id>https://addy.io/</id>
-    <link href="https://addy.io/"/>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <category term="Privacy"/>
-    <summary>Anonymous email forwarding service. Create unlimited aliases on the fly to protect your real address. Open source and self-hostable.</summary>
-  </entry>
-  <entry>
     <title>Ansible</title>
     <id>https://www.ansible.com</id>
     <link href="https://www.ansible.com"/>
@@ -279,14 +271,6 @@
     <summary>Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage.</summary>
   </entry>
   <entry>
-    <title>Awesome Selfhosted</title>
-    <id>https://awesome-selfhosted.net/</id>
-    <link href="https://awesome-selfhosted.net/"/>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <category term="Indexes &amp; Wikis"/>
-    <summary>Comprehensive list of self-hosted software and services. Searchable, categorized, and community-maintained on GitHub.</summary>
-  </entry>
-  <entry>
     <title>Awesome Windows 11</title>
     <id>https://github.com/awesome-windows11/windows11</id>
     <link href="https://github.com/awesome-windows11/windows11"/>
@@ -405,5 +389,21 @@
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Gaming"/>
     <summary>Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.</summary>
+  </entry>
+  <entry>
+    <title>Brilliant</title>
+    <id>https://brilliant.org</id>
+    <link href="https://brilliant.org"/>
+    <updated>2026-06-25T00:00:00Z</updated>
+    <category term="Education"/>
+    <summary>Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition.</summary>
+  </entry>
+  <entry>
+    <title>BrowserLeaks</title>
+    <id>https://browserleaks.com</id>
+    <link href="https://browserleaks.com"/>
+    <updated>2026-06-25T00:00:00Z</updated>
+    <category term="Security"/>
+    <summary>Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.</summary>
   </entry>
 </feed>

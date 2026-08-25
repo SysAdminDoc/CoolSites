@@ -7327,21 +7327,6 @@
     ]
   },
   {
-    "name": "Awesome Selfhosted",
-    "url": "https://awesome-selfhosted.net/",
-    "description": "Comprehensive list of self-hosted software and services. Searchable, categorized, and community-maintained on GitHub.",
-    "category": "Indexes & Wikis",
-    "openSource": true,
-    "requiresAuth": false,
-    "updatedAt": "2026-06-25",
-    "tags": [
-      "selfhosted",
-      "index",
-      "awesome",
-      "github"
-    ]
-  },
-  {
     "name": "Awesome Privacy",
     "url": "https://awesome-privacy.xyz/",
     "description": "Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage.",
@@ -7864,21 +7849,6 @@
       "extension",
       "tracking",
       "urls"
-    ]
-  },
-  {
-    "name": "AnonAddy",
-    "url": "https://addy.io/",
-    "description": "Anonymous email forwarding service. Create unlimited aliases on the fly to protect your real address. Open source and self-hostable.",
-    "category": "Privacy",
-    "openSource": true,
-    "requiresAuth": false,
-    "updatedAt": "2026-06-25",
-    "tags": [
-      "email",
-      "alias",
-      "privacy",
-      "forwarding"
     ]
   },
   {

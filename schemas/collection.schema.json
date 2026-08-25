@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sysadmindoc.github.io/CoolSites/schemas/collection.schema.json",
+  "title": "CoolSites collection entry",
+  "type": "object",
+  "required": ["name", "slug", "description", "urls"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "description": { "type": "string", "minLength": 12, "maxLength": 300 },
+    "urls": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string", "format": "uri" } }
+  }
+}

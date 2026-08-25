@@ -205,22 +205,6 @@
       "_coolsites_slug": "angry-ip-scanner"
     },
     {
-      "id": "https://addy.io/",
-      "url": "https://addy.io/",
-      "title": "AnonAddy",
-      "summary": "Anonymous email forwarding service. Create unlimited aliases on the fly to protect your real address. Open source and self-hostable.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Privacy",
-        "email",
-        "alias",
-        "privacy",
-        "forwarding"
-      ],
-      "_coolsites_category": "Privacy",
-      "_coolsites_slug": "anonaddy"
-    },
-    {
       "id": "https://www.ansible.com",
       "url": "https://www.ansible.com",
       "title": "Ansible",
@@ -525,22 +509,6 @@
       "_coolsites_slug": "awesome-privacy"
     },
     {
-      "id": "https://awesome-selfhosted.net/",
-      "url": "https://awesome-selfhosted.net/",
-      "title": "Awesome Selfhosted",
-      "summary": "Comprehensive list of self-hosted software and services. Searchable, categorized, and community-maintained on GitHub.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Indexes & Wikis",
-        "selfhosted",
-        "index",
-        "awesome",
-        "github"
-      ],
-      "_coolsites_category": "Indexes & Wikis",
-      "_coolsites_slug": "awesome-selfhosted"
-    },
-    {
       "id": "https://github.com/awesome-windows11/windows11",
       "url": "https://github.com/awesome-windows11/windows11",
       "title": "Awesome Windows 11",
@@ -772,6 +740,36 @@
       ],
       "_coolsites_category": "Gaming",
       "_coolsites_slug": "board-game-arena"
+    },
+    {
+      "id": "https://brilliant.org",
+      "url": "https://brilliant.org",
+      "title": "Brilliant",
+      "summary": "Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition.",
+      "date_modified": "2026-06-25T00:00:00Z",
+      "tags": [
+        "Education",
+        "stem",
+        "interactive",
+        "puzzles"
+      ],
+      "_coolsites_category": "Education",
+      "_coolsites_slug": "brilliant"
+    },
+    {
+      "id": "https://browserleaks.com",
+      "url": "https://browserleaks.com",
+      "title": "BrowserLeaks",
+      "summary": "Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.",
+      "date_modified": "2026-06-25T00:00:00Z",
+      "tags": [
+        "Security",
+        "fingerprint",
+        "privacy",
+        "browser"
+      ],
+      "_coolsites_category": "Security",
+      "_coolsites_slug": "browserleaks"
     }
   ]
 }

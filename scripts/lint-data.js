@@ -1,105 +1,228 @@
+'use strict';
+
 const fs = require('node:fs');
 const path = require('node:path');
+const { computeMetadata, renderTargets } = require('./lib/metadata');
 
 const root = path.resolve(__dirname, '..');
-const sites = readJson('sites.json');
-const categories = readJson('categories.json');
-const collections = readOptionalJson('collections.json', []);
-
+const sourceOnly = process.argv.includes('--source-only');
 const errors = [];
 
 function readJson(file) {
-  return JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
+  const target = path.join(root, file);
+  try {
+    return JSON.parse(fs.readFileSync(target, 'utf8'));
+  } catch (error) {
+    errors.push(`${file}: ${error.message}`);
+    return null;
+  }
 }
 
 function readOptionalJson(file, fallback) {
-  const target = path.join(root, file);
-  return fs.existsSync(target) ? JSON.parse(fs.readFileSync(target, 'utf8')) : fallback;
+  return fs.existsSync(path.join(root, file)) ? readJson(file) : fallback;
+}
+
+function addError(message) {
+  errors.push(message);
+}
+
+function validateSchema(value, schema, label) {
+  if (!schema) return;
+  if (schema.type === 'object') {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) {
+      addError(`${label}: must be an object`);
+      return;
+    }
+    for (const key of schema.required || []) {
+      if (!(key in value)) addError(`${label}: missing required ${key}`);
+    }
+    if (schema.additionalProperties === false) {
+      for (const key of Object.keys(value)) {
+        if (!schema.properties?.[key]) addError(`${label}: unexpected property ${key}`);
+      }
+    }
+    for (const [key, propertySchema] of Object.entries(schema.properties || {})) {
+      if (key in value) validateSchema(value[key], propertySchema, `${label}.${key}`);
+    }
+    return;
+  }
+  if (schema.type === 'array') {
+    if (!Array.isArray(value)) {
+      addError(`${label}: must be an array`);
+      return;
+    }
+    if (schema.minItems != null && value.length < schema.minItems) addError(`${label}: must contain at least ${schema.minItems} entries`);
+    if (schema.maxItems != null && value.length > schema.maxItems) addError(`${label}: must contain at most ${schema.maxItems} entries`);
+    if (schema.uniqueItems) {
+      const serialized = value.map(item => JSON.stringify(item));
+      if (new Set(serialized).size !== serialized.length) addError(`${label}: entries must be unique`);
+    }
+    value.forEach((item, index) => validateSchema(item, schema.items, `${label}[${index}]`));
+    return;
+  }
+  if (schema.type === 'string') {
+    if (typeof value !== 'string') {
+      addError(`${label}: must be a string`);
+      return;
+    }
+    if (schema.minLength != null && value.length < schema.minLength) addError(`${label}: is shorter than ${schema.minLength} characters`);
+    if (schema.maxLength != null && value.length > schema.maxLength) addError(`${label}: is longer than ${schema.maxLength} characters`);
+    if (schema.pattern && !new RegExp(schema.pattern).test(value)) addError(`${label}: does not match ${schema.pattern}`);
+    if (schema.format === 'uri') {
+      try { new URL(value); } catch { addError(`${label}: must be a valid URI`); }
+    }
+    return;
+  }
+  if (schema.type === 'boolean' && typeof value !== 'boolean') addError(`${label}: must be a boolean`);
+  if (schema.type === 'integer' && (!Number.isInteger(value) || (schema.minimum != null && value < schema.minimum))) addError(`${label}: must be an integer${schema.minimum != null ? ` >= ${schema.minimum}` : ''}`);
 }
 
 function isDate(value) {
-  return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
+  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
+}
+
+function isTimestamp(value) {
+  return typeof value === 'string' && !Number.isNaN(Date.parse(value));
 }
 
 function slugify(value) {
   return value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-function requireString(obj, key, label) {
-  if (typeof obj[key] !== 'string' || obj[key].trim() === '') {
-    errors.push(`${label}: missing non-empty ${key}`);
+function canonicalUrl(value) {
+  try {
+    const parsed = new URL(value);
+    parsed.hash = '';
+    parsed.hostname = parsed.hostname.toLowerCase();
+    if ((parsed.protocol === 'http:' && parsed.port === '80') || (parsed.protocol === 'https:' && parsed.port === '443')) parsed.port = '';
+    if (parsed.pathname.length > 1) parsed.pathname = parsed.pathname.replace(/\/+$/, '');
+    return parsed.toString();
+  } catch {
+    return null;
   }
 }
 
-if (!Array.isArray(sites)) errors.push('sites.json must be an array');
-if (!Array.isArray(categories)) errors.push('categories.json must be an array');
+function validateSourceData() {
+  const sites = readJson('sites.json');
+  const categories = readJson('categories.json');
+  const collections = readOptionalJson('collections.json', []);
+  const stars = readOptionalJson('stars.json', {});
+  const favicons = readOptionalJson('favicons.json', {});
+  const siteSchema = readJson('schemas/site.schema.json');
+  const categorySchema = readJson('schemas/category.schema.json');
+  const collectionSchema = readJson('schemas/collection.schema.json');
 
-const categoryNames = new Set();
-const categoryCounts = new Map();
-const urls = new Set();
+  if (!Array.isArray(sites)) addError('sites.json must be an array');
+  if (!Array.isArray(categories)) addError('categories.json must be an array');
+  if (!Array.isArray(collections)) addError('collections.json must be an array');
+  if (!stars || typeof stars !== 'object' || Array.isArray(stars)) addError('stars.json must be an object');
+  if (!favicons || typeof favicons !== 'object' || Array.isArray(favicons)) addError('favicons.json must be an object');
 
-categories.forEach((category, index) => {
-  const label = `categories[${index}]`;
-  requireString(category, 'name', label);
-  requireString(category, 'slug', label);
-  requireString(category, 'className', label);
-  requireString(category, 'color', label);
-  requireString(category, 'blurb', label);
-  if (category.slug !== slugify(category.name)) errors.push(`${label}: slug does not match name`);
-  if (!/^#[0-9a-fA-F]{6}$/.test(category.color || '')) errors.push(`${label}: invalid color`);
-  if (!Number.isInteger(category.count) || category.count < 1) errors.push(`${label}: invalid count`);
-  if (categoryNames.has(category.name)) errors.push(`${label}: duplicate category ${category.name}`);
-  categoryNames.add(category.name);
-  categoryCounts.set(category.name, 0);
-});
+  const categoryNames = new Set();
+  const categoryCounts = new Map();
+  const urls = new Set();
+  const canonicalUrls = new Map();
 
-sites.forEach((site, index) => {
-  const label = `sites[${index}] ${site?.name || ''}`.trim();
-  requireString(site, 'name', label);
-  requireString(site, 'url', label);
-  requireString(site, 'description', label);
-  requireString(site, 'category', label);
-  try {
-    const parsed = new URL(site.url);
-    if (!['http:', 'https:'].includes(parsed.protocol)) errors.push(`${label}: URL must be http(s)`);
-  } catch {
-    errors.push(`${label}: invalid URL ${site.url}`);
-  }
-  if (urls.has(site.url)) errors.push(`${label}: duplicate URL ${site.url}`);
-  urls.add(site.url);
-  if (!categoryNames.has(site.category)) errors.push(`${label}: unknown category ${site.category}`);
-  categoryCounts.set(site.category, (categoryCounts.get(site.category) || 0) + 1);
-  if (typeof site.openSource !== 'boolean') errors.push(`${label}: openSource must be boolean`);
-  if (typeof site.requiresAuth !== 'boolean') errors.push(`${label}: requiresAuth must be boolean`);
-  if (!isDate(site.updatedAt)) errors.push(`${label}: updatedAt must be YYYY-MM-DD`);
-  if (!Array.isArray(site.tags) || site.tags.length === 0) errors.push(`${label}: tags must be a non-empty array`);
-  if (site.tags?.some(tag => typeof tag !== 'string' || !tag.trim())) errors.push(`${label}: tags must be non-empty strings`);
-  if ('editorsPick' in site && typeof site.editorsPick !== 'boolean') errors.push(`${label}: editorsPick must be boolean`);
-  if ('alternativeTo' in site) {
-    if (!Array.isArray(site.alternativeTo)) errors.push(`${label}: alternativeTo must be an array`);
-    else if (site.alternativeTo.some(item => typeof item !== 'string' || !item.trim())) errors.push(`${label}: alternativeTo values must be non-empty strings`);
-  }
-});
-
-categories.forEach((category, index) => {
-  const actual = categoryCounts.get(category.name) || 0;
-  if (category.count !== actual) errors.push(`categories[${index}] ${category.name}: count ${category.count} does not match ${actual}`);
-});
-
-collections.forEach((collection, index) => {
-  const label = `collections[${index}] ${collection?.name || ''}`.trim();
-  requireString(collection, 'name', label);
-  requireString(collection, 'slug', label);
-  requireString(collection, 'description', label);
-  if (!Array.isArray(collection.urls) || collection.urls.length < 2) errors.push(`${label}: urls must contain at least two entries`);
-  collection.urls?.forEach(url => {
-    if (!urls.has(url)) errors.push(`${label}: unknown URL ${url}`);
+  (Array.isArray(categories) ? categories : []).forEach((category, index) => {
+    const label = `categories[${index}]`;
+    validateSchema(category, categorySchema, label);
+    if (category?.slug !== slugify(category?.name || '')) addError(`${label}: slug does not match name`);
+    if (categoryNames.has(category?.name)) addError(`${label}: duplicate category ${category?.name}`);
+    categoryNames.add(category?.name);
+    categoryCounts.set(category?.name, 0);
   });
-});
+
+  (Array.isArray(sites) ? sites : []).forEach((site, index) => {
+    const label = `sites[${index}] ${site?.name || ''}`.trim();
+    validateSchema(site, siteSchema, label);
+    const canonical = canonicalUrl(site?.url);
+    if (!canonical || !['http:', 'https:'].includes(new URL(site.url).protocol)) addError(`${label}: URL must be http(s)`);
+    if (urls.has(site?.url)) addError(`${label}: duplicate URL ${site?.url}`);
+    urls.add(site?.url);
+    if (canonical && canonicalUrls.has(canonical)) addError(`${label}: canonical URL collides with ${canonicalUrls.get(canonical)}`);
+    if (canonical) canonicalUrls.set(canonical, label);
+    if (!categoryNames.has(site?.category)) addError(`${label}: unknown category ${site?.category}`);
+    categoryCounts.set(site?.category, (categoryCounts.get(site?.category) || 0) + 1);
+    if (typeof site?.name === 'string' && (site.name.length > 120 || site.name.trim() !== site.name)) addError(`${label}: name length/whitespace invalid`);
+    if (typeof site?.description === 'string' && (site.description.length > 300 || site.description.trim() !== site.description)) addError(`${label}: description length/whitespace invalid`);
+    if (!isDate(site?.updatedAt)) addError(`${label}: updatedAt must be YYYY-MM-DD`);
+    if (!Array.isArray(site?.tags) || new Set(site.tags).size !== site.tags.length) addError(`${label}: tags must be unique`);
+    if (site?.tags?.some(tag => tag.length > 40 || tag.trim() !== tag)) addError(`${label}: tag length/whitespace invalid`);
+    if ('lastReviewedAt' in (site || {}) && !isDate(site.lastReviewedAt)) addError(`${label}: lastReviewedAt must be YYYY-MM-DD`);
+    if ('dateProvenance' in (site || {}) && !['legacy', 'curated', 'automated'].includes(site.dateProvenance)) addError(`${label}: invalid dateProvenance`);
+  });
+
+  (Array.isArray(categories) ? categories : []).forEach((category, index) => {
+    const actual = categoryCounts.get(category?.name) || 0;
+    if (category?.count !== actual) addError(`categories[${index}] ${category?.name}: count ${category?.count} does not match ${actual}`);
+  });
+
+  (Array.isArray(collections) ? collections : []).forEach((collection, index) => {
+    const label = `collections[${index}] ${collection?.name || ''}`.trim();
+    validateSchema(collection, collectionSchema, label);
+    if (collection?.urls?.some(url => !urls.has(url))) addError(`${label}: contains an unknown URL`);
+    if (collection?.slug !== slugify(collection?.name || '')) addError(`${label}: slug does not match name`);
+  });
+
+  Object.entries(stars || {}).forEach(([repository, record]) => {
+    const label = `stars.${repository}`;
+    if (!/^[^/\s]+\/[^/\s]+$/.test(repository)) addError(`${label}: invalid repository key`);
+    if (!record || typeof record !== 'object' || Array.isArray(record)) addError(`${label}: must be an object`);
+    else {
+      for (const key of ['fullName', 'fetchedAt']) if (typeof record[key] !== 'string' || !record[key].trim()) addError(`${label}: missing ${key}`);
+      for (const key of ['stars', 'forks', 'openIssues']) if (!Number.isInteger(record[key]) || record[key] < 0) addError(`${label}: invalid ${key}`);
+      if (!isTimestamp(record.fetchedAt)) addError(`${label}: invalid fetchedAt`);
+    }
+  });
+
+  Object.entries(favicons || {}).forEach(([domain, data]) => {
+    if (!/^[a-z0-9.-]+$/i.test(domain)) addError(`favicons.${domain}: invalid domain key`);
+    if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp);base64,[A-Za-z0-9+/=]+$/.test(data)) addError(`favicons.${domain}: invalid data URI`);
+    if (typeof data === 'string' && data.length > 300000) addError(`favicons.${domain}: data URI is too large`);
+  });
+
+  return { sites: Array.isArray(sites) ? sites : [], categories: Array.isArray(categories) ? categories : [], collections: Array.isArray(collections) ? collections : [], urls };
+}
+
+function validateFeeds(data) {
+  const feed = readJson('feeds/recent.json');
+  const atomPath = path.join(root, 'feeds/recent.atom');
+  const atom = fs.existsSync(atomPath) ? fs.readFileSync(atomPath, 'utf8') : '';
+  if (!feed || feed.version !== 'https://jsonfeed.org/version/1.1' || !Array.isArray(feed.items)) addError('feeds/recent.json: invalid JSON Feed envelope');
+  const expected = [...data.sites].sort((a, b) => (b.lastReviewedAt || b.updatedAt).localeCompare(a.lastReviewedAt || a.updatedAt) || a.name.localeCompare(b.name)).slice(0, 50);
+  if (feed?.items?.length !== expected.length) addError(`feeds/recent.json: expected ${expected.length} items, found ${feed?.items?.length}`);
+  expected.forEach((site, index) => {
+    const item = feed?.items?.[index];
+    if (!item || item.id !== site.url || item.url !== site.url || item.title !== site.name || item.date_modified !== `${site.lastReviewedAt || site.updatedAt}T00:00:00Z`) addError(`feeds/recent.json: stale or mismatched item at index ${index} (${site.name})`);
+  });
+  const atomIds = [...atom.matchAll(/<id>([^<]+)<\/id>/g)].map(match => match[1]).slice(1);
+  if (atomIds.length !== expected.length || atomIds.some((id, index) => id !== expected[index].url)) addError('feeds/recent.atom: stale or mismatched entry order');
+}
+
+function validateMetadata() {
+  let meta;
+  try {
+    meta = computeMetadata();
+  } catch (error) {
+    addError(`metadata: ${error.message}`);
+    return;
+  }
+  const { results, problems } = renderTargets(meta);
+  problems.forEach(addError);
+  results
+    .filter(result => result.changed)
+    .forEach(result => addError(`${result.file}: version/count metadata is stale; run npm run generate`));
+}
+
+const data = validateSourceData();
+if (!sourceOnly) {
+  validateFeeds(data);
+  validateMetadata();
+}
 
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exit(1);
 }
 
-console.log(`Validated ${sites.length} sites, ${categories.length} categories, ${collections.length} collections`);
+console.log(`Validated ${data.sites.length} sites, ${data.categories.length} categories, ${data.collections.length} collections${sourceOnly ? ' (source only)' : ', caches, and feeds'}`);
