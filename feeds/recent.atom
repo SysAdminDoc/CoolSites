@@ -5,7 +5,7 @@
   <link href="https://sysadmindoc.github.io/CoolSites/" rel="alternate"/>
   <link href="https://sysadmindoc.github.io/CoolSites/feeds/recent.atom" rel="self"/>
   <updated>2026-08-16T00:00:00Z</updated>
-  <generator version="2.2.1">CoolSites</generator>
+  <generator version="2.3.0">CoolSites</generator>
   <entry>
     <title>Agent QA</title>
     <id>https://github.com/vostride/agent-qa</id>

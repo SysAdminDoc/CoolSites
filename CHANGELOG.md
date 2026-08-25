@@ -2,6 +2,47 @@
 
 All notable changes to CoolSites will be documented in this file.
 
+## [v2.3.0] - 2026-08-25
+
+A full audit pass. The short version: search actually narrows now, the layout no longer overflows on a phone, the page makes no third-party requests at all, text clears WCAG AA in every theme, and the build refuses to ship a stale number.
+
+### Fixed
+
+- **Search returned most of the directory.** A query was matched as a subsequence of the description, so "rss" returned 579 of 588 entries, "pdf" 292 and "vpn" 246. Every word now has to match, typo tolerance is limited to the name, and short fields carry the weight. When nothing matches literally, a relaxed pass covers plurals and typos and the results are labelled "closest matches".
+- **Cards overflowed the viewport on phones.** A card could not shrink below its footer row, so at a 320px viewport it rendered 388px wide and the overflow was silently clipped.
+- **The header clipped its own GitHub link on a phone**, so it could not be tapped.
+- **A new browser could never import bookmarks.** The dock collapsed to nothing with no bookmarks, and Import lives inside it.
+- **`?cat=a"]` broke the page.** The category from the URL went into a CSS selector unescaped and threw, leaving no cards at all.
+- **Search highlighting split HTML entities.** Searching for "&" produced `&amp;` on screen, and only the first word of a multi-word query was ever highlighted.
+- **Shuffle reshuffled on every keystroke and every "show more"**, so the list changed under you.
+- **Arrow keys focused the bookmark star**, so Enter bookmarked the card instead of opening it.
+- **Escape did not clear the search box** the way the shortcut panel and this README said it did, and once it did, cancelling a modal wiped the search behind it.
+- **Removing a bookmark or deleting a group was unrecoverable.** Both now offer Undo, which restores the entry, the group and the filter you were looking at.
+- **The dock header disagreed with the chips below it** when a bookmarked site left the directory.
+- **Copy as Markdown threw** on an insecure origin instead of falling back.
+- **Every render leaked the previous one.** Two IntersectionObservers kept strong references to detached cards.
+- **The service worker cached error responses**, so one 404 during a deploy could be served offline afterwards. A single failed asset also aborted the whole precache.
+- **`npm run package` corrupted the minified build** when a script block contained `$&`, `` $` `` or `$1`, and it never copied `collections.html`, so the Collections link was broken in every packaged release.
+- **The local server served `.git` and `.env`**, because the repository is its document root.
+- **The Docker image copied working notes, tests and package metadata into the web root.**
+
+### Added
+
+- **One source of truth for the version and the counts.** `scripts/lib/metadata.js` derives them from `package.json` and the data, rewrites the page metadata, hero line, manifest, service worker cache name and the README badges and category table, and `npm run lint` fails when any of it has drifted. Twelve strings said 590 sites when there were 588.
+- **The data lint validates against the declared JSON schemas**, rejects duplicate and canonical-collision URLs, checks the generated feeds match the data, and checks the submission form's category dropdown against `categories.json`.
+- **A palette test** that checks every text token against the page, the card and the hovered card in all nine themes, and a browser probe that measures what is actually rendered.
+- **An nginx config for the Docker image** with a content security policy, per-type caching and a healthcheck, on a digest-pinned base.
+- **Loading, error, empty and offline states on the Collections page**, which also follows the theme you picked in the directory instead of forcing dark.
+
+### Changed
+
+- **No third-party requests.** Favicons are inlined at build time for 520 of 539 domains; the rest render the site initial. The page no longer tells Google which entry you are looking at.
+- **Contrast.** Muted, secondary and accent text were below WCAG AA on the page, the card and the hovered card in all nine themes. Category badges were unreadable in light mode, at worst 1.23:1. The badge now carries its colour in a dot and its label in the theme's text colour.
+- **Keyboard and screen reader.** The group colour picker is a real radio group, hover-only controls appear on focus, the comparison table has a caption and scoped headers, the theme menu reports which theme is selected, and the chip remove button is reachable and no longer 15px.
+- **Ceilings are enforced when you hit them**, not silently applied on the next load.
+- **The README describes what the code does**, including the commands, the data files and the Docker path.
+- Rewrote the 49 site descriptions that used an em dash as a clause separator.
+
 ## [v2.2.1] - 2026-08-24
 
 ### Added
@@ -104,65 +145,3 @@ All notable changes to CoolSites will be documented in this file.
 - Initial release: 470 sites across 25 categories
 - Single-file HTML directory with search, category filters, grid/list views
 - OLED dark theme with glassmorphism
-
-## Roadmap archive — 2026-08-10 — ROADMAP.md
-
-<details>
-<summary>Original roadmap snapshot</summary>
-
-```markdown
-# CoolSites Roadmap
-
-Single-file curated directory (593 sites, 30 categories). Roadmap tracks additions beyond v1.0.0 while preserving the zero-build, single-HTML constraint.
-
-## Planned Features
-
-### Core / Data
-- Extract the `SITES` array to `sites.json` loaded via `fetch('./sites.json')` at runtime so contributions don't require editing a 10k-line HTML file
-- JSON schema + `npm run lint` script (single Node file, no build step for the page) that validates each entry has `name`, `url`, `description`, `category`, `tags`
-- Category metadata (color, blurb, slug) centralized in `categories.json` instead of inline CSS classes
-- `updatedAt` timestamp per entry so "Recently Added" becomes a real view
-
-### UI/UX
-- Compare/multi-select: pick 2-5 sites, show a side-by-side attribute table
-
-### Performance
-- Virtualize card rendering past ~200 visible results so 470+ entries don't thrash layout
-- Pre-generate a 32x32 sprite of favicons at build time (optional) to avoid 470 Google favicon fetches
-
-### Integrations
-- GitHub star count badge per entry (cached JSON pulled by the weekly Action, not live-fetched)
-- RSS / Atom feed of recently added sites
-
-### Packaging
-- Tag every release (`v1.x`) and attach a minified single-file `index.html` as a release asset
-- Docker one-liner (`docker run -p 8080:80 ghcr.io/sysadmindoc/coolsites`) for self-hosters that don't use GitHub Pages
-
-## Nice-to-Haves
-
-- Collections (curated sub-lists like "Homelab starter pack," "OSINT 101") rendered as a separate page
-- Per-site screenshots via a once-a-month Playwright CI job, stored as thumbnails in `/thumbs/`
-- Embeddable widget (`<iframe>` or Web Component) so other sites can drop in a filtered CoolSites list
-
-## Research-Driven Additions
-
-### P2 — Search & Discovery
-
-- [ ] P2 — `alternativeTo` field per entry
-  Why: Enables "alternatives to X" discovery — searching "Notion" shows entries that list Notion as alternative
-  Evidence: AlternativeTo.net's core UX pattern; most-requested directory feature
-  Touches: SITES array entries, search logic, card UI (show "Alternative to: X" badge)
-  Acceptance: Searching "Notion" surfaces both Notion itself and entries listing it as an alternative
-  Complexity: M
-
-### P2 — Code Quality & Hardening
-
-- [ ] P2 — Self-host fonts or add SRI to Google Fonts
-  Why: Google Fonts loaded without `integrity` — CDN compromise would inject arbitrary CSS
-  Evidence: `index.html:11` — `<link>` tag with no SRI attributes
-  Touches: `index.html` — `<head>` font links
-  Acceptance: Fonts load from local files or CDN with SRI hash
-  Complexity: M
-```
-
-</details>

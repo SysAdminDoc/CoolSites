@@ -1,5 +1,5 @@
 // CoolSites Service Worker — offline-first caching
-const CACHE_NAME = 'coolsites-v2.2.1';
+const CACHE_NAME = 'coolsites-v2.3.0';
 const ASSETS = [
   './',
   './index.html',
