@@ -230,7 +230,7 @@ function validateMetadata() {
   problems.forEach(addError);
   results
     .filter(result => result.changed)
-    .forEach(result => addError(`${result.file}: version/count metadata is stale; run npm run generate`));
+    .forEach(result => addError(`${result.file}: version, counts or formatting are out of sync; run npm run generate`));
 }
 
 const data = validateSourceData();

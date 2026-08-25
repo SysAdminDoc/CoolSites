@@ -18,6 +18,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="alternate" type="application/atom+xml" title="CoolSites Recently Added" href="feeds/recent.atom">
 <link rel="alternate" type="application/feed+json" title="CoolSites Recently Added" href="feeds/recent.json">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script type="application/ld+json">
@@ -79,7 +80,7 @@
     --border-hover: rgba(255, 255, 255, 0.12);
     --text-primary: #e8e9ed;
     --text-secondary: #8b8d98;
-    --text-muted: #7c7f8b;
+    --text-muted: #818490;
     --accent: #6e56cf;
     --accent-glow: rgba(110, 86, 207, 0.25);
     --accent-secondary: #3ecf8e;
@@ -95,7 +96,7 @@
 
     --card-shadow: rgba(0,0,0,0.3);
     --on-accent: #ffffff;
-    --accent-text: #8470d6;
+    --accent-text: #8875d7;
     --amber-text: #f5a623;
     --danger-text: #e5484d;
   }
@@ -111,7 +112,7 @@
     --border-hover: rgba(205, 214, 244, 0.15);
     --text-primary: #cdd6f4;
     --text-secondary: #a6adc8;
-    --text-muted: #8a8da0;
+    --text-muted: #9194a5;
     --accent: #cba6f7;
     --accent-glow: rgba(203, 166, 247, 0.2);
     --accent-secondary: #a6e3a1;
@@ -143,7 +144,7 @@
     --border-hover: rgba(216, 222, 233, 0.15);
     --text-primary: #eceff4;
     --text-secondary: #d8dee9;
-    --text-muted: #a8b0c1;
+    --text-muted: #b6bdcb;
     --accent: #88c0d0;
     --accent-glow: rgba(136, 192, 208, 0.2);
     --accent-secondary: #a3be8c;
@@ -159,7 +160,7 @@
 
     --card-shadow: rgba(0,0,0,0.25);
     --on-accent: #2e3440;
-    --accent-text: #88c0d0;
+    --accent-text: #91c5d3;
     --amber-text: #eed29a;
     --danger-text: #d9a2a8;
   }
@@ -175,7 +176,7 @@
     --border-hover: rgba(248, 248, 242, 0.14);
     --text-primary: #f8f8f2;
     --text-secondary: #c0bfbc;
-    --text-muted: #8e99bd;
+    --text-muted: #98a2c3;
     --accent: #bd93f9;
     --accent-glow: rgba(189, 147, 249, 0.2);
     --accent-secondary: #50fa7b;
@@ -207,7 +208,7 @@
     --border-hover: rgba(240, 246, 252, 0.12);
     --text-primary: #e6edf3;
     --text-secondary: #8b949e;
-    --text-muted: #7a8591;
+    --text-muted: #808a96;
     --accent: #58a6ff;
     --accent-glow: rgba(88, 166, 255, 0.2);
     --accent-secondary: #3fb950;
@@ -239,7 +240,7 @@
     --border-hover: rgba(120, 160, 255, 0.15);
     --text-primary: #e0e6f0;
     --text-secondary: #8892a8;
-    --text-muted: #7b84a1;
+    --text-muted: #8088a4;
     --accent: #5b8def;
     --accent-glow: rgba(91, 141, 239, 0.2);
     --accent-secondary: #4ecdc4;
@@ -270,8 +271,8 @@
     --border: rgba(131, 148, 150, 0.12);
     --border-hover: rgba(131, 148, 150, 0.22);
     --text-primary: #fdf6e3;
-    --text-secondary: #93a1a1;
-    --text-muted: #8a9ea5;
+    --text-secondary: #9aa7a7;
+    --text-muted: #94a7ad;
     --accent: #268bd2;
     --accent-glow: rgba(38, 139, 210, 0.2);
     --accent-secondary: #859900;
@@ -287,7 +288,7 @@
 
     --card-shadow: rgba(0,0,0,0.3);
     --on-accent: #00212b;
-    --accent-text: #4aa1de;
+    --accent-text: #5dabe1;
     --amber-text: #c9a945;
     --danger-text: #e87977;
   }
@@ -303,7 +304,7 @@
     --border-hover: rgba(0, 0, 0, 0.15);
     --text-primary: #1a1d26;
     --text-secondary: #5a5e6e;
-    --text-muted: #6c6f83;
+    --text-muted: #6a6d81;
     --accent: #6e56cf;
     --accent-glow: rgba(110, 86, 207, 0.12);
     --accent-secondary: #2a9d6e;
@@ -334,8 +335,8 @@
     --border: rgba(224, 222, 244, 0.08);
     --border-hover: rgba(224, 222, 244, 0.14);
     --text-primary: #e0def4;
-    --text-secondary: #908caa;
-    --text-muted: #8f8ca4;
+    --text-secondary: #9591ad;
+    --text-muted: #9592a9;
     --accent: #c4a7e7;
     --accent-glow: rgba(196, 167, 231, 0.2);
     --accent-secondary: #9ccfd8;
@@ -1375,6 +1376,21 @@
     background: color-mix(in srgb, var(--accent-tertiary) 16%, var(--bg-card));
   }
 
+  .chip-initial {
+    width: 14px;
+    height: 14px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--text-primary) 10%, transparent);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+
   /* Chip click overlay (opens url) */
   .chip-open {
     position: absolute;
@@ -1667,7 +1683,7 @@
     cursor: pointer;
     transition: all 0.15s ease;
   }
-  .empty-state-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+  .empty-state-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--accent-glow); }
 
   /* ── Toast ── */
   .toast {
@@ -1873,7 +1889,7 @@
     background: rgba(0,0,0,0.05);
   }
   .theme-option.active {
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .theme-option .swatch {
     width: 16px;
@@ -1889,7 +1905,7 @@
   .theme-option .check {
     margin-left: auto;
     opacity: 0;
-    color: var(--accent);
+    color: var(--accent-text);
   }
   .theme-option.active .check {
     opacity: 1;
@@ -2426,14 +2442,24 @@ function formatCompact(value) {
   return String(number);
 }
 
+// A filter can stop existing (last bookmark removed, category emptied). Resolve
+// that here rather than inside a render, so the grid and the pills always agree.
+function normalizeActiveFilter() {
+  if (activeFilter === 'All') return;
+  if (activeFilter === 'Bookmarks') {
+    if (resolvedBookmarkUrls().length === 0) activeFilter = 'All';
+    return;
+  }
+  if (!SITES.some(site => site.category === activeFilter)) activeFilter = 'All';
+}
+
 function buildFilters() {
+  normalizeActiveFilter();
   const cats = {};
   SITES.forEach(s => { cats[s.category] = (cats[s.category] || 0) + 1; });
   const container = document.getElementById('filters');
   const bmCount = resolvedBookmarkUrls().length;
 
-  if (activeFilter === 'Bookmarks' && bmCount === 0) activeFilter = 'All';
-  if (activeFilter !== 'All' && activeFilter !== 'Bookmarks' && !cats[activeFilter]) activeFilter = 'All';
 
   let html = `<button class="filter-btn active" data-cat="All" aria-pressed="true">All<span class="filter-count">${SITES.length}</span></button>`;
 
@@ -2477,6 +2503,7 @@ function buildSearchIndex(site) {
   return {
     name: site.name.toLowerCase(),
     tags: site.tags.map(tag => String(tag).toLowerCase()),
+    short: [site.name, site.category, ...site.tags].join(' ').toLowerCase(),
     haystack: [
       site.description,
       site.category,
@@ -2515,13 +2542,22 @@ function tokenScore(token, index) {
     const hit = substringScore(token, tag) * 2;
     if (hit > best) best = hit;
   }
-  const hit = substringScore(token, index.haystack);
+  // One or two characters will appear somewhere in almost any description, so a
+  // short token only counts against the name, category and tags.
+  const field = token.length < MIN_FUZZY_TOKEN ? index.short : index.haystack;
+  const hit = substringScore(token, field);
   if (hit > best) best = hit;
   return best;
 }
 
+// Split on whitespace, then strip surrounding punctuation so a pasted
+// "Cloudflare," or a typed "c*" still finds something.
 function tokenize(query) {
-  return query.toLowerCase().split(/\s+/).filter(Boolean);
+  return query
+    .toLowerCase()
+    .split(/\s+/)
+    .map(token => token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}+#]+$/gu, ''))
+    .filter(Boolean);
 }
 
 // Every token must match somewhere, so adding words narrows results.
@@ -2530,6 +2566,22 @@ function searchScore(tokens, site) {
   let total = 0;
   for (const token of tokens) {
     const score = tokenScore(token, index);
+    if (!score) return 0;
+    total += score;
+  }
+  return total;
+}
+
+// Second chance when nothing matched literally: allow each token to be a
+// subsequence of the short fields, which covers plurals and typos ("dockers",
+// "kubernets") without letting a long description swallow every query.
+function relaxedScore(tokens, site) {
+  const index = site._search || (site._search = buildSearchIndex(site));
+  const haystack = `${index.name} ${index.tags.join(' ')}`;
+  let total = 0;
+  for (const token of tokens) {
+    if (token.length < MIN_FUZZY_TOKEN) return 0;
+    const score = subsequenceScore(token, haystack);
     if (!score) return 0;
     total += score;
   }
@@ -2545,9 +2597,29 @@ function shuffleRank(url) {
   return hash;
 }
 
+let lastSearchRelaxed = false;
+
 function getFiltered() {
   const tokens = searchTerm ? tokenize(searchTerm) : [];
   const scores = tokens.length ? new Map() : null;
+  let scorer = searchScore;
+  lastSearchRelaxed = false;
+
+  const passesFilters = site => {
+    const matchCat = activeFilter === "All" || activeFilter === "Bookmarks"
+      ? true
+      : site.category === activeFilter;
+    if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
+    if (!matchCat) return false;
+    return (!openSourceOnly || site.openSource) &&
+      (!noAuthOnly || !site.requiresAuth) &&
+      (!picksOnly || site.editorsPick);
+  };
+
+  if (tokens.length && !SITES.some(site => passesFilters(site) && searchScore(tokens, site) > 0)) {
+    scorer = relaxedScore;
+    lastSearchRelaxed = true;
+  }
 
   let results = SITES.filter(site => {
     const matchCat = activeFilter === "All" || activeFilter === "Bookmarks"
@@ -2562,7 +2634,7 @@ function getFiltered() {
     if (!matchCat) return false;
     if (!tokens.length) return true;
 
-    const score = searchScore(tokens, site);
+    const score = scorer(tokens, site);
     if (score <= 0) return false;
     scores.set(site.url, score);
     return true;
@@ -2705,6 +2777,7 @@ const _loadMoreObserver = new IntersectionObserver((entries) => {
 
 function _renderGridInner() {
   const grid = document.getElementById('grid');
+  normalizeActiveFilter();
   const filtered = getFiltered();
   const filterKey = JSON.stringify({
     activeFilter,
@@ -2754,9 +2827,13 @@ function _renderGridInner() {
   }
 
   const shown = Math.min(filtered.length, visibleLimit);
-  document.getElementById('resultsCount').textContent = filtered.length > shown
-    ? `${shown} of ${filtered.length} sites`
-    : `${filtered.length} site${filtered.length !== 1 ? 's' : ''}`;
+  const noun = `site${filtered.length === 1 ? '' : 's'}`;
+  const base = filtered.length > shown
+    ? `${shown} of ${filtered.length} ${noun}`
+    : `${filtered.length} ${noun}`;
+  document.getElementById('resultsCount').textContent = lastSearchRelaxed && filtered.length
+    ? `${base}, closest matches`
+    : base;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
   _faviconObserver.disconnect();
@@ -2932,7 +3009,7 @@ document.querySelectorAll('[data-meta-filter]').forEach(btn => {
 let _searchTimer;
 document.getElementById('searchInput').addEventListener('input', e => {
   clearTimeout(_searchTimer);
-  const val = e.target.value.trim();
+  const val = e.target.value.trim().slice(0, MAX_QUERY_LENGTH);
   _searchTimer = setTimeout(() => { searchTerm = val; renderGrid(); }, 200);
 });
 
@@ -2943,6 +3020,9 @@ document.addEventListener('keydown', e => {
     document.getElementById('searchInput').focus();
   }
   if (e.key === 'Escape') {
+    // A dialog's own Escape bubbles up here; cancelling a modal must not wipe
+    // the search behind it.
+    if (document.querySelector('dialog[open]')) return;
     document.querySelectorAll('.assign-dropdown').forEach(dropdown => dropdown.remove());
     const input = document.getElementById('searchInput');
     if (input.value) {
@@ -3288,14 +3368,15 @@ function getNextOrder(groupId) {
 function toggleBookmark(url, groupId) {
   if (bookmarks[url]) {
     delete bookmarks[url];
+  } else if (Object.keys(bookmarks).length >= MAX_BOOKMARKS) {
+    showToast(`You can keep up to ${MAX_BOOKMARKS} bookmarks`);
+    return;
   } else {
     const gid = groupId || (groups.length > 0 ? groups[0].id : 'default');
     bookmarks[url] = { group: gid, order: getNextOrder(gid), addedAt: Date.now() };
   }
-  saveBookmarks();
-  renderDock();
-  renderGrid();
-  buildFilters();
+  if (!saveBookmarks()) return;
+  refreshBookmarkViews();
   showToast(bookmarks[url] ? 'Bookmarked' : 'Removed');
 }
 
@@ -3305,14 +3386,16 @@ function moveToGroup(url, newGroupId) {
   bookmarks[url].group = newGroupId;
   bookmarks[url].order = getNextOrder(newGroupId);
   reindexGroupOrder(oldGroup);
+  reindexGroupOrder(newGroupId);
+  hideToast();
   saveBookmarks();
   renderDock();
 }
 
 function refreshBookmarkViews() {
+  buildFilters();
   renderDock();
   renderGrid();
-  buildFilters();
 }
 
 function removeBookmark(url, evt) {
@@ -3320,14 +3403,18 @@ function removeBookmark(url, evt) {
   const previous = bookmarks[url];
   if (!previous) return;
   const name = getSiteByUrl(url)?.name;
+  const previousFilter = activeFilter;
   delete bookmarks[url];
   reindexGroupOrder(previous.group);
-  saveBookmarks();
+  // saveBookmarks reloads from storage on failure, so a false return means the
+  // removal did not happen and there is nothing to undo.
+  if (!saveBookmarks()) { refreshBookmarkViews(); return; }
   refreshBookmarkViews();
   showToast(name ? `Removed ${name}` : 'Removed', () => {
     bookmarks[url] = previous;
     reindexGroupOrder(previous.group);
-    saveBookmarks();
+    if (!saveBookmarks()) { refreshBookmarkViews(); return; }
+    activeFilter = previousFilter;
     refreshBookmarkViews();
     showToast(name ? `Restored ${name}` : 'Restored');
   });
@@ -3384,7 +3471,9 @@ function renderDock() {
       const chipIcon = getFavicon(site.url);
       return `
         <div class="site-chip" draggable="true" data-url="${siteUrl}" data-group="${escAttr(group.id)}" title="${escAttr(`${site.name}. ${site.description}`)}">
-          ${chipIcon ? `<img src="${escAttr(chipIcon)}" alt="" width="14" height="14" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img" draggable="false">` : ''}
+          ${chipIcon
+            ? `<img src="${escAttr(chipIcon)}" alt="" width="14" height="14" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img" draggable="false">`
+            : `<span class="chip-initial" aria-hidden="true">${escHtml(getInitial(site.name))}</span>`}
           <span class="chip-text">${escHtml(site.name)}</span>
           <a href="${siteUrl}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
           <button class="chip-remove" data-dock-action="remove" data-url="${siteUrl}" title="Remove bookmark">&times;</button>
@@ -3547,6 +3636,8 @@ function performChipMove(dragUrl, sourceGroup, targetGroup, targetUrl, insertBef
     reindexGroupOrder(sourceGroup);
   }
 
+
+  hideToast();
   saveBookmarks();
   renderDock();
 }
@@ -3634,6 +3725,7 @@ function initGroupDragAndDrop() {
       const [moved] = groups.splice(fromIdx, 1);
       groups.splice(toIdx, 0, moved);
 
+      hideToast();
       saveGroups();
       renderDock();
     });
@@ -3752,7 +3844,11 @@ function saveGroupFromModal() {
     const g = groups.find(g => g.id === editingGroupId);
     if (g) { g.name = name; g.color = selectedColor; }
   } else {
-    const id = 'g_' + Date.now();
+    if (groups.length >= MAX_GROUPS) {
+      showToast(`You can keep up to ${MAX_GROUPS} groups`);
+      return;
+    }
+    const id = `g_${Date.now()}_${groups.length}`;
     groups.push({ id, name, color: selectedColor });
   }
   if (!saveGroups()) return;
@@ -3769,9 +3865,7 @@ function deleteGroup(id) {
 
   const groupName = groups.find(g => g.id === id)?.name || '';
   const previousGroups = groups.map(group => ({ ...group }));
-  const previousBookmarks = Object.fromEntries(
-    Object.entries(bookmarks).map(([url, bookmark]) => [url, { ...bookmark }])
-  );
+  const previousBookmarks = snapshotBookmarks();
 
   Object.keys(bookmarks).forEach(url => {
     if (bookmarks[url].group === id) {
@@ -3779,18 +3873,32 @@ function deleteGroup(id) {
       bookmarks[url].order = getNextOrder(fallback.id);
     }
   });
+  reindexGroupOrder(fallback.id);
   groups = groups.filter(g => g.id !== id);
-  saveGroups();
-  saveBookmarks();
-  refreshBookmarkViews();
-  showToast(`"${groupName}" deleted`, () => {
+  if (!persistBookmarkState(bookmarks, groups)) {
     groups = previousGroups;
     bookmarks = previousBookmarks;
-    saveGroups();
-    saveBookmarks();
+    refreshBookmarkViews();
+    showToast('Group could not be deleted');
+    return;
+  }
+  refreshBookmarkViews();
+  showToast(`"${groupName}" deleted`, () => {
+    if (!persistBookmarkState(previousBookmarks, previousGroups)) {
+      showToast('Group could not be restored');
+      return;
+    }
+    groups = previousGroups;
+    bookmarks = previousBookmarks;
     refreshBookmarkViews();
     showToast(`"${groupName}" restored`);
   });
+}
+
+function snapshotBookmarks() {
+  return Object.fromEntries(
+    Object.entries(bookmarks).map(([url, bookmark]) => [url, { ...bookmark }])
+  );
 }
 
 // ── Assign dropdown on cards ──
@@ -3933,13 +4041,18 @@ document.getElementById('importFile').addEventListener('change', (e) => {
 
       const importedGroups = normalizeGroups(data.groups);
       const nextGroups = groups.map(group => ({ ...group }));
+      let droppedGroups = 0;
       importedGroups.groups.forEach(group => {
-        if (!nextGroups.some(existing => existing.id === group.id)) nextGroups.push(group);
+        if (nextGroups.some(existing => existing.id === group.id)) return;
+        if (nextGroups.length >= MAX_GROUPS) { droppedGroups++; return; }
+        nextGroups.push(group);
       });
       const knownUrls = new Set(SITES.map(site => site.url));
       const importedBookmarks = normalizeBookmarks(data.bookmarks, new Set(nextGroups.map(group => group.id)), knownUrls);
-      const nextBookmarks = { ...bookmarks, ...importedBookmarks.bookmarks };
-      const skipped = importedGroups.skipped + importedBookmarks.skipped;
+      const merged = { ...bookmarks, ...importedBookmarks.bookmarks };
+      const nextBookmarks = Object.fromEntries(Object.entries(merged).slice(0, MAX_BOOKMARKS));
+      const droppedBookmarks = Object.keys(merged).length - Object.keys(nextBookmarks).length;
+      const skipped = importedGroups.skipped + importedBookmarks.skipped + droppedGroups + droppedBookmarks;
       if (!Object.keys(importedBookmarks.bookmarks).length && importedGroups.skipped > 0) throw new Error('no valid entries');
       if (!persistBookmarkState(nextBookmarks, nextGroups)) {
         showToast('Import could not be saved; previous bookmarks were kept');

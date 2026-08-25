@@ -47,30 +47,50 @@ function copyFor(meta) {
   };
 }
 
-function replaceOnce(content, pattern, replacement, label, problems) {
+function replaceOnce(content, pattern, replacement, label, hint, problems) {
   const matches = content.match(new RegExp(pattern.source, `${pattern.flags.replace(/g/g, '')}g`));
   if (!matches || matches.length !== 1) {
-    problems.push(`${label}: expected exactly one match, found ${matches ? matches.length : 0}`);
+    const found = matches ? matches.length : 0;
+    problems.push(`${label}: found ${found} matches, expected exactly 1. ${hint}`);
     return content;
   }
   return content.replace(pattern, replacement);
+}
+
+// shields.io reads a single hyphen as a field separator.
+function shield(value) {
+  return String(value).replace(/-/g, '--').replace(/_/g, '__').replace(/ /g, '_');
+}
+
+// A pipe inside a cell would silently add a column, and the next run would
+// re-parse its own broken output and truncate the text.
+function cell(value) {
+  return String(value).replace(/\|/g, '\\|').replace(/\r?\n/g, ' ').trim();
 }
 
 function padCell(value, width) {
   return value.length >= width ? value : value + ' '.repeat(width - value.length);
 }
 
+// Split on unescaped pipes only, so an escaped pipe inside a cell survives the
+// round trip.
+function splitRow(line) {
+  return line
+    .split(/(?<!\\)\|/)
+    .map(part => part.replace(/\\\|/g, '|').trim());
+}
+
 function buildCategoryTable(meta, previous) {
   const highlights = new Map();
-  for (const line of previous.split('\n')) {
-    const cells = line.split('|').map(cell => cell.trim());
+  for (const line of previous.split(/\r?\n/)) {
+    const cells = splitRow(line);
     if (cells.length < 5 || !/^\d+$/.test(cells[2])) continue;
     highlights.set(cells[1], cells[3]);
   }
   const rows = meta.categories.map(category => [
-    category.name,
+    cell(category.name),
     String(category.siteCount),
-    highlights.get(category.name) || category.blurb
+    cell(highlights.get(cell(category.name)) || category.blurb)
   ]);
   const nameWidth = Math.max(8, ...rows.map(row => row[0].length));
   const countWidth = Math.max(5, ...rows.map(row => row[1].length));
@@ -88,17 +108,23 @@ function applyIndexHtml(content, meta, problems) {
   const copy = copyFor(meta);
   let next = content;
   next = replaceOnce(next, /(<meta name="description" content=")[^"]*(">)/,
-    (_, a, b) => `${a}${copy.metaDescription}${b}`, 'index.html meta description', problems);
+    (_, a, b) => `${a}${copy.metaDescription}${b}`, 'index.html meta description',
+    'There must be exactly one <meta name="description">.', problems);
   next = replaceOnce(next, /(<meta property="og:description" content=")[^"]*(">)/,
-    (_, a, b) => `${a}${copy.socialDescription}${b}`, 'index.html og:description', problems);
+    (_, a, b) => `${a}${copy.socialDescription}${b}`, 'index.html og:description',
+    'There must be exactly one <meta property="og:description">.', problems);
   next = replaceOnce(next, /(<meta name="twitter:description" content=")[^"]*(">)/,
-    (_, a, b) => `${a}${copy.socialDescription}${b}`, 'index.html twitter:description', problems);
+    (_, a, b) => `${a}${copy.socialDescription}${b}`, 'index.html twitter:description',
+    'There must be exactly one <meta name="twitter:description">.', problems);
   next = replaceOnce(next, /("@type":"WebSite","name":"CoolSites","url":"[^"]*","description":")[^"]*(")/,
-    (_, a, b) => `${a}${copy.metaDescription}${b}`, 'index.html JSON-LD description', problems);
+    (_, a, b) => `${a}${copy.metaDescription}${b}`, 'index.html JSON-LD description',
+    'The application/ld+json block must keep its "description" key.', problems);
   next = replaceOnce(next, /(<p id="heroTagline">)[^<]*(<\/p>)/,
-    (_, a, b) => `${a}${copy.heroTagline}${b}`, 'index.html hero tagline', problems);
+    (_, a, b) => `${a}${copy.heroTagline}${b}`, 'index.html hero tagline',
+    'The hero paragraph must be a single <p id="heroTagline"> with plain text.', problems);
   next = replaceOnce(next, /(<meta name="generator" content="CoolSites v)[^"]*(">)/,
-    (_, a, b) => `${a}${meta.version}${b}`, 'index.html generator version', problems);
+    (_, a, b) => `${a}${meta.version}${b}`, 'index.html generator version',
+    'Keep the <meta name="generator" content="CoolSites vX.Y.Z"> tag.', problems);
   return next;
 }
 
@@ -111,33 +137,46 @@ function applyManifest(content, meta, problems) {
     return content;
   }
   manifest.description = copyFor(meta).metaDescription;
+  // Note: this also normalises formatting to two-space indent, so a
+  // hand-reindented manifest reports as out of sync.
   return `${JSON.stringify(manifest, null, 2)}\n`;
 }
 
 function applyServiceWorker(content, meta, problems) {
   return replaceOnce(content, /(const CACHE_NAME = 'coolsites-v)[^']*(';)/,
-    (_, a, b) => `${a}${meta.version}${b}`, 'sw.js cache name', problems);
+    (_, a, b) => `${a}${meta.version}${b}`, 'sw.js cache name',
+    "Keep the line `const CACHE_NAME = 'coolsites-vX.Y.Z';`.", problems);
 }
 
 function applyReadme(content, meta, problems) {
   const copy = copyFor(meta);
   let next = content;
-  next = replaceOnce(next, /(!\[Version\]\(https:\/\/img\.shields\.io\/badge\/version-)[^-]*(-blue\))/,
-    (_, a, b) => `${a}${meta.version}${b}`, 'README version badge', problems);
-  next = replaceOnce(next, /(!\[Sites\]\(https:\/\/img\.shields\.io\/badge\/sites-)[^-]*(-blueviolet\))/,
-    (_, a, b) => `${a}${meta.siteCount}${b}`, 'README sites badge', problems);
-  next = replaceOnce(next, /(!\[Categories\]\(https:\/\/img\.shields\.io\/badge\/categories-)[^-]*(-orange\))/,
-    (_, a, b) => `${a}${meta.categoryCount}${b}`, 'README categories badge', problems);
-  next = replaceOnce(next, /^> .*$/m, () => copy.readmeTagline, 'README tagline', problems);
-  next = replaceOnce(next, /^- \*\*\d+ curated sites\*\*.*$/m, () => copy.readmeFeature, 'README site-count feature', problems);
-  next = replaceOnce(next, /^\*\*\[Browse the full directory\].*$/m, () => copy.readmeClosing, 'README closing line', problems);
+  next = replaceOnce(next, /(!\[Version\]\(https:\/\/img\.shields\.io\/badge\/version-)[^)]*(-blue\))/,
+    (_, a, b) => `${a}${shield(meta.version)}${b}`, 'README version badge',
+    'Keep one ![Version](https://img.shields.io/badge/version-X-blue) badge.', problems);
+  next = replaceOnce(next, /(!\[Sites\]\(https:\/\/img\.shields\.io\/badge\/sites-)[^)]*(-blueviolet\))/,
+    (_, a, b) => `${a}${meta.siteCount}${b}`, 'README sites badge',
+    'Keep one ![Sites](https://img.shields.io/badge/sites-N-blueviolet) badge.', problems);
+  next = replaceOnce(next, /(!\[Categories\]\(https:\/\/img\.shields\.io\/badge\/categories-)[^)]*(-orange\))/,
+    (_, a, b) => `${a}${meta.categoryCount}${b}`, 'README categories badge',
+    'Keep one ![Categories](https://img.shields.io/badge/categories-N-orange) badge.', problems);
+  next = replaceOnce(next, /^> .*$/m, () => copy.readmeTagline, 'README tagline',
+    'The tagline is the only line starting with "> ". Blockquotes elsewhere in the README are not supported.', problems);
+  next = replaceOnce(next, /^- \*\*\d+ curated sites\*\*.*$/m, () => copy.readmeFeature, 'README site-count feature',
+    'Exactly one feature bullet may start "- **N curated sites**".', problems);
+  next = replaceOnce(next, /^\*\*\[Browse the full directory\].*$/m, () => copy.readmeClosing, 'README closing line',
+    'Exactly one line may start "**[Browse the full directory]".', problems);
 
-  const tableMatch = next.match(/(## Categories\n\n)([\s\S]*?)(\n\n## )/);
+  // Match the table itself rather than everything up to the next heading, so
+  // prose that follows the table is left alone.
+  const tableMatch = next.match(/(^## Categories\r?\n\r?\n)((?:\|.*(?:\r?\n|$))+)/m);
   if (!tableMatch) {
-    problems.push('README category table: section not found');
+    problems.push('README category table: no pipe table found directly under the "## Categories" heading.');
     return next;
   }
-  const rendered = `${tableMatch[1]}${buildCategoryTable(meta, tableMatch[2])}${tableMatch[3]}`;
+  const eol = tableMatch[2].includes('\r\n') ? '\r\n' : '\n';
+  const trailingNewline = /(\r?\n)$/.test(tableMatch[2]) ? eol : '';
+  const rendered = `${tableMatch[1]}${buildCategoryTable(meta, tableMatch[2]).split('\n').join(eol)}${trailingNewline}`;
   return next.replace(tableMatch[0], () => rendered);
 }
 

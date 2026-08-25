@@ -49,47 +49,89 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "!document.getElementById('groupModal').open");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
-    await page.evaluate(`(() => {
-      const input = document.getElementById('searchInput');
-      input.value = 'Cloudflare';
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-    })()`);
-    await waitFor(page, "document.querySelector('#grid .card .card-title')?.textContent.includes('Cloudflare')");
+    // Wait past the input debounce, or this measures the unfiltered grid: the
+    // first card is already a Cloudflare entry in the default order, so a
+    // content check alone returns before the search has run.
+    await searchFor(page, 'Cloudflare');
+    await waitFor(page, "document.querySelectorAll('#grid .card').length < 100");
     const searchResults = await page.evaluate("document.querySelectorAll('#grid .card').length");
     assert.ok(searchResults > 0, 'a real query should return matches');
+    // The bug this replaced matched a query as a subsequence of the
+    // description, so "cloudflare" returned every entry in the directory. The
+    // real answer is a handful, so the bound has to be tight enough to fail
+    // against that behaviour rather than merely below half the directory.
     assert.ok(
-      searchResults < SITES.length / 2,
-      `a single-word query should narrow the directory, got ${searchResults} of ${SITES.length}`
+      searchResults <= 12,
+      `a single product name should return a handful of entries, got ${searchResults} of ${SITES.length}`
     );
     const searchNames = await page.evaluate("[...document.querySelectorAll('#grid .card-title')].map(node => node.textContent.trim())");
     assert.ok(searchNames[0].toLowerCase().includes('cloudflare'), 'the best name match should rank first');
+    assert.ok(
+      searchNames.filter(name => name.toLowerCase().includes('cloudflare')).length >= 3,
+      `name matches should dominate the results: ${searchNames.join(', ')}`
+    );
 
     // Every token has to match, so adding a word narrows rather than widens.
-    await page.evaluate(`(() => {
-      const input = document.getElementById('searchInput');
-      input.value = 'cloudflare speed';
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-    })()`);
-    await delay(400);
+    await searchFor(page, 'cloudflare speed');
     const narrowed = await page.evaluate("document.querySelectorAll('#grid .card').length");
     assert.ok(narrowed > 0 && narrowed <= searchResults, `extra tokens must narrow: ${narrowed} vs ${searchResults}`);
 
-    // Search must survive regex metacharacters and ampersands in the highlighter.
-    for (const probe of ['a+b(', '&', 'c*']) {
-      await page.evaluate(`(() => {
-        const input = document.getElementById('searchInput');
-        input.value = ${JSON.stringify(probe)};
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-      })()`);
-      await delay(300);
-      assert.equal(
-        await page.evaluate("document.getElementById('resultsCount').textContent.includes('Data failed')"),
-        false,
-        `search must not break on ${probe}`
-      );
-    }
+    // A plural with no literal match falls back to the relaxed pass and says so.
+    await searchFor(page, 'dockers');
+    const relaxed = await page.evaluate(`({
+      count: document.querySelectorAll('#grid .card').length,
+      label: document.getElementById('resultsCount').textContent
+    })`);
+    assert.ok(relaxed.count > 0 && relaxed.count <= 30, `a plural should still find something: ${relaxed.count}`);
+    assert.match(relaxed.label, /closest matches/, 'approximate results have to be labelled');
 
-    // A hostile category in the URL used to reach querySelector unescaped.
+    // A pasted word with trailing punctuation still matches.
+    await searchFor(page, 'Cloudflare,');
+    assert.equal(
+      await page.evaluate("document.querySelectorAll('#grid .card').length"),
+      searchResults,
+      'trailing punctuation should not change the result set'
+    );
+
+    // A one-character token must not match every description.
+    await searchFor(page, 'c');
+    const oneChar = await page.evaluate("document.querySelectorAll('#grid .card').length");
+    assert.ok(oneChar < SITES.length, `a single letter should not match everything: ${oneChar}`);
+
+    // The highlighter builds a regex from the query and writes into escaped
+    // HTML, so metacharacters and ampersands both have to survive.
+    for (const probe of ['a+b(', '&', 'c*', '[', ')(', 'a & b']) {
+      await searchFor(page, probe);
+      const state = await page.evaluate(`({
+        label: document.getElementById('resultsCount').textContent,
+        rendered: document.querySelectorAll('#grid .card, #grid .empty-state').length,
+        brokenEntity: document.body.innerHTML.includes('&amp;amp;')
+      })`);
+      assert.ok(!state.label.includes('Data failed'), `search must not break on ${probe}`);
+      assert.ok(state.rendered > 0, `search must render something for ${probe}`);
+      assert.equal(state.brokenEntity, false, `highlighting must not split an entity for ${probe}`);
+    }
+    await searchFor(page, '');
+
+    // The category schema allows a quote in a name, and activeFilter used to be
+    // interpolated straight into a selector. Drive buildFilters with a hostile
+    // value that really exists in the data, which is the only way to reach the
+    // lookup rather than the unknown-category fallback.
+    const hostileFilter = await page.evaluate(`(() => {
+      const original = SITES.map(site => site.category);
+      const hostile = 'a"] , [data-cat';
+      SITES.forEach(site => { site.category = hostile; });
+      CATEGORY_META.set(hostile, { name: hostile, color: '#64b4ff', blurb: 'hostile' });
+      CATEGORIES = [{ name: hostile, color: '#64b4ff', blurb: 'hostile' }];
+      activeFilter = hostile;
+      let error = null;
+      try { buildFilters(); } catch (e) { error = String(e); }
+      const marked = document.querySelectorAll('.filter-btn[aria-pressed="true"]').length;
+      SITES.forEach((site, index) => { site.category = original[index]; });
+      return { error, marked };
+    })()`);
+    assert.equal(hostileFilter.error, null, 'a quoted category name must not throw');
+    assert.equal(hostileFilter.marked, 1, 'exactly one filter pill should be marked active');
     await page.send('Page.navigate', { url: `${server.url}?cat=${encodeURIComponent('a"]')}` });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
     assert.equal(await page.evaluate("document.querySelectorAll('.filter-btn.active').length"), 1, 'an unknown category must fall back to All');
@@ -111,15 +153,24 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       return names[0] === [...names].sort((a, b) => a.localeCompare(b))[0];
     })()`), true, 'A-Z sort should reorder the visible cards');
 
-    await page.evaluate(`(() => {
-      const first = document.querySelector('#grid .card .card-url');
+    const arrowNav = await page.evaluate(`(() => {
+      const cards = [...document.querySelectorAll('#grid .card')];
+      const first = cards[0].querySelector('.card-url');
       first.focus();
+      const before = document.activeElement.closest('.card').dataset.url;
       first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      const active = document.activeElement;
+      return {
+        before,
+        after: active.closest('.card')?.dataset.url,
+        expected: cards[1].dataset.url,
+        isLink: active.classList.contains('card-url'),
+        tag: active.tagName
+      };
     })()`);
-    assert.ok(
-      await page.evaluate("document.activeElement.classList.contains('card-url')"),
-      'arrow navigation should focus the site link so Enter opens it'
-    );
+    assert.equal(arrowNav.after, arrowNav.expected, 'ArrowRight should move focus to the next card');
+    assert.notEqual(arrowNav.after, arrowNav.before, 'ArrowRight should not leave focus where it was');
+    assert.ok(arrowNav.isLink, `arrow navigation should land on the site link, got ${arrowNav.tag}`);
 
     await page.evaluate("document.querySelector('.theme-option[data-theme=\"light\"]').click()");
     assert.equal(await page.evaluate("document.documentElement.dataset.theme"), 'light');
@@ -130,12 +181,42 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     );
 
     // Every theme has to keep body text readable against the body background.
-    const contrast = await page.evaluate(`(() => {
-      const themes = ['oled','catppuccin','dracula','rose-pine','nord','github-dark','midnight','solarized','light'];
-      const previous = document.documentElement.dataset.theme;
-      const parse = value => {
-        const parts = (value.match(/[\\d.]+/g) || ['0', '0', '0']).map(Number);
-        return parts.slice(0, 3);
+    const contrast = await page.evaluate(`(async () => {
+      // Transitions make getComputedStyle return an interpolated colour, and
+      // content-visibility leaves off-screen cards unrecalculated, so both are
+      // disabled for the measurement. Compositing runs through a canvas so the
+      // browser resolves colour(), oklab() and alpha for us.
+      const override = document.createElement('style');
+      override.textContent = '*, *::before, *::after { transition: none !important; animation: none !important; content-visibility: visible !important; }';
+      document.head.appendChild(override);
+      const frame = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      // Some transitions survive the override (a popover opening in the top
+      // layer), and a mid-transition colour is not the colour a user sees.
+      // Settle in real time rather than racing the compositor.
+      const settle = () => new Promise(resolve => setTimeout(resolve, 300));
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 1;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      const paint = layers => {
+        ctx.clearRect(0, 0, 1, 1);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 1, 1);
+        for (const layer of layers) {
+          ctx.fillStyle = '#000000';
+          ctx.fillStyle = layer;
+          ctx.fillRect(0, 0, 1, 1);
+        }
+        const data = ctx.getImageData(0, 0, 1, 1).data;
+        return [data[0], data[1], data[2]];
+      };
+      const layersFor = node => {
+        const stack = [];
+        for (let el = node; el; el = el.parentElement) {
+          const bg = getComputedStyle(el).backgroundColor;
+          if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') stack.unshift(bg);
+          if (bg.startsWith('rgb(')) break;
+        }
+        return stack;
       };
       const channel = c => { const s = c / 255; return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4); };
       const luminance = rgb => 0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2]);
@@ -143,21 +224,41 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
         const la = luminance(a), lb = luminance(b);
         return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
       };
+      const selectors = ['.card-title', '.card-desc', '.card-url', '.card-category', '.results-count',
+        '.footer p', '.stat', '.dock-title', '.filter-btn', '.metadata-toggle', '.sort-select',
+        '.empty-state', '.shortcuts-table td'];
+      // .theme-option is deliberately absent: it lives in a top-layer popover
+      // whose computed colour does not settle reliably under CDP. The palette
+      // test covers that surface from the tokens instead.
+      const themes = ['oled','catppuccin','dracula','rose-pine','nord','github-dark','midnight','solarized','light'];
+      const previous = document.documentElement.dataset.theme;
       const failures = [];
+      let sampled = 0;
+      document.querySelector('#grid .card').scrollIntoView({ block: 'center' });
+      // The theme menu is a popover: it has to be open, or its options are not
+      // rendered and the measurement is meaningless.
+
       for (const theme of themes) {
         document.documentElement.dataset.theme = theme;
-        const body = parse(getComputedStyle(document.body).backgroundColor);
-        for (const selector of ['.card-title', '.card-desc', '.results-count', '.footer p']) {
+        await settle();
+        for (const selector of selectors) {
           const node = document.querySelector(selector);
           if (!node) continue;
-          const value = ratio(parse(getComputedStyle(node).color), body);
-          if (value < 4.5) failures.push(theme + ' ' + selector + ' ' + value.toFixed(2));
+          const layers = layersFor(node);
+          const background = paint(layers);
+          const foreground = paint([...layers, getComputedStyle(node).color]);
+          const value = ratio(foreground, background);
+          sampled++;
+          if (value < 4.5) failures.push(theme + ' ' + selector + ' ' + value.toFixed(2) + ' fg=' + foreground + ' bg=' + background);
         }
       }
       document.documentElement.dataset.theme = previous;
-      return failures;
+      override.remove();
+      await frame();
+      return { failures, sampled };
     })()`);
-    assert.deepEqual(contrast, [], 'body text must clear WCAG AA in every theme');
+    assert.ok(contrast.sampled >= 90, `the contrast probe should sample every theme, sampled ${contrast.sampled}`);
+    assert.deepEqual(contrast.failures, [], 'text must clear WCAG AA against its own backdrop in every theme');
 
     await page.evaluate("document.querySelector('#compareModeBtn').click()");
     await waitFor(page, "document.querySelectorAll('[data-action=compare]').length >= 2");
@@ -176,21 +277,73 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     })()`);
     assert.deepEqual(savedBookmark, { schemaVersion: 2, hasBookmark: true });
 
+    // Remove the only bookmark while looking at the Bookmarks filter: undo has
+    // to bring back both the entry and the view.
+    await page.evaluate("document.querySelector('.filter-btn[data-cat=\"Bookmarks\"]').click()");
+    await waitFor(page, "activeFilter === 'Bookmarks' && document.querySelectorAll('#grid .card').length === 1");
+    const inBookmarks = await page.evaluate(`({
+      filter: activeFilter,
+      cards: document.querySelectorAll('#grid .card').length
+    })`);
+    assert.equal(inBookmarks.filter, 'Bookmarks');
+    assert.equal(inBookmarks.cards, 1);
+
     await page.evaluate("document.querySelector('.site-chip .chip-remove').click()");
     await waitFor(page, "!document.getElementById('toastAction').hidden");
+    await waitFor(page, "activeFilter === 'All' && document.querySelectorAll('#grid .card').length > 1");
+    const afterRemove = await page.evaluate("({ filter: activeFilter, pills: [...document.querySelectorAll('.filter-btn')].map(b => b.dataset.cat) })");
+    assert.equal(afterRemove.filter, 'All', 'an emptied Bookmarks filter should fall back to All');
+    assert.ok(!afterRemove.pills.includes('Bookmarks'), 'the Bookmarks pill should go with the last bookmark');
+
     await page.evaluate("document.getElementById('toastAction').click()");
     await waitFor(page, `Object.keys(JSON.parse(localStorage.getItem('coolsites-bookmarks-v2')).data).length === 1`);
-    assert.equal(
-      await page.evaluate("document.querySelectorAll('.site-chip').length"),
-      1,
-      'undo should restore a removed bookmark'
-    );
+    // renderGrid defers through startViewTransition, so the storage write lands
+    // a frame before the grid does. Wait for the view, not just the data.
+    await waitFor(page, "activeFilter === 'Bookmarks' && document.querySelectorAll('#grid .card').length === 1");
+    const afterUndo = await page.evaluate(`({
+      chips: document.querySelectorAll('.site-chip').length,
+      filter: activeFilter,
+      activePill: document.querySelector('.filter-btn.active')?.dataset.cat,
+      cards: document.querySelectorAll('#grid .card').length
+    })`);
+    assert.equal(afterUndo.chips, 1, 'undo should restore a removed bookmark');
+    assert.equal(afterUndo.filter, 'Bookmarks', 'undo should return you to the filter you were using');
+    assert.equal(afterUndo.activePill, 'Bookmarks', 'the restored filter has to be the highlighted pill');
+    assert.equal(afterUndo.cards, 1, 'the grid has to agree with the highlighted pill');
 
-    await page.evaluate("localStorage.setItem('coolsites-bookmarks-v2', '{broken')");
+    // Cancelling a modal must not wipe an active search behind it.
+    await searchFor(page, 'cloudflare');
+    const beforeModal = await page.evaluate("document.getElementById('searchInput').value");
+    await page.evaluate("document.getElementById('newGroupBtn').click()");
+    await waitFor(page, "document.getElementById('groupModal').open");
+    await page.evaluate("document.getElementById('groupModal').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))");
+    await delay(250);
+    assert.equal(
+      await page.evaluate("document.getElementById('searchInput').value"),
+      beforeModal,
+      'Escape inside a dialog must not clear the search box'
+    );
+    await page.evaluate("document.getElementById('groupModal').close()");
+    await searchFor(page, '');
+    await page.evaluate("document.querySelector('.filter-btn[data-cat=\"All\"]').click()");
+    await delay(250);
+
+    await page.evaluate("localStorage.setItem('coolsites-bookmarks-v2', '{broken'); localStorage.setItem('coolsites-groups-v2', '[[[')");
     await page.send('Page.reload', { ignoreCache: true });
     await delay(500);
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
-    assert.equal(await page.evaluate("document.getElementById('resultsCount').textContent.includes('Data failed')"), false, 'corrupt local storage must not stop boot');
+    const afterCorrupt = await page.evaluate(`({
+      label: document.getElementById('resultsCount').textContent,
+      cards: document.querySelectorAll('#grid .card').length,
+      pills: document.querySelectorAll('.filter-btn').length,
+      dockCount: document.getElementById('dockCount').textContent,
+      groups: typeof groups === 'undefined' ? null : groups.map(g => g.id)
+    })`);
+    assert.match(afterCorrupt.label, /^\d+( of \d+)? sites?$/, `corrupt storage must still render a count, got ${afterCorrupt.label}`);
+    assert.ok(afterCorrupt.cards > 0, 'corrupt local storage must not stop boot');
+    assert.ok(afterCorrupt.pills > 1, 'category pills should still build');
+    assert.deepEqual(afterCorrupt.groups, ['default'], 'corrupt groups should fall back to the default group');
+    assert.equal(afterCorrupt.dockCount, '0', 'corrupt bookmarks should read as none, not as garbage');
 
     const importResult = await page.evaluate(`(() => {
       const first = document.querySelector('#grid .card').dataset.url;
@@ -382,6 +535,15 @@ async function evaluate(connection, sessionId, expression) {
   }, sessionId);
   if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || 'Browser evaluation failed');
   return result.result?.value;
+}
+
+async function searchFor(page, query) {
+  await page.evaluate(`(() => {
+    const input = document.getElementById('searchInput');
+    input.value = ${JSON.stringify(query)};
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await delay(350);
 }
 
 async function waitFor(page, expression, timeoutMs = 10000) {
