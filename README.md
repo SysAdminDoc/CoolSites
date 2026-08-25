@@ -108,9 +108,28 @@ directory and anything starting with a dot. The bundled `npm run serve` already
 refuses them.
 
 The content security policy travels in a `<meta>` tag, so it applies wherever
-you host the page, including GitHub Pages. If your server can send real headers,
-`Content-Security-Policy` as a header takes precedence and also lets you add
-`frame-ancestors`, which browsers ignore in a meta tag.
+you host the page, including GitHub Pages.
+
+### Security headers
+
+Three things a meta tag cannot do, so they need a real server. GitHub Pages
+sends none of them, which is worth knowing rather than assuming: the hosted copy
+can be framed by anyone and browsers are free to sniff content types.
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+```
+
+Sent as a header, the policy takes precedence over the meta tag and adds
+`frame-ancestors`, which browsers ignore in a meta tag. `npm run serve` already
+sends all four, so local development matches a properly configured host.
+
+On nginx, remember that `add_header` does not inherit into a `location` block
+that sets any header of its own, so these have to be repeated in each one rather
+than declared once at the server level.
 
 ## How It Works
 
@@ -188,19 +207,24 @@ The point of it is telling apart things that look identical from a script:
 | `moved` | permanently redirected somewhere genuinely different, so the entry is stale |
 | `redirect` | temporary redirect, nothing to do |
 | `blocked` | a bot wall: it refused this client but serves a browser fine |
-| `dead` | gone for everyone, including a browser |
+| `dead` | 404 or 410 for everyone, including a browser |
 | `tls` | certificate or handshake failure |
 | `dns` | the hostname no longer resolves |
 | `timeout` | no answer inside the timeout, twice |
-| `error` | transient: a dropped connection, a CDN edge failure, a 503 |
+| `error` | anything else: a dropped connection, a CDN edge failure, a 500, a redirect that goes nowhere |
 
-Only `dead` and `tls` set a non-zero exit code. Everything else is information.
+`dead`, `tls` and `dns` set a non-zero exit code. Everything else is
+information.
 
-Before calling anything dead it asks once more with a browser user agent, and
-downgrades to `blocked` if that works. Bot walls answer scripts with 404s and
-5xx just as readily as with 403s, and one of them handed back a 404 to the
-checker while serving a real page to Chrome. Deleting a live entry is a much
-worse outcome than keeping a stale one, so every rule here leans that way.
+Only a 404 or a 410 counts as dead. A 500 or a 503 is a broken server, not a
+removed page, and failing the run on one would tell you to delete a live entry.
+
+Before calling anything dead it asks once more with a browser user agent and
+downgrades to `blocked` if that works, because bot walls answer scripts with
+404s and 503s just as readily as with 403s. One of them handed back a 404 to
+the checker while serving a real page to Chrome. The retry also checks the
+browser landed on the same URL, so a parked domain that redirects every path to
+its homepage does not get read as proof of life.
 
 Useful flags: `--filter <text>` to check one site, `--limit <n>` for a quick
 sample, `--concurrency <n>` (default 8), `--timeout <ms>` (default 15000), and

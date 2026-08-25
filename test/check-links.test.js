@@ -79,11 +79,42 @@ before(async () => {
       return;
     }
 
-    // Same trick with a 503, which is what a shield under load returns.
+    // Same trick with a 503, which is what a shield under load returns. This
+    // has to actually be a 503: as a 403 it short-circuits long before the
+    // browser retry and the test proves nothing.
     if (route === '/botwall503') {
       const browser = /Mozilla\/5\.0/.test(request.headers['user-agent'] || '');
       if (browser) { response.writeHead(200); response.end('the real page'); return; }
-      response.writeHead(403); response.end('go away');
+      response.writeHead(503); response.end('go away');
+      return;
+    }
+
+    // A dead deep link on a site whose 404 handler redirects browsers to the
+    // homepage. The browser retry must not read that as proof of life.
+    if (route === '/deadbutredirects') {
+      const browser = /Mozilla\/5\.0/.test(request.headers['user-agent'] || '');
+      if (browser) { response.writeHead(302, { Location: origin + '/ok' }); response.end(); return; }
+      response.writeHead(404); response.end('gone');
+      return;
+    }
+
+    // Refuses HEAD with a 404 but serves GET to everyone, which some CDNs do.
+    if (route === '/head404') {
+      if (request.method === 'HEAD') { response.writeHead(404); response.end(); return; }
+      response.writeHead(200); response.end('fine');
+      return;
+    }
+
+    if (route === '/nolocation') { response.writeHead(302); response.end(); return; }
+    if (route === '/notimplemented') { response.writeHead(501); response.end(); return; }
+    if (route === '/netauth') { response.writeHead(511); response.end(); return; }
+    if (route === '/teapotonly') { response.writeHead(418); response.end(); return; }
+
+    if (route === '/hop') {
+      const n = Number(url.searchParams.get('n') || '0');
+      if (n <= 0) { response.writeHead(200); response.end('done'); return; }
+      response.writeHead(301, { Location: origin + '/hop?n=' + (n - 1) });
+      response.end();
       return;
     }
 
@@ -178,10 +209,13 @@ test('a host that refuses HEAD is retried with GET', async () => {
   assert.equal((await check(site('/headhostile'), options)).status, 'ok');
 });
 
-test('a retryable 5xx is an error and a plain one is dead', async () => {
+test('5xx and odd 4xx are errors, never dead', async () => {
+  // This test used to assert that a 418 was "dead". That was wrong: only 404
+  // and 410 say a page is gone, and dead is the one status that fails the run
+  // and tells an editor to delete the entry.
   assert.equal((await check(site('/broken'), options)).status, 'error');
   assert.equal((await check(site('/unavailable'), options)).status, 'error');
-  assert.equal((await check(site('/teapot'), options)).status, 'dead');
+  assert.equal((await check(site('/teapot'), options)).status, 'error');
 });
 
 test('a bot wall that 404s scripts and serves browsers is blocked, not dead', async () => {
@@ -192,8 +226,49 @@ test('a bot wall that 404s scripts and serves browsers is blocked, not dead', as
   assert.match(result.detail, /bot wall/);
 });
 
-test('a bot wall that 403s scripts is still blocked', async () => {
-  assert.equal((await check(site('/botwall503'), options)).status, 'blocked');
+test('a bot wall that 503s scripts is blocked, not filed as a server error', async () => {
+  // A shield under load answers 503. That used to short-circuit to "error"
+  // before the browser retry ever ran, so the whole 5xx half of the bot-wall
+  // claim was untested and did not work.
+  const result = await check(site('/botwall503'), options);
+  assert.equal(result.status, 'blocked', `expected blocked, got ${result.status} (${result.detail})`);
+});
+
+test('a browser landing on the homepage is not proof the deep link is alive', async () => {
+  // Parked domains and redirecting 404 handlers answer every path with a 200
+  // somewhere else. Accepting that would mean nothing is ever reported dead.
+  const result = await check(site('/deadbutredirects'), options);
+  assert.equal(result.status, 'dead', `expected dead, got ${result.status} (${result.detail})`);
+});
+
+test('a host that answers HEAD with 404 and GET with a page is ok', async () => {
+  // Not a bot wall: the user agent never came into it. Reporting this as
+  // blocked would be an invented diagnosis.
+  const result = await check(site('/head404'), options);
+  assert.equal(result.status, 'ok', `expected ok, got ${result.status} (${result.detail})`);
+});
+
+test('a redirect with no Location goes nowhere and is an error', async () => {
+  const result = await check(site('/nolocation'), options);
+  assert.equal(result.status, 'error');
+  assert.match(result.detail, /no Location/);
+});
+
+test('server errors and refusals are never reported as dead', async () => {
+  // Only 404 and 410 mean the page is gone. A 501 or a captive portal is a
+  // broken server, and failing the run on it tells the editor to delete a
+  // live entry.
+  for (const route of ['/notimplemented', '/netauth', '/teapotonly']) {
+    const result = await check(site(route), options);
+    assert.equal(result.status, 'error', `${route} should be error, got ${result.status}`);
+  }
+});
+
+test('a long but working redirect chain resolves instead of erroring', async () => {
+  // Browsers allow 20 hops. Stopping short reported a working link as broken.
+  const result = await check(site('/hop?n=15'), options);
+  assert.equal(result.status, 'moved', `expected moved, got ${result.status} (${result.detail})`);
+  assert.equal(result.hops, 15);
 });
 
 test('a page that is missing for everyone stays dead', async () => {
@@ -247,4 +322,12 @@ test('destination comparison ignores www and a trailing slash but not the path',
   assert.equal(sameDestination('https://example.com/a', 'https://example.com/b'), false);
   assert.equal(sameDestination('https://example.com', 'https://other.com'), false);
   assert.equal(sameDestination('https://example.com/a?x=1', 'https://example.com/a?x=2'), false);
+});
+
+test('destination comparison respects protocol and port, and ignores query order', () => {
+  // An https to http downgrade and a move to another port are real changes.
+  assert.equal(sameDestination('https://example.com/a', 'http://example.com/a'), false);
+  assert.equal(sameDestination('https://example.com/a', 'https://example.com:8443/a'), false);
+  // Reordered parameters land in the same place, so reporting a move is noise.
+  assert.equal(sameDestination('https://example.com/a?x=1&y=2', 'https://example.com/a?y=2&x=1'), true);
 });

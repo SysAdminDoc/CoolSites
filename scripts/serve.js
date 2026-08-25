@@ -15,6 +15,17 @@ const MIME_TYPES = {
   '.woff2': 'font/woff2'
 };
 
+// The pages carry the same policy in a meta tag so it applies on GitHub Pages,
+// which cannot send headers at all. These are the parts a meta tag cannot
+// deliver, sent here so local development matches a properly configured host.
+// README documents the same set for anyone self-hosting behind a real server.
+const SECURITY_HEADERS = {
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'",
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'geolocation=(), microphone=(), camera=()'
+};
+
 const requestedPort = Number.parseInt(process.env.PORT || process.argv[2] || '4173', 10);
 const host = process.env.HOST || '127.0.0.1';
 
@@ -65,7 +76,7 @@ if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 655
         const extension = path.extname(resolvedPath).toLowerCase();
         response.writeHead(200, {
           'Cache-Control': 'no-store',
-          'X-Content-Type-Options': 'nosniff',
+          ...SECURITY_HEADERS,
           'Content-Length': data.length,
           'Content-Type': MIME_TYPES[extension] || 'application/octet-stream'
         });

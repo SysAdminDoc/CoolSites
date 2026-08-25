@@ -66,47 +66,95 @@ test('both pages ship the same enforced content security policy', () => {
   }
 });
 
-test('the policy grants exactly what the site needs and nothing wider', () => {
-  const directives = parse(readPolicy(PAGES[0]));
+// The three rules below are written against a parsed policy rather than against
+// the shipped file, so each one can be pointed at a deliberately bad policy and
+// shown to catch it. Checking only the real policy made them unfalsifiable: the
+// exact-match assertion above would fail first every time, and a rule with a
+// hole in it would still look green.
 
-  const declared = [...directives.keys()].sort();
-  assert.deepEqual(declared, Object.keys(EXPECTED).sort(),
-    'a new directive needs a decision recorded here, not a silent addition');
-
-  for (const [name, sources] of Object.entries(EXPECTED)) {
-    assert.deepEqual(directives.get(name), sources, `--${name} must stay exactly as reviewed`);
-  }
-
-  // The site is entirely self-hosted, so any host source at all is a regression.
-  const wildcards = [];
+// Anything that can load from an origin other than this one. A bare scheme
+// source like `https:` is the easy one to miss: it permits every https host on
+// the internet while matching none of the obvious wildcard shapes.
+function offOriginSources(directives) {
+  const found = [];
   for (const [name, sources] of directives) {
     for (const source of sources) {
-      if (source === '*' || source.includes('://') || /^\*\./.test(source)) {
-        wildcards.push(`${name} ${source}`);
+      const bare = source.replace(/^'|'$/g, '');
+      const isSchemeSource = /^[a-z][a-z0-9+.-]*:$/i.test(source) && source !== 'data:' && source !== 'blob:';
+      if (source === '*' || source.includes('://') || /^\*\./.test(source)
+        || isSchemeSource || bare === 'unsafe-hashes') {
+        found.push(`${name} ${source}`);
       }
     }
   }
-  assert.deepEqual(wildcards, [], 'nothing may be loaded from another origin');
+  return found;
+}
+
+function headerOnlyDirectives(directives) {
+  return HEADER_ONLY.filter(name => directives.has(name));
+}
+
+function unsafeOutsideInlineCode(directives) {
+  const found = [];
+  for (const [name, sources] of directives) {
+    if (name === 'script-src' || name === 'style-src') continue;
+    for (const source of sources) {
+      if (source === "'unsafe-inline'" || source === "'unsafe-eval'") found.push(`${name} ${source}`);
+    }
+  }
+  return found;
+}
+
+test('the policy grants exactly what the site needs', () => {
+  const directives = parse(readPolicy(PAGES[0]));
+  const declared = [...directives.keys()].sort();
+  assert.deepEqual(declared, Object.keys(EXPECTED).sort(),
+    'a new directive needs a decision recorded here, not a silent addition');
+  for (const [name, sources] of Object.entries(EXPECTED)) {
+    assert.deepEqual(directives.get(name), sources, `--${name} must stay exactly as reviewed`);
+  }
+});
+
+test('nothing may be loaded from another origin', () => {
+  assert.deepEqual(offOriginSources(parse(readPolicy(PAGES[0]))), [],
+    'the site is entirely self-hosted');
+
+  // The rule has to catch every shape, including the ones that do not look like
+  // wildcards. `https:` alone permits the whole web.
+  const shouldCatch = [
+    "img-src 'self' https:",
+    "script-src 'self' https://cdn.example.com",
+    "default-src *",
+    "font-src 'self' *.example.com",
+    "connect-src 'self' http:",
+    "style-src 'self' 'unsafe-hashes'"
+  ];
+  for (const policy of shouldCatch) {
+    assert.ok(offOriginSources(parse(policy)).length > 0, `should have flagged: ${policy}`);
+  }
+
+  // And must not fire on the inline schemes the site legitimately uses.
+  for (const policy of ["img-src 'self' data:", "worker-src 'self' blob:", "default-src 'none'"]) {
+    assert.deepEqual(offOriginSources(parse(policy)), [], `should not have flagged: ${policy}`);
+  }
 });
 
 test('the policy does not claim protection a meta tag cannot deliver', () => {
-  const directives = parse(readPolicy(PAGES[0]));
-  const ignored = HEADER_ONLY.filter(name => directives.has(name));
-  assert.deepEqual(ignored, [],
+  assert.deepEqual(headerOnlyDirectives(parse(readPolicy(PAGES[0]))), [],
     'browsers ignore these in a meta tag, so shipping them there is misleading');
+  for (const name of HEADER_ONLY) {
+    assert.deepEqual(headerOnlyDirectives(parse(`default-src 'self'; ${name} 'none'`)), [name],
+      `the rule has to catch ${name}`);
+  }
 });
 
 test('unsafe-inline is confined to script-src and style-src', () => {
   // Both are load-bearing today: all CSS and JS are inline, and the theme boot
   // script has to run before first paint. Dropping them is a roadmap item.
   // Anywhere else it would be an accident.
-  const directives = parse(readPolicy(PAGES[0]));
-  const unexpected = [];
-  for (const [name, sources] of directives) {
-    if (name === 'script-src' || name === 'style-src') continue;
-    for (const source of sources) {
-      if (source === "'unsafe-inline'" || source === "'unsafe-eval'") unexpected.push(`${name} ${source}`);
-    }
-  }
-  assert.deepEqual(unexpected, [], 'unsafe-inline belongs only where inline code actually lives');
+  assert.deepEqual(unsafeOutsideInlineCode(parse(readPolicy(PAGES[0]))), [],
+    'unsafe-inline belongs only where inline code actually lives');
+  assert.deepEqual(unsafeOutsideInlineCode(parse("script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'")), []);
+  assert.ok(unsafeOutsideInlineCode(parse("default-src 'self' 'unsafe-eval'")).length > 0);
+  assert.ok(unsafeOutsideInlineCode(parse("img-src 'self' 'unsafe-inline'")).length > 0);
 });

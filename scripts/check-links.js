@@ -13,8 +13,9 @@
 //   --limit <n>           stop after this many entries
 //   --only <status,...>   print only these statuses in the console summary
 //
-// Exit code is 0 unless something is actually broken (dead or a TLS failure),
-// so a redirect or a rate-limited host does not fail a routine check.
+// Exit code is 0 unless something is actually broken: a page that is gone for
+// everyone, a TLS failure, or a hostname that no longer resolves. A redirect, a
+// rate-limited host or a server having a bad day does not fail a routine check.
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -24,7 +25,9 @@ const ROOT = path.resolve(__dirname, '..');
 // Long enough that a slow homelab project does not read as dead, short enough
 // that 588 entries still finish in a couple of minutes.
 const DEFAULTS = { concurrency: 8, timeout: 15000, out: path.join('work', 'link-check.json') };
-const MAX_HOPS = 10;
+// Browsers allow 20. Stopping at 10 turned a long but working chain into a
+// reported error, which is a false alarm rather than a finding.
+const MAX_HOPS = 20;
 const RETRY_STATUSES = new Set([408, 425, 500, 502, 503, 504]);
 
 // A polite, honest identifier. Some hosts still refuse it, which is what the
@@ -46,7 +49,17 @@ const STATUS_ORDER = ['dead', 'tls', 'dns', 'timeout', 'error', 'blocked', 'move
 // Only these mean "a human needs to edit sites.json". Everything else is
 // informational: a 403 from a bot wall says nothing about whether the page is
 // still there, and treating it as a dead link is how good entries get deleted.
-const BROKEN = new Set(['dead', 'tls']);
+// dns belongs here because a hostname that stopped resolving is the commonest
+// form of link rot there is.
+const BROKEN = new Set(['dead', 'tls', 'dns']);
+
+// Writing the report over the directory's own data would make a liar of every
+// promise in this file. --out is a path from the command line, so it gets
+// checked rather than trusted.
+const PROTECTED_FILES = new Set([
+  'sites.json', 'categories.json', 'collections.json', 'stars.json',
+  'favicons.json', 'package.json', 'package-lock.json', 'index.html', 'collections.html'
+]);
 
 function parseArgs(argv) {
   const options = { ...DEFAULTS, filter: null, limit: Infinity, only: null };
@@ -67,6 +80,10 @@ function parseArgs(argv) {
   }
   if (!Number.isInteger(options.concurrency) || options.concurrency < 1) throw new Error('--concurrency must be a positive integer');
   if (!Number.isInteger(options.timeout) || options.timeout < 1000) throw new Error('--timeout must be at least 1000');
+  // Was silently ignored, so a typo checked all 588 URLs instead of the 5 asked for.
+  if (options.limit !== Infinity && (!Number.isInteger(options.limit) || options.limit < 1)) {
+    throw new Error('--limit must be a positive integer');
+  }
   return options;
 }
 
@@ -120,11 +137,15 @@ async function walk(startUrl, method, timeout, userAgent = USER_AGENT) {
   let current = startUrl;
   let permanent = true;
 
-  for (let hop = 0; hop < MAX_HOPS; hop++) {
+  for (let hop = 0; hop <= MAX_HOPS; hop++) {
     const response = await attempt(current, method, timeout, userAgent);
     const location = response.headers.get('location');
 
-    if (response.status >= 300 && response.status < 400 && location) {
+    if (response.status >= 300 && response.status < 400) {
+      // 304 is not a redirect, and a 3xx with no Location is one no browser can
+      // follow. Either way it is not a healthy link, so say so rather than
+      // falling through and reporting the 3xx as ok.
+      if (!location) return { response, finalUrl: current, chain, permanent, noLocation: true };
       // A 302/303/307 says "not here right now", which is not a reason to
       // rewrite the entry, so one temporary hop makes the whole chain temporary.
       if (response.status !== 301 && response.status !== 308) permanent = false;
@@ -148,22 +169,33 @@ function sameDestination(a, b) {
   try {
     const first = new URL(a);
     const second = new URL(b);
-    const strip = value => value.replace(/\/$/, '');
-    return first.hostname.replace(/^www\./, '') === second.hostname.replace(/^www\./, '')
-      && strip(first.pathname) === strip(second.pathname)
-      && first.search === second.search;
+    const host = url => url.hostname.replace(/^www\./, '').toLowerCase();
+    const path = url => url.pathname.replace(/\/$/, '');
+    // Sorted, because a redirect that only reorders query parameters lands in
+    // the same place and is not worth sending anyone to edit sites.json over.
+    const query = url => [...url.searchParams].sort((x, y) => (x[0] + x[1]).localeCompare(y[0] + y[1]))
+      .map(pair => pair.join('=')).join('&');
+    // Protocol and port are part of the destination: an https to http downgrade
+    // and a move to another port are both real changes.
+    return first.protocol === second.protocol
+      && first.port === second.port
+      && host(first) === host(second)
+      && path(first) === path(second)
+      && query(first) === query(second);
   } catch {
     return a === b;
   }
 }
 
-// Deliberately forgiving: any 2xx at the end of the chain counts. This only ever
-// runs to downgrade a failure to "blocked", so a false positive costs a stale
-// entry and a false negative costs a deleted live one.
+// Only ever runs to downgrade a failure to "blocked". It has to be strict about
+// where the browser landed: a parked domain, or any site with a redirecting 404
+// handler, answers every path with a 200 on its homepage, and accepting that
+// would mean nothing is ever reported dead again.
 async function looksAliveToABrowser(url, timeout) {
   try {
     const walked = await walk(url, 'GET', timeout, BROWSER_USER_AGENT);
-    return Boolean(walked.response && walked.response.ok);
+    if (!walked.response || !walked.response.ok) return false;
+    return sameDestination(url, walked.finalUrl);
   } catch {
     return false;
   }
@@ -175,13 +207,12 @@ async function check(site, options) {
 
   try {
     walked = await walk(site.url, 'HEAD', options.timeout);
-    // Plenty of hosts refuse HEAD outright while serving GET fine, so a failing
-    // HEAD is a reason to ask again properly, not a verdict.
-    if (!walked.response || !walked.response.ok) {
-      const status = walked.response ? walked.response.status : 0;
-      if (status === 0 || status === 403 || status === 405 || status === 501 || status >= 500) {
-        walked = await walk(site.url, 'GET', options.timeout);
-      }
+    // Plenty of hosts refuse HEAD outright while serving GET fine, and they do
+    // it with 404s and 400s as well as the obvious 405. Any unhappy HEAD is a
+    // reason to ask again properly rather than a verdict.
+    const unresolved = !walked.response || !walked.response.ok || walked.noLocation;
+    if (unresolved && !walked.loop && !walked.tooManyHops) {
+      walked = await walk(site.url, 'GET', options.timeout);
     }
   } catch (firstError) {
     try {
@@ -206,6 +237,11 @@ async function check(site, options) {
   const result = { ...record, httpStatus, hops: chain.length };
   if (chain.length) result.finalUrl = finalUrl;
 
+  if (walked.noLocation) {
+    result.status = 'error';
+    result.detail = `HTTP ${httpStatus} with no Location header, so the redirect goes nowhere`;
+    return result;
+  }
   if (httpStatus === 401 || httpStatus === 403 || httpStatus === 429) {
     result.status = 'blocked';
     result.detail = `HTTP ${httpStatus}, which usually means a bot wall rather than a missing page`;
@@ -218,21 +254,27 @@ async function check(site, options) {
     return result;
   }
   if (httpStatus >= 400) {
-    if (httpStatus >= 500 && RETRY_STATUSES.has(httpStatus)) {
-      result.status = 'error';
+    // Ask again as a browser before deciding anything. Bot walls answer scripts
+    // with 404s and 503s as readily as with 403s, and this runs before the 5xx
+    // branch on purpose: a shield under load is the exact case that used to
+    // slip through as a plain server error.
+    if (await looksAliveToABrowser(site.url, options.timeout)) {
+      result.status = 'blocked';
+      result.detail = `HTTP ${httpStatus} for a script, but a browser gets the same page, so this is a bot wall`;
+      return result;
+    }
+    // Only 404 and 410 actually mean the page is gone. A 5xx is a broken
+    // server, a 400 or a 451 is a refusal, and none of them are grounds for
+    // deleting an entry, so they are reported without failing the run.
+    if (httpStatus === 404 || httpStatus === 410) {
+      result.status = 'dead';
       result.detail = `HTTP ${httpStatus}`;
       return result;
     }
-    // Last chance before calling an entry dead: ask again as a browser. Bot
-    // walls answer scripts with 404s and 5xx as readily as with 403s, and
-    // deleting a live entry is far worse than leaving a stale one.
-    if (await looksAliveToABrowser(site.url, options.timeout)) {
-      result.status = 'blocked';
-      result.detail = `HTTP ${httpStatus} for a script, but a browser gets a page, so this is a bot wall`;
-      return result;
-    }
-    result.status = 'dead';
-    result.detail = `HTTP ${httpStatus}`;
+    result.status = 'error';
+    result.detail = httpStatus >= 500
+      ? `HTTP ${httpStatus}, a server error rather than a removed page`
+      : `HTTP ${httpStatus}, which is a refusal rather than a removed page`;
     return result;
   }
 
@@ -333,6 +375,11 @@ async function main() {
   };
 
   const outPath = path.resolve(ROOT, options.out);
+  if (PROTECTED_FILES.has(path.basename(outPath)) && path.dirname(outPath) === ROOT) {
+    console.error(`Refusing to write the report over ${path.basename(outPath)}. Pick another --out path.`);
+    process.exitCode = 1;
+    return;
+  }
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`);
 
@@ -341,8 +388,10 @@ async function main() {
     const list = byStatus.get(status) || [];
     if (!list.length) continue;
     console.log(`${status.padEnd(8)} ${String(list.length).padStart(4)}`);
-    if (options.only && !options.only.has(status)) continue;
-    if (status === 'ok' || status === 'redirect') continue;
+    // Without --only the healthy statuses are counted but not listed. With it,
+    // the flag decides entirely, so --only ok can actually show them.
+    const listed = options.only ? options.only.has(status) : (status !== 'ok' && status !== 'redirect');
+    if (!listed) continue;
     for (const result of list) {
       console.log(`  ${result.name} - ${result.url}`);
       console.log(`      ${result.detail}${result.finalUrl ? ` -> ${result.finalUrl}` : ''}`);
