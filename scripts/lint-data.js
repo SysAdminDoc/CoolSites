@@ -184,6 +184,25 @@ function validateSourceData() {
   return { sites: Array.isArray(sites) ? sites : [], categories: Array.isArray(categories) ? categories : [], collections: Array.isArray(collections) ? collections : [], urls };
 }
 
+// The submission form lists categories by hand; when a category is added or
+// renamed the dropdown silently keeps offering the old set.
+function validateIssueTemplate(data) {
+  const templatePath = path.join(root, '.github/ISSUE_TEMPLATE/submit-site.yml');
+  if (!fs.existsSync(templatePath)) return;
+  const template = fs.readFileSync(templatePath, 'utf8');
+  const section = template.match(/label: Category\r?\n\s+options:\r?\n((?:[ \t]+- .+\r?\n)+)/);
+  if (!section) {
+    addError('.github/ISSUE_TEMPLATE/submit-site.yml: category dropdown not found');
+    return;
+  }
+  const listed = section[1].split(/\r?\n/).map(line => line.replace(/^\s*-\s*/, '').trim()).filter(Boolean);
+  const expected = data.categories.map(category => category.name).sort((a, b) => a.localeCompare(b));
+  const missing = expected.filter(name => !listed.includes(name));
+  const extra = listed.filter(name => !expected.includes(name));
+  if (missing.length) addError(`.github/ISSUE_TEMPLATE/submit-site.yml: category dropdown is missing ${missing.join(', ')}`);
+  if (extra.length) addError(`.github/ISSUE_TEMPLATE/submit-site.yml: category dropdown offers unknown ${extra.join(', ')}`);
+}
+
 function validateFeeds(data) {
   const feed = readJson('feeds/recent.json');
   const atomPath = path.join(root, 'feeds/recent.atom');
@@ -215,6 +234,7 @@ function validateMetadata() {
 }
 
 const data = validateSourceData();
+validateIssueTemplate(data);
 if (!sourceOnly) {
   validateFeeds(data);
   validateMetadata();
