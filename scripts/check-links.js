@@ -31,6 +31,16 @@ const RETRY_STATUSES = new Set([408, 425, 500, 502, 503, 504]);
 // "blocked" status is for.
 const USER_AGENT = 'CoolSites-link-check (+https://github.com/SysAdminDoc/CoolSites)';
 
+// Used only to re-ask after a failure, to find out whether the page is actually
+// gone or the host just dislikes scripts. Never used for the first request:
+// pretending to be a browser by default would hide exactly the bot walls this
+// is supposed to surface.
+const BROWSER_USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
+
+// Cloudflare's 52x range describes the edge failing to reach the origin. That
+// is an outage or a shield, never evidence that a page was removed.
+const EDGE_STATUSES = new Set([520, 521, 522, 523, 524, 525, 526, 527, 530]);
+
 const STATUS_ORDER = ['dead', 'tls', 'dns', 'timeout', 'error', 'blocked', 'moved', 'redirect', 'ok'];
 
 // Only these mean "a human needs to edit sites.json". Everything else is
@@ -76,19 +86,26 @@ function classifyError(error) {
   if (code === 'ETIMEDOUT' || code === 'UND_ERR_CONNECT_TIMEOUT' || code === 'UND_ERR_HEADERS_TIMEOUT') {
     return { status: 'timeout', detail: code };
   }
-  if (code === 'ECONNREFUSED' || code === 'ECONNRESET' || code === 'EHOSTUNREACH') {
+  // A refusal or an unreachable host is a strong signal, though still only a
+  // candidate: check() re-asks as a browser before calling anything dead.
+  if (code === 'ECONNREFUSED' || code === 'EHOSTUNREACH' || code === 'ENETUNREACH') {
     return { status: 'dead', detail: code };
+  }
+  // A reset mid-stream is what shields and flaky links do. It is not evidence
+  // that anything was removed, and it cost PuTTY a false "dead" once already.
+  if (code === 'ECONNRESET' || code === 'UND_ERR_SOCKET') {
+    return { status: 'error', detail: `${code}, which is usually transient` };
   }
   return { status: 'error', detail: code || cause.message || String(error) };
 }
 
-async function attempt(url, method, timeout) {
+async function attempt(url, method, timeout, userAgent = USER_AGENT) {
   return fetch(url, {
     method,
     redirect: 'manual',
     signal: AbortSignal.timeout(timeout),
     headers: {
-      'User-Agent': USER_AGENT,
+      'User-Agent': userAgent,
       // Some hosts serve a bot wall to clients that do not look like browsers.
       Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'Accept-Language': 'en-US,en;q=0.9'
@@ -98,13 +115,13 @@ async function attempt(url, method, timeout) {
 
 // Walks the redirect chain by hand so the final URL, the hop count and whether
 // the move was permanent are all visible. redirect: 'follow' throws that away.
-async function walk(startUrl, method, timeout) {
+async function walk(startUrl, method, timeout, userAgent = USER_AGENT) {
   const chain = [];
   let current = startUrl;
   let permanent = true;
 
   for (let hop = 0; hop < MAX_HOPS; hop++) {
-    const response = await attempt(current, method, timeout);
+    const response = await attempt(current, method, timeout, userAgent);
     const location = response.headers.get('location');
 
     if (response.status >= 300 && response.status < 400 && location) {
@@ -140,6 +157,18 @@ function sameDestination(a, b) {
   }
 }
 
+// Deliberately forgiving: any 2xx at the end of the chain counts. This only ever
+// runs to downgrade a failure to "blocked", so a false positive costs a stale
+// entry and a false negative costs a deleted live one.
+async function looksAliveToABrowser(url, timeout) {
+  try {
+    const walked = await walk(url, 'GET', timeout, BROWSER_USER_AGENT);
+    return Boolean(walked.response && walked.response.ok);
+  } catch {
+    return false;
+  }
+}
+
 async function check(site, options) {
   const record = { name: site.name, category: site.category, url: site.url };
   let walked;
@@ -161,6 +190,9 @@ async function check(site, options) {
       const classified = classifyError(secondError);
       // A timeout on both attempts is still only a timeout. Calling it dead
       // would delete entries for anything slow.
+      if (classified.status === 'dead' && await looksAliveToABrowser(site.url, options.timeout)) {
+        return { ...record, status: 'blocked', detail: `${classified.detail} for a script, but a browser gets a page` };
+      }
       return { ...record, status: classified.status, detail: classified.detail };
     }
   }
@@ -179,17 +211,26 @@ async function check(site, options) {
     result.detail = `HTTP ${httpStatus}, which usually means a bot wall rather than a missing page`;
     return result;
   }
-  if (httpStatus === 404 || httpStatus === 410) {
-    result.status = 'dead';
-    result.detail = `HTTP ${httpStatus}`;
-    return result;
-  }
-  if (httpStatus >= 500) {
-    result.status = RETRY_STATUSES.has(httpStatus) ? 'error' : 'dead';
-    result.detail = `HTTP ${httpStatus}`;
+  if (EDGE_STATUSES.has(httpStatus)) {
+    // The edge could not reach the origin. Says nothing about the page.
+    result.status = 'error';
+    result.detail = `HTTP ${httpStatus} from the CDN edge, so the origin is unreachable rather than the page removed`;
     return result;
   }
   if (httpStatus >= 400) {
+    if (httpStatus >= 500 && RETRY_STATUSES.has(httpStatus)) {
+      result.status = 'error';
+      result.detail = `HTTP ${httpStatus}`;
+      return result;
+    }
+    // Last chance before calling an entry dead: ask again as a browser. Bot
+    // walls answer scripts with 404s and 5xx as readily as with 403s, and
+    // deleting a live entry is far worse than leaving a stale one.
+    if (await looksAliveToABrowser(site.url, options.timeout)) {
+      result.status = 'blocked';
+      result.detail = `HTTP ${httpStatus} for a script, but a browser gets a page, so this is a bot wall`;
+      return result;
+    }
     result.status = 'dead';
     result.detail = `HTTP ${httpStatus}`;
     return result;

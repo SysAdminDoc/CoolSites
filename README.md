@@ -174,15 +174,20 @@ The point of it is telling apart things that look identical from a script:
 | `ok` | reachable at the URL on file |
 | `moved` | permanently redirected somewhere genuinely different, so the entry is stale |
 | `redirect` | temporary redirect, nothing to do |
-| `blocked` | answered 401, 403 or 429, which is a bot wall and says nothing about the page |
-| `dead` | 404, 410, or the connection was refused |
+| `blocked` | a bot wall: it refused this client but serves a browser fine |
+| `dead` | gone for everyone, including a browser |
 | `tls` | certificate or handshake failure |
 | `dns` | the hostname no longer resolves |
 | `timeout` | no answer inside the timeout, twice |
+| `error` | transient: a dropped connection, a CDN edge failure, a 503 |
 
-Only `dead` and `tls` set a non-zero exit code. A rate-limited host is not a
-broken link, and deleting entries because Cloudflare dislikes a script is how a
-good directory rots.
+Only `dead` and `tls` set a non-zero exit code. Everything else is information.
+
+Before calling anything dead it asks once more with a browser user agent, and
+downgrades to `blocked` if that works. Bot walls answer scripts with 404s and
+5xx just as readily as with 403s, and one of them handed back a 404 to the
+checker while serving a real page to Chrome. Deleting a live entry is a much
+worse outcome than keeping a stale one, so every rule here leans that way.
 
 Useful flags: `--filter <text>` to check one site, `--limit <n>` for a quick
 sample, `--concurrency <n>` (default 8), `--timeout <ms>` (default 15000), and

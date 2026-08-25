@@ -67,6 +67,33 @@ before(async () => {
 
     if (route === '/slow') { setTimeout(() => { response.writeHead(200); response.end('eventually'); }, SLOW_MS); return; }
 
+    // Cloudflare's 52x range: the edge could not reach the origin.
+    if (route === '/edgefail') { response.writeHead(526); response.end('origin cert problem'); return; }
+
+    // The nasty one. A bot wall that answers scripts with 404 and browsers with
+    // a real page. Torrents CSV does exactly this.
+    if (route === '/botwall404') {
+      const browser = /Mozilla\/5\.0/.test(request.headers['user-agent'] || '');
+      if (browser) { response.writeHead(200); response.end('the real page'); return; }
+      response.writeHead(404); response.end('go away');
+      return;
+    }
+
+    // Same trick with a 503, which is what a shield under load returns.
+    if (route === '/botwall503') {
+      const browser = /Mozilla\/5\.0/.test(request.headers['user-agent'] || '');
+      if (browser) { response.writeHead(200); response.end('the real page'); return; }
+      response.writeHead(403); response.end('go away');
+      return;
+    }
+
+    // A genuinely missing page: 404 no matter who asks. Must stay dead.
+    if (route === '/reallygone') { response.writeHead(404); response.end('gone'); return; }
+
+    // Drops the connection without answering, the way a shield or a flaky link
+    // does. PuTTY was reported dead for exactly this.
+    if (route === '/reset') { request.socket.destroy(); return; }
+
     response.writeHead(404);
     response.end();
   });
@@ -155,6 +182,37 @@ test('a retryable 5xx is an error and a plain one is dead', async () => {
   assert.equal((await check(site('/broken'), options)).status, 'error');
   assert.equal((await check(site('/unavailable'), options)).status, 'error');
   assert.equal((await check(site('/teapot'), options)).status, 'dead');
+});
+
+test('a bot wall that 404s scripts and serves browsers is blocked, not dead', async () => {
+  // The failure this guards against deletes a live entry from the directory,
+  // which is the worst thing this tool could do.
+  const result = await check(site('/botwall404'), options);
+  assert.equal(result.status, 'blocked');
+  assert.match(result.detail, /bot wall/);
+});
+
+test('a bot wall that 403s scripts is still blocked', async () => {
+  assert.equal((await check(site('/botwall503'), options)).status, 'blocked');
+});
+
+test('a page that is missing for everyone stays dead', async () => {
+  // The other half: the browser retry must not launder every 404 into blocked.
+  const result = await check(site('/reallygone'), options);
+  assert.equal(result.status, 'dead');
+  assert.equal(result.httpStatus, 404);
+});
+
+test('a dropped connection is transient, not a dead link', async () => {
+  const result = await check(site('/reset'), options);
+  assert.equal(result.status, 'error', `expected error, got ${result.status} (${result.detail})`);
+  assert.match(result.detail, /transient/);
+});
+
+test('a CDN edge failure is not a missing page', async () => {
+  const result = await check(site('/edgefail'), options);
+  assert.equal(result.status, 'error');
+  assert.match(result.detail, /edge/);
 });
 
 test('a host that never answers is a timeout, not a dead link', async () => {
