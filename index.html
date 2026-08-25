@@ -1205,7 +1205,8 @@
     gap: 6px;
   }
   .dock-action-btn {
-    min-height: 30px;
+    /* 32px so the tap target clears the WCAG 2.2 minimum with room to spare. */
+    min-height: 32px;
     padding: 5px 10px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
@@ -1615,8 +1616,8 @@
   .modal-color {
     padding: 0;
     appearance: none;
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -2207,6 +2208,9 @@
       <tr><td><kbd>Enter</kbd></td><td>Open focused site</td></tr>
       <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Open in new tab</td></tr>
       <tr><td><kbd>?</kbd></td><td>Show this help</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Move a bookmark inside its group</td></tr>
+      <tr><td><kbd>Alt</kbd>+<kbd>&uarr;</kbd> <kbd>&darr;</kbd></td><td>Move a bookmark to another group</td></tr>
+      <tr><td><kbd>Alt</kbd>+arrows</td><td>Reorder a group, from its edit button</td></tr>
     </table>
     <div class="modal-btns" style="margin-top:16px">
       <button class="modal-btn primary" id="shortcutsClose">Close</button>
@@ -3948,6 +3952,109 @@ function initGroupDragAndDrop() {
     });
   });
 }
+
+// ════════════════════════════════════════════════════════════════
+//  KEYBOARD REORDERING — the same moves as dragging, without a mouse
+// ════════════════════════════════════════════════════════════════
+// Alt is the modifier because the plain arrow keys already walk the card grid,
+// and Shift+Arrow selects text. Alt+Left/Right moves a chip inside its group,
+// Alt+Up/Down moves it to the next group, and either axis reorders a group when
+// focus is on one of its header controls.
+
+function moveChipWithinGroup(url, delta) {
+  const bookmark = bookmarks[url];
+  if (!bookmark) return false;
+  const order = getGroupSites(bookmark.group);
+  const from = order.indexOf(url);
+  const to = from + delta;
+  if (from === -1 || to < 0 || to >= order.length) return false;
+  order.splice(to, 0, ...order.splice(from, 1));
+  order.forEach((entry, index) => { bookmarks[entry].order = index; });
+  invalidateUndo();
+  return saveBookmarks();
+}
+
+function moveChipToAdjacentGroup(url, delta) {
+  const bookmark = bookmarks[url];
+  if (!bookmark) return null;
+  const from = groups.findIndex(group => group.id === bookmark.group);
+  const to = from + delta;
+  if (from === -1 || to < 0 || to >= groups.length) return null;
+  const target = groups[to];
+  const previousGroup = bookmark.group;
+  bookmark.group = target.id;
+  bookmark.order = getNextOrder(target.id);
+  reindexGroupOrder(previousGroup);
+  reindexGroupOrder(target.id);
+  invalidateUndo();
+  return saveBookmarks() ? target : null;
+}
+
+function moveGroupBy(groupId, delta) {
+  const from = groups.findIndex(group => group.id === groupId);
+  const to = from + delta;
+  if (from === -1 || to < 0 || to >= groups.length) return false;
+  groups.splice(to, 0, ...groups.splice(from, 1));
+  invalidateUndo();
+  saveGroups();
+  return true;
+}
+
+// renderDock replaces the whole subtree, so the focused element is gone by the
+// time the move finishes. Put focus back on the same control of the same chip
+// or group, or the move is unusable with a keyboard.
+function refocusDock(selector) {
+  const target = document.querySelector(selector);
+  if (target) target.focus();
+}
+
+document.getElementById('dockGroups').addEventListener('keydown', (event) => {
+  if (!event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  const horizontal = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
+  const vertical = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
+  if (!horizontal && !vertical) return;
+
+  const chip = event.target.closest('.site-chip');
+  if (chip) {
+    const url = chip.dataset.url;
+    const name = getSiteByUrl(url)?.name || 'Bookmark';
+    // Whichever control was focused keeps focus after the re-render.
+    const control = event.target.closest('.chip-remove') ? '.chip-remove' : '.chip-open';
+    const selector = `.site-chip[data-url="${CSS.escape(url)}"] ${control}`;
+
+    if (horizontal) {
+      if (!moveChipWithinGroup(url, horizontal)) return;
+      event.preventDefault();
+      renderDock();
+      refocusDock(selector);
+      const position = getGroupSites(bookmarks[url].group).indexOf(url) + 1;
+      const total = getGroupSites(bookmarks[url].group).length;
+      showToast(`${name} moved to position ${position} of ${total}`);
+      return;
+    }
+
+    const target = moveChipToAdjacentGroup(url, vertical);
+    if (!target) return;
+    event.preventDefault();
+    renderDock();
+    refocusDock(selector);
+    showToast(`${name} moved to ${target.name}`);
+    return;
+  }
+
+  const groupEl = event.target.closest('.dock-group');
+  if (!groupEl) return;
+  const groupId = groupEl.dataset.groupId;
+  if (!moveGroupBy(groupId, horizontal || vertical)) return;
+  event.preventDefault();
+  const action = event.target.dataset.dockAction;
+  renderDock();
+  refocusDock(action
+    ? `.dock-group[data-group-id="${CSS.escape(groupId)}"] [data-dock-action="${action}"]`
+    : `.dock-group[data-group-id="${CSS.escape(groupId)}"]`);
+  const group = groups.find(entry => entry.id === groupId);
+  showToast(`${group.name} moved to position ${groups.indexOf(group) + 1} of ${groups.length}`);
+});
 
 // ════════════════════════════════════════════════════════════════
 //  GROUP MANAGEMENT — create, edit, delete

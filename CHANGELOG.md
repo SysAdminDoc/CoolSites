@@ -14,6 +14,7 @@ All notable changes to CoolSites will be documented in this file.
 
 ### Fixed
 
+- **Bookmarks and groups can be reordered from the keyboard.** Arranging the dock was drag-only, so anyone not using a mouse could build groups but never order them. `Alt` plus left or right moves a bookmark inside its group, `Alt` plus up or down moves it to the next group, and `Alt` plus any arrow reorders a group when focus is on one of its header buttons. Every move announces what happened and focus follows what moved. Also nudged the dock buttons to 32px and the group colour swatches from 26px to 32px.
 - **Red text failed WCAG AA on a hovered card in four themes**, between 3.98:1 and 4.39:1 in oled, nord, dracula and solarized, and on the light theme's secondary surface at 4.32:1. The contrast gate had only been checking that colour against two of the four surfaces it actually lands on, so none of it showed up. All five are retuned and the gate now covers every surface.
 
 ### Changed

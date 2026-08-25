@@ -594,6 +594,92 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
     assert.ok(Number.parseFloat(await page.evaluate("getComputedStyle(document.querySelector('#grid .card')).animationDuration")) < 0.001, 'reduced motion should disable card animation');
 
+    // Keyboard reordering in the dock. Reordering used to be drag-only, so a
+    // keyboard user could build groups but never arrange them.
+    const reorder = await page.evaluate(`(async () => {
+      const urls = [...document.querySelectorAll('#grid .card')].slice(0, 3).map(card => card.dataset.url);
+      groups = [
+        { id: 'ka', name: 'Alpha', color: '#6e56cf' },
+        { id: 'kb', name: 'Beta', color: '#30a46c' }
+      ];
+      saveGroups();
+      bookmarks = {};
+      urls.forEach((url, index) => { bookmarks[url] = { group: 'ka', order: index, addedAt: Date.now() }; });
+      saveBookmarks();
+      refreshBookmarkViews();
+      const settle = () => new Promise(resolve => setTimeout(resolve, 120));
+      const order = () => [...document.querySelectorAll('.dock-group[data-group-id="ka"] .site-chip')].map(chip => chip.dataset.url);
+      const press = (node, key) => node.dispatchEvent(new KeyboardEvent('keydown', { key, altKey: true, bubbles: true }));
+
+      const before = order();
+
+      // Move the first chip right, from its own link, the way a keyboard user
+      // arrives at it.
+      const link = document.querySelector('.dock-group[data-group-id="ka"] .site-chip .chip-open');
+      link.focus();
+      press(link, 'ArrowRight');
+      await settle();
+      const afterRight = order();
+      const focusFollowed = document.activeElement.closest('.site-chip')?.dataset.url === urls[0]
+        && document.activeElement.classList.contains('chip-open');
+
+      // At the end of the group it must refuse rather than wrap or throw.
+      const last = document.querySelector('.dock-group[data-group-id="ka"] .site-chip:last-of-type .chip-open');
+      last.focus();
+      press(last, 'ArrowRight');
+      await settle();
+      const afterEdge = order();
+
+      // Down moves it into the next group.
+      const mover = document.querySelector('.dock-group[data-group-id="ka"] .site-chip .chip-open');
+      const movedUrl = mover.closest('.site-chip').dataset.url;
+      mover.focus();
+      press(mover, 'ArrowDown');
+      await settle();
+      const landedIn = bookmarks[movedUrl].group;
+      const announced = document.getElementById('toastMessage').textContent;
+
+      // A group reorders from its edit button.
+      const groupsBefore = groups.map(g => g.id);
+      const edit = document.querySelector('.dock-group[data-group-id="kb"] [data-dock-action="edit-group"]');
+      edit.focus();
+      press(edit, 'ArrowLeft');
+      await settle();
+      const groupsAfter = groups.map(g => g.id);
+      const groupFocusFollowed = document.activeElement.dataset.dockAction === 'edit-group'
+        && document.activeElement.closest('.dock-group').dataset.groupId === 'kb';
+
+      // A bare arrow, with no Alt, must not reorder anything. Checked against
+      // the chips as well as the groups: the key press lands on a chip, so
+      // watching only the group order would miss it entirely.
+      const chipsBeforeBare = order();
+      const bare = document.querySelector('.dock-group[data-group-id="ka"] .site-chip .chip-open');
+      bare.focus();
+      bare.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      await settle();
+      const afterBare = groups.map(g => g.id);
+      const chipsAfterBare = order();
+
+      return { before, afterRight, afterEdge, landedIn, announced, groupsBefore, groupsAfter, focusFollowed, groupFocusFollowed, afterBare, chipsBeforeBare, chipsAfterBare, movedUrl };
+    })()`);
+
+    assert.deepEqual(reorder.afterRight, [reorder.before[1], reorder.before[0], reorder.before[2]],
+      'Alt+Right should swap a chip with the one after it');
+    assert.equal(reorder.focusFollowed, true, 'focus must follow the chip it just moved');
+    assert.deepEqual(reorder.afterEdge, reorder.afterRight,
+      'Alt+Right at the end of a group must do nothing, not wrap around to the front');
+    assert.equal(reorder.landedIn, 'kb', 'Alt+Down should move a chip into the next group');
+    assert.match(reorder.announced, /moved to Beta/, 'the move has to be announced, not just performed');
+    assert.deepEqual(reorder.groupsBefore, ['ka', 'kb']);
+    assert.deepEqual(reorder.groupsAfter, ['kb', 'ka'], 'Alt+Left on a group header should reorder the group');
+    assert.equal(reorder.groupFocusFollowed, true, 'focus must stay on the same control of the moved group');
+    assert.deepEqual(reorder.afterBare, ['kb', 'ka'], 'a plain arrow key must not reorder a group');
+    assert.deepEqual(reorder.chipsAfterBare, reorder.chipsBeforeBare, 'a plain arrow key must not reorder a chip either');
+
+    await page.evaluate("bookmarks = {}; saveBookmarks(); localStorage.removeItem('coolsites-groups');");
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+
     // Diagnostics. Opens only with ?debug=1, reports real state, and must not
     // reach for the network: the whole point is a health surface that does not
     // phone anywhere.
