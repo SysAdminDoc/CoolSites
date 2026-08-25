@@ -177,7 +177,7 @@ function validateSourceData() {
 
   Object.entries(favicons || {}).forEach(([domain, data]) => {
     if (!/^[a-z0-9.-]+$/i.test(domain)) addError(`favicons.${domain}: invalid domain key`);
-    if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp);base64,[A-Za-z0-9+/=]+$/.test(data)) addError(`favicons.${domain}: invalid data URI`);
+    if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp|x-icon|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(data)) addError(`favicons.${domain}: invalid data URI`);
     if (typeof data === 'string' && data.length > 300000) addError(`favicons.${domain}: data URI is too large`);
   });
 

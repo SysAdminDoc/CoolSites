@@ -3,19 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090d">
+<meta name="theme-color" content="#08090d" id="metaThemeColor">
 <title>CoolSites Collections</title>
 <meta name="description" content="Curated CoolSites collections for homelab, OSINT, privacy, creative, and terminal workflows.">
+<meta property="og:title" content="CoolSites Collections">
+<meta property="og:description" content="Curated CoolSites collections for homelab, OSINT, privacy, creative, and terminal workflows.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sysadmindoc.github.io/CoolSites/collections.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='16' fill='white'%3E//%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <style>
-  :root{color-scheme:dark;--bg:#08090d;--panel:#12141c;--panel2:#181b25;--border:rgba(255,255,255,.08);--text:#e8e9ed;--muted:#8b8d98;--accent:#6e56cf;--green:#3ecf8e}
+  /* Same nine themes as the directory, reduced to the tokens this page uses. */
+  [data-theme="oled"], :root {
+    color-scheme: dark;
+    --bg: #08090d; --panel: #12141c; --panel2: #181b25;
+    --border: rgba(255,255,255,.08); --border-strong: rgba(255,255,255,.16);
+    --text: #e8e9ed; --muted: #7c7f8b; --accent: #8470d6; --accent-fill: #6e56cf; --on-accent: #ffffff;
+  }
+  [data-theme="catppuccin"] {
+    color-scheme: dark;
+    --bg: #1e1e2e; --panel: #24243a; --panel2: #2a2a42;
+    --border: rgba(205,214,244,.08); --border-strong: rgba(205,214,244,.18);
+    --text: #cdd6f4; --muted: #8a8da0; --accent: #cba6f7; --accent-fill: #cba6f7; --on-accent: #1e1e2e;
+  }
+  [data-theme="nord"] {
+    color-scheme: dark;
+    --bg: #2e3440; --panel: #3b4252; --panel2: #434c5e;
+    --border: rgba(216,222,233,.08); --border-strong: rgba(216,222,233,.18);
+    --text: #eceff4; --muted: #a8b0c1; --accent: #88c0d0; --accent-fill: #88c0d0; --on-accent: #2e3440;
+  }
+  [data-theme="dracula"] {
+    color-scheme: dark;
+    --bg: #282a36; --panel: #2e303e; --panel2: #363848;
+    --border: rgba(248,248,242,.08); --border-strong: rgba(248,248,242,.18);
+    --text: #f8f8f2; --muted: #8e99bd; --accent: #bd93f9; --accent-fill: #bd93f9; --on-accent: #282a36;
+  }
+  [data-theme="github-dark"] {
+    color-scheme: dark;
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129;
+    --border: rgba(240,246,252,.06); --border-strong: rgba(240,246,252,.16);
+    --text: #e6edf3; --muted: #7a8591; --accent: #58a6ff; --accent-fill: #58a6ff; --on-accent: #0d1117;
+  }
+  [data-theme="midnight"] {
+    color-scheme: dark;
+    --bg: #0a0e1a; --panel: #141a2e; --panel2: #1a2038;
+    --border: rgba(120,160,255,.08); --border-strong: rgba(120,160,255,.2);
+    --text: #e0e6f0; --muted: #7b84a1; --accent: #5b8def; --accent-fill: #5b8def; --on-accent: #0a0e1a;
+  }
+  [data-theme="solarized"] {
+    color-scheme: dark;
+    --bg: #002b36; --panel: #073642; --panel2: #0a3f4e;
+    --border: rgba(131,148,150,.12); --border-strong: rgba(131,148,150,.26);
+    --text: #fdf6e3; --muted: #8a9ea5; --accent: #4aa1de; --accent-fill: #268bd2; --on-accent: #00212b;
+  }
+  [data-theme="light"] {
+    color-scheme: light;
+    --bg: #f8f9fc; --panel: #ffffff; --panel2: #f0f2f7;
+    --border: rgba(0,0,0,.08); --border-strong: rgba(0,0,0,.18);
+    --text: #1a1d26; --muted: #6c6f83; --accent: #6e56cf; --accent-fill: #6e56cf; --on-accent: #ffffff;
+  }
+  [data-theme="rose-pine"] {
+    color-scheme: dark;
+    --bg: #191724; --panel: #26233a; --panel2: #2d2a42;
+    --border: rgba(224,222,244,.08); --border-strong: rgba(224,222,244,.18);
+    --text: #e0def4; --muted: #8f8ca4; --accent: #c4a7e7; --accent-fill: #c4a7e7; --on-accent: #191724;
+  }
+
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  header{position:sticky;top:0;z-index:1;background:rgba(8,9,13,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  :focus-visible{outline:2px solid var(--accent-fill);outline-offset:2px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--accent-fill);color:var(--on-accent);font-weight:600;font-size:.85rem;border-radius:8px;z-index:10;text-decoration:none}
+  .skip-link:focus{top:8px}
+  header{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--border)}
   nav{max-width:1160px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .brand{font-weight:800;letter-spacing:.02em}
   a{color:inherit}
-  .nav-link{color:var(--muted);text-decoration:none}
+  .nav-link{color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
   .nav-link:hover{color:var(--text)}
   main{max-width:1160px;margin:0 auto;padding:42px 20px 64px}
   h1{font-size:clamp(2rem,5vw,4rem);line-height:1;margin:0 0 12px}
@@ -25,14 +89,34 @@
   .collection h2{font-size:1.05rem;margin:0 0 6px}
   .collection p{color:var(--muted);margin:0 0 14px}
   .sites{display:grid;gap:8px}
-  .site{display:block;text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.025);border-radius:6px;padding:10px}
-  .site:hover{border-color:color-mix(in srgb,var(--accent) 55%,transparent);background:var(--panel2)}
+  .site{display:block;text-decoration:none;border:1px solid var(--border);background:var(--panel2);border-radius:6px;padding:10px}
+  .site:hover{border-color:var(--border-strong);background:var(--panel)}
   .site strong{display:block;font-size:.95rem}
   .site span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
-  .badge{display:inline-flex;color:#08090d;background:var(--green);font-size:.72rem;font-weight:800;border-radius:4px;padding:2px 6px;margin-bottom:10px}
+  .badge{display:inline-flex;color:var(--on-accent);background:var(--accent-fill);font-size:.72rem;font-weight:800;border-radius:4px;padding:2px 6px;margin-bottom:10px}
+  .skeleton{border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:18px;min-height:180px}
+  .skeleton span{display:block;height:12px;border-radius:4px;background:var(--panel2);margin-bottom:10px}
+  .skeleton span:nth-child(1){width:40%}
+  .skeleton span:nth-child(2){width:80%}
+  .skeleton span:nth-child(3){width:65%}
+  .error{border:1px solid var(--border-strong);background:var(--panel);border-radius:8px;padding:18px}
+  .error button{margin-top:12px;padding:8px 18px;border-radius:8px;border:1px solid var(--border-strong);background:transparent;color:var(--text);font:inherit;font-size:.85rem;cursor:pointer;min-height:40px}
+  .error button:hover{border-color:var(--accent-fill);color:var(--accent)}
+  footer{max-width:1160px;margin:0 auto;padding:0 20px 48px;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--muted)}
+  footer a:hover{color:var(--accent)}
 </style>
+<script>
+(function(){
+  var t = 'system';
+  try { t = localStorage.getItem('coolsites-theme') || 'system'; } catch (e) {}
+  if (t === 'system') t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 </head>
 <body>
+<a href="#collections" class="skip-link">Skip to content</a>
 <header>
   <nav>
     <div class="brand">CoolSites Collections</div>
@@ -42,31 +126,88 @@
 <main>
   <h1>Curated Starting Points</h1>
   <p class="lede">Focused sub-lists for common workflows, built from the same validated CoolSites data.</p>
-  <section class="collections" id="collections" aria-live="polite"></section>
+  <section class="collections" id="collections" aria-live="polite" aria-busy="true">
+    <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+  </section>
+  <noscript>
+    <p class="lede">Collections are built in the browser from <code>collections.json</code> and <code>sites.json</code>. Turn JavaScript on to see them, or read those two files directly.</p>
+  </noscript>
 </main>
+<footer>
+  <p><a href="./">Back to the directory</a> &middot; <a href="feeds/recent.atom">Feed</a> &middot; <a href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+</footer>
 <script>
 const $collections = document.getElementById('collections');
-if ('serviceWorker' in navigator) {
+const THEME_COLORS = {oled:'#08090d',catppuccin:'#1e1e2e',nord:'#2e3440',dracula:'#282a36','github-dark':'#0d1117',midnight:'#0a0e1a',solarized:'#002b36',light:'#f8f9fc','rose-pine':'#191724'};
+
+function syncThemeColor() {
+  const theme = document.documentElement.getAttribute('data-theme') || 'oled';
+  document.getElementById('metaThemeColor').setAttribute('content', THEME_COLORS[theme] || '#08090d');
+}
+syncThemeColor();
+
+// Follow the system setting when the directory has no explicit theme saved.
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
+  let saved = null;
+  try { saved = localStorage.getItem('coolsites-theme'); } catch {}
+  if (saved && saved !== 'system') return;
+  document.documentElement.setAttribute('data-theme', event.matches ? 'light' : 'oled');
+  syncThemeColor();
+});
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
-Promise.all([
-  fetch('./collections.json').then(r => r.json()),
-  fetch('./sites.json').then(r => r.json())
-]).then(([collections, sites]) => {
-  const byUrl = new Map(sites.map(site => [site.url, site]));
-  $collections.innerHTML = collections.map(collection => {
-    const entries = collection.urls.map(url => byUrl.get(url)).filter(Boolean);
-    return `<article class="collection">
-      <span class="badge">${entries.length} sites</span>
-      <h2>${esc(collection.name)}</h2>
-      <p>${esc(collection.description)}</p>
-      <div class="sites">${entries.map(site => `<a class="site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(site.name)}</strong><span>${esc(site.category)}</span></a>`).join('')}</div>
-    </article>`;
-  }).join('');
-}).catch(() => {
-  $collections.innerHTML = '<p class="lede">Collections could not be loaded.</p>';
-});
-function esc(value){return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+
+function esc(value) {
+  return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+}
+
+function loadJson(url) {
+  return fetch(url, { cache: 'no-cache' }).then(response => {
+    if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+    return response.json();
+  });
+}
+
+function showError(message) {
+  $collections.setAttribute('aria-busy', 'false');
+  $collections.innerHTML = `<div class="error"><strong>Collections could not be loaded.</strong><p class="lede" style="margin:8px 0 0">${esc(message)}</p><button type="button" id="retry">Try again</button></div>`;
+  document.getElementById('retry').addEventListener('click', render);
+}
+
+function render() {
+  $collections.setAttribute('aria-busy', 'true');
+  $collections.innerHTML = '<div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>'.repeat(3);
+  Promise.all([loadJson('./collections.json'), loadJson('./sites.json')])
+    .then(([collections, sites]) => {
+      const byUrl = new Map(sites.map(site => [site.url, site]));
+      $collections.setAttribute('aria-busy', 'false');
+      if (!Array.isArray(collections) || !collections.length) {
+        $collections.innerHTML = '<p class="lede">No collections have been published yet.</p>';
+        return;
+      }
+      $collections.innerHTML = collections.map(collection => {
+        const entries = (collection.urls || []).map(url => byUrl.get(url)).filter(Boolean);
+        const body = entries.length
+          ? entries.map(site => `<a class="site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(site.name)}</strong><span>${esc(site.category)}</span></a>`).join('')
+          : '<p class="lede" style="margin:0">Every entry in this collection has left the directory.</p>';
+        return `<article class="collection">
+          <span class="badge">${entries.length} site${entries.length === 1 ? '' : 's'}</span>
+          <h2>${esc(collection.name)}</h2>
+          <p>${esc(collection.description)}</p>
+          <div class="sites">${body}</div>
+        </article>`;
+      }).join('');
+    })
+    .catch(error => showError(navigator.onLine === false
+      ? 'You appear to be offline and nothing is cached yet.'
+      : error.message));
+}
+
+render();
 </script>
 </body>
 </html>

@@ -33,7 +33,9 @@ function markCacheSource(response, source) {
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(ASSETS))
+      .then(cache => Promise.all(ASSETS.map(asset =>
+        cache.add(asset).catch(error => console.warn('CoolSites precache skipped', asset, error))
+      )))
       .then(() => self.skipWaiting())
   );
 });
@@ -51,27 +53,8 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
 
-  // Skip cross-origin requests except favicon APIs
-  if (url.origin !== location.origin) {
-    // Cache favicon responses (Google/DuckDuckGo)
-    if (url.hostname.includes('google.com') ||
-        url.hostname.includes('duckduckgo.com')) {
-    e.respondWith(
-      caches.match(e.request).then(cached => {
-        if (cached) return cached;
-        return fetch(e.request).then(response => {
-            if (response.ok) {
-              const clone = response.clone();
-              caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
-            }
-            return response;
-          }).catch(() => cached || new Response('', { status: 408 }));
-        })
-      );
-      return;
-    }
-    return;
-  }
+  // Everything the directory needs is same-origin; leave anything else alone.
+  if (url.origin !== location.origin) return;
 
   const isData = /\.(json|atom)$/.test(url.pathname);
   const isNavigation = e.request.mode === 'navigate';
@@ -81,7 +64,9 @@ self.addEventListener('fetch', (e) => {
       caches.match(e.request).then(cached => cached || fetch(e.request).then(response => {
         if (response.ok) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(e.request, clone))
+            .catch(() => {});
         }
         return response;
       }))
@@ -92,13 +77,23 @@ self.addEventListener('fetch', (e) => {
   // Network-first for data and navigations, with an offline shell fallback.
   e.respondWith(
     fetch(e.request).then(response => {
-      const clone = response.clone();
-      caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+      if (response.ok) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME)
+          .then(cache => cache.put(e.request, clone))
+          .catch(() => {});
+      }
       return isData ? markCacheSource(response, 'network') : response;
-    }).catch(() => caches.match(e.request).then(cached => {
+    }).catch(() => caches.match(e.request).then(async cached => {
       if (cached) return isData ? markCacheSource(cached, 'cache') : cached;
-      if (isNavigation) return caches.match('./index.html');
-      throw new Error(`No cached response for ${url.pathname}`);
+      if (isNavigation) {
+        const shell = await caches.match('./index.html');
+        if (shell) return shell;
+      }
+      return new Response('Offline and not cached', {
+        status: 504,
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+      });
     }))
   );
 });

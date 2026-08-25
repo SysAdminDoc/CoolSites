@@ -404,7 +404,7 @@
       "id": "https://audiomass.co",
       "url": "https://audiomass.co",
       "title": "AudioMass",
-      "summary": "Full audio editor right in your browser. Cut, trim, apply effects — no install, no account, no ads.",
+      "summary": "Full audio editor right in your browser. Cut, trim and apply effects with no install, no account and no ads.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "Music & Audio",
@@ -434,7 +434,7 @@
       "id": "https://www.autohotkey.com",
       "url": "https://www.autohotkey.com",
       "title": "AutoHotkey",
-      "summary": "Scripting language for Windows automation. Hotkeys, macros, text expansion, GUI automation — infinitely flexible.",
+      "summary": "Scripting language for Windows automation. Hotkeys, macros, text expansion and GUI automation. Infinitely flexible.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "Desktop Software",
@@ -449,7 +449,7 @@
       "id": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
       "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
       "title": "AUTOMATIC1111 WebUI",
-      "summary": "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting, upscaling — everything in one UI.",
+      "summary": "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting and upscaling, all in one UI.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "AI & ML",
@@ -714,7 +714,7 @@
       "id": "https://www.blender.org",
       "url": "https://www.blender.org",
       "title": "Blender",
-      "summary": "The free 3D creation suite. Modeling, animation, rendering, VFX, video editing — an entire studio in one app.",
+      "summary": "The free 3D creation suite. Modeling, animation, rendering, VFX and video editing in one app. An entire studio.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "Creative",
@@ -730,7 +730,7 @@
       "id": "https://boardgamearena.com",
       "url": "https://boardgamearena.com",
       "title": "Board Game Arena",
-      "summary": "Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.",
+      "summary": "Play more than 800 board games online for free. Catan, Azul and Terraforming Mars, all in your browser.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "Gaming",
@@ -760,7 +760,7 @@
       "id": "https://browserleaks.com",
       "url": "https://browserleaks.com",
       "title": "BrowserLeaks",
-      "summary": "Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.",
+      "summary": "Shows everything your browser reveals about you: canvas fingerprint, WebGL, fonts and WebRTC leaks.",
       "date_modified": "2026-06-25T00:00:00Z",
       "tags": [
         "Security",

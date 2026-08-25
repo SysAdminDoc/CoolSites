@@ -32,7 +32,7 @@
   {
     "name": "Waveform Bufferbloat Test",
     "url": "https://www.waveform.com/tools/bufferbloat",
-    "description": "Tests for bufferbloat — the hidden cause of laggy connections even on fast links. Measures loaded vs unloaded latency.",
+    "description": "Tests for bufferbloat, the hidden cause of laggy connections even on fast links. Measures loaded against unloaded latency.",
     "category": "Speed Tests",
     "openSource": false,
     "requiresAuth": false,
@@ -145,7 +145,7 @@
   {
     "name": "Hurricane Electric BGP",
     "url": "https://bgp.he.net",
-    "description": "The most comprehensive BGP toolkit available. AS info, prefix lists, IRR data, DNS — all in one.",
+    "description": "The most comprehensive BGP toolkit available. AS info, prefix lists, IRR data and DNS, all in one place.",
     "category": "IP & Network",
     "openSource": false,
     "requiresAuth": false,
@@ -330,7 +330,7 @@
   {
     "name": "BrowserLeaks",
     "url": "https://browserleaks.com",
-    "description": "Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.",
+    "description": "Shows everything your browser reveals about you: canvas fingerprint, WebGL, fonts and WebRTC leaks.",
     "category": "Security",
     "openSource": false,
     "requiresAuth": false,
@@ -472,7 +472,7 @@
   {
     "name": "CyberChef",
     "url": "https://gchq.github.io/CyberChef",
-    "description": "GCHQ's data Swiss Army knife. Encode, decode, encrypt, compress, parse — chain operations visually.",
+    "description": "GCHQ's data Swiss Army knife. Encode, decode, encrypt, compress and parse by chaining operations visually.",
     "category": "Security",
     "openSource": false,
     "requiresAuth": false,
@@ -517,7 +517,7 @@
   {
     "name": "crt.sh",
     "url": "https://crt.sh",
-    "description": "Certificate transparency log search. Discover all SSL certs ever issued for a domain — reveals subdomains.",
+    "description": "Certificate transparency log search. Find every SSL cert ever issued for a domain, which also reveals subdomains.",
     "category": "OSINT",
     "openSource": false,
     "requiresAuth": false,
@@ -691,7 +691,7 @@
   {
     "name": "httpbin.org",
     "url": "https://httpbin.org",
-    "description": "HTTP request and response testing service. Echo back headers, methods, and auth — great for debugging.",
+    "description": "HTTP request and response testing service. Echoes back headers, methods and auth, so it's great for debugging.",
     "category": "Dev Tools",
     "openSource": false,
     "requiresAuth": false,
@@ -775,7 +775,7 @@
   {
     "name": "DevToys",
     "url": "https://devtoys.app",
-    "description": "Swiss Army knife for developers. 30+ offline tools — JSON formatter, JWT decoder, hash generator, regex tester — all in one native app.",
+    "description": "Swiss Army knife for developers. Over 30 offline tools in one native app: JSON formatter, JWT decoder, hash generator, regex tester.",
     "category": "Desktop Software",
     "openSource": true,
     "requiresAuth": false,
@@ -948,7 +948,7 @@
   {
     "name": "WizTree",
     "url": "https://diskanalyzer.com",
-    "description": "Fastest disk space analyzer for Windows. Reads the MFT directly — scans a 1TB drive in seconds.",
+    "description": "Fastest disk space analyzer for Windows. It reads the MFT directly, so a 1TB drive scans in seconds.",
     "category": "Desktop Software",
     "openSource": false,
     "requiresAuth": false,
@@ -1005,7 +1005,7 @@
   {
     "name": "Open WebUI",
     "url": "https://openwebui.com",
-    "description": "Beautiful self-hosted ChatGPT-like interface for local LLMs. Connects to Ollama. RAG, web search, voice — everything.",
+    "description": "Beautiful self-hosted ChatGPT-like interface for local LLMs. Connects to Ollama and adds RAG, web search and voice.",
     "category": "AI & ML",
     "openSource": true,
     "requiresAuth": false,
@@ -1076,7 +1076,7 @@
   {
     "name": "AUTOMATIC1111 WebUI",
     "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
-    "description": "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting, upscaling — everything in one UI.",
+    "description": "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting and upscaling, all in one UI.",
     "category": "AI & ML",
     "openSource": true,
     "requiresAuth": false,
@@ -1462,7 +1462,7 @@
   {
     "name": "Proxmox VE",
     "url": "https://www.proxmox.com/en/proxmox-virtual-environment",
-    "description": "Enterprise-grade virtualization platform. VMs, containers, clustering, backups — all open source and free.",
+    "description": "Enterprise-grade virtualization platform. VMs, containers, clustering and backups, all open source and free.",
     "category": "Homelab",
     "openSource": true,
     "requiresAuth": false,
@@ -1535,7 +1535,7 @@
   {
     "name": "Blender",
     "url": "https://www.blender.org",
-    "description": "The free 3D creation suite. Modeling, animation, rendering, VFX, video editing — an entire studio in one app.",
+    "description": "The free 3D creation suite. Modeling, animation, rendering, VFX and video editing in one app. An entire studio.",
     "category": "Creative",
     "openSource": true,
     "requiresAuth": false,
@@ -1610,7 +1610,7 @@
   {
     "name": "DaVinci Resolve",
     "url": "https://www.blackmagicdesign.com/products/davinciresolve/",
-    "description": "Hollywood-grade video editing, color grading, VFX, and audio — free version is insanely powerful.",
+    "description": "Hollywood-grade video editing, color grading, VFX and audio. The free version is insanely powerful.",
     "category": "Creative",
     "openSource": false,
     "requiresAuth": false,
@@ -1685,7 +1685,7 @@
   {
     "name": "Squoosh",
     "url": "https://squoosh.app",
-    "description": "Google's image compression tool. Compare codecs side by side, resize, and optimize — all in the browser.",
+    "description": "Google's image compression tool. Compare codecs side by side, resize and optimize, all in the browser.",
     "category": "Creative",
     "openSource": true,
     "requiresAuth": false,
@@ -1743,7 +1743,7 @@
   {
     "name": "AudioMass",
     "url": "https://audiomass.co",
-    "description": "Full audio editor right in your browser. Cut, trim, apply effects — no install, no account, no ads.",
+    "description": "Full audio editor right in your browser. Cut, trim and apply effects with no install, no account and no ads.",
     "category": "Music & Audio",
     "openSource": false,
     "requiresAuth": false,
@@ -1813,7 +1813,7 @@
   {
     "name": "PrivateBin",
     "url": "https://privatebin.info",
-    "description": "Encrypted pastebin. Zero-knowledge — the server never sees your content. Self-hostable.",
+    "description": "Encrypted pastebin built on zero knowledge, so the server never sees your content. Self-hostable.",
     "category": "Privacy",
     "openSource": true,
     "requiresAuth": false,
@@ -1827,7 +1827,7 @@
   {
     "name": "CryptPad",
     "url": "https://cryptpad.org",
-    "description": "Encrypted collaborative office suite. Docs, sheets, slides, polls — all zero-knowledge encrypted.",
+    "description": "Encrypted collaborative office suite. Docs, sheets, slides and polls, all zero-knowledge encrypted.",
     "category": "Privacy",
     "openSource": true,
     "requiresAuth": false,
@@ -1883,7 +1883,7 @@
   {
     "name": "Mullvad VPN",
     "url": "https://mullvad.net",
-    "description": "Privacy-focused VPN. No email, no accounts — just a number. Pay with cash or crypto. Audited and trusted.",
+    "description": "Privacy-focused VPN. No email and no accounts, just a number. Pay with cash or crypto. Audited and trusted.",
     "category": "Privacy",
     "openSource": false,
     "requiresAuth": true,
@@ -2137,7 +2137,7 @@
   {
     "name": "PhET Simulations",
     "url": "https://phet.colorado.edu",
-    "description": "Free interactive science simulations from CU Boulder. Physics, chemistry, math, biology — all visual.",
+    "description": "Free interactive science simulations from CU Boulder covering physics, chemistry, math and biology.",
     "category": "Education",
     "openSource": false,
     "requiresAuth": false,
@@ -2222,7 +2222,7 @@
   {
     "name": "Draw.io",
     "url": "https://app.diagrams.net",
-    "description": "Full-featured diagramming tool. Flowcharts, network diagrams, UML, wireframes — all in the browser, all free.",
+    "description": "Full-featured diagramming tool. Flowcharts, network diagrams, UML and wireframes, all in the browser and all free.",
     "category": "Productivity",
     "openSource": false,
     "requiresAuth": false,
@@ -2236,7 +2236,7 @@
   {
     "name": "tldraw",
     "url": "https://www.tldraw.com",
-    "description": "Infinite canvas drawing tool. Collaborative whiteboard with shapes, arrows, text — clean and fast.",
+    "description": "Infinite canvas drawing tool. A collaborative whiteboard with shapes, arrows and text. Clean and fast.",
     "category": "Productivity",
     "openSource": true,
     "requiresAuth": false,
@@ -2316,7 +2316,7 @@
   {
     "name": "Stirling PDF",
     "url": "https://stirlingpdf.io",
-    "description": "Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR, convert — every PDF operation in one tool.",
+    "description": "Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR and convert. Every PDF operation in one tool.",
     "category": "Productivity",
     "openSource": true,
     "requiresAuth": false,
@@ -2446,7 +2446,7 @@
   {
     "name": "Neal.fun",
     "url": "https://neal.fun",
-    "description": "Mind-bending interactive experiences. The Deep Sea, Size of Space, Spend Bill Gates' Money — endlessly fascinating.",
+    "description": "Mind-bending interactive experiences. The Deep Sea, Size of Space and Spend Bill Gates' Money, among many others.",
     "category": "Fun & Culture",
     "openSource": false,
     "requiresAuth": false,
@@ -2618,7 +2618,7 @@
   {
     "name": "Devhints.io",
     "url": "https://devhints.io",
-    "description": "Beautiful cheatsheets for developers. Bash, React, Git, Vim, CSS — gorgeous one-page references.",
+    "description": "Beautiful cheatsheets for developers. Bash, React, Git, Vim and CSS as gorgeous one-page references.",
     "category": "News & Reference",
     "openSource": false,
     "requiresAuth": false,
@@ -2646,7 +2646,7 @@
   {
     "name": "public-apis",
     "url": "https://github.com/public-apis/public-apis",
-    "description": "Massive categorized list of free APIs. Weather, music, sports, finance — if it exists, there's an API for it.",
+    "description": "Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there's an API for it.",
     "category": "News & Reference",
     "openSource": false,
     "requiresAuth": false,
@@ -3422,7 +3422,7 @@
   {
     "name": "AutoHotkey",
     "url": "https://www.autohotkey.com",
-    "description": "Scripting language for Windows automation. Hotkeys, macros, text expansion, GUI automation — infinitely flexible.",
+    "description": "Scripting language for Windows automation. Hotkeys, macros, text expansion and GUI automation. Infinitely flexible.",
     "category": "Desktop Software",
     "openSource": true,
     "requiresAuth": false,
@@ -3464,7 +3464,7 @@
   {
     "name": "VLC",
     "url": "https://www.videolan.org",
-    "description": "The universal media player. Plays everything — every format, every codec, every protocol. No questions asked.",
+    "description": "The universal media player. It plays everything: every format, every codec, every protocol. No questions asked.",
     "category": "Desktop Software",
     "openSource": true,
     "requiresAuth": false,
@@ -3493,7 +3493,7 @@
   {
     "name": "Ventoy",
     "url": "https://www.ventoy.net",
-    "description": "Create a bootable USB with multiple ISOs. Just copy ISO files to the USB — no reformatting needed.",
+    "description": "Create a bootable USB with multiple ISOs. Just copy ISO files onto the USB. No reformatting needed.",
     "category": "Desktop Software",
     "openSource": true,
     "requiresAuth": false,
@@ -3745,7 +3745,7 @@
   {
     "name": "Civitai",
     "url": "https://civitai.com",
-    "description": "Community hub for Stable Diffusion models. LoRAs, checkpoints, embeddings — the modding scene for AI art.",
+    "description": "Community hub for Stable Diffusion models. LoRAs, checkpoints and embeddings. The modding scene for AI art.",
     "category": "AI & ML",
     "openSource": false,
     "requiresAuth": false,
@@ -3815,7 +3815,7 @@
   {
     "name": "LibreChat",
     "url": "https://www.librechat.ai",
-    "description": "Self-hosted multi-provider chat UI. Connect OpenAI, Anthropic, Google, local models — all in one interface.",
+    "description": "Self-hosted multi-provider chat UI. Connect OpenAI, Anthropic, Google and local models in one interface.",
     "category": "AI & ML",
     "openSource": true,
     "requiresAuth": false,
@@ -4180,7 +4180,7 @@
   {
     "name": "Plex",
     "url": "https://www.plex.tv",
-    "description": "Organize and stream your personal media library. Movies, TV, music, photos — beautifully presented.",
+    "description": "Organize and stream your personal media library. Movies, TV, music and photos, beautifully presented.",
     "category": "Homelab",
     "openSource": false,
     "requiresAuth": true,
@@ -4379,7 +4379,7 @@
   {
     "name": "Canva",
     "url": "https://www.canva.com",
-    "description": "Design anything — presentations, social media, posters, logos. Drag-and-drop with massive template library.",
+    "description": "Design presentations, social media posts, posters and logos. Drag-and-drop with a massive template library.",
     "category": "Creative",
     "openSource": false,
     "requiresAuth": true,
@@ -4550,7 +4550,7 @@
   {
     "name": "Shape Divider",
     "url": "https://www.shapedivider.app",
-    "description": "Generate custom section dividers for your website. Waves, curves, triangles — export as SVG or CSS.",
+    "description": "Generate custom section dividers for your website. Waves, curves and triangles, exported as SVG or CSS.",
     "category": "Creative",
     "openSource": false,
     "requiresAuth": false,
@@ -4835,7 +4835,7 @@
   {
     "name": "Zabbix",
     "url": "https://www.zabbix.com",
-    "description": "Enterprise-class monitoring solution. Servers, networks, applications, cloud — all open source.",
+    "description": "Enterprise-class monitoring solution for servers, networks, applications and cloud. All open source.",
     "category": "Sysadmin",
     "openSource": true,
     "requiresAuth": false,
@@ -4934,7 +4934,7 @@
   {
     "name": "btop",
     "url": "https://github.com/aristocratos/btop",
-    "description": "Resource monitor with a gorgeous TUI. CPU, memory, disk, network — beautifully rendered in terminal.",
+    "description": "Resource monitor with a gorgeous TUI. CPU, memory, disk and network, beautifully rendered in the terminal.",
     "category": "Sysadmin",
     "openSource": true,
     "requiresAuth": false,
@@ -4992,7 +4992,7 @@
   {
     "name": "Plotly",
     "url": "https://plotly.com/javascript/",
-    "description": "Interactive charts for the web. Scatter, bar, 3D, maps, financial — gorgeous out of the box.",
+    "description": "Interactive charts for the web. Scatter, bar, 3D, maps and financial, gorgeous out of the box.",
     "category": "Data & Viz",
     "openSource": false,
     "requiresAuth": false,
@@ -5062,7 +5062,7 @@
   {
     "name": "Khan Academy",
     "url": "https://www.khanacademy.org",
-    "description": "Free world-class education. Math, science, computing, arts — from kindergarten to college level.",
+    "description": "Free world-class education in math, science, computing and the arts, from kindergarten to college level.",
     "category": "Education",
     "openSource": false,
     "requiresAuth": true,
@@ -5148,7 +5148,7 @@
   {
     "name": "W3Schools",
     "url": "https://www.w3schools.com",
-    "description": "Web development tutorials and references. HTML, CSS, JavaScript, Python, SQL — the classic learning resource.",
+    "description": "Web development tutorials and references for HTML, CSS, JavaScript, Python and SQL. The classic learning resource.",
     "category": "Education",
     "openSource": false,
     "requiresAuth": false,
@@ -5162,7 +5162,7 @@
   {
     "name": "Full Stack Open",
     "url": "https://fullstackopen.com",
-    "description": "University of Helsinki's full-stack web dev course. React, Node, TypeScript, GraphQL — completely free.",
+    "description": "University of Helsinki's full-stack web dev course covering React, Node, TypeScript and GraphQL. Completely free.",
     "category": "Education",
     "openSource": false,
     "requiresAuth": false,
@@ -5427,7 +5427,7 @@
   {
     "name": "file.io",
     "url": "https://www.file.io",
-    "description": "Ephemeral file sharing. Upload a file, share the link — file deletes after first download. Zero-knowledge.",
+    "description": "Ephemeral file sharing. Upload a file and share the link; it deletes after the first download. Zero knowledge.",
     "category": "File Tools",
     "openSource": false,
     "requiresAuth": false,
@@ -5497,7 +5497,7 @@
   {
     "name": "ImageMagick",
     "url": "https://imagemagick.org",
-    "description": "Command-line image manipulation powerhouse. Convert, resize, crop, transform — batch process thousands.",
+    "description": "Command-line image manipulation powerhouse. Convert, resize, crop and transform, batch processing thousands at a time.",
     "category": "File Tools",
     "openSource": true,
     "requiresAuth": false,
@@ -5511,7 +5511,7 @@
   {
     "name": "PDF24",
     "url": "https://tools.pdf24.org",
-    "description": "Free online PDF tools. Merge, compress, convert, edit, sign, protect — every PDF operation imaginable.",
+    "description": "Free online PDF tools. Merge, compress, convert, edit, sign and protect. Every PDF operation imaginable.",
     "category": "File Tools",
     "openSource": false,
     "requiresAuth": false,
@@ -5525,7 +5525,7 @@
   {
     "name": "Pandoc",
     "url": "https://pandoc.org",
-    "description": "Universal document converter. Markdown, LaTeX, HTML, DOCX, EPUB — converts between 40+ formats.",
+    "description": "Universal document converter. Markdown, LaTeX, HTML, DOCX and EPUB, converting between more than 40 formats.",
     "category": "File Tools",
     "openSource": true,
     "requiresAuth": false,
@@ -5610,7 +5610,7 @@
   {
     "name": "Little Alchemy 2",
     "url": "https://littlealchemy2.com",
-    "description": "Combine elements to discover new ones. Start with earth, fire, water, air — end with 720 items.",
+    "description": "Combine elements to discover new ones. Start with earth, fire, water and air, and end with 720 items.",
     "category": "Fun & Culture",
     "openSource": false,
     "requiresAuth": false,
@@ -5947,7 +5947,7 @@
   {
     "name": "free-for.dev",
     "url": "https://free-for.dev",
-    "description": "Massive list of free-tier developer services. SaaS, PaaS, IaaS — everything with a free option.",
+    "description": "Massive list of free-tier developer services covering SaaS, PaaS and IaaS. Everything with a free option.",
     "category": "News & Reference",
     "openSource": false,
     "requiresAuth": false,
@@ -6020,7 +6020,7 @@
   {
     "name": "Board Game Arena",
     "url": "https://boardgamearena.com",
-    "description": "Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.",
+    "description": "Play more than 800 board games online for free. Catan, Azul and Terraforming Mars, all in your browser.",
     "category": "Gaming",
     "openSource": false,
     "requiresAuth": true,
@@ -6076,7 +6076,7 @@
   {
     "name": "fzf",
     "url": "https://github.com/junegunn/fzf",
-    "description": "Command-line fuzzy finder. Search through any list — files, history, processes — interactively and fast.",
+    "description": "Command-line fuzzy finder. Search interactively through any list, whether that's files, history or processes.",
     "category": "CLI Tools",
     "openSource": true,
     "requiresAuth": false,
@@ -6204,7 +6204,7 @@
   {
     "name": "lazygit",
     "url": "https://github.com/jesseduffield/lazygit",
-    "description": "Terminal UI for git commands. Stage, commit, rebase, cherry-pick — all from an interactive TUI.",
+    "description": "Terminal UI for git commands. Stage, commit, rebase and cherry-pick from an interactive TUI.",
     "category": "CLI Tools",
     "openSource": true,
     "requiresAuth": false,
@@ -6461,7 +6461,7 @@
   {
     "name": "mRemoteNG",
     "url": "https://mremoteng.org",
-    "description": "Multi-remote connection manager. SSH, RDP, VNC, Telnet — all in one tabbed interface.",
+    "description": "Multi-remote connection manager. SSH, RDP, VNC and Telnet in one tabbed interface.",
     "category": "Networking",
     "openSource": true,
     "requiresAuth": false,

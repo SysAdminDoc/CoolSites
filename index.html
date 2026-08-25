@@ -2340,11 +2340,7 @@ function getDomain(url) {
 }
 
 function getFavicon(url) {
-  const domain = getDomain(url);
-  return FAVICON_CACHE[domain] || `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-}
-function getFaviconFallback(url) {
-  return `https://icons.duckduckgo.com/ip3/${getDomain(url)}.ico`;
+  return FAVICON_CACHE[getDomain(url)] || '';
 }
 
 function getInitial(name) {
@@ -2580,6 +2576,7 @@ function buildCard(site, index) {
   const starClass = bm ? ' bookmarked' : '';
   const starFill = bm ? 'currentColor' : 'none';
   const escUrl = escAttr(site.url);
+  const favicon = getFavicon(site.url);
   const starRecord = getStarRecord(site);
   const pickBadge = site.editorsPick ? '<span class="editors-pick-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Pick</span>' : '';
   const altBadge = site.alternativeTo?.length ? `<span class="alternative-badge">Alt to ${escHtml(site.alternativeTo.slice(0, 2).join(', '))}</span>` : '';
@@ -2590,9 +2587,9 @@ function buildCard(site, index) {
     <article class="card${bmClass}${pickClass}${compareClass}" data-url="${escUrl}">
       <div class="card-body">
         <div class="card-header">
-          <div class="card-icon">
-            <img data-src="${getFavicon(site.url)}" alt="" width="20" height="20" data-fallback="${getFaviconFallback(site.url)}" data-initial="${getInitial(site.name)}" class="favicon-img">
-          </div>
+          <div class="card-icon">${favicon
+            ? `<img data-src="${escAttr(favicon)}" alt="" width="20" height="20" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img">`
+            : escHtml(getInitial(site.name))}</div>
           <div class="card-header-text">
             <div class="card-category" style="--cat-c:${escAttr(category.color)}" title="${escAttr(category.blurb)}">${escHtml(site.category)}</div>
             <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}${pickBadge}</h3>
@@ -2629,15 +2626,12 @@ function buildCard(site, index) {
   `;
 }
 
+// Safety net for a cached icon the browser refuses to decode.
 document.addEventListener('error', (e) => {
   const img = e.target;
   if (img.tagName !== 'IMG' || !img.classList.contains('favicon-img')) return;
-  if (!img.dataset.retry) {
-    img.dataset.retry = '1';
-    if (img.dataset.fallback) { img.src = img.dataset.fallback; return; }
-  }
   img.style.display = 'none';
-  if (img.dataset.initial) img.parentElement.textContent = img.dataset.initial;
+  if (img.dataset.initial && img.parentElement) img.parentElement.textContent = img.dataset.initial;
 }, true);
 
 const _faviconObserver = new IntersectionObserver((entries) => {
@@ -3323,9 +3317,10 @@ function renderDock() {
 
     const chips = groupSites.map(site => {
       const siteUrl = escAttr(site.url);
+      const chipIcon = getFavicon(site.url);
       return `
-        <div class="site-chip" draggable="true" data-url="${siteUrl}" data-group="${escAttr(group.id)}" title="${escAttr(`${site.name} — ${site.description}`)}">
-          <img src="${escAttr(getFavicon(site.url))}" alt="" width="14" height="14" data-fallback="${escAttr(getFaviconFallback(site.url))}" class="favicon-img" draggable="false">
+        <div class="site-chip" draggable="true" data-url="${siteUrl}" data-group="${escAttr(group.id)}" title="${escAttr(`${site.name}. ${site.description}`)}">
+          ${chipIcon ? `<img src="${escAttr(chipIcon)}" alt="" width="14" height="14" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img" draggable="false">` : ''}
           <span class="chip-text">${escHtml(site.name)}</span>
           <a href="${siteUrl}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
           <button class="chip-remove" data-dock-action="remove" data-url="${siteUrl}" title="Remove bookmark">&times;</button>
@@ -3814,7 +3809,7 @@ document.getElementById('groupNameInput').addEventListener('keydown', (e) => {
 document.getElementById('copyMdBtn').addEventListener('click', () => {
   const filtered = getFiltered();
   if (!filtered.length) { showToast('Nothing to copy'); return; }
-  const md = filtered.map(s => `- [${s.name}](${s.url}) — ${s.description}`).join('\n');
+  const md = filtered.map(s => `- [${s.name}](${s.url}): ${s.description}`).join('\n');
   copyText(md, `Copied ${filtered.length} site${filtered.length === 1 ? '' : 's'} as Markdown`);
 });
 

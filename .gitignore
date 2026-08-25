@@ -3,6 +3,10 @@
 *.log
 CLAUDE.md
 
+# Build output
+dist/
+node_modules/
+
 # Markdown files local-only (except README)
 *.md
 !README.md

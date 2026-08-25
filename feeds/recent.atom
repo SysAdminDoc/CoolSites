@@ -220,7 +220,7 @@
     <link href="https://audiomass.co"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Music &amp; Audio"/>
-    <summary>Full audio editor right in your browser. Cut, trim, apply effects — no install, no account, no ads.</summary>
+    <summary>Full audio editor right in your browser. Cut, trim and apply effects with no install, no account and no ads.</summary>
   </entry>
   <entry>
     <title>Authentik</title>
@@ -236,7 +236,7 @@
     <link href="https://www.autohotkey.com"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Desktop Software"/>
-    <summary>Scripting language for Windows automation. Hotkeys, macros, text expansion, GUI automation — infinitely flexible.</summary>
+    <summary>Scripting language for Windows automation. Hotkeys, macros, text expansion and GUI automation. Infinitely flexible.</summary>
   </entry>
   <entry>
     <title>AUTOMATIC1111 WebUI</title>
@@ -244,7 +244,7 @@
     <link href="https://github.com/AUTOMATIC1111/stable-diffusion-webui"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="AI &amp; ML"/>
-    <summary>The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting, upscaling — everything in one UI.</summary>
+    <summary>The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting and upscaling, all in one UI.</summary>
   </entry>
   <entry>
     <title>Awesome Open Source</title>
@@ -380,7 +380,7 @@
     <link href="https://www.blender.org"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Creative"/>
-    <summary>The free 3D creation suite. Modeling, animation, rendering, VFX, video editing — an entire studio in one app.</summary>
+    <summary>The free 3D creation suite. Modeling, animation, rendering, VFX and video editing in one app. An entire studio.</summary>
   </entry>
   <entry>
     <title>Board Game Arena</title>
@@ -388,7 +388,7 @@
     <link href="https://boardgamearena.com"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Gaming"/>
-    <summary>Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.</summary>
+    <summary>Play more than 800 board games online for free. Catan, Azul and Terraforming Mars, all in your browser.</summary>
   </entry>
   <entry>
     <title>Brilliant</title>
@@ -404,6 +404,6 @@
     <link href="https://browserleaks.com"/>
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Security"/>
-    <summary>Shows everything your browser reveals about you — canvas fingerprint, WebGL, fonts, WebRTC leaks.</summary>
+    <summary>Shows everything your browser reveals about you: canvas fingerprint, WebGL, fonts and WebRTC leaks.</summary>
   </entry>
 </feed>

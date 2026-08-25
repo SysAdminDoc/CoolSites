@@ -45,6 +45,10 @@ if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 655
       response.end('Forbidden');
       return;
     }
+    if (isHidden(filePath)) {
+      sendNotFound(response);
+      return;
+    }
 
     fs.stat(filePath, (statError, stats) => {
       if (statError) {
@@ -61,6 +65,7 @@ if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 655
         const extension = path.extname(resolvedPath).toLowerCase();
         response.writeHead(200, {
           'Cache-Control': 'no-store',
+          'X-Content-Type-Options': 'nosniff',
           'Content-Length': data.length,
           'Content-Type': MIME_TYPES[extension] || 'application/octet-stream'
         });
@@ -79,6 +84,12 @@ if (!Number.isInteger(requestedPort) || requestedPort < 0 || requestedPort > 655
 
   process.once('SIGINT', () => server.close(() => process.exit(0)));
   process.once('SIGTERM', () => server.close(() => process.exit(0)));
+}
+
+// The repository is the document root, so dotfiles (.git, .env) must never be
+// served even though they sit inside it.
+function isHidden(filePath) {
+  return path.relative(ROOT, filePath).split(path.sep).some(segment => segment.startsWith('.'));
 }
 
 function sendNotFound(response) {

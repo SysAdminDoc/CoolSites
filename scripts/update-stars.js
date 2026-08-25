@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -34,8 +36,14 @@ async function fetchRepo(fullName) {
 
 (async () => {
   const repos = [...new Set(sites.map(site => repoFromUrl(site.url)).filter(Boolean))].sort();
+  const known = new Set(repos.map(fullName => fullName.toLowerCase()));
   const fetchedAt = new Date().toISOString();
   let updated = 0;
+  let failed = 0;
+
+  if (!token) {
+    console.warn('No GITHUB_TOKEN set; the unauthenticated API allows 60 requests an hour.');
+  }
 
   for (const fullName of repos) {
     try {
@@ -49,12 +57,25 @@ async function fetchRepo(fullName) {
       };
       updated++;
     } catch (error) {
+      failed++;
       console.warn(error.message);
+      // Stop early rather than burning through the list once the quota is gone.
+      if (/\b(403|429)\b/.test(error.message)) {
+        console.error('Rate limited by the GitHub API; stopping and keeping what was fetched.');
+        break;
+      }
     }
   }
 
-  fs.writeFileSync(cachePath, `${JSON.stringify(cache, null, 2)}\n`);
-  console.log(`Updated ${updated}/${repos.length} GitHub star records`);
+  // A site can leave the directory; its cached record should leave with it.
+  let pruned = 0;
+  for (const key of Object.keys(cache)) {
+    if (!known.has(key)) { delete cache[key]; pruned++; }
+  }
+
+  const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
+  fs.writeFileSync(cachePath, `${JSON.stringify(ordered, null, 2)}\n`);
+  console.log(`Updated ${updated}/${repos.length} GitHub star records (${failed} failed, ${pruned} stale removed)`);
 })().catch(error => {
   console.error(error);
   process.exit(1);

@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -9,6 +11,7 @@ fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
 copyFile('index.html');
+copyFile('collections.html');
 copyFile('sites.json');
 copyFile('categories.json');
 copyFile('collections.json');
@@ -25,6 +28,10 @@ copyDir('schemas');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const minified = minifyHtmlOutsideCode(html);
 fs.writeFileSync(path.join(dist, `coolsites-v${pkg.version}.min.html`), minified);
+
+if (minified.includes('__COOLSITES_BLOCK_')) {
+  throw new Error('Minified output still contains block placeholders');
+}
 
 console.log(`Packaged CoolSites v${pkg.version} in ${dist}`);
 
@@ -55,7 +62,9 @@ function minifyHtmlOutsideCode(input) {
     .replace(/\s{2,}/g, ' ')
     .trim();
   blocks.forEach((block, index) => {
-    min = min.replace(`__COOLSITES_BLOCK_${index}__`, block);
+    const token = `__COOLSITES_BLOCK_${index}__`;
+    if (!min.includes(token)) throw new Error(`Minifier lost ${token}`);
+    min = min.replace(token, () => block);
   });
   return `${min}\n`;
 }
