@@ -4,8 +4,16 @@
   <id>https://sysadmindoc.github.io/CoolSites/feeds/recent.atom</id>
   <link href="https://sysadmindoc.github.io/CoolSites/" rel="alternate"/>
   <link href="https://sysadmindoc.github.io/CoolSites/feeds/recent.atom" rel="self"/>
-  <updated>2026-06-25T00:00:00Z</updated>
-  <generator version="2.2.0">CoolSites</generator>
+  <updated>2026-08-16T00:00:00Z</updated>
+  <generator version="2.2.1">CoolSites</generator>
+  <entry>
+    <title>Agent QA</title>
+    <id>https://github.com/vostride/agent-qa</id>
+    <link href="https://github.com/vostride/agent-qa"/>
+    <updated>2026-08-16T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage.</summary>
+  </entry>
   <entry>
     <title>3Blue1Brown</title>
     <id>https://www.3blue1brown.com</id>
@@ -397,13 +405,5 @@
     <updated>2026-06-25T00:00:00Z</updated>
     <category term="Gaming"/>
     <summary>Play 800+ board games online for free. Catan, Azul, Terraforming Mars — all in your browser.</summary>
-  </entry>
-  <entry>
-    <title>Brilliant</title>
-    <id>https://brilliant.org</id>
-    <link href="https://brilliant.org"/>
-    <updated>2026-06-25T00:00:00Z</updated>
-    <category term="Education"/>
-    <summary>Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition.</summary>
   </entry>
 </feed>

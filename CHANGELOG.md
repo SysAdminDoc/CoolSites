@@ -2,14 +2,16 @@
 
 All notable changes to CoolSites will be documented in this file.
 
-## [Unreleased]
-
-### Fixed
-- Hide closed native dialogs instead of displaying them over the directory on first load.
-- Pre-cache the directory's JSON data, collections page, widget, and feeds for offline reloads.
+## [v2.2.1] - 2026-08-24
 
 ### Added
+- Add Agent QA to Dev Tools (submitted in #8 by @pranshuchittora), bringing the directory to 590 sites.
 - Add `npm run serve` for a supported local HTTP development server.
+
+### Fixed
+- Sync the hardcoded 589-site count in the browser test, page metadata, manifest, and hero copy with the new total.
+- Hide closed native dialogs instead of displaying them over the directory on first load.
+- Pre-cache the directory's JSON data, collections page, widget, and feeds for offline reloads.
 
 ## [v2.1.1] - 2026-06-25
 

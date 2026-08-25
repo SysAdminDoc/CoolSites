@@ -54,7 +54,7 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       input.dispatchEvent(new Event('input', { bubbles: true }));
     })()`);
     await waitFor(page, "document.querySelector('#grid .card .card-title')?.textContent.includes('Cloudflare')");
-    assert.match(await page.evaluate("document.getElementById('resultsCount').textContent"), /of 589/);
+    assert.match(await page.evaluate("document.getElementById('resultsCount').textContent"), /of 590/);
 
     await page.evaluate(`(() => {
       const input = document.getElementById('searchInput');
