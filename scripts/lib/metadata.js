@@ -14,6 +14,28 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 }
 
+// Provenance. 587 of the original 588 entries carry this one date because they
+// arrived in a single bulk import, not because anyone reviewed them that day.
+// Treating it as a per-entry review date is what made the "recent" sort and the
+// feeds alphabetical tie-breaks dressed up as chronology.
+const LEGACY_IMPORT_DATE = '2026-06-25';
+
+// A ratchet, not a target. The number of entries still carrying the import date
+// may fall as they get reviewed, and lint fails if it ever rises, so nothing new
+// can be filed under the legacy date to dodge the provenance rule. Lowering this
+// is a deliberate edit.
+const MAX_LEGACY_DATED = 577;
+
+// The date a human last actually looked at the entry, as opposed to updatedAt,
+// which is when its content changed. Either can be the more recent one.
+function freshness(site) {
+  return site.lastReviewedAt || site.updatedAt;
+}
+
+function hasRealProvenance(site) {
+  return Boolean(site.lastReviewedAt);
+}
+
 function computeMetadata() {
   const pkg = readJson('package.json');
   const sites = readJson('sites.json');
@@ -203,4 +225,7 @@ function renderTargets(meta) {
   return { results, problems };
 }
 
-module.exports = { computeMetadata, copyFor, renderTargets };
+module.exports = {
+  computeMetadata, copyFor, renderTargets,
+  LEGACY_IMPORT_DATE, MAX_LEGACY_DATED, freshness, hasRealProvenance
+};

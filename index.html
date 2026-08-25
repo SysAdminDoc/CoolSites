@@ -2432,8 +2432,19 @@ function showDataError(error) {
   console.error(error);
 }
 
+// lastReviewedAt is when a person last checked the entry; updatedAt is when its
+// content changed. Most of the directory has only the second, and that value is
+// the date of one bulk import rather than anything per entry, so nothing here
+// may describe it as a review.
+function freshness(site) {
+  return site.lastReviewedAt || site.updatedAt;
+}
+
 function formatDataAge() {
-  const dates = SITES.map(site => Date.parse(site.updatedAt)).filter(Number.isFinite);
+  // A bare YYYY-MM-DD parses as UTC midnight and then formats in local time, so
+  // anywhere west of Greenwich the directory claimed to be a day older than it
+  // is. Appending the time makes it a local date instead.
+  const dates = SITES.map(site => Date.parse(`${freshness(site)}T00:00:00`)).filter(Number.isFinite);
   if (!dates.length) return 'an undated snapshot';
   const newest = new Date(Math.max(...dates));
   const ageDays = Math.max(0, Math.floor((Date.now() - newest.getTime()) / 86400000));
@@ -2449,7 +2460,7 @@ function showDataStatus() {
     return;
   }
   status.hidden = false;
-  status.innerHTML = `<span>Offline: showing cached directory data last reviewed ${formatDataAge()}.</span><button class="empty-state-btn" type="button" id="dataStatusRetryBtn">Retry</button>`;
+  status.innerHTML = `<span>Offline: showing a cached copy of the directory. Its newest entry is from ${formatDataAge()}.</span><button class="empty-state-btn" type="button" id="dataStatusRetryBtn">Retry</button>`;
   document.getElementById('dataStatusRetryBtn').addEventListener('click', retryDataLoad);
 }
 
@@ -2774,7 +2785,7 @@ function getFiltered() {
   } else if (sortMode === 'shuffle') {
     results.sort((a, b) => shuffleRank(a.url) - shuffleRank(b.url) || a.name.localeCompare(b.name));
   } else if (sortMode === 'recent') {
-    results.sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || '') || a.name.localeCompare(b.name));
+    results.sort((a, b) => freshness(b).localeCompare(freshness(a)) || a.name.localeCompare(b.name));
   } else if (activeFilter !== "Bookmarks") {
     results.sort((a, b) => {
       const aBm = isBookmarked(a.url) ? 1 : 0;
@@ -3140,6 +3151,7 @@ function openCompareModal() {
     ['Account required', site => site.requiresAuth ? 'Yes' : 'No'],
     ['Alternative to', site => site.alternativeTo?.length ? site.alternativeTo.join(', ') : ''],
     ['Updated', site => site.updatedAt || ''],
+    ['Last reviewed', site => site.lastReviewedAt || 'not since the import'],
     ['Tags', site => site.tags.slice(0, 5).join(', ')]
   ];
   document.getElementById('compareTableWrap').innerHTML = `

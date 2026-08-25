@@ -2,7 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { computeMetadata, renderTargets } = require('./lib/metadata');
+const { computeMetadata, renderTargets, freshness, hasRealProvenance, LEGACY_IMPORT_DATE } = require('./lib/metadata');
 
 const root = path.resolve(__dirname, '..');
 const feedsDir = path.join(root, 'feeds');
@@ -29,14 +29,16 @@ function slug(value) {
 }
 
 const siteUrl = 'https://sysadmindoc.github.io/CoolSites/';
-function freshness(site) {
-  return site.lastReviewedAt || site.updatedAt;
-}
 
-const recent = [...sites]
+// Only entries someone has actually reviewed. Most of the directory still
+// carries the date of a single bulk import, and publishing forty of those as
+// "recently added", all stamped the same second, is alphabetical order with a
+// timestamp glued on. A short honest feed beats a long invented one.
+const recent = sites
+  .filter(hasRealProvenance)
   .sort((a, b) => freshness(b).localeCompare(freshness(a)) || a.name.localeCompare(b.name))
   .slice(0, 50);
-const feedUpdated = `${recent[0] ? freshness(recent[0]) : '2026-06-25'}T00:00:00Z`;
+const feedUpdated = `${recent[0] ? freshness(recent[0]) : LEGACY_IMPORT_DATE}T00:00:00Z`;
 
 const atom = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">

@@ -179,6 +179,31 @@ match the data, and fails when any version or count string in `index.html`,
 `manifest.json`, `sw.js` or this README has drifted from `package.json` and
 `sites.json`.
 
+### Entry dates
+
+Two fields, and they mean different things. `updatedAt` is when the entry's own
+text last changed. `lastReviewedAt` is when a person last opened the site and
+confirmed the entry still describes it.
+
+Most of the directory carries `2026-06-25` and no `lastReviewedAt`. That is the
+date of one bulk import, not a review, and pretending otherwise is what made the
+"recent" sort and the feeds alphabetical order with a timestamp attached. So the
+feeds now publish only entries with a real `lastReviewedAt`, which is a short
+list and an honest one.
+
+After you have actually checked an entry:
+
+```bash
+npm run review -- https://example.com              # reviewed today, text unchanged
+npm run review -- https://example.com --changed    # the entry's text changed too
+npm run review -- --list                           # how much is still unreviewed
+```
+
+`npm run lint` enforces the rest: no future dates, no review dated before the
+change it reviewed, a `lastReviewedAt` on anything not left over from the
+import, and a ceiling on how many entries may carry the import date, so nothing
+new can be filed under it to dodge the rule.
+
 ### Diagnostics
 
 Add `?debug=1` to the URL and a panel opens with the app version, where the data

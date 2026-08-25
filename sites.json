@@ -391,12 +391,13 @@
     "category": "Security",
     "openSource": false,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "mozilla",
       "scanner",
       "http"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "GRC ShieldsUP!",
@@ -1496,12 +1497,13 @@
     "category": "Homelab",
     "openSource": false,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "tunnel",
       "cloudflare",
       "zero-trust"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Pi-hole",
@@ -3889,12 +3891,13 @@
     "category": "AI & ML",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "local",
       "portable",
       "single-file"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Ideogram",
@@ -4001,12 +4004,13 @@
     "category": "AI Creative",
     "openSource": false,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "video",
       "generation",
       "creative"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Make (Integromat)",
@@ -4796,13 +4800,14 @@
     "category": "Sysadmin",
     "openSource": false,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "iac",
       "cloud",
       "provisioning"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Cockpit",
@@ -5284,12 +5289,13 @@
     "category": "Productivity",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "signing",
       "documents",
       "open source"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Plane",
@@ -5358,12 +5364,13 @@
     "category": "Productivity",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "notes",
       "hierarchical",
       "scripting"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "HedgeDoc",
@@ -6251,12 +6258,13 @@
     "category": "CLI Tools",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "json",
       "processor",
       "filter"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "yq",
@@ -7873,13 +7881,14 @@
     "category": "Privacy",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "encryption",
       "disk",
       "volumes",
       "security"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "GrapheneOS",
@@ -8413,13 +8422,14 @@
     "category": "Creative",
     "openSource": false,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "photo-editing",
       "windows",
       "layers",
       "plugins"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Motion Canvas",
@@ -8480,6 +8490,7 @@
       "testing",
       "automation",
       "mcp"
-    ]
+    ],
+    "lastReviewedAt": "2026-08-16"
   }
 ]

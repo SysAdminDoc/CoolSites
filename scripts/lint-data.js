@@ -2,7 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { computeMetadata, renderTargets } = require('./lib/metadata');
+const { computeMetadata, renderTargets, LEGACY_IMPORT_DATE, MAX_LEGACY_DATED, freshness, hasRealProvenance } = require('./lib/metadata');
 
 const root = path.resolve(__dirname, '..');
 const sourceOnly = process.argv.includes('--source-only');
@@ -145,6 +145,10 @@ function validateSourceData() {
   const categoryCounts = new Map();
   const urls = new Set();
   const canonicalUrls = new Map();
+  let legacyDated = 0;
+  // Compared as a plain string against the YYYY-MM-DD the data uses, so a
+  // timezone never turns a same-day stamp into a future date.
+  const today = new Date().toISOString().slice(0, 10);
 
   (Array.isArray(categories) ? categories : []).forEach((category, index) => {
     const label = `categories[${index}]`;
@@ -172,8 +176,27 @@ function validateSourceData() {
     if (!Array.isArray(site?.tags) || new Set(site.tags).size !== site.tags.length) addError(`${label}: tags must be unique`);
     if (site?.tags?.some(tag => tag.length > 40 || tag.trim() !== tag)) addError(`${label}: tag length/whitespace invalid`);
     if ('lastReviewedAt' in (site || {}) && !isDate(site.lastReviewedAt)) addError(`${label}: lastReviewedAt must be YYYY-MM-DD`);
-    if ('dateProvenance' in (site || {}) && !['legacy', 'curated', 'automated'].includes(site.dateProvenance)) addError(`${label}: invalid dateProvenance`);
+    if (site?.updatedAt && site.updatedAt > today) addError(`${label}: updatedAt ${site.updatedAt} is in the future`);
+    if (site?.lastReviewedAt && site.lastReviewedAt > today) addError(`${label}: lastReviewedAt ${site.lastReviewedAt} is in the future`);
+    // A review is a person confirming the entry still describes the site, so it
+    // cannot predate the content change it is supposed to have looked at.
+    if (site?.lastReviewedAt && site?.updatedAt && site.lastReviewedAt < site.updatedAt) {
+      addError(`${label}: lastReviewedAt ${site.lastReviewedAt} is before updatedAt ${site.updatedAt}`);
+    }
+    // Everything except the untouched import has to say when someone checked it.
+    // Without this the recent sort and the feeds are alphabetical order wearing
+    // a timestamp.
+    if (site?.updatedAt && site.updatedAt !== LEGACY_IMPORT_DATE && !hasRealProvenance(site)) {
+      addError(`${label}: updatedAt is ${site.updatedAt} but there is no lastReviewedAt saying who checked it`);
+    }
+    if (site?.updatedAt === LEGACY_IMPORT_DATE) legacyDated++;
   });
+
+  // The ratchet. This may only fall, so nothing new can be filed under the
+  // import date to sidestep the rule above.
+  if (legacyDated > MAX_LEGACY_DATED) {
+    addError(`sites.json: ${legacyDated} entries still carry the ${LEGACY_IMPORT_DATE} import date, above the ceiling of ${MAX_LEGACY_DATED}. New entries need a real date and a lastReviewedAt.`);
+  }
 
   (Array.isArray(categories) ? categories : []).forEach((category, index) => {
     const actual = categoryCounts.get(category?.name) || 0;
@@ -235,11 +258,16 @@ function validateFeeds(data) {
   const atomPath = path.join(root, 'feeds/recent.atom');
   const atom = fs.existsSync(atomPath) ? fs.readFileSync(atomPath, 'utf8') : '';
   if (!feed || feed.version !== 'https://jsonfeed.org/version/1.1' || !Array.isArray(feed.items)) addError('feeds/recent.json: invalid JSON Feed envelope');
-  const expected = [...data.sites].sort((a, b) => (b.lastReviewedAt || b.updatedAt).localeCompare(a.lastReviewedAt || a.updatedAt) || a.name.localeCompare(b.name)).slice(0, 50);
+  // Only entries with real provenance. A feed of fifty items where thirty-nine
+  // share the import timestamp is not a list of what changed recently.
+  const expected = [...data.sites]
+    .filter(hasRealProvenance)
+    .sort((a, b) => freshness(b).localeCompare(freshness(a)) || a.name.localeCompare(b.name))
+    .slice(0, 50);
   if (feed?.items?.length !== expected.length) addError(`feeds/recent.json: expected ${expected.length} items, found ${feed?.items?.length}`);
   expected.forEach((site, index) => {
     const item = feed?.items?.[index];
-    if (!item || item.id !== site.url || item.url !== site.url || item.title !== site.name || item.date_modified !== `${site.lastReviewedAt || site.updatedAt}T00:00:00Z`) addError(`feeds/recent.json: stale or mismatched item at index ${index} (${site.name})`);
+    if (!item || item.id !== site.url || item.url !== site.url || item.title !== site.name || item.date_modified !== `${freshness(site)}T00:00:00Z`) addError(`feeds/recent.json: stale or mismatched item at index ${index} (${site.name})`);
   });
   const atomIds = [...atom.matchAll(/<id>([^<]+)<\/id>/g)].map(match => match[1]).slice(1);
   if (atomIds.length !== expected.length || atomIds.some((id, index) => id !== expected[index].url)) addError('feeds/recent.atom: stale or mismatched entry order');

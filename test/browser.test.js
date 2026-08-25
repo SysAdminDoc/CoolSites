@@ -555,7 +555,19 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       probeSource: await fetch('./sites.json', { cache: 'no-cache' }).then(response => response.headers.get('X-CoolSites-Cache')).catch(error => String(error))
     }))()`);
     assert.equal(offlineState.statusHidden, false, JSON.stringify(offlineState));
-    assert.match(offlineState.statusText, /Offline: showing cached directory data/);
+    // The wording changed on purpose. It used to say the directory was "last
+    // reviewed" on that date, which was untrue: the date is the newest entry's,
+    // and most entries have never been reviewed at all.
+    assert.match(offlineState.statusText, /Offline: showing a cached copy of the directory/);
+    assert.match(offlineState.statusText, /newest entry is from/);
+    assert.equal(/last reviewed/i.test(offlineState.statusText), false,
+      'nothing may describe the whole directory as reviewed');
+    // The date must match the data. A bare YYYY-MM-DD parses as UTC and then
+    // renders in local time, which showed the wrong day west of Greenwich.
+    const newest = SITES.map(site => site.lastReviewedAt || site.updatedAt).sort().at(-1);
+    const expectedDay = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(`${newest}T00:00:00`));
+    assert.ok(offlineState.statusText.includes(expectedDay),
+      `status should show ${expectedDay} for data dated ${newest}, got: ${offlineState.statusText}`);
     server = await startLocalServer();
     await page.send('Page.navigate', { url: server.url });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");

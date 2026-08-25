@@ -6,6 +6,158 @@
   "description": "Recently added and updated CoolSites directory entries.",
   "items": [
     {
+      "id": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
+      "url": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
+      "title": "Cloudflare Tunnel",
+      "summary": "Expose local services to the internet securely without port forwarding. Free, encrypted, and zero-trust.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Homelab",
+        "tunnel",
+        "cloudflare",
+        "zero-trust"
+      ],
+      "_coolsites_category": "Homelab",
+      "_coolsites_slug": "cloudflare-tunnel"
+    },
+    {
+      "id": "https://www.docuseal.com",
+      "url": "https://www.docuseal.com",
+      "title": "Docuseal",
+      "summary": "Open source document signing platform. Create, fill, and sign documents. DocuSign alternative.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Productivity",
+        "signing",
+        "documents",
+        "open source"
+      ],
+      "_coolsites_category": "Productivity",
+      "_coolsites_slug": "docuseal"
+    },
+    {
+      "id": "https://jqlang.org/",
+      "url": "https://jqlang.org/",
+      "title": "jq",
+      "summary": "Command-line JSON processor. Slice, filter, map, and transform JSON data. Essential for API work.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "CLI Tools",
+        "json",
+        "processor",
+        "filter"
+      ],
+      "_coolsites_category": "CLI Tools",
+      "_coolsites_slug": "jq"
+    },
+    {
+      "id": "https://github.com/mozilla-ai/llamafile",
+      "url": "https://github.com/mozilla-ai/llamafile",
+      "title": "Llamafile",
+      "summary": "Single-file executable LLMs. Download one file and run a chatbot. No Python, no Docker, no dependencies.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "AI & ML",
+        "local",
+        "portable",
+        "single-file"
+      ],
+      "_coolsites_category": "AI & ML",
+      "_coolsites_slug": "llamafile"
+    },
+    {
+      "id": "https://developer.mozilla.org/en-US/observatory",
+      "url": "https://developer.mozilla.org/en-US/observatory",
+      "title": "Mozilla Observatory",
+      "summary": "Mozilla's website security scanner. Tests headers, TLS, cookies, and content security policies.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Security",
+        "mozilla",
+        "scanner",
+        "http"
+      ],
+      "_coolsites_category": "Security",
+      "_coolsites_slug": "mozilla-observatory"
+    },
+    {
+      "id": "https://paint.net/",
+      "url": "https://paint.net/",
+      "title": "Paint.NET",
+      "summary": "Fast, intuitive image editor for Windows. Layers, effects, plugins, and GPU acceleration. Lighter than Photoshop, more powerful than Paint.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Creative",
+        "photo-editing",
+        "windows",
+        "layers",
+        "plugins"
+      ],
+      "_coolsites_category": "Creative",
+      "_coolsites_slug": "paint-net"
+    },
+    {
+      "id": "https://runway.com/",
+      "url": "https://runway.com/",
+      "title": "Runway",
+      "summary": "Creative AI toolkit for video. Gen-3 Alpha for video generation, motion brush, green screen, and more.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "AI Creative",
+        "video",
+        "generation",
+        "creative"
+      ],
+      "_coolsites_category": "AI Creative",
+      "_coolsites_slug": "runway"
+    },
+    {
+      "id": "https://developer.hashicorp.com/terraform",
+      "url": "https://developer.hashicorp.com/terraform",
+      "title": "Terraform",
+      "summary": "Infrastructure as code. Define cloud resources in declarative config files. The industry standard.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Sysadmin",
+        "iac",
+        "cloud",
+        "provisioning"
+      ],
+      "_coolsites_category": "Sysadmin",
+      "_coolsites_slug": "terraform"
+    },
+    {
+      "id": "https://github.com/TriliumNext/Trilium",
+      "url": "https://github.com/TriliumNext/Trilium",
+      "title": "Trilium Notes",
+      "summary": "Hierarchical note-taking app with powerful scripting. Relation maps, book notes, task management. Self-hostable.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Productivity",
+        "notes",
+        "hierarchical",
+        "scripting"
+      ],
+      "_coolsites_category": "Productivity",
+      "_coolsites_slug": "trilium-notes"
+    },
+    {
+      "id": "https://veracrypt.io/",
+      "url": "https://veracrypt.io/",
+      "title": "VeraCrypt",
+      "summary": "Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Privacy",
+        "encryption",
+        "disk",
+        "volumes",
+        "security"
+      ],
+      "_coolsites_category": "Privacy",
+      "_coolsites_slug": "veracrypt"
+    },
+    {
       "id": "https://github.com/vostride/agent-qa",
       "url": "https://github.com/vostride/agent-qa",
       "title": "Agent QA",
@@ -21,755 +173,6 @@
       ],
       "_coolsites_category": "Dev Tools",
       "_coolsites_slug": "agent-qa"
-    },
-    {
-      "id": "https://www.3blue1brown.com",
-      "url": "https://www.3blue1brown.com",
-      "title": "3Blue1Brown",
-      "summary": "Math videos that make your brain tingle. Beautiful animations that build deep understanding.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Education",
-        "math",
-        "visualization",
-        "youtube"
-      ],
-      "_coolsites_category": "Education",
-      "_coolsites_slug": "3blue1brown"
-    },
-    {
-      "id": "https://www.7-zip.org",
-      "url": "https://www.7-zip.org",
-      "title": "7-Zip",
-      "summary": "The file archiver with the highest compression ratio. Supports every format. Free, open source, legendary.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "compression",
-        "archive",
-        "zip"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "7-zip"
-    },
-    {
-      "id": "https://www.abuseipdb.com",
-      "url": "https://www.abuseipdb.com",
-      "title": "AbuseIPDB",
-      "summary": "Community-driven IP abuse database. Check and report malicious IPs. Essential for firewall rules.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "OSINT",
-        "abuse",
-        "ip",
-        "blacklist"
-      ],
-      "_coolsites_category": "OSINT",
-      "_coolsites_slug": "abuseipdb"
-    },
-    {
-      "id": "https://www.activepieces.com",
-      "url": "https://www.activepieces.com",
-      "title": "Activepieces",
-      "summary": "Open source no-code automation platform. Clean UI, 100+ integrations, self-hostable Zapier alternative.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Automation",
-        "no-code",
-        "workflow",
-        "self-hosted"
-      ],
-      "_coolsites_category": "Automation",
-      "_coolsites_slug": "activepieces"
-    },
-    {
-      "id": "https://actualbudget.org",
-      "url": "https://actualbudget.org",
-      "title": "Actual Budget",
-      "summary": "Privacy-focused budgeting app. Envelope budgeting, bank sync, self-hostable. YNAB alternative.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Homelab",
-        "budget",
-        "finance",
-        "privacy"
-      ],
-      "_coolsites_category": "Homelab",
-      "_coolsites_slug": "actual-budget"
-    },
-    {
-      "id": "https://addy.io",
-      "url": "https://addy.io",
-      "title": "addy.io",
-      "summary": "Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Privacy",
-        "email",
-        "aliases",
-        "forwarding"
-      ],
-      "_coolsites_category": "Privacy",
-      "_coolsites_slug": "addy-io"
-    },
-    {
-      "id": "https://adguard.com/en/adguard-home/overview.html",
-      "url": "https://adguard.com/en/adguard-home/overview.html",
-      "title": "AdGuard Home",
-      "summary": "Network-wide ad and tracker blocker. Self-hosted DNS server that filters ads for every device on your network. Pi-hole alternative.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Privacy",
-        "adblock",
-        "dns",
-        "self-hosted",
-        "network"
-      ],
-      "_coolsites_category": "Privacy",
-      "_coolsites_slug": "adguard-home"
-    },
-    {
-      "id": "https://alacritty.org",
-      "url": "https://alacritty.org",
-      "title": "Alacritty",
-      "summary": "GPU-accelerated terminal emulator. Blazing fast, minimal, and cross-platform. Written in Rust.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "terminal",
-        "gpu",
-        "rust"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "alacritty"
-    },
-    {
-      "id": "https://algorithm-visualizer.org",
-      "url": "https://algorithm-visualizer.org",
-      "title": "Algorithm Visualizer",
-      "summary": "Interactive animations of algorithms and data structures. See sorting, pathfinding, and trees come alive.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Education",
-        "algorithms",
-        "visualization",
-        "interactive"
-      ],
-      "_coolsites_category": "Education",
-      "_coolsites_slug": "algorithm-visualizer"
-    },
-    {
-      "id": "https://alternativeto.net",
-      "url": "https://alternativeto.net",
-      "title": "AlternativeTo",
-      "summary": "Find alternatives to any software. Community-driven recommendations with platform and license filters.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "News & Reference",
-        "alternatives",
-        "software",
-        "directory"
-      ],
-      "_coolsites_category": "News & Reference",
-      "_coolsites_slug": "alternativeto"
-    },
-    {
-      "id": "https://github.com/RamonUnch/AltSnap",
-      "url": "https://github.com/RamonUnch/AltSnap",
-      "title": "AltSnap",
-      "summary": "Hold Alt to drag, resize, minimize, or snap any window. Lightweight Linux-style window management for Windows.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "windows",
-        "window-management",
-        "productivity",
-        "utility"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "altsnap"
-    },
-    {
-      "id": "https://angryip.org",
-      "url": "https://angryip.org",
-      "title": "Angry IP Scanner",
-      "summary": "Fast network scanner. Ping IPs, resolve hostnames, detect MAC addresses, scan ports.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Networking",
-        "scanner",
-        "ip",
-        "fast"
-      ],
-      "_coolsites_category": "Networking",
-      "_coolsites_slug": "angry-ip-scanner"
-    },
-    {
-      "id": "https://www.ansible.com",
-      "url": "https://www.ansible.com",
-      "title": "Ansible",
-      "summary": "IT automation that everyone can use. Agentless, YAML-based configuration management and deployment.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Homelab",
-        "automation",
-        "config",
-        "deployment"
-      ],
-      "_coolsites_category": "Homelab",
-      "_coolsites_slug": "ansible"
-    },
-    {
-      "id": "https://anythingllm.com",
-      "url": "https://anythingllm.com",
-      "title": "AnythingLLM",
-      "summary": "All-in-one AI desktop app. Chat with documents, RAG, multiple model support. Self-hosted knowledge assistant.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "AI & ML",
-        "rag",
-        "documents",
-        "assistant"
-      ],
-      "_coolsites_category": "AI & ML",
-      "_coolsites_slug": "anythingllm"
-    },
-    {
-      "id": "https://anytype.io",
-      "url": "https://anytype.io",
-      "title": "Anytype",
-      "summary": "Local-first, encrypted alternative to Notion. Offline-capable, peer-to-peer sync. Privacy-respecting.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Productivity",
-        "workspace",
-        "encrypted",
-        "local-first"
-      ],
-      "_coolsites_category": "Productivity",
-      "_coolsites_slug": "anytype"
-    },
-    {
-      "id": "https://airflow.apache.org",
-      "url": "https://airflow.apache.org",
-      "title": "Apache Airflow",
-      "summary": "The industry standard for data pipeline orchestration. Schedule, monitor, and manage complex workflows.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Automation",
-        "pipelines",
-        "scheduling",
-        "data"
-      ],
-      "_coolsites_category": "Automation",
-      "_coolsites_slug": "apache-airflow"
-    },
-    {
-      "id": "https://superset.apache.org",
-      "url": "https://superset.apache.org",
-      "title": "Apache Superset",
-      "summary": "Modern data exploration and visualization platform. Create dashboards from any SQL database.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Data & Viz",
-        "dashboards",
-        "sql",
-        "exploration"
-      ],
-      "_coolsites_category": "Data & Viz",
-      "_coolsites_slug": "apache-superset"
-    },
-    {
-      "id": "https://www.appsmith.com",
-      "url": "https://www.appsmith.com",
-      "title": "Appsmith",
-      "summary": "Open source low-code platform. Build internal tools with drag-and-drop, connected to any database or API.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Productivity",
-        "low-code",
-        "internal tools",
-        "dashboard"
-      ],
-      "_coolsites_category": "Productivity",
-      "_coolsites_slug": "appsmith"
-    },
-    {
-      "id": "https://wiki.archlinux.org",
-      "url": "https://wiki.archlinux.org",
-      "title": "ArchWiki",
-      "summary": "The best Linux documentation on the internet. Useful regardless of which distro you run.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "News & Reference",
-        "linux",
-        "wiki",
-        "documentation"
-      ],
-      "_coolsites_category": "News & Reference",
-      "_coolsites_slug": "archwiki"
-    },
-    {
-      "id": "https://ardour.org",
-      "url": "https://ardour.org",
-      "title": "Ardour",
-      "summary": "Professional digital audio workstation. Full multi-track recording, editing, and mixing. Open source.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Music & Audio",
-        "daw",
-        "recording",
-        "mixing"
-      ],
-      "_coolsites_category": "Music & Audio",
-      "_coolsites_slug": "ardour"
-    },
-    {
-      "id": "https://argo-cd.readthedocs.io",
-      "url": "https://argo-cd.readthedocs.io",
-      "title": "ArgoCD",
-      "summary": "Declarative GitOps CD for Kubernetes. Auto-sync your cluster state with Git repositories.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Containers",
-        "gitops",
-        "cd",
-        "kubernetes"
-      ],
-      "_coolsites_category": "Containers",
-      "_coolsites_slug": "argocd"
-    },
-    {
-      "id": "https://astexplorer.net",
-      "url": "https://astexplorer.net",
-      "title": "AST Explorer",
-      "summary": "Explore the abstract syntax tree of your code. Supports JavaScript, TypeScript, CSS, HTML, and more.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Dev Tools",
-        "ast",
-        "parser",
-        "code"
-      ],
-      "_coolsites_category": "Dev Tools",
-      "_coolsites_slug": "ast-explorer"
-    },
-    {
-      "id": "https://astro.build/",
-      "url": "https://astro.build/",
-      "title": "Astro",
-      "summary": "The web framework for content-driven sites. Ship zero JavaScript by default, use any UI framework, and get insane performance.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Dev Tools",
-        "framework",
-        "static-site",
-        "javascript",
-        "performance"
-      ],
-      "_coolsites_category": "Dev Tools",
-      "_coolsites_slug": "astro"
-    },
-    {
-      "id": "https://atuin.sh",
-      "url": "https://atuin.sh",
-      "title": "atuin",
-      "summary": "Magical shell history. Search, sync, and analyze your command history across machines. Encrypted.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "CLI Tools",
-        "history",
-        "sync",
-        "search"
-      ],
-      "_coolsites_category": "CLI Tools",
-      "_coolsites_slug": "atuin"
-    },
-    {
-      "id": "https://www.audacityteam.org",
-      "url": "https://www.audacityteam.org",
-      "title": "Audacity",
-      "summary": "The classic audio editor. Record, edit, mix, and process audio. Simple enough for beginners, powerful enough for pros.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Creative",
-        "audio",
-        "recording",
-        "editing"
-      ],
-      "_coolsites_category": "Creative",
-      "_coolsites_slug": "audacity"
-    },
-    {
-      "id": "https://audiomass.co",
-      "url": "https://audiomass.co",
-      "title": "AudioMass",
-      "summary": "Full audio editor right in your browser. Cut, trim and apply effects with no install, no account and no ads.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Music & Audio",
-        "audio",
-        "browser",
-        "editor"
-      ],
-      "_coolsites_category": "Music & Audio",
-      "_coolsites_slug": "audiomass"
-    },
-    {
-      "id": "https://goauthentik.io",
-      "url": "https://goauthentik.io",
-      "title": "Authentik",
-      "summary": "Open source identity provider. SSO, MFA, user management for all your self-hosted services.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Homelab",
-        "sso",
-        "identity",
-        "authentication"
-      ],
-      "_coolsites_category": "Homelab",
-      "_coolsites_slug": "authentik"
-    },
-    {
-      "id": "https://www.autohotkey.com",
-      "url": "https://www.autohotkey.com",
-      "title": "AutoHotkey",
-      "summary": "Scripting language for Windows automation. Hotkeys, macros, text expansion and GUI automation. Infinitely flexible.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "automation",
-        "macros",
-        "scripting"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "autohotkey"
-    },
-    {
-      "id": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
-      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
-      "title": "AUTOMATIC1111 WebUI",
-      "summary": "The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting and upscaling, all in one UI.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "AI & ML",
-        "stable diffusion",
-        "image",
-        "webui"
-      ],
-      "_coolsites_category": "AI & ML",
-      "_coolsites_slug": "automatic1111-webui"
-    },
-    {
-      "id": "https://awesomeopensource.com/",
-      "url": "https://awesomeopensource.com/",
-      "title": "Awesome Open Source",
-      "summary": "Find and compare open source projects across every language and category. Millions of projects indexed and searchable.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Indexes & Wikis",
-        "open-source",
-        "index",
-        "search",
-        "projects"
-      ],
-      "_coolsites_category": "Indexes & Wikis",
-      "_coolsites_slug": "awesome-open-source"
-    },
-    {
-      "id": "https://shakil-shahadat.github.io/awesome-piracy/",
-      "url": "https://shakil-shahadat.github.io/awesome-piracy/",
-      "title": "Awesome Piracy",
-      "summary": "Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Indexes & Wikis",
-        "piracy",
-        "index",
-        "tools",
-        "curated"
-      ],
-      "_coolsites_category": "Indexes & Wikis",
-      "_coolsites_slug": "awesome-piracy"
-    },
-    {
-      "id": "https://awesome-privacy.xyz/",
-      "url": "https://awesome-privacy.xyz/",
-      "title": "Awesome Privacy",
-      "summary": "Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Indexes & Wikis",
-        "privacy",
-        "index",
-        "awesome",
-        "alternatives"
-      ],
-      "_coolsites_category": "Indexes & Wikis",
-      "_coolsites_slug": "awesome-privacy"
-    },
-    {
-      "id": "https://github.com/awesome-windows11/windows11",
-      "url": "https://github.com/awesome-windows11/windows11",
-      "title": "Awesome Windows 11",
-      "summary": "Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Indexes & Wikis",
-        "windows",
-        "index",
-        "awesome",
-        "apps"
-      ],
-      "_coolsites_category": "Indexes & Wikis",
-      "_coolsites_slug": "awesome-windows-11"
-    },
-    {
-      "id": "https://awesome-selfhosted.net",
-      "url": "https://awesome-selfhosted.net",
-      "title": "Awesome-Selfhosted",
-      "summary": "The definitive list of self-hostable software. Hundreds of categorized alternatives to commercial services.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Homelab",
-        "list",
-        "self-hosted",
-        "directory"
-      ],
-      "_coolsites_category": "Homelab",
-      "_coolsites_slug": "awesome-selfhosted"
-    },
-    {
-      "id": "https://github.com/ansible/awx",
-      "url": "https://github.com/ansible/awx",
-      "title": "AWX",
-      "summary": "Open source version of Ansible Tower. Web interface for Ansible with RBAC, scheduling, and inventories.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Sysadmin",
-        "ansible",
-        "tower",
-        "management"
-      ],
-      "_coolsites_category": "Sysadmin",
-      "_coolsites_slug": "awx"
-    },
-    {
-      "id": "https://www.bandlab.com",
-      "url": "https://www.bandlab.com",
-      "title": "Bandlab",
-      "summary": "Free online DAW and music social network. Record, produce, and share music. No limits, no subscriptions.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Music & Audio",
-        "daw",
-        "social",
-        "free"
-      ],
-      "_coolsites_category": "Music & Audio",
-      "_coolsites_slug": "bandlab"
-    },
-    {
-      "id": "https://github.com/debauchee/barrier",
-      "url": "https://github.com/debauchee/barrier",
-      "title": "Barrier",
-      "summary": "Open source KVM software. Share mouse and keyboard between multiple computers. Cross-platform.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "kvm",
-        "mouse",
-        "keyboard"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "barrier"
-    },
-    {
-      "id": "https://github.com/sharkdp/bat",
-      "url": "https://github.com/sharkdp/bat",
-      "title": "bat",
-      "summary": "A cat clone with wings. Syntax highlighting, line numbers, git integration, and automatic paging.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "CLI Tools",
-        "cat",
-        "syntax",
-        "highlighting"
-      ],
-      "_coolsites_category": "CLI Tools",
-      "_coolsites_slug": "bat"
-    },
-    {
-      "id": "https://www.bazarr.media/",
-      "url": "https://www.bazarr.media/",
-      "title": "Bazarr",
-      "summary": "Automated subtitle downloader. Companion app for Sonarr and Radarr that finds and downloads matching subtitles for your media.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Arr Stack",
-        "subtitles",
-        "automation",
-        "companion",
-        "media"
-      ],
-      "_coolsites_category": "Arr Stack",
-      "_coolsites_slug": "bazarr"
-    },
-    {
-      "id": "https://beszel.dev/",
-      "url": "https://beszel.dev/",
-      "title": "Beszel",
-      "summary": "Lightweight server monitoring hub with Docker stats, historical data, and alerts. Agent-based with a minimal resource footprint.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Homelab",
-        "monitoring",
-        "docker",
-        "lightweight",
-        "alerts"
-      ],
-      "_coolsites_category": "Homelab",
-      "_coolsites_slug": "beszel"
-    },
-    {
-      "id": "https://bgp.tools",
-      "url": "https://bgp.tools",
-      "title": "BGP.Tools",
-      "summary": "Beautiful BGP looking glass. Visualize AS paths, prefix announcements, and routing in real time.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "IP & Network",
-        "bgp",
-        "routing",
-        "network"
-      ],
-      "_coolsites_category": "IP & Network",
-      "_coolsites_slug": "bgp-tools"
-    },
-    {
-      "id": "https://www.biglybt.com/",
-      "url": "https://www.biglybt.com/",
-      "title": "BiglyBT",
-      "summary": "Feature-rich open source torrent client with swarm merging, I2P integration, and decentralized chat. Azureus/Vuze successor.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Torrenting",
-        "torrent",
-        "client",
-        "i2p",
-        "swarm",
-        "open-source"
-      ],
-      "_coolsites_category": "Torrenting",
-      "_coolsites_slug": "biglybt"
-    },
-    {
-      "id": "https://bitmagnet.io/",
-      "url": "https://bitmagnet.io/",
-      "title": "BitMagnet",
-      "summary": "Self-hosted DHT torrent search engine and crawler. Indexes the DHT network and provides a modern web UI for searching.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Torrenting",
-        "torrent",
-        "self-hosted",
-        "dht",
-        "crawler"
-      ],
-      "_coolsites_category": "Torrenting",
-      "_coolsites_slug": "bitmagnet"
-    },
-    {
-      "id": "https://bitwarden.com",
-      "url": "https://bitwarden.com",
-      "title": "Bitwarden",
-      "summary": "Open source password manager. Self-hostable, cross-platform, with browser extensions and auto-fill.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "passwords",
-        "security",
-        "self-hosted"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "bitwarden"
-    },
-    {
-      "id": "https://www.bleachbit.org/",
-      "url": "https://www.bleachbit.org/",
-      "title": "BleachBit",
-      "summary": "Open source system cleaner. Free disk space, reduce clutter, and protect privacy by clearing caches, logs, and temp files.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Desktop Software",
-        "cleaner",
-        "privacy",
-        "disk-space",
-        "open-source"
-      ],
-      "_coolsites_category": "Desktop Software",
-      "_coolsites_slug": "bleachbit"
-    },
-    {
-      "id": "https://www.blender.org",
-      "url": "https://www.blender.org",
-      "title": "Blender",
-      "summary": "The free 3D creation suite. Modeling, animation, rendering, VFX and video editing in one app. An entire studio.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Creative",
-        "3d",
-        "modeling",
-        "animation",
-        "vfx"
-      ],
-      "_coolsites_category": "Creative",
-      "_coolsites_slug": "blender"
-    },
-    {
-      "id": "https://boardgamearena.com",
-      "url": "https://boardgamearena.com",
-      "title": "Board Game Arena",
-      "summary": "Play more than 800 board games online for free. Catan, Azul and Terraforming Mars, all in your browser.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Gaming",
-        "board games",
-        "multiplayer",
-        "free"
-      ],
-      "_coolsites_category": "Gaming",
-      "_coolsites_slug": "board-game-arena"
-    },
-    {
-      "id": "https://brilliant.org",
-      "url": "https://brilliant.org",
-      "title": "Brilliant",
-      "summary": "Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Education",
-        "stem",
-        "interactive",
-        "puzzles"
-      ],
-      "_coolsites_category": "Education",
-      "_coolsites_slug": "brilliant"
-    },
-    {
-      "id": "https://browserleaks.com",
-      "url": "https://browserleaks.com",
-      "title": "BrowserLeaks",
-      "summary": "Shows everything your browser reveals about you: canvas fingerprint, WebGL, fonts and WebRTC leaks.",
-      "date_modified": "2026-06-25T00:00:00Z",
-      "tags": [
-        "Security",
-        "fingerprint",
-        "privacy",
-        "browser"
-      ],
-      "_coolsites_category": "Security",
-      "_coolsites_slug": "browserleaks"
     }
   ]
 }

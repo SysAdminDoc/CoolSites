@@ -14,6 +14,7 @@
     "serve": "node scripts/serve.js",
     "package": "node scripts/package-release.js",
     "check:links": "node scripts/check-links.js",
+    "review": "node scripts/review-entry.js",
     "update:stars": "node scripts/update-stars.js",
     "update:favicons": "node scripts/generate-favicon-cache.js"
   },
