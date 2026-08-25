@@ -149,6 +149,7 @@ npm run generate   # regenerate feeds and sync versions and counts
 npm run build      # lint sources, generate, then re-validate
 npm test           # drive the app in headless Chrome over CDP
 npm run package    # write dist/ with a minified single-page build
+npm run check:links      # check every URL in sites.json and write a report
 npm run update:stars     # refresh stars.json (set GITHUB_TOKEN to avoid the 60/hour cap)
 npm run update:favicons  # refresh favicons.json
 ```
@@ -158,6 +159,39 @@ the schemas, rejects duplicate and colliding URLs, checks the generated feeds
 match the data, and fails when any version or count string in `index.html`,
 `manifest.json`, `sw.js` or this README has drifted from `package.json` and
 `sites.json`.
+
+### Checking links
+
+`npm run check:links` walks every URL in `sites.json` and writes a JSON report to
+`work/link-check.json`. The whole directory takes about a minute. It never writes
+to `sites.json`, because whether a dead entry should be repaired or removed is an
+editorial call.
+
+The point of it is telling apart things that look identical from a script:
+
+| Status | Meaning |
+|--------|---------|
+| `ok` | reachable at the URL on file |
+| `moved` | permanently redirected somewhere genuinely different, so the entry is stale |
+| `redirect` | temporary redirect, nothing to do |
+| `blocked` | answered 401, 403 or 429, which is a bot wall and says nothing about the page |
+| `dead` | 404, 410, or the connection was refused |
+| `tls` | certificate or handshake failure |
+| `dns` | the hostname no longer resolves |
+| `timeout` | no answer inside the timeout, twice |
+
+Only `dead` and `tls` set a non-zero exit code. A rate-limited host is not a
+broken link, and deleting entries because Cloudflare dislikes a script is how a
+good directory rots.
+
+Useful flags: `--filter <text>` to check one site, `--limit <n>` for a quick
+sample, `--concurrency <n>` (default 8), `--timeout <ms>` (default 15000), and
+`--out <path>` to put the report somewhere else.
+
+```bash
+npm run check:links -- --filter github.com
+npm run check:links -- --concurrency 12 --timeout 20000
+```
 
 ## Adding Sites
 

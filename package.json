@@ -13,6 +13,7 @@
     "build": "npm run lint:source && npm run generate && npm run lint",
     "serve": "node scripts/serve.js",
     "package": "node scripts/package-release.js",
+    "check:links": "node scripts/check-links.js",
     "update:stars": "node scripts/update-stars.js",
     "update:favicons": "node scripts/generate-favicon-cache.js"
   },
