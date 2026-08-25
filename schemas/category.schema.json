@@ -3,12 +3,11 @@
   "$id": "https://sysadmindoc.github.io/CoolSites/schemas/category.schema.json",
   "title": "CoolSites category entry",
   "type": "object",
-  "required": ["name", "slug", "className", "color", "blurb", "count"],
+  "required": ["name", "slug", "color", "blurb", "count"],
   "additionalProperties": false,
   "properties": {
     "name": { "type": "string", "minLength": 1 },
     "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "className": { "type": "string", "pattern": "^cat-[a-z0-9-]+$" },
     "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
     "blurb": { "type": "string", "minLength": 8 },
     "count": { "type": "integer", "minimum": 1 }
