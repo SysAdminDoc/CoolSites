@@ -304,7 +304,7 @@
     --border-hover: rgba(0, 0, 0, 0.15);
     --text-primary: #1a1d26;
     --text-secondary: #5a5e6e;
-    --text-muted: #6a6d81;
+    --text-muted: #686b7f;
     --accent: #6e56cf;
     --accent-glow: rgba(110, 86, 207, 0.12);
     --accent-secondary: #2a9d6e;
@@ -1376,6 +1376,12 @@
     background: color-mix(in srgb, var(--accent-tertiary) 16%, var(--bg-card));
   }
 
+  .card-initial {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
   .chip-initial {
     width: 14px;
     height: 14px;
@@ -1722,7 +1728,8 @@
     cursor: pointer;
     transition: background 0.15s ease, border-color 0.15s ease;
   }
-  .toast-action:hover { background: var(--bg-card-hover); border-color: var(--accent); }
+  .toast-action:hover,
+  .toast-action:focus-visible { background: var(--accent-glow); border-color: var(--accent); }
   .toast-action[hidden] { display: none; }
 
   /* ── Back to top ── */
@@ -2000,60 +2007,60 @@
       <div class="stat"><strong id="totalCount">0</strong> sites</div>
       <div class="stat"><strong id="catCount">0</strong> categories</div>
       <div class="theme-picker">
-        <button class="theme-btn" id="themeToggle" popovertarget="themeDropdown" title="Change theme" aria-label="Change theme" aria-haspopup="menu" aria-expanded="false">
+        <button class="theme-btn" id="themeToggle" popovertarget="themeDropdown" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </button>
-        <div class="theme-dropdown" id="themeDropdown" popover role="menu" aria-label="Theme">
-          <div class="theme-section-label" role="presentation">Dark</div>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="oled">
+        <div class="theme-dropdown" id="themeDropdown" popover role="radiogroup" aria-label="Theme">
+          <div class="theme-section-label" aria-hidden="true">Dark</div>
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="oled">
             <span class="swatch" style="background: #08090d;"></span>
             OLED Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="catppuccin">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="catppuccin">
             <span class="swatch" style="background: #1e1e2e;"></span>
             Catppuccin Mocha
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="dracula">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="dracula">
             <span class="swatch" style="background: #282a36;"></span>
             Dracula
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="rose-pine">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="rose-pine">
             <span class="swatch" style="background: #191724;"></span>
             Rosé Pine
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="nord">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="nord">
             <span class="swatch" style="background: #2e3440;"></span>
             Nord
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="github-dark">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="github-dark">
             <span class="swatch" style="background: #0d1117;"></span>
             GitHub Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="midnight">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="midnight">
             <span class="swatch" style="background: #0a0e1a;"></span>
             Midnight Blue
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="solarized">
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="solarized">
             <span class="swatch" style="background: #002b36;"></span>
             Solarized Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <div class="theme-divider" role="separator"></div>
-          <div class="theme-section-label" role="presentation">Light</div>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="light">
+          <div class="theme-divider" aria-hidden="true"></div>
+          <div class="theme-section-label" aria-hidden="true">Light</div>
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="light">
             <span class="swatch" style="background: #f8f9fc; border-color: rgba(0,0,0,0.2);"></span>
             Light
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
-          <div class="theme-divider" role="separator"></div>
-          <button class="theme-option" role="menuitemradio" aria-checked="false" data-theme="system">
+          <div class="theme-divider" aria-hidden="true"></div>
+          <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="system">
             <span class="swatch" style="background: linear-gradient(135deg, #08090d 50%, #f8f9fc 50%); border-color: rgba(128,128,128,0.3);"></span>
             System
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -2445,12 +2452,13 @@ function formatCompact(value) {
 // A filter can stop existing (last bookmark removed, category emptied). Resolve
 // that here rather than inside a render, so the grid and the pills always agree.
 function normalizeActiveFilter() {
-  if (activeFilter === 'All') return;
+  const before = activeFilter;
   if (activeFilter === 'Bookmarks') {
     if (resolvedBookmarkUrls().length === 0) activeFilter = 'All';
-    return;
+  } else if (activeFilter !== 'All' && !SITES.some(site => site.category === activeFilter)) {
+    activeFilter = 'All';
   }
-  if (!SITES.some(site => site.category === activeFilter)) activeFilter = 'All';
+  return activeFilter !== before;
 }
 
 function buildFilters() {
@@ -2752,8 +2760,12 @@ function buildCard(site, index) {
 document.addEventListener('error', (e) => {
   const img = e.target;
   if (img.tagName !== 'IMG' || !img.classList.contains('favicon-img')) return;
-  img.style.display = 'none';
-  if (img.dataset.initial && img.parentElement) img.parentElement.textContent = img.dataset.initial;
+  const initial = img.dataset.initial || '';
+  const replacement = document.createElement('span');
+  replacement.className = img.closest('.site-chip') ? 'chip-initial' : 'card-initial';
+  replacement.setAttribute('aria-hidden', 'true');
+  replacement.textContent = initial;
+  img.replaceWith(replacement);
 }, true);
 
 const _faviconObserver = new IntersectionObserver((entries) => {
@@ -2777,7 +2789,9 @@ const _loadMoreObserver = new IntersectionObserver((entries) => {
 
 function _renderGridInner() {
   const grid = document.getElementById('grid');
-  normalizeActiveFilter();
+  // If the filter had to change here, the pill row is now describing something
+  // that no longer exists, so rebuild it rather than leaving the two disagreeing.
+  if (normalizeActiveFilter()) buildFilters();
   const filtered = getFiltered();
   const filterKey = JSON.stringify({
     activeFilter,
@@ -2879,26 +2893,80 @@ function shareUrl(name, url) {
   }
 }
 
+const TOAST_MS = 2000;
+const UNDO_MS = 7000;
 let _toastTimer;
 let _undoAction = null;
+let _undoMessage = '';
+let _undoDeadline = 0;
+let _toastHeld = false;
 
 function hideToast() {
   clearTimeout(_toastTimer);
   _undoAction = null;
+  _undoMessage = '';
+  _undoDeadline = 0;
   document.getElementById('toastAction').hidden = true;
   document.getElementById('toast').classList.remove('visible');
 }
 
-function showToast(message, undo) {
-  clearTimeout(_toastTimer);
-  const toast = document.getElementById('toast');
-  const action = document.getElementById('toastAction');
-  document.getElementById('toastMessage').textContent = message;
-  _undoAction = typeof undo === 'function' ? undo : null;
-  action.hidden = !_undoAction;
-  toast.classList.add('visible');
-  _toastTimer = setTimeout(hideToast, _undoAction ? 7000 : 2000);
+// Any change to bookmarks or groups makes a pending Undo describe a state that
+// no longer exists. Read-only actions must leave it alone.
+function invalidateUndo() {
+  if (_undoAction) hideToast();
 }
+
+function paintToast(message, withUndo) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMessage').textContent = message;
+  document.getElementById('toastAction').hidden = !withUndo;
+  toast.classList.add('visible');
+}
+
+function scheduleToast(ms) {
+  clearTimeout(_toastTimer);
+  if (_toastHeld) return;
+  _toastTimer = setTimeout(expireToast, ms);
+}
+
+function expireToast() {
+  // An informational toast borrowed the strip from a live Undo; hand it back
+  // rather than swallowing the user's only way to recover.
+  const remaining = _undoDeadline - Date.now();
+  if (_undoAction && remaining > 0) {
+    paintToast(_undoMessage, true);
+    scheduleToast(remaining);
+    return;
+  }
+  hideToast();
+}
+
+function showToast(message, undo) {
+  if (typeof undo === 'function') {
+    _undoAction = undo;
+    _undoMessage = message;
+    _undoDeadline = Date.now() + UNDO_MS;
+    paintToast(message, true);
+    scheduleToast(UNDO_MS);
+    return;
+  }
+  paintToast(message, Boolean(_undoAction));
+  scheduleToast(TOAST_MS);
+}
+
+// Do not time out a control the user is pointing at or has focused.
+const _toastEl = document.getElementById('toast');
+['mouseenter', 'focusin'].forEach(event => _toastEl.addEventListener(event, () => {
+  _toastHeld = true;
+  clearTimeout(_toastTimer);
+}));
+['mouseleave', 'focusout'].forEach(event => _toastEl.addEventListener(event, () => {
+  _toastHeld = false;
+  if (_toastEl.classList.contains('visible')) {
+    const remaining = _undoAction ? Math.max(1200, _undoDeadline - Date.now()) : TOAST_MS;
+    scheduleToast(remaining);
+  }
+}));
 
 document.getElementById('toastAction').addEventListener('click', () => {
   const undo = _undoAction;
@@ -3020,10 +3088,14 @@ document.addEventListener('keydown', e => {
     document.getElementById('searchInput').focus();
   }
   if (e.key === 'Escape') {
-    // A dialog's own Escape bubbles up here; cancelling a modal must not wipe
-    // the search behind it.
+    // A dialog's Escape, and a popover's light dismiss, both bubble up here.
+    // Neither may wipe the search behind them.
     if (document.querySelector('dialog[open]')) return;
-    document.querySelectorAll('.assign-dropdown').forEach(dropdown => dropdown.remove());
+    if (document.querySelector('[popover]:popover-open')) return;
+    if (document.querySelector('.assign-dropdown')) {
+      document.querySelectorAll('.assign-dropdown').forEach(dropdown => dropdown.remove());
+      return;
+    }
     const input = document.getElementById('searchInput');
     if (input.value) {
       input.value = '';
@@ -3127,12 +3199,33 @@ function updateThemeIcon(resolved) {
 }
 
 function updateThemeDropdown(activeId) {
-  document.querySelectorAll('.theme-option').forEach(opt => {
-    const isActive = opt.dataset.theme === activeId;
+  const options = [...document.querySelectorAll('.theme-option')];
+  const known = options.some(opt => opt.dataset.theme === activeId);
+  options.forEach((opt, index) => {
+    // A stored id that no longer exists would otherwise leave the group with no
+    // checked option at all.
+    const isActive = known ? opt.dataset.theme === activeId : index === 0;
     opt.classList.toggle('active', isActive);
     opt.setAttribute('aria-checked', String(isActive));
+    opt.tabIndex = isActive ? 0 : -1;
   });
 }
+
+// A radiogroup is expected to move with the arrow keys, not Tab.
+document.getElementById('themeDropdown').addEventListener('keydown', event => {
+  const options = [...document.querySelectorAll('.theme-option')];
+  const current = options.indexOf(document.activeElement);
+  if (current === -1) return;
+  const steps = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+  let next = -1;
+  if (steps[event.key]) next = (current + steps[event.key] + options.length) % options.length;
+  else if (event.key === 'Home') next = 0;
+  else if (event.key === 'End') next = options.length - 1;
+  else return;
+  event.preventDefault();
+  options[next].focus();
+  options[next].click();
+});
 
 document.getElementById('themeDropdown').addEventListener('toggle', event => {
   document.getElementById('themeToggle').setAttribute('aria-expanded', String(event.newState === 'open'));
@@ -3140,7 +3233,10 @@ document.getElementById('themeDropdown').addEventListener('toggle', event => {
 
 function initTheme() {
   const saved = storageGet('coolsites-theme');
-  const themeId = saved || 'system';
+  // A theme that was removed since the user last visited must not leave the
+  // picker with nothing selected.
+  const themeId = saved && Object.prototype.hasOwnProperty.call(THEMES, saved) ? saved : 'system';
+  if (saved && themeId !== saved) storageSet('coolsites-theme', themeId);
   applyTheme(themeId);
 }
 
@@ -3375,6 +3471,7 @@ function toggleBookmark(url, groupId) {
     const gid = groupId || (groups.length > 0 ? groups[0].id : 'default');
     bookmarks[url] = { group: gid, order: getNextOrder(gid), addedAt: Date.now() };
   }
+  invalidateUndo();
   if (!saveBookmarks()) return;
   refreshBookmarkViews();
   showToast(bookmarks[url] ? 'Bookmarked' : 'Removed');
@@ -3387,7 +3484,7 @@ function moveToGroup(url, newGroupId) {
   bookmarks[url].order = getNextOrder(newGroupId);
   reindexGroupOrder(oldGroup);
   reindexGroupOrder(newGroupId);
-  hideToast();
+  invalidateUndo();
   saveBookmarks();
   renderDock();
 }
@@ -3404,17 +3501,24 @@ function removeBookmark(url, evt) {
   if (!previous) return;
   const name = getSiteByUrl(url)?.name;
   const previousFilter = activeFilter;
+  // Reindexing renumbers the survivors, so a stored order is stale by the time
+  // undo runs. Keep the group's actual sequence instead.
+  const previousOrder = getGroupSites(previous.group);
   delete bookmarks[url];
   reindexGroupOrder(previous.group);
   // saveBookmarks reloads from storage on failure, so a false return means the
   // removal did not happen and there is nothing to undo.
   if (!saveBookmarks()) { refreshBookmarkViews(); return; }
   refreshBookmarkViews();
+  const filterAfterRemoval = activeFilter;
   showToast(name ? `Removed ${name}` : 'Removed', () => {
-    bookmarks[url] = previous;
-    reindexGroupOrder(previous.group);
+    bookmarks[url] = { ...previous };
+    previousOrder.forEach((entry, index) => {
+      if (bookmarks[entry]) bookmarks[entry].order = index;
+    });
     if (!saveBookmarks()) { refreshBookmarkViews(); return; }
-    activeFilter = previousFilter;
+    // Only put the filter back if nothing has chosen a different one since.
+    if (activeFilter === filterAfterRemoval) activeFilter = previousFilter;
     refreshBookmarkViews();
     showToast(name ? `Restored ${name}` : 'Restored');
   });
@@ -3460,7 +3564,7 @@ function renderDock() {
       reassigned = true;
     }
   });
-  if (reassigned) saveBookmarks();
+  if (reassigned) { invalidateUndo(); saveBookmarks(); }
 
   let html = '';
   groups.forEach((group, gi) => {
@@ -3637,7 +3741,7 @@ function performChipMove(dragUrl, sourceGroup, targetGroup, targetUrl, insertBef
   }
 
 
-  hideToast();
+  invalidateUndo();
   saveBookmarks();
   renderDock();
 }
@@ -3725,7 +3829,7 @@ function initGroupDragAndDrop() {
       const [moved] = groups.splice(fromIdx, 1);
       groups.splice(toIdx, 0, moved);
 
-      hideToast();
+      invalidateUndo();
       saveGroups();
       renderDock();
     });
@@ -3801,21 +3905,32 @@ const COLOR_NAMES = {
   '#64b4ff': 'Blue', '#c864ff': 'Purple'
 };
 
+// Updates state in place. Re-rendering the markup would destroy the button the
+// user is standing on, which took the arrow keys down with it.
+function syncModalColors(moveFocus) {
+  document.querySelectorAll('.modal-color').forEach(el => {
+    const isSelected = el.dataset.color === selectedColor;
+    el.classList.toggle('selected', isSelected);
+    el.setAttribute('aria-checked', String(isSelected));
+    el.tabIndex = isSelected ? 0 : -1;
+    if (isSelected && moveFocus) el.focus();
+  });
+}
+
 function selectModalColor(color, moveFocus) {
   selectedColor = color;
-  renderModalColors();
-  if (moveFocus) document.querySelector(`.modal-color[data-color="${CSS.escape(color)}"]`)?.focus();
+  syncModalColors(moveFocus);
 }
 
 function renderModalColors() {
   const container = document.getElementById('modalColors');
-  container.innerHTML = GROUP_COLORS.map(color => {
-    const isSelected = color === selectedColor;
-    return `<button type="button" role="radio" class="modal-color${isSelected ? ' selected' : ''}" style="background: ${escAttr(color)}" data-color="${escAttr(color)}" aria-checked="${isSelected}" tabindex="${isSelected ? '0' : '-1'}" aria-label="${escAttr(COLOR_NAMES[color] || color)}"></button>`;
-  }).join('');
+  container.innerHTML = GROUP_COLORS.map(color =>
+    `<button type="button" role="radio" class="modal-color" style="background: ${escAttr(color)}" data-color="${escAttr(color)}" aria-checked="false" tabindex="-1" aria-label="${escAttr(COLOR_NAMES[color] || color)}"></button>`
+  ).join('');
   container.querySelectorAll('.modal-color').forEach(el => {
     el.addEventListener('click', () => selectModalColor(el.dataset.color, false));
   });
+  syncModalColors(false);
 }
 
 // Arrow keys move between swatches the way a radio group is expected to behave.
@@ -3848,9 +3963,10 @@ function saveGroupFromModal() {
       showToast(`You can keep up to ${MAX_GROUPS} groups`);
       return;
     }
-    const id = `g_${Date.now()}_${groups.length}`;
+    const id = `g_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
     groups.push({ id, name, color: selectedColor });
   }
+  invalidateUndo();
   if (!saveGroups()) return;
   closeGroupModal();
   renderDock();
@@ -4058,11 +4174,10 @@ document.getElementById('importFile').addEventListener('change', (e) => {
         showToast('Import could not be saved; previous bookmarks were kept');
         return;
       }
+      invalidateUndo();
       bookmarks = nextBookmarks;
       groups = nextGroups;
-      renderDock();
-      renderGrid();
-      buildFilters();
+      refreshBookmarkViews();
       const accepted = Object.keys(importedBookmarks.bookmarks).length;
       showToast(`Imported ${accepted} bookmark${accepted === 1 ? '' : 's'}${skipped ? `; skipped ${skipped} invalid entr${skipped === 1 ? 'y' : 'ies'}` : ''}`);
     } catch (error) {

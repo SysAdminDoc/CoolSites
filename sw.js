@@ -19,7 +19,16 @@ const ASSETS = [
   './fonts/jetbrains-mono-latin-ext.woff2'
 ];
 
+function offlineResponse() {
+  return new Response('Offline and not cached', {
+    status: 504,
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+  });
+}
+
 function markCacheSource(response, source) {
+  // A 204 or 205 has a null body and constructing a Response from it throws.
+  if (response.status === 204 || response.status === 205 || response.status === 304) return response;
   const headers = new Headers(response.headers);
   headers.set('X-CoolSites-Cache', source);
   return new Response(response.body, {
@@ -69,7 +78,7 @@ self.addEventListener('fetch', (e) => {
             .catch(() => {});
         }
         return response;
-      }))
+      }).catch(() => offlineResponse()))
     );
     return;
   }
@@ -90,10 +99,7 @@ self.addEventListener('fetch', (e) => {
         const shell = await caches.match('./index.html');
         if (shell) return shell;
       }
-      return new Response('Offline and not cached', {
-        status: 504,
-        headers: { 'Content-Type': 'text/plain; charset=utf-8' }
-      });
+      return offlineResponse();
     }))
   );
 });

@@ -45,6 +45,19 @@ function normalizeType(contentType) {
   return ALLOWED_TYPES.has(type) ? type : null;
 }
 
+function looksLikeImage(bytes) {
+  if (bytes.length < 8) return false;
+  const head = bytes.subarray(0, 4);
+  if (head[0] === 0x89 && head[1] === 0x50 && head[2] === 0x4e && head[3] === 0x47) return true;
+  if (head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff) return true;
+  if (bytes.subarray(0, 3).toString('latin1') === 'GIF') return true;
+  if (bytes.subarray(0, 4).toString('latin1') === 'RIFF'
+    && bytes.subarray(8, 12).toString('latin1') === 'WEBP') return true;
+  if (head[0] === 0x00 && head[1] === 0x00 && (head[2] === 0x01 || head[2] === 0x02)) return true;
+  const text = bytes.subarray(0, 256).toString('utf8');
+  return text.includes('<svg') || text.trimStart().startsWith('<?xml');
+}
+
 async function fetchIcon(url) {
   const response = await fetch(url, {
     redirect: 'follow',
@@ -57,6 +70,9 @@ async function fetchIcon(url) {
   const bytes = Buffer.from(await response.arrayBuffer());
   if (bytes.length < MIN_ICON_BYTES) throw new Error(`icon is only ${bytes.length} bytes`);
   if (bytes.length > MAX_ICON_BYTES) throw new Error(`icon is ${bytes.length} bytes`);
+  // Servers lie about Content-Type. One domain served a macOS alias file as
+  // image/x-icon, which the browser then refused to decode.
+  if (!looksLikeImage(bytes)) throw new Error(`payload is not an image (starts ${bytes.subarray(0, 4).toString('hex')})`);
   return `data:${type};base64,${bytes.toString('base64')}`;
 }
 

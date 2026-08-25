@@ -28,9 +28,12 @@ function parseThemes(source) {
   return themes;
 }
 
+// Returns null rather than throwing: one unparseable token must not abort the
+// whole sweep and hide every other regression behind it.
 function toRgb(value) {
+  if (typeof value !== 'string') return null;
   const match = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.exec(value.trim());
-  assert.ok(match, `expected a hex colour, got ${value}`);
+  if (!match) return null;
   let hex = match[1];
   if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
   return [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
@@ -46,16 +49,19 @@ function luminance(rgb) {
 }
 
 function contrast(a, b) {
-  const la = luminance(toRgb(a));
-  const lb = luminance(toRgb(b));
+  const rgbA = toRgb(a);
+  const rgbB = toRgb(b);
+  if (!rgbA || !rgbB) return null;
+  const la = luminance(rgbA);
+  const lb = luminance(rgbB);
   return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
 }
 
 // Foreground token -> the surfaces it is painted on.
 const PAIRS = [
-  ['text-primary', ['bg-primary', 'bg-card', 'bg-card-hover']],
-  ['text-secondary', ['bg-primary', 'bg-card', 'bg-card-hover']],
-  ['text-muted', ['bg-primary', 'bg-card', 'bg-card-hover']],
+  ['text-primary', ['bg-primary', 'bg-secondary', 'bg-card', 'bg-card-hover']],
+  ['text-secondary', ['bg-primary', 'bg-secondary', 'bg-card', 'bg-card-hover']],
+  ['text-muted', ['bg-primary', 'bg-secondary', 'bg-card', 'bg-card-hover']],
   ['accent-text', ['bg-primary', 'bg-card', 'bg-card-hover']],
   ['amber-text', ['bg-primary', 'bg-card']],
   ['danger-text', ['bg-primary', 'bg-card']],
@@ -77,11 +83,20 @@ test('every theme defines the full token set', () => {
 });
 
 test('text tokens clear WCAG AA on the surfaces that use them', () => {
+  // Every palette has to be present, or a parse slip silently narrows the sweep
+  // and this test passes without measuring the missing theme.
+  assert.equal(THEMES.size, 9, 'the palette parse must find all nine themes');
   const failures = [];
+  let checked = 0;
   for (const [name, tokens] of THEMES) {
     for (const [foreground, backgrounds] of PAIRS) {
       for (const background of backgrounds) {
         const ratio = contrast(tokens[foreground], tokens[background]);
+        if (ratio === null) {
+          failures.push(`${name}: --${foreground} (${tokens[foreground] ?? 'missing'}) on --${background} (${tokens[background] ?? 'missing'}) is not a plain hex colour`);
+          continue;
+        }
+        checked++;
         if (ratio < 4.5) {
           failures.push(`${name}: --${foreground} on --${background} is ${ratio.toFixed(2)}`);
         }
@@ -89,6 +104,8 @@ test('text tokens clear WCAG AA on the surfaces that use them', () => {
     }
   }
   assert.deepEqual(failures, [], 'small text needs 4.5:1');
+  assert.equal(checked, THEMES.size * PAIRS.reduce((total, pair) => total + pair[1].length, 0),
+    'every token pair in every theme has to be measured');
 });
 
 test('borders stay visible against their own surface', () => {

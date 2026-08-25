@@ -172,13 +172,23 @@ function loadJson(url) {
   });
 }
 
+let loading = false;
+
 function showError(message) {
   $collections.setAttribute('aria-busy', 'false');
   $collections.innerHTML = `<div class="error"><strong>Collections could not be loaded.</strong><p class="lede" style="margin:8px 0 0">${esc(message)}</p><button type="button" id="retry">Try again</button></div>`;
-  document.getElementById('retry').addEventListener('click', render);
+  document.getElementById('retry').addEventListener('click', event => {
+    event.currentTarget.disabled = true;
+    event.currentTarget.textContent = 'Retrying...';
+    render();
+  });
 }
 
 function render() {
+  // Without this a second click starts a second fetch, and a late failure can
+  // overwrite the render that already succeeded.
+  if (loading) return;
+  loading = true;
   $collections.setAttribute('aria-busy', 'true');
   $collections.innerHTML = '<div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>'.repeat(3);
   Promise.all([loadJson('./collections.json'), loadJson('./sites.json')])
@@ -204,7 +214,8 @@ function render() {
     })
     .catch(error => showError(navigator.onLine === false
       ? 'You appear to be offline and nothing is cached yet.'
-      : error.message));
+      : error.message))
+    .finally(() => { loading = false; });
 }
 
 render();

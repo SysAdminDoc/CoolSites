@@ -311,6 +311,58 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.equal(afterUndo.activePill, 'Bookmarks', 'the restored filter has to be the highlighted pill');
     assert.equal(afterUndo.cards, 1, 'the grid has to agree with the highlighted pill');
 
+    // Undo has to restore a chip to its original slot, not append it.
+    const undoOrder = await page.evaluate(`(async () => {
+      const urls = [...document.querySelectorAll('#grid .card')].slice(0, 4).map(card => card.dataset.url);
+      bookmarks = {};
+      urls.forEach((url, index) => { bookmarks[url] = { group: groups[0].id, order: index, addedAt: Date.now() }; });
+      saveBookmarks();
+      refreshBookmarkViews();
+      const before = [...document.querySelectorAll('.site-chip')].map(chip => chip.dataset.url);
+      removeBookmark(urls[1]);
+      document.getElementById('toastAction').click();
+      await new Promise(resolve => setTimeout(resolve, 250));
+      const after = [...document.querySelectorAll('.site-chip')].map(chip => chip.dataset.url);
+      return { before, after };
+    })()`);
+    assert.deepEqual(undoOrder.after, undoOrder.before, 'undo must restore the chip to its original position');
+
+    // Undo must not overwrite a filter the user chose after the removal.
+    const undoRespectsChoice = await page.evaluate(`(async () => {
+      const urls = Object.keys(bookmarks);
+      removeBookmark(urls[0]);
+      activeFilter = 'Homelab';
+      buildFilters();
+      renderGrid();
+      document.getElementById('toastAction').click();
+      await new Promise(resolve => setTimeout(resolve, 250));
+      return activeFilter;
+    })()`);
+    assert.equal(undoRespectsChoice, 'Homelab', 'undo must leave a deliberately chosen filter alone');
+    await page.evaluate("bookmarks = {}; saveBookmarks(); activeFilter = 'All'; refreshBookmarkViews();");
+    await delay(200);
+
+    // A broken icon must replace only itself. It used to overwrite the chip's
+    // parent, taking the label, the open overlay and the remove button with it.
+    const chipSurvives = await page.evaluate(`(() => {
+      const img = document.querySelector('.site-chip img.favicon-img');
+      if (!img) return { skipped: true };
+      const chip = img.closest('.site-chip');
+      img.dispatchEvent(new Event('error', { bubbles: true }));
+      return {
+        label: Boolean(chip.querySelector('.chip-text')),
+        open: Boolean(chip.querySelector('.chip-open')),
+        remove: Boolean(chip.querySelector('.chip-remove')),
+        placeholder: Boolean(chip.querySelector('.chip-initial'))
+      };
+    })()`);
+    if (!chipSurvives.skipped) {
+      assert.deepEqual(chipSurvives, { label: true, open: true, remove: true, placeholder: true },
+        'a failed favicon must not destroy the rest of the chip');
+    }
+    await page.send('Page.reload', { ignoreCache: true });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+
     // Cancelling a modal must not wipe an active search behind it.
     await searchFor(page, 'cloudflare');
     const beforeModal = await page.evaluate("document.getElementById('searchInput').value");
@@ -324,11 +376,74 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       'Escape inside a dialog must not clear the search box'
     );
     await page.evaluate("document.getElementById('groupModal').close()");
+
+    // Escape also light-dismisses a popover, which is not a <dialog>.
+    await page.evaluate("document.getElementById('themeDropdown').showPopover()");
+    await delay(200);
+    await page.evaluate("document.getElementById('themeDropdown').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))");
+    await delay(200);
+    assert.equal(
+      await page.evaluate("document.getElementById('searchInput').value"),
+      beforeModal,
+      'Escape closing the theme popover must not clear the search box'
+    );
+    await page.evaluate("document.getElementById('themeDropdown').hidePopover()");
+
+    // A read-only action must not cancel a pending Undo.
+    await page.evaluate("showToast('Removed something', () => { window.__undoRan = true; })");
+    await page.evaluate("showToast('URL copied')");
+    await delay(150);
+    const undoSurvives = await page.evaluate(`({
+      visible: !document.getElementById('toastAction').hidden,
+      message: document.getElementById('toastMessage').textContent
+    })`);
+    assert.equal(undoSurvives.visible, true, 'an informational toast must not cancel a pending Undo');
+    assert.equal(undoSurvives.message, 'URL copied');
+    await page.evaluate("document.getElementById('toastAction').click()");
+    assert.equal(await page.evaluate("window.__undoRan === true"), true, 'the preserved Undo must still run');
+
+    // Focus holds the toast open; a 7s countdown must not steal the control.
+    await page.evaluate("window.__undoRan = false; showToast('Removed something', () => { window.__undoRan = true; })");
+    await page.evaluate("document.getElementById('toastAction').focus()");
+    await delay(1200);
+    assert.equal(
+      await page.evaluate("document.activeElement === document.getElementById('toastAction')"),
+      true,
+      'focus must stay on the Undo control'
+    );
+    await page.evaluate("hideToast()");
+
+    // The colour picker must keep focus inside the radiogroup.
+    await page.evaluate("document.getElementById('newGroupBtn').click()");
+    await waitFor(page, "document.getElementById('groupModal').open");
+    const colourKeyboard = await page.evaluate(`(() => {
+      const swatch = document.querySelectorAll('.modal-color')[2];
+      swatch.focus();
+      swatch.click();
+      const afterClick = document.activeElement.classList.contains('modal-color');
+      document.getElementById('modalColors').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+      const moved = document.activeElement.classList.contains('modal-color');
+      const checked = document.querySelectorAll('.modal-color[aria-checked="true"]').length;
+      return { afterClick, moved, checked };
+    })()`);
+    assert.equal(colourKeyboard.afterClick, true, 'clicking a swatch must not throw focus out of the group');
+    assert.equal(colourKeyboard.moved, true, 'arrow keys must still work after a selection');
+    assert.equal(colourKeyboard.checked, 1, 'exactly one swatch is checked');
+    await page.evaluate("document.getElementById('modalCancel').click()");
+    await waitFor(page, "!document.getElementById('groupModal').open");
+
     await searchFor(page, '');
     await page.evaluate("document.querySelector('.filter-btn[data-cat=\"All\"]').click()");
     await delay(250);
 
-    await page.evaluate("localStorage.setItem('coolsites-bookmarks-v2', '{broken'); localStorage.setItem('coolsites-groups-v2', '[[[')");
+    // Clobber the last-good backups too, or the fallback legitimately recovers
+    // the previous value and this measures the backup rather than the corruption.
+    await page.evaluate(`(() => {
+      for (const key of ['coolsites-bookmarks-v2', 'coolsites-groups-v2']) {
+        localStorage.setItem(key, '{broken');
+        localStorage.setItem(key + ':last-good', '{broken');
+      }
+    })()`);
     await page.send('Page.reload', { ignoreCache: true });
     await delay(500);
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
@@ -343,7 +458,27 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.ok(afterCorrupt.cards > 0, 'corrupt local storage must not stop boot');
     assert.ok(afterCorrupt.pills > 1, 'category pills should still build');
     assert.deepEqual(afterCorrupt.groups, ['default'], 'corrupt groups should fall back to the default group');
-    assert.equal(afterCorrupt.dockCount, '0', 'corrupt bookmarks should read as none, not as garbage');
+    assert.equal(afterCorrupt.dockCount, '0', 'corrupt bookmarks with no recoverable backup should read as none');
+
+    // With only the primary copy corrupt, the last-good backup has to recover it.
+    await page.evaluate(`(() => {
+      const value = JSON.stringify({ schemaVersion: 2, data: { 'https://example.com/': { group: 'default', order: 0, addedAt: 1 } } });
+      localStorage.setItem('coolsites-bookmarks-v2:last-good', value);
+      localStorage.setItem('coolsites-bookmarks-v2', '{broken');
+    })()`);
+    await page.send('Page.reload', { ignoreCache: true });
+    await delay(500);
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+    assert.equal(
+      await page.evaluate("Object.keys(bookmarks).length"),
+      1,
+      'a corrupt primary copy should be recovered from the last-good backup'
+    );
+    // Restore the theme the earlier assertions selected; later checks rely on it.
+    await page.evaluate("localStorage.clear(); localStorage.setItem('coolsites-theme', 'light')");
+    await page.send('Page.reload', { ignoreCache: true });
+    await delay(500);
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
 
     const importResult = await page.evaluate(`(() => {
       const first = document.querySelector('#grid .card').dataset.url;

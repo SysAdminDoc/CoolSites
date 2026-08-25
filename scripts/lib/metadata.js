@@ -85,12 +85,16 @@ function buildCategoryTable(meta, previous) {
   for (const line of previous.split(/\r?\n/)) {
     const cells = splitRow(line);
     if (cells.length < 5 || !/^\d+$/.test(cells[2])) continue;
-    highlights.set(cells[1], cells[3]);
+    // A hand-typed pipe in the Highlights cell splits the row into more parts
+    // than the template writes. Rejoin the tail rather than dropping it, or a
+    // regenerate silently truncates someone's prose.
+    const tail = cells.slice(3, cells.length - 1).join(' | ');
+    highlights.set(cells[1], tail);
   }
   const rows = meta.categories.map(category => [
     cell(category.name),
     String(category.siteCount),
-    cell(highlights.get(cell(category.name)) || category.blurb)
+    cell(highlights.get(cell(category.name)) ?? highlights.get(category.name) ?? category.blurb)
   ]);
   const nameWidth = Math.max(8, ...rows.map(row => row[0].length));
   const countWidth = Math.max(5, ...rows.map(row => row[1].length));

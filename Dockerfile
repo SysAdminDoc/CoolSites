@@ -11,7 +11,8 @@ RUN rm -rf /usr/share/nginx/html/.git \
     /usr/share/nginx/html/node_modules \
     /usr/share/nginx/html/scripts \
     /usr/share/nginx/html/test \
-    && find /usr/share/nginx/html -maxdepth 1 -name '*.md' ! -name 'README.md' -delete \
+    /usr/share/nginx/html/docker \
+    && find /usr/share/nginx/html -name '*.md' ! -name 'README.md' -delete \
     && rm -f /usr/share/nginx/html/package.json \
        /usr/share/nginx/html/package-lock.json \
        /usr/share/nginx/html/Dockerfile \

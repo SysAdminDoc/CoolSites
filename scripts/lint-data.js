@@ -102,6 +102,29 @@ function canonicalUrl(value) {
   }
 }
 
+// The declared media type is whatever the server claimed. Check the bytes, or a
+// non-image sails through and only fails in the browser, where it can take the
+// surrounding UI with it.
+function looksLikeImage(dataUri) {
+  let bytes;
+  try {
+    bytes = Buffer.from(dataUri.slice(dataUri.indexOf(',') + 1), 'base64');
+  } catch {
+    return false;
+  }
+  if (bytes.length < 8) return false;
+  const head = bytes.subarray(0, 4);
+  if (head[0] === 0x89 && head[1] === 0x50 && head[2] === 0x4e && head[3] === 0x47) return true;  // PNG
+  if (head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff) return true;                     // JPEG
+  if (bytes.subarray(0, 3).toString('latin1') === 'GIF') return true;                            // GIF
+  if (bytes.subarray(0, 4).toString('latin1') === 'RIFF'
+    && bytes.subarray(8, 12).toString('latin1') === 'WEBP') return true;                         // WebP
+  if (head[0] === 0x00 && head[1] === 0x00 && (head[2] === 0x01 || head[2] === 0x02)) return true; // ICO/CUR
+  const text = bytes.subarray(0, 256).toString('utf8');
+  if (text.includes('<svg') || text.trimStart().startsWith('<?xml')) return true;                // SVG
+  return false;
+}
+
 function validateSourceData() {
   const sites = readJson('sites.json');
   const categories = readJson('categories.json');
@@ -177,8 +200,12 @@ function validateSourceData() {
 
   Object.entries(favicons || {}).forEach(([domain, data]) => {
     if (!/^[a-z0-9.-]+$/i.test(domain)) addError(`favicons.${domain}: invalid domain key`);
-    if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp|x-icon|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(data)) addError(`favicons.${domain}: invalid data URI`);
-    if (typeof data === 'string' && data.length > 300000) addError(`favicons.${domain}: data URI is too large`);
+    if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp|x-icon|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(data)) {
+      addError(`favicons.${domain}: invalid data URI`);
+      return;
+    }
+    if (data.length > 300000) addError(`favicons.${domain}: data URI is too large`);
+    if (!looksLikeImage(data)) addError(`favicons.${domain}: payload is not an image`);
   });
 
   return { sites: Array.isArray(sites) ? sites : [], categories: Array.isArray(categories) ? categories : [], collections: Array.isArray(collections) ? collections : [], urls };
