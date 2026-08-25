@@ -10,7 +10,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="CoolSites v2.3.0">
+<meta name="generator" content="CoolSites v2.4.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
 <meta name="description" content="A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.">
 <meta property="og:title" content="CoolSites — Curated Web Tools & Resources">
@@ -2049,6 +2049,422 @@
     .metadata-toggle { min-height: 40px; }
     .filter-btn { min-height: 40px; }
   }
+
+  /* ── Discovery workspace redesign ── */
+  :root {
+    --workspace-rail: 328px;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-lg: 12px;
+  }
+  [data-theme="oled"] {
+    --bg-primary: #080b12;
+    --bg-secondary: #0b111b;
+    --bg-card: #101722;
+    --bg-card-hover: #141e2c;
+    --border: rgba(133, 160, 192, 0.13);
+    --border-hover: rgba(133, 160, 192, 0.26);
+    --text-primary: #f1f5fb;
+    --text-secondary: #9ba8ba;
+    --text-muted: #7f8ba0;
+    --accent: #168fff;
+    --accent-secondary: #3ecf8e;
+    --accent-tertiary: #e5484d;
+    --accent-amber: #f5a623;
+    --accent-cyan: #05c8e8;
+    --accent-text: #51aaff;
+    --accent-glow: rgba(22, 143, 255, 0.16);
+    --on-accent: #07131f;
+    --amber-text: #f5a623;
+    --danger-text: #f27b80;
+    --header-bg: rgba(8, 11, 18, 0.96);
+  }
+
+  body { overflow-x: clip; }
+  body::before,
+  .ambient-glow { display: none; }
+
+  .header {
+    height: 64px;
+    padding: 0;
+    background: var(--header-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .header-inner {
+    max-width: none;
+    height: 64px;
+    padding: 0 22px;
+    justify-content: flex-start;
+    gap: 18px;
+  }
+  .logo { flex: 0 0 auto; gap: 10px; padding-right: 20px; }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    background: #168fff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
+  }
+  .logo-text { font-size: 1.18rem; }
+  .logo-text span { display: none; }
+  .primary-nav {
+    align-self: stretch;
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    border-left: 1px solid var(--border);
+    padding-left: 12px;
+  }
+  .primary-nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  .primary-nav-link:hover { color: var(--text-primary); }
+  .primary-nav-link.active { color: var(--accent-text); }
+  .primary-nav-link.active::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    left: 14px;
+    right: 14px;
+    bottom: 0;
+    background: var(--accent);
+  }
+  .header-stats { margin-left: auto; gap: 18px; }
+  .header-stats .stat { font-size: 0.72rem; }
+  .github-link {
+    min-height: 36px;
+    padding: 6px 8px;
+    border-color: transparent;
+    border-radius: 6px;
+  }
+  .theme-btn { border-radius: 6px; }
+
+  .dock-wrapper {
+    position: fixed;
+    inset: 64px auto 0 0;
+    width: var(--workspace-rail);
+    z-index: 85;
+    background: color-mix(in srgb, var(--bg-secondary) 94%, transparent);
+    border-right: 1px solid var(--border);
+    transition: width 0.25s ease;
+  }
+  .dock {
+    height: 100%;
+    max-height: none;
+    padding: 20px 16px 72px;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow-y: auto;
+  }
+  .dock-inner { max-width: none; margin: 0; }
+  .dock-header { display: block; margin-bottom: 12px; }
+  .dock-title { margin-bottom: 10px; }
+  .dock-count,
+  .filter-count { border-radius: 4px; }
+  .dock-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .dock-action-btn {
+    justify-content: center;
+    min-width: 0;
+    min-height: 34px;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+  .dock-wrapper:not(.empty) #newGroupBtn { grid-column: 1 / -1; }
+  .dock-hint {
+    margin: 8px 0 16px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    line-height: 1.45;
+  }
+  .dock-groups { gap: 7px; margin-bottom: 18px; }
+  .dock-group { padding: 8px; border-radius: 8px; }
+  .dock-group-sites { display: grid; gap: 4px; }
+  .site-chip {
+    width: 100%;
+    min-width: 0;
+    padding: 7px 28px 7px 7px;
+    border-radius: 6px;
+  }
+  .rail-section-label {
+    margin: 16px 0 7px;
+    color: var(--text-muted);
+    font: 600 0.66rem/1 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .filter-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 36px;
+    padding: 7px 9px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-align: left;
+  }
+  .filter-btn:hover { border-color: var(--border); }
+  .filter-btn.active {
+    background: var(--accent-glow);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    color: var(--text-primary);
+    box-shadow: none;
+  }
+  .filter-count {
+    height: 20px;
+    min-width: 24px;
+    margin-left: 10px;
+    background: color-mix(in srgb, var(--text-primary) 5%, transparent);
+  }
+  .rail-categories-toggle {
+    width: 100%;
+    min-height: 36px;
+    margin-top: 4px;
+    padding: 8px 9px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font: 600 0.72rem/1.2 var(--font-mono);
+    text-align: left;
+    cursor: pointer;
+  }
+  .rail-categories-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--border);
+    background: var(--bg-card);
+  }
+  .metadata-filters {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+  }
+  .metadata-toggle {
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: transparent;
+  }
+  .metadata-toggle.active { box-shadow: none; }
+  .dock-toggle-bar {
+    position: absolute;
+    right: -14px;
+    bottom: 18px;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    align-items: center;
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    background: var(--bg-card);
+  }
+  .dock-wrapper.collapsed { width: 44px; }
+  .dock-wrapper.collapsed .dock {
+    max-height: none;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    border: 0;
+  }
+
+  .hero,
+  .container,
+  .footer {
+    margin-left: var(--workspace-rail);
+    transition: margin-left 0.25s ease;
+  }
+  body:has(.dock-wrapper.collapsed) .hero,
+  body:has(.dock-wrapper.collapsed) .container,
+  body:has(.dock-wrapper.collapsed) .footer { margin-left: 44px; }
+  .hero {
+    max-width: none;
+    min-height: 244px;
+    margin-right: 0;
+    padding: 40px 32px 28px 68px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg-secondary) 48%, transparent);
+  }
+  .hero-eyebrow {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--accent-text);
+    font: 700 0.67rem/1 var(--font-mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    max-width: 940px;
+    margin: 0 0 10px;
+    color: var(--text-primary);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    font-size: clamp(2.2rem, 4vw, 2.85rem);
+    line-height: 1.08;
+  }
+  .hero p {
+    max-width: 760px;
+    margin: 0;
+    font-size: 0.98rem;
+  }
+  .search-container {
+    max-width: 660px;
+    margin: 22px 0 0;
+  }
+  .search-input {
+    min-height: 50px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--bg-card) 86%, transparent);
+  }
+
+  .container {
+    max-width: none;
+    margin-right: 0;
+    padding: 0 40px 80px;
+  }
+  .results-bar {
+    position: sticky;
+    top: 64px;
+    z-index: 70;
+    min-height: 54px;
+    margin: 0 -40px 14px;
+    padding: 10px 40px;
+    background: color-mix(in srgb, var(--bg-primary) 95%, transparent);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .sort-select { min-height: 36px; border-radius: 6px; }
+  .view-btn { width: 36px; height: 36px; border-radius: 6px; }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .card {
+    min-height: 154px;
+    border-radius: 8px;
+    border-left: 4px solid color-mix(in srgb, var(--cat-c, var(--accent)) 86%, #ffffff 8%);
+    contain-intrinsic-size: auto 154px;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card-body { padding: 13px 15px 11px; }
+  .card-header { gap: 10px; margin-bottom: 7px; }
+  .card-icon { width: 34px; height: 34px; border-radius: 6px; }
+  .card-category {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: color-mix(in srgb, var(--cat-c) 40%, var(--text-primary));
+    margin-bottom: 3px;
+  }
+  .card-category::before { display: none; }
+  .card-title { font-size: 1rem; margin-bottom: 2px; }
+  .card-desc { min-height: 34px; margin-bottom: 8px; font-size: 0.78rem; line-height: 1.4; }
+  .card-footer {
+    padding-top: 7px;
+    border-top: 1px solid var(--border);
+  }
+  .card-meta-row { min-height: 0; }
+  .card-meta-row:empty { display: none; }
+  .card-actions-overflow { opacity: 1; }
+  .card-action,
+  .card-bookmark,
+  .compare-select { border-radius: 6px; }
+  .card.is-bookmarked::after { display: none; }
+  .editors-pick-badge,
+  .alternative-badge,
+  .star-badge { border-radius: 4px; }
+  .load-more-card { border-radius: 8px; }
+  .footer { max-width: none; }
+
+  @media (max-width: 1180px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    :root { --workspace-rail: 0px; }
+    .logo { padding-right: 0; }
+    .header,
+    .header-inner { height: 56px; }
+    .header-inner { padding: 0 12px; gap: 8px; }
+    .primary-nav { padding-left: 6px; }
+    .primary-nav-link { padding: 0 9px; font-size: 0.76rem; }
+    .primary-nav-link.active::after { left: 9px; right: 9px; }
+    .dock-wrapper,
+    .dock-wrapper.collapsed {
+      position: sticky;
+      inset: auto;
+      top: 56px;
+      width: 100%;
+      height: auto;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .dock,
+    .dock-wrapper.collapsed .dock {
+      height: auto;
+      max-height: 280px;
+      padding: 12px 16px;
+      opacity: 1;
+      pointer-events: auto;
+      overflow-y: auto;
+    }
+    .dock-wrapper.collapsed .dock { display: none; }
+    .dock-toggle-bar { right: 14px; bottom: -14px; }
+    .filters {
+      flex-direction: row;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-btn { width: auto; flex: 0 0 auto; }
+    .metadata-filters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .hero,
+    .container,
+    .footer,
+    body:has(.dock-wrapper.collapsed) .hero,
+    body:has(.dock-wrapper.collapsed) .container,
+    body:has(.dock-wrapper.collapsed) .footer { margin-left: 0; }
+    .hero { padding: 42px 24px 26px; min-height: 230px; }
+    .container { padding: 0 24px 72px; }
+    .results-bar { top: 56px; margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 640px) {
+    .header-stats .stat { display: none; }
+    .logo-text { font-size: 1rem; }
+    .header-stats { gap: 4px; }
+    .github-link-label { display: none; }
+    .hero { padding: 36px 16px 22px; }
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 0.9rem; }
+    .container { padding: 0 16px 64px; }
+    .results-bar { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .metadata-filters { grid-template-columns: 1fr; }
+    .card-actions-overflow { opacity: 1; }
+  }
 </style>
 <script>
 (function(){
@@ -2074,6 +2490,10 @@
       <div class="logo-icon">//</div>
       <div class="logo-text">CoolSites <span>directory</span></div>
     </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="./" class="primary-nav-link active" aria-current="page">Directory</a>
+      <a href="collections.html" class="primary-nav-link">Collections</a>
+    </nav>
     <div class="header-stats">
       <div class="stat"><strong id="totalCount">0</strong> sites</div>
       <div class="stat"><strong id="catCount">0</strong> categories</div>
@@ -2138,9 +2558,6 @@
           </button>
         </div>
       </div>
-      <a href="collections.html" class="github-link">
-        Collections
-      </a>
       <a href="https://github.com/SysAdminDoc/CoolSites" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="CoolSites on GitHub">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         <span class="github-link-label">GitHub</span>
@@ -2177,6 +2594,23 @@
       </div>
       <div class="dock-groups" id="dockGroups"></div>
       <p class="dock-hint">Star any site to pin it here, then drag the chips into groups. Already have an export? Use Import.</p>
+      <div class="rail-section-label">Categories</div>
+      <div class="filters" id="filters" role="toolbar" aria-label="Filter by category"></div>
+      <div class="rail-section-label">Filters</div>
+      <div class="metadata-filters" id="metadataFilters" role="group" aria-label="Filter by metadata">
+        <button class="metadata-toggle" id="openSourceOnlyBtn" type="button" aria-pressed="false" data-meta-filter="openSourceOnly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open source
+        </button>
+        <button class="metadata-toggle" id="noAuthOnlyBtn" type="button" aria-pressed="false" data-meta-filter="noAuthOnly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          No account
+        </button>
+        <button class="metadata-toggle" id="picksOnlyBtn" type="button" aria-pressed="false" data-meta-filter="picksOnly">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Staff Picks
+        </button>
+      </div>
     </div>
   </div>
   <button class="dock-toggle-bar" id="dockToggle" title="Toggle bookmarks bar" aria-label="Toggle bookmarks bar" aria-expanded="true">
@@ -2249,8 +2683,9 @@
 
 <!-- Hero -->
 <section class="hero">
+  <span class="hero-eyebrow">Curated directory</span>
   <h1>The Internet's Best Kept Secrets</h1>
-  <p id="heroTagline">Your personal launchpad. Bookmark what you like, sort it into groups, and go find something new. 588 picks across 30 categories.</p>
+  <p id="heroTagline">A hand-picked directory of 588 free tools and hidden gems across 30 categories.</p>
 
   <div class="search-container">
     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -2258,21 +2693,6 @@
     <span class="search-shortcut">/</span>
   </div>
 
-  <div class="filters" id="filters" role="toolbar" aria-label="Filter by category"></div>
-  <div class="metadata-filters" id="metadataFilters" role="group" aria-label="Filter by metadata">
-    <button class="metadata-toggle" id="openSourceOnlyBtn" type="button" aria-pressed="false" data-meta-filter="openSourceOnly">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Open source
-    </button>
-    <button class="metadata-toggle" id="noAuthOnlyBtn" type="button" aria-pressed="false" data-meta-filter="noAuthOnly">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-      No account
-    </button>
-    <button class="metadata-toggle" id="picksOnlyBtn" type="button" aria-pressed="false" data-meta-filter="picksOnly">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      Staff Picks
-    </button>
-  </div>
 </section>
 
 <!-- Content -->
@@ -2521,6 +2941,7 @@ let activeFilter = _initState.cat;
 let searchTerm = _initState.q;
 let viewMode = _initState.view;
 let sortMode = _initState.sort;
+let categoriesExpanded = false;
 let openSourceOnly = _initState.oss;
 let noAuthOnly = _initState.noauth;
 let picksOnly = _initState.picks;
@@ -2603,14 +3024,29 @@ function buildFilters() {
     html += `<button class="filter-btn" data-cat="Bookmarks" aria-pressed="false">Bookmarks<span class="filter-count">${bmCount}</span></button>`;
   }
 
-  CATEGORIES
+  const rankedCategories = CATEGORIES
     .filter(category => cats[category.name])
-    .sort((a, b) => cats[b.name] - cats[a.name])
-    .forEach(category => {
+    .sort((a, b) => cats[b.name] - cats[a.name]);
+  const shownCategories = categoriesExpanded
+    ? rankedCategories
+    : rankedCategories.slice(0, 10);
+  if (!categoriesExpanded && activeFilter !== 'All' && activeFilter !== 'Bookmarks') {
+    const activeCategory = rankedCategories.find(category => category.name === activeFilter);
+    if (activeCategory && !shownCategories.includes(activeCategory)) shownCategories.push(activeCategory);
+  }
+  shownCategories.forEach(category => {
       const count = cats[category.name];
       html += `<button class="filter-btn" data-cat="${escAttr(category.name)}" title="${escAttr(category.blurb)}" aria-pressed="false">${escHtml(category.name)}<span class="filter-count">${count}</span></button>`;
     });
+  if (rankedCategories.length > 10) {
+    html += `<button class="rail-categories-toggle" type="button" aria-expanded="${categoriesExpanded}">${categoriesExpanded ? 'Show fewer categories' : `Show all ${rankedCategories.length} categories`}</button>`;
+  }
   container.innerHTML = html;
+
+  container.querySelector('.rail-categories-toggle')?.addEventListener('click', () => {
+    categoriesExpanded = !categoriesExpanded;
+    buildFilters();
+  });
 
   container.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -2842,7 +3278,7 @@ function buildCard(site, index) {
   const compareButton = compareMode ? `<button class="compare-select${selectedCompare.has(site.url) ? ' selected' : ''}" title="Select for comparison" aria-label="Select ${escAttr(site.name)} for comparison" aria-pressed="${selectedCompare.has(site.url)}" data-action="compare" data-url="${escUrl}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg></button>` : '';
 
   return `
-    <article class="card${bmClass}${pickClass}${compareClass}" data-url="${escUrl}">
+    <article class="card${bmClass}${pickClass}${compareClass}" data-url="${escUrl}" style="--cat-c:${escAttr(category.color)}">
       <div class="card-body">
         <div class="card-header">
           <div class="card-icon">${favicon
@@ -3555,7 +3991,9 @@ const normalizedGroups = normalizeGroups(readStoredValue(GROUPS_KEY, []));
 let groups = normalizedGroups.groups;
 const normalizedBookmarks = normalizeBookmarks(readStoredValue(STORAGE_KEY, {}), new Set(groups.map(group => group.id)));
 let bookmarks = normalizedBookmarks.bookmarks;
-let dockCollapsed = storageGet(DOCK_STATE_KEY) === 'collapsed';
+const savedDockState = storageGet(DOCK_STATE_KEY);
+let dockCollapsed = savedDockState === 'collapsed' ||
+  (savedDockState === null && window.matchMedia('(max-width: 900px)').matches);
 
 function saveBookmarks(next = bookmarks) {
   if (writeStoredValue(STORAGE_KEY, next)) return true;

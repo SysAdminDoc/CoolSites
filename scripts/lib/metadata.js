@@ -62,7 +62,7 @@ function copyFor(meta) {
   return {
     metaDescription: `A hand-checked directory of ${siteCount} free tools, open source projects, and hidden gems across ${categoryCount} categories.`,
     socialDescription: `${siteCount} hand-checked free tools, open source projects, and hidden gems, sorted into ${categoryCount} categories.`,
-    heroTagline: `Your personal launchpad. Bookmark what you like, sort it into groups, and go find something new. ${siteCount} picks across ${categoryCount} categories.`,
+    heroTagline: `A hand-picked directory of ${siteCount} free tools and hidden gems across ${categoryCount} categories.`,
     readmeTagline: `> A curated directory of ${siteCount} free tools, open source projects, and hidden gems across ${categoryCount} categories, built for sysadmins, devs, creators, homelabbers, and the endlessly curious.`,
     readmeFeature: `- **${siteCount} curated sites** across ${categoryCount} categories, every entry hand-picked and described`,
     readmeClosing: `**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** with all ${siteCount} sites.`

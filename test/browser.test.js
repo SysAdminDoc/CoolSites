@@ -43,10 +43,13 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.getElementById('shortcutsModal').open");
     await page.evaluate("document.getElementById('shortcutsClose').click()");
     await waitFor(page, "!document.getElementById('shortcutsModal').open");
+    await page.evaluate("if (document.getElementById('dockWrapper').classList.contains('collapsed')) document.getElementById('dockToggle').click()");
+    await waitFor(page, "!document.getElementById('dockWrapper').classList.contains('collapsed')");
     await page.evaluate("document.getElementById('newGroupBtn').focus(); document.getElementById('newGroupBtn').click()");
     await waitFor(page, "document.getElementById('groupModal').open");
     await page.evaluate("document.getElementById('modalCancel').click()");
     await waitFor(page, "!document.getElementById('groupModal').open");
+    await waitFor(page, "document.activeElement.id === 'newGroupBtn'");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
     // Wait past the input debounce, or this measures the unfiltered grid: the
@@ -516,17 +519,22 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.equal(importedState.unsafeGroup, false, 'unsafe imported group fields must be rejected');
 
     await page.send('Page.navigate', { url: `${server.url}collections.html` });
-    await waitFor(page, "document.querySelectorAll('#collections .collection').length > 0");
-    assert.ok(await page.evaluate("document.querySelectorAll('#collections .site').length > 0"));
+    await waitFor(page, "document.querySelectorAll('#collections .featured-site').length > 0");
+    assert.ok(await page.evaluate("document.querySelectorAll('#collections .featured-site').length > 0"));
     // The theme picked in the directory has to carry across to this page.
     const collectionsTheme = await page.evaluate(`({
       theme: document.documentElement.getAttribute('data-theme'),
       background: getComputedStyle(document.body).backgroundColor,
-      badge: document.querySelector('.badge')?.textContent.trim()
+      badge: document.querySelector('#collections .badge')?.textContent.trim()
     })`);
     assert.equal(collectionsTheme.theme, 'light', 'collections should follow the stored theme');
     assert.equal(collectionsTheme.background, 'rgb(248, 249, 252)', 'collections should paint the light background');
     assert.match(collectionsTheme.badge, /^\d+ sites?$/, 'each collection should count its resolvable entries');
+
+    await page.evaluate("document.querySelector('[data-collection-index=\"1\"]').click()");
+    await waitFor(page, "document.getElementById('featuredTitle').textContent === 'OSINT 101'");
+    assert.equal(await page.evaluate("document.querySelectorAll('#collections .featured-site').length"), 6,
+      'choosing a collection should replace the focused member list');
 
     await page.send('Page.navigate', { url: server.url });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
@@ -671,6 +679,8 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
 
     // Keyboard reordering in the dock. Reordering used to be drag-only, so a
     // keyboard user could build groups but never arrange them.
+    await page.evaluate("if (document.getElementById('dockWrapper').classList.contains('collapsed')) document.getElementById('dockToggle').click()");
+    await waitFor(page, "!document.getElementById('dockWrapper').classList.contains('collapsed')");
     const reorder = await page.evaluate(`(async () => {
       const urls = [...document.querySelectorAll('#grid .card')].slice(0, 3).map(card => card.dataset.url);
       groups = [
@@ -849,7 +859,7 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     const collectionsPolicy = await page.evaluate(`({
       enforced: Boolean(document.querySelector('meta[http-equiv="Content-Security-Policy"]')),
       violations: window.__cspViolations,
-      rendered: document.querySelectorAll('.collection').length,
+      rendered: document.querySelectorAll('.featured-site').length,
       failed: Boolean(document.querySelector('.error'))
     })`);
     assert.equal(collectionsPolicy.enforced, true, 'collections must carry the policy too');

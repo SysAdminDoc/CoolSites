@@ -1,6 +1,6 @@
 # CoolSites
 
-![Version](https://img.shields.io/badge/version-2.3.0-blue)
+![Version](https://img.shields.io/badge/version-2.4.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Sites](https://img.shields.io/badge/sites-588-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
@@ -18,6 +18,8 @@ backend and no tracking of any kind.
 ## Features
 
 - **588 curated sites** across 30 categories, every entry hand-picked and described
+- **A browse workspace.** Bookmarks stay in the fixed rail beside the category and metadata filters, leaving the rest of the screen for search and results.
+- **Focused collections.** Pick a starting point in the rail, scan every member, then move to another collection without leaving the page.
 - **Search that narrows.** Every word you type has to match. Names tolerate typos, longer fields need a real match, and hits are highlighted.
 - **Filters that stack.** Category, open source only, no account needed, and staff picks all combine, with live counts on each.
 - **Sorting.** A to Z, Z to A, recently added, shuffle, or the default with your bookmarks floated to the top.

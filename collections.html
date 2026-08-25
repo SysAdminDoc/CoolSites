@@ -15,12 +15,26 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='16' fill='white'%3E//%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <style>
+  @font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url(fonts/jetbrains-mono-latin.woff2) format('woff2');
+  }
+  @font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 300 800;
+    font-display: swap;
+    src: url(fonts/outfit-latin.woff2) format('woff2');
+  }
   /* Same nine themes as the directory, reduced to the tokens this page uses. */
   [data-theme="oled"], :root {
     color-scheme: dark;
-    --bg: #08090d; --panel: #12141c; --panel2: #181b25;
-    --border: rgba(255,255,255,.08); --border-strong: rgba(255,255,255,.16);
-    --text: #e8e9ed; --muted: #7c7f8b; --accent: #8470d6; --accent-fill: #6e56cf; --on-accent: #ffffff;
+    --bg: #080b12; --panel: #101722; --panel2: #0d1420;
+    --border: rgba(133,160,192,.13); --border-strong: rgba(133,160,192,.28);
+    --text: #f1f5fb; --muted: #8d9bad; --accent: #51aaff; --accent-fill: #168fff; --on-accent: #ffffff;
   }
   [data-theme="catppuccin"] {
     color-scheme: dark;
@@ -71,42 +85,106 @@
     --text: #e0def4; --muted: #8f8ca4; --accent: #c4a7e7; --accent-fill: #c4a7e7; --on-accent: #191724;
   }
 
+  :root { --rail:328px; --display:'Outfit',sans-serif; --mono:'JetBrains Mono',monospace; }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font:15px/1.5 var(--display);overflow-x:clip}
+  button,input{font:inherit}
+  button{color:inherit}
   :focus-visible{outline:2px solid var(--accent-fill);outline-offset:2px}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-  .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--accent-fill);color:var(--on-accent);font-weight:600;font-size:.85rem;border-radius:8px;z-index:10;text-decoration:none}
+  .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);padding:8px 20px;background:var(--accent-fill);color:var(--on-accent);font-weight:600;font-size:.85rem;border-radius:8px;z-index:20;text-decoration:none}
   .skip-link:focus{top:8px}
-  header{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--border)}
-  nav{max-width:1160px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .brand{font-weight:800;letter-spacing:.02em}
   a{color:inherit}
-  .nav-link{color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
-  .nav-link:hover{color:var(--text)}
-  main{max-width:1160px;margin:0 auto;padding:42px 20px 64px}
-  h1{font-size:clamp(2rem,5vw,4rem);line-height:1;margin:0 0 12px}
-  .lede{color:var(--muted);max-width:720px;margin:0 0 32px}
-  .collections{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  .collection{border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:18px}
-  .collection h2{font-size:1.05rem;margin:0 0 6px}
-  .collection p{color:var(--muted);margin:0 0 14px}
-  .sites{display:grid;gap:8px}
-  .site{display:block;text-decoration:none;border:1px solid var(--border);background:var(--panel2);border-radius:6px;padding:10px}
-  .site:hover{border-color:var(--border-strong);background:var(--panel)}
-  .site strong{display:block;font-size:.95rem}
-  .site span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
-  .badge{display:inline-flex;color:var(--on-accent);background:var(--accent-fill);font-size:.72rem;font-weight:800;border-radius:4px;padding:2px 6px;margin-bottom:10px}
-  .skeleton{border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:18px;min-height:180px}
+
+  .topbar{position:sticky;top:0;z-index:10;height:64px;background:color-mix(in srgb,var(--bg) 96%,transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(18px)}
+  .topnav{height:64px;padding:0 22px;display:flex;align-items:center;gap:18px}
+  .brand{display:inline-flex;align-items:center;gap:10px;padding-right:20px;color:var(--text);font-size:1.18rem;font-weight:800;text-decoration:none;white-space:nowrap}
+  .brand-mark{width:34px;height:34px;border-radius:6px;background:#168fff;color:#fff;display:grid;place-items:center;font:800 14px/1 var(--mono);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+  .primary-nav{align-self:stretch;display:flex;align-items:stretch;gap:2px;padding-left:12px;border-left:1px solid var(--border)}
+  .primary-link{position:relative;display:inline-flex;align-items:center;padding:0 14px;color:var(--muted);font-size:.84rem;font-weight:600;text-decoration:none}
+  .primary-link:hover{color:var(--text)}
+  .primary-link.active{color:var(--accent)}
+  .primary-link.active::after{content:'';position:absolute;left:14px;right:14px;bottom:0;height:2px;background:var(--accent-fill)}
+  .nav-meta{margin-left:auto;display:flex;align-items:center;gap:18px;color:var(--muted);font:.72rem/1 var(--mono)}
+  .theme-button,.github-link{width:36px;height:36px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;text-decoration:none}
+  .theme-button:hover,.github-link:hover{border-color:var(--border-strong);color:var(--text);background:var(--panel)}
+  .theme-button svg,.github-link svg{width:17px;height:17px}
+  .github-link svg{fill:currentColor}
+
+  .collection-rail{position:fixed;inset:64px auto 0 0;width:var(--rail);padding:20px 16px 48px;background:color-mix(in srgb,var(--panel2) 92%,transparent);border-right:1px solid var(--border);overflow-y:auto}
+  .rail-label{margin:0 0 8px;color:var(--muted);font:600 .66rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .rail-search{position:relative;margin-bottom:22px}
+  .rail-search svg{position:absolute;left:11px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+  .rail-search input{width:100%;min-height:42px;padding:9px 10px 9px 36px;border:1px solid var(--border);border-radius:7px;background:var(--panel2);color:var(--text);outline:none}
+  .rail-search input:focus{border-color:var(--accent-fill);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent-fill) 16%,transparent)}
+  .collection-nav{display:grid;gap:3px}
+  .collection-nav-button{width:100%;min-height:40px;padding:8px 9px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--muted);display:flex;align-items:center;gap:9px;text-align:left;cursor:pointer}
+  .collection-nav-button:hover{border-color:var(--border);color:var(--text);background:var(--panel)}
+  .collection-nav-button.active{border-color:color-mix(in srgb,var(--accent-fill) 48%,var(--border));background:color-mix(in srgb,var(--accent-fill) 14%,transparent);color:var(--accent)}
+  .collection-nav-icon{width:18px;color:var(--collection-accent,var(--accent));font:800 .75rem/1 var(--mono)}
+  .collection-nav-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .collection-count{margin-left:auto;min-width:24px;padding:2px 5px;border:1px solid var(--border);border-radius:4px;color:var(--muted);font:.66rem/1.2 var(--mono);text-align:center}
+  .collection-nav-empty{color:var(--muted);font-size:.82rem;padding:8px}
+
+  main{max-width:none;margin-left:var(--rail);padding:30px 40px 72px}
+  .page-eyebrow{display:block;margin-bottom:10px;color:var(--accent);font:700 .68rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+  h1{margin:0 0 8px;font-size:clamp(2.2rem,4vw,2.85rem);line-height:1.08;letter-spacing:-.04em}
+  .lede{max-width:760px;margin:0;color:var(--muted);font-size:.98rem}
+  .page-heading{padding-bottom:20px;border-bottom:1px solid var(--border)}
+
+  .featured{position:relative;margin-top:18px;padding:18px;border:1px solid var(--border);border-left:4px solid var(--accent-fill);border-radius:8px;background:var(--panel)}
+  .featured-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+  .featured-index{width:46px;height:46px;flex:0 0 auto;border:1px solid color-mix(in srgb,var(--accent-fill) 65%,var(--border));border-radius:7px;color:var(--accent);display:grid;place-items:center;font:700 .72rem/1 var(--mono)}
+  .featured-copy{min-width:0;flex:1}
+  .featured-title-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .featured h2{margin:0;font-size:1.24rem;line-height:1.2}
+  .badge{display:inline-flex;padding:3px 7px;border-radius:4px;background:color-mix(in srgb,var(--accent-fill) 22%,transparent);color:var(--accent);font:700 .66rem/1.2 var(--mono)}
+  .featured p{max-width:720px;margin:5px 0 0;color:var(--muted);font-size:.88rem}
+  .featured-sites{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .featured-site{min-width:0;min-height:68px;padding:10px 11px;border:1px solid var(--border);border-radius:6px;background:var(--panel2);display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:10px;text-decoration:none}
+  .featured-site:hover{border-color:var(--border-strong);background:color-mix(in srgb,var(--panel) 75%,var(--panel2))}
+  .site-icon{width:38px;height:38px;border-radius:6px;background:var(--panel);display:grid;place-items:center;overflow:hidden;color:var(--muted);font:700 .84rem/1 var(--mono)}
+  .site-icon img{width:24px;height:24px;border-radius:4px}
+  .site-icon img + span{display:none}
+  .site-name{display:block;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .site-context{display:block;margin-top:1px;color:var(--muted);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .site-domain{color:color-mix(in srgb,var(--accent) 42%,var(--muted));font:.67rem/1 var(--mono);white-space:nowrap}
+  .site-open{margin-left:2px;color:var(--muted);font:700 .9rem/1 var(--mono)}
+
+  .more-heading{margin:20px 0 9px;color:var(--muted);font:600 .66rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .more-collections{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .collection-summary{position:relative;width:100%;min-height:248px;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column}
+  .collection-summary:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+  .summary-title{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .summary-marker{width:28px;height:28px;border:1px solid color-mix(in srgb,var(--collection-accent) 70%,var(--border));border-radius:6px;color:var(--collection-accent);display:grid;place-items:center;font:800 .67rem/1 var(--mono)}
+  .summary-title strong{min-width:0;flex:1;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .summary-description{min-height:58px;margin:0 0 10px;color:var(--muted);font-size:.78rem;line-height:1.45}
+  .summary-sites{display:grid;gap:4px;margin:0;padding:0;color:var(--muted);font-size:.74rem}
+  .summary-sites [role="listitem"]{padding-left:8px;border-left:2px solid color-mix(in srgb,var(--collection-accent) 65%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .summary-action{margin-top:auto;padding-top:10px;border-top:1px solid var(--border);color:var(--text);font-size:.76rem}
+
+  .skeleton{border:1px solid var(--border);background:var(--panel);border-radius:8px;padding:18px;min-height:220px}
   .skeleton span{display:block;height:12px;border-radius:4px;background:var(--panel2);margin-bottom:10px}
-  .skeleton span:nth-child(1){width:40%}
-  .skeleton span:nth-child(2){width:80%}
-  .skeleton span:nth-child(3){width:65%}
-  .error{border:1px solid var(--border-strong);background:var(--panel);border-radius:8px;padding:18px}
-  .error button{margin-top:12px;padding:8px 18px;border-radius:8px;border:1px solid var(--border-strong);background:transparent;color:var(--text);font:inherit;font-size:.85rem;cursor:pointer;min-height:40px}
+  .skeleton span:nth-child(1){width:40%}.skeleton span:nth-child(2){width:80%}.skeleton span:nth-child(3){width:65%}
+  .error{margin-top:18px;border:1px solid var(--border-strong);background:var(--panel);border-radius:8px;padding:18px}
+  .error button{margin-top:12px;min-height:40px;padding:8px 18px;border:1px solid var(--border-strong);border-radius:8px;background:transparent;color:var(--text);cursor:pointer}
   .error button:hover{border-color:var(--accent-fill);color:var(--accent)}
-  footer{max-width:1160px;margin:0 auto;padding:0 20px 48px;color:var(--muted);font-size:.82rem}
-  footer a{color:var(--muted)}
-  footer a:hover{color:var(--accent)}
+  footer{max-width:none;margin-left:var(--rail);padding:0 40px 44px;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--muted)}footer a:hover{color:var(--accent)}
+
+  @media(max-width:1100px){.more-collections{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:820px){
+    :root{--rail:0px}
+    .nav-meta .nav-stat{display:none}
+    .collection-rail{position:sticky;top:64px;z-index:8;width:100%;padding:12px 16px;border-right:0;border-bottom:1px solid var(--border);overflow:visible}
+    .collection-rail .rail-label{display:none}.rail-search{margin-bottom:8px}.collection-nav{display:flex;overflow-x:auto;scrollbar-width:none}.collection-nav-button{width:auto;flex:0 0 auto}.collection-nav-name{overflow:visible}
+    main,footer{margin-left:0}main{padding:30px 22px 64px}footer{padding:0 22px 40px}.featured-sites{grid-template-columns:1fr}
+  }
+  @media(max-width:620px){
+    .topbar,.topnav{height:56px}.topnav{padding:0 12px;gap:8px}.brand{padding-right:0;font-size:1rem}.brand-mark{width:32px;height:32px}.primary-nav{padding-left:6px}.primary-link{padding:0 8px;font-size:.75rem}.primary-link.active::after{left:8px;right:8px}.collection-rail{top:56px}.github-link{display:none}.nav-meta{gap:4px}
+    main{padding:26px 16px 56px}h1{font-size:2rem}.page-heading{padding-bottom:16px}.featured{padding:13px}.featured-head{gap:10px}.featured-index{width:40px;height:40px}.featured-site{grid-template-columns:34px minmax(0,1fr) auto}.site-icon{width:34px;height:34px}.site-domain{display:none}.more-collections{grid-template-columns:1fr}.collection-summary{min-height:0}.summary-description{min-height:0}footer{padding:0 16px 36px}
+  }
 </style>
 <script>
 (function(){
@@ -119,20 +197,50 @@
 </head>
 <body>
 <a href="#collections" class="skip-link">Skip to content</a>
-<header>
-  <nav>
-    <div class="brand">CoolSites Collections</div>
-    <a class="nav-link" href="./">Directory</a>
+<header class="topbar">
+  <nav class="topnav" aria-label="Primary navigation">
+    <a class="brand" href="./" aria-label="CoolSites directory">
+      <span class="brand-mark" aria-hidden="true">//</span>
+      <span>CoolSites</span>
+    </a>
+    <div class="primary-nav">
+      <a class="primary-link" href="./">Directory</a>
+      <a class="primary-link active" href="collections.html" aria-current="page">Collections</a>
+    </div>
+    <div class="nav-meta">
+      <span class="nav-stat"><strong id="collectionSiteCount">0</strong> sites</span>
+      <span class="nav-stat"><strong id="collectionCategoryCount">0</strong> categories</span>
+      <button class="theme-button" id="collectionThemeToggle" type="button" title="Change theme" aria-label="Change theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a class="github-link" href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener noreferrer" aria-label="CoolSites on GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+    </div>
   </nav>
 </header>
+
+<aside class="collection-rail" aria-label="Collection navigation">
+  <p class="rail-label">Quick launch</p>
+  <div class="rail-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="collectionSearch" type="search" placeholder="Jump to a collection..." autocomplete="off" aria-label="Find a collection">
+  </div>
+  <p class="rail-label">Collections</p>
+  <div class="collection-nav" id="collectionNav" aria-live="polite"></div>
+</aside>
+
 <main>
-  <h1>Curated Starting Points</h1>
-  <p class="lede">Focused sub-lists for common workflows, built from the same validated CoolSites data.</p>
-  <section class="collections" id="collections" aria-live="polite" aria-busy="true">
-    <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+  <header class="page-heading">
+    <span class="page-eyebrow">Curated collections</span>
+    <h1>Curated Starting Points</h1>
+    <p class="lede">Focused sub-lists for common workflows, built from the same validated CoolSites data.</p>
+  </header>
+  <section class="featured" id="collections" aria-live="polite" aria-busy="true">
     <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
   </section>
+  <h2 class="more-heading" id="moreHeading">More collections</h2>
+  <section class="more-collections" id="moreCollections" aria-labelledby="moreHeading"></section>
   <noscript>
     <p class="lede">Collections are built in the browser from <code>collections.json</code> and <code>sites.json</code>. Turn JavaScript on to see them, or read those two files directly.</p>
   </noscript>
@@ -141,14 +249,36 @@
   <p><a href="./">Back to the directory</a> &middot; <a href="feeds/recent.atom">Feed</a> &middot; <a href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener noreferrer">GitHub</a></p>
 </footer>
 <script>
-const $collections = document.getElementById('collections');
-const THEME_COLORS = {oled:'#08090d',catppuccin:'#1e1e2e',nord:'#2e3440',dracula:'#282a36','github-dark':'#0d1117',midnight:'#0a0e1a',solarized:'#002b36',light:'#f8f9fc','rose-pine':'#191724'};
+const $featured = document.getElementById('collections');
+const $moreCollections = document.getElementById('moreCollections');
+const $collectionNav = document.getElementById('collectionNav');
+const $collectionSearch = document.getElementById('collectionSearch');
+const THEME_COLORS = {oled:'#080b12',catppuccin:'#1e1e2e',nord:'#2e3440',dracula:'#282a36','github-dark':'#0d1117',midnight:'#0a0e1a',solarized:'#002b36',light:'#f8f9fc','rose-pine':'#191724'};
+const THEMES = ['oled','catppuccin','dracula','rose-pine','nord','github-dark','midnight','solarized','light'];
+const COLLECTION_ACCENTS = ['#168fff','#ff5a67','#6ce7c2','#a269ff','#c6dc4b'];
 
 function syncThemeColor() {
   const theme = document.documentElement.getAttribute('data-theme') || 'oled';
   document.getElementById('metaThemeColor').setAttribute('content', THEME_COLORS[theme] || '#08090d');
 }
 syncThemeColor();
+
+function updateThemeButton() {
+  const theme = document.documentElement.getAttribute('data-theme') || 'oled';
+  const label = `Change theme. Current theme: ${theme.replace(/-/g, ' ')}`;
+  document.getElementById('collectionThemeToggle').setAttribute('aria-label', label);
+  document.getElementById('collectionThemeToggle').title = label;
+}
+updateThemeButton();
+
+document.getElementById('collectionThemeToggle').addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'oled';
+  const next = THEMES[(Math.max(0, THEMES.indexOf(current)) + 1) % THEMES.length];
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('coolsites-theme', next); } catch {}
+  syncThemeColor();
+  updateThemeButton();
+});
 
 // Follow the system setting when the directory has no explicit theme saved.
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
@@ -167,6 +297,10 @@ function esc(value) {
   return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 }
 
+function domainFor(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; }
+}
+
 function loadJson(url) {
   return fetch(url, { cache: 'no-cache' }).then(response => {
     if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
@@ -175,10 +309,121 @@ function loadJson(url) {
 }
 
 let loading = false;
+let collections = [];
+let sites = [];
+let sitesByUrl = new Map();
+let favicons = {};
+let selectedCollection = 0;
+
+function entriesFor(collection) {
+  return (collection?.urls || []).map(url => sitesByUrl.get(url)).filter(Boolean);
+}
+
+function collectionAccent(index) {
+  return COLLECTION_ACCENTS[index % COLLECTION_ACCENTS.length];
+}
+
+function siteIcon(site) {
+  const icon = favicons[domainFor(site.url)] || '';
+  const initial = esc(site.name.charAt(0).toUpperCase());
+  if (!icon) return `<span class="site-icon" aria-hidden="true">${initial}</span>`;
+  return `<span class="site-icon" aria-hidden="true"><img class="collection-favicon" src="${esc(icon)}" alt=""><span>${initial}</span></span>`;
+}
+
+document.addEventListener('error', event => {
+  if (!event.target.classList?.contains('collection-favicon')) return;
+  event.target.remove();
+}, true);
+
+function renderNavigation(query = '') {
+  const needle = query.trim().toLowerCase();
+  const matches = collections
+    .map((collection, index) => ({ collection, index, entries: entriesFor(collection) }))
+    .filter(item => !needle || `${item.collection.name} ${item.collection.description}`.toLowerCase().includes(needle));
+  if (!matches.length) {
+    $collectionNav.innerHTML = '<p class="collection-nav-empty">No collection matches that search.</p>';
+    return;
+  }
+  $collectionNav.innerHTML = matches.map(({ collection, index, entries }) => `
+    <button class="collection-nav-button${index === selectedCollection ? ' active' : ''}" type="button" data-collection-index="${index}" aria-pressed="${index === selectedCollection}" style="--collection-accent:${collectionAccent(index)}">
+      <span class="collection-nav-icon" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+      <span class="collection-nav-name">${esc(collection.name)}</span>
+      <span class="collection-count">${entries.length}</span>
+    </button>
+  `).join('');
+}
+
+function renderFeatured() {
+  const collection = collections[selectedCollection];
+  const entries = entriesFor(collection);
+  const accent = collectionAccent(selectedCollection);
+  $featured.style.setProperty('--accent-fill', accent);
+  $featured.setAttribute('aria-busy', 'false');
+  $featured.innerHTML = `
+    <div class="featured-head">
+      <div class="featured-index" aria-hidden="true">${String(selectedCollection + 1).padStart(2, '0')}</div>
+      <div class="featured-copy">
+        <div class="featured-title-row">
+          <h2 id="featuredTitle" tabindex="-1">${esc(collection.name)}</h2>
+          <span class="badge">${entries.length} site${entries.length === 1 ? '' : 's'}</span>
+        </div>
+        <p>${esc(collection.description)}</p>
+      </div>
+    </div>
+    <div class="featured-sites">
+      ${entries.map(site => `
+        <a class="featured-site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">
+          ${siteIcon(site)}
+          <span>
+            <span class="site-name">${esc(site.name)}</span>
+            <span class="site-context">${esc(site.description)}</span>
+          </span>
+          <span>
+            <span class="site-domain">${esc(domainFor(site.url))}</span>
+            <span class="site-open">Open</span>
+          </span>
+        </a>
+      `).join('') || '<p class="lede">Every entry in this collection has left the directory.</p>'}
+    </div>
+  `;
+}
+
+function renderMoreCollections() {
+  const items = collections
+    .map((collection, index) => ({ collection, index, entries: entriesFor(collection) }))
+    .filter(item => item.index !== selectedCollection);
+  document.getElementById('moreHeading').hidden = items.length === 0;
+  $moreCollections.innerHTML = items.map(({ collection, index, entries }) => `
+    <button class="collection-summary" type="button" data-collection-index="${index}" style="--collection-accent:${collectionAccent(index)}" aria-label="View ${esc(collection.name)}">
+      <span class="summary-title">
+        <span class="summary-marker" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+        <strong>${esc(collection.name)}</strong>
+        <span class="badge">${entries.length} site${entries.length === 1 ? '' : 's'}</span>
+      </span>
+      <span class="summary-description">${esc(collection.description)}</span>
+      <span class="summary-sites" role="list">
+        ${entries.slice(0, 6).map(site => `<span role="listitem">${esc(site.name)}</span>`).join('')}
+      </span>
+      <span class="summary-action">Open collection</span>
+    </button>
+  `).join('');
+}
+
+function selectCollection(index, moveFocus) {
+  if (!Number.isInteger(index) || index < 0 || index >= collections.length) return;
+  selectedCollection = index;
+  renderNavigation($collectionSearch.value);
+  renderFeatured();
+  renderMoreCollections();
+  if (moveFocus) document.getElementById('featuredTitle')?.focus({ preventScroll: true });
+}
 
 function showError(message) {
-  $collections.setAttribute('aria-busy', 'false');
-  $collections.innerHTML = `<div class="error"><strong>Collections could not be loaded.</strong><p class="lede" style="margin:8px 0 0">${esc(message)}</p><button type="button" id="retry">Try again</button></div>`;
+  $featured.setAttribute('aria-busy', 'false');
+  $featured.className = 'error';
+  $featured.innerHTML = `<strong>Collections could not be loaded.</strong><p class="lede" style="margin:8px 0 0">${esc(message)}</p><button type="button" id="retry">Try again</button>`;
+  $moreCollections.innerHTML = '';
+  $collectionNav.innerHTML = '';
   document.getElementById('retry').addEventListener('click', event => {
     event.currentTarget.disabled = true;
     event.currentTarget.textContent = 'Retrying...';
@@ -191,34 +436,45 @@ function render() {
   // overwrite the render that already succeeded.
   if (loading) return;
   loading = true;
-  $collections.setAttribute('aria-busy', 'true');
-  $collections.innerHTML = '<div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>'.repeat(3);
-  Promise.all([loadJson('./collections.json'), loadJson('./sites.json')])
-    .then(([collections, sites]) => {
-      const byUrl = new Map(sites.map(site => [site.url, site]));
-      $collections.setAttribute('aria-busy', 'false');
+  $featured.className = 'featured';
+  $featured.setAttribute('aria-busy', 'true');
+  $featured.innerHTML = '<div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>';
+  Promise.all([loadJson('./collections.json'), loadJson('./sites.json'), loadJson('./categories.json'), loadJson('./favicons.json')])
+    .then(([loadedCollections, loadedSites, categories, loadedFavicons]) => {
+      collections = loadedCollections;
+      sites = loadedSites;
+      favicons = loadedFavicons || {};
+      sitesByUrl = new Map(sites.map(site => [site.url, site]));
+      document.getElementById('collectionSiteCount').textContent = sites.length;
+      document.getElementById('collectionCategoryCount').textContent = categories.length;
+      $featured.setAttribute('aria-busy', 'false');
       if (!Array.isArray(collections) || !collections.length) {
-        $collections.innerHTML = '<p class="lede">No collections have been published yet.</p>';
+        $featured.innerHTML = '<p class="lede">No collections have been published yet.</p>';
         return;
       }
-      $collections.innerHTML = collections.map(collection => {
-        const entries = (collection.urls || []).map(url => byUrl.get(url)).filter(Boolean);
-        const body = entries.length
-          ? entries.map(site => `<a class="site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer"><strong>${esc(site.name)}</strong><span>${esc(site.category)}</span></a>`).join('')
-          : '<p class="lede" style="margin:0">Every entry in this collection has left the directory.</p>';
-        return `<article class="collection">
-          <span class="badge">${entries.length} site${entries.length === 1 ? '' : 's'}</span>
-          <h2>${esc(collection.name)}</h2>
-          <p>${esc(collection.description)}</p>
-          <div class="sites">${body}</div>
-        </article>`;
-      }).join('');
+      selectedCollection = 0;
+      renderNavigation();
+      renderFeatured();
+      renderMoreCollections();
     })
     .catch(error => showError(navigator.onLine === false
       ? 'You appear to be offline and nothing is cached yet.'
       : error.message))
     .finally(() => { loading = false; });
 }
+
+$collectionSearch.addEventListener('input', event => renderNavigation(event.target.value));
+$collectionNav.addEventListener('click', event => {
+  const button = event.target.closest('[data-collection-index]');
+  if (button) selectCollection(Number(button.dataset.collectionIndex), true);
+});
+$moreCollections.addEventListener('click', event => {
+  const button = event.target.closest('[data-collection-index]');
+  if (button) {
+    selectCollection(Number(button.dataset.collectionIndex), true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
 
 render();
 </script>

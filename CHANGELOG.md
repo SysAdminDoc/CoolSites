@@ -2,7 +2,7 @@
 
 All notable changes to CoolSites will be documented in this file.
 
-## [Unreleased]
+## [v2.4.0] - 2026-08-25
 
 ### Added
 
@@ -23,6 +23,9 @@ All notable changes to CoolSites will be documented in this file.
 
 ### Changed
 
+- **The directory is now a browse workspace.** Bookmarks stay in the fixed rail beside the category and metadata filters. Search and results use the remaining width, and the denser three-column grid keeps more useful choices above the fold.
+- **Collections now opens one focused starting point at a time.** The selected set gets a full member list with local favicons and descriptions. The remaining sets stay visible as compact selectors, with collection search and the same responsive rail used by the directory.
+- **Both pages share one visual system.** The rebuilt header, wider navigation rail, tighter card geometry and compact controls follow the same dark workspace direction on desktop and phones.
 - **The embeddable widget follows the reader's theme instead of always being dark**, and a host page can repaint it through `--coolsites-*` custom properties. It also documents its attributes for the first time, carries its contract version in `data-version`, gives its region an accessible name and a live region, caps `data-limit` instead of trusting it, and names what went wrong when a category doesn't exist, a request times out, or the reader is offline. A `data-target` that matches nothing now warns in the console rather than rendering silently into the wrong place.
 - **Ten entries now point where the project actually lives.** Every destination was confirmed by opening it and reading the page, not by trusting the redirect: llamafile and Trilium Notes moved GitHub org, jq moved off GitHub Pages to `jqlang.org`, DocuSeal went from `.co` to `.com`, Paint.NET dropped the `getpaint` prefix, VeraCrypt moved from `.fr` to `.io`, Runway dropped the `ml`, `terraform.io` retired into the HashiCorp developer portal, the Mozilla Observatory moved into MDN, and Cloudflare reorganised its tunnel docs. Redirects that only add a locale or a marketing path were deliberately left alone, since the URL on file is the better canonical address.
 - **`npm run update:favicons` reads the page's own `<link rel="icon">`** when the icon services and a bare `/favicon.ico` all come up empty, which took the cache from 520 to 525 of 539 domains. It asks the entry's real URL rather than the domain root, which is what finds icons on project pages hosted under a path. The 14 still missing declare no icon in their HTML at all.
