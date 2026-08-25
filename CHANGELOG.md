@@ -34,6 +34,18 @@ A full audit pass. The short version: search actually narrows now, the layout no
 - **An nginx config for the Docker image** with a content security policy, per-type caching and a healthcheck, on a digest-pinned base.
 - **Loading, error, empty and offline states on the Collections page**, which also follows the theme you picked in the directory instead of forcing dark.
 
+### Fixed after review
+
+A second adversarial pass over the audit itself found eight more defects, six of them introduced by the audit:
+
+- A favicon that would not decode wiped the whole dock chip, taking its label, link and remove button. One shipped icon triggered it: a domain served a macOS alias file as an icon. The favicon cache now checks magic bytes rather than trusting the media type.
+- Escape closing the theme menu still cleared the search box.
+- Copying a URL or opening a random site silently cancelled a pending Undo.
+- Undo put a bookmark back in the wrong slot, and overwrote a filter chosen after the removal.
+- The Undo button vanished after seven seconds even while focused.
+- Picking a group colour threw focus out of the dialog and killed the arrow keys.
+- The Docker image served its own nginx config from the web root, and the dotfile deny sat after the file-type rules so a dotfile ending .json slipped past.
+
 ### Changed
 
 - **No third-party requests.** Favicons are inlined at build time for 520 of 539 domains; the rest render the site initial. The page no longer tells Google which entry you are looking at.
