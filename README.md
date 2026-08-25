@@ -266,6 +266,42 @@ npm run check:links -- --filter github.com
 npm run check:links -- --concurrency 12 --timeout 20000
 ```
 
+## Embedding
+
+`widget.js` drops a short list of entries onto another page. One script tag, no
+dependencies, and exactly one request, to `sites.json` beside it. It renders in a
+shadow root so nothing leaks either direction.
+
+```html
+<script src="https://your-host/CoolSites/widget.js"
+        data-category="Homelab"
+        data-limit="8"></script>
+```
+
+| Attribute | Meaning |
+|-----------|---------|
+| `data-category` | Show only this category, spelled exactly as the directory does. An unknown name says so rather than rendering an empty box. |
+| `data-limit` | How many entries, 1 to 50. Anything else falls back to 8. |
+| `data-target` | CSS selector for where to mount. Defaults to the script tag's parent. |
+| `data-theme` | `auto` (default), `light` or `dark`. |
+
+It follows the reader's system theme unless you pin it, and you can repaint it
+from the host page:
+
+```css
+coolsites-widget {
+  --coolsites-bg: #fff;
+  --coolsites-text: #111;
+  --coolsites-muted: #666;
+  --coolsites-border: rgba(0, 0, 0, .12);
+  --coolsites-accent: #2563eb;
+  --coolsites-radius: 8px;
+}
+```
+
+The element carries its contract version in `data-version`. Offline, a timeout
+and a failed load each say which one happened.
+
 ## Adding Sites
 
 The easiest way is to [open a submission issue](https://github.com/SysAdminDoc/CoolSites/issues/new?template=submit-site.yml). Fill in the form and it gets reviewed from there.

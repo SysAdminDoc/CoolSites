@@ -606,6 +606,69 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
     assert.ok(Number.parseFloat(await page.evaluate("getComputedStyle(document.querySelector('#grid .card')).animationDuration")) < 0.001, 'reduced motion should disable card animation');
 
+    // The embeddable widget. It is the one surface an outside site pulls in, so
+    // an unknown category or a typo'd target has to explain itself rather than
+    // leaving a blank box on someone else's page.
+    const widget = await page.evaluate(`(async () => {
+      const mount = (attrs) => new Promise(resolve => {
+        const holder = document.createElement('div');
+        holder.className = 'widget-probe';
+        document.body.appendChild(holder);
+        const script = document.createElement('script');
+        script.src = './widget.js';
+        for (const [key, value] of Object.entries(attrs)) script.dataset[key] = value;
+        script.onload = () => setTimeout(() => resolve(holder), 600);
+        holder.appendChild(script);
+      });
+
+      const read = (holder) => {
+        const el = holder.querySelector('coolsites-widget');
+        if (!el) return { mounted: false };
+        const root = el.shadowRoot;
+        return {
+          mounted: true,
+          version: el.dataset.version,
+          heading: root.querySelector('.title')?.textContent,
+          labelled: Boolean(root.querySelector('section[aria-labelledby]')),
+          headingLinked: root.querySelector('section')?.getAttribute('aria-labelledby') === root.querySelector('.title')?.id,
+          busy: root.querySelector('.body')?.getAttribute('aria-busy'),
+          listItems: root.querySelectorAll('ul.items li a.item').length,
+          note: root.querySelector('.note')?.textContent || '',
+          background: getComputedStyle(root.querySelector('.wrap')).backgroundColor
+        };
+      };
+
+      const normal = read(await mount({ category: 'Homelab', limit: '5' }));
+      const unknown = read(await mount({ category: 'No Such Category Exists' }));
+      const badLimit = read(await mount({ limit: 'eight' }));
+      const hugeLimit = read(await mount({ limit: '9999' }));
+
+      // A target selector that matches nothing must not mount anything at all.
+      const orphanHolder = await mount({ target: '#definitely-not-here' });
+      const orphan = Boolean(orphanHolder.querySelector('coolsites-widget'))
+        || Boolean(document.querySelector('body > coolsites-widget'));
+
+      document.querySelectorAll('.widget-probe').forEach(node => node.remove());
+      return { normal, unknown, badLimit, hugeLimit, orphan };
+    })()`);
+
+    assert.equal(widget.normal.mounted, true, 'the widget should mount');
+    assert.match(widget.normal.version, /^\d+\.\d+\.\d+$/, 'the widget should expose a version');
+    assert.equal(widget.normal.heading, 'CoolSites: Homelab');
+    assert.equal(widget.normal.labelled, true, 'the widget region needs an accessible name');
+    assert.equal(widget.normal.headingLinked, true, 'aria-labelledby must point at the heading that exists');
+    assert.equal(widget.normal.busy, 'false', 'the live region must stop reporting busy once loaded');
+    assert.equal(widget.normal.listItems, 5, 'data-limit should be honoured');
+    assert.equal(widget.unknown.listItems, 0, 'an unknown category has nothing to list');
+    assert.match(widget.unknown.note, /No category called "No Such Category Exists"/,
+      'an unknown category must name itself instead of rendering a blank box');
+    assert.equal(widget.badLimit.listItems, 8, 'an unparseable data-limit falls back to the default');
+    assert.ok(widget.hugeLimit.listItems > 0 && widget.hugeLimit.listItems <= 50,
+      `data-limit should be capped, got ${widget.hugeLimit.listItems}`);
+    assert.equal(widget.orphan, false, 'a data-target that matches nothing must not mount anywhere');
+    // Fixed #12141c regardless of the host page was the old behaviour.
+    assert.notEqual(widget.normal.background, 'rgba(0, 0, 0, 0)', 'the widget should paint its own surface');
+
     // Keyboard reordering in the dock. Reordering used to be drag-only, so a
     // keyboard user could build groups but never arrange them.
     const reorder = await page.evaluate(`(async () => {
