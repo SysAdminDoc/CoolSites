@@ -593,6 +593,55 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await page.send('Page.reload', { ignoreCache: false });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
     assert.ok(Number.parseFloat(await page.evaluate("getComputedStyle(document.querySelector('#grid .card')).animationDuration")) < 0.001, 'reduced motion should disable card animation');
+
+    // The policy ships in a meta tag, so it is enforced on GitHub Pages where no
+    // response header can reach. Drive the surfaces it could plausibly block:
+    // the inline boot script, the inline stylesheet, the data: favicons, the
+    // JSON fetches and the service worker.
+    await page.send('Emulation.setEmulatedMedia', { features: [] });
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+    await searchFor(page, 'docker');
+    await page.evaluate("document.getElementById('themeDropdown').showPopover()");
+    await delay(150);
+    await page.evaluate("document.getElementById('themeDropdown').hidePopover()");
+    await page.evaluate("document.getElementById('newGroupBtn').click()");
+    await waitFor(page, "document.getElementById('groupModal').open");
+    await page.evaluate("document.getElementById('modalCancel').click()");
+    await searchFor(page, '');
+    await delay(400);
+
+    const policy = await page.evaluate(`(() => {
+      const meta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+      const styled = getComputedStyle(document.querySelector('#grid .card'));
+      return {
+        enforced: Boolean(meta),
+        content: meta ? meta.content : '',
+        violations: window.__cspViolations,
+        // If style-src had blocked the inline sheet the card would fall back to
+        // the UA default, so this proves the policy is not silently breaking it.
+        painted: styled.backgroundColor !== 'rgba(0, 0, 0, 0)',
+        icons: document.querySelectorAll('#grid .card img.favicon-img').length
+      };
+    })()`);
+    assert.equal(policy.enforced, true, 'the page must carry an enforced content security policy');
+    assert.deepEqual(policy.violations, [], 'the shipped policy must not block anything the app does');
+    assert.equal(policy.painted, true, 'the inline stylesheet must survive style-src');
+    assert.ok(policy.icons > 0, 'data: favicons must survive img-src');
+
+    // Collections is a separate document and carries its own copy of the policy.
+    await page.send('Page.navigate', { url: `${server.url}collections.html` });
+    await waitFor(page, "document.getElementById('collections').getAttribute('aria-busy') === 'false'");
+    const collectionsPolicy = await page.evaluate(`({
+      enforced: Boolean(document.querySelector('meta[http-equiv="Content-Security-Policy"]')),
+      violations: window.__cspViolations,
+      rendered: document.querySelectorAll('.collection').length,
+      failed: Boolean(document.querySelector('.error'))
+    })`);
+    assert.equal(collectionsPolicy.enforced, true, 'collections must carry the policy too');
+    assert.equal(collectionsPolicy.failed, false, 'connect-src must still allow the collections data fetch');
+    assert.ok(collectionsPolicy.rendered > 0, 'collections should actually render under the policy');
+    assert.deepEqual(collectionsPolicy.violations, [], 'the policy must not block the collections page');
   } finally {
     if (page && connection) {
       try { await connection.send('Target.closeTarget', { targetId: page.targetId }); } catch {}
@@ -657,6 +706,14 @@ async function createPage(connection, url, navigate = true) {
   await page.send('Page.enable');
   await page.send('Network.enable');
   await page.send('Network.setBlockedURLs', { urls: ['https://*'] });
+  // Installed at document-start so it beats the theme boot script, which is the
+  // first thing the policy could block. Re-runs on every navigation and reload.
+  await page.send('Page.addScriptToEvaluateOnNewDocument', {
+    source: `window.__cspViolations = [];
+      document.addEventListener('securitypolicyviolation', event => {
+        window.__cspViolations.push(event.effectiveDirective + ' blocked ' + (event.blockedURI || '(inline)'));
+      });`
+  });
   if (navigate) await page.send('Page.navigate', { url });
   return page;
 }

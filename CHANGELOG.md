@@ -2,6 +2,18 @@
 
 All notable changes to CoolSites will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- **A content security policy that actually reaches you.** The policy used to live only in the nginx config that shipped with the Docker image, which meant the real deployment on GitHub Pages ran with no policy at all. It now travels in a `<meta>` tag on both pages, so it applies wherever the site is hosted. `frame-ancestors` is deliberately left out because browsers ignore it in a meta tag, and claiming it there would be pretending to a protection the page doesn't have.
+- A `Referrer-Policy` of `strict-origin-when-cross-origin`, so following a link off the directory no longer leaks the full URL you came from.
+- Tests that gate all of the above: one drives a real browser and fails if the policy blocks anything the app does, four check the policy itself for drift between pages, wildcard hosts, and `unsafe-inline` turning up somewhere it wasn't reviewed.
+
+### Removed
+
+- **Docker support.** The `Dockerfile`, `.dockerignore` and the nginx configs are gone. Building the image for the first time turned up the reason to be suspicious of it: `try_files ... /index.html` answered every missing path with a 200 and a copy of the homepage, so `/CLAUDE.md` and `/Dockerfile` looked like real pages to a crawler. CoolSites has no client-side routing and needs no rewrite rule. Copy the files into any document root instead, which the README now explains.
+
 ## [v2.3.0] - 2026-08-25
 
 A full audit pass. The short version: search actually narrows now, the layout no longer overflows on a phone, the page makes no third-party requests at all, text clears WCAG AA in every theme, and the build refuses to ship a stale number.

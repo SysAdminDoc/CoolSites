@@ -34,7 +34,7 @@ backend and no tracking of any kind.
 - **No third-party requests.** Fonts and favicons ship with the site. Nothing loads from a CDN, and nothing calls home.
 - **No runtime dependencies.** Static HTML, CSS, JavaScript and JSON. No framework, no build step to view it.
 - **Accessible.** Body text clears WCAG AA in every theme, with visible focus, live regions, a skip link, and reduced-motion and forced-colors support.
-- **Self-hostable** on GitHub Pages, nginx, Docker, or the local server in this repo.
+- **Self-hostable** on GitHub Pages, any static web server, or the local server in this repo.
 
 ## Categories
 
@@ -96,21 +96,21 @@ Open the printed `http://127.0.0.1:4173/` address. Opening `index.html` straight
 from disk will not work, because browsers block `file://` fetches; the page says
 so and tells you to run the server if you try.
 
-### Docker
-
-```bash
-docker build -t coolsites .
-docker run --rm -p 8080:80 coolsites
-```
-
-The image is nginx with the directory copied in, a pinned base digest, and a
-config that sets a content security policy and per-type caching.
-
 ### Any other web server
 
 Copy the repository contents into the document root. It works with nginx,
-Apache, Caddy, or `python3 -m http.server`. Serve `index.html` for unknown paths
-if you want the offline shell to behave.
+Apache, Caddy, or `python3 -m http.server`. There is no client-side routing, so
+don't add a catch-all rewrite to `index.html`. It would turn every typo into a
+page that looks like the homepage but isn't.
+
+Two things are worth excluding from the document root if you can: the `.git`
+directory and anything starting with a dot. The bundled `npm run serve` already
+refuses them.
+
+The content security policy travels in a `<meta>` tag, so it applies wherever
+you host the page, including GitHub Pages. If your server can send real headers,
+`Content-Security-Policy` as a header takes precedence and also lets you add
+`frame-ancestors`, which browsers ignore in a meta tag.
 
 ## How It Works
 
@@ -194,7 +194,7 @@ feeds, and the counts in this README for you.
 | Logic | Vanilla JavaScript, no framework |
 | Fonts | Outfit and JetBrains Mono, self-hosted as woff2 |
 | Icons | Inline SVG, plus favicons inlined as data URIs at build time |
-| Hosting | GitHub Pages, nginx, or Docker |
+| Hosting | GitHub Pages or any static web server |
 | Local tooling | Node.js 22.17 or newer for the lint, build, package, test and server scripts |
 
 ## Keyboard Shortcuts
