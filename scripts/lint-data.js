@@ -288,7 +288,24 @@ function validateMetadata() {
     .forEach(result => addError(`${result.file}: version, counts or formatting are out of sync; run npm run generate`));
 }
 
+// The project is deliberately dependency-free: no framework, no build step to
+// view it, nothing to audit and nothing to lock. That is a decision, not an
+// oversight, so it is enforced rather than written down and forgotten. The day
+// a real dependency lands, this fails and the lockfile has to land with it.
+function validateDependencies() {
+  const pkg = readJson('package.json');
+  if (!pkg) return;
+  const declared = ['dependencies', 'peerDependencies', 'optionalDependencies', 'devDependencies']
+    .flatMap(field => Object.keys(pkg[field] || {}).map(name => `${field}.${name}`));
+  if (!declared.length) return;
+  if (!fs.existsSync(path.join(root, 'package-lock.json'))) {
+    addError(`package.json declares ${declared.join(', ')} but there is no package-lock.json. `
+      + 'A dependency without a lockfile is not reproducible, and npm audit cannot run at all.');
+  }
+}
+
 const data = validateSourceData();
+validateDependencies();
 validateIssueTemplate(data);
 if (!sourceOnly) {
   validateFeeds(data);

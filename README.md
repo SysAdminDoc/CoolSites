@@ -173,6 +173,12 @@ npm run update:stars     # refresh stars.json (set GITHUB_TOKEN to avoid the 60/
 npm run update:favicons  # refresh favicons.json
 ```
 
+There is no lockfile because there is nothing to lock. No runtime dependencies,
+no dev dependencies, no framework, no build step to view the page. That is a
+deliberate choice rather than an oversight, and `npm run lint` enforces it: the
+day a dependency appears in `package.json` without a `package-lock.json` beside
+it, the build fails.
+
 `npm run lint` is the gate that matters. It validates every data file against
 the schemas, rejects duplicate and colliding URLs, checks the generated feeds
 match the data, and fails when any version or count string in `index.html`,
