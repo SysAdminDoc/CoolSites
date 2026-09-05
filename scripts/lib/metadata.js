@@ -69,6 +69,81 @@ function copyFor(meta) {
   };
 }
 
+const SITE_URL = 'https://sysadmindoc.github.io/CoolSites/';
+
+// The only machine-readable statement of what this site holds. The page renders
+// its cards from JSON at runtime, so a crawler reading the HTML sees the shell
+// and the noscript notice and nothing else.
+//
+// The previous block was a WebSite with a SearchAction, which existed to drive
+// Google's sitelinks search box. Google retired that on 2024-11-21, so it had
+// been describing a feature that no longer exists for the better part of a year.
+//
+// This lists the categories rather than all 586 entries, because a ListItem is
+// supposed to point at a page this site serves and the only such pages are the
+// filtered views. Listing 586 addresses belonging to other people under our own
+// ItemList would be a claim about pages we do not publish.
+function structuredData(meta) {
+  const copy = copyFor(meta);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'CoolSites',
+    url: SITE_URL,
+    description: copy.metaDescription,
+    inLanguage: 'en',
+    isFamilyFriendly: true,
+    license: 'https://opensource.org/licenses/MIT',
+    keywords: meta.categories.map(category => category.name).join(', '),
+    mainEntity: {
+      '@type': 'ItemList',
+      name: 'Categories',
+      numberOfItems: meta.categoryCount,
+      itemListOrder: 'https://schema.org/ItemListUnordered',
+      itemListElement: meta.categories.map((category, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: category.name,
+        description: category.blurb,
+        url: `${SITE_URL}?cat=${encodeURIComponent(category.name)}`
+      }))
+    }
+  };
+}
+
+function collectionsStructuredData(meta, collections) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'CoolSites Collections',
+    url: `${SITE_URL}collections.html`,
+    description: `${collections.length} curated starting points drawn from the ${meta.siteCount} entries in the directory.`,
+    inLanguage: 'en',
+    isPartOf: { '@type': 'CollectionPage', name: 'CoolSites', url: SITE_URL },
+    mainEntity: {
+      '@type': 'ItemList',
+      name: 'Collections',
+      numberOfItems: collections.length,
+      itemListOrder: 'https://schema.org/ItemListUnordered',
+      // No per-item url: the page has no address for an individual collection,
+      // and inventing one would point a crawler at something that does not load.
+      itemListElement: collections.map((collection, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: collection.name,
+        description: collection.description
+      }))
+    }
+  };
+}
+
+// A </script> inside a JSON string would end the block early and put the rest of
+// the payload into the document as markup. Nothing here contains one today,
+// which is exactly why it would go unnoticed the day something does.
+function embedJson(value) {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
+}
+
 function replaceOnce(content, pattern, replacement, label, hint, problems) {
   const matches = content.match(new RegExp(pattern.source, `${pattern.flags.replace(/g/g, '')}g`));
   if (!matches || matches.length !== 1) {
@@ -142,9 +217,9 @@ function applyIndexHtml(content, meta, problems) {
   next = replaceOnce(next, /(<meta name="twitter:description" content=")[^"]*(">)/,
     (_, a, b) => `${a}${copy.socialDescription}${b}`, 'index.html twitter:description',
     'There must be exactly one <meta name="twitter:description">.', problems);
-  next = replaceOnce(next, /("@type":"WebSite","name":"CoolSites","url":"[^"]*","description":")[^"]*(")/,
-    (_, a, b) => `${a}${copy.metaDescription}${b}`, 'index.html JSON-LD description',
-    'The application/ld+json block must keep its "description" key.', problems);
+  next = replaceOnce(next, /(<script type="application\/ld\+json">\n)[\s\S]*?(\n<\/script>)/,
+    (_, a, b) => `${a}${embedJson(structuredData(meta))}${b}`, 'index.html structured data',
+    'There must be exactly one application/ld+json block, opening and closing on their own lines.', problems);
   next = replaceOnce(next, /(<p id="heroTagline">)[^<]*(<\/p>)/,
     (_, a, b) => `${a}${copy.heroTagline}${b}`, 'index.html hero tagline',
     'The hero paragraph must be a single <p id="heroTagline"> with plain text.', problems);
@@ -206,10 +281,19 @@ function applyReadme(content, meta, problems) {
   return next.replace(tableMatch[0], () => rendered);
 }
 
+function applyCollectionsHtml(content, meta, problems) {
+  const collections = readJson('collections.json');
+  return replaceOnce(content, /(<script type="application\/ld\+json">\n)[\s\S]*?(\n<\/script>)/,
+    (_, a, b) => `${a}${embedJson(collectionsStructuredData(meta, Array.isArray(collections) ? collections : []))}${b}`,
+    'collections.html structured data',
+    'There must be exactly one application/ld+json block, opening and closing on their own lines.', problems);
+}
+
 const TARGETS = [
   { file: 'index.html', apply: applyIndexHtml },
   { file: 'manifest.json', apply: applyManifest },
   { file: 'sw.js', apply: applyServiceWorker },
+  { file: 'collections.html', apply: applyCollectionsHtml },
   { file: 'README.md', apply: applyReadme }
 ];
 
