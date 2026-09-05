@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-WFeISWjiPTQuinF6Mj0ismezXL/rOaVtbL2Sgfr6/rI=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-rQXJSvhNQkLv/v3A65hZafN1pOlICDpj5xZIpML6EsE=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-wqyJGHqs4MNXhytBXUzQoLdLK7DrZaJM9Egslpgo8Ag=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-LI+OXPM6dlKRMnsRsEw1u2+ZWZnzfeuDX4LQQFDTH0M=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1880,8 +1880,8 @@
      elements and style attributes, not scripted style writes, so this is the
      one shape a strict policy leaves open for a colour that is not known until
      the page has its data. */
-  .card { --cat-c: var(--accent); }
-  .group-color, .modal-color { background: var(--accent); }
+  .card { --cat-c: var(--entry-accent); }
+  .group-color, .modal-color { background: var(--entry-accent); }
 
     text-align: center;
     padding: 4rem 2rem 3rem;
@@ -4289,9 +4289,14 @@ function escAttr(s) { return escHtml(s).replace(/\`/g, '&#96;'); }
 // attribute once style-src stops allowing them. CSP governs <style> elements and
 // style attributes in markup and does not govern scripted style writes, which is
 // what this is. Called after every innerHTML that can produce a data-accent.
+//
+// The property is deliberately not --accent. That is a theme token, and writing
+// it on a card overrode the theme accent for everything inside: the focus
+// outline, the compare border and the selected state all silently took the
+// category colour instead.
 function paintAccents(root) {
   for (const element of root.querySelectorAll('[data-accent]')) {
-    element.style.setProperty('--accent', element.dataset.accent);
+    element.style.setProperty('--entry-accent', element.dataset.accent);
   }
 }
 

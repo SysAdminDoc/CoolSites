@@ -72,12 +72,27 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     // fallback accent and nothing throws.
     const accents = await page.evaluate(`(() => {
       const cards = [...document.querySelectorAll('#grid .card')].slice(0, 40);
-      const applied = cards.filter(card => card.style.getPropertyValue('--accent') === card.dataset.accent && card.dataset.accent);
+      const applied = cards.filter(card => card.style.getPropertyValue('--entry-accent') === card.dataset.accent && card.dataset.accent);
       const painted = new Set(cards.map(card => getComputedStyle(card.querySelector('.card-category')).color));
       return { cards: cards.length, applied: applied.length, distinctCategoryColours: painted.size };
     })()`);
     assert.equal(accents.applied, accents.cards, 'every card should carry the accent its data attribute names');
     assert.ok(accents.distinctCategoryColours > 1, 'category badges should still be coloured per category, not all one colour');
+
+    // The per-card property must not be --accent. That is a theme token, and
+    // writing it on a card takes over the focus outline, the compare border and
+    // every other thing inside the card that reads the theme's accent.
+    const themeAccent = await page.evaluate(`(() => {
+      const card = document.querySelector('#grid .card');
+      return {
+        root: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+        inCard: getComputedStyle(card).getPropertyValue('--accent').trim(),
+        catColour: getComputedStyle(card).getPropertyValue('--cat-c').trim()
+      };
+    })()`);
+    assert.ok(themeAccent.catColour, 'a card still needs its category colour');
+    assert.ok(themeAccent.root, 'the theme should define an accent to compare against');
+    assert.equal(themeAccent.inCard, themeAccent.root, 'a card must not shadow the theme accent with its category colour');
 
     // A filtered view was shareable but not navigable: Back left the site
     // instead of undoing the filter, because every render replaced the history

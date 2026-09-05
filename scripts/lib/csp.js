@@ -43,9 +43,13 @@ function withoutComments(html) {
   return html.replace(/<!--[\s\S]*?-->/g, match => match.replace(/[^\n]/g, ''));
 }
 
-// A <style> element has no equivalent of type="module" or src to reason about:
-// every one of them is a stylesheet the browser applies, so all of them count.
-const INLINE_STYLE = /<style>([\s\S]*?)<\/style>/gi;
+// Attributes are tolerated deliberately. A bare-tag pattern would not see
+// <style media="print"> or <style type="text/css">, the digest would never enter
+// the policy, and the browser would refuse a stylesheet the build had no idea
+// existed. Worse, package-release.js verifies with this same function, so it
+// would find no orphaned hash and pass. An extra hash costs nothing; a missing
+// one is a blank page. The script matcher already learned this lesson once.
+const INLINE_STYLE = /<style(?![^>]*\ssrc\s*=)[^>]*>([\s\S]*?)<\/style>/gi;
 
 function digest(body) {
   return `'sha256-${crypto.createHash('sha256').update(body, 'utf8').digest('base64')}'`;

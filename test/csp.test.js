@@ -232,3 +232,27 @@ test('the matcher sees exactly the scripts a browser would execute', () => {
     assert.equal(hashesFor(html).length, expected, name);
   }
 });
+
+// The style matcher decides what style-src allows, so a stylesheet it fails to
+// see is one the browser refuses. package-release.js verifies with the same
+// function, so a blind spot here is invisible to the build as well as to lint:
+// nothing reports an orphaned hash for a tag nobody matched. Crafted markup,
+// for the same reason the script cases are crafted.
+test('the matcher sees every stylesheet a browser would apply', () => {
+  const { styleHashesFor } = require('../scripts/lib/csp');
+  const cases = [
+    ['a bare tag', '<style>a{color:red}</style>', 1],
+    // Attributes are the trap. A bare-tag pattern misses these silently.
+    ['an explicit type', '<style type="text/css">a{color:red}</style>', 1],
+    ['a media query', '<style media="print">a{color:red}</style>', 1],
+    ['stray whitespace in the tag', '<style >a{color:red}</style>', 1],
+    ['uppercase', '<STYLE>a{color:red}</STYLE>', 1],
+    ['an empty block is nothing to allow', '<style>   </style>', 0],
+    ['two blocks are two hashes', '<style>a{}</style><style>b{}</style>', 2],
+    // Same shape that once let a comment swallow a real script.
+    ['a comment holding an unpaired open tag', '<!-- like this: <style> --><style>a{color:red}</style>', 1]
+  ];
+  for (const [name, html, expected] of cases) {
+    assert.equal(styleHashesFor(html).length, expected, name);
+  }
+});
