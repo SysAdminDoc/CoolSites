@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-hH4U6gsxUJ9xYYJXlis/GDLXtAZiMkp72jL8hReuLow='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-WFeISWjiPTQuinF6Mj0ismezXL/rOaVtbL2Sgfr6/rI=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
@@ -132,6 +132,7 @@
   .collection-nav-button{width:100%;min-height:40px;padding:8px 9px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--muted);display:flex;align-items:center;gap:9px;text-align:left;cursor:pointer}
   .collection-nav-button:hover{border-color:var(--border);color:var(--text);background:var(--panel)}
   .collection-nav-button.active{border-color:color-mix(in srgb,var(--accent-fill) 48%,var(--border));background:color-mix(in srgb,var(--accent-fill) 14%,transparent);color:var(--accent)}
+  .flush-top{margin:8px 0 0}
   .collection-nav-icon{width:18px;color:var(--collection-accent,var(--accent));font:800 .75rem/1 var(--mono)}
   .collection-nav-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .collection-count{margin-left:auto;min-width:24px;padding:2px 5px;border:1px solid var(--border);border-radius:4px;color:var(--muted);font:.66rem/1.2 var(--mono);text-align:center}
@@ -329,6 +330,12 @@ function entriesFor(collection) {
   return (collection?.urls || []).map(url => sitesByUrl.get(url)).filter(Boolean);
 }
 
+function paintAccents(root) {
+  for (const element of root.querySelectorAll('[data-accent]')) {
+    element.style.setProperty('--collection-accent', element.dataset.accent);
+  }
+}
+
 function collectionAccent(index) {
   return COLLECTION_ACCENTS[index % COLLECTION_ACCENTS.length];
 }
@@ -355,12 +362,13 @@ function renderNavigation(query = '') {
     return;
   }
   $collectionNav.innerHTML = matches.map(({ collection, index, entries }) => `
-    <button class="collection-nav-button${index === selectedCollection ? ' active' : ''}" type="button" data-collection-index="${index}" aria-pressed="${index === selectedCollection}" style="--collection-accent:${collectionAccent(index)}">
+    <button class="collection-nav-button${index === selectedCollection ? ' active' : ''}" type="button" data-collection-index="${index}" aria-pressed="${index === selectedCollection}" data-accent="${collectionAccent(index)}">
       <span class="collection-nav-icon" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
       <span class="collection-nav-name">${esc(collection.name)}</span>
       <span class="collection-count">${entries.length}</span>
     </button>
   `).join('');
+  paintAccents($collectionNav);
 }
 
 function renderFeatured() {
@@ -404,7 +412,7 @@ function renderMoreCollections() {
     .filter(item => item.index !== selectedCollection);
   document.getElementById('moreHeading').hidden = items.length === 0;
   $moreCollections.innerHTML = items.map(({ collection, index, entries }) => `
-    <button class="collection-summary" type="button" data-collection-index="${index}" style="--collection-accent:${collectionAccent(index)}" aria-label="View ${esc(collection.name)}">
+    <button class="collection-summary" type="button" data-collection-index="${index}" data-accent="${collectionAccent(index)}" aria-label="View ${esc(collection.name)}">
       <span class="summary-title">
         <span class="summary-marker" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
         <strong>${esc(collection.name)}</strong>
@@ -417,6 +425,7 @@ function renderMoreCollections() {
       <span class="summary-action">Open collection</span>
     </button>
   `).join('');
+  paintAccents($moreCollections);
 }
 
 function selectCollection(index, moveFocus) {
@@ -431,7 +440,7 @@ function selectCollection(index, moveFocus) {
 function showError(message) {
   $featured.setAttribute('aria-busy', 'false');
   $featured.className = 'error';
-  $featured.innerHTML = `<strong>Collections could not be loaded.</strong><p class="lede" style="margin:8px 0 0">${esc(message)}</p><button type="button" id="retry">Try again</button>`;
+  $featured.innerHTML = `<strong>Collections could not be loaded.</strong><p class="lede flush-top">${esc(message)}</p><button type="button" id="retry">Try again</button>`;
   $moreCollections.innerHTML = '';
   $collectionNav.innerHTML = '';
   document.getElementById('retry').addEventListener('click', event => {

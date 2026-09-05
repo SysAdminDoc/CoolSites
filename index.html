@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-hH4U6gsxUJ9xYYJXlis/GDLXtAZiMkp72jL8hReuLow='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-WFeISWjiPTQuinF6Mj0ismezXL/rOaVtbL2Sgfr6/rI=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1865,7 +1865,24 @@
   .back-to-top svg { width: 18px; height: 18px; }
 
   /* ── Footer ── */
-  .footer {
+  /* Everything below replaces a style attribute that used to sit in the markup.
+     A hash covers a whole <style> element but never a style="" attribute, so
+     these had to become rules before style-src could drop 'unsafe-inline'. */
+  .modal-narrow { max-width: 340px; }
+  .modal-btns.spaced { margin-top: 16px; }
+  .noscript-state { grid-column: 1 / -1; padding: 4rem 2rem; }
+  .footer-links { margin-top: 0.5rem; }
+  .grid-full { grid-column: 1 / -1; }
+  .flush { margin: 0; }
+
+  /* Set through the CSSOM after render, from a data-accent attribute, because a
+     category or group colour is data rather than markup. CSP governs <style>
+     elements and style attributes, not scripted style writes, so this is the
+     one shape a strict policy leaves open for a colour that is not known until
+     the page has its data. */
+  .card { --cat-c: var(--accent); }
+  .group-color, .modal-color { background: var(--accent); }
+
     text-align: center;
     padding: 4rem 2rem 3rem;
     border-top: 1px solid var(--border);
@@ -2002,6 +2019,19 @@
   .theme-option.active {
     color: var(--accent-text);
   }
+  /* One rule per theme, generated from what used to be an inline style on each
+     swatch. A hash cannot cover a style attribute, so these had to become real
+     rules before style-src could drop 'unsafe-inline'. */
+  .theme-option[data-theme="oled"] .swatch { background: #08090d; }
+  .theme-option[data-theme="catppuccin"] .swatch { background: #1e1e2e; }
+  .theme-option[data-theme="dracula"] .swatch { background: #282a36; }
+  .theme-option[data-theme="rose-pine"] .swatch { background: #191724; }
+  .theme-option[data-theme="nord"] .swatch { background: #2e3440; }
+  .theme-option[data-theme="github-dark"] .swatch { background: #0d1117; }
+  .theme-option[data-theme="midnight"] .swatch { background: #0a0e1a; }
+  .theme-option[data-theme="solarized"] .swatch { background: #002b36; }
+  .theme-option[data-theme="light"] .swatch { background: #f8f9fc; border-color: rgba(0,0,0,0.2); }
+  .theme-option[data-theme="system"] .swatch { background: linear-gradient(135deg, #08090d 50%, #f8f9fc 50%); border-color: rgba(128,128,128,0.3); }
   .theme-option .swatch {
     width: 16px;
     height: 16px;
@@ -2537,55 +2567,55 @@
         <div class="theme-dropdown" id="themeDropdown" popover role="radiogroup" aria-label="Theme">
           <div class="theme-section-label" aria-hidden="true">Dark</div>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="oled">
-            <span class="swatch" style="background: #08090d;"></span>
+            <span class="swatch"></span>
             OLED Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="catppuccin">
-            <span class="swatch" style="background: #1e1e2e;"></span>
+            <span class="swatch"></span>
             Catppuccin Mocha
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="dracula">
-            <span class="swatch" style="background: #282a36;"></span>
+            <span class="swatch"></span>
             Dracula
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="rose-pine">
-            <span class="swatch" style="background: #191724;"></span>
+            <span class="swatch"></span>
             Rosé Pine
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="nord">
-            <span class="swatch" style="background: #2e3440;"></span>
+            <span class="swatch"></span>
             Nord
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="github-dark">
-            <span class="swatch" style="background: #0d1117;"></span>
+            <span class="swatch"></span>
             GitHub Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="midnight">
-            <span class="swatch" style="background: #0a0e1a;"></span>
+            <span class="swatch"></span>
             Midnight Blue
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="solarized">
-            <span class="swatch" style="background: #002b36;"></span>
+            <span class="swatch"></span>
             Solarized Dark
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <div class="theme-divider" aria-hidden="true"></div>
           <div class="theme-section-label" aria-hidden="true">Light</div>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="light">
-            <span class="swatch" style="background: #f8f9fc; border-color: rgba(0,0,0,0.2);"></span>
+            <span class="swatch"></span>
             Light
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
           <div class="theme-divider" aria-hidden="true"></div>
           <button class="theme-option" role="radio" aria-checked="false" tabindex="-1" data-theme="system">
-            <span class="swatch" style="background: linear-gradient(135deg, #08090d 50%, #f8f9fc 50%); border-color: rgba(128,128,128,0.3);"></span>
+            <span class="swatch"></span>
             System
             <svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </button>
@@ -2622,7 +2652,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             Import
           </button>
-          <input type="file" id="importFile" accept=".json" style="display:none">
+          <input type="file" id="importFile" accept=".json" hidden>
         </div>
       </div>
       <div class="dock-groups" id="dockGroups"></div>
@@ -2670,7 +2700,7 @@
 
 <!-- Shortcuts Help -->
 <dialog class="modal-overlay" id="shortcutsModal" aria-labelledby="shortcutsTitle">
-  <div class="modal" style="max-width:340px">
+  <div class="modal modal-narrow">
     <h3 id="shortcutsTitle">Keyboard Shortcuts</h3>
     <table class="shortcuts-table">
       <tr><td><kbd>/</kbd></td><td>Focus search</td></tr>
@@ -2683,7 +2713,7 @@
       <tr><td><kbd>Alt</kbd>+<kbd>&uarr;</kbd> <kbd>&darr;</kbd></td><td>Move a bookmark to another group</td></tr>
       <tr><td><kbd>Alt</kbd>+arrows</td><td>Reorder a group, from its edit button</td></tr>
     </table>
-    <div class="modal-btns" style="margin-top:16px">
+    <div class="modal-btns spaced">
       <button class="modal-btn primary" id="shortcutsClose">Close</button>
     </div>
   </div>
@@ -2694,7 +2724,7 @@
   <div class="modal compare-modal">
     <h3 id="compareTitle">Compare Sites</h3>
     <div class="compare-table-wrap" id="compareTableWrap"></div>
-    <div class="modal-btns" style="margin-top:16px">
+    <div class="modal-btns spaced">
       <button class="modal-btn primary" id="compareClose">Close</button>
     </div>
   </div>
@@ -2707,7 +2737,7 @@
     <h3 id="debugTitle">Diagnostics</h3>
     <p class="debug-note">Everything here is read from this browser. Nothing is sent anywhere.</p>
     <div class="debug-body" id="debugBody" tabindex="0" role="region" aria-labelledby="debugTitle"></div>
-    <div class="modal-btns" style="margin-top:16px">
+    <div class="modal-btns spaced">
       <button class="modal-btn" type="button" id="debugCopy">Copy report</button>
       <button class="modal-btn" type="button" id="debugReset">Clear cache and reload</button>
       <button class="modal-btn primary" type="button" id="debugClose">Close</button>
@@ -2771,7 +2801,7 @@
   </div>
   <div class="grid" id="grid"></div>
   <noscript>
-    <div class="empty-state" style="grid-column:1/-1; padding:4rem 2rem">
+    <div class="empty-state noscript-state">
       <h3>JavaScript Required</h3>
       <p>CoolSites needs JavaScript to search, filter, and display the directory. Please enable JavaScript and reload the page.</p>
     </div>
@@ -2792,7 +2822,7 @@
 <!-- Footer -->
 <footer class="footer">
   <p>Built for sysadmins, devs, creators, homelabbers, and the endlessly curious.</p>
-  <p style="margin-top: 0.5rem"><a href="https://github.com/SysAdminDoc/CoolSites/issues" target="_blank" rel="noopener noreferrer">Suggest a site</a> &middot; <a href="collections.html">Collections</a> &middot; <a href="feeds/recent.atom">Feed</a> &middot; <a href="feeds/directory.opml">OPML</a> &middot; <a href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  <p class="footer-links"><a href="https://github.com/SysAdminDoc/CoolSites/issues" target="_blank" rel="noopener noreferrer">Suggest a site</a> &middot; <a href="collections.html">Collections</a> &middot; <a href="feeds/recent.atom">Feed</a> &middot; <a href="feeds/directory.opml">OPML</a> &middot; <a href="https://github.com/SysAdminDoc/CoolSites" target="_blank" rel="noopener noreferrer">GitHub</a></p>
 </footer>
 
 <script>
@@ -2879,7 +2909,7 @@ function showDataError(error) {
   const fileProtocol = location.protocol === 'file:';
   document.getElementById('resultsCount').textContent = 'Data failed to load';
   grid.innerHTML = `
-    <div class="empty-state" style="grid-column:1/-1">
+    <div class="empty-state" class="grid-full">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <h3>Directory data could not be loaded</h3>
       <p>${fileProtocol ? 'Opening index.html directly is not supported. Run <code>npm run serve</code> from the repository, then open the printed address.' : 'Check the local server and reload so the browser can fetch sites.json and categories.json.'}</p>
@@ -3420,14 +3450,14 @@ function buildCard(site, index) {
   const compareButton = compareMode ? `<button class="compare-select${selectedCompare.has(site.url) ? ' selected' : ''}" title="Select for comparison" aria-label="Select ${escAttr(site.name)} for comparison" aria-pressed="${selectedCompare.has(site.url)}" data-action="compare" data-url="${escUrl}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg></button>` : '';
 
   return `
-    <article class="card${bmClass}${pickClass}${compareClass}" data-url="${escUrl}" style="--cat-c:${escAttr(category.color)}">
+    <article class="card${bmClass}${pickClass}${compareClass}" data-url="${escUrl}" data-accent="${escAttr(category.color)}">
       <div class="card-body">
         <div class="card-header">
           <div class="card-icon">${favicon
             ? `<img data-src="${escAttr(favicon)}" alt="" width="20" height="20" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img">`
             : escHtml(getInitial(site.name))}</div>
           <div class="card-header-text">
-            <div class="card-category" style="--cat-c:${escAttr(category.color)}" title="${escAttr(category.blurb)}">${escHtml(site.category)}</div>
+            <div class="card-category" title="${escAttr(category.blurb)}">${escHtml(site.category)}</div>
             <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}${pickBadge}</h3>
             <div class="card-meta-row">${altBadge}${starBadge}${archivedBadge}${linkBadge}</div>
           </div>
@@ -3528,7 +3558,7 @@ function _renderGridInner() {
       ? `Nothing here matches ${escHtml(joinList(active))}. Drop a filter and try again.`
       : 'Try a shorter search term, or fewer words.';
     grid.innerHTML = `
-      <div class="empty-state" style="grid-column: 1 / -1">
+      <div class="empty-state grid-full">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <h3>${hint}</h3>
         <p>${detail}</p>
@@ -3558,6 +3588,7 @@ function _renderGridInner() {
     : base;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+  paintAccents(grid);
   _faviconObserver.disconnect();
   _loadMoreObserver.disconnect();
   grid.querySelectorAll('img.favicon-img[data-src]').forEach(img => _faviconObserver.observe(img));
@@ -4254,6 +4285,16 @@ function escAttr(s) { return escHtml(s).replace(/\`/g, '&#96;'); }
 // ════════════════════════════════════════════════════════════════
 //  DOCK RENDERING
 // ════════════════════════════════════════════════════════════════
+// A category or group colour is data, not markup, so it cannot live in a style
+// attribute once style-src stops allowing them. CSP governs <style> elements and
+// style attributes in markup and does not govern scripted style writes, which is
+// what this is. Called after every innerHTML that can produce a data-accent.
+function paintAccents(root) {
+  for (const element of root.querySelectorAll('[data-accent]')) {
+    element.style.setProperty('--accent', element.dataset.accent);
+  }
+}
+
 function renderDock() {
   const wrapper = document.getElementById('dockWrapper');
   const container = document.getElementById('dockGroups');
@@ -4303,7 +4344,7 @@ function renderDock() {
         <div class="dock-group-header" data-group-drag="${escAttr(group.id)}">
           <span class="dock-group-name">
             <span class="drag-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/></svg></span>
-            <span class="group-color" style="background: ${escAttr(group.color)}"></span>
+            <span class="group-color" data-accent="${escAttr(group.color)}"></span>
             ${escHtml(group.name)}
             <span class="group-chip-count">(${groupSites.length})</span>
           </span>
@@ -4324,6 +4365,7 @@ function renderDock() {
   });
 
   container.innerHTML = html;
+  paintAccents(container);
   initChipDragAndDrop();
   initGroupDragAndDrop();
 }
@@ -4741,8 +4783,9 @@ function selectModalColor(color, moveFocus) {
 function renderModalColors() {
   const container = document.getElementById('modalColors');
   container.innerHTML = GROUP_COLORS.map(color =>
-    `<button type="button" role="radio" class="modal-color" style="background: ${escAttr(color)}" data-color="${escAttr(color)}" aria-checked="false" tabindex="-1" aria-label="${escAttr(COLOR_NAMES[color] || color)}"></button>`
+    `<button type="button" role="radio" class="modal-color" data-accent="${escAttr(color)}" data-color="${escAttr(color)}" aria-checked="false" tabindex="-1" aria-label="${escAttr(COLOR_NAMES[color] || color)}"></button>`
   ).join('');
+  paintAccents(container);
   container.querySelectorAll('.modal-color').forEach(el => {
     el.addEventListener('click', () => selectModalColor(el.dataset.color, false));
   });
@@ -4842,11 +4885,12 @@ function showAssignDropdown(url, btnEl) {
   dd.className = 'assign-dropdown open';
   dd.innerHTML = groups.map(g => `
     <button class="assign-option ${bookmarks[url]?.group === g.id ? 'active' : ''}" data-gid="${escAttr(g.id)}">
-      <span class="group-color" style="background: ${escAttr(g.color)}"></span>
+      <span class="group-color" data-accent="${escAttr(g.color)}"></span>
       ${escHtml(g.name)}
     </button>
   `).join('');
 
+  paintAccents(dd);
   dd.querySelectorAll('.assign-option').forEach(opt => {
     opt.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -5105,7 +5149,7 @@ function renderDiagnostics(report) {
   const rows = (title, entries) => `
     <div class="debug-group">
       <h4>${escHtml(title)}</h4>
-      <dl style="margin:0">
+      <dl class="flush">
         ${Object.entries(entries).map(([key, value]) => `
           <div class="debug-row"><dt>${escHtml(key)}</dt><dd>${escHtml(value)}</dd></div>
         `).join('')}

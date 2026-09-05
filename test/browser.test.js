@@ -66,6 +66,19 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.activeElement.id === 'newGroupBtn'");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
+    // Category and group colours used to live in style attributes, which a CSP
+    // hash cannot cover. They are set through the CSSOM now, and the failure
+    // mode if that ever stops running is silent: every card renders with the
+    // fallback accent and nothing throws.
+    const accents = await page.evaluate(`(() => {
+      const cards = [...document.querySelectorAll('#grid .card')].slice(0, 40);
+      const applied = cards.filter(card => card.style.getPropertyValue('--accent') === card.dataset.accent && card.dataset.accent);
+      const painted = new Set(cards.map(card => getComputedStyle(card.querySelector('.card-category')).color));
+      return { cards: cards.length, applied: applied.length, distinctCategoryColours: painted.size };
+    })()`);
+    assert.equal(accents.applied, accents.cards, 'every card should carry the accent its data attribute names');
+    assert.ok(accents.distinctCategoryColours > 1, 'category badges should still be coloured per category, not all one colour');
+
     // A filtered view was shareable but not navigable: Back left the site
     // instead of undoing the filter, because every render replaced the history
     // entry rather than adding one.
