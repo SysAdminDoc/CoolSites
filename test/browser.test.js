@@ -372,6 +372,13 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     );
 
     // Every theme has to keep body text readable against the body background.
+    // The probe is measured on a deliberately slow machine. Eight times slower
+    // is far past the contention that broke the old fixed delay, and it is the
+    // rate the old delay was shown to fail at: with the settle wait below removed,
+    // this run reports a dozen contrast failures that are nothing but colours read
+    // halfway through a theme change. A rewrite back to a fixed delay fails here
+    // rather than on somebody else's laptop.
+    await page.send('Emulation.setCPUThrottlingRate', { rate: 8 });
     const contrast = await page.evaluate(`(async () => {
       // Transitions make getComputedStyle return an interpolated colour, and
       // content-visibility leaves off-screen cards unrecalculated, so both are
@@ -381,10 +388,6 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       override.textContent = '*, *::before, *::after { transition: none !important; animation: none !important; content-visibility: visible !important; }';
       document.head.appendChild(override);
       const frame = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-      // Some transitions survive the override (a popover opening in the top
-      // layer), and a mid-transition colour is not the colour a user sees.
-      // Settle in real time rather than racing the compositor.
-      const settle = () => new Promise(resolve => setTimeout(resolve, 300));
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = 1;
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -422,16 +425,49 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       // whose computed colour does not settle reliably under CDP. The palette
       // test covers that surface from the tokens instead.
       const themes = ['oled','catppuccin','dracula','rose-pine','nord','github-dark','midnight','solarized','light'];
+
+      // Everything the measurement is about to read, in one string. Some
+      // transitions survive the override above (a popover opening in the top
+      // layer), and a colour read partway through one is not a colour anybody
+      // sees. This used to be a flat 300ms wait, which is a bet on how fast the
+      // machine is: on 2026-09-05 a second headless Chrome on the same box was
+      // enough to lose that bet once and pass on an immediate rerun. Waiting for
+      // the value to stop moving makes the probe as slow as the machine needs
+      // and no slower.
+      const signature = () => selectors.map(selector => {
+        const node = document.querySelector(selector);
+        return node ? getComputedStyle(node).color + '|' + layersFor(node).join(',') : '';
+      }).join(';');
+
+      const SETTLE_FRAMES = 240;
+      const settle = async before => {
+        let last = null;
+        let stable = 0;
+        for (let attempt = 0; attempt < SETTLE_FRAMES; attempt++) {
+          await frame();
+          const current = signature();
+          stable = current === last ? stable + 1 : 0;
+          last = current;
+          // Two consecutive frames that agree, on a value that has already moved
+          // off the one the previous theme was showing. Stability alone would
+          // accept the old colour in the frame before the change lands.
+          if (stable >= 2 && current !== before) return true;
+        }
+        return false;
+      };
+
       const previous = document.documentElement.dataset.theme;
       const failures = [];
+      const unsettled = [];
       let sampled = 0;
       document.querySelector('#grid .card').scrollIntoView({ block: 'center' });
       // The theme menu is a popover: it has to be open, or its options are not
       // rendered and the measurement is meaningless.
 
       for (const theme of themes) {
+        const before = signature();
         document.documentElement.dataset.theme = theme;
-        await settle();
+        if (!await settle(before)) unsettled.push(theme);
         for (const selector of selectors) {
           const node = document.querySelector(selector);
           if (!node) continue;
@@ -446,8 +482,12 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
       document.documentElement.dataset.theme = previous;
       override.remove();
       await frame();
-      return { failures, sampled };
+      return { failures, sampled, unsettled };
     })()`);
+    await page.send('Emulation.setCPUThrottlingRate', { rate: 1 });
+    // Checked before the contrast result, because a theme that never settled
+    // means the colours below were read mid-change and the ratios are fiction.
+    assert.deepEqual(contrast.unsettled, [], 'every theme has to reach a colour that stops moving before it is measured');
     assert.ok(contrast.sampled >= 90, `the contrast probe should sample every theme, sampled ${contrast.sampled}`);
     assert.deepEqual(contrast.failures, [], 'text must clear WCAG AA against its own backdrop in every theme');
 
@@ -771,6 +811,11 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await page.send('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 1, mobile: true });
     await page.send('Page.reload', { ignoreCache: false });
     await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+    // Measuring before the web fonts are applied measures the fallback stack's
+    // metrics, which are not the metrics anybody sees. On a busy machine the
+    // grid can be up before the fonts are, which is how this probe reported the
+    // header two pixels over the viewport once and passed on the next run.
+    await waitFor(page, "document.fonts.ready.then(() => document.fonts.status === 'loaded')");
     const mobile = await page.evaluate(`(() => {
       // Under CDP emulation window.innerWidth reports the window, not the
       // layout viewport, so it is useless here. body also has
@@ -967,6 +1012,13 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     // reach for the network: the whole point is a health surface that does not
     // phone anywhere.
     await page.send('Emulation.setEmulatedMedia', { features: [] });
+    // The panel renders once, when the page loads, so a worker still mid-
+    // registration is reported as "registering" for as long as the panel is
+    // open. Registration is per origin and survives the navigation below, so
+    // waiting for it here is enough. On a loaded machine it has not always
+    // finished by the time the grid is on screen, which is how this assertion
+    // failed once on 2026-09-05 and passed on the next run.
+    await waitFor(page, "(async () => { const registration = await navigator.serviceWorker.getRegistration(); return Boolean(registration && (registration.active || registration.installing || registration.waiting)); })()");
     await page.send('Page.navigate', { url: `${server.url}?debug=1` });
     await waitFor(page, "document.getElementById('debugModal') && document.getElementById('debugModal').open");
     const diagnostics = await page.evaluate(`(() => {
