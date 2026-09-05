@@ -1068,6 +1068,100 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.equal(recorded.after, recorded.before + 1, 'a fallback must not hide the failure from diagnostics');
     assert.match(recorded.last.scope, /definitely-not-here/);
 
+    // ── Search operators ──
+    // Every one of these has to narrow. The rule that matters most is the last
+    // one: syntax the parser does not recognise has to behave like the words it
+    // is made of, because someone typing a dash mid-thought should get results
+    // rather than an empty page.
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+
+    const plain = await page.evaluate("(() => { searchTerm = 'docker'; return getFiltered().map(site => site.url); })()");
+    assert.ok(plain.length > 3, 'the plain query should return something to narrow');
+
+    const excluded = await page.evaluate(`(() => {
+      searchTerm = 'docker -compose';
+      const results = getFiltered();
+      return {
+        count: results.length,
+        anyMentions: results.some(site => JSON.stringify(site).toLowerCase().includes('compose'))
+      };
+    })()`);
+    assert.ok(excluded.count < plain.length, 'a leading dash has to remove results');
+    assert.equal(excluded.anyMentions, false, 'nothing mentioning the excluded word may survive');
+
+    const phrase = await page.evaluate(`(() => {
+      searchTerm = '"command line"';
+      const results = getFiltered();
+      return {
+        count: results.length,
+        allLiteral: results.every(site => JSON.stringify(site).toLowerCase().includes('command line'))
+      };
+    })()`);
+    assert.ok(phrase.count > 0, 'a quoted phrase that exists should find its entries');
+    assert.equal(phrase.allLiteral, true, 'a quoted phrase has to match literally, in that order');
+
+    const tagged = await page.evaluate(`(() => {
+      searchTerm = '#dns';
+      const results = getFiltered();
+      return {
+        count: results.length,
+        allTagged: results.every(site => [...site.tags, ...site.keywords].includes('dns')),
+        // #dns must not be satisfied by dnssec: an exact facet match is the
+        // whole difference between this and typing the word.
+        substringOnly: results.filter(site => ![...site.tags, ...site.keywords].includes('dns')).length
+      };
+    })()`);
+    assert.ok(tagged.count > 0, 'a tag that exists should find its entries');
+    assert.equal(tagged.allTagged, true, '#tag has to be an exact match on a tag or keyword');
+    assert.equal(tagged.substringOnly, 0);
+
+    const quotedTag = await page.evaluate("(() => { searchTerm = '#\"open source\"'; return getFiltered().length; })()");
+    assert.ok(quotedTag > 0, 'a tag with a space in it needs the quoted form to work');
+
+    const excludedTag = await page.evaluate(`(() => {
+      searchTerm = '-#torrent';
+      const results = getFiltered();
+      return { count: results.length, anyTagged: results.some(site => [...site.tags, ...site.keywords].includes('torrent')) };
+    })()`);
+    assert.ok(excludedTag.count > 100, 'excluding one tag should leave most of the directory');
+    assert.equal(excludedTag.anyTagged, false, '-#tag has to remove every entry carrying it');
+
+    const combined = await page.evaluate("(() => { searchTerm = '#dns -windows'; return getFiltered().length; })()");
+    assert.ok(combined > 0 && combined <= tagged.count, 'operators have to combine, and combining has to narrow');
+
+    // Degrading, not breaking.
+    const degraded = await page.evaluate(`(() => {
+      const counts = {};
+      for (const [key, query] of [['bare', 'docker'], ['strayDash', 'docker -'], ['strayHash', 'docker #'], ['openQuote', '"docker'], ['emptyQuote', 'docker ""']]) {
+        searchTerm = query;
+        counts[key] = getFiltered().length;
+      }
+      searchTerm = '';
+      return counts;
+    })()`);
+    assert.equal(degraded.strayDash, degraded.bare, 'a dash on its own must not change the results');
+    assert.equal(degraded.strayHash, degraded.bare, 'a hash on its own must not change the results');
+    assert.equal(degraded.openQuote, degraded.bare, 'an unclosed quote must read as the words inside it');
+    assert.equal(degraded.emptyQuote, degraded.bare, 'an empty quoted phrase must not empty the page');
+
+    // Ranking is the thing that must not move. Unrecognised syntax has to
+    // produce the same list in the same order, not merely the same count, and
+    // an operator must filter the ranked list rather than reorder it.
+    const ranking = await page.evaluate(`(() => {
+      const orderFor = query => { searchTerm = query; return getFiltered().map(site => site.url); };
+      const result = { stray: orderFor('docker -'), quoted: orderFor('"docker"'), narrowed: orderFor('docker -compose') };
+      searchTerm = '';
+      return result;
+    })()`);
+    assert.deepEqual(ranking.stray, plain, 'unrecognised syntax must leave the ranking exactly as it was');
+    assert.deepEqual(ranking.narrowed, plain.filter(url => ranking.narrowed.includes(url)),
+      'an exclusion removes entries from the ranking; it must not reorder what is left');
+    assert.ok(ranking.quoted.length > 0 && ranking.quoted.every(url => plain.includes(url)),
+      'a quoted single word can only ever be a subset of the same word unquoted');
+
+    await searchFor(page, '');
+
     // ── Facets ──
     // The promise a facet makes is its count. Everything below is one form of
     // the same question: does clicking a chip give you the number on it.

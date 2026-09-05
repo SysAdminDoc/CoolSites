@@ -454,6 +454,25 @@ listing a project twice fails the build.
 | Hosting | GitHub Pages or any static web server |
 | Local tooling | Node.js 22.17 or newer for the lint, build, package, test and server scripts |
 
+## Search
+
+Every word you type has to match, so adding words narrows the list. Names
+tolerate a typo, longer fields need a real match, and if nothing matches
+literally the search relaxes and says so.
+
+| Type | What it does |
+|------|--------------|
+| `docker compose` | Both words have to match somewhere |
+| `"command line"` | Matches the phrase exactly, in that order |
+| `#dns` | Only entries carrying that tag or keyword, matched exactly, so `#dns` never means `dnssec` |
+| `#"open source"` | A tag with a space in it |
+| `-windows` | Leaves out anything mentioning the word |
+| `-#torrent` | Leaves out every entry carrying that tag |
+
+Anything else is read as words. A stray dash, a lone `#` or a quote you have
+not closed yet narrows nothing rather than emptying the page, which matters
+because the results update while you type.
+
 ## Keyboard Shortcuts
 
 | Key | Action |

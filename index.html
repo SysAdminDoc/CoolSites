@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-r0aW+L4LFpCcTk2sz05d3GRe2D/MlzKlq529bnYrJWQ=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-efCg1qvcMKFJuuMIy7wvZbUH4VzxyGxvhrS08zc9sJc=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-X51WADwdv0jcDQXuHXtPl2DP258j/aI5tc9W9sk7mOQ=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-efCg1qvcMKFJuuMIy7wvZbUH4VzxyGxvhrS08zc9sJc=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2820,6 +2820,15 @@
       <tr><td><kbd>Alt</kbd>+<kbd>&uarr;</kbd> <kbd>&darr;</kbd></td><td>Move a bookmark to another group</td></tr>
       <tr><td><kbd>Alt</kbd>+arrows</td><td>Reorder a group, from its edit button</td></tr>
     </table>
+    <h3 id="searchOperatorsTitle">Search</h3>
+    <table class="shortcuts-table">
+      <tr><td><kbd>docker compose</kbd></td><td>Every word has to match, so more words means fewer results</td></tr>
+      <tr><td><kbd>"self hosted"</kbd></td><td>Matches the phrase exactly, in that order</td></tr>
+      <tr><td><kbd>#dns</kbd></td><td>Only entries carrying that tag, matched exactly</td></tr>
+      <tr><td><kbd>#"open source"</kbd></td><td>A tag with a space in it</td></tr>
+      <tr><td><kbd>-windows</kbd></td><td>Leaves out anything mentioning the word</td></tr>
+      <tr><td><kbd>-#torrent</kbd></td><td>Leaves out a whole tag</td></tr>
+    </table>
     <div class="modal-btns spaced">
       <button class="modal-btn primary" id="shortcutsClose">Close</button>
     </div>
@@ -3410,21 +3419,94 @@ function tokenScore(token, index) {
   return best;
 }
 
-// Split on whitespace, then strip surrounding punctuation so a pasted
-// "Cloudflare," or a typed "c*" still finds something.
-function tokenize(query) {
-  return query
-    .toLowerCase()
-    .split(/\s+/)
-    .map(token => token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}+#]+$/gu, ''))
-    .filter(Boolean);
+// Strip surrounding punctuation so a pasted "Cloudflare," or a typed "c*" still
+// finds something.
+function cleanToken(token) {
+  return token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}+#]+$/gu, '');
+}
+
+// A leading run of - and #, then either a quoted phrase or a bare word. A part
+// that is nothing but punctuation falls through as a word and is then cleaned
+// away, so a stray dash or a lone # narrows nothing rather than emptying the
+// page. An unclosed quote never matches the quoted branch, so its contents are
+// read as ordinary words: the reader keeps getting results while they type.
+const QUERY_PART = /([-#]*)(?:"([^"]*)"|(\S+))/g;
+
+function parseQuery(query) {
+  const parsed = { tokens: [], phrases: [], tags: [], excluded: [], excludedTags: [] };
+  for (const [, prefix, quoted, bare] of query.toLowerCase().matchAll(QUERY_PART)) {
+    const exclude = prefix.includes('-');
+    const tag = prefix.includes('#');
+    if (quoted !== undefined) {
+      const phrase = quoted.trim();
+      if (!phrase) continue;
+      if (exclude && tag) parsed.excludedTags.push(phrase);
+      else if (exclude) parsed.excluded.push(phrase);
+      else if (tag) parsed.tags.push(phrase);
+      else parsed.phrases.push(phrase);
+      continue;
+    }
+    const word = cleanToken(bare);
+    if (!word) continue;
+    if (exclude && tag) parsed.excludedTags.push(word);
+    else if (exclude) parsed.excluded.push(word);
+    else if (tag) parsed.tags.push(word);
+    else parsed.tokens.push(word);
+  }
+  return parsed;
+}
+
+function hasQuery(parsed) {
+  return Boolean(parsed) && (parsed.tokens.length || parsed.phrases.length ||
+    parsed.tags.length || parsed.excluded.length || parsed.excludedTags.length);
+}
+
+// Every term a highlight should mark. Exclusions are deliberately absent: the
+// word is not on the card, and a tag the reader asked for by name is.
+function highlightTerms(parsed) {
+  return [...parsed.tokens, ...parsed.phrases, ...parsed.tags];
+}
+
+// #term is an exact facet match, not a substring: #dns must not be satisfied by
+// "dnssec". tags and keywords are both searched because search has always read
+// them at the same weight, and the reader cannot tell which field a word is in.
+function hasExactTag(index, term) {
+  return index.tags.includes(term);
+}
+
+// The operators every entry has to satisfy before scoring starts. They are hard
+// conditions rather than ranking signals: a reader who excludes a word means it,
+// and a near miss on a phrase is a miss.
+function constraintScore(parsed, index) {
+  let total = 0;
+  for (const term of parsed.excluded) {
+    if (index.haystack.includes(term)) return -1;
+  }
+  for (const term of parsed.excludedTags) {
+    if (hasExactTag(index, term)) return -1;
+  }
+  for (const term of parsed.tags) {
+    if (!hasExactTag(index, term)) return -1;
+    total += 200;
+  }
+  for (const phrase of parsed.phrases) {
+    const score = substringScore(phrase, index.name) * 3 || substringScore(phrase, index.haystack);
+    if (!score) return -1;
+    total += score;
+  }
+  return total;
 }
 
 // Every token must match somewhere, so adding words narrows results.
-function searchScore(tokens, site) {
+function searchScore(parsed, site) {
   const index = site._search || (site._search = buildSearchIndex(site));
-  let total = 0;
-  for (const token of tokens) {
+  const constrained = constraintScore(parsed, index);
+  if (constrained < 0) return 0;
+  // The base point is what makes a query of nothing but exclusions work: with a
+  // zero here, an entry that satisfies every constraint and has no word to score
+  // reads as no match at all. It is uniform, so it moves no ranking.
+  let total = constrained + 1;
+  for (const token of parsed.tokens) {
     const score = tokenScore(token, index);
     if (!score) return 0;
     total += score;
@@ -3435,11 +3517,15 @@ function searchScore(tokens, site) {
 // Second chance when nothing matched literally: allow each token to be a
 // subsequence of the short fields, which covers plurals and typos ("dockers",
 // "kubernets") without letting a long description swallow every query.
-function relaxedScore(tokens, site) {
+// Only the words are relaxed. An operator is something the reader typed on
+// purpose, and guessing at what they meant by it would be worse than no results.
+function relaxedScore(parsed, site) {
   const index = site._search || (site._search = buildSearchIndex(site));
+  const constrained = constraintScore(parsed, index);
+  if (constrained < 0) return 0;
   const haystack = `${index.name} ${index.tags.join(' ')}`;
-  let total = 0;
-  for (const token of tokens) {
+  let total = constrained + 1;
+  for (const token of parsed.tokens) {
     if (token.length < MIN_FUZZY_TOKEN) return 0;
     const score = subsequenceScore(token, haystack);
     if (!score) return 0;
@@ -3469,8 +3555,9 @@ function matchesFacets(site) {
 }
 
 function getFiltered() {
-  const tokens = searchTerm ? tokenize(searchTerm) : [];
-  const scores = tokens.length ? new Map() : null;
+  const parsed = searchTerm ? parseQuery(searchTerm) : null;
+  const searching = hasQuery(parsed);
+  const scores = searching ? new Map() : null;
   let scorer = searchScore;
   lastSearchRelaxed = false;
 
@@ -3487,7 +3574,7 @@ function getFiltered() {
       matchesFacets(site);
   };
 
-  if (tokens.length && !SITES.some(site => passesFilters(site) && searchScore(tokens, site) > 0)) {
+  if (searching && !SITES.some(site => passesFilters(site) && searchScore(parsed, site) > 0)) {
     scorer = relaxedScore;
     lastSearchRelaxed = true;
   }
@@ -3505,9 +3592,9 @@ function getFiltered() {
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
     if (!matchMetadata) return false;
     if (!matchCat) return false;
-    if (!tokens.length) return true;
+    if (!searching) return true;
 
-    const score = scorer(tokens, site);
+    const score = scorer(parsed, site);
     if (score <= 0) return false;
     scores.set(site.url, score);
     return true;
@@ -3541,7 +3628,7 @@ function joinList(items) {
 
 function highlightMatch(text, query) {
   const raw = String(text);
-  const tokens = query ? tokenize(query) : [];
+  const tokens = query ? highlightTerms(parseQuery(query)) : [];
   if (!tokens.length) return escHtml(raw);
   const pattern = tokens
     .slice()
