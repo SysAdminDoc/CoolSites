@@ -180,7 +180,18 @@ npm run package    # write dist/ with a minified single-page build
 npm run check:links      # check every URL in sites.json and write a report
 npm run update:stars     # refresh stars.json (set GITHUB_TOKEN to avoid the 60/hour cap)
 npm run update:favicons  # refresh favicons.json and re-encode oversized icons
+npm run sync:repo        # set the GitHub description and topics from the same data
 ```
+
+`npm run lint` guarantees no count can drift inside the repository. Nothing
+covered anything outside it, so the description on GitHub sat at "588 free
+tools" while `sites.json` held 586, and the first place most people read about
+this project was the one place the guarantee did not reach. `npm run sync:repo`
+fixes that from the same source the README badges use, and
+`npm run sync:repo -- --check` reports a difference without changing anything.
+It needs the `gh` CLI. It is deliberately not part of `npm run build`: a build
+that reaches out and mutates something on github.com would be a surprising
+build.
 
 There is no lockfile because there is nothing to lock. No runtime dependencies,
 no dev dependencies, no framework, no build step to view the page. That is a
