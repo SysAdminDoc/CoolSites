@@ -21,12 +21,12 @@ backend and no tracking of any kind.
 - **A browse workspace.** Bookmarks stay in the fixed rail beside the category and metadata filters, leaving the rest of the screen for search and results.
 - **Focused collections.** Pick a starting point in the rail, scan every member, then move to another collection without leaving the page.
 - **Search that narrows.** Every word you type has to match. Names tolerate typos, longer fields need a real match, and hits are highlighted.
-- **Filters that stack.** Category, open source only, no account needed, and staff picks all combine, with live counts on each.
+- **Filters that stack.** Category, tags, open source only, no account needed, staff picks and the products a tool replaces all combine, with live counts on each. Every count is measured against the list as it already stands, so a chip that says 12 gives you 12, and a term that would leave you with nothing is never offered.
 - **Sorting.** A to Z, Z to A, recently added, shuffle, or the default with your bookmarks floated to the top.
 - **Ten themes.** Eight dark (OLED, Catppuccin, Dracula, Nord, Rosé Pine, GitHub Dark, Midnight, Solarized), one light, and a system option that follows the OS.
 - **Bookmarks with groups.** Star a site, sort it into a colour-coded group, drag to reorder. Removing a bookmark or deleting a group can be undone.
 - **Export and import.** Bookmarks download as versioned JSON and restore on any device. Imports are validated entry by entry and report what they skipped.
-- **Grid and list views**, remembered in the URL along with your search, category, sort and filters, so a view can be shared as a link.
+- **Grid and list views**, remembered in the URL along with your search, category, sort, tags and filters, so a view can be shared as a link.
 - **Keyboard first.** `/` focuses search, arrows move between cards, Enter opens, `?` lists every shortcut.
 - **Copy as Markdown**, so the current filtered list can be pasted into notes or an issue.
 - **Random pick** from whatever is on screen, and a Wayback Machine link on every card.

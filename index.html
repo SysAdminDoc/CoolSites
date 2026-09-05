@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-74oyNIO4mA5I6gORoDRX1pHPA4ebS1DNGdA6pnwKsHE=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-epmbnnadGvoYhWu4qaGgpuLzQ30e8rUH8VI4YzW3YOA=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-r0aW+L4LFpCcTk2sz05d3GRe2D/MlzKlq529bnYrJWQ=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-efCg1qvcMKFJuuMIy7wvZbUH4VzxyGxvhrS08zc9sJc=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -720,6 +720,91 @@
     height: 15px;
     flex: 0 0 auto;
   }
+
+  .facet-group { display: flex; flex-wrap: wrap; gap: 5px; }
+  .facet-group:empty { display: none; }
+  .facet {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    padding: 4px 9px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .facet:hover { border-color: var(--border-hover); color: var(--text-primary); background: var(--bg-card-hover); }
+  .facet.active { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+  .facet-count { font-family: var(--font-mono); font-size: 0.64rem; opacity: 0.7; }
+  .metadata-toggle .facet-count { margin-left: auto; }
+  .facet-toggle {
+    width: 100%;
+    margin-top: 4px;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: var(--accent-text);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+  }
+  .facet-toggle:hover { text-decoration: underline; }
+
+  .active-facets {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: -0.5rem 0 1.25rem;
+    padding: 0 2px;
+  }
+  .active-facet {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 4px 3px 10px;
+    border-radius: 100px;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--text-primary);
+    font-size: 0.72rem;
+  }
+  .active-facet-remove {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .active-facet-remove:hover { background: color-mix(in srgb, var(--text-primary) 14%, transparent); }
+  .clear-facets {
+    min-height: 24px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .clear-facets:hover { border-color: var(--border-hover); color: var(--text-primary); }
 
   /* ── Grid ── */
   .container {
@@ -2678,20 +2763,28 @@
         <button class="metadata-toggle" id="openSourceOnlyBtn" type="button" aria-pressed="false" data-meta-filter="openSourceOnly">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           Open source
+          <span class="facet-count" data-meta-count="openSourceOnly"></span>
         </button>
         <button class="metadata-toggle" id="noAuthOnlyBtn" type="button" aria-pressed="false" data-meta-filter="noAuthOnly">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
           No account
+          <span class="facet-count" data-meta-count="noAuthOnly"></span>
         </button>
         <button class="metadata-toggle" id="picksOnlyBtn" type="button" aria-pressed="false" data-meta-filter="picksOnly">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           Staff Picks
+          <span class="facet-count" data-meta-count="picksOnly"></span>
         </button>
         <button class="metadata-toggle" id="linkIssuesOnlyBtn" type="button" aria-pressed="false" data-meta-filter="linkIssuesOnly" title="Entries whose link did not answer normally when it was last checked">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M13.4 10.6a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
           Link issues
+          <span class="facet-count" data-meta-count="linkIssuesOnly"></span>
         </button>
       </div>
+      <div class="rail-section-label" id="tagFacetLabel">Tags</div>
+      <div class="facet-group" id="tagFacets" role="group" aria-labelledby="tagFacetLabel"></div>
+      <div class="rail-section-label" id="altFacetLabel">Alternative to</div>
+      <div class="facet-group" id="altFacets" role="group" aria-labelledby="altFacetLabel"></div>
     </div>
   </div>
   <button class="dock-toggle-bar" id="dockToggle" title="Toggle bookmarks bar" aria-label="Toggle bookmarks bar" aria-expanded="true">
@@ -2805,6 +2898,7 @@
       </button>
     </div>
   </div>
+  <div class="active-facets" id="activeFacets" hidden></div>
   <div class="data-status" id="dataStatus" role="status" aria-live="polite" hidden></div>
   <div class="compare-tray" id="compareTray" hidden>
     <span id="compareCount">0 selected</span>
@@ -2995,6 +3089,18 @@ function oneOf(value, allowed, fallback) {
   return allowed.includes(value) ? value : fallback;
 }
 
+// Facets arrive as a comma-separated list. Bounded on the way in because this
+// is a query string a stranger can hand you: without a cap, a long enough list
+// turns every filter pass into a linear scan per entry.
+const MAX_FACETS = 12;
+const MAX_FACET_LENGTH = 48;
+function readFacetParam(params, key) {
+  return [...new Set((params.get(key) || '')
+    .split(',')
+    .map(value => value.trim().slice(0, MAX_FACET_LENGTH))
+    .filter(Boolean))].slice(0, MAX_FACETS);
+}
+
 function readUrlState() {
   const p = new URLSearchParams(location.search);
   return {
@@ -3005,7 +3111,9 @@ function readUrlState() {
     oss: p.get('oss') === '1',
     noauth: p.get('noauth') === '1',
     picks: p.get('picks') === '1',
-    linkissues: p.get('linkissues') === '1'
+    linkissues: p.get('linkissues') === '1',
+    tags: readFacetParam(p, 'tags'),
+    alt: readFacetParam(p, 'alt')
   };
 }
 function currentUrlState() {
@@ -3018,6 +3126,11 @@ function currentUrlState() {
   if (noAuthOnly) p.set('noauth', '1');
   if (picksOnly) p.set('picks', '1');
   if (linkIssuesOnly) p.set('linkissues', '1');
+  // Sorted so the same set of facets always produces the same link, whatever
+  // order they were clicked in. Two people who narrowed to the same thing
+  // should be able to compare URLs.
+  if (selectedTags.size) p.set('tags', [...selectedTags].sort().join(','));
+  if (selectedAlternatives.size) p.set('alt', [...selectedAlternatives].sort().join(','));
   return p;
 }
 
@@ -3072,6 +3185,8 @@ window.addEventListener('popstate', () => {
   noAuthOnly = state.noauth;
   picksOnly = state.picks;
   linkIssuesOnly = state.linkissues;
+  selectedTags = new Set(state.tags);
+  selectedAlternatives = new Set(state.alt);
   // A pending keystroke would otherwise land after the render and put the
   // search term the reader just navigated away from straight back.
   clearTimeout(_searchTimer);
@@ -3090,6 +3205,13 @@ let picksOnly = _initState.picks;
 // A link the checker could not reach normally. Deliberately not 'broken': a bot
 // wall refusing a script says nothing about whether the page is there.
 let linkIssuesOnly = _initState.linkissues;
+// Facets narrow: an entry has to carry every selected term, not any of them.
+// The rail never offers a term that would empty the list, so a reader cannot
+// click their way into a combination that matches nothing.
+let selectedTags = new Set(_initState.tags);
+let selectedAlternatives = new Set(_initState.alt);
+let tagFacetsExpanded = false;
+const FACET_LIMIT = 18;
 const HEALTHY_LINK_STATUSES = new Set(['ok', 'redirect', 'blocked']);
 const LINK_STATUS_TEXT = {
   ok: 'The link answered normally when it was last checked',
@@ -3337,6 +3459,15 @@ function shuffleRank(url) {
 
 let lastSearchRelaxed = false;
 
+// tags are the governed facet vocabulary in tags.json; keywords are the
+// descriptive tail and stay out of here on purpose, because a term one entry
+// uses is a facet that narrows to one entry.
+function matchesFacets(site) {
+  for (const tag of selectedTags) if (!site.tags.includes(tag)) return false;
+  for (const alternative of selectedAlternatives) if (!site.alternativeTo.includes(alternative)) return false;
+  return true;
+}
+
 function getFiltered() {
   const tokens = searchTerm ? tokenize(searchTerm) : [];
   const scores = tokens.length ? new Map() : null;
@@ -3352,7 +3483,8 @@ function getFiltered() {
     return (!openSourceOnly || site.openSource) &&
       (!noAuthOnly || !site.requiresAuth) &&
       (!picksOnly || site.editorsPick) &&
-      (!linkIssuesOnly || hasLinkIssue(site));
+      (!linkIssuesOnly || hasLinkIssue(site)) &&
+      matchesFacets(site);
   };
 
   if (tokens.length && !SITES.some(site => passesFilters(site) && searchScore(tokens, site) > 0)) {
@@ -3367,7 +3499,8 @@ function getFiltered() {
     const matchMetadata = (!openSourceOnly || site.openSource) &&
       (!noAuthOnly || !site.requiresAuth) &&
       (!picksOnly || site.editorsPick) &&
-      (!linkIssuesOnly || hasLinkIssue(site));
+      (!linkIssuesOnly || hasLinkIssue(site)) &&
+      matchesFacets(site);
 
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
     if (!matchMetadata) return false;
@@ -3552,6 +3685,8 @@ function _renderGridInner() {
     noAuthOnly,
     picksOnly,
     linkIssuesOnly,
+    tags: [...selectedTags].sort(),
+    alternatives: [...selectedAlternatives].sort(),
     bookmarks: Object.keys(bookmarks).sort()
   });
   if (filterKey !== lastRenderKey) {
@@ -3567,6 +3702,8 @@ function _renderGridInner() {
     if (noAuthOnly) active.push('no account needed');
     if (picksOnly) active.push('staff picks');
     if (linkIssuesOnly) active.push('link issues');
+    for (const tag of [...selectedTags].sort()) active.push(`the ${tag} tag`);
+    for (const alternative of [...selectedAlternatives].sort()) active.push(`alternatives to ${alternative}`);
     const hint = searchTerm ? `No results for "${escHtml(searchTerm)}"` : 'Nothing matches these filters';
     const detail = active.length
       ? `Nothing here matches ${escHtml(joinList(active))}. Drop a filter and try again.`
@@ -3602,6 +3739,7 @@ function _renderGridInner() {
     : base;
 
   grid.className = viewMode === 'list' ? 'grid list-view' : 'grid';
+  buildFacets(filtered);
   paintAccents(grid);
   _faviconObserver.disconnect();
   _loadMoreObserver.disconnect();
@@ -3828,6 +3966,137 @@ document.querySelectorAll('[data-meta-filter]').forEach(btn => {
     renderGrid();
   });
 });
+
+// ── Facets ──
+// Every count below is measured against the list as it currently stands, after
+// the search, the category and every other facet. That is the only count worth
+// showing: a total taken over the whole directory would promise 33 results from
+// a chip that delivers two.
+
+const METADATA_FACETS = [
+  ['openSourceOnly', 'oss', 'open source only', () => openSourceOnly, site => site.openSource],
+  ['noAuthOnly', 'noauth', 'no account needed', () => noAuthOnly, site => !site.requiresAuth],
+  ['picksOnly', 'picks', 'staff picks', () => picksOnly, site => site.editorsPick],
+  ['linkIssuesOnly', 'linkissues', 'link issues', () => linkIssuesOnly, site => hasLinkIssue(site)]
+];
+
+function facetCounts(sites, field) {
+  const counts = new Map();
+  for (const site of sites) {
+    for (const value of site[field]) counts.set(value, (counts.get(value) || 0) + 1);
+  }
+  return counts;
+}
+
+function facetChip(value, count, active) {
+  return `<button class="facet${active ? ' active' : ''}" type="button" data-facet-value="${escAttr(value)}" aria-pressed="${active}">${escHtml(value)}<span class="facet-count">${count}</span></button>`;
+}
+
+// A term that would empty the list is left out rather than shown at zero. It
+// keeps every offered combination reachable, which is what lets the facets
+// narrow with AND without ever painting the reader into a corner.
+function renderFacetGroup(groupId, labelId, field, selected, filtered, limit, expandNoun) {
+  const container = document.getElementById(groupId);
+  const counts = facetCounts(filtered, field);
+  const terms = [...counts.keys()].sort((a, b) => counts.get(b) - counts.get(a) || a.localeCompare(b));
+  const chosen = terms.filter(term => selected.has(term));
+  const rest = terms.filter(term => !selected.has(term));
+  const shownRest = limit === null ? rest : rest.slice(0, Math.max(0, limit - chosen.length));
+
+  let html = [...chosen, ...shownRest].map(term => facetChip(term, counts.get(term), selected.has(term))).join('');
+  if (expandNoun && rest.length > shownRest.length) {
+    html += `<button class="facet-toggle" type="button" data-facet-expand aria-expanded="false">Show all ${terms.length} ${expandNoun}</button>`;
+  } else if (expandNoun && limit === null && terms.length > FACET_LIMIT) {
+    html += `<button class="facet-toggle" type="button" data-facet-expand aria-expanded="true">Show fewer ${expandNoun}</button>`;
+  }
+  container.innerHTML = html;
+  document.getElementById(labelId).hidden = terms.length === 0;
+}
+
+function renderActiveFacets(filtered) {
+  const chips = [];
+  if (activeFilter !== 'All') {
+    chips.push([activeFilter === 'Bookmarks' ? 'Bookmarks' : `Category: ${activeFilter}`, 'cat']);
+  }
+  for (const [, key, label, isOn] of METADATA_FACETS) {
+    if (isOn()) chips.push([label, key]);
+  }
+  for (const tag of [...selectedTags].sort()) chips.push([tag, `tag:${tag}`]);
+  for (const alternative of [...selectedAlternatives].sort()) chips.push([`Alt to ${alternative}`, `alt:${alternative}`]);
+
+  const container = document.getElementById('activeFacets');
+  container.hidden = chips.length === 0;
+  if (!chips.length) {
+    container.replaceChildren();
+    return;
+  }
+  container.innerHTML = chips.map(([label, key]) => `
+    <span class="active-facet">${escHtml(label)}<button class="active-facet-remove" type="button" data-facet-clear="${escAttr(key)}" aria-label="Remove the ${escAttr(label)} filter">&times;</button></span>
+  `).join('') + `<button class="clear-facets" type="button" data-facet-clear="all">Clear ${chips.length === 1 ? 'filter' : 'all filters'}</button>`;
+}
+
+function buildFacets(filtered) {
+  renderFacetGroup('tagFacets', 'tagFacetLabel', 'tags', selectedTags, filtered, tagFacetsExpanded ? null : FACET_LIMIT, 'tags');
+  renderFacetGroup('altFacets', 'altFacetLabel', 'alternativeTo', selectedAlternatives, filtered, null, null);
+  for (const [id, , , , matches] of METADATA_FACETS) {
+    document.querySelector(`[data-meta-count="${id}"]`).textContent = filtered.filter(matches).length;
+  }
+  renderActiveFacets(filtered);
+}
+
+function toggleFacet(selected, value) {
+  if (selected.has(value)) selected.delete(value);
+  else if (selected.size < MAX_FACETS) selected.add(value);
+  else showToast(`A search can combine at most ${MAX_FACETS} facets`);
+  renderGrid();
+}
+
+document.getElementById('tagFacets').addEventListener('click', event => {
+  const expand = event.target.closest('[data-facet-expand]');
+  if (expand) {
+    tagFacetsExpanded = !tagFacetsExpanded;
+    renderGrid();
+    return;
+  }
+  const chip = event.target.closest('[data-facet-value]');
+  if (chip) toggleFacet(selectedTags, chip.dataset.facetValue);
+});
+
+document.getElementById('altFacets').addEventListener('click', event => {
+  const chip = event.target.closest('[data-facet-value]');
+  if (chip) toggleFacet(selectedAlternatives, chip.dataset.facetValue);
+});
+
+document.getElementById('activeFacets').addEventListener('click', event => {
+  const button = event.target.closest('[data-facet-clear]');
+  if (!button) return;
+  const key = button.dataset.facetClear;
+  if (key === 'all') clearAllFilters();
+  else if (key === 'cat') { activeFilter = 'All'; buildFilters(); }
+  else if (key.startsWith('tag:')) selectedTags.delete(key.slice(4));
+  else if (key.startsWith('alt:')) selectedAlternatives.delete(key.slice(4));
+  else {
+    const metadata = METADATA_FACETS.find(([, param]) => param === key);
+    if (metadata) setMetadataFilter(metadata[0], false);
+  }
+  renderGrid();
+});
+
+function setMetadataFilter(name, value) {
+  if (name === 'openSourceOnly') openSourceOnly = value;
+  if (name === 'noAuthOnly') noAuthOnly = value;
+  if (name === 'picksOnly') picksOnly = value;
+  if (name === 'linkIssuesOnly') linkIssuesOnly = value;
+  updateMetadataFilters();
+}
+
+function clearAllFilters() {
+  activeFilter = 'All';
+  for (const [name] of METADATA_FACETS) setMetadataFilter(name, false);
+  selectedTags.clear();
+  selectedAlternatives.clear();
+  buildFilters();
+}
 
 // ── Search ──
 let _searchTimer;
@@ -5148,13 +5417,7 @@ document.getElementById('grid').addEventListener('click', (e) => {
     searchTerm = '';
     renderGrid();
   } else if (action === 'reset-filters') {
-    activeFilter = 'All';
-    openSourceOnly = false;
-    noAuthOnly = false;
-    picksOnly = false;
-    linkIssuesOnly = false;
-    updateMetadataFilters();
-    buildFilters();
+    clearAllFilters();
     renderGrid();
   }
 });

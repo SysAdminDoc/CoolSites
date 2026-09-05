@@ -789,12 +789,22 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
         viewport,
         columns: getComputedStyle(document.getElementById('grid')).gridTemplateColumns,
         overflow: document.documentElement.scrollWidth <= viewport + 1,
-        clipped
+        clipped,
+        // Naming the widest boxes turns "something overflows" into something
+        // fixable without reproducing the failure by hand.
+        widest: [...document.querySelectorAll('body *')]
+          .map(node => ({
+            node: node.tagName.toLowerCase() + (node.id ? '#' + node.id : '') + (typeof node.className === 'string' && node.className.trim() ? '.' + node.className.trim().split(/\s+/).join('.') : ''),
+            right: Math.round(node.getBoundingClientRect().right)
+          }))
+          .filter(entry => entry.right > viewport + 1)
+          .sort((a, b) => b.right - a.right)
+          .slice(0, 6)
       };
     })()`);
     assert.equal(mobile.viewport, 375, 'device metrics override should apply');
     assert.equal(mobile.columns.split(' ').length, 1, 'mobile layout should use one card column');
-    assert.equal(mobile.overflow, true, 'mobile layout should not overflow horizontally');
+    assert.equal(mobile.overflow, true, `mobile layout should not overflow horizontally; widest: ${JSON.stringify(mobile.widest)}`);
     assert.deepEqual(mobile.clipped, [], `no element may be clipped at ${mobile.viewport}px`);
     await page.send('Emulation.clearDeviceMetricsOverride');
     await page.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
@@ -1005,6 +1015,130 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     })()`);
     assert.equal(recorded.after, recorded.before + 1, 'a fallback must not hide the failure from diagnostics');
     assert.match(recorded.last.scope, /definitely-not-here/);
+
+    // ── Facets ──
+    // The promise a facet makes is its count. Everything below is one form of
+    // the same question: does clicking a chip give you the number on it.
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+
+    const facetsAtRest = await page.evaluate(`(() => {
+      const chips = [...document.querySelectorAll('#tagFacets .facet')];
+      const counted = chips.map(chip => Number(chip.querySelector('.facet-count').textContent));
+      return {
+        offered: chips.length,
+        zeroes: counted.filter(count => count === 0).length,
+        descending: counted.every((count, index) => index === 0 || counted[index - 1] >= count),
+        first: chips[0]?.dataset.facetValue,
+        firstCount: counted[0],
+        stripHidden: document.getElementById('activeFacets').hidden,
+        alternatives: document.querySelectorAll('#altFacets .facet').length,
+        metadataCounts: [...document.querySelectorAll('[data-meta-count]')].map(node => Number(node.textContent))
+      };
+    })()`);
+    assert.ok(facetsAtRest.offered > 0, 'the rail should offer tag facets');
+    assert.equal(facetsAtRest.zeroes, 0, 'a facet that would empty the list must not be offered');
+    assert.equal(facetsAtRest.descending, true, 'facets should lead with the ones that cover the most');
+    assert.equal(facetsAtRest.stripHidden, true, 'with nothing selected the active strip stays out of the way');
+    assert.ok(facetsAtRest.alternatives > 0, 'alternativeTo should be offered as a facet too');
+    assert.equal(facetsAtRest.metadataCounts.length, 4, 'every metadata toggle needs a count');
+    assert.ok(facetsAtRest.metadataCounts.every(count => count > 0), 'metadata counts should be measured, not blank');
+
+    await page.evaluate("document.querySelectorAll('#tagFacets .facet')[0].click()");
+    await waitFor(page, "document.querySelectorAll('#tagFacets .facet.active').length === 1");
+    const oneTag = await page.evaluate(`({
+      results: getFiltered().length,
+      allCarryIt: getFiltered().every(site => site.tags.includes([...selectedTags][0])),
+      selected: [...document.querySelectorAll('#tagFacets .facet.active')].map(chip => chip.dataset.facetValue),
+      chips: document.querySelectorAll('#activeFacets .active-facet').length,
+      stripHidden: document.getElementById('activeFacets').hidden,
+      search: location.search
+    })`);
+    assert.equal(oneTag.results, facetsAtRest.firstCount, 'a facet count must be what clicking it delivers');
+    assert.equal(oneTag.allCarryIt, true, 'every remaining entry has to carry the tag');
+    assert.deepEqual(oneTag.selected, [facetsAtRest.first]);
+    assert.equal(oneTag.chips, 1, 'the selected facet should appear above the results');
+    assert.equal(oneTag.stripHidden, false);
+    assert.match(oneTag.search, /[?&]tags=/, 'a facet belongs in the URL');
+
+    // Two tags narrow rather than widen, and the second chip's count is again
+    // measured against the list as it stands, not against the whole directory.
+    const secondTag = await page.evaluate(`(() => {
+      const chip = [...document.querySelectorAll('#tagFacets .facet')].find(node => !node.classList.contains('active'));
+      const promised = Number(chip.querySelector('.facet-count').textContent);
+      chip.click();
+      return { promised };
+    })()`);
+    await waitFor(page, "document.querySelectorAll('#tagFacets .facet.active').length === 2");
+    const twoTags = await page.evaluate(`({
+      results: getFiltered().length,
+      allCarryBoth: getFiltered().every(site => [...selectedTags].every(tag => site.tags.includes(tag))),
+      chips: document.querySelectorAll('#activeFacets .active-facet').length
+    })`);
+    assert.equal(twoTags.results, secondTag.promised, 'the second facet must also deliver its count');
+    assert.ok(twoTags.results <= oneTag.results, 'adding a facet narrows');
+    assert.equal(twoTags.allCarryBoth, true, 'facets combine with AND, not OR');
+    assert.equal(twoTags.chips, 2);
+
+    // The whole point of putting it in the URL: someone else opens the link and
+    // sees what you saw.
+    const shared = await page.evaluate('location.href');
+    await page.send('Page.navigate', { url: server.url });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0 && selectedTags.size === 0");
+    await page.send('Page.navigate', { url: shared });
+    await waitFor(page, "document.querySelectorAll('#tagFacets .facet.active').length === 2");
+    const reopened = await page.evaluate(`({
+      results: getFiltered().length,
+      active: document.querySelectorAll('#tagFacets .facet.active').length,
+      chips: document.querySelectorAll('#activeFacets .active-facet').length
+    })`);
+    assert.equal(reopened.results, twoTags.results, 'a shared facet link must reproduce the same list');
+    assert.equal(reopened.active, 2, 'the rail has to show what the URL asked for');
+    assert.equal(reopened.chips, 2);
+
+    // Removing one facet puts back exactly what it took away.
+    await page.evaluate("document.querySelectorAll('#activeFacets .active-facet-remove')[1].click()");
+    await waitFor(page, "document.querySelectorAll('#tagFacets .facet.active').length === 1");
+    assert.equal(await page.evaluate('getFiltered().length'), oneTag.results, 'removing a facet restores the list it narrowed');
+
+    // Clear has to reach every kind of filter, including the ones that are not
+    // facet chips. Built back up from nothing so each control is exercised on a
+    // list that still offers it.
+    await page.evaluate("document.querySelector('#activeFacets .clear-facets').click()");
+    await waitFor(page, "document.getElementById('activeFacets').hidden");
+    await page.evaluate("document.querySelectorAll('#altFacets .facet')[0].click()");
+    await waitFor(page, "document.querySelectorAll('#altFacets .facet.active').length === 1");
+    await page.evaluate("document.getElementById('linkIssuesOnlyBtn').click()");
+    await page.evaluate("[...document.querySelectorAll('#filters .filter-btn')].find(button => button.dataset.cat !== 'All' && button.dataset.cat !== 'Bookmarks').click()");
+    await waitFor(page, "document.querySelectorAll('#activeFacets .active-facet').length === 3");
+    assert.equal(await page.evaluate("document.querySelectorAll('#activeFacets .active-facet').length"), 3, 'category, metadata and alternative facets all belong in the strip');
+    await page.evaluate("document.querySelector('#activeFacets .clear-facets').click()");
+    await waitFor(page, "document.getElementById('activeFacets').hidden");
+    const cleared = await page.evaluate(`({
+      tags: selectedTags.size,
+      alternatives: selectedAlternatives.size,
+      linkIssues: linkIssuesOnly,
+      category: activeFilter,
+      pressed: document.getElementById('linkIssuesOnlyBtn').getAttribute('aria-pressed'),
+      search: location.search
+    })`);
+    assert.deepEqual(cleared, {
+      tags: 0, alternatives: 0, linkIssues: false, category: 'All', pressed: 'false', search: ''
+    }, 'clearing has to leave nothing behind, in the state or the URL');
+
+    // A facet filters a ranked list. It must not reorder it, or searching and
+    // then narrowing would quietly promote a worse match.
+    await searchFor(page, 'self hosted');
+    const rankedBefore = await page.evaluate('getFiltered().map(site => site.url)');
+    await page.evaluate("document.querySelectorAll('#tagFacets .facet')[0].click()");
+    await waitFor(page, "document.querySelectorAll('#tagFacets .facet.active').length === 1");
+    const rankedAfter = await page.evaluate('getFiltered().map(site => site.url)');
+    assert.ok(rankedAfter.length > 0, 'the facet should leave something to check the order of');
+    assert.deepEqual(rankedAfter, rankedBefore.filter(url => rankedAfter.includes(url)), 'a facet filters the ranking, it must not reorder it');
+
+    await page.evaluate("document.querySelector('#activeFacets .clear-facets').click()");
+    await searchFor(page, '');
+    await waitFor(page, "document.getElementById('activeFacets').hidden");
 
     // The policy ships in a meta tag, so it is enforced on GitHub Pages where no
     // response header can reach. Drive the surfaces it could plausibly block:

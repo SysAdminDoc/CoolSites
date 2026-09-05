@@ -96,7 +96,11 @@ test('the page tells a bot wall apart from a broken link', () => {
 test('the link-issues filter round-trips through the URL', () => {
   assert.match(INDEX, /if \(linkIssuesOnly\) p\.set\('linkissues', '1'\);/);
   assert.match(INDEX, /linkissues: p\.get\('linkissues'\) === '1'/);
-  assert.match(INDEX, /linkIssuesOnly = false;/);
+  // Was a grep for the literal `linkIssuesOnly = false;` that the reset handler
+  // used to contain. Resetting is now table-driven, so the assertion was
+  // pinning a line rather than the behaviour: this checks the filter is in the
+  // table every reset walks. The behaviour itself is covered in browser.test.js.
+  assert.match(INDEX, /\['linkIssuesOnly', 'linkissues',/);
 });
 
 test('an entry the checker skips is not shown as broken', () => {
