@@ -3262,6 +3262,10 @@ function highlightMatch(text, query) {
   return out + escHtml(raw.slice(last));
 }
 
+// Every link out to a listed site carries rel="nofollow ugc". A directory that
+// passes ranking signal to its entries is a commodity people buy, and two of the
+// three submissions this repository has received were promotional. The links to
+// the CoolSites repository itself, and the Wayback link, are ours and stay plain.
 function buildCard(site, index) {
   const category = getCategoryMeta(site.category);
   const domain = getDomain(site.url);
@@ -3298,9 +3302,9 @@ function buildCard(site, index) {
         </div>
         <p class="card-desc">${searchTerm ? highlightMatch(site.description, searchTerm) : escHtml(site.description)}</p>
         <div class="card-footer">
-          <a href="${escUrl}" class="card-url" target="_blank" rel="noopener noreferrer">${escHtml(domain)}</a>
+          <a href="${escUrl}" class="card-url" target="_blank" rel="nofollow ugc noopener noreferrer">${escHtml(domain)}</a>
           <div class="card-actions">
-            <a href="${escUrl}" class="card-action" title="Open ${escAttr(site.name)}" aria-label="Open ${escAttr(site.name)}" target="_blank" rel="noopener noreferrer">
+            <a href="${escUrl}" class="card-action" title="Open ${escAttr(site.name)}" aria-label="Open ${escAttr(site.name)}" target="_blank" rel="nofollow ugc noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
             <button class="card-action" title="Copy URL" data-action="copy" data-url="${escUrl}">
@@ -3598,7 +3602,7 @@ function openCompareModal() {
       <thead>
         <tr>
           <th scope="col">Attribute</th>
-          ${sites.map(site => `<th scope="col"><a href="${escAttr(site.url)}" target="_blank" rel="noopener noreferrer">${escHtml(site.name)}</a></th>`).join('')}
+          ${sites.map(site => `<th scope="col"><a href="${escAttr(site.url)}" target="_blank" rel="nofollow ugc noopener noreferrer">${escHtml(site.name)}</a></th>`).join('')}
         </tr>
       </thead>
       <tbody>
@@ -4148,7 +4152,7 @@ function renderDock() {
             ? `<img src="${escAttr(chipIcon)}" alt="" width="14" height="14" data-initial="${escAttr(getInitial(site.name))}" class="favicon-img" draggable="false">`
             : `<span class="chip-initial" aria-hidden="true">${escHtml(getInitial(site.name))}</span>`}
           <span class="chip-text">${escHtml(site.name)}</span>
-          <a href="${siteUrl}" class="chip-open" target="_blank" rel="noopener noreferrer" draggable="false"></a>
+          <a href="${siteUrl}" class="chip-open" target="_blank" rel="nofollow ugc noopener noreferrer" draggable="false"></a>
           <button class="chip-remove" data-dock-action="remove" data-url="${siteUrl}" title="Remove bookmark">&times;</button>
         </div>
       `;

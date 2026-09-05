@@ -39,6 +39,20 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.equal(initial.unnamedButtons, 0, 'icon-only controls need an accessible name');
     assert.ok(initial.cards > 0, 'the directory should render cards');
 
+    // test/outbound-links.test.js gates the templates. This checks the DOM they
+    // actually produce, because a rel attribute is only worth anything if it
+    // survives rendering.
+    const outbound = await page.evaluate(`(() => {
+      const links = [...document.querySelectorAll('#grid .card a[href]')]
+        .filter(a => !a.href.startsWith('https://web.archive.org/'));
+      return {
+        total: links.length,
+        nofollowed: links.filter(a => a.rel.includes('nofollow') && a.rel.includes('ugc')).length
+      };
+    })()`);
+    assert.ok(outbound.total > 0, 'cards should link out to the sites they describe');
+    assert.equal(outbound.nofollowed, outbound.total, 'every link to a listed site must be rel="nofollow ugc"');
+
     await page.evaluate("document.body.focus(); document.dispatchEvent(new KeyboardEvent('keydown', { key: '?' }))");
     await waitFor(page, "document.getElementById('shortcutsModal').open");
     await page.evaluate("document.getElementById('shortcutsClose').click()");

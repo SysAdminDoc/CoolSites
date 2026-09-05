@@ -154,7 +154,7 @@
       }
 
       done(`<ul class="items">${filtered.map(site => `
-        <li><a class="item" href="${escapeAttr(site.url)}" target="_blank" rel="noopener noreferrer">
+        <li><a class="item" href="${escapeAttr(site.url)}" target="_blank" rel="nofollow ugc noopener noreferrer">
           <span class="name">${escapeHtml(site.name)}</span>
           <span class="desc">${escapeHtml(site.description)}</span>
           <span class="meta">${escapeHtml(site.category)}</span>

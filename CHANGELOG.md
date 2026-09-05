@@ -11,6 +11,7 @@ All notable changes to CoolSites will be documented in this file.
 
 ### Added
 
+- **Every link out to a listed site now carries `rel="nofollow ugc"`.** A directory that passes ranking signal to its entries is a commodity people buy, and two of the three submissions this repository has received were promotional. This changes nothing a reader can see. It removes the reason to submit here for anything other than the listing itself, and it has to be in place before the directory is ever pre-rendered to crawlable HTML. Links to the CoolSites repository and the Wayback Machine are ours and stay plain.
 - Lint rejects an entry that sits on a source forge and declares `openSource: false` without an `openSourceNote` explaining it. A project site published through GitHub Pages is deliberately not treated as a repository, so a project that publishes through Pages is not asked for a note it does not owe.
 - The legacy-import ratchet is exact rather than a ceiling. Slack between the recorded number and the real one was room a new entry could be filed into under the import date to dodge the provenance rule, and `npm run review` now lowers the recorded number itself as entries get checked.
 - `npm run update:stars` follows `repository` where it is set, because an entry's main link is often the project's own site while the code lives on GitHub.

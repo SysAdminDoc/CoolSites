@@ -372,7 +372,7 @@ function renderFeatured() {
     </div>
     <div class="featured-sites">
       ${entries.map(site => `
-        <a class="featured-site" href="${esc(site.url)}" target="_blank" rel="noopener noreferrer">
+        <a class="featured-site" href="${esc(site.url)}" target="_blank" rel="nofollow ugc noopener noreferrer">
           ${siteIcon(site)}
           <span>
             <span class="site-name">${esc(site.name)}</span>
