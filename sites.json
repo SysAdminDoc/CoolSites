@@ -9303,7 +9303,7 @@
   {
     "name": "Awesome Piracy",
     "url": "https://shakil-shahadat.github.io/awesome-piracy/",
-    "description": "Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.",
+    "description": "A curated list of piracy resources, tools and sites. The maintained fork; the original was archived in 2023.",
     "category": "Indexes & Wikis",
     "openSource": true,
     "requiresAuth": false,

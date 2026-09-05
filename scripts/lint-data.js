@@ -407,6 +407,12 @@ function validateSourceData() {
       for (const key of ['fullName', 'fetchedAt']) if (typeof record[key] !== 'string' || !record[key].trim()) addError(`${label}: missing ${key}`);
       for (const key of ['stars', 'forks', 'openIssues']) if (!Number.isInteger(record[key]) || record[key] < 0) addError(`${label}: invalid ${key}`);
       if (!isTimestamp(record.fetchedAt)) addError(`${label}: invalid fetchedAt`);
+      // The card reads archived directly, so any truthy value renders the badge
+      // and 0 or "" quietly would not. pushedAt feeds a string date comparison,
+      // where a missing or malformed value compares as false and drops the entry
+      // out of the twelve-month report without saying so.
+      if (typeof record.archived !== 'boolean') addError(`${label}: archived must be true or false, not ${JSON.stringify(record.archived)}`);
+      if (!isTimestamp(record.pushedAt)) addError(`${label}: invalid pushedAt`);
     }
   });
 

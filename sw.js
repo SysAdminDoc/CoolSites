@@ -1,5 +1,9 @@
 // CoolSites Service Worker — offline-first caching
 const CACHE_NAME = 'coolsites-v2.4.0';
+// feeds/directory.opml is deliberately not here. It is 128KB, nothing on either
+// page reads it, and precaching charges every first visit for a file only an
+// external tool or a feed reader ever asks for. The fetch handler still caches
+// it for whoever does.
 const ASSETS = [
   './',
   './index.html',
@@ -14,7 +18,6 @@ const ASSETS = [
   './favicons.json',
   './feeds/recent.atom',
   './feeds/recent.json',
-  './feeds/directory.opml',
   './fonts/outfit-latin.woff2',
   './fonts/outfit-latin-ext.woff2',
   './fonts/jetbrains-mono-latin.woff2',

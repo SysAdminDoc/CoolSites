@@ -96,6 +96,11 @@ async function fetchRepo(fullName) {
     if (!site) continue;
     if (record.archived) stale.push(`${site.name}: archived by its author`);
     else if (record.pushedAt && record.pushedAt < cutoff) stale.push(`${site.name}: nothing pushed since ${record.pushedAt.slice(0, 10)}`);
+    // A record with no pushedAt is one whose fetch has been failing since before
+    // this field existed, or one the rate limit stopped mid-run. Skipping it
+    // silently means a repository that has gone private, or stopped answering,
+    // never appears in this report at all.
+    else if (!record.pushedAt) stale.push(`${site.name}: no push date on record, so its state is unknown`);
   }
   if (stale.length) {
     console.log(`

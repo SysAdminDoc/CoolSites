@@ -510,6 +510,14 @@ and using one.
 **No affiliate links, no sponsored entries, no ads.** There is no paid placement
 and there never will be.
 
+**What counts as open source.** For software, an OSI-approved licence. For a
+curated list or a dataset, where the OSI has approved nothing and never will, an
+open content licence: CC0, CC BY or CC BY-SA. Source-available but restricted is
+not open whichever way it is spelled, so FSL, BUSL and SSPL entries read
+`openSource: false` and carry a note saying which one and why. Writing this down
+matters because the two halves are judged by different standards and it would
+otherwise look like an inconsistency rather than a rule.
+
 **Check `removed.json` first.** Anything taken out of the directory leaves a
 record there saying when and why. Deleting a row on its own records nothing you
 can read before opening a pull request, and the predictable result is that

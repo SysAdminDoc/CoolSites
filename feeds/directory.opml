@@ -407,7 +407,7 @@
     </outline>
     <outline text="Indexes &amp; Wikis" title="Indexes &amp; Wikis">
       <outline type="link" text="Awesome Open Source" title="Awesome Open Source" description="Find and compare open source projects across every language and category. Millions of projects indexed and searchable." htmlUrl="https://awesomeopensource.com/"/>
-      <outline type="link" text="Awesome Piracy" title="Awesome Piracy" description="Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources." htmlUrl="https://shakil-shahadat.github.io/awesome-piracy/"/>
+      <outline type="link" text="Awesome Piracy" title="Awesome Piracy" description="A curated list of piracy resources, tools and sites. The maintained fork; the original was archived in 2023." htmlUrl="https://shakil-shahadat.github.io/awesome-piracy/"/>
       <outline type="link" text="Awesome Privacy" title="Awesome Privacy" description="Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage." htmlUrl="https://awesome-privacy.xyz/"/>
       <outline type="link" text="Awesome Windows 11" title="Awesome Windows 11" description="Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub." htmlUrl="https://github.com/awesome-windows11/windows11"/>
       <outline type="link" text="degoogle" title="degoogle" description="Massive list of Google alternatives for every service. Search, email, maps, drive, docs, photos, and more. All privacy-focused." htmlUrl="https://tycrek.github.io/degoogle/"/>

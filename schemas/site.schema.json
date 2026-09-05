@@ -15,7 +15,10 @@
     },
     "description": { "type": "string", "minLength": 12 },
     "category": { "type": "string", "minLength": 1 },
-    "openSource": { "type": "boolean" },
+    "openSource": {
+      "type": "boolean",
+      "description": "True when what you get is open. For software that means an OSI-approved licence. For a curated list or a dataset, where OSI has approved nothing and never will, it means an open content licence: CC0, CC BY or CC BY-SA. Source-available but restricted is not open whichever it is, so FSL, BUSL and SSPL are all false with an openSourceNote saying so."
+    },
     "openSourceNote": {
       "type": "string",
       "minLength": 12,
