@@ -982,6 +982,21 @@
     background: color-mix(in srgb, var(--text-primary) 7%, transparent);
   }
   .star-badge { color: var(--amber-text); }
+  .link-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.62rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--text-primary) 5%, transparent);
+  }
+  .link-badge.has-issue {
+    color: var(--amber-text);
+    background: color-mix(in srgb, var(--accent-amber) 14%, transparent);
+  }
 
   .compare-select {
     width: 28px;
@@ -2610,6 +2625,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           Staff Picks
         </button>
+        <button class="metadata-toggle" id="linkIssuesOnlyBtn" type="button" aria-pressed="false" data-meta-filter="linkIssuesOnly" title="Entries whose link did not answer normally when it was last checked">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M13.4 10.6a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+          Link issues
+        </button>
       </div>
     </div>
   </div>
@@ -2922,7 +2941,8 @@ function readUrlState() {
     sort: oneOf(p.get('sort'), SORT_MODES, 'default'),
     oss: p.get('oss') === '1',
     noauth: p.get('noauth') === '1',
-    picks: p.get('picks') === '1'
+    picks: p.get('picks') === '1',
+    linkissues: p.get('linkissues') === '1'
   };
 }
 function writeUrlState() {
@@ -2934,6 +2954,7 @@ function writeUrlState() {
   if (openSourceOnly) p.set('oss', '1');
   if (noAuthOnly) p.set('noauth', '1');
   if (picksOnly) p.set('picks', '1');
+  if (linkIssuesOnly) p.set('linkissues', '1');
   const qs = p.toString();
   history.replaceState(null, '', qs ? '?' + qs : location.pathname);
 }
@@ -2946,6 +2967,24 @@ let categoriesExpanded = false;
 let openSourceOnly = _initState.oss;
 let noAuthOnly = _initState.noauth;
 let picksOnly = _initState.picks;
+// A link the checker could not reach normally. Deliberately not 'broken': a bot
+// wall refusing a script says nothing about whether the page is there.
+let linkIssuesOnly = _initState.linkissues;
+const HEALTHY_LINK_STATUSES = new Set(['ok', 'redirect', 'blocked']);
+const LINK_STATUS_TEXT = {
+  ok: 'The link answered normally when it was last checked',
+  redirect: 'Redirects somewhere else, which is normal and needs nothing',
+  blocked: 'The host refused the checker, which says nothing about whether the page is there',
+  moved: 'Permanently redirects somewhere else, so this entry is out of date',
+  dead: 'Gone: a 404, a 410, or a refused connection',
+  tls: 'The certificate or TLS handshake failed',
+  dns: 'The hostname no longer resolves',
+  timeout: 'No response in time, twice',
+  error: 'Something else went wrong, see npm run check:links'
+};
+function hasLinkIssue(site) {
+  return Boolean(site.linkStatus) && !HEALTHY_LINK_STATUSES.has(site.linkStatus);
+}
 let compareMode = false;
 let shuffleSeed = (Date.now() >>> 0) || 1;
 const selectedCompare = new Set();
@@ -3189,7 +3228,8 @@ function getFiltered() {
     if (!matchCat) return false;
     return (!openSourceOnly || site.openSource) &&
       (!noAuthOnly || !site.requiresAuth) &&
-      (!picksOnly || site.editorsPick);
+      (!picksOnly || site.editorsPick) &&
+      (!linkIssuesOnly || hasLinkIssue(site));
   };
 
   if (tokens.length && !SITES.some(site => passesFilters(site) && searchScore(tokens, site) > 0)) {
@@ -3203,7 +3243,8 @@ function getFiltered() {
       : site.category === activeFilter;
     const matchMetadata = (!openSourceOnly || site.openSource) &&
       (!noAuthOnly || !site.requiresAuth) &&
-      (!picksOnly || site.editorsPick);
+      (!picksOnly || site.editorsPick) &&
+      (!linkIssuesOnly || hasLinkIssue(site));
 
     if (activeFilter === "Bookmarks" && !isBookmarked(site.url)) return false;
     if (!matchMetadata) return false;
@@ -3283,6 +3324,13 @@ function buildCard(site, index) {
   const pickBadge = site.editorsPick ? '<span class="editors-pick-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Pick</span>' : '';
   const altBadge = site.alternativeTo?.length ? `<span class="alternative-badge">Alt to ${escHtml(site.alternativeTo.slice(0, 2).join(', '))}</span>` : '';
   const starBadge = starRecord ? `<span class="star-badge" title="GitHub stars cached ${escAttr(starRecord.fetchedAt || '')}">&#9733; ${formatCompact(starRecord.stars)}</span>` : '';
+  // The reader's question is "is this still there?", and the honest answer has
+  // two parts: what the checker saw, and when. A healthy check is a quiet date.
+  // Anything else names the status, because "blocked" and "dead" mean very
+  // different things and collapsing them into one warning would lie.
+  const linkBadge = site.lastCheckedAt
+    ? `<span class="link-badge${hasLinkIssue(site) ? ' has-issue' : ''}" title="${escAttr(LINK_STATUS_TEXT[site.linkStatus] || 'Checked by npm run check:links')}">${hasLinkIssue(site) ? `${escHtml(site.linkStatus)} &middot; ` : ''}checked ${escHtml(site.lastCheckedAt)}</span>`
+    : '';
   const compareButton = compareMode ? `<button class="compare-select${selectedCompare.has(site.url) ? ' selected' : ''}" title="Select for comparison" aria-label="Select ${escAttr(site.name)} for comparison" aria-pressed="${selectedCompare.has(site.url)}" data-action="compare" data-url="${escUrl}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg></button>` : '';
 
   return `
@@ -3295,7 +3343,7 @@ function buildCard(site, index) {
           <div class="card-header-text">
             <div class="card-category" style="--cat-c:${escAttr(category.color)}" title="${escAttr(category.blurb)}">${escHtml(site.category)}</div>
             <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}${pickBadge}</h3>
-            <div class="card-meta-row">${altBadge}${starBadge}</div>
+            <div class="card-meta-row">${altBadge}${starBadge}${linkBadge}</div>
           </div>
           ${compareButton}
           <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escAttr(site.name)}" aria-pressed="${bm}" data-action="bookmark" data-url="${escUrl}">
@@ -3373,6 +3421,7 @@ function _renderGridInner() {
     openSourceOnly,
     noAuthOnly,
     picksOnly,
+    linkIssuesOnly,
     bookmarks: Object.keys(bookmarks).sort()
   });
   if (filterKey !== lastRenderKey) {
@@ -3387,6 +3436,7 @@ function _renderGridInner() {
     if (openSourceOnly) active.push('open source only');
     if (noAuthOnly) active.push('no account needed');
     if (picksOnly) active.push('staff picks');
+    if (linkIssuesOnly) active.push('link issues');
     const hint = searchTerm ? `No results for "${escHtml(searchTerm)}"` : 'Nothing matches these filters';
     const detail = active.length
       ? `Nothing here matches ${escHtml(joinList(active))}. Drop a filter and try again.`
@@ -3627,7 +3677,8 @@ function updateMetadataFilters() {
   const states = {
     openSourceOnlyBtn: openSourceOnly,
     noAuthOnlyBtn: noAuthOnly,
-    picksOnlyBtn: picksOnly
+    picksOnlyBtn: picksOnly,
+    linkIssuesOnlyBtn: linkIssuesOnly
   };
   Object.entries(states).forEach(([id, active]) => {
     const btn = document.getElementById(id);
@@ -3641,6 +3692,7 @@ document.querySelectorAll('[data-meta-filter]').forEach(btn => {
     if (btn.dataset.metaFilter === 'openSourceOnly') openSourceOnly = !openSourceOnly;
     if (btn.dataset.metaFilter === 'noAuthOnly') noAuthOnly = !noAuthOnly;
     if (btn.dataset.metaFilter === 'picksOnly') picksOnly = !picksOnly;
+    if (btn.dataset.metaFilter === 'linkIssuesOnly') linkIssuesOnly = !linkIssuesOnly;
     updateMetadataFilters();
     renderGrid();
   });
@@ -3698,7 +3750,7 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowUp') next = Math.max(0, idx - cols);
   else if (e.key === 'Enter' && e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') {
     const link = card.querySelector('.card-url');
-    if (link) { if (e.shiftKey) window.open(link.href, '_blank'); else link.click(); }
+    if (link) { if (e.shiftKey) window.open(link.href, '_blank', 'noopener,noreferrer'); else link.click(); }
     e.preventDefault(); return;
   } else return;
   if (next >= 0 && next !== idx) {
@@ -4889,6 +4941,7 @@ document.getElementById('grid').addEventListener('click', (e) => {
     openSourceOnly = false;
     noAuthOnly = false;
     picksOnly = false;
+    linkIssuesOnly = false;
     updateMetadataFilters();
     buildFilters();
     renderGrid();

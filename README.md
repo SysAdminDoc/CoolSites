@@ -228,9 +228,21 @@ stale data, which is almost always an old cache the worker is still holding.
 ### Checking links
 
 `npm run check:links` walks every URL in `sites.json` and writes a JSON report to
-`work/link-check.json`. The whole directory takes about a minute. It never writes
-to `sites.json`, because whether a dead entry should be repaired or removed is an
-editorial call.
+`work/link-check.json`. The whole directory takes about a minute. By default it
+writes nothing back, because whether a dead entry should be repaired or removed
+is an editorial call.
+
+Pass `--write` and it records what it saw: `linkStatus` and `lastCheckedAt` on
+each entry it actually reached. That's an observation, not a decision, and it's
+the difference between a directory that says "checked last Tuesday" and one that
+asks you to take its word. Nothing else in the entry moves. `lastCheckedAt` is
+not `lastReviewedAt`: a check says the URL answered, a review says a person
+opened the page and confirmed the entry still describes it. If the result would
+fail the lint, the write is rolled back rather than left for whoever pulls next.
+
+Cards show the check date. Anything that didn't answer normally says what
+happened and is reachable through the **Link issues** filter, which is a
+shareable URL like any other filter.
 
 The point of it is telling apart things that look identical from a script:
 
@@ -259,12 +271,19 @@ the checker while serving a real page to Chrome. The retry also checks the
 browser landed on the same URL, so a parked domain that redirects every path to
 its homepage does not get read as proof of life.
 
-Useful flags: `--filter <text>` to check one site, `--limit <n>` for a quick
-sample, `--concurrency <n>` (default 8), `--timeout <ms>` (default 15000), and
+Some hosts refuse every automated request however politely it asks. Set
+`checkDisabled` on the entry to a sentence saying why, and the checker skips it
+and prints the reason instead of reporting the same false alarm every run.
+`--recheck` includes them anyway.
+
+Useful flags: `--write` to record the result, `--filter <text>` to check one
+site, `--limit <n>` for a quick sample, `--concurrency <n>` (default 8),
+`--timeout <ms>` (default 15000), `--recheck` to include skipped entries, and
 `--out <path>` to put the report somewhere else.
 
 ```bash
 npm run check:links -- --filter github.com
+npm run check:links -- --write
 npm run check:links -- --concurrency 12 --timeout 20000
 ```
 

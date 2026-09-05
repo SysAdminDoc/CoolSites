@@ -1,17 +1,24 @@
 'use strict';
 
-// Reads sites.json and reports on every URL in it. Never writes to sites.json:
-// deciding what to do about a dead entry is an editorial call, not something a
-// script should make at three in the morning.
+// Reads sites.json and reports on every URL in it. By default it writes nothing
+// back: deciding what to do about a dead entry is an editorial call, not
+// something a script should make at three in the morning.
+//
+// --write records what the check saw, which is a different thing from deciding
+// what it means. It stamps linkStatus and lastCheckedAt on each entry it
+// actually checked, so the page can tell a reader when a link was last known to
+// work. It still never removes, repoints or rewords anything.
 //
 //   node scripts/check-links.js [options]
 //
 //   --out <path>          where to write the JSON report (default work/link-check.json)
+//   --write               record linkStatus and lastCheckedAt back into sites.json
 //   --concurrency <n>     parallel requests (default 8)
 //   --timeout <ms>        per-attempt timeout (default 15000)
 //   --filter <text>       only check URLs containing this text
 //   --limit <n>           stop after this many entries
 //   --only <status,...>   print only these statuses in the console summary
+//   --recheck             include entries marked checkDisabled
 //
 // Exit code is 0 unless something is actually broken: a page that is gone for
 // everyone, a TLS failure, or a hostname that no longer resolves. A redirect, a
@@ -19,6 +26,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -62,7 +70,7 @@ const PROTECTED_FILES = new Set([
 ]);
 
 function parseArgs(argv) {
-  const options = { ...DEFAULTS, filter: null, limit: Infinity, only: null };
+  const options = { ...DEFAULTS, filter: null, limit: Infinity, only: null, write: false, recheck: false };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     const value = argv[i + 1];
@@ -73,6 +81,8 @@ function parseArgs(argv) {
       case '--filter': options.filter = value; i++; break;
       case '--limit': options.limit = Number.parseInt(value, 10); i++; break;
       case '--only': options.only = new Set(value.split(',').map(s => s.trim())); i++; break;
+      case '--write': options.write = true; break;
+      case '--recheck': options.recheck = true; break;
       case '--help': case '-h': options.help = true; break;
       default:
         if (arg.startsWith('-')) throw new Error(`Unknown option ${arg}`);
@@ -292,6 +302,55 @@ async function check(site, options) {
   return result;
 }
 
+// Records what the check saw. Deliberately narrow: linkStatus is an observation
+// and lastCheckedAt is when it was made. Neither is a decision about the entry,
+// and removing, repointing or rewording one still belongs to a person.
+//
+// lastCheckedAt is not lastReviewedAt. A check says the URL answered. A review
+// says someone opened the page and confirmed the entry still describes it. They
+// are kept apart so a scheduled run cannot launder itself into a claim that
+// somebody looked.
+function writeBack(sites, results, startedAt) {
+  const checkedAt = startedAt.toISOString().slice(0, 10);
+  const byUrl = new Map(results.map(result => [result.url, result]));
+  let changed = 0;
+
+  for (const index of sites.keys()) {
+    const site = sites[index];
+    const result = byUrl.get(site.url);
+    if (!result) continue;
+
+    // Rebuilt rather than assigned into, so the two fields stay together at the
+    // end of the record instead of wherever a previous run left them.
+    const next = {};
+    for (const [key, value] of Object.entries(site)) {
+      if (key === 'linkStatus' || key === 'lastCheckedAt') continue;
+      next[key] = value;
+    }
+    next.linkStatus = result.status;
+    next.lastCheckedAt = checkedAt;
+    if (JSON.stringify(next) !== JSON.stringify(site)) changed++;
+    sites[index] = next;
+  }
+
+  const sitesPath = path.join(ROOT, 'sites.json');
+  const original = fs.readFileSync(sitesPath, 'utf8');
+  fs.writeFileSync(sitesPath, `${JSON.stringify(sites, null, 2)}\n`);
+
+  // A run that writes something the lint rejects leaves the repository broken
+  // for whoever pulls next, so put it back rather than hope someone notices.
+  const lint = spawnSync(process.execPath, ['scripts/lint-data.js', '--source-only'], { cwd: ROOT, encoding: 'utf8' });
+  if (lint.status !== 0) {
+    fs.writeFileSync(sitesPath, original);
+    console.error('\nRefusing to keep the write: lint rejected the result, so sites.json has been restored.');
+    console.error(lint.stdout || lint.stderr);
+    process.exitCode = 1;
+    return false;
+  }
+  console.log(`\nRecorded linkStatus and lastCheckedAt on ${changed} ${changed === 1 ? 'entry' : 'entries'}.`);
+  return true;
+}
+
 async function runPool(items, worker, concurrency, onProgress) {
   const results = new Array(items.length);
   let next = 0;
@@ -320,13 +379,26 @@ async function main() {
   }
 
   if (options.help) {
-    console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(2, 18).map(l => l.replace(/^\/\/ ?/, '')).join('\n'));
+    // Reads the header comment until it ends, rather than a line count that
+    // silently truncated the help the moment the header grew.
+    const header = [];
+    for (const line of fs.readFileSync(__filename, 'utf8').split('\n').slice(2)) {
+      if (!line.startsWith('//')) break;
+      header.push(line.replace(/^\/\/ ?/, ''));
+    }
+    console.log(header.join('\n').trimEnd());
     return;
   }
 
   const sites = JSON.parse(fs.readFileSync(path.join(ROOT, 'sites.json'), 'utf8'));
   let targets = sites;
   if (options.filter) targets = targets.filter(site => site.url.includes(options.filter) || site.name.toLowerCase().includes(options.filter.toLowerCase()));
+
+  // Some hosts refuse every automated request no matter how politely it asks.
+  // checkDisabled is how a curator says "I looked by hand, it is fine, stop
+  // reporting it", and skipping is only honest if the run says what it skipped.
+  const skipped = options.recheck ? [] : targets.filter(site => site.checkDisabled);
+  if (!options.recheck) targets = targets.filter(site => !site.checkDisabled);
   if (Number.isFinite(options.limit)) targets = targets.slice(0, options.limit);
 
   if (!targets.length) {
@@ -337,6 +409,9 @@ async function main() {
 
   const startedAt = new Date();
   console.log(`Checking ${targets.length} of ${sites.length} URLs, ${options.concurrency} at a time.`);
+  for (const site of skipped) {
+    console.log(`  skipping ${site.name}: ${site.checkDisabled === true ? 'checkDisabled is set' : site.checkDisabled}`);
+  }
 
   const results = await runPool(targets, site => check(site, options), options.concurrency, (done, total) => {
     if (done % 25 === 0 || done === total) process.stdout.write(`\r  ${done}/${total}`);
@@ -383,6 +458,8 @@ async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, `${JSON.stringify(report, null, 2)}\n`);
 
+  const wrote = options.write ? writeBack(sites, results, startedAt) : false;
+
   console.log('');
   for (const status of STATUS_ORDER) {
     const list = byStatus.get(status) || [];
@@ -399,7 +476,9 @@ async function main() {
   }
 
   console.log(`\nReport written to ${path.relative(ROOT, outPath)}`);
-  console.log('sites.json was not modified. Nothing here edits editorial data.');
+  console.log(wrote
+    ? 'sites.json now records what this run saw. No entry was removed, repointed or reworded: that is still an editorial call.'
+    : 'sites.json was not modified. Nothing here edits editorial data.' + (options.write ? '' : ' Pass --write to record what was seen.'));
 
   const broken = report.needsAttention.length;
   if (broken) {
@@ -418,4 +497,4 @@ if (require.main === module) {
 // Exported so the tests can drive the classifier against a local server that
 // returns each case on demand. Checking 588 real URLs only ever exercises the
 // paths the live web happens to hand back that day.
-module.exports = { check, classifyError, sameDestination, BROKEN, STATUS_ORDER };
+module.exports = { check, classifyError, sameDestination, writeBack, BROKEN, STATUS_ORDER };

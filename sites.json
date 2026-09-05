@@ -15,7 +15,9 @@
       "latency",
       "jitter"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Fast.com",
@@ -31,7 +33,9 @@
     ],
     "keywords": [
       "netflix"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Waveform Bufferbloat Test",
@@ -46,7 +50,9 @@
       "bufferbloat",
       "latency",
       "quality"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OpenSpeedTest",
@@ -60,7 +66,9 @@
       "speed",
       "open source",
       "self-hosted"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Speedof.me",
@@ -76,7 +84,9 @@
     ],
     "keywords": [
       "html5"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WiFiman",
@@ -92,7 +102,9 @@
     "keywords": [
       "wifi",
       "ubiquiti"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LibreSpeed",
@@ -106,7 +118,9 @@
       "speed",
       "self-hosted",
       "privacy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "M-Lab NDT",
@@ -120,7 +134,9 @@
       "speed",
       "google",
       "research"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IPChicken",
@@ -136,7 +152,9 @@
     "keywords": [
       "lookup",
       "classic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BGP.Tools",
@@ -153,7 +171,9 @@
     "keywords": [
       "routing"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hurricane Electric BGP",
@@ -169,7 +189,9 @@
     ],
     "keywords": [
       "routing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IPinfo.io",
@@ -184,7 +206,9 @@
       "geolocation",
       "api"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ping.pe",
@@ -200,7 +224,9 @@
     "keywords": [
       "ping",
       "mtr"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Robtex",
@@ -214,7 +240,9 @@
       "dns",
       "ip",
       "visualization"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ViewDNS.info",
@@ -230,7 +258,9 @@
     ],
     "keywords": [
       "port scan"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "HackerTarget",
@@ -246,7 +276,9 @@
     ],
     "keywords": [
       "nmap"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "RIPEstat",
@@ -262,7 +294,9 @@
     ],
     "keywords": [
       "ripe"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "whatsmydns.net",
@@ -278,7 +312,9 @@
     ],
     "keywords": [
       "propagation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DNSViz",
@@ -294,7 +330,9 @@
     ],
     "keywords": [
       "dnssec"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MXToolbox",
@@ -311,7 +349,9 @@
     "keywords": [
       "mx"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "nslookup.io",
@@ -327,7 +367,9 @@
     "keywords": [
       "lookup",
       "records"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DNS Leak Test",
@@ -344,7 +386,9 @@
     ],
     "keywords": [
       "leak"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IntoDNS",
@@ -360,7 +404,9 @@
     "keywords": [
       "health",
       "audit"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BrowserLeaks",
@@ -376,7 +422,9 @@
     ],
     "keywords": [
       "fingerprint"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cover Your Tracks (EFF)",
@@ -392,7 +440,9 @@
     "keywords": [
       "eff",
       "fingerprint"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Qualys SSL Labs",
@@ -409,7 +459,9 @@
       "tls",
       "certificate"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SecurityHeaders",
@@ -425,7 +477,9 @@
     ],
     "keywords": [
       "headers"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mozilla Observatory",
@@ -442,7 +496,9 @@
     "keywords": [
       "mozilla"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GRC ShieldsUP!",
@@ -458,7 +514,9 @@
     ],
     "keywords": [
       "ports"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "urlscan.io",
@@ -474,7 +532,9 @@
     ],
     "keywords": [
       "phishing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hardenize",
@@ -490,7 +550,9 @@
     ],
     "keywords": [
       "assessment"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Have I Been Pwned",
@@ -507,7 +569,9 @@
       "breach",
       "password"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "VirusTotal",
@@ -523,7 +587,9 @@
     "keywords": [
       "antivirus",
       "scan"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CyberChef",
@@ -540,7 +606,9 @@
       "crypto",
       "gchq"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shodan",
@@ -557,7 +625,9 @@
     "keywords": [
       "devices"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Censys",
@@ -573,7 +643,9 @@
     "keywords": [
       "scan",
       "certificates"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "crt.sh",
@@ -589,7 +661,9 @@
     "keywords": [
       "certificates",
       "subdomains"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DNSDumpster",
@@ -605,7 +679,9 @@
     ],
     "keywords": [
       "subdomains"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AbuseIPDB",
@@ -621,7 +697,9 @@
     ],
     "keywords": [
       "abuse"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GreyNoise",
@@ -637,7 +715,9 @@
     "keywords": [
       "noise",
       "scanning"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pulsedive",
@@ -653,7 +733,9 @@
     "keywords": [
       "intelligence",
       "ioc"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PublicWWW",
@@ -669,7 +751,9 @@
     ],
     "keywords": [
       "source code"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SpiderFoot",
@@ -686,7 +770,9 @@
     "keywords": [
       "footprint"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Regex101",
@@ -703,7 +789,9 @@
       "regex",
       "patterns"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IT-Tools",
@@ -719,7 +807,9 @@
     "keywords": [
       "utilities",
       "hash"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hoppscotch",
@@ -739,7 +829,9 @@
     "editorsPick": true,
     "alternativeTo": [
       "Postman"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Compiler Explorer",
@@ -755,7 +847,9 @@
     "keywords": [
       "compiler",
       "assembly"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Webhook.site",
@@ -771,7 +865,9 @@
     ],
     "keywords": [
       "webhook"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "httpbin.org",
@@ -785,7 +881,9 @@
       "http",
       "testing",
       "debug"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ExplainShell",
@@ -801,7 +899,9 @@
     "keywords": [
       "bash",
       "learning"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DB Fiddle",
@@ -817,7 +917,9 @@
     ],
     "keywords": [
       "sql"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "JSONCrack",
@@ -831,7 +933,9 @@
       "json",
       "visualization",
       "data"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Crontab.guru",
@@ -847,7 +951,9 @@
     "keywords": [
       "cron",
       "sysadmin"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DevDocs",
@@ -861,7 +967,9 @@
       "documentation",
       "api",
       "reference"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DevToys",
@@ -878,7 +986,9 @@
     ],
     "keywords": [
       "utilities"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PowerToys",
@@ -895,7 +1005,9 @@
     "keywords": [
       "microsoft"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Files",
@@ -911,7 +1023,9 @@
     ],
     "keywords": [
       "file manager"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WingetUI",
@@ -925,7 +1039,9 @@
       "package-manager",
       "windows",
       "gui"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "EarTrumpet",
@@ -941,7 +1057,9 @@
     ],
     "keywords": [
       "volume"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ShareX",
@@ -958,7 +1076,9 @@
     "keywords": [
       "capture"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ditto",
@@ -974,7 +1094,9 @@
     ],
     "keywords": [
       "clipboard"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Everything",
@@ -991,7 +1113,9 @@
     "keywords": [
       "instant"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flameshot",
@@ -1007,7 +1131,9 @@
     ],
     "keywords": [
       "annotation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Syncthing",
@@ -1023,7 +1149,9 @@
     ],
     "keywords": [
       "p2p"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "KeePassXC",
@@ -1038,7 +1166,9 @@
       "security",
       "offline"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Bitwarden",
@@ -1052,7 +1182,9 @@
       "passwords",
       "security",
       "self-hosted"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WizTree",
@@ -1068,7 +1200,9 @@
     "keywords": [
       "storage",
       "analyzer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Tabby",
@@ -1082,7 +1216,9 @@
       "terminal",
       "ssh",
       "cross-platform"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Alacritty",
@@ -1096,7 +1232,9 @@
       "terminal",
       "gpu",
       "rust"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ollama",
@@ -1113,7 +1251,9 @@
     "keywords": [
       "llm"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Open WebUI",
@@ -1128,7 +1268,9 @@
       "ui",
       "self-hosted"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LM Studio",
@@ -1144,7 +1286,9 @@
     ],
     "keywords": [
       "llm"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Jan",
@@ -1158,7 +1302,9 @@
       "chat",
       "offline",
       "privacy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LocalAI",
@@ -1174,7 +1320,9 @@
     ],
     "keywords": [
       "multimodal"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ComfyUI",
@@ -1190,7 +1338,9 @@
     "keywords": [
       "image generation",
       "nodes"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AUTOMATIC1111 WebUI",
@@ -1206,7 +1356,9 @@
     ],
     "keywords": [
       "webui"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hugging Face",
@@ -1223,7 +1375,9 @@
     "keywords": [
       "datasets"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TensorFlow Playground",
@@ -1239,7 +1393,9 @@
     "keywords": [
       "neural network",
       "learning"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Chatbot Arena",
@@ -1254,7 +1410,9 @@
       "benchmark",
       "comparison",
       "leaderboard"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AnythingLLM",
@@ -1270,7 +1428,9 @@
     "keywords": [
       "rag",
       "assistant"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Perplexity",
@@ -1287,7 +1447,9 @@
     "keywords": [
       "citations"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Whisper",
@@ -1302,7 +1464,9 @@
       "speech",
       "transcription",
       "openai"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kokoro TTS",
@@ -1318,7 +1482,9 @@
     ],
     "keywords": [
       "voice"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Chatterbox TTS",
@@ -1334,7 +1500,9 @@
     "keywords": [
       "voice cloning",
       "emotion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Khroma",
@@ -1350,7 +1518,9 @@
     "keywords": [
       "color",
       "palette"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cleanup.pictures",
@@ -1366,7 +1536,9 @@
     "keywords": [
       "inpainting",
       "removal"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Recraft",
@@ -1380,7 +1552,9 @@
       "vector",
       "illustration",
       "generation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Suno",
@@ -1395,7 +1569,9 @@
       "generation",
       "audio"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Udio",
@@ -1409,7 +1585,9 @@
       "music",
       "audio",
       "generation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ElevenLabs",
@@ -1426,7 +1604,9 @@
       "voice",
       "cloning"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Midjourney",
@@ -1443,7 +1623,9 @@
     "keywords": [
       "art"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "n8n",
@@ -1458,7 +1640,9 @@
       "automation",
       "self-hosted"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Node-RED",
@@ -1475,7 +1659,9 @@
     "keywords": [
       "flow"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Huginn",
@@ -1491,7 +1677,9 @@
     ],
     "keywords": [
       "scraping"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Activepieces",
@@ -1505,7 +1693,9 @@
       "no-code",
       "workflow",
       "self-hosted"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Windmill",
@@ -1520,7 +1710,9 @@
       "scripts",
       "workflows",
       "internal tools"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Awesome-Selfhosted",
@@ -1536,7 +1728,9 @@
     ],
     "keywords": [
       "list"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Uptime Kuma",
@@ -1553,7 +1747,9 @@
     "keywords": [
       "uptime"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Nginx Proxy Manager",
@@ -1569,7 +1765,9 @@
     ],
     "keywords": [
       "nginx"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Homepage",
@@ -1585,7 +1783,9 @@
     "keywords": [
       "homepage",
       "widgets"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Portainer",
@@ -1599,7 +1799,9 @@
       "docker",
       "kubernetes",
       "management"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Dockge",
@@ -1615,7 +1817,9 @@
     ],
     "keywords": [
       "compose"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Proxmox VE",
@@ -1631,7 +1835,9 @@
       "hypervisor",
       "enterprise"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Tailscale",
@@ -1648,7 +1854,9 @@
     "keywords": [
       "mesh"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cloudflare Tunnel",
@@ -1665,7 +1873,9 @@
       "tunnel",
       "zero-trust"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pi-hole",
@@ -1682,7 +1892,9 @@
     "keywords": [
       "ad blocker"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Vaultwarden",
@@ -1698,7 +1910,9 @@
     ],
     "keywords": [
       "bitwarden"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Blender",
@@ -1716,7 +1930,9 @@
       "modeling",
       "vfx"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GIMP",
@@ -1735,7 +1951,9 @@
     ],
     "alternativeTo": [
       "Photoshop"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Inkscape",
@@ -1749,7 +1967,9 @@
       "vector",
       "svg",
       "illustration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Krita",
@@ -1765,7 +1985,9 @@
     ],
     "keywords": [
       "painting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kdenlive",
@@ -1780,7 +2002,9 @@
       "video editing",
       "multi-track",
       "effects"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DaVinci Resolve",
@@ -1796,7 +2020,9 @@
     "keywords": [
       "color grading",
       "hollywood"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Audacity",
@@ -1812,7 +2038,9 @@
     ],
     "keywords": [
       "editing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OBS Studio",
@@ -1827,7 +2055,9 @@
       "recording",
       "live"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "fffuel.co",
@@ -1843,7 +2073,9 @@
     "keywords": [
       "generators",
       "backgrounds"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Photopea",
@@ -1863,7 +2095,9 @@
     "editorsPick": true,
     "alternativeTo": [
       "Photoshop"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Squoosh",
@@ -1877,7 +2111,9 @@
       "compression",
       "images",
       "optimization"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Excalidraw",
@@ -1894,7 +2130,9 @@
     "keywords": [
       "whiteboard"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ardour",
@@ -1911,7 +2149,9 @@
     "keywords": [
       "mixing"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LMMS",
@@ -1927,7 +2167,9 @@
     "keywords": [
       "beats",
       "synthesizer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AudioMass",
@@ -1941,7 +2183,9 @@
       "audio",
       "browser",
       "editor"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Vital",
@@ -1956,7 +2200,9 @@
       "synthesizer",
       "wavetable",
       "sound design"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mixxx",
@@ -1972,7 +2218,9 @@
     "keywords": [
       "dj",
       "mixing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "addy.io",
@@ -1988,7 +2236,9 @@
     "keywords": [
       "aliases",
       "forwarding"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SimpleLogin",
@@ -2004,7 +2254,9 @@
     ],
     "keywords": [
       "aliases"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PrivateBin",
@@ -2020,7 +2272,9 @@
     "keywords": [
       "pastebin",
       "zero-knowledge"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CryptPad",
@@ -2036,7 +2290,9 @@
     ],
     "keywords": [
       "office"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SearXNG",
@@ -2052,7 +2308,9 @@
     ],
     "keywords": [
       "metasearch"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "privacy.sexy",
@@ -2068,7 +2326,9 @@
     ],
     "keywords": [
       "scripts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LibRedirect",
@@ -2084,7 +2344,9 @@
     "keywords": [
       "redirect",
       "frontends"
-    ]
+    ],
+    "linkStatus": "timeout",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mullvad VPN",
@@ -2101,7 +2363,9 @@
       "anonymous",
       "audited"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Tor Project",
@@ -2117,7 +2381,9 @@
     "keywords": [
       "anonymity",
       "onion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Healthchecks.io",
@@ -2133,7 +2399,9 @@
     "keywords": [
       "cron",
       "alerts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GoAccess",
@@ -2147,7 +2415,9 @@
       "logs",
       "analytics",
       "terminal"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "NGINXConfig",
@@ -2163,7 +2433,9 @@
     ],
     "keywords": [
       "nginx"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mozilla SSL Config",
@@ -2179,7 +2451,9 @@
     "keywords": [
       "tls",
       "configuration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cloudflare Radar",
@@ -2194,7 +2468,9 @@
       "internet",
       "traffic",
       "intelligence"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Dozzle",
@@ -2210,7 +2486,9 @@
     ],
     "keywords": [
       "viewer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Grafana",
@@ -2225,7 +2503,9 @@
       "dashboards",
       "metrics"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Netdata",
@@ -2241,7 +2521,9 @@
     ],
     "keywords": [
       "auto"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "RAWGraphs",
@@ -2255,7 +2537,9 @@
       "charts",
       "visualization",
       "no-code"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Datawrapper",
@@ -2271,7 +2555,9 @@
     "keywords": [
       "maps",
       "journalism"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flourish",
@@ -2287,7 +2573,9 @@
     "keywords": [
       "storytelling",
       "animated"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Observable",
@@ -2303,7 +2591,9 @@
     "keywords": [
       "notebooks",
       "d3"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kepler.gl",
@@ -2318,7 +2608,9 @@
       "maps",
       "geospatial",
       "uber"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Algorithm Visualizer",
@@ -2334,7 +2626,9 @@
     ],
     "keywords": [
       "algorithms"
-    ]
+    ],
+    "linkStatus": "dead",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "VisuAlgo",
@@ -2350,7 +2644,9 @@
     "keywords": [
       "algorithms",
       "data structures"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Exercism",
@@ -2366,7 +2662,9 @@
     "keywords": [
       "practice",
       "mentoring"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PhET Simulations",
@@ -2381,7 +2679,9 @@
       "science",
       "physics",
       "simulations"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Desmos",
@@ -2397,7 +2697,9 @@
     "keywords": [
       "graphing",
       "calculator"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "freeCodeCamp",
@@ -2412,7 +2714,9 @@
       "web dev",
       "free"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "The Odin Project",
@@ -2428,7 +2732,9 @@
     "keywords": [
       "full stack",
       "projects"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Roadmap.sh",
@@ -2444,7 +2750,9 @@
     "keywords": [
       "roadmaps",
       "career"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Learn X in Y Minutes",
@@ -2460,7 +2768,9 @@
     "keywords": [
       "languages",
       "quick start"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Draw.io",
@@ -2476,7 +2786,9 @@
     "keywords": [
       "flowcharts",
       "uml"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "tldraw",
@@ -2490,7 +2802,9 @@
       "canvas",
       "drawing",
       "collaboration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Obsidian",
@@ -2510,7 +2824,9 @@
     "editorsPick": true,
     "alternativeTo": [
       "Notion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Logseq",
@@ -2529,7 +2845,9 @@
     ],
     "alternativeTo": [
       "Notion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Joplin",
@@ -2548,7 +2866,9 @@
     ],
     "alternativeTo": [
       "Notion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "StackEdit",
@@ -2562,7 +2882,9 @@
       "markdown",
       "editor",
       "sync"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Stirling PDF",
@@ -2583,7 +2905,9 @@
     ],
     "editorsPick": true,
     "repository": "https://github.com/Stirling-Tools/Stirling-PDF",
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Grist",
@@ -2599,7 +2923,9 @@
     "keywords": [
       "spreadsheet",
       "airtable"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "NocoDB",
@@ -2615,7 +2941,9 @@
     ],
     "keywords": [
       "spreadsheet"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Appsmith",
@@ -2631,7 +2959,9 @@
     "keywords": [
       "low-code",
       "internal tools"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CloudConvert",
@@ -2647,7 +2977,9 @@
     ],
     "keywords": [
       "formats"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cobalt",
@@ -2664,7 +2996,9 @@
     "keywords": [
       "downloader"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "yt-dlp",
@@ -2681,7 +3015,9 @@
       "downloader",
       "command-line"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FFmpeg",
@@ -2698,7 +3034,9 @@
       "conversion",
       "encoding"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "HandBrake",
@@ -2714,7 +3052,9 @@
     ],
     "keywords": [
       "transcoding"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Neal.fun",
@@ -2731,7 +3071,9 @@
     "keywords": [
       "educational"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Radio Garden",
@@ -2747,7 +3089,9 @@
       "globe",
       "worldwide"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shadertoy",
@@ -2763,7 +3107,9 @@
     "keywords": [
       "shaders",
       "creative coding"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "The Useless Web",
@@ -2778,7 +3124,9 @@
       "random",
       "fun",
       "procrastination"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Window Swap",
@@ -2794,7 +3142,9 @@
     "keywords": [
       "travel",
       "zen"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Patatap",
@@ -2808,7 +3158,9 @@
       "music",
       "animation",
       "interactive"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Internet Archive",
@@ -2825,7 +3177,9 @@
     "keywords": [
       "wayback"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Dwitter",
@@ -2841,7 +3195,9 @@
     ],
     "keywords": [
       "code golf"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Neocities",
@@ -2856,7 +3212,9 @@
       "hosting",
       "indie web",
       "geocities"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Web Design Museum",
@@ -2872,7 +3230,9 @@
     ],
     "keywords": [
       "nostalgia"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hacker News",
@@ -2889,7 +3249,9 @@
       "tech",
       "startups"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lobsters",
@@ -2905,7 +3267,9 @@
     ],
     "keywords": [
       "tech"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Devhints.io",
@@ -2921,7 +3285,9 @@
     ],
     "keywords": [
       "cheatsheets"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "QuickRef.ME",
@@ -2937,7 +3303,9 @@
     "keywords": [
       "cheatsheets",
       "quick"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "public-apis",
@@ -2954,7 +3322,9 @@
     "keywords": [
       "apis"
     ],
-    "lastReviewedAt": "2026-09-05"
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Free Programming Books",
@@ -2970,7 +3340,9 @@
     ],
     "keywords": [
       "books"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hackaday",
@@ -2986,7 +3358,9 @@
     "keywords": [
       "electronics",
       "diy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "daily.dev",
@@ -3002,7 +3376,9 @@
     ],
     "keywords": [
       "feed"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Packet Loss Test",
@@ -3018,7 +3394,9 @@
     "keywords": [
       "packet loss",
       "voip"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TestMy.net",
@@ -3034,7 +3412,9 @@
     ],
     "keywords": [
       "isp"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IP.me",
@@ -3050,7 +3430,9 @@
     ],
     "keywords": [
       "curl"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "icanhazip.com",
@@ -3066,7 +3448,9 @@
     ],
     "keywords": [
       "plain text"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Whois Lookup",
@@ -3081,7 +3465,9 @@
       "whois",
       "domain",
       "registration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IPVoid",
@@ -3095,7 +3481,9 @@
       "tools",
       "blacklist",
       "geolocation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WhatIsMyIPAddress",
@@ -3109,7 +3497,9 @@
       "ip",
       "geolocation",
       "proxy"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Subnet Calculator",
@@ -3124,7 +3514,9 @@
       "subnet",
       "cidr",
       "calculator"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DNSChecker",
@@ -3140,7 +3532,9 @@
     ],
     "keywords": [
       "propagation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "dig (web)",
@@ -3156,7 +3550,9 @@
     "keywords": [
       "dig",
       "query"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Zonemaster",
@@ -3172,7 +3568,9 @@
     "keywords": [
       "validation",
       "rfc"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DMARC Analyzer",
@@ -3188,7 +3586,9 @@
     "keywords": [
       "dmarc",
       "spoofing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pentest-Tools",
@@ -3204,7 +3604,9 @@
     "keywords": [
       "pentest",
       "vulnerability"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shodan Monitor",
@@ -3220,7 +3622,9 @@
     ],
     "keywords": [
       "exposure"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DeHashed",
@@ -3236,7 +3640,9 @@
     "keywords": [
       "breach",
       "credentials"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "JWT.io",
@@ -3252,7 +3658,9 @@
     "keywords": [
       "jwt",
       "tokens"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SSL Checker",
@@ -3268,7 +3676,9 @@
     "keywords": [
       "certificate",
       "diagnostic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Immuniweb",
@@ -3284,7 +3694,9 @@
     "keywords": [
       "compliance",
       "pci"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Report URI",
@@ -3299,7 +3711,9 @@
       "csp",
       "headers",
       "reporting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Sucuri SiteCheck",
@@ -3313,7 +3727,9 @@
       "malware",
       "scanner",
       "website"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OWASP ZAP",
@@ -3329,7 +3745,9 @@
     "keywords": [
       "owasp",
       "webapp"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "IntelligenceX",
@@ -3345,7 +3763,9 @@
     "keywords": [
       "darknet",
       "leaks"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wayback Machine",
@@ -3360,7 +3780,9 @@
       "history",
       "web"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OSINT Framework",
@@ -3374,7 +3796,9 @@
       "framework",
       "directory",
       "tools"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Maltego CE",
@@ -3389,7 +3813,9 @@
       "link analysis",
       "graph",
       "investigation"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hunter.io",
@@ -3405,7 +3831,9 @@
     "keywords": [
       "finder",
       "verification"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PhoneInfoga",
@@ -3422,7 +3850,9 @@
     "keywords": [
       "phone"
     ],
-    "lastReviewedAt": "2026-09-05"
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TinEye",
@@ -3438,7 +3868,9 @@
     ],
     "keywords": [
       "reverse search"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wigle.net",
@@ -3453,7 +3885,9 @@
       "wifi",
       "wardriving",
       "map"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BuiltWith",
@@ -3469,7 +3903,9 @@
     "keywords": [
       "technology",
       "profiler"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Epieos",
@@ -3485,7 +3921,9 @@
     "keywords": [
       "social",
       "accounts"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CodePen",
@@ -3499,7 +3937,9 @@
       "frontend",
       "playground",
       "community"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CodeSandbox",
@@ -3515,7 +3955,9 @@
     ],
     "keywords": [
       "online"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "StackBlitz",
@@ -3532,7 +3974,9 @@
       "node",
       "webcontainers"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Carbon",
@@ -3548,7 +3992,9 @@
     ],
     "keywords": [
       "screenshots"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Can I Use",
@@ -3564,7 +4010,9 @@
     "keywords": [
       "compatibility",
       "css"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Bundlephobia",
@@ -3579,7 +4027,9 @@
       "npm",
       "size",
       "performance"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ray.so",
@@ -3593,7 +4043,9 @@
       "code",
       "images",
       "design"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Responsively",
@@ -3609,7 +4061,9 @@
     ],
     "keywords": [
       "responsive"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Playwright",
@@ -3626,7 +4080,9 @@
     "keywords": [
       "e2e"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Insomnia",
@@ -3645,7 +4101,9 @@
     ],
     "alternativeTo": [
       "Postman"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WakaTime",
@@ -3661,7 +4119,9 @@
     ],
     "keywords": [
       "time tracking"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Gitpod",
@@ -3677,7 +4137,9 @@
     ],
     "keywords": [
       "cloud ide"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TypeScript Playground",
@@ -3693,7 +4155,9 @@
     ],
     "keywords": [
       "compiler"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Zed",
@@ -3709,7 +4173,9 @@
     ],
     "keywords": [
       "multiplayer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cursor",
@@ -3725,7 +4191,9 @@
     ],
     "keywords": [
       "vscode"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Transform.tools",
@@ -3739,7 +4207,9 @@
       "converter",
       "json",
       "typescript"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AST Explorer",
@@ -3755,7 +4225,9 @@
     "keywords": [
       "ast",
       "parser"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Warp",
@@ -3769,7 +4241,9 @@
       "terminal",
       "ai",
       "modern"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flow Launcher",
@@ -3783,7 +4257,9 @@
       "launcher",
       "search",
       "windows"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Espanso",
@@ -3799,7 +4275,9 @@
     "keywords": [
       "text expander",
       "typing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AutoHotkey",
@@ -3815,7 +4293,9 @@
     "keywords": [
       "macros",
       "scripting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Greenshot",
@@ -3829,7 +4309,9 @@
       "screenshot",
       "lightweight",
       "windows"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "7-Zip",
@@ -3845,7 +4327,9 @@
     ],
     "keywords": [
       "zip"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "VLC",
@@ -3862,7 +4346,9 @@
     "keywords": [
       "media player"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "mpv",
@@ -3878,7 +4364,9 @@
     ],
     "keywords": [
       "media player"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ventoy",
@@ -3893,7 +4381,9 @@
       "bootable",
       "usb",
       "iso"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Rufus",
@@ -3908,7 +4398,9 @@
       "bootable",
       "usb",
       "formatting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Bulk Crap Uninstaller",
@@ -3924,7 +4416,9 @@
     "keywords": [
       "uninstaller",
       "cleanup"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TranslucentTB",
@@ -3940,7 +4434,9 @@
     ],
     "keywords": [
       "transparency"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WindHawk",
@@ -3956,7 +4452,9 @@
     ],
     "keywords": [
       "mods"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Twinkle Tray",
@@ -3971,7 +4469,9 @@
       "brightness",
       "monitor",
       "tray"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "QuickLook",
@@ -3986,7 +4486,9 @@
       "preview",
       "quicklook",
       "macos"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Barrier",
@@ -4001,7 +4503,9 @@
       "kvm",
       "mouse",
       "keyboard"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Notepads",
@@ -4017,7 +4521,9 @@
     ],
     "keywords": [
       "text editor"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CrystalDiskInfo",
@@ -4033,7 +4539,9 @@
     "keywords": [
       "health",
       "smart"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "HWiNFO",
@@ -4049,7 +4557,9 @@
     ],
     "keywords": [
       "sensors"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Process Hacker",
@@ -4065,7 +4575,9 @@
     "keywords": [
       "task manager",
       "process"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OpenRouter",
@@ -4081,7 +4593,9 @@
     "keywords": [
       "unified",
       "multi-model"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Groq",
@@ -4097,7 +4611,9 @@
     ],
     "keywords": [
       "inference"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Together AI",
@@ -4113,7 +4629,9 @@
     "keywords": [
       "inference",
       "fine-tune"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Replicate",
@@ -4127,7 +4645,9 @@
       "models",
       "cloud",
       "api"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Weights & Biases",
@@ -4143,7 +4663,9 @@
     "keywords": [
       "experiment",
       "mlops"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Papers With Code",
@@ -4159,7 +4681,9 @@
     "keywords": [
       "papers",
       "benchmarks"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Civitai",
@@ -4173,7 +4697,9 @@
       "stable diffusion",
       "models",
       "community"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "InvokeAI",
@@ -4189,7 +4715,9 @@
     ],
     "keywords": [
       "professional"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flowise",
@@ -4205,7 +4733,9 @@
     ],
     "keywords": [
       "langchain"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LangFlow",
@@ -4221,7 +4751,9 @@
     ],
     "keywords": [
       "langchain"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Dify",
@@ -4237,7 +4769,9 @@
     "keywords": [
       "platform",
       "rag"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LibreChat",
@@ -4253,7 +4787,9 @@
     ],
     "keywords": [
       "multi-provider"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GPT4All",
@@ -4267,7 +4803,9 @@
       "local",
       "desktop",
       "offline"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Phidata",
@@ -4281,7 +4819,9 @@
       "agents",
       "framework",
       "python"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CrewAI",
@@ -4297,7 +4837,9 @@
     "keywords": [
       "multi-agent",
       "orchestration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "NotebookLM",
@@ -4311,7 +4853,9 @@
       "research",
       "documents",
       "google"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Llamafile",
@@ -4328,7 +4872,9 @@
       "portable",
       "single-file"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ideogram",
@@ -4344,7 +4890,9 @@
     "keywords": [
       "text",
       "typography"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Leonardo.ai",
@@ -4360,7 +4908,9 @@
     ],
     "keywords": [
       "art"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pika",
@@ -4376,7 +4926,9 @@
     ],
     "keywords": [
       "editing"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Luma AI",
@@ -4390,7 +4942,9 @@
       "3d",
       "video",
       "generation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Krea.ai",
@@ -4404,7 +4958,9 @@
       "real-time",
       "canvas",
       "image"
-    ]
+    ],
+    "linkStatus": "error",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pixlr",
@@ -4420,7 +4976,9 @@
     "keywords": [
       "photo",
       "background"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Remove.bg",
@@ -4435,7 +4993,9 @@
       "background",
       "removal",
       "instant"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Runway",
@@ -4450,7 +5010,9 @@
       "generation",
       "creative"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Make (Integromat)",
@@ -4466,7 +5028,9 @@
     ],
     "keywords": [
       "integrations"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pipedream",
@@ -4480,7 +5044,9 @@
       "api",
       "code",
       "developer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Temporal",
@@ -4495,7 +5061,9 @@
       "durable",
       "workflows",
       "reliable"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Prefect",
@@ -4511,7 +5079,9 @@
     ],
     "keywords": [
       "orchestration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Apache Airflow",
@@ -4527,7 +5097,9 @@
     ],
     "keywords": [
       "pipelines"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CasaOS",
@@ -4543,7 +5115,9 @@
     ],
     "keywords": [
       "personal cloud"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Homarr",
@@ -4559,7 +5133,9 @@
     "keywords": [
       "widgets",
       "dark theme"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Yacht",
@@ -4573,7 +5149,9 @@
       "docker",
       "templates",
       "deployment"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Authentik",
@@ -4588,7 +5166,9 @@
       "sso",
       "identity",
       "authentication"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Traefik",
@@ -4604,7 +5184,9 @@
     ],
     "keywords": [
       "load balancer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WireGuard",
@@ -4620,7 +5202,9 @@
     ],
     "keywords": [
       "kernel"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ansible",
@@ -4635,7 +5219,9 @@
       "config",
       "deployment"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Plex",
@@ -4649,7 +5235,9 @@
       "media",
       "streaming",
       "library"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Jellyfin",
@@ -4664,7 +5252,9 @@
       "streaming",
       "open source"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Immich",
@@ -4681,7 +5271,9 @@
       "photos",
       "backup"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Paperless-ngx",
@@ -4697,7 +5289,9 @@
     ],
     "keywords": [
       "ocr"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Gotify",
@@ -4713,7 +5307,9 @@
     ],
     "keywords": [
       "push"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Ntfy",
@@ -4727,7 +5323,9 @@
       "notifications",
       "http",
       "simple"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Linkwarden",
@@ -4743,7 +5341,9 @@
     ],
     "keywords": [
       "bookmarks"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mealie",
@@ -4758,7 +5358,9 @@
       "recipes",
       "meal planning",
       "food"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Actual Budget",
@@ -4774,7 +5376,9 @@
     "keywords": [
       "budget",
       "finance"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FreshRSS",
@@ -4790,7 +5394,9 @@
     ],
     "keywords": [
       "rss"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Miniflux",
@@ -4806,7 +5412,9 @@
     ],
     "keywords": [
       "rss"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Navidrome",
@@ -4822,7 +5430,9 @@
     ],
     "keywords": [
       "subsonic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Firefly III",
@@ -4838,7 +5448,9 @@
     "keywords": [
       "finance",
       "budgeting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Figma",
@@ -4855,7 +5467,9 @@
     "keywords": [
       "prototyping"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Canva",
@@ -4871,7 +5485,9 @@
     ],
     "keywords": [
       "easy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Penpot",
@@ -4890,7 +5506,9 @@
     ],
     "alternativeTo": [
       "Figma"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Coolors",
@@ -4906,7 +5524,9 @@
     "keywords": [
       "colors",
       "palette"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Realtime Colors",
@@ -4922,7 +5542,9 @@
     "keywords": [
       "colors",
       "preview"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "unDraw",
@@ -4938,7 +5560,9 @@
     ],
     "keywords": [
       "illustrations"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Heroicons",
@@ -4954,7 +5578,9 @@
     ],
     "keywords": [
       "tailwind"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lucide",
@@ -4968,7 +5594,9 @@
       "icons",
       "svg",
       "open source"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SVG Repo",
@@ -4984,7 +5612,9 @@
     ],
     "keywords": [
       "vectors"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shots.so",
@@ -5000,7 +5630,9 @@
     "keywords": [
       "mockups",
       "screenshots"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lottiefiles",
@@ -5016,7 +5648,9 @@
     ],
     "keywords": [
       "lottie"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TinyPNG",
@@ -5030,7 +5664,9 @@
       "compression",
       "images",
       "optimization"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Haikei",
@@ -5046,7 +5682,9 @@
     "keywords": [
       "backgrounds",
       "generators"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shape Divider",
@@ -5062,7 +5700,9 @@
     "keywords": [
       "dividers",
       "web design"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Freesound",
@@ -5077,7 +5717,9 @@
       "sounds",
       "samples",
       "creative commons"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Sonic Pi",
@@ -5093,7 +5735,9 @@
     "keywords": [
       "live coding",
       "ruby"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MuseScore",
@@ -5110,7 +5754,9 @@
       "notation",
       "sheet music"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Soundtrap",
@@ -5126,7 +5772,9 @@
     "keywords": [
       "studio",
       "online"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Bandlab",
@@ -5142,7 +5790,9 @@
     ],
     "keywords": [
       "social"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Standard Notes",
@@ -5156,7 +5806,9 @@
       "notes",
       "encrypted",
       "open source"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Signal",
@@ -5173,7 +5825,9 @@
     "keywords": [
       "messaging"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ProtonMail",
@@ -5190,7 +5844,9 @@
     "keywords": [
       "swiss"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Tails",
@@ -5206,7 +5862,9 @@
     ],
     "keywords": [
       "portable"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Whonix",
@@ -5222,7 +5880,9 @@
     ],
     "keywords": [
       "vm"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "uBlock Origin",
@@ -5239,7 +5899,9 @@
       "ad blocker",
       "efficient"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Prism Break",
@@ -5255,7 +5917,9 @@
     ],
     "keywords": [
       "foss"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Privacy Guides",
@@ -5271,7 +5935,9 @@
     ],
     "keywords": [
       "recommendations"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CalyxOS",
@@ -5287,7 +5953,9 @@
     ],
     "keywords": [
       "degoogled"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Semaphore",
@@ -5303,7 +5971,9 @@
     ],
     "keywords": [
       "ansible"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AWX",
@@ -5319,7 +5989,9 @@
     "keywords": [
       "ansible",
       "tower"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Terraform",
@@ -5337,7 +6009,9 @@
       "provisioning"
     ],
     "editorsPick": true,
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cockpit",
@@ -5351,7 +6025,9 @@
       "linux",
       "web",
       "management"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Webmin",
@@ -5367,7 +6043,9 @@
     ],
     "keywords": [
       "administration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Zabbix",
@@ -5383,7 +6061,9 @@
     ],
     "keywords": [
       "enterprise"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Prometheus",
@@ -5400,7 +6080,9 @@
     "keywords": [
       "cloud-native"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Loki",
@@ -5416,7 +6098,9 @@
     "keywords": [
       "aggregation",
       "grafana"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Teleport",
@@ -5432,7 +6116,9 @@
     "keywords": [
       "access",
       "zero-trust"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wazuh",
@@ -5448,7 +6134,9 @@
     ],
     "keywords": [
       "siem"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Checkmk",
@@ -5464,7 +6152,9 @@
     ],
     "keywords": [
       "auto-discovery"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Glances",
@@ -5478,7 +6168,9 @@
       "system",
       "terminal",
       "python"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "btop",
@@ -5494,7 +6186,9 @@
     "keywords": [
       "monitor",
       "beautiful"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Metabase",
@@ -5511,7 +6205,9 @@
     "keywords": [
       "bi"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Apache Superset",
@@ -5527,7 +6223,9 @@
     ],
     "keywords": [
       "sql"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "D3.js",
@@ -5544,7 +6242,9 @@
     "keywords": [
       "custom"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Plotly",
@@ -5558,7 +6258,9 @@
       "charts",
       "interactive",
       "3d"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mermaid Live",
@@ -5574,7 +6276,9 @@
     "keywords": [
       "text",
       "flowcharts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DB Diagram",
@@ -5590,7 +6294,9 @@
     ],
     "keywords": [
       "erd"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Chartbrew",
@@ -5604,7 +6310,9 @@
       "dashboards",
       "api",
       "live"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Brilliant",
@@ -5620,7 +6328,9 @@
     "keywords": [
       "stem",
       "puzzles"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Khan Academy",
@@ -5637,7 +6347,9 @@
       "comprehensive",
       "courses"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MIT OpenCourseWare",
@@ -5653,7 +6365,9 @@
       "courses",
       "lectures"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "3Blue1Brown",
@@ -5667,7 +6381,9 @@
       "math",
       "visualization",
       "youtube"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "LeetCode",
@@ -5683,7 +6399,9 @@
     "keywords": [
       "interview",
       "practice"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "HackerRank",
@@ -5699,7 +6417,9 @@
     "keywords": [
       "challenges",
       "certification"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Codecademy",
@@ -5715,7 +6435,9 @@
     ],
     "keywords": [
       "lessons"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "W3Schools",
@@ -5731,7 +6453,9 @@
     ],
     "keywords": [
       "tutorials"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Full Stack Open",
@@ -5746,7 +6470,9 @@
       "full stack",
       "react",
       "university"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CS50",
@@ -5763,7 +6489,9 @@
       "harvard",
       "cs"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Scrimba",
@@ -5779,7 +6507,9 @@
     ],
     "keywords": [
       "screencasts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Nand2Tetris",
@@ -5795,7 +6525,9 @@
     "keywords": [
       "computer science",
       "fundamentals"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Notion",
@@ -5812,7 +6544,9 @@
     "keywords": [
       "databases"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Anytype",
@@ -5831,7 +6565,9 @@
     ],
     "alternativeTo": [
       "Notion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Linear",
@@ -5847,7 +6583,9 @@
     ],
     "keywords": [
       "issues"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cal.com",
@@ -5864,7 +6602,9 @@
     "keywords": [
       "calendar"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Docuseal",
@@ -5881,7 +6621,9 @@
     "keywords": [
       "signing"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Plane",
@@ -5901,7 +6643,9 @@
     "alternativeTo": [
       "Linear",
       "Jira"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Huly",
@@ -5917,7 +6661,9 @@
     ],
     "keywords": [
       "all-in-one"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Typst",
@@ -5932,7 +6678,9 @@
       "latex",
       "typesetting",
       "academic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Overleaf",
@@ -5948,7 +6696,9 @@
     "keywords": [
       "latex",
       "academic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Trilium Notes",
@@ -5965,7 +6715,9 @@
       "hierarchical",
       "scripting"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "HedgeDoc",
@@ -5979,7 +6731,9 @@
       "markdown",
       "collaborative",
       "real-time"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mattermost",
@@ -5998,7 +6752,9 @@
     ],
     "alternativeTo": [
       "Slack"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Zulip",
@@ -6014,7 +6770,9 @@
     ],
     "keywords": [
       "threaded"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Leantime",
@@ -6030,7 +6788,9 @@
     ],
     "keywords": [
       "lean"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "file.io",
@@ -6046,7 +6806,9 @@
     ],
     "keywords": [
       "ephemeral"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WeTransfer",
@@ -6062,7 +6824,9 @@
     ],
     "keywords": [
       "large files"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Send (Mozilla)",
@@ -6078,7 +6842,9 @@
     ],
     "keywords": [
       "auto-expire"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OnionShare",
@@ -6094,7 +6860,9 @@
     ],
     "keywords": [
       "anonymous"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wormhole",
@@ -6108,7 +6876,9 @@
       "encrypted",
       "transfer",
       "simple"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ImageMagick",
@@ -6124,7 +6894,9 @@
     ],
     "keywords": [
       "batch"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PDF24",
@@ -6140,7 +6912,9 @@
     ],
     "keywords": [
       "pdf"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pandoc",
@@ -6157,7 +6931,9 @@
     "keywords": [
       "universal"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Croc",
@@ -6171,7 +6947,9 @@
       "transfer",
       "cli",
       "encrypted"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Magic Wormhole",
@@ -6187,7 +6965,9 @@
     ],
     "keywords": [
       "codes"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "This Person Does Not Exist",
@@ -6203,7 +6983,9 @@
     "keywords": [
       "faces",
       "generative"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pointer Pointer",
@@ -6218,7 +7000,9 @@
       "pointer",
       "photos",
       "weird"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Geoguessr",
@@ -6234,7 +7018,9 @@
     "keywords": [
       "geography",
       "streetview"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Little Alchemy 2",
@@ -6250,7 +7036,9 @@
     "keywords": [
       "puzzle",
       "elements"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Infinite Craft",
@@ -6266,7 +7054,9 @@
     "keywords": [
       "crafting",
       "infinite"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Stellarium Web",
@@ -6281,7 +7071,9 @@
       "astronomy",
       "stars",
       "planetarium"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Noclip",
@@ -6295,7 +7087,9 @@
       "gaming",
       "exploration",
       "3d"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Scale of the Universe",
@@ -6311,7 +7105,9 @@
     "keywords": [
       "science",
       "scale"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Quick Draw (Google)",
@@ -6325,7 +7121,9 @@
       "ai",
       "drawing",
       "game"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "xkcd",
@@ -6341,7 +7139,9 @@
     ],
     "keywords": [
       "humor"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hacker Typer",
@@ -6356,7 +7156,9 @@
       "hacker",
       "typing",
       "fake"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Poolside FM",
@@ -6372,7 +7174,9 @@
     ],
     "keywords": [
       "vaporwave"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Windows93",
@@ -6388,7 +7192,9 @@
     ],
     "keywords": [
       "simulation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ooh.directory",
@@ -6404,7 +7210,9 @@
     ],
     "keywords": [
       "blogs"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Marginalia",
@@ -6420,7 +7228,9 @@
     ],
     "keywords": [
       "non-commercial"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wiby",
@@ -6436,7 +7246,9 @@
     "keywords": [
       "old web",
       "nostalgia"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ArchWiki",
@@ -6451,7 +7263,9 @@
       "wiki",
       "documentation"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Stack Overflow",
@@ -6467,7 +7281,9 @@
     ],
     "keywords": [
       "qa"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Product Hunt",
@@ -6482,7 +7298,9 @@
       "products",
       "launches",
       "discovery"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AlternativeTo",
@@ -6498,7 +7316,9 @@
     ],
     "keywords": [
       "software"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Slant",
@@ -6514,7 +7334,9 @@
     "keywords": [
       "recommendations",
       "comparisons"
-    ]
+    ],
+    "linkStatus": "error",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Killed by Google",
@@ -6530,7 +7352,9 @@
     ],
     "keywords": [
       "discontinued"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Explain XKCD",
@@ -6546,7 +7370,9 @@
     "keywords": [
       "xkcd",
       "explanations"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "The Changelog",
@@ -6562,7 +7388,9 @@
     ],
     "keywords": [
       "podcasts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Smashing Magazine",
@@ -6578,7 +7406,9 @@
     ],
     "keywords": [
       "articles"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CSS-Tricks",
@@ -6594,7 +7424,9 @@
     "keywords": [
       "css",
       "tutorials"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "free-for.dev",
@@ -6611,7 +7443,9 @@
       "free tier",
       "saas"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "RetroArch",
@@ -6628,7 +7462,9 @@
       "emulation",
       "multi-platform"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "itch.io",
@@ -6644,7 +7480,9 @@
     ],
     "keywords": [
       "marketplace"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GBA Online",
@@ -6660,7 +7498,9 @@
     ],
     "keywords": [
       "gba"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lichess",
@@ -6677,7 +7517,9 @@
     "keywords": [
       "chess"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Board Game Arena",
@@ -6693,7 +7535,9 @@
     "keywords": [
       "board games",
       "multiplayer"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "OpenTTD",
@@ -6709,7 +7553,9 @@
     "keywords": [
       "simulation",
       "tycoon"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Citra / Lime3DS",
@@ -6725,7 +7571,9 @@
     "keywords": [
       "3ds",
       "enhanced"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "RPCS3",
@@ -6741,7 +7589,9 @@
     ],
     "keywords": [
       "ps3"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "fzf",
@@ -6758,7 +7608,9 @@
     "keywords": [
       "fuzzy"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ripgrep",
@@ -6775,7 +7627,9 @@
     "keywords": [
       "grep"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "bat",
@@ -6790,7 +7644,9 @@
       "cat",
       "syntax",
       "highlighting"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "exa / eza",
@@ -6806,7 +7662,9 @@
     ],
     "keywords": [
       "ls"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "fd",
@@ -6822,7 +7680,9 @@
     ],
     "keywords": [
       "find"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "dust",
@@ -6838,7 +7698,9 @@
     ],
     "keywords": [
       "usage"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "delta",
@@ -6854,7 +7716,9 @@
     "keywords": [
       "diff",
       "syntax"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "zoxide",
@@ -6869,7 +7733,9 @@
       "cd",
       "navigation",
       "smart"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "tldr pages",
@@ -6888,7 +7754,9 @@
       "examples"
     ],
     "repository": "https://github.com/tldr-pages/tldr",
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "lazygit",
@@ -6905,7 +7773,9 @@
     "keywords": [
       "tui"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "lazydocker",
@@ -6921,7 +7791,9 @@
     ],
     "keywords": [
       "tui"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "httpie",
@@ -6937,7 +7809,9 @@
     ],
     "keywords": [
       "curl"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "jq",
@@ -6954,7 +7828,9 @@
       "processor",
       "filter"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "yq",
@@ -6970,7 +7846,9 @@
     "keywords": [
       "yaml",
       "processor"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "tmux",
@@ -6985,7 +7863,9 @@
       "multiplexer",
       "sessions",
       "panes"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "neovim",
@@ -7002,7 +7882,9 @@
       "vim",
       "lua"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "starship",
@@ -7019,7 +7901,9 @@
     "keywords": [
       "prompt"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "nushell",
@@ -7035,7 +7919,9 @@
     ],
     "keywords": [
       "structured"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "atuin",
@@ -7049,7 +7935,9 @@
       "history",
       "sync",
       "search"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "chezmoi",
@@ -7065,7 +7953,9 @@
     ],
     "keywords": [
       "dotfiles"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wireshark",
@@ -7082,7 +7972,9 @@
       "packet",
       "protocol"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "nmap",
@@ -7099,7 +7991,9 @@
     "keywords": [
       "ports"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "mtr",
@@ -7114,7 +8008,9 @@
       "traceroute",
       "ping",
       "diagnostic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "iperf3",
@@ -7130,7 +8026,9 @@
     ],
     "keywords": [
       "throughput"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Angry IP Scanner",
@@ -7144,7 +8042,9 @@
       "scanner",
       "ip",
       "fast"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Zenmap",
@@ -7160,7 +8060,9 @@
     "keywords": [
       "nmap",
       "topology"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PuTTY",
@@ -7176,7 +8078,9 @@
     ],
     "keywords": [
       "telnet"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "mRemoteNG",
@@ -7192,7 +8096,9 @@
     "keywords": [
       "multi-protocol",
       "tabs"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Termius",
@@ -7206,7 +8112,9 @@
       "ssh",
       "modern",
       "cross-platform"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "WinSCP",
@@ -7221,7 +8129,9 @@
       "sftp",
       "ftp",
       "file transfer"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FileZilla",
@@ -7237,7 +8147,9 @@
     "keywords": [
       "ftp",
       "sftp"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "NetBox",
@@ -7254,7 +8166,9 @@
       "ipam",
       "dcim"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Netbird",
@@ -7270,7 +8184,9 @@
     ],
     "keywords": [
       "mesh"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Docker",
@@ -7287,7 +8203,9 @@
     "keywords": [
       "platform"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Podman",
@@ -7306,7 +8224,9 @@
     ],
     "alternativeTo": [
       "Docker"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Rancher",
@@ -7322,7 +8242,9 @@
     ],
     "keywords": [
       "multi-cluster"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "k3s",
@@ -7339,7 +8261,9 @@
     "keywords": [
       "edge"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lens",
@@ -7353,7 +8277,9 @@
       "kubernetes",
       "ide",
       "desktop"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kompose",
@@ -7369,7 +8295,9 @@
     "keywords": [
       "docker compose",
       "migration"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Helm",
@@ -7385,7 +8313,9 @@
     ],
     "keywords": [
       "packages"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ArgoCD",
@@ -7402,7 +8332,9 @@
       "gitops",
       "cd"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Harbor",
@@ -7418,7 +8350,9 @@
     ],
     "keywords": [
       "registry"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "qBittorrent",
@@ -7436,7 +8370,9 @@
     ],
     "keywords": [
       "p2p"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Deluge",
@@ -7452,7 +8388,9 @@
       "lightweight",
       "plugins",
       "cross-platform"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Transmission",
@@ -7470,7 +8408,9 @@
     ],
     "keywords": [
       "macos"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BiglyBT",
@@ -7488,7 +8428,9 @@
     "keywords": [
       "i2p",
       "swarm"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PikaTorrent",
@@ -7504,7 +8446,9 @@
       "modern",
       "mobile",
       "cross-platform"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Knaben",
@@ -7521,7 +8465,9 @@
     ],
     "keywords": [
       "metasearch"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BTDigg",
@@ -7538,7 +8484,9 @@
     ],
     "keywords": [
       "dht"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "snowfl",
@@ -7553,7 +8501,9 @@
       "search",
       "aggregator",
       "real-time"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ExT",
@@ -7568,7 +8518,9 @@
       "search",
       "aggregator",
       "index"
-    ]
+    ],
+    "linkStatus": "blocked",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Seedr",
@@ -7583,7 +8535,9 @@
       "cloud",
       "streaming",
       "remote"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "webtor",
@@ -7600,7 +8554,9 @@
     ],
     "keywords": [
       "no-install"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TorBox",
@@ -7617,7 +8573,9 @@
     ],
     "keywords": [
       "debrid"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Torrent Parts",
@@ -7634,7 +8592,9 @@
     "keywords": [
       "metadata",
       "inspect"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Stremio",
@@ -7651,7 +8611,9 @@
     "keywords": [
       "media-center",
       "addons"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "cross-seed",
@@ -7668,7 +8630,9 @@
     "keywords": [
       "cross-seed",
       "ratio"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Torrents CSV",
@@ -7683,7 +8647,9 @@
       "search",
       "self-hosted",
       "open source"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BitMagnet",
@@ -7700,7 +8666,9 @@
     "keywords": [
       "dht",
       "crawler"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flood",
@@ -7717,7 +8685,9 @@
     ],
     "keywords": [
       "webui"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "JDownloader",
@@ -7734,7 +8704,9 @@
     "keywords": [
       "manager",
       "file-host"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "gallery-dl",
@@ -7751,7 +8723,9 @@
     ],
     "keywords": [
       "gallery"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SpotDL",
@@ -7768,7 +8742,9 @@
     "keywords": [
       "spotify",
       "metadata"
-    ]
+    ],
+    "linkStatus": "redirect",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Parabolic",
@@ -7785,7 +8761,9 @@
     ],
     "keywords": [
       "yt-dlp"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kodi",
@@ -7802,7 +8780,9 @@
       "media-center",
       "player",
       "addons"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Video DownloadHelper",
@@ -7817,7 +8797,9 @@
       "video",
       "extension",
       "browser"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SponsorBlock",
@@ -7832,7 +8814,9 @@
       "adblock",
       "extension",
       "community"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MAS (Microsoft Activation)",
@@ -7849,7 +8833,9 @@
       "activation",
       "office",
       "iso"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Spicetify",
@@ -7866,7 +8852,9 @@
       "spotify",
       "themes",
       "extensions"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ReVanced Manager",
@@ -7883,7 +8871,9 @@
     ],
     "keywords": [
       "patching"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "NewPipe",
@@ -7898,7 +8888,9 @@
       "youtube",
       "privacy",
       "lightweight"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FreeTube",
@@ -7913,7 +8905,9 @@
       "privacy",
       "desktop",
       "open source"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Invidious",
@@ -7928,7 +8922,9 @@
       "privacy",
       "frontend",
       "self-hosted"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Calibre",
@@ -7943,7 +8939,9 @@
       "library",
       "converter",
       "management"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Kavita",
@@ -7958,7 +8956,9 @@
       "comics",
       "self-hosted",
       "library"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Komga",
@@ -7975,7 +8975,9 @@
     ],
     "keywords": [
       "server"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Project Gutenberg",
@@ -7992,7 +8994,9 @@
     "keywords": [
       "public-domain",
       "classics"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Standard Ebooks",
@@ -8009,7 +9013,9 @@
     "keywords": [
       "public-domain",
       "typography"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Open Library",
@@ -8026,7 +9032,9 @@
     "keywords": [
       "borrow",
       "catalog"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Mihon",
@@ -8043,7 +9051,9 @@
     ],
     "keywords": [
       "extensions"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Readarr",
@@ -8060,7 +9070,9 @@
     ],
     "keywords": [
       "audiobooks"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wotaku",
@@ -8077,7 +9089,9 @@
     ],
     "keywords": [
       "anime"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Libby",
@@ -8094,7 +9108,9 @@
     ],
     "keywords": [
       "audiobooks"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Koodo Reader",
@@ -8111,7 +9127,9 @@
     ],
     "keywords": [
       "epub"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FMHY",
@@ -8129,7 +9147,9 @@
     ],
     "keywords": [
       "resources"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Awesome Privacy",
@@ -8146,7 +9166,9 @@
     ],
     "keywords": [
       "awesome"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Awesome Windows 11",
@@ -8164,7 +9186,9 @@
       "awesome",
       "apps"
     ],
-    "lastReviewedAt": "2026-09-05"
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Awesome Open Source",
@@ -8181,7 +9205,9 @@
     ],
     "keywords": [
       "projects"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FMHY SafeGuard",
@@ -8199,7 +9225,9 @@
       "safety",
       "blocklist"
     ],
-    "lastReviewedAt": "2026-09-05"
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Awesome Piracy",
@@ -8216,7 +9244,9 @@
     ],
     "keywords": [
       "piracy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "degoogle",
@@ -8233,7 +9263,9 @@
     ],
     "keywords": [
       "degoogle"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MediaSavvy",
@@ -8250,7 +9282,9 @@
     ],
     "keywords": [
       "piracy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Sonarr",
@@ -8267,7 +9301,9 @@
     ],
     "keywords": [
       "tv"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Radarr",
@@ -8284,7 +9320,9 @@
     ],
     "keywords": [
       "movies"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Prowlarr",
@@ -8301,7 +9339,9 @@
     "keywords": [
       "indexer",
       "usenet"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lidarr",
@@ -8316,7 +9356,9 @@
       "music",
       "download",
       "library"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Bazarr",
@@ -8333,7 +9375,9 @@
     "keywords": [
       "subtitles",
       "companion"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Overseerr",
@@ -8350,7 +9394,9 @@
     "keywords": [
       "requests",
       "plex"
-    ]
+    ],
+    "linkStatus": "moved",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Tautulli",
@@ -8367,7 +9413,9 @@
     "keywords": [
       "plex",
       "statistics"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Recyclarr",
@@ -8384,7 +9432,9 @@
     "keywords": [
       "quality",
       "profiles"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Flaresolverr",
@@ -8401,7 +9451,9 @@
     ],
     "keywords": [
       "bypass"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Unpackerr",
@@ -8418,7 +9470,9 @@
     "keywords": [
       "extraction",
       "archives"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Sysinternals",
@@ -8435,7 +9489,9 @@
     ],
     "keywords": [
       "microsoft"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Open Shell",
@@ -8452,7 +9508,9 @@
     "keywords": [
       "start-menu",
       "classic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GlazeWM",
@@ -8469,7 +9527,9 @@
     "keywords": [
       "tiling",
       "window-manager"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Scoop",
@@ -8484,7 +9544,9 @@
       "package-manager",
       "cli",
       "installer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Chocolatey",
@@ -8499,7 +9561,9 @@
       "package-manager",
       "automation",
       "installer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "BleachBit",
@@ -8516,7 +9580,9 @@
     "keywords": [
       "cleaner",
       "disk-space"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "FanControl",
@@ -8533,7 +9599,9 @@
     "keywords": [
       "fans",
       "cooling"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AltSnap",
@@ -8550,7 +9618,9 @@
     "keywords": [
       "window-management",
       "utility"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "EverythingToolbar",
@@ -8565,7 +9635,9 @@
       "search",
       "taskbar",
       "productivity"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Parsec",
@@ -8582,7 +9654,9 @@
     ],
     "keywords": [
       "low-latency"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "RustDesk",
@@ -8599,7 +9673,9 @@
     ],
     "keywords": [
       "teamviewer"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "VirtualBox",
@@ -8616,7 +9692,9 @@
     "keywords": [
       "virtualization",
       "vm"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "UniGetUI",
@@ -8631,7 +9709,9 @@
       "gui",
       "windows",
       "management"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "StartAllBack",
@@ -8648,7 +9728,9 @@
     ],
     "keywords": [
       "start-menu"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Shell (Nilesoft)",
@@ -8665,7 +9747,9 @@
     ],
     "keywords": [
       "context-menu"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "AdGuard Home",
@@ -8680,7 +9764,9 @@
       "dns",
       "self-hosted",
       "network"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Portmaster",
@@ -8697,7 +9783,9 @@
     ],
     "keywords": [
       "tracker-blocking"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ClearURLs",
@@ -8714,7 +9802,9 @@
     ],
     "keywords": [
       "urls"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cryptomator",
@@ -8731,7 +9821,9 @@
     ],
     "keywords": [
       "encryption"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "VeraCrypt",
@@ -8749,7 +9841,9 @@
       "encryption",
       "volumes"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "GrapheneOS",
@@ -8766,7 +9860,9 @@
     ],
     "keywords": [
       "hardened"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Proton Pass",
@@ -8783,7 +9879,9 @@
       "password",
       "manager",
       "proton"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "TrueNAS",
@@ -8800,7 +9898,9 @@
       "storage",
       "nas",
       "zfs"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Netboot.xyz",
@@ -8817,7 +9917,9 @@
     "keywords": [
       "pxe",
       "boot"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Komodo",
@@ -8832,7 +9934,9 @@
       "management",
       "deployment",
       "automation"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Beszel",
@@ -8849,7 +9953,9 @@
     ],
     "keywords": [
       "alerts"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Cosmos Cloud",
@@ -8866,7 +9972,9 @@
     ],
     "keywords": [
       "marketplace"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Pangolin",
@@ -8883,7 +9991,9 @@
     "keywords": [
       "tunnel",
       "reverse-proxy"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Changedetection.io",
@@ -8900,7 +10010,9 @@
     ],
     "keywords": [
       "changes"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Playnite",
@@ -8915,7 +10027,9 @@
       "library",
       "launcher",
       "open source"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Heroic Games Launcher",
@@ -8932,7 +10046,9 @@
     ],
     "keywords": [
       "epic"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Lutris",
@@ -8949,7 +10065,9 @@
     ],
     "keywords": [
       "wine"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ProtonDB",
@@ -8966,7 +10084,9 @@
       "steam",
       "proton",
       "compatibility"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "PCSX2",
@@ -8983,7 +10103,9 @@
     ],
     "keywords": [
       "ps2"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Dolphin Emulator",
@@ -9000,7 +10122,9 @@
       "gamecube",
       "wii",
       "nintendo"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "DuckStation",
@@ -9017,7 +10141,9 @@
     ],
     "keywords": [
       "ps1"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "SteamGridDB",
@@ -9034,7 +10160,9 @@
     "keywords": [
       "steam",
       "artwork"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Guacamole",
@@ -9051,7 +10179,9 @@
     "keywords": [
       "vnc",
       "web-gateway"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "MeshCentral",
@@ -9068,7 +10198,9 @@
     "keywords": [
       "remote-management",
       "rdp"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Graylog",
@@ -9085,7 +10217,9 @@
     "keywords": [
       "logging",
       "siem"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "CrowdSec",
@@ -9102,7 +10236,9 @@
     ],
     "keywords": [
       "ids"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "ss64",
@@ -9119,7 +10255,9 @@
       "command-line",
       "powershell",
       "bash"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Rundeck",
@@ -9136,7 +10274,9 @@
       "runbook",
       "jobs",
       "operations"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Hugo",
@@ -9153,7 +10293,9 @@
     "keywords": [
       "static-site",
       "go"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Astro",
@@ -9170,7 +10312,9 @@
     "keywords": [
       "static-site",
       "performance"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Coolify",
@@ -9187,7 +10331,9 @@
     ],
     "keywords": [
       "paas"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Gitea",
@@ -9204,7 +10350,9 @@
     ],
     "keywords": [
       "github"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Forgejo",
@@ -9221,7 +10369,9 @@
     ],
     "keywords": [
       "forge"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Woodpecker CI",
@@ -9238,7 +10388,9 @@
     ],
     "keywords": [
       "ci-cd"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Fail2ban",
@@ -9256,7 +10408,9 @@
       "intrusion-prevention",
       "banning"
     ],
-    "lastReviewedAt": "2026-09-05"
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Trivy",
@@ -9273,7 +10427,9 @@
     ],
     "keywords": [
       "vulnerabilities"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Snyk",
@@ -9290,7 +10446,9 @@
       "dependencies",
       "vulnerabilities",
       "devsecops"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Wappalyzer",
@@ -9307,7 +10465,9 @@
       "fingerprinting",
       "technology",
       "detection"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Nuclei",
@@ -9324,7 +10484,9 @@
     ],
     "keywords": [
       "vulnerability"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Paint.NET",
@@ -9342,7 +10504,9 @@
       "photo-editing",
       "layers"
     ],
-    "lastReviewedAt": "2026-08-25"
+    "lastReviewedAt": "2026-08-25",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Motion Canvas",
@@ -9359,7 +10523,9 @@
     ],
     "keywords": [
       "code-driven"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Rive",
@@ -9376,7 +10542,9 @@
     ],
     "keywords": [
       "runtime"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Vectornator (Linearity Curve)",
@@ -9393,7 +10561,9 @@
     ],
     "keywords": [
       "logos"
-    ]
+    ],
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Agent QA",
@@ -9413,6 +10583,8 @@
       "qa",
       "mcp"
     ],
-    "lastReviewedAt": "2026-08-16"
+    "lastReviewedAt": "2026-08-16",
+    "linkStatus": "ok",
+    "lastCheckedAt": "2026-09-05"
   }
 ]

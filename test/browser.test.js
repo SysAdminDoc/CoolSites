@@ -66,6 +66,32 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.activeElement.id === 'newGroupBtn'");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
+    // The link check is only worth running if a reader can see the result.
+    const linkHealth = await page.evaluate(`(() => {
+      const badges = [...document.querySelectorAll('#grid .card .link-badge')];
+      return { total: badges.length, dated: badges.filter(b => /checked \\d{4}-\\d{2}-\\d{2}/.test(b.textContent)).length };
+    })()`);
+    assert.ok(linkHealth.total > 0, 'cards should show when their link was last checked');
+    assert.equal(linkHealth.dated, linkHealth.total, 'every link badge should carry the date it was checked');
+
+    await page.evaluate("document.getElementById('linkIssuesOnlyBtn').click()");
+    // aria-pressed is set synchronously but the grid re-renders inside a view
+    // transition, so waiting on the button measures the unfiltered grid. Wait
+    // for the result set itself to shrink.
+    await waitFor(page, "document.getElementById('linkIssuesOnlyBtn').getAttribute('aria-pressed') === 'true' && document.querySelectorAll('#grid .card').length > 0 && document.querySelectorAll('#grid .card').length < 100");
+    const issues = await page.evaluate(`(() => {
+      const badges = [...document.querySelectorAll('#grid .card .link-badge')];
+      return {
+        shown: Number(document.getElementById('resultsCount').textContent.replace(/\\D.*$/, '')),
+        allFlagged: badges.length > 0 && badges.every(b => b.classList.contains('has-issue')),
+        url: location.search
+      };
+    })()`);
+    assert.ok(issues.allFlagged, 'the link-issues filter should show only entries whose link did not answer normally');
+    assert.match(issues.url, /linkissues=1/, 'the filter should be shareable as a URL');
+    await page.evaluate("document.getElementById('linkIssuesOnlyBtn').click()");
+    await waitFor(page, "document.getElementById('linkIssuesOnlyBtn').getAttribute('aria-pressed') === 'false'");
+
     // Splitting tags into a facet vocabulary and a keyword tail is only safe if
     // the tail is still searchable. These five terms exist nowhere in their
     // entry's name, description or tags: keywords is the only thing that can

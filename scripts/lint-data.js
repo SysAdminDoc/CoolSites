@@ -28,6 +28,13 @@ function addError(message) {
 
 function validateSchema(value, schema, label) {
   if (!schema) return;
+  // Checked before the type branches, and on its own, because an enum schema
+  // carries no "type". Without this an enum was decoration: every value passed,
+  // including ones the schema explicitly listed as the only allowed set.
+  if (Array.isArray(schema.enum)) {
+    if (!schema.enum.includes(value)) addError(`${label}: ${JSON.stringify(value)} is not one of ${schema.enum.join(', ')}`);
+    if (schema.type == null) return;
+  }
   if (schema.type === 'object') {
     if (!value || typeof value !== 'object' || Array.isArray(value)) {
       addError(`${label}: must be an object`);
@@ -92,8 +99,18 @@ function slugify(value) {
 // A repository page on one of these is a project's source, so an entry pointing
 // at one reads as open source whatever the flag says. Deliberately not matching
 // *.github.io or *.pages.dev: those are project sites, not repositories.
-const SOURCE_FORGES = new Set(['github.com', 'gitlab.com', 'codeberg.org', 'bitbucket.org', 'git.sr.ht']);
-const NON_REPOSITORY_PATHS = new Set(['topics', 'trending', 'marketplace', 'features', 'orgs', 'sponsors', 'explore']);
+const SOURCE_FORGES = new Set([
+  'github.com', 'gist.github.com', 'gitlab.com', 'codeberg.org',
+  'bitbucket.org', 'git.sr.ht', 'sourceforge.net', 'gitea.com'
+]);
+// Paths on those hosts that are the site itself rather than somebody's project.
+// github.com/apps/dependabot is a listing page, not a repository, and demanding
+// a licence note for one would be nonsense.
+const NON_REPOSITORY_PATHS = new Set([
+  'topics', 'trending', 'marketplace', 'features', 'orgs', 'sponsors', 'explore',
+  'apps', 'settings', 'about', 'pricing', 'security', 'collections', 'events',
+  'enterprise', 'login', 'join', 'search', 'notifications'
+]);
 
 function forgeRepository(value) {
   try {
@@ -229,7 +246,7 @@ function validateSourceData() {
     // in both would be filtered on and searched twice, and it would be unclear
     // which copy is authoritative.
     for (const word of site?.keywords || []) {
-      if (site.tags.includes(word)) addError(`${label}: ${word} is both a tag and a keyword`);
+      if (site?.tags?.includes(word)) addError(`${label}: ${word} is both a tag and a keyword`);
       if (tagVocabulary.has(word)) addError(`${label}: keyword ${word} is in the tag vocabulary, so it belongs in tags`);
       tagUse.set(word, tagUse.get(word) || 0);
     }

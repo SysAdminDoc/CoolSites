@@ -125,6 +125,19 @@ test('lint rejects an unsorted vocabulary', () => {
   assert.match(result.output, /must be sorted/);
 });
 
+test('malformed data is reported, not thrown', () => {
+  // An entry missing tags entirely while carrying keywords used to take the
+  // whole lint down with a TypeError, so a contributor with a bad edit saw a
+  // stack trace instead of the line telling them what was wrong.
+  const result = lintWith(sites => {
+    const site = sites.find(entry => entry.keywords && entry.keywords.length);
+    delete site.tags;
+  });
+  assert.equal(result.passed, false);
+  assert.doesNotMatch(result.output, /TypeError/, 'lint must report the problem, not crash on it');
+  assert.match(result.output, /missing required tags/);
+});
+
 test('the guard restores both files even when lint fails', () => {
   assert.equal(fs.readFileSync(SITES_PATH, 'utf8'), `${JSON.stringify(SITES, null, 2)}\n`);
   assert.equal(fs.readFileSync(TAGS_PATH, 'utf8'), `${JSON.stringify(TAGS, null, 2)}\n`);
