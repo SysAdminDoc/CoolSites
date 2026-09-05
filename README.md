@@ -119,15 +119,22 @@ sends none of them, which is worth knowing rather than assuming: the hosted copy
 can be framed by anyone and browsers are free to sniff content types.
 
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'
+Content-Security-Policy: <the policy from index.html>; frame-ancestors 'none'
 X-Content-Type-Options: nosniff
 Referrer-Policy: strict-origin-when-cross-origin
 Permissions-Policy: geolocation=(), microphone=(), camera=()
 ```
 
-Sent as a header, the policy takes precedence over the meta tag and adds
-`frame-ancestors`, which browsers ignore in a meta tag. `npm run serve` already
-sends all four, so local development matches a properly configured host.
+The policy is not written out here because it is not a constant. `script-src`
+lists a SHA-256 for every inline script, and `npm run generate` recomputes those
+as its last step, so copying the string anywhere means copying something that
+goes stale the next time a script changes. Read it out of the `<meta>` tag in
+`index.html`, which is what `npm run serve` does. The only thing worth adding on
+top is `frame-ancestors`, which browsers ignore in a meta tag, so the copy hosted
+on GitHub Pages genuinely does not have it.
+
+`npm run serve` sends all four, so local development matches a properly
+configured host.
 
 On nginx, remember that `add_header` does not inherit into a `location` block
 that sets any header of its own, so these have to be repeated in each one rather

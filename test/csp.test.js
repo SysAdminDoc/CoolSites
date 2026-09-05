@@ -19,9 +19,11 @@ const PAGES = ['index.html', 'collections.html'];
 // there reads as protection the page does not actually have.
 const HEADER_ONLY = ['frame-ancestors', 'report-uri', 'report-to', 'sandbox'];
 
+// script-src is checked by shape rather than by literal, because the digests
+// change with every edit to an inline script. The shape is the contract: 'self'
+// plus one sha256 per inline script, and nothing else.
 const EXPECTED = {
   'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'"],
   'style-src': ["'self'", "'unsafe-inline'"],
   'img-src': ["'self'", 'data:'],
   'font-src': ["'self'"],
@@ -108,11 +110,35 @@ function unsafeOutsideInlineCode(directives) {
 test('the policy grants exactly what the site needs', () => {
   const directives = parse(readPolicy(PAGES[0]));
   const declared = [...directives.keys()].sort();
-  assert.deepEqual(declared, Object.keys(EXPECTED).sort(),
+  assert.deepEqual(declared, [...Object.keys(EXPECTED), 'script-src'].sort(),
     'a new directive needs a decision recorded here, not a silent addition');
   for (const [name, sources] of Object.entries(EXPECTED)) {
     assert.deepEqual(directives.get(name), sources, `--${name} must stay exactly as reviewed`);
   }
+});
+
+test('script-src allows named scripts and nothing else', () => {
+  const sources = parse(readPolicy(PAGES[0])).get('script-src');
+  assert.equal(sources[0], "'self'");
+  const rest = sources.slice(1);
+  assert.ok(rest.length > 0, 'the inline scripts have to be listed by digest');
+  for (const source of rest) {
+    assert.match(source, /^'sha256-[A-Za-z0-9+/]+={0,2}'$/, `${source} is not a sha256 digest`);
+  }
+  // The whole point. 'unsafe-inline' permits every inline script including an
+  // injected one, and a hash next to it would be ignored by the browser anyway.
+  assert.equal(sources.includes("'unsafe-inline'"), false, 'a digest beside unsafe-inline buys nothing: the browser honours the weaker one');
+  assert.equal(sources.includes("'unsafe-eval'"), false);
+});
+
+test('the listed digests are the scripts the pages actually ship', () => {
+  // Hashes that have drifted do not fail open, they fail closed: the page stops
+  // working. This turns that into a build failure instead of a bug report.
+  const { hashesFor } = require('../scripts/lib/csp');
+  const listed = new Set(parse(readPolicy(PAGES[0])).get('script-src').filter(source => source.startsWith("'sha256-")));
+  const actual = new Set(PAGES.flatMap(page => hashesFor(fs.readFileSync(path.join(ROOT, page), 'utf8'))));
+  assert.deepEqual([...listed].sort(), [...actual].sort(), 'run npm run generate to resync the policy with the scripts');
+  assert.ok(actual.size >= 2, 'both the theme boot script and the application script have to be covered');
 });
 
 test('nothing may be loaded from another origin', () => {
@@ -148,9 +174,11 @@ test('the policy does not claim protection a meta tag cannot deliver', () => {
   }
 });
 
-test('unsafe-inline is confined to script-src and style-src', () => {
-  // Both are load-bearing today: all CSS and JS are inline, and the theme boot
-  // script has to run before first paint. Dropping them is a roadmap item.
+test('unsafe-inline is confined to style-src', () => {
+  // script-src lost it on 2026-09-05: every inline script is listed by digest
+  // instead. style-src still carries it, because a hash covers a whole <style>
+  // element but not a style="" attribute, and 25 of those are still in the
+  // markup. Covering those needs 'unsafe-hashes', which is not an improvement.
   // Anywhere else it would be an accident.
   assert.deepEqual(unsafeOutsideInlineCode(parse(readPolicy(PAGES[0]))), [],
     'unsafe-inline belongs only where inline code actually lives');

@@ -19,8 +19,21 @@ const MIME_TYPES = {
 // which cannot send headers at all. These are the parts a meta tag cannot
 // deliver, sent here so local development matches a properly configured host.
 // README documents the same set for anyone self-hosting behind a real server.
+// Read from the page rather than written out again here. The policy now carries
+// a SHA-256 for every inline script, so a copy would be wrong the first time
+// anyone edits one, and a local server enforcing a policy the real one does not
+// is worse than no local server at all.
+function pagePolicy() {
+  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const match = /<meta http-equiv="Content-Security-Policy" content="([^"]+)">/.exec(html);
+  if (!match) throw new Error('index.html has no content security policy to serve');
+  // frame-ancestors is the one directive worth adding here: browsers ignore it
+  // in a meta tag, so the hosted copy genuinely cannot have it.
+  return `${match[1]}; frame-ancestors 'none'`;
+}
+
 const SECURITY_HEADERS = {
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'",
+  'Content-Security-Policy': pagePolicy(),
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=()'

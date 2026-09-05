@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { hashesFor } = require('./lib/csp');
 
 const root = path.resolve(__dirname, '..');
 const dist = path.join(root, 'dist');
@@ -31,6 +32,23 @@ fs.writeFileSync(path.join(dist, `coolsites-v${pkg.version}.min.html`), minified
 
 if (minified.includes('__COOLSITES_BLOCK_')) {
   throw new Error('Minified output still contains block placeholders');
+}
+
+// The minifier lifts script and style blocks out whole and puts them back
+// untouched, so the digests in the policy should survive it. "Should" is not
+// good enough for a policy that fails closed: if a future change to the
+// minifier so much as reindents a script, the packaged build would ship a page
+// whose own JavaScript the browser refuses to run, and the only symptom is a
+// blank screen. So the packaged file is checked against itself.
+for (const [file, html] of [[`coolsites-v${pkg.version}.min.html`, minified], ['index.html', fs.readFileSync(path.join(dist, 'index.html'), 'utf8')], ['collections.html', fs.readFileSync(path.join(dist, 'collections.html'), 'utf8')]]) {
+  const policy = /<meta http-equiv="Content-Security-Policy" content="([^"]+)">/.exec(html);
+  if (!policy) throw new Error(`${file} has no content security policy`);
+  const listed = new Set((policy[1].match(/'sha256-[^']+'/g) || []));
+  const actual = hashesFor(html);
+  const orphaned = actual.filter(hash => !listed.has(hash));
+  if (orphaned.length) {
+    throw new Error(`${file} contains ${orphaned.length} inline script(s) the policy does not allow. The browser would refuse to run them. Run npm run generate before packaging.`);
+  }
 }
 
 console.log(`Packaged CoolSites v${pkg.version} in ${dist}`);

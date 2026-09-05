@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { computeMetadata, renderTargets, freshness, hasRealProvenance, LEGACY_IMPORT_DATE } = require('./lib/metadata');
+const { rewritePolicies } = require('./lib/csp');
 
 const root = path.resolve(__dirname, '..');
 const feedsDir = path.join(root, 'feeds');
@@ -105,8 +106,26 @@ if (problems.length) {
 const rewritten = results.filter(result => result.changed);
 for (const result of rewritten) fs.writeFileSync(result.absolute, result.next);
 
+// Last, because the digests have to cover the scripts as they will actually
+// ship. Anything that rewrites a script after this point invalidates them, and
+// the page stops working rather than failing open, which is the right way round.
+const CSP_PAGES = ['index.html', 'collections.html'];
+const pageSources = Object.fromEntries(CSP_PAGES.map(file => [file, fs.readFileSync(path.join(root, file), 'utf8')]));
+const csp = rewritePolicies(pageSources);
+if (csp.missing.length) {
+  console.error(`No content security policy meta tag to update in ${csp.missing.join(', ')}`);
+  process.exit(1);
+}
+let policyChanged = 0;
+for (const [file, html] of Object.entries(csp.pages)) {
+  if (html === pageSources[file]) continue;
+  fs.writeFileSync(path.join(root, file), html);
+  policyChanged++;
+}
+
 console.log(`Generated feeds for ${recent.length} recent entries`);
 if (countsChanged) console.log(`Updated ${countsChanged} category ${countsChanged === 1 ? 'count' : 'counts'}`);
+if (policyChanged) console.log(`Updated the content security policy in ${policyChanged} ${policyChanged === 1 ? 'page' : 'pages'} for ${csp.hashes.length} inline scripts`);
 console.log(rewritten.length
   ? `Synced v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories into ${rewritten.map(result => result.file).join(', ')}`
   : `Metadata already in sync (v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories)`);
