@@ -98,3 +98,25 @@ test('the link-issues filter round-trips through the URL', () => {
   assert.match(INDEX, /linkissues: p\.get\('linkissues'\) === '1'/);
   assert.match(INDEX, /linkIssuesOnly = false;/);
 });
+
+test('an entry the checker skips is not shown as broken', () => {
+  // Krea.ai loads fine in a browser; Node rejects its response headers as
+  // oversized. Flagging it would show a warning re-running can never clear,
+  // because a skipped entry is never re-checked.
+  assert.match(INDEX, /if \(site\.checkDisabled\) return false;/);
+  assert.match(INDEX, /not auto-checked/);
+  for (const site of SITES) {
+    if (!site.checkDisabled) continue;
+    assert.equal(site.linkStatus, undefined, `${site.name}: a skipped entry must not carry a status from before it was skipped`);
+  }
+});
+
+test('an accepted redirect names where it goes', () => {
+  // Muting an entry would inherit a pass for the next move too. Naming the
+  // destination means the exemption expires the day the destination changes.
+  for (const site of SITES) {
+    if (!site.acceptedRedirect) continue;
+    assert.doesNotThrow(() => new URL(site.acceptedRedirect), `${site.name}: acceptedRedirect must be a URL`);
+    assert.notEqual(site.acceptedRedirect, site.url, `${site.name}: accepting the address it already has means nothing`);
+  }
+});

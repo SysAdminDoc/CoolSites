@@ -53,6 +53,11 @@
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
       "description": "When the link checker last reached this URL. Not lastReviewedAt: a check says the URL answered, a review says a person confirmed the entry still describes it."
     },
+    "acceptedRedirect": {
+      "type": "string",
+      "format": "uri",
+      "description": "A permanent redirect a curator looked at and decided not to follow, usually a locale or marketing path where the URL on file is the better canonical. The checker reports ok while the destination matches this, and goes back to reporting moved the day it changes."
+    },
     "checkDisabled": {
       "type": "string",
       "minLength": 8,

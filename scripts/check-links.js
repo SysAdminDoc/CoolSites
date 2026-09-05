@@ -289,11 +289,24 @@ async function check(site, options) {
   }
 
   if (chain.length && !sameDestination(site.url, finalUrl)) {
+    // Some permanent redirects are the right answer and repointing at them
+    // would be worse. Six entries here land on a locale or marketing path:
+    // tools.pdf24.org sends an English reader to /en/ and a German one to /de/,
+    // so storing either would pick a language for everybody. acceptedRedirect
+    // is a curator saying "I looked at this one, it is fine", and it names the
+    // destination so the exemption stops applying the day the move changes.
+    if (site.acceptedRedirect && sameDestination(site.acceptedRedirect, finalUrl)) {
+      result.status = 'ok';
+      result.detail = `redirects to ${finalUrl}, which was reviewed and accepted`;
+      return result;
+    }
     // A permanent redirect to a genuinely different address is the one case
     // worth editing sites.json over.
     result.status = permanent ? 'moved' : 'redirect';
     result.detail = permanent
-      ? 'permanently moved, so sites.json should be updated'
+      ? site.acceptedRedirect
+        ? `permanently moved to ${finalUrl}, which is not the accepted ${site.acceptedRedirect}`
+        : 'permanently moved, so sites.json should be updated'
       : 'temporary redirect, no action needed';
     return result;
   }

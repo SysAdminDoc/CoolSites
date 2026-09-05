@@ -22,6 +22,21 @@
       "_coolsites_slug": "agno"
     },
     {
+      "id": "https://github.com/algorithm-visualizer/algorithm-visualizer",
+      "url": "https://github.com/algorithm-visualizer/algorithm-visualizer",
+      "title": "Algorithm Visualizer",
+      "summary": "Interactive animations of algorithms and data structures, with the code beside them. The hosted demo is offline, so this runs locally.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Education",
+        "visualization",
+        "interactive",
+        "algorithms"
+      ],
+      "_coolsites_category": "Education",
+      "_coolsites_slug": "algorithm-visualizer"
+    },
+    {
       "id": "https://arena.ai",
       "url": "https://arena.ai",
       "title": "Arena AI",
@@ -104,6 +119,54 @@
       "_coolsites_slug": "gitpod"
     },
     {
+      "id": "https://www.krea.ai",
+      "url": "https://www.krea.ai",
+      "title": "Krea.ai",
+      "summary": "Real-time AI image generation. See results update as you type. Canvas mode for editing.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "AI Creative",
+        "real-time",
+        "canvas",
+        "image"
+      ],
+      "_coolsites_category": "AI Creative",
+      "_coolsites_slug": "krea-ai"
+    },
+    {
+      "id": "https://lenshq.io",
+      "url": "https://lenshq.io",
+      "title": "Lens",
+      "summary": "The Kubernetes IDE. Manage clusters, workloads, and Helm charts with a beautiful desktop app.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Containers",
+        "kubernetes",
+        "ide",
+        "desktop",
+        "k8slens",
+        "lenshq"
+      ],
+      "_coolsites_category": "Containers",
+      "_coolsites_slug": "lens"
+    },
+    {
+      "id": "https://github.com/libredirect/browser_extension",
+      "url": "https://github.com/libredirect/browser_extension",
+      "title": "LibRedirect",
+      "summary": "Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.).",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Privacy",
+        "browser",
+        "redirect",
+        "frontends",
+        "manerakai"
+      ],
+      "_coolsites_category": "Privacy",
+      "_coolsites_slug": "libredirect"
+    },
+    {
       "id": "https://www.maltego.com/pricing/",
       "url": "https://www.maltego.com/pricing/",
       "title": "Maltego",
@@ -135,6 +198,21 @@
       "_coolsites_slug": "phoneinfoga"
     },
     {
+      "id": "https://watch.plex.tv",
+      "url": "https://watch.plex.tv",
+      "title": "Plex",
+      "summary": "Organize and stream your personal media library. Movies, TV, music and photos, beautifully presented.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Homelab",
+        "media",
+        "streaming",
+        "library"
+      ],
+      "_coolsites_category": "Homelab",
+      "_coolsites_slug": "plex"
+    },
+    {
       "id": "https://poolsuite.net",
       "url": "https://poolsuite.net",
       "title": "Poolsuite",
@@ -164,6 +242,38 @@
       ],
       "_coolsites_category": "News & Reference",
       "_coolsites_slug": "public-apis"
+    },
+    {
+      "id": "https://seerr.dev",
+      "url": "https://seerr.dev",
+      "title": "Seerr",
+      "summary": "Media request management for Plex. Users browse and request films and shows; you approve. Formerly Overseerr.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Arr Stack",
+        "management",
+        "media",
+        "requests",
+        "plex",
+        "overseerr"
+      ],
+      "_coolsites_category": "Arr Stack",
+      "_coolsites_slug": "seerr"
+    },
+    {
+      "id": "https://www.soundtrap.com/musicmakers",
+      "url": "https://www.soundtrap.com/musicmakers",
+      "title": "Soundtrap",
+      "summary": "Online collaborative music studio. Record, mix, and share music directly in the browser.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Music & Audio",
+        "collaboration",
+        "studio",
+        "online"
+      ],
+      "_coolsites_category": "Music & Audio",
+      "_coolsites_slug": "soundtrap"
     },
     {
       "id": "https://github.com/smicallef/spiderfoot",

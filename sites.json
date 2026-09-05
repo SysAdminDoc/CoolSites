@@ -1630,7 +1630,7 @@
       "art"
     ],
     "editorsPick": true,
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -1974,7 +1974,7 @@
       "svg",
       "illustration"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "timeout",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -2338,20 +2338,22 @@
   },
   {
     "name": "LibRedirect",
-    "url": "https://libredirect.manerakai.com",
+    "url": "https://github.com/libredirect/browser_extension",
     "description": "Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.).",
     "category": "Privacy",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "browser"
     ],
     "keywords": [
       "redirect",
-      "frontends"
+      "frontends",
+      "manerakai"
     ],
-    "linkStatus": "timeout",
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -2475,7 +2477,7 @@
       "traffic",
       "intelligence"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -2620,12 +2622,12 @@
   },
   {
     "name": "Algorithm Visualizer",
-    "url": "https://algorithm-visualizer.org",
-    "description": "Interactive animations of algorithms and data structures. See sorting, pathfinding, and trees come alive.",
+    "url": "https://github.com/algorithm-visualizer/algorithm-visualizer",
+    "description": "Interactive animations of algorithms and data structures, with the code beside them. The hosted demo is offline, so this runs locally.",
     "category": "Education",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "visualization",
       "interactive"
@@ -2633,7 +2635,8 @@
     "keywords": [
       "algorithms"
     ],
-    "linkStatus": "dead",
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -3718,7 +3721,7 @@
       "headers",
       "reporting"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -3946,7 +3949,7 @@
       "playground",
       "community"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -4674,7 +4677,8 @@
       "experiment",
       "mlops"
     ],
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://wandb.ai/site",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -4968,14 +4972,14 @@
     "category": "AI Creative",
     "openSource": false,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "real-time",
       "canvas",
       "image"
     ],
-    "linkStatus": "error",
-    "lastCheckedAt": "2026-09-05"
+    "checkDisabled": "Node rejects the response headers as oversized (UND_ERR_HEADERS_OVERFLOW). The site itself loads fine in a browser.",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Pixlr",
@@ -5235,23 +5239,25 @@
       "deployment"
     ],
     "editorsPick": true,
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://www.redhat.com/en/ansible-collaborative?intcmp=7015Y000003t7aWQAQ",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
     "name": "Plex",
-    "url": "https://www.plex.tv",
+    "url": "https://watch.plex.tv",
     "description": "Organize and stream your personal media library. Movies, TV, music and photos, beautifully presented.",
     "category": "Homelab",
     "openSource": false,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "media",
       "streaming",
       "library"
     ],
-    "linkStatus": "moved",
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -5501,7 +5507,7 @@
     "keywords": [
       "easy"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -5664,7 +5670,7 @@
     "keywords": [
       "lottie"
     ],
-    "linkStatus": "ok",
+    "linkStatus": "blocked",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -5775,12 +5781,12 @@
   },
   {
     "name": "Soundtrap",
-    "url": "https://www.soundtrap.com",
+    "url": "https://www.soundtrap.com/musicmakers",
     "description": "Online collaborative music studio. Record, mix, and share music directly in the browser.",
     "category": "Music & Audio",
     "openSource": false,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "collaboration"
     ],
@@ -5788,7 +5794,8 @@
       "studio",
       "online"
     ],
-    "linkStatus": "moved",
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -6928,7 +6935,8 @@
     "keywords": [
       "pdf"
     ],
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://tools.pdf24.org/en/",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -7281,7 +7289,8 @@
       "documentation"
     ],
     "editorsPick": true,
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://wiki.archlinux.org/title/Main_page",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -7388,7 +7397,8 @@
       "xkcd",
       "explanations"
     ],
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://www.explainxkcd.com/wiki/index.php/Main_Page",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -8147,7 +8157,8 @@
       "ftp",
       "file transfer"
     ],
-    "linkStatus": "moved",
+    "acceptedRedirect": "https://winscp.net/eng/index.php",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -8284,18 +8295,23 @@
   },
   {
     "name": "Lens",
-    "url": "https://k8slens.dev",
+    "url": "https://lenshq.io",
     "description": "The Kubernetes IDE. Manage clusters, workloads, and Helm charts with a beautiful desktop app.",
     "category": "Containers",
     "openSource": false,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "kubernetes",
       "ide",
       "desktop"
     ],
-    "linkStatus": "moved",
+    "keywords": [
+      "k8slens",
+      "lenshq"
+    ],
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {
@@ -9397,22 +9413,24 @@
     "lastCheckedAt": "2026-09-05"
   },
   {
-    "name": "Overseerr",
-    "url": "https://overseerr.dev/",
-    "description": "Media request management for Plex. Users can browse and request movies and TV shows which auto-feed into Sonarr/Radarr.",
+    "name": "Seerr",
+    "url": "https://seerr.dev",
+    "description": "Media request management for Plex. Users browse and request films and shows; you approve. Formerly Overseerr.",
     "category": "Arr Stack",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "management",
       "media"
     ],
     "keywords": [
       "requests",
-      "plex"
+      "plex",
+      "overseerr"
     ],
-    "linkStatus": "moved",
+    "lastReviewedAt": "2026-09-05",
+    "linkStatus": "ok",
     "lastCheckedAt": "2026-09-05"
   },
   {

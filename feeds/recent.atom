@@ -15,6 +15,14 @@
     <summary>Build AI agents with memory, knowledge and tools. Python framework for production agents, formerly Phidata.</summary>
   </entry>
   <entry>
+    <title>Algorithm Visualizer</title>
+    <id>https://github.com/algorithm-visualizer/algorithm-visualizer</id>
+    <link href="https://github.com/algorithm-visualizer/algorithm-visualizer"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Education"/>
+    <summary>Interactive animations of algorithms and data structures, with the code beside them. The hosted demo is offline, so this runs locally.</summary>
+  </entry>
+  <entry>
     <title>Arena AI</title>
     <id>https://arena.ai</id>
     <link href="https://arena.ai"/>
@@ -55,6 +63,30 @@
     <summary>Self-hostable cloud development environments. Spin up a full dev workspace from any Git repo. The company now trades as Ona; the AGPL project kept the name.</summary>
   </entry>
   <entry>
+    <title>Krea.ai</title>
+    <id>https://www.krea.ai</id>
+    <link href="https://www.krea.ai"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="AI Creative"/>
+    <summary>Real-time AI image generation. See results update as you type. Canvas mode for editing.</summary>
+  </entry>
+  <entry>
+    <title>Lens</title>
+    <id>https://lenshq.io</id>
+    <link href="https://lenshq.io"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Containers"/>
+    <summary>The Kubernetes IDE. Manage clusters, workloads, and Helm charts with a beautiful desktop app.</summary>
+  </entry>
+  <entry>
+    <title>LibRedirect</title>
+    <id>https://github.com/libredirect/browser_extension</id>
+    <link href="https://github.com/libredirect/browser_extension"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Privacy"/>
+    <summary>Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.).</summary>
+  </entry>
+  <entry>
     <title>Maltego</title>
     <id>https://www.maltego.com/pricing/</id>
     <link href="https://www.maltego.com/pricing/"/>
@@ -71,6 +103,14 @@
     <summary>Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.</summary>
   </entry>
   <entry>
+    <title>Plex</title>
+    <id>https://watch.plex.tv</id>
+    <link href="https://watch.plex.tv"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Homelab"/>
+    <summary>Organize and stream your personal media library. Movies, TV, music and photos, beautifully presented.</summary>
+  </entry>
+  <entry>
     <title>Poolsuite</title>
     <id>https://poolsuite.net</id>
     <link href="https://poolsuite.net"/>
@@ -85,6 +125,22 @@
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="News &amp; Reference"/>
     <summary>Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there&apos;s an API for it.</summary>
+  </entry>
+  <entry>
+    <title>Seerr</title>
+    <id>https://seerr.dev</id>
+    <link href="https://seerr.dev"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Arr Stack"/>
+    <summary>Media request management for Plex. Users browse and request films and shows; you approve. Formerly Overseerr.</summary>
+  </entry>
+  <entry>
+    <title>Soundtrap</title>
+    <id>https://www.soundtrap.com/musicmakers</id>
+    <link href="https://www.soundtrap.com/musicmakers"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Music &amp; Audio"/>
+    <summary>Online collaborative music studio. Record, mix, and share music directly in the browser.</summary>
   </entry>
   <entry>
     <title>SpiderFoot</title>

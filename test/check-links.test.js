@@ -331,3 +331,31 @@ test('destination comparison respects protocol and port, and ignores query order
   // Reordered parameters land in the same place, so reporting a move is noise.
   assert.equal(sameDestination('https://example.com/a?x=1&y=2', 'https://example.com/a?y=2&x=1'), true);
 });
+
+test('a redirect a curator accepted is reported as ok', async () => {
+  // Six entries land on a locale or marketing path where the address on file is
+  // the better thing to publish: tools.pdf24.org sends an English reader to
+  // /en/ and a German one to /de/, so storing either picks a language for
+  // everybody. Reporting those as moved every run buries the real ones.
+  const entry = { ...site('/moved'), acceptedRedirect: `${origin}/somewhere-else` };
+  const result = await check(entry, options);
+  assert.equal(result.status, 'ok');
+  assert.match(result.detail, /reviewed and accepted/);
+});
+
+test('an accepted redirect stops applying when the destination changes', async () => {
+  // The exemption names a destination rather than just muting the entry, so a
+  // second move gets looked at instead of inheriting the first one's pass.
+  const entry = { ...site('/moved'), acceptedRedirect: `${origin}/somewhere-they-used-to-go` };
+  const result = await check(entry, options);
+  assert.equal(result.status, 'moved');
+  assert.match(result.detail, /not the accepted/);
+});
+
+test('an accepted redirect does not excuse a dead link', async () => {
+  // The exemption is about where a working page moved to, and must never turn
+  // into a way of hiding one that stopped existing.
+  const entry = { ...site('/gone'), acceptedRedirect: `${origin}/gone` };
+  const result = await check(entry, options);
+  assert.equal(result.status, 'dead');
+});
