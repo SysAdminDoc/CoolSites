@@ -89,6 +89,25 @@ function slugify(value) {
   return value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+// A repository page on one of these is a project's source, so an entry pointing
+// at one reads as open source whatever the flag says. Deliberately not matching
+// *.github.io or *.pages.dev: those are project sites, not repositories.
+const SOURCE_FORGES = new Set(['github.com', 'gitlab.com', 'codeberg.org', 'bitbucket.org', 'git.sr.ht']);
+const NON_REPOSITORY_PATHS = new Set(['topics', 'trending', 'marketplace', 'features', 'orgs', 'sponsors', 'explore']);
+
+function forgeRepository(value) {
+  try {
+    const url = new URL(value);
+    if (!SOURCE_FORGES.has(url.hostname.replace(/^www\./, ''))) return null;
+    const parts = url.pathname.replace(/^\/+/, '').replace(/\.git$/, '').split('/').filter(Boolean);
+    if (parts.length < 2) return null;
+    if (NON_REPOSITORY_PATHS.has(parts[0])) return null;
+    return `${parts[0]}/${parts[1]}`;
+  } catch {
+    return null;
+  }
+}
+
 function canonicalUrl(value) {
   try {
     const parsed = new URL(value);
@@ -191,6 +210,18 @@ function validateSourceData() {
       addError(`${label}: updatedAt is ${site.updatedAt} but there is no lastReviewedAt saying who checked it`);
     }
     if (site?.updatedAt === LEGACY_IMPORT_DATE) legacyDated++;
+
+    // Five entries sat on a source repository declaring openSource false, so the
+    // open-source-only filter hid tools whose code is one click away. Saying no
+    // to that reading now costs a sentence, which is the right price: the one
+    // real exception is source-available under a licence the OSI has not
+    // approved, and a reader cannot tell that from the URL.
+    if (site?.openSource === false && (forgeRepository(site?.url) || forgeRepository(site?.repository)) && !site?.openSourceNote) {
+      addError(`${label}: openSource is false but the entry points at a source repository. Set it true, or say why not in openSourceNote.`);
+    }
+    if (site?.openSource === true && site?.openSourceNote) {
+      addError(`${label}: openSourceNote explains a false openSource, but this entry is true`);
+    }
 
     // A project gets one entry. Two of them were listed twice, once by homepage
     // and once by repository, which inflated the count and showed the same tool

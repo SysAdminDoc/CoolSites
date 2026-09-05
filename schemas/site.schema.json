@@ -16,6 +16,11 @@
     "description": { "type": "string", "minLength": 12 },
     "category": { "type": "string", "minLength": 1 },
     "openSource": { "type": "boolean" },
+    "openSourceNote": {
+      "type": "string",
+      "minLength": 12,
+      "description": "Why openSource is false when the entry is hosted on a source forge. Required in that case, because 'the code is right there' is the reader's default reading of a repository link."
+    },
     "requiresAuth": { "type": "boolean" },
     "updatedAt": {
       "type": "string",

@@ -6,6 +6,84 @@
   "description": "Recently added and updated CoolSites directory entries.",
   "items": [
     {
+      "id": "https://github.com/awesome-windows11/windows11",
+      "url": "https://github.com/awesome-windows11/windows11",
+      "title": "Awesome Windows 11",
+      "summary": "Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Indexes & Wikis",
+        "windows",
+        "index",
+        "awesome",
+        "apps"
+      ],
+      "_coolsites_category": "Indexes & Wikis",
+      "_coolsites_slug": "awesome-windows-11"
+    },
+    {
+      "id": "https://github.com/fail2ban/fail2ban",
+      "url": "https://github.com/fail2ban/fail2ban",
+      "title": "Fail2ban",
+      "summary": "Intrusion prevention that bans IPs showing malicious signs. Monitors logs and updates firewall rules automatically.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Security",
+        "intrusion-prevention",
+        "firewall",
+        "banning",
+        "logs"
+      ],
+      "_coolsites_category": "Security",
+      "_coolsites_slug": "fail2ban"
+    },
+    {
+      "id": "https://github.com/fmhy/FMHY-SafeGuard",
+      "url": "https://github.com/fmhy/FMHY-SafeGuard",
+      "title": "FMHY SafeGuard",
+      "summary": "Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY's unsafe sites list.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Indexes & Wikis",
+        "safety",
+        "extension",
+        "blocklist",
+        "malware"
+      ],
+      "_coolsites_category": "Indexes & Wikis",
+      "_coolsites_slug": "fmhy-safeguard"
+    },
+    {
+      "id": "https://github.com/sundowndev/phoneinfoga",
+      "url": "https://github.com/sundowndev/phoneinfoga",
+      "title": "PhoneInfoga",
+      "summary": "Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "OSINT",
+        "phone",
+        "recon",
+        "scanner"
+      ],
+      "_coolsites_category": "OSINT",
+      "_coolsites_slug": "phoneinfoga"
+    },
+    {
+      "id": "https://github.com/public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "title": "public-apis",
+      "summary": "Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there's an API for it.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "News & Reference",
+        "apis",
+        "directory",
+        "free"
+      ],
+      "_coolsites_category": "News & Reference",
+      "_coolsites_slug": "public-apis"
+    },
+    {
       "id": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
       "url": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
       "title": "Cloudflare Tunnel",

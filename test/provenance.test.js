@@ -173,6 +173,40 @@ test('lint rejects a repository that just repeats the url', () => {
   assert.match(result.output, /same address as url/);
 });
 
+test('an entry on a source repository cannot silently claim to be closed source', () => {
+  const result = lintWith(sites => {
+    const entry = sites.find(site => site.url.startsWith('https://github.com/'));
+    entry.openSource = false;
+    delete entry.openSourceNote;
+  });
+  assert.equal(result.passed, false);
+  assert.match(result.output, /points at a source repository/);
+});
+
+test('a source-available entry says why it is not open source', () => {
+  const result = lintWith(sites => { delete sites.find(site => site.openSourceNote).openSourceNote; });
+  assert.equal(result.passed, false);
+  assert.match(result.output, /points at a source repository/);
+});
+
+test('a project site on github.io is not mistaken for a repository', () => {
+  // gchq.github.io/CyberChef is a published site, not a source tree, so the
+  // rule above must not fire on it. Without this the rule would demand a note
+  // from every project that publishes through Pages.
+  const result = lintWith(sites => {
+    const entry = sites.find(site => /\.github\.io/.test(site.url));
+    entry.openSource = false;
+    delete entry.openSourceNote;
+  });
+  assert.equal(result.passed, true, result.output);
+});
+
+test('a note explaining a false openSource cannot sit on a true one', () => {
+  const result = lintWith(sites => { sites.find(site => site.openSource).openSourceNote = 'This should not be here at all.'; });
+  assert.equal(result.passed, false);
+  assert.match(result.output, /but this entry is true/);
+});
+
 test('the guard restores sites.json even when lint fails', () => {
   // Every test above rewrites the real file. If the restore ever slipped, the
   // repository would be left broken by a test run.

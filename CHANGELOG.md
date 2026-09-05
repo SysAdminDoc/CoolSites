@@ -2,6 +2,19 @@
 
 All notable changes to CoolSites will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+
+- **Five entries said they were closed source while pointing straight at their own repository.** Fail2ban, PhoneInfoga, public-apis, Awesome Windows 11 and FMHY SafeGuard all read `openSource: false`, so the open-source-only filter hid tools whose code is one click away. Each licence was read from the project's own repository before the flag was changed. Agent QA keeps `openSource: false` and now says why: it is source-available under FSL-1.1-ALv2, which the OSI has not approved, and each release converts to Apache-2.0 after two years.
+- A project gets one entry. Stirling PDF and tldr pages were each listed twice, once by homepage and once by repository, which inflated the count and showed the same tool twice in a combined view. An optional `repository` field now carries both addresses on one entry, and lint treats `url` and `repository` as one address space so a second entry for a listed project fails the gate.
+
+### Added
+
+- Lint rejects an entry that sits on a source forge and declares `openSource: false` without an `openSourceNote` explaining it. A project site published through GitHub Pages is deliberately not treated as a repository, so a project that publishes through Pages is not asked for a note it does not owe.
+- The legacy-import ratchet is exact rather than a ceiling. Slack between the recorded number and the real one was room a new entry could be filed into under the import date to dodge the provenance rule, and `npm run review` now lowers the recorded number itself as entries get checked.
+- `npm run update:stars` follows `repository` where it is set, because an entry's main link is often the project's own site while the code lives on GitHub.
+
 ## [v2.4.0] - 2026-08-25
 
 ### Added

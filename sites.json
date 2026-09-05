@@ -2654,14 +2654,15 @@
     "url": "https://github.com/public-apis/public-apis",
     "description": "Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there's an API for it.",
     "category": "News & Reference",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "apis",
       "directory",
       "free"
-    ]
+    ],
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Free Programming Books",
@@ -3075,14 +3076,15 @@
     "url": "https://github.com/sundowndev/phoneinfoga",
     "description": "Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.",
     "category": "OSINT",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "phone",
       "recon",
       "scanner"
-    ]
+    ],
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "TinEye",
@@ -7347,15 +7349,16 @@
     "url": "https://github.com/awesome-windows11/windows11",
     "description": "Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.",
     "category": "Indexes & Wikis",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "windows",
       "index",
       "awesome",
       "apps"
-    ]
+    ],
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Awesome Open Source",
@@ -7377,15 +7380,16 @@
     "url": "https://github.com/fmhy/FMHY-SafeGuard",
     "description": "Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY's unsafe sites list.",
     "category": "Indexes & Wikis",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "safety",
       "extension",
       "blocklist",
       "malware"
-    ]
+    ],
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Awesome Piracy",
@@ -8323,15 +8327,16 @@
     "url": "https://github.com/fail2ban/fail2ban",
     "description": "Intrusion prevention that bans IPs showing malicious signs. Monitors logs and updates firewall rules automatically.",
     "category": "Security",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "intrusion-prevention",
       "firewall",
       "banning",
       "logs"
-    ]
+    ],
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Trivy",
@@ -8460,6 +8465,7 @@
     "description": "Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage.",
     "category": "Dev Tools",
     "openSource": false,
+    "openSourceNote": "Source-available under FSL-1.1-ALv2, which is not an OSI open source licence. Each release converts to Apache-2.0 after two years.",
     "requiresAuth": true,
     "updatedAt": "2026-08-16",
     "tags": [

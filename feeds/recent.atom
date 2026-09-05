@@ -4,8 +4,48 @@
   <id>https://sysadmindoc.github.io/CoolSites/feeds/recent.atom</id>
   <link href="https://sysadmindoc.github.io/CoolSites/" rel="alternate"/>
   <link href="https://sysadmindoc.github.io/CoolSites/feeds/recent.atom" rel="self"/>
-  <updated>2026-08-25T00:00:00Z</updated>
+  <updated>2026-09-05T00:00:00Z</updated>
   <generator version="2.4.0">CoolSites</generator>
+  <entry>
+    <title>Awesome Windows 11</title>
+    <id>https://github.com/awesome-windows11/windows11</id>
+    <link href="https://github.com/awesome-windows11/windows11"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Indexes &amp; Wikis"/>
+    <summary>Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.</summary>
+  </entry>
+  <entry>
+    <title>Fail2ban</title>
+    <id>https://github.com/fail2ban/fail2ban</id>
+    <link href="https://github.com/fail2ban/fail2ban"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Security"/>
+    <summary>Intrusion prevention that bans IPs showing malicious signs. Monitors logs and updates firewall rules automatically.</summary>
+  </entry>
+  <entry>
+    <title>FMHY SafeGuard</title>
+    <id>https://github.com/fmhy/FMHY-SafeGuard</id>
+    <link href="https://github.com/fmhy/FMHY-SafeGuard"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Indexes &amp; Wikis"/>
+    <summary>Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY&apos;s unsafe sites list.</summary>
+  </entry>
+  <entry>
+    <title>PhoneInfoga</title>
+    <id>https://github.com/sundowndev/phoneinfoga</id>
+    <link href="https://github.com/sundowndev/phoneinfoga"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="OSINT"/>
+    <summary>Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.</summary>
+  </entry>
+  <entry>
+    <title>public-apis</title>
+    <id>https://github.com/public-apis/public-apis</id>
+    <link href="https://github.com/public-apis/public-apis"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="News &amp; Reference"/>
+    <summary>Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there&apos;s an API for it.</summary>
+  </entry>
   <entry>
     <title>Cloudflare Tunnel</title>
     <id>https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/</id>
