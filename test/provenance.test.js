@@ -190,13 +190,19 @@ test('a source-available entry says why it is not open source', () => {
 });
 
 test('a project site on github.io is not mistaken for a repository', () => {
-  // gchq.github.io/CyberChef is a published site, not a source tree, so the
-  // rule above must not fire on it. Without this the rule would demand a note
-  // from every project that publishes through Pages.
+  // A github.io address is a published site, not a source tree, so the rule
+  // above must not fire on it. Without this it would demand a note from every
+  // project that publishes through Pages.
+  //
+  // repository is deleted too, and that is the point of the test rather than a
+  // convenience: the rule reads both fields, so leaving a repository in place
+  // would prove only that the repository half works and say nothing about
+  // whether a bare github.io URL is treated as a forge.
   const result = lintWith(sites => {
     const entry = sites.find(site => /\.github\.io/.test(site.url));
     entry.openSource = false;
     delete entry.openSourceNote;
+    delete entry.repository;
   });
   assert.equal(result.passed, true, result.output);
 });

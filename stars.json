@@ -1,296 +1,478 @@
 {
   "0x7c13/notepads": {
     "fullName": "0x7c13/Notepads",
-    "stars": 10225,
-    "forks": 555,
+    "stars": 10241,
+    "forks": 554,
     "openIssues": 464,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "agno-agi/agno": {
+    "fullName": "agno-agi/agno",
+    "stars": 42056,
+    "forks": 5870,
+    "openIssues": 1323,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "ajeetdsouza/zoxide": {
     "fullName": "ajeetdsouza/zoxide",
-    "stars": 38825,
-    "forks": 871,
-    "openIssues": 137,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 39176,
+    "forks": 886,
+    "openIssues": 142,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "algorithm-visualizer/algorithm-visualizer": {
+    "fullName": "algorithm-visualizer/algorithm-visualizer",
+    "stars": 48717,
+    "forks": 7580,
+    "openIssues": 80,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "anonaddy/anonaddy": {
+    "fullName": "anonaddy/anonaddy",
+    "stars": 4829,
+    "forks": 266,
+    "openIssues": 63,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "ansible/awx": {
     "fullName": "ansible/awx",
-    "stars": 15536,
-    "forks": 3670,
-    "openIssues": 1865,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 15545,
+    "forks": 3675,
+    "openIssues": 1869,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "aristocratos/btop": {
     "fullName": "aristocratos/btop",
-    "stars": 34207,
-    "forks": 1132,
-    "openIssues": 528,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 34408,
+    "forks": 1140,
+    "openIssues": 534,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "automatic1111/stable-diffusion-webui": {
     "fullName": "AUTOMATIC1111/stable-diffusion-webui",
-    "stars": 164651,
+    "stars": 164817,
     "forks": 30555,
-    "openIssues": 2503,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "openIssues": 2504,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "awesome-windows11/windows11": {
     "fullName": "awesome-windows11/windows11",
-    "stars": 3533,
-    "forks": 169,
+    "stars": 3548,
+    "forks": 168,
     "openIssues": 13,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "aykutsarac/jsoncrack.com": {
+    "fullName": "AykutSarac/jsoncrack.com",
+    "stars": 44364,
+    "forks": 3563,
+    "openIssues": 44,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "bootandy/dust": {
     "fullName": "bootandy/dust",
-    "stars": 12178,
-    "forks": 284,
-    "openIssues": 8,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 12220,
+    "forks": 287,
+    "openIssues": 9,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "burntsushi/ripgrep": {
     "fullName": "BurntSushi/ripgrep",
-    "stars": 67587,
-    "forks": 2741,
-    "openIssues": 182,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 67965,
+    "forks": 2748,
+    "openIssues": 185,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "carbon-app/carbon": {
+    "fullName": "carbon-app/carbon",
+    "stars": 36086,
+    "forks": 1976,
+    "openIssues": 85,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "compiler-explorer/compiler-explorer": {
+    "fullName": "compiler-explorer/compiler-explorer",
+    "stars": 19046,
+    "forks": 2105,
+    "openIssues": 853,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "dandavison/delta": {
     "fullName": "dandavison/delta",
-    "stars": 31853,
-    "forks": 564,
-    "openIssues": 430,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 32084,
+    "forks": 568,
+    "openIssues": 434,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "dani-garcia/vaultwarden": {
     "fullName": "dani-garcia/vaultwarden",
-    "stars": 66216,
-    "forks": 3149,
-    "openIssues": 86,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 66864,
+    "forks": 3184,
+    "openIssues": 90,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "debauchee/barrier": {
     "fullName": "debauchee/barrier",
-    "stars": 30831,
-    "forks": 1632,
-    "openIssues": 1045,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 30853,
+    "forks": 1634,
+    "openIssues": 1046,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "digitalocean/nginxconfig.io": {
+    "fullName": "digitalocean/nginxconfig.io",
+    "stars": 28264,
+    "forks": 2031,
+    "openIssues": 71,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "dnsviz/dnsviz": {
+    "fullName": "dnsviz/dnsviz",
+    "stars": 1247,
+    "forks": 161,
+    "openIssues": 28,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "ebookfoundation/free-programming-books": {
+    "fullName": "EbookFoundation/free-programming-books",
+    "stars": 396005,
+    "forks": 66737,
+    "openIssues": 78,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "eza-community/eza": {
     "fullName": "eza-community/eza",
-    "stars": 23033,
-    "forks": 510,
-    "openIssues": 437,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 23153,
+    "forks": 519,
+    "openIssues": 445,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "fail2ban/fail2ban": {
     "fullName": "fail2ban/fail2ban",
-    "stars": 18469,
-    "forks": 1498,
+    "stars": 18539,
+    "forks": 1497,
     "openIssues": 272,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "fechin/reference": {
+    "fullName": "Fechin/reference",
+    "stars": 10822,
+    "forks": 1318,
+    "openIssues": 259,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "flaresolverr/flaresolverr": {
     "fullName": "FlareSolverr/FlareSolverr",
-    "stars": 15296,
-    "forks": 1226,
-    "openIssues": 84,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 15414,
+    "forks": 1237,
+    "openIssues": 86,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "fmhy/fmhy-safeguard": {
     "fullName": "fmhy/FMHY-SafeGuard",
-    "stars": 583,
-    "forks": 21,
-    "openIssues": 9,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 588,
+    "forks": 22,
+    "openIssues": 11,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "fosrl/pangolin": {
     "fullName": "fosrl/pangolin",
-    "stars": 22469,
-    "forks": 764,
+    "stars": 22626,
+    "forks": 776,
     "openIssues": 119,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "freecodecamp/devdocs": {
+    "fullName": "freeCodeCamp/devdocs",
+    "stars": 39417,
+    "forks": 2636,
+    "openIssues": 218,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "gchq/cyberchef": {
+    "fullName": "gchq/CyberChef",
+    "stars": 35748,
+    "forks": 4134,
+    "openIssues": 566,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "gitpod-io/gitpod": {
+    "fullName": "gitpod-io/gitpod",
+    "stars": 13761,
+    "forks": 1393,
+    "openIssues": 451,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "glzr-io/glazewm": {
     "fullName": "glzr-io/glazewm",
-    "stars": 12659,
-    "forks": 423,
-    "openIssues": 402,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 12726,
+    "forks": 425,
+    "openIssues": 404,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "huginn/huginn": {
     "fullName": "huginn/huginn",
-    "stars": 49851,
-    "forks": 4299,
-    "openIssues": 697,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 49897,
+    "forks": 4301,
+    "openIssues": 694,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "idank/explainshell": {
+    "fullName": "idank/explainshell",
+    "stars": 14229,
+    "forks": 849,
+    "openIssues": 54,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "jesseduffield/lazydocker": {
     "fullName": "jesseduffield/lazydocker",
-    "stars": 52601,
-    "forks": 1685,
-    "openIssues": 295,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 52731,
+    "forks": 1686,
+    "openIssues": 299,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "jesseduffield/lazygit": {
     "fullName": "jesseduffield/lazygit",
-    "stars": 81624,
-    "forks": 3007,
-    "openIssues": 1026,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 82000,
+    "forks": 3022,
+    "openIssues": 1029,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "junegunn/fzf": {
     "fullName": "junegunn/fzf",
-    "stars": 82649,
-    "forks": 2857,
-    "openIssues": 327,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 82823,
+    "forks": 2862,
+    "openIssues": 330,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "libredirect/browser_extension": {
+    "fullName": "libredirect/browser_extension",
+    "stars": 4035,
+    "forks": 146,
+    "openIssues": 47,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "lmms/lmms": {
+    "fullName": "LMMS/lmms",
+    "stars": 10326,
+    "forks": 1244,
+    "openIssues": 1452,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "lockfale/osint-framework": {
+    "fullName": "lockfale/OSINT-Framework",
+    "stars": 12077,
+    "forks": 1972,
+    "openIssues": 89,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "microsoft/playwright": {
+    "fullName": "microsoft/playwright",
+    "stars": 95645,
+    "forks": 6385,
+    "openIssues": 180,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "mikefarah/yq": {
     "fullName": "mikefarah/yq",
-    "stars": 15873,
-    "forks": 826,
-    "openIssues": 285,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 15923,
+    "forks": 832,
+    "openIssues": 298,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "mikf/gallery-dl": {
     "fullName": "mikf/gallery-dl",
-    "stars": 19316,
-    "forks": 1462,
-    "openIssues": 1151,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 19414,
+    "forks": 1466,
+    "openIssues": 1153,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "mozilla-ai/llamafile": {
     "fullName": "mozilla-ai/llamafile",
-    "stars": 25688,
-    "forks": 1573,
-    "openIssues": 212,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 25876,
+    "forks": 1597,
+    "openIssues": 214,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "mozilla/ssl-config-generator": {
+    "fullName": "mozilla/ssl-config-generator",
+    "stars": 438,
+    "forks": 69,
+    "openIssues": 0,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "node-red/node-red": {
+    "fullName": "node-red/node-red",
+    "stars": 23619,
+    "forks": 3887,
+    "openIssues": 324,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "openai/whisper": {
     "fullName": "openai/whisper",
-    "stars": 107909,
-    "forks": 13100,
-    "openIssues": 137,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 108470,
+    "forks": 13142,
+    "openIssues": 142,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "pastelsky/bundlephobia": {
+    "fullName": "pastelsky/bundlephobia",
+    "stars": 9581,
+    "forks": 269,
+    "openIssues": 216,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "postmanlabs/httpbin": {
+    "fullName": "postmanlabs/httpbin",
+    "stars": 13612,
+    "forks": 1928,
+    "openIssues": 190,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "public-apis/public-apis": {
     "fullName": "public-apis/public-apis",
-    "stars": 470252,
-    "forks": 51847,
-    "openIssues": 1776,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 475492,
+    "forks": 52533,
+    "openIssues": 1897,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "ql-win/quicklook": {
     "fullName": "QL-Win/QuickLook",
-    "stars": 24502,
-    "forks": 1286,
-    "openIssues": 197,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 24598,
+    "forks": 1292,
+    "openIssues": 201,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "ramonunch/altsnap": {
     "fullName": "RamonUnch/AltSnap",
-    "stars": 5161,
-    "forks": 169,
-    "openIssues": 130,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 5186,
+    "forks": 172,
+    "openIssues": 131,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "resemble-ai/chatterbox": {
     "fullName": "resemble-ai/chatterbox",
-    "stars": 26144,
-    "forks": 3517,
-    "openIssues": 358,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 26275,
+    "forks": 3539,
+    "openIssues": 360,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "responsively-org/responsively-app": {
+    "fullName": "responsively-org/responsively-app",
+    "stars": 25153,
+    "forks": 1395,
+    "openIssues": 325,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "schollz/croc": {
     "fullName": "schollz/croc",
-    "stars": 40090,
-    "forks": 1610,
-    "openIssues": 3,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 40236,
+    "forks": 1614,
+    "openIssues": 1,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "shakil-shahadat/awesome-piracy": {
+    "fullName": "shakil-shahadat/awesome-piracy",
+    "stars": 2952,
+    "forks": 138,
+    "openIssues": 16,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "sharkdp/bat": {
     "fullName": "sharkdp/bat",
-    "stars": 60248,
-    "forks": 1631,
+    "stars": 60371,
+    "forks": 1641,
     "openIssues": 424,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "sharkdp/fd": {
     "fullName": "sharkdp/fd",
-    "stars": 44197,
-    "forks": 1122,
-    "openIssues": 190,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 44314,
+    "forks": 1124,
+    "openIssues": 201,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "smicallef/spiderfoot": {
+    "fullName": "smicallef/spiderfoot",
+    "stars": 21723,
+    "forks": 3510,
+    "openIssues": 320,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "srwi/everythingtoolbar": {
     "fullName": "srwi/EverythingToolbar",
-    "stars": 14637,
-    "forks": 557,
-    "openIssues": 35,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 14691,
+    "forks": 559,
+    "openIssues": 36,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "stirling-tools/stirling-pdf": {
     "fullName": "Stirling-Tools/Stirling-PDF",
-    "stars": 90383,
-    "forks": 8195,
-    "openIssues": 577,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 91323,
+    "forks": 8285,
+    "openIssues": 598,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "sundowndev/phoneinfoga": {
     "fullName": "sundowndev/phoneinfoga",
-    "stars": 17629,
-    "forks": 5657,
-    "openIssues": 123,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 17780,
+    "forks": 5780,
+    "openIssues": 135,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "tldr-pages/tldr": {
     "fullName": "tldr-pages/tldr",
-    "stars": 63483,
-    "forks": 5384,
-    "openIssues": 289,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 63594,
+    "forks": 5403,
+    "openIssues": 291,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "tmux/tmux": {
     "fullName": "tmux/tmux",
-    "stars": 48811,
-    "forks": 2851,
-    "openIssues": 31,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 49069,
+    "forks": 2872,
+    "openIssues": 30,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "translucenttb/translucenttb": {
     "fullName": "TranslucentTB/TranslucentTB",
-    "stars": 20177,
-    "forks": 1250,
+    "stars": 20265,
+    "forks": 1252,
     "openIssues": 327,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "traviscross/mtr": {
     "fullName": "traviscross/mtr",
-    "stars": 3337,
-    "forks": 376,
-    "openIssues": 137,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 3342,
+    "forks": 377,
+    "openIssues": 139,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "triliumnext/trilium": {
     "fullName": "TriliumNext/Trilium",
-    "stars": 37580,
-    "forks": 2519,
-    "openIssues": 691,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 37716,
+    "forks": 2535,
+    "openIssues": 698,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
+  },
+  "tycrek/degoogle": {
+    "fullName": "tycrek/degoogle",
+    "stars": 8502,
+    "forks": 395,
+    "openIssues": 36,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "vostride/agent-qa": {
     "fullName": "vostride/agent-qa",
-    "stars": 874,
+    "stars": 901,
     "forks": 15,
     "openIssues": 0,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   },
   "yt-dlp/yt-dlp": {
     "fullName": "yt-dlp/yt-dlp",
-    "stars": 186840,
-    "forks": 16105,
-    "openIssues": 2606,
-    "fetchedAt": "2026-08-25T14:21:51.027Z"
+    "stars": 189067,
+    "forks": 16379,
+    "openIssues": 2629,
+    "fetchedAt": "2026-09-05T08:24:16.698Z"
   }
 }

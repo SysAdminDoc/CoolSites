@@ -7,6 +7,14 @@
   <updated>2026-09-05T00:00:00Z</updated>
   <generator version="2.4.0">CoolSites</generator>
   <entry>
+    <title>addy.io</title>
+    <id>https://addy.io</id>
+    <link href="https://addy.io"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Privacy"/>
+    <summary>Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking.</summary>
+  </entry>
+  <entry>
     <title>Agno</title>
     <id>https://www.agno.com</id>
     <link href="https://www.agno.com"/>
@@ -31,12 +39,84 @@
     <summary>Head-to-head LLM comparisons with blind voting. The most credible LLM benchmark based on human preference.</summary>
   </entry>
   <entry>
+    <title>Awesome Piracy</title>
+    <id>https://shakil-shahadat.github.io/awesome-piracy/</id>
+    <link href="https://shakil-shahadat.github.io/awesome-piracy/"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Indexes &amp; Wikis"/>
+    <summary>Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.</summary>
+  </entry>
+  <entry>
     <title>Awesome Windows 11</title>
     <id>https://github.com/awesome-windows11/windows11</id>
     <link href="https://github.com/awesome-windows11/windows11"/>
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="Indexes &amp; Wikis"/>
     <summary>Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub.</summary>
+  </entry>
+  <entry>
+    <title>Bundlephobia</title>
+    <id>https://bundlephobia.com</id>
+    <link href="https://bundlephobia.com"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Know the cost of adding a npm package before you install it. See size, download time, and composition.</summary>
+  </entry>
+  <entry>
+    <title>Carbon</title>
+    <id>https://carbon.now.sh</id>
+    <link href="https://carbon.now.sh"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Create beautiful images of your source code. Perfect for blog posts, presentations, and social media.</summary>
+  </entry>
+  <entry>
+    <title>Compiler Explorer</title>
+    <id>https://godbolt.org</id>
+    <link href="https://godbolt.org"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>See how compilers turn your code into assembly. Supports 30+ languages. Mind-blowing for understanding optimization.</summary>
+  </entry>
+  <entry>
+    <title>CyberChef</title>
+    <id>https://gchq.github.io/CyberChef</id>
+    <link href="https://gchq.github.io/CyberChef"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Security"/>
+    <summary>GCHQ&apos;s data Swiss Army knife. Encode, decode, encrypt, compress and parse by chaining operations visually.</summary>
+  </entry>
+  <entry>
+    <title>degoogle</title>
+    <id>https://tycrek.github.io/degoogle/</id>
+    <link href="https://tycrek.github.io/degoogle/"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Indexes &amp; Wikis"/>
+    <summary>Massive list of Google alternatives for every service. Search, email, maps, drive, docs, photos, and more. All privacy-focused.</summary>
+  </entry>
+  <entry>
+    <title>DevDocs</title>
+    <id>https://devdocs.io</id>
+    <link href="https://devdocs.io"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Fast, offline-capable API documentation browser. Combines 500+ docs into one searchable interface.</summary>
+  </entry>
+  <entry>
+    <title>DNSViz</title>
+    <id>https://dnsviz.net</id>
+    <link href="https://dnsviz.net"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="DNS Tools"/>
+    <summary>Visualizes DNSSEC authentication chains. See exactly where validation breaks down.</summary>
+  </entry>
+  <entry>
+    <title>ExplainShell</title>
+    <id>https://explainshell.com</id>
+    <link href="https://explainshell.com"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Paste any shell command and get a visual breakdown of every flag and argument. No more man page diving.</summary>
   </entry>
   <entry>
     <title>Fail2ban</title>
@@ -55,12 +135,36 @@
     <summary>Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY&apos;s unsafe sites list.</summary>
   </entry>
   <entry>
+    <title>Free Programming Books</title>
+    <id>https://ebookfoundation.github.io/free-programming-books/</id>
+    <link href="https://ebookfoundation.github.io/free-programming-books/"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="News &amp; Reference"/>
+    <summary>Thousands of free programming books and resources. Every language and framework. Community-maintained.</summary>
+  </entry>
+  <entry>
     <title>Gitpod</title>
     <id>https://github.com/gitpod-io/gitpod</id>
     <link href="https://github.com/gitpod-io/gitpod"/>
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="Dev Tools"/>
     <summary>Self-hostable cloud development environments. Spin up a full dev workspace from any Git repo. The company now trades as Ona; the AGPL project kept the name.</summary>
+  </entry>
+  <entry>
+    <title>httpbin.org</title>
+    <id>https://httpbin.org</id>
+    <link href="https://httpbin.org"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>HTTP request and response testing service. Echoes back headers, methods and auth, so it&apos;s great for debugging.</summary>
+  </entry>
+  <entry>
+    <title>JSONCrack</title>
+    <id>https://jsoncrack.com</id>
+    <link href="https://jsoncrack.com"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Visualize JSON, YAML, and XML as interactive graphs. Makes complex nested data instantly readable.</summary>
   </entry>
   <entry>
     <title>Krea.ai</title>
@@ -87,6 +191,14 @@
     <summary>Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.).</summary>
   </entry>
   <entry>
+    <title>LMMS</title>
+    <id>https://lmms.io</id>
+    <link href="https://lmms.io"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Music &amp; Audio"/>
+    <summary>Free digital audio workstation for music production. Beat sequencer, synthesizers, and effects. Cross-platform.</summary>
+  </entry>
+  <entry>
     <title>Maltego</title>
     <id>https://www.maltego.com/pricing/</id>
     <link href="https://www.maltego.com/pricing/"/>
@@ -95,12 +207,52 @@
     <summary>Visual link analysis for OSINT investigations. Map relationships between people, companies, domains and IPs. The Community Edition is still free.</summary>
   </entry>
   <entry>
+    <title>Mozilla SSL Config</title>
+    <id>https://ssl-config.mozilla.org</id>
+    <link href="https://ssl-config.mozilla.org"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Sysadmin"/>
+    <summary>SSL/TLS configuration generator. Best-practice configs for Apache, Nginx, HAProxy, and more.</summary>
+  </entry>
+  <entry>
+    <title>NGINXConfig</title>
+    <id>https://www.digitalocean.com/community/tools/nginx</id>
+    <link href="https://www.digitalocean.com/community/tools/nginx"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Sysadmin"/>
+    <summary>DigitalOcean&apos;s NGINX config generator. Answer questions, get a production-ready config file.</summary>
+  </entry>
+  <entry>
+    <title>Node-RED</title>
+    <id>https://nodered.org</id>
+    <link href="https://nodered.org"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Automation"/>
+    <summary>Flow-based programming for IoT and automation. Wire together APIs, devices, and services visually.</summary>
+  </entry>
+  <entry>
+    <title>OSINT Framework</title>
+    <id>https://osintframework.com</id>
+    <link href="https://osintframework.com"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="OSINT"/>
+    <summary>Interactive tree of OSINT tools organized by category. The starting point for any investigation.</summary>
+  </entry>
+  <entry>
     <title>PhoneInfoga</title>
     <id>https://github.com/sundowndev/phoneinfoga</id>
     <link href="https://github.com/sundowndev/phoneinfoga"/>
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="OSINT"/>
     <summary>Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.</summary>
+  </entry>
+  <entry>
+    <title>Playwright</title>
+    <id>https://playwright.dev</id>
+    <link href="https://playwright.dev"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Microsoft&apos;s end-to-end testing framework. Test across Chromium, Firefox, WebKit with one API.</summary>
   </entry>
   <entry>
     <title>Plex</title>
@@ -125,6 +277,22 @@
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="News &amp; Reference"/>
     <summary>Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there&apos;s an API for it.</summary>
+  </entry>
+  <entry>
+    <title>QuickRef.ME</title>
+    <id>https://quickref.me</id>
+    <link href="https://quickref.me"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="News &amp; Reference"/>
+    <summary>Quick reference cheatsheets for everything. Programming, tools, and Linux commands in clean format.</summary>
+  </entry>
+  <entry>
+    <title>Responsively</title>
+    <id>https://responsively.app</id>
+    <link href="https://responsively.app"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Modified browser for responsive web development. Preview across multiple devices simultaneously.</summary>
   </entry>
   <entry>
     <title>Seerr</title>
@@ -237,21 +405,5 @@
     <updated>2026-08-25T00:00:00Z</updated>
     <category term="Productivity"/>
     <summary>Hierarchical note-taking app with powerful scripting. Relation maps, book notes, task management. Self-hostable.</summary>
-  </entry>
-  <entry>
-    <title>VeraCrypt</title>
-    <id>https://veracrypt.io/</id>
-    <link href="https://veracrypt.io/"/>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <category term="Privacy"/>
-    <summary>Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems.</summary>
-  </entry>
-  <entry>
-    <title>Agent QA</title>
-    <id>https://github.com/vostride/agent-qa</id>
-    <link href="https://github.com/vostride/agent-qa"/>
-    <updated>2026-08-16T00:00:00Z</updated>
-    <category term="Dev Tools"/>
-    <summary>Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage.</summary>
   </entry>
 </feed>

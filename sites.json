@@ -321,9 +321,9 @@
     "url": "https://dnsviz.net",
     "description": "Visualizes DNSSEC authentication chains. See exactly where validation breaks down.",
     "category": "DNS Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "visualization",
       "security"
@@ -332,7 +332,9 @@
       "dnssec"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/dnsviz/dnsviz",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "MXToolbox",
@@ -596,9 +598,9 @@
     "url": "https://gchq.github.io/CyberChef",
     "description": "GCHQ's data Swiss Army knife. Encode, decode, encrypt, compress and parse by chaining operations visually.",
     "category": "Security",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [],
     "keywords": [
       "encode",
@@ -608,7 +610,9 @@
     ],
     "editorsPick": true,
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/gchq/CyberChef",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Shodan",
@@ -840,9 +844,9 @@
     "url": "https://godbolt.org",
     "description": "See how compilers turn your code into assembly. Supports 30+ languages. Mind-blowing for understanding optimization.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "optimization"
     ],
@@ -851,7 +855,9 @@
       "assembly"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/compiler-explorer/compiler-explorer",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Webhook.site",
@@ -876,25 +882,27 @@
     "url": "https://httpbin.org",
     "description": "HTTP request and response testing service. Echoes back headers, methods and auth, so it's great for debugging.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "http",
       "testing",
       "debug"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/postmanlabs/httpbin",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "ExplainShell",
     "url": "https://explainshell.com",
     "description": "Paste any shell command and get a visual breakdown of every flag and argument. No more man page diving.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "shell"
     ],
@@ -903,7 +911,9 @@
       "learning"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/idank/explainshell",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "DB Fiddle",
@@ -928,16 +938,18 @@
     "url": "https://jsoncrack.com",
     "description": "Visualize JSON, YAML, and XML as interactive graphs. Makes complex nested data instantly readable.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "json",
       "visualization",
       "data"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/AykutSarac/jsoncrack.com",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Crontab.guru",
@@ -962,16 +974,18 @@
     "url": "https://devdocs.io",
     "description": "Fast, offline-capable API documentation browser. Combines 500+ docs into one searchable interface.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "documentation",
       "api",
       "reference"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/freeCodeCamp/devdocs",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "DevToys",
@@ -1655,9 +1669,9 @@
     "url": "https://nodered.org",
     "description": "Flow-based programming for IoT and automation. Wire together APIs, devices, and services visually.",
     "category": "Automation",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "iot",
       "programming"
@@ -1667,7 +1681,9 @@
     ],
     "editorsPick": true,
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/node-red/node-red",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Huginn",
@@ -2164,9 +2180,9 @@
     "url": "https://lmms.io",
     "description": "Free digital audio workstation for music production. Beat sequencer, synthesizers, and effects. Cross-platform.",
     "category": "Music & Audio",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "daw"
     ],
@@ -2175,7 +2191,9 @@
       "synthesizer"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/LMMS/lmms",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "AudioMass",
@@ -2233,9 +2251,9 @@
     "url": "https://addy.io",
     "description": "Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking.",
     "category": "Privacy",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": true,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "email"
     ],
@@ -2244,7 +2262,9 @@
       "forwarding"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/anonaddy/anonaddy",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "SimpleLogin",
@@ -2432,9 +2452,9 @@
     "url": "https://www.digitalocean.com/community/tools/nginx",
     "description": "DigitalOcean's NGINX config generator. Answer questions, get a production-ready config file.",
     "category": "Sysadmin",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "config",
       "generator"
@@ -2443,16 +2463,18 @@
       "nginx"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/digitalocean/nginxconfig.io",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Mozilla SSL Config",
     "url": "https://ssl-config.mozilla.org",
     "description": "SSL/TLS configuration generator. Best-practice configs for Apache, Nginx, HAProxy, and more.",
     "category": "Sysadmin",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "ssl"
     ],
@@ -2461,7 +2483,9 @@
       "configuration"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/mozilla/ssl-config-generator",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Cloudflare Radar",
@@ -3303,9 +3327,9 @@
     "url": "https://quickref.me",
     "description": "Quick reference cheatsheets for everything. Programming, tools, and Linux commands in clean format.",
     "category": "News & Reference",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "reference"
     ],
@@ -3314,7 +3338,9 @@
       "quick"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/Fechin/reference",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "public-apis",
@@ -3340,9 +3366,9 @@
     "url": "https://ebookfoundation.github.io/free-programming-books/",
     "description": "Thousands of free programming books and resources. Every language and framework. Community-maintained.",
     "category": "News & Reference",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "programming",
       "free"
@@ -3351,7 +3377,9 @@
       "books"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/EbookFoundation/free-programming-books",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Hackaday",
@@ -3798,16 +3826,18 @@
     "url": "https://osintframework.com",
     "description": "Interactive tree of OSINT tools organized by category. The starting point for any investigation.",
     "category": "OSINT",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "framework",
       "directory",
       "tools"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/lockfale/OSINT-Framework",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Maltego",
@@ -3994,9 +4024,9 @@
     "url": "https://carbon.now.sh",
     "description": "Create beautiful images of your source code. Perfect for blog posts, presentations, and social media.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "code",
       "sharing"
@@ -4005,7 +4035,9 @@
       "screenshots"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/carbon-app/carbon",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Can I Use",
@@ -4030,9 +4062,9 @@
     "url": "https://bundlephobia.com",
     "description": "Know the cost of adding a npm package before you install it. See size, download time, and composition.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [],
     "keywords": [
       "npm",
@@ -4040,7 +4072,9 @@
       "performance"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/pastelsky/bundlephobia",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "ray.so",
@@ -4063,9 +4097,9 @@
     "url": "https://responsively.app",
     "description": "Modified browser for responsive web development. Preview across multiple devices simultaneously.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "testing",
       "browser"
@@ -4074,16 +4108,18 @@
       "responsive"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/responsively-org/responsively-app",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Playwright",
     "url": "https://playwright.dev",
     "description": "Microsoft's end-to-end testing framework. Test across Chromium, Firefox, WebKit with one API.",
     "category": "Dev Tools",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "testing",
       "automation"
@@ -4093,7 +4129,9 @@
     ],
     "editorsPick": true,
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/microsoft/playwright",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "Insomnia",
@@ -9267,9 +9305,9 @@
     "url": "https://shakil-shahadat.github.io/awesome-piracy/",
     "description": "Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.",
     "category": "Indexes & Wikis",
-    "openSource": false,
+    "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "index",
       "tools",
@@ -9279,7 +9317,9 @@
       "piracy"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/shakil-shahadat/awesome-piracy",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "degoogle",
@@ -9288,7 +9328,7 @@
     "category": "Indexes & Wikis",
     "openSource": false,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-09-05",
     "tags": [
       "google",
       "alternatives",
@@ -9298,7 +9338,10 @@
       "degoogle"
     ],
     "linkStatus": "ok",
-    "lastCheckedAt": "2026-09-05"
+    "lastCheckedAt": "2026-09-05",
+    "repository": "https://github.com/tycrek/degoogle",
+    "openSourceNote": "The repository is archived and carries no licence at all, so the list is readable but not reusable.",
+    "lastReviewedAt": "2026-09-05"
   },
   {
     "name": "MediaSavvy",

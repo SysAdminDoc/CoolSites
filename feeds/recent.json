@@ -6,6 +6,21 @@
   "description": "Recently added and updated CoolSites directory entries.",
   "items": [
     {
+      "id": "https://addy.io",
+      "url": "https://addy.io",
+      "title": "addy.io",
+      "summary": "Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Privacy",
+        "email",
+        "aliases",
+        "forwarding"
+      ],
+      "_coolsites_category": "Privacy",
+      "_coolsites_slug": "addy-io"
+    },
+    {
       "id": "https://www.agno.com",
       "url": "https://www.agno.com",
       "title": "Agno",
@@ -55,6 +70,22 @@
       "_coolsites_slug": "arena-ai"
     },
     {
+      "id": "https://shakil-shahadat.github.io/awesome-piracy/",
+      "url": "https://shakil-shahadat.github.io/awesome-piracy/",
+      "title": "Awesome Piracy",
+      "summary": "Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Indexes & Wikis",
+        "index",
+        "tools",
+        "curated",
+        "piracy"
+      ],
+      "_coolsites_category": "Indexes & Wikis",
+      "_coolsites_slug": "awesome-piracy"
+    },
+    {
       "id": "https://github.com/awesome-windows11/windows11",
       "url": "https://github.com/awesome-windows11/windows11",
       "title": "Awesome Windows 11",
@@ -69,6 +100,128 @@
       ],
       "_coolsites_category": "Indexes & Wikis",
       "_coolsites_slug": "awesome-windows-11"
+    },
+    {
+      "id": "https://bundlephobia.com",
+      "url": "https://bundlephobia.com",
+      "title": "Bundlephobia",
+      "summary": "Know the cost of adding a npm package before you install it. See size, download time, and composition.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "npm",
+        "size",
+        "performance"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "bundlephobia"
+    },
+    {
+      "id": "https://carbon.now.sh",
+      "url": "https://carbon.now.sh",
+      "title": "Carbon",
+      "summary": "Create beautiful images of your source code. Perfect for blog posts, presentations, and social media.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "code",
+        "sharing",
+        "screenshots"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "carbon"
+    },
+    {
+      "id": "https://godbolt.org",
+      "url": "https://godbolt.org",
+      "title": "Compiler Explorer",
+      "summary": "See how compilers turn your code into assembly. Supports 30+ languages. Mind-blowing for understanding optimization.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "optimization",
+        "compiler",
+        "assembly"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "compiler-explorer"
+    },
+    {
+      "id": "https://gchq.github.io/CyberChef",
+      "url": "https://gchq.github.io/CyberChef",
+      "title": "CyberChef",
+      "summary": "GCHQ's data Swiss Army knife. Encode, decode, encrypt, compress and parse by chaining operations visually.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Security",
+        "encode",
+        "decode",
+        "crypto",
+        "gchq"
+      ],
+      "_coolsites_category": "Security",
+      "_coolsites_slug": "cyberchef"
+    },
+    {
+      "id": "https://tycrek.github.io/degoogle/",
+      "url": "https://tycrek.github.io/degoogle/",
+      "title": "degoogle",
+      "summary": "Massive list of Google alternatives for every service. Search, email, maps, drive, docs, photos, and more. All privacy-focused.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Indexes & Wikis",
+        "google",
+        "alternatives",
+        "privacy",
+        "degoogle"
+      ],
+      "_coolsites_category": "Indexes & Wikis",
+      "_coolsites_slug": "degoogle"
+    },
+    {
+      "id": "https://devdocs.io",
+      "url": "https://devdocs.io",
+      "title": "DevDocs",
+      "summary": "Fast, offline-capable API documentation browser. Combines 500+ docs into one searchable interface.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "documentation",
+        "api",
+        "reference"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "devdocs"
+    },
+    {
+      "id": "https://dnsviz.net",
+      "url": "https://dnsviz.net",
+      "title": "DNSViz",
+      "summary": "Visualizes DNSSEC authentication chains. See exactly where validation breaks down.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "DNS Tools",
+        "visualization",
+        "security",
+        "dnssec"
+      ],
+      "_coolsites_category": "DNS Tools",
+      "_coolsites_slug": "dnsviz"
+    },
+    {
+      "id": "https://explainshell.com",
+      "url": "https://explainshell.com",
+      "title": "ExplainShell",
+      "summary": "Paste any shell command and get a visual breakdown of every flag and argument. No more man page diving.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "shell",
+        "bash",
+        "learning"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "explainshell"
     },
     {
       "id": "https://github.com/fail2ban/fail2ban",
@@ -103,6 +256,21 @@
       "_coolsites_slug": "fmhy-safeguard"
     },
     {
+      "id": "https://ebookfoundation.github.io/free-programming-books/",
+      "url": "https://ebookfoundation.github.io/free-programming-books/",
+      "title": "Free Programming Books",
+      "summary": "Thousands of free programming books and resources. Every language and framework. Community-maintained.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "News & Reference",
+        "programming",
+        "free",
+        "books"
+      ],
+      "_coolsites_category": "News & Reference",
+      "_coolsites_slug": "free-programming-books"
+    },
+    {
       "id": "https://github.com/gitpod-io/gitpod",
       "url": "https://github.com/gitpod-io/gitpod",
       "title": "Gitpod",
@@ -117,6 +285,36 @@
       ],
       "_coolsites_category": "Dev Tools",
       "_coolsites_slug": "gitpod"
+    },
+    {
+      "id": "https://httpbin.org",
+      "url": "https://httpbin.org",
+      "title": "httpbin.org",
+      "summary": "HTTP request and response testing service. Echoes back headers, methods and auth, so it's great for debugging.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "http",
+        "testing",
+        "debug"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "httpbin-org"
+    },
+    {
+      "id": "https://jsoncrack.com",
+      "url": "https://jsoncrack.com",
+      "title": "JSONCrack",
+      "summary": "Visualize JSON, YAML, and XML as interactive graphs. Makes complex nested data instantly readable.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "json",
+        "visualization",
+        "data"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "jsoncrack"
     },
     {
       "id": "https://www.krea.ai",
@@ -167,6 +365,21 @@
       "_coolsites_slug": "libredirect"
     },
     {
+      "id": "https://lmms.io",
+      "url": "https://lmms.io",
+      "title": "LMMS",
+      "summary": "Free digital audio workstation for music production. Beat sequencer, synthesizers, and effects. Cross-platform.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Music & Audio",
+        "daw",
+        "beats",
+        "synthesizer"
+      ],
+      "_coolsites_category": "Music & Audio",
+      "_coolsites_slug": "lmms"
+    },
+    {
       "id": "https://www.maltego.com/pricing/",
       "url": "https://www.maltego.com/pricing/",
       "title": "Maltego",
@@ -183,6 +396,66 @@
       "_coolsites_slug": "maltego"
     },
     {
+      "id": "https://ssl-config.mozilla.org",
+      "url": "https://ssl-config.mozilla.org",
+      "title": "Mozilla SSL Config",
+      "summary": "SSL/TLS configuration generator. Best-practice configs for Apache, Nginx, HAProxy, and more.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Sysadmin",
+        "ssl",
+        "tls",
+        "configuration"
+      ],
+      "_coolsites_category": "Sysadmin",
+      "_coolsites_slug": "mozilla-ssl-config"
+    },
+    {
+      "id": "https://www.digitalocean.com/community/tools/nginx",
+      "url": "https://www.digitalocean.com/community/tools/nginx",
+      "title": "NGINXConfig",
+      "summary": "DigitalOcean's NGINX config generator. Answer questions, get a production-ready config file.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Sysadmin",
+        "config",
+        "generator",
+        "nginx"
+      ],
+      "_coolsites_category": "Sysadmin",
+      "_coolsites_slug": "nginxconfig"
+    },
+    {
+      "id": "https://nodered.org",
+      "url": "https://nodered.org",
+      "title": "Node-RED",
+      "summary": "Flow-based programming for IoT and automation. Wire together APIs, devices, and services visually.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Automation",
+        "iot",
+        "programming",
+        "flow"
+      ],
+      "_coolsites_category": "Automation",
+      "_coolsites_slug": "node-red"
+    },
+    {
+      "id": "https://osintframework.com",
+      "url": "https://osintframework.com",
+      "title": "OSINT Framework",
+      "summary": "Interactive tree of OSINT tools organized by category. The starting point for any investigation.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "OSINT",
+        "framework",
+        "directory",
+        "tools"
+      ],
+      "_coolsites_category": "OSINT",
+      "_coolsites_slug": "osint-framework"
+    },
+    {
       "id": "https://github.com/sundowndev/phoneinfoga",
       "url": "https://github.com/sundowndev/phoneinfoga",
       "title": "PhoneInfoga",
@@ -196,6 +469,21 @@
       ],
       "_coolsites_category": "OSINT",
       "_coolsites_slug": "phoneinfoga"
+    },
+    {
+      "id": "https://playwright.dev",
+      "url": "https://playwright.dev",
+      "title": "Playwright",
+      "summary": "Microsoft's end-to-end testing framework. Test across Chromium, Firefox, WebKit with one API.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "testing",
+        "automation",
+        "e2e"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "playwright"
     },
     {
       "id": "https://watch.plex.tv",
@@ -242,6 +530,36 @@
       ],
       "_coolsites_category": "News & Reference",
       "_coolsites_slug": "public-apis"
+    },
+    {
+      "id": "https://quickref.me",
+      "url": "https://quickref.me",
+      "title": "QuickRef.ME",
+      "summary": "Quick reference cheatsheets for everything. Programming, tools, and Linux commands in clean format.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "News & Reference",
+        "reference",
+        "cheatsheets",
+        "quick"
+      ],
+      "_coolsites_category": "News & Reference",
+      "_coolsites_slug": "quickref-me"
+    },
+    {
+      "id": "https://responsively.app",
+      "url": "https://responsively.app",
+      "title": "Responsively",
+      "summary": "Modified browser for responsive web development. Preview across multiple devices simultaneously.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "testing",
+        "browser",
+        "responsive"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "responsively"
     },
     {
       "id": "https://seerr.dev",
@@ -459,39 +777,6 @@
       ],
       "_coolsites_category": "Productivity",
       "_coolsites_slug": "trilium-notes"
-    },
-    {
-      "id": "https://veracrypt.io/",
-      "url": "https://veracrypt.io/",
-      "title": "VeraCrypt",
-      "summary": "Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems.",
-      "date_modified": "2026-08-25T00:00:00Z",
-      "tags": [
-        "Privacy",
-        "disk",
-        "security",
-        "encryption",
-        "volumes"
-      ],
-      "_coolsites_category": "Privacy",
-      "_coolsites_slug": "veracrypt"
-    },
-    {
-      "id": "https://github.com/vostride/agent-qa",
-      "url": "https://github.com/vostride/agent-qa",
-      "title": "Agent QA",
-      "summary": "Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage.",
-      "date_modified": "2026-08-16T00:00:00Z",
-      "tags": [
-        "Dev Tools",
-        "ai",
-        "testing",
-        "automation",
-        "qa",
-        "mcp"
-      ],
-      "_coolsites_category": "Dev Tools",
-      "_coolsites_slug": "agent-qa"
     }
   ]
 }
