@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-btFBo2/WPIQYE8FwStNPlwp8J9AcKUnsm0FFsejK9Bg='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-hH4U6gsxUJ9xYYJXlis/GDLXtAZiMkp72jL8hReuLow='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -988,6 +988,17 @@
     background: color-mix(in srgb, var(--text-primary) 7%, transparent);
   }
   .star-badge { color: var(--amber-text); }
+  .archived-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.62rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  }
   .link-badge {
     display: inline-flex;
     align-items: center;
@@ -3391,6 +3402,11 @@ function buildCard(site, index) {
   const pickBadge = site.editorsPick ? '<span class="editors-pick-badge"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Pick</span>' : '';
   const altBadge = site.alternativeTo?.length ? `<span class="alternative-badge">Alt to ${escHtml(site.alternativeTo.slice(0, 2).join(', '))}</span>` : '';
   const starBadge = starRecord ? `<span class="star-badge" title="GitHub stars cached ${escAttr(starRecord.fetchedAt || '')}">&#9733; ${formatCompact(starRecord.stars)}</span>` : '';
+  // The author's own statement that they have stopped. Worth more than any
+  // threshold guessed from dates, and the question this audience asks first.
+  const archivedBadge = starRecord?.archived
+    ? '<span class="archived-badge" title="The author has archived the repository. It still works; nobody is developing it.">Archived</span>'
+    : '';
   // The reader's question is "is this still there?", and the honest answer has
   // two parts: what the checker saw, and when. A healthy check is a quiet date.
   // Anything else names the status, because "blocked" and "dead" mean very
@@ -3412,7 +3428,7 @@ function buildCard(site, index) {
           <div class="card-header-text">
             <div class="card-category" style="--cat-c:${escAttr(category.color)}" title="${escAttr(category.blurb)}">${escHtml(site.category)}</div>
             <h3 class="card-title">${searchTerm ? highlightMatch(site.name, searchTerm) : escHtml(site.name)}${pickBadge}</h3>
-            <div class="card-meta-row">${altBadge}${starBadge}${linkBadge}</div>
+            <div class="card-meta-row">${altBadge}${starBadge}${archivedBadge}${linkBadge}</div>
           </div>
           ${compareButton}
           <button class="card-bookmark${starClass}" title="${bm ? 'Remove bookmark' : 'Bookmark'}" aria-label="${bm ? 'Remove bookmark for ' : 'Bookmark '}${escAttr(site.name)}" aria-pressed="${bm}" data-action="bookmark" data-url="${escUrl}">

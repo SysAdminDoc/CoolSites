@@ -120,3 +120,19 @@ test('an accepted redirect names where it goes', () => {
     assert.notEqual(site.acceptedRedirect, site.url, `${site.name}: accepting the address it already has means nothing`);
   }
 });
+
+test('an archived project says so on its card', () => {
+  // The author's own statement that they have stopped. It is the question this
+  // audience asks first, and a star count answers the opposite one: how popular
+  // something was, not whether anyone is still there.
+  const stars = JSON.parse(fs.readFileSync(path.join(ROOT, 'stars.json'), 'utf8'));
+  const records = Object.values(stars);
+  assert.ok(records.length > 0, 'there should be star records to reason about');
+  for (const record of records) {
+    assert.equal(typeof record.archived, 'boolean', `${record.fullName}: archived has to be recorded, not inferred`);
+    assert.match(record.pushedAt, /^\d{4}-\d{2}-\d{2}T/, `${record.fullName}: pushedAt has to be a timestamp`);
+  }
+  assert.ok(records.some(record => record.archived), 'the archived state should actually be in use');
+  assert.match(INDEX, /starRecord\?\.archived/, 'the card has to read the flag');
+  assert.match(INDEX, /class="archived-badge"/);
+});

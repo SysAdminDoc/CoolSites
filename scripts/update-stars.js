@@ -55,6 +55,12 @@ async function fetchRepo(fullName) {
         stars: repo.stargazers_count,
         forks: repo.forks_count,
         openIssues: repo.open_issues_count,
+        // The two signals this audience actually asks about. A star count says
+        // a project was once popular; these say whether anyone is still there.
+        // archived is the author's own statement that they have stopped, which
+        // is worth more than any threshold guessed from dates.
+        pushedAt: repo.pushed_at,
+        archived: Boolean(repo.archived),
         fetchedAt
       };
       updated++;
@@ -78,6 +84,25 @@ async function fetchRepo(fullName) {
   const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
   fs.writeFileSync(cachePath, `${JSON.stringify(ordered, null, 2)}\n`);
   console.log(`Updated ${updated}/${repos.length} GitHub star records (${failed} failed, ${pruned} stale removed)`);
+
+  // The removal bar, reported rather than acted on. The README says a project
+  // that has shipped nothing in twelve months becomes a candidate, and that some
+  // tools are simply finished, so this is a prompt to go and look.
+  const byRepo = new Map(sites.map(site => [repoFromUrl(site.repository || site.url)?.toLowerCase(), site]).filter(([key]) => key));
+  const cutoff = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString();
+  const stale = [];
+  for (const record of Object.values(ordered)) {
+    const site = byRepo.get(record.fullName.toLowerCase());
+    if (!site) continue;
+    if (record.archived) stale.push(`${site.name}: archived by its author`);
+    else if (record.pushedAt && record.pushedAt < cutoff) stale.push(`${site.name}: nothing pushed since ${record.pushedAt.slice(0, 10)}`);
+  }
+  if (stale.length) {
+    console.log(`
+${stale.length} ${stale.length === 1 ? 'entry has' : 'entries have'} crossed the twelve-month mark in the README's rules:`);
+    for (const line of stale) console.log(`  ${line}`);
+    console.log('That is a prompt to go and look, not a verdict. Some tools are simply finished.');
+  }
 })().catch(error => {
   console.error(error);
   process.exit(1);

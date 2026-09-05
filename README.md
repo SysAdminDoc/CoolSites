@@ -479,7 +479,10 @@ history before it's eligible. Plenty of good tools launch and vanish inside a
 year, and a directory that lists them is a directory of dead links. If a project
 hasn't shipped anything or answered an issue in twelve months, it becomes a
 candidate for removal. Some tools are simply finished, so this is a prompt to go
-look rather than an automatic delete.
+look rather than an automatic delete. `npm run update:stars` records whether each
+repository is archived and when it was last pushed, and prints the ones that have
+crossed that line. A card says "Archived" when the author has said so themselves,
+which is worth more than any threshold guessed from dates.
 
 **Say if it's yours.** Submitting your own project is fine and several good
 entries got here that way. Say so in the submission. What gets declined is the
