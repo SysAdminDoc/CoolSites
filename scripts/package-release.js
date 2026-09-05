@@ -2,7 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { hashesFor } = require('./lib/csp');
+const { hashesFor, styleHashesFor } = require('./lib/csp');
 
 const root = path.resolve(__dirname, '..');
 const dist = path.join(root, 'dist');
@@ -47,10 +47,11 @@ for (const [file, html] of [[`coolsites-v${pkg.version}.min.html`, minified], ['
   const policy = /<meta http-equiv="Content-Security-Policy" content="([^"]+)">/.exec(html);
   if (!policy) throw new Error(`${file} has no content security policy`);
   const listed = new Set((policy[1].match(/'sha256-[^']+'/g) || []));
-  const actual = hashesFor(html);
-  const orphaned = actual.filter(hash => !listed.has(hash));
-  if (orphaned.length) {
-    throw new Error(`${file} contains ${orphaned.length} inline script(s) the policy does not allow. The browser would refuse to run them. Run npm run generate before packaging.`);
+  for (const [what, extract] of [['script', hashesFor], ['stylesheet', styleHashesFor]]) {
+    const orphaned = extract(html).filter(hash => !listed.has(hash));
+    if (orphaned.length) {
+      throw new Error(`${file} contains ${orphaned.length} inline ${what}(s) the policy does not allow. The browser would refuse them. Run npm run generate before packaging.`);
+    }
   }
 }
 

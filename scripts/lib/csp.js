@@ -14,12 +14,12 @@
 // one, injected or otherwise. Editing a script by hand and forgetting to
 // regenerate does not fail open: the page simply stops working, loudly.
 //
-// style-src still carries 'unsafe-inline'. Hashes cover a whole <style> element
-// but not a style="" attribute, and 28 of those are still in the markup across
-// the two pages, four of them built at render time. Covering those needs
-// 'unsafe-hashes', which the CSP spec's own wording calls unsafe, so the honest
-// move is to leave style-src alone until the attributes are gone rather than
-// claim a protection with a hole in it.
+// style-src is hashed the same way, and could not be until the 28 style
+// attributes were out of the markup: a hash covers a whole <style> element and
+// never a style="" attribute. Covering attributes needs 'unsafe-hashes', which
+// the CSP spec's own wording calls unsafe. The colours that used to live in
+// those attributes are set through the CSSOM instead, which CSP does not govern
+// and which therefore needs no hash at all.
 
 const crypto = require('node:crypto');
 
@@ -43,6 +43,14 @@ function withoutComments(html) {
   return html.replace(/<!--[\s\S]*?-->/g, match => match.replace(/[^\n]/g, ''));
 }
 
+// A <style> element has no equivalent of type="module" or src to reason about:
+// every one of them is a stylesheet the browser applies, so all of them count.
+const INLINE_STYLE = /<style>([\s\S]*?)<\/style>/gi;
+
+function digest(body) {
+  return `'sha256-${crypto.createHash('sha256').update(body, 'utf8').digest('base64')}'`;
+}
+
 function hashesFor(html) {
   const digests = [];
   for (const [, openingTag, body] of withoutComments(html).matchAll(EXECUTABLE_SCRIPT)) {
@@ -50,7 +58,16 @@ function hashesFor(html) {
     // covered by 'self'.
     if (/\ssrc\s*=/i.test(openingTag)) continue;
     if (!body.trim()) continue;
-    digests.push(`'sha256-${crypto.createHash('sha256').update(body, 'utf8').digest('base64')}'`);
+    digests.push(digest(body));
+  }
+  return [...new Set(digests)];
+}
+
+function styleHashesFor(html) {
+  const digests = [];
+  for (const [, body] of withoutComments(html).matchAll(INLINE_STYLE)) {
+    if (!body.trim()) continue;
+    digests.push(digest(body));
   }
   return [...new Set(digests)];
 }
@@ -58,11 +75,11 @@ function hashesFor(html) {
 // Both pages ship the same policy, so the sources are the union across them.
 // A per-page policy would be tighter, but the two are asserted identical
 // elsewhere precisely so neither can quietly drift from the other.
-function buildPolicy(scriptHashes) {
+function buildPolicy(scriptHashes, styleHashes) {
   return [
     "default-src 'self'",
     `script-src 'self' ${scriptHashes.join(' ')}`.trim(),
-    "style-src 'self' 'unsafe-inline'",
+    `style-src 'self' ${styleHashes.join(' ')}`.trim(),
     "img-src 'self' data:",
     "font-src 'self'",
     "connect-src 'self'",
@@ -86,7 +103,8 @@ function applyPolicy(html, policy) {
 // match whatever scripts those files actually contain right now.
 function rewritePolicies(pages) {
   const hashes = [...new Set(Object.values(pages).flatMap(hashesFor))].sort();
-  const policy = buildPolicy(hashes);
+  const styleHashes = [...new Set(Object.values(pages).flatMap(styleHashesFor))].sort();
+  const policy = buildPolicy(hashes, styleHashes);
   const out = {};
   const missing = [];
   for (const [file, html] of Object.entries(pages)) {
@@ -94,7 +112,7 @@ function rewritePolicies(pages) {
     if (!result.ok) missing.push(file);
     out[file] = result.html;
   }
-  return { pages: out, policy, hashes, missing };
+  return { pages: out, policy, hashes, styleHashes, missing };
 }
 
-module.exports = { hashesFor, buildPolicy, rewritePolicies };
+module.exports = { hashesFor, styleHashesFor, buildPolicy, rewritePolicies };

@@ -126,9 +126,9 @@ Permissions-Policy: geolocation=(), microphone=(), camera=()
 ```
 
 The policy is not written out here because it is not a constant. `script-src`
-lists a SHA-256 for every inline script, and `npm run generate` recomputes those
-as its last step, so copying the string anywhere means copying something that
-goes stale the next time a script changes. Read it out of the `<meta>` tag in
+and `style-src` each list a SHA-256 for every inline block, and `npm run generate`
+recomputes those as its last step, so copying the string anywhere means copying
+something that goes stale the next time a script or a stylesheet changes. Read it out of the `<meta>` tag in
 `index.html`, which is what `npm run serve` does. The only thing worth adding on
 top is `frame-ancestors`, which browsers ignore in a meta tag, so the copy hosted
 on GitHub Pages genuinely does not have it.
