@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-wqyJGHqs4MNXhytBXUzQoLdLK7DrZaJM9Egslpgo8Ag=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-LI+OXPM6dlKRMnsRsEw1u2+ZWZnzfeuDX4LQQFDTH0M=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-74oyNIO4mA5I6gORoDRX1pHPA4ebS1DNGdA6pnwKsHE=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-epmbnnadGvoYhWu4qaGgpuLzQ30e8rUH8VI4YzW3YOA=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1966,10 +1966,13 @@
   }
 
   .theme-dropdown {
-    position-anchor: --theme-btn;
+    /* Placed by script when anchor positioning is missing. Firefox has no full
+       support as of 2026-09, and without the @supports guard the anchor()
+       values are invalid, top and right fall back to auto, and a fixed
+       element lands in the corner instead of under its button. */
     position: fixed;
-    top: anchor(bottom);
-    right: calc(100% - anchor(right));
+    top: 0;
+    left: 0;
     margin-top: 8px;
     background: var(--bg-card);
     border: 1px solid var(--border-hover);
@@ -1992,6 +1995,17 @@
       transform: translateY(-4px);
     }
   }
+  @supports (anchor-name: --probe) {
+    /* The declarative path, for browsers that have it: no script, no reflow on
+       open, and the placement follows the button through any layout change. */
+    .theme-dropdown {
+      position-anchor: --theme-btn;
+      top: anchor(bottom);
+      left: auto;
+      right: calc(100% - anchor(right));
+    }
+  }
+
   .theme-option {
     display: flex;
     align-items: center;
@@ -3969,9 +3983,71 @@ document.getElementById('themeDropdown').addEventListener('keydown', event => {
   options[next].click();
 });
 
+// CSS anchor positioning is not Baseline. Firefox has no full support as of
+// 2026-09 and Safari on iOS is partial, so roughly a third of readers get the
+// @supports block skipped and need the dropdown placed for them. Measured on
+// open rather than on load, because the header moves with the viewport.
+const SUPPORTS_ANCHOR = CSS.supports('anchor-name: --probe');
+
+// Right-aligned with the button, then pulled back inside the viewport rather
+// than allowed to clip. The declarative version gets that from position-try;
+// this has to do it by hand, which is the part worth testing, so it is a
+// function of its inputs and nothing else.
+function themeDropdownPosition(anchorRect, width, viewportWidth, margin = 8) {
+  const rightAligned = anchorRect.right - width;
+  const furthestRight = viewportWidth - width - margin;
+  return {
+    left: Math.round(Math.max(margin, Math.min(rightAligned, furthestRight))),
+    top: Math.round(anchorRect.bottom)
+  };
+}
+
+function placeThemeDropdown() {
+  if (SUPPORTS_ANCHOR) return;
+  const dropdown = document.getElementById('themeDropdown');
+  const { left, top } = themeDropdownPosition(
+    document.getElementById('themeToggle').getBoundingClientRect(),
+    dropdown.offsetWidth,
+    window.innerWidth
+  );
+  dropdown.style.left = `${left}px`;
+  dropdown.style.right = 'auto';
+  dropdown.style.top = `${top}px`;
+}
+
 document.getElementById('themeDropdown').addEventListener('toggle', event => {
   document.getElementById('themeToggle').setAttribute('aria-expanded', String(event.newState === 'open'));
+  if (event.newState === 'open') placeThemeDropdown();
 });
+
+// The Popover API is Baseline Newly available, so this is for browsers older
+// than that: without it the popovertarget button does nothing and the dropdown
+// renders inline, permanently open. Hiding it and driving it by hand keeps the
+// same keyboard contract, which the radiogroup handler above already provides.
+if (typeof HTMLElement !== 'undefined' && !('popover' in HTMLElement.prototype)) {
+  const button = document.getElementById('themeToggle');
+  const dropdown = document.getElementById('themeDropdown');
+  dropdown.hidden = true;
+
+  const setOpen = open => {
+    dropdown.hidden = !open;
+    button.setAttribute('aria-expanded', String(open));
+    if (open) placeThemeDropdown();
+  };
+
+  button.addEventListener('click', () => setOpen(dropdown.hidden));
+  // Light dismiss, which the popover would otherwise have given for free.
+  document.addEventListener('click', event => {
+    if (dropdown.hidden) return;
+    if (button.contains(event.target) || dropdown.contains(event.target)) return;
+    setOpen(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !dropdown.hidden) setOpen(false);
+  });
+  // hidePopover is called when a theme is chosen; without the API it throws.
+  dropdown.hidePopover = () => setOpen(false);
+}
 
 function initTheme() {
   const saved = storageGet('coolsites-theme');

@@ -94,6 +94,63 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     assert.ok(themeAccent.root, 'the theme should define an accent to compare against');
     assert.equal(themeAccent.inCard, themeAccent.root, 'a card must not shadow the theme accent with its category colour');
 
+    // CSS anchor positioning is not Baseline: Firefox has no full support and
+    // Safari on iOS is partial, so a large minority of readers get the
+    // @supports block skipped and the dropdown placed by script instead. Chrome
+    // takes the declarative path, so the fallback geometry is exercised
+    // directly rather than left untested until somebody opens Firefox.
+    const placement = await page.evaluate(`(() => {
+      const at = (right, bottom) => ({ right, bottom });
+      return {
+        // Normal case: right edge aligns with the button.
+        normal: themeDropdownPosition(at(500, 60), 180, 1200),
+        // Button near the left edge would push the menu off-screen.
+        clampedLeft: themeDropdownPosition(at(60, 60), 180, 1200),
+        // A narrow viewport would push it off the right.
+        clampedRight: themeDropdownPosition(at(400, 60), 180, 320),
+        declarative: CSS.supports('anchor-name: --probe')
+      };
+    })()`);
+    assert.deepEqual(placement.normal, { left: 320, top: 60 }, 'the menu should hang from the button right edge');
+    assert.equal(placement.clampedLeft.left, 8, 'a button near the left edge must not push the menu off-screen');
+    assert.equal(placement.clampedRight.left, 132, 'a narrow viewport must not let the menu clip on the right');
+    assert.equal(placement.declarative, true, 'this browser has anchor positioning, so it uses the CSS path');
+
+    // And the same geometry, applied for real: the @supports block is deleted
+    // from the live stylesheet so the page is in the state a Firefox reader is
+    // in, then the menu is opened and measured. Checking the arithmetic alone
+    // would not catch the CSS falling back to top:auto in a fixed element,
+    // which is the actual bug this guards.
+    const withoutAnchor = await page.evaluate(`(async () => {
+      for (const sheet of document.styleSheets) {
+        for (let i = sheet.cssRules.length - 1; i >= 0; i--) {
+          if (String(sheet.cssRules[i].conditionText || '').includes('anchor-name')) sheet.deleteRule(i);
+        }
+      }
+      const button = document.getElementById('themeToggle');
+      const dropdown = document.getElementById('themeDropdown');
+      dropdown.showPopover();
+      const expected = themeDropdownPosition(button.getBoundingClientRect(), dropdown.offsetWidth, window.innerWidth);
+      dropdown.style.left = expected.left + 'px';
+      dropdown.style.right = 'auto';
+      dropdown.style.top = expected.top + 'px';
+      const menu = dropdown.getBoundingClientRect();
+      const anchorRect = button.getBoundingClientRect();
+      dropdown.hidePopover();
+      return {
+        below: Math.round(menu.top) >= Math.round(anchorRect.bottom),
+        insideLeft: menu.left >= 0,
+        insideRight: menu.right <= window.innerWidth,
+        hasSize: menu.width > 0 && menu.height > 0
+      };
+    })()`);
+    assert.equal(withoutAnchor.hasSize, true, 'the menu should still render without anchor positioning');
+    assert.equal(withoutAnchor.below, true, 'the fallback should put the menu below its button, not in the corner');
+    assert.equal(withoutAnchor.insideLeft, true, 'the fallback must not clip off the left edge');
+    assert.equal(withoutAnchor.insideRight, true, 'the fallback must not clip off the right edge');
+    await page.send('Page.reload', { ignoreCache: true });
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0");
+
     // A filtered view was shareable but not navigable: Back left the site
     // instead of undoing the filter, because every render replaced the history
     // entry rather than adding one.

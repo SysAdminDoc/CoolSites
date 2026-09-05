@@ -446,6 +446,7 @@ listing a project twice fails the build.
 | Component | Technology |
 |-----------|-----------|
 | Structure | Semantic HTML5 with ARIA |
+| Theme menu | Popover plus CSS anchor positioning, with a scripted fallback for browsers that have neither |
 | Styling | Vanilla CSS (custom properties, `color-mix`, `content-visibility`, forced-colors) |
 | Logic | Vanilla JavaScript, no framework |
 | Fonts | Outfit and JetBrains Mono, self-hosted as woff2 |
