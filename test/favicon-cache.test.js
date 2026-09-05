@@ -96,3 +96,21 @@ test('the cache holds no icon for a domain that left the directory', () => {
   const orphans = Object.keys(cache).filter(domain => !live.has(domain));
   assert.deepEqual(orphans, [], 'an icon for a delisted domain is payload every visitor downloads for nothing');
 });
+
+test('no single icon is fat enough to matter on its own', () => {
+  // Four icons were 21% of this file before they were re-encoded: a 58KB
+  // multi-resolution .ico, a 46KB PNG, a 43KB .ico and a 20KB .ico. Nothing in
+  // the fetch path stopped them, because the size only shows up in aggregate.
+  const cache = JSON.parse(fs.readFileSync(path.join(ROOT, 'favicons.json'), 'utf8'));
+  const fat = Object.entries(cache)
+    .filter(([, value]) => value.length > 8 * 1024 && !value.startsWith('data:image/svg+xml'))
+    .map(([domain, value]) => `${domain} ${(value.length / 1024).toFixed(1)}KB`);
+  assert.deepEqual(fat, [], 'run npm run update:favicons to re-encode these at 32px');
+});
+
+test('the whole cache stays inside its download budget', () => {
+  // Not a style rule. favicons.json is fetched in full on every visit, so this
+  // number is the largest single thing a reader waits for.
+  const bytes = fs.readFileSync(path.join(ROOT, 'favicons.json'), 'utf8').length;
+  assert.ok(bytes <= 700 * 1024, `favicons.json is ${(bytes / 1024).toFixed(0)}KB, over the 700KB budget`);
+});

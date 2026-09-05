@@ -192,6 +192,21 @@ if (require.main !== module) return;
     if (!known.has(domain)) { delete cache[domain]; pruned++; }
   }
 
+  // Every byte here is downloaded by every reader, so anything the fallbacks
+  // handed back at 180px or as a multi-resolution .ico gets re-encoded at the
+  // size the page renders. Skipped with --no-reencode, which is what you want
+  // when Chrome is not available and you only need the fetch.
+  if (!process.argv.includes('--no-reencode')) {
+    const result = await reencodeAll(cache, {
+      onProgress: (done, total) => process.stdout.write(`\r  re-encoding ${done}/${total}`)
+    });
+    if (result.checked) {
+      process.stdout.write('\n');
+      console.log(`Re-encoded ${result.shrunk} of ${result.checked} oversized icons at ${RENDER_SIZE}px, saving ${(result.savedBytes / 1024).toFixed(0)}KB`);
+      for (const failure of result.failures) console.warn(`  could not re-encode ${failure}`);
+    }
+  }
+
   const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
   fs.writeFileSync(output, `${JSON.stringify(ordered, null, 2)}\n`);
   const covered = Object.keys(ordered).length;

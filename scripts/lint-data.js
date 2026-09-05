@@ -112,6 +112,14 @@ const NON_REPOSITORY_PATHS = new Set([
   'enterprise', 'login', 'join', 'search', 'notifications'
 ]);
 
+// Measured, not aspirational. After re-encoding at 32px the whole cache is
+// about 593KB across 525 domains, so roughly 1.1KB an icon, and the largest
+// raster is 3KB. The headroom is for the directory growing, not for one icon
+// getting fat: an SVG is exempt from the per-icon cap because rasterising a
+// vector to 32px would trade away the thing that makes it worth keeping.
+const MAX_ICON_URI_BYTES = 8 * 1024;
+const MAX_FAVICON_FILE_BYTES = 700 * 1024;
+
 function forgeRepository(value) {
   try {
     const url = new URL(value);
@@ -358,9 +366,21 @@ function validateSourceData() {
       addError(`favicons.${domain}: invalid data URI`);
       return;
     }
-    if (data.length > 300000) addError(`favicons.${domain}: data URI is too large`);
+    // 300KB was a sanity check against a corrupt payload, not a budget. The
+    // real cost is that favicons.json ships in full to every reader, so an icon
+    // arriving as a multi-resolution .ico or a 180px apple-touch-icon is paid
+    // for by everyone. npm run update:favicons re-encodes anything oversized at
+    // 32px; these two ceilings are what stops one slipping past it.
+    if (data.length > MAX_ICON_URI_BYTES && !data.startsWith('data:image/svg+xml')) {
+      addError(`favicons.${domain}: ${(data.length / 1024).toFixed(1)}KB is over the ${(MAX_ICON_URI_BYTES / 1024)}KB per-icon ceiling. Run npm run update:favicons to re-encode it at 32px.`);
+    }
     if (!looksLikeImage(data)) addError(`favicons.${domain}: payload is not an image`);
   });
+
+  const faviconBytes = JSON.stringify(favicons || {}).length;
+  if (faviconBytes > MAX_FAVICON_FILE_BYTES) {
+    addError(`favicons.json is ${(faviconBytes / 1024).toFixed(0)}KB, over the ${(MAX_FAVICON_FILE_BYTES / 1024)}KB ceiling. Every reader downloads this file in full.`);
+  }
 
   return { sites: Array.isArray(sites) ? sites : [], categories: Array.isArray(categories) ? categories : [], collections: Array.isArray(collections) ? collections : [], urls };
 }

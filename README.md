@@ -172,7 +172,7 @@ npm test           # drive the app in headless Chrome over CDP
 npm run package    # write dist/ with a minified single-page build
 npm run check:links      # check every URL in sites.json and write a report
 npm run update:stars     # refresh stars.json (set GITHUB_TOKEN to avoid the 60/hour cap)
-npm run update:favicons  # refresh favicons.json
+npm run update:favicons  # refresh favicons.json and re-encode oversized icons
 ```
 
 There is no lockfile because there is nothing to lock. No runtime dependencies,
@@ -180,6 +180,26 @@ no dev dependencies, no framework, no build step to view the page. That is a
 deliberate choice rather than an oversight, and `npm run lint` enforces it: the
 day a dependency appears in `package.json` without a `package-lock.json` beside
 it, the build fails.
+
+### Favicon weight
+
+`favicons.json` ships in full on every visit, so it is the largest single thing a
+reader waits for. The generator asks Google for a 32px icon, but Google has no
+icon for a long tail of domains, and the fallbacks hand back whatever the site
+happens to have: a multi-resolution `.ico` carrying every size from 16 to 256px,
+or an apple-touch-icon at 180. Four of those were 21% of the file on their own,
+the largest at 58KB.
+
+`npm run update:favicons` now decodes anything over 2KB in the headless Chrome
+that already runs the tests, redraws it at 32px, and keeps whichever of WebP or
+PNG comes out smaller. It only keeps a result that actually shrank, so an icon
+that was already the right size is left alone, and SVG is skipped entirely
+because rasterising a vector trades away the thing worth keeping. That took the
+cache from 827KB to 593KB across 525 domains. Pass `--no-reencode` to skip it
+when Chrome is unavailable and you only need the fetch.
+
+Two ceilings stop it creeping back: 8KB for any one raster icon, and 700KB for
+the file. Both fail the lint rather than warn.
 
 `npm run lint` is the gate that matters. It validates every data file against
 the schemas, rejects duplicate and colliding URLs, checks the generated feeds
