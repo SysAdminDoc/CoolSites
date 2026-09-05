@@ -89,18 +89,49 @@ body:
     id: tags
     attributes:
       label: Tags (comma-separated)
+      description: "Shared terms from tags.json become tags. Anything more specific becomes a keyword, which search reads the same way."
       placeholder: "whiteboard, drawing, collaboration, open-source"
     validations:
       required: true
+
+  - type: input
+    id: first_release
+    attributes:
+      label: When was this first released publicly?
+      description: "Roughly is fine. A project needs six months of public history to be eligible, because a directory of things that launched and vanished is a directory of dead links."
+      placeholder: "March 2024"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affiliation
+    attributes:
+      label: Are you involved with this project?
+      description: "Saying yes is fine and several good entries got here that way. Not saying is the problem."
+      options:
+        - "No, I just use it"
+        - "Yes, I work on it or for them"
+        - "Yes, I was asked to submit it"
+    validations:
+      required: true
+
+  - type: input
+    id: other_submissions
+    attributes:
+      label: If it is yours, name two entries you have no stake in
+      description: "A self-submission should also propose two sites you are not involved with. It costs the same time it costs whoever reviews yours. Leave blank if this is not your project."
+      placeholder: "https://example.org, https://another.example"
 
   - type: checkboxes
     id: checklist
     attributes:
       label: Submission Checklist
       options:
-        - label: Site is free to use (or has a meaningful free tier)
+        - label: Site is free to use, or the free tier stands on its own without the paid one
           required: true
         - label: Site is not already in the directory
           required: true
         - label: I have verified the URL works
+          required: true
+        - label: I have read the inclusion rules in the README and this entry meets them
           required: true

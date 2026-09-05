@@ -379,12 +379,47 @@ Contributions are welcome. To add a site:
 3. Run `npm run build`, which validates the entry and updates the counts and feeds
 4. Open a pull request with the generated files included
 
-**Guidelines**
+### What gets in
 
-- Every site has to be free, or have a free tier that is actually useful on its own.
-- Descriptions say what it does and why it is worth knowing about. Keep them to a sentence or two.
-- Prefer open source when there is a reasonable alternative.
-- No affiliate links, no sponsored entries, no ads.
+These are the rules submissions are actually judged against. They're written down
+because the first two we turned down were judged against reasons invented in the
+reply, which isn't fair to anyone who spends time on a submission.
+
+**Free means free.** The site has to be free, or have a free tier that stands on
+its own. A tier that exists to show you what you're missing doesn't count. The
+submission we declined offered the last two days of results plus three full
+reports a week, with everything else behind a $49.99 a year subscription. Compare
+that against what's already listed: Ollama and Hugging Face are free to use for
+the thing they're for. That's the bar.
+
+**Six months old, and still moving.** A project needs six months of public
+history before it's eligible. Plenty of good tools launch and vanish inside a
+year, and a directory that lists them is a directory of dead links. If a project
+hasn't shipped anything or answered an issue in twelve months, it becomes a
+candidate for removal. Some tools are simply finished, so this is a prompt to go
+look rather than an automatic delete.
+
+**Say if it's yours.** Submitting your own project is fine and several good
+entries got here that way. Say so in the submission. What gets declined is the
+pattern where the same link lands in thirty directories the same week, because
+that's someone buying backlinks, not telling us about a tool. Every outbound link
+here carries `rel="nofollow ugc"`, so there's nothing to buy.
+
+**If it's yours, bring two that aren't.** A self-submission should also propose
+two entries you have no stake in. It costs you the same twenty minutes it costs
+whoever reviews it, and it's the difference between contributing to a directory
+and using one.
+
+**No affiliate links, no sponsored entries, no ads.** There is no paid placement
+and there never will be.
+
+**Descriptions** say what it does and why it's worth knowing about. One or two
+sentences. Prefer open source when there's a reasonable alternative.
+
+A worked example of a good self-submission: [PR #8](https://github.com/SysAdminDoc/CoolSites/pull/8)
+disclosed the affiliation, set `openSource: false` correctly for a
+source-available licence rather than claiming otherwise, and ran the lint before
+opening.
 
 ## License
 
