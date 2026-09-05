@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-qynlkolua/KQNGfXTbKNBZU42tAv5D8LG2/MtWYGrc4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1Lv4sNWKhIt66+zUFP+X53/UtcXacccE8bijLlcSZ/o=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-q4kQQYFnNbeQr9EYY+jeAH3ubSRHCxIfAtXNRVhuGZU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2952,7 +2952,7 @@ function readUrlState() {
     linkissues: p.get('linkissues') === '1'
   };
 }
-function writeUrlState() {
+function currentUrlState() {
   const p = new URLSearchParams();
   if (searchTerm) p.set('q', searchTerm);
   if (activeFilter !== 'All') p.set('cat', activeFilter);
@@ -2962,9 +2962,66 @@ function writeUrlState() {
   if (noAuthOnly) p.set('noauth', '1');
   if (picksOnly) p.set('picks', '1');
   if (linkIssuesOnly) p.set('linkissues', '1');
-  const qs = p.toString();
-  history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+  return p;
 }
+
+// Everything except the search term. Typing has to be able to change the URL
+// without filling the back stack with one entry per character, and everything
+// else has to leave an entry so Back actually undoes it.
+function withoutQuery(params) {
+  const copy = new URLSearchParams(params);
+  copy.delete('q');
+  return copy.toString();
+}
+
+function writeUrlState() {
+  const params = currentUrlState();
+  const qs = params.toString();
+  if (qs === location.search.replace(/^\?/, '')) return;
+
+  const previous = new URLSearchParams(location.search);
+  // One history entry per search, not per keystroke: the first character
+  // pushes, the rest of the word replaces, and clearing the box replaces its
+  // way back to that same entry. Back then leaves the search entirely.
+  const sameFilters = withoutQuery(previous) === withoutQuery(params);
+  const startedSearching = !previous.get('q') && Boolean(params.get('q'));
+  const url = qs ? `?${qs}` : location.pathname;
+  if (sameFilters && !startedSearching) history.replaceState(null, '', url);
+  else history.pushState(null, '', url);
+}
+
+// Puts the controls back in step with the state after Back or Forward. The
+// alternative is reloading, which throws away the scroll position and the
+// bookmark dock for something the page can just redraw.
+function syncControlsToState() {
+  document.getElementById('searchInput').value = searchTerm;
+  document.getElementById('sortSelect').value = sortMode;
+  const isList = viewMode === 'list';
+  for (const [id, active] of [['listViewBtn', isList], ['gridViewBtn', !isList]]) {
+    const button = document.getElementById(id);
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  }
+  updateMetadataFilters();
+  buildFilters();
+}
+
+window.addEventListener('popstate', () => {
+  const state = readUrlState();
+  searchTerm = state.q;
+  activeFilter = state.cat;
+  viewMode = state.view;
+  sortMode = state.sort;
+  openSourceOnly = state.oss;
+  noAuthOnly = state.noauth;
+  picksOnly = state.picks;
+  linkIssuesOnly = state.linkissues;
+  // A pending keystroke would otherwise land after the render and put the
+  // search term the reader just navigated away from straight back.
+  clearTimeout(_searchTimer);
+  syncControlsToState();
+  renderGrid();
+});
 const _initState = readUrlState();
 let activeFilter = _initState.cat;
 let searchTerm = _initState.q;

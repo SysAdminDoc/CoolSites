@@ -15,16 +15,17 @@
 // regenerate does not fail open: the page simply stops working, loudly.
 //
 // style-src still carries 'unsafe-inline'. Hashes cover a whole <style> element
-// but not a style="" attribute, and 25 of those are still in the markup, four of
-// them built at render time. Covering them needs 'unsafe-hashes', which the CSP
-// spec's own wording calls unsafe, so the honest move is to leave style-src as
-// it is until the attributes are gone rather than claim a protection with a
-// hole in it.
+// but not a style="" attribute, and 28 of those are still in the markup across
+// the two pages, four of them built at render time. Covering those needs
+// 'unsafe-hashes', which the CSP spec's own wording calls unsafe, so the honest
+// move is to leave style-src alone until the attributes are gone rather than
+// claim a protection with a hole in it.
 
 const crypto = require('node:crypto');
 
 // A <script> with a type the browser does not execute is data, not code, and is
 // outside script-src entirely. The JSON-LD block is the one here.
+//
 // The opening tag is captured separately from the body on purpose. Testing the
 // whole match for a src attribute looked equivalent and was not: the 93KB
 // application script assigns element.src in its own code, so it read as an
@@ -32,9 +33,19 @@ const crypto = require('node:crypto');
 // with a hash covering the theme boot script and nothing else.
 const EXECUTABLE_SCRIPT = /(<script(?![^>]*\stype\s*=\s*"(?!text\/javascript|module)[^"]*")[^>]*>)([\s\S]*?)<\/script>/gi;
 
+// An HTML comment holding an unpaired <script ...> open tag, the sort a README
+// snippet inside a page would have, made the non-greedy body match run past it
+// and swallow the next real script whole. That script then shipped with no
+// digest and the browser refused to run it. Comments cannot contain a script
+// element, so removing them first is both correct and enough. The replacement
+// keeps the newlines so nothing else that reads this HTML shifts.
+function withoutComments(html) {
+  return html.replace(/<!--[\s\S]*?-->/g, match => match.replace(/[^\n]/g, ''));
+}
+
 function hashesFor(html) {
   const digests = [];
-  for (const [, openingTag, body] of html.matchAll(EXECUTABLE_SCRIPT)) {
+  for (const [, openingTag, body] of withoutComments(html).matchAll(EXECUTABLE_SCRIPT)) {
     // Only inline scripts. One with a src attribute loads from an origin and is
     // covered by 'self'.
     if (/\ssrc\s*=/i.test(openingTag)) continue;

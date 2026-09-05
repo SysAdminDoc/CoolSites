@@ -186,3 +186,35 @@ test('unsafe-inline is confined to style-src', () => {
   assert.ok(unsafeOutsideInlineCode(parse("default-src 'self' 'unsafe-eval'")).length > 0);
   assert.ok(unsafeOutsideInlineCode(parse("img-src 'self' 'unsafe-inline'")).length > 0);
 });
+
+// hashesFor decides what the policy allows, so a script it fails to see is a
+// script the browser refuses to run. Every case below is markup the matcher got
+// wrong at some point, or nearly did. They use crafted HTML rather than the real
+// pages on purpose: checking the shipped policy against the same function that
+// generated it only proves the function agrees with itself.
+test('the matcher sees exactly the scripts a browser would execute', () => {
+  const { hashesFor } = require('../scripts/lib/csp');
+  const cases = [
+    // A page documenting an embed snippet has an unpaired open tag inside a
+    // comment. The body match used to run past it and swallow the next real
+    // script whole, which then shipped with no digest.
+    ['a comment holding an unpaired open tag', '<!-- paste this: <script src="x.js"> --><script>var real=1;</script>', 1],
+    ['a plain inline script', '<script>var a=1;</script>', 1],
+    // JSON-LD is data. A browser never executes it, so script-src never applies.
+    ['JSON-LD is data, not code', '<script type="application/ld+json">{"@type":"WebSite"}</script>', 0],
+    ['a module is still script', '<script type="module">var a=1;</script>', 1],
+    ['text/javascript is the default spelled out', '<script type="text/javascript">var a=1;</script>', 1],
+    // Covered by 'self'; hashing it would be meaningless.
+    ['an external script needs no hash', '<script defer src="app.js"></script>', 0],
+    // The application script contains element.src assignments, which is how it
+    // was once mistaken for an external script and left out of the policy.
+    ['src inside the body is not a src attribute', '<script>img.src = url;</script>', 1],
+    ['an end tag inside a string does not end the script', '<script>var s = "</scr" + "ipt>";</script>', 1],
+    ['two scripts are two hashes', '<script>var a=1;</script><script>var b=2;</script>', 2],
+    ['an empty script is nothing to allow', '<script>   </script>', 0],
+    ['uppercase is the same element', '<SCRIPT>var a=1;</SCRIPT>', 1]
+  ];
+  for (const [name, html, expected] of cases) {
+    assert.equal(hashesFor(html).length, expected, name);
+  }
+});

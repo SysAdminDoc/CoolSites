@@ -66,6 +66,51 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.activeElement.id === 'newGroupBtn'");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
+    // A filtered view was shareable but not navigable: Back left the site
+    // instead of undoing the filter, because every render replaced the history
+    // entry rather than adding one.
+    const beforeFilter = await page.evaluate('location.search');
+    // Whichever category pill the rail actually rendered: the list is capped
+    // until someone expands it, so naming one by hand makes the test depend on
+    // the order of categories.json.
+    const chosenCategory = await page.evaluate(`(() => {
+      const pill = [...document.querySelectorAll('#filters .filter-btn')]
+        .find(button => button.dataset.cat && !['All', 'Bookmarks'].includes(button.dataset.cat));
+      pill.click();
+      return pill.dataset.cat;
+    })()`);
+    await waitFor(page, `new URLSearchParams(location.search).get('cat') === ${JSON.stringify(chosenCategory)}`);
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 0 && document.querySelectorAll('#grid .card').length < 100");
+    const filteredCount = await page.evaluate("document.querySelectorAll('#grid .card').length");
+
+    await page.send('Runtime.evaluate', { expression: 'history.back()' });
+    await waitFor(page, `location.search === ${JSON.stringify(beforeFilter)}`);
+    await waitFor(page, "document.querySelectorAll('#grid .card').length > 100");
+    const restored = await page.evaluate(`({
+      pill: document.querySelector('#filters .filter-btn.active')?.dataset.cat,
+      search: document.getElementById('searchInput').value
+    })`);
+    assert.equal(restored.pill, 'All', 'Back should put the category pill back too, not just the grid');
+    assert.equal(restored.search, '', 'Back should leave the search box as it was');
+
+    await page.send('Runtime.evaluate', { expression: 'history.forward()' });
+    await waitFor(page, `new URLSearchParams(location.search).get('cat') === ${JSON.stringify(chosenCategory)}`);
+    await waitFor(page, "document.querySelectorAll('#grid .card').length < 100");
+    assert.equal(await page.evaluate("document.querySelectorAll('#grid .card').length"), filteredCount,
+      'Forward should land on the same result set Back came from');
+    await page.send('Runtime.evaluate', { expression: 'history.back()' });
+    await waitFor(page, `location.search === ${JSON.stringify(beforeFilter)}`);
+
+    // Typing must not fill the back stack with one entry per character.
+    const depthBefore = await page.evaluate('history.length');
+    await searchFor(page, 'cloudflare');
+    await waitFor(page, "new URLSearchParams(location.search).get('q') === 'cloudflare'");
+    const depthAfter = await page.evaluate('history.length');
+    assert.ok(depthAfter - depthBefore <= 1, `typing ten characters added ${depthAfter - depthBefore} history entries`);
+    await page.send('Runtime.evaluate', { expression: 'history.back()' });
+    await waitFor(page, "!new URLSearchParams(location.search).get('q')");
+    assert.equal(await page.evaluate("document.getElementById('searchInput').value"), '', 'one Back should leave the whole search');
+
     // The link check is only worth running if a reader can see the result.
     const linkHealth = await page.evaluate(`(() => {
       const badges = [...document.querySelectorAll('#grid .card .link-badge')];
