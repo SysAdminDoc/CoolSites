@@ -71,7 +71,7 @@ const jsonFeed = {
     title: site.name,
     summary: site.description,
     date_modified: `${freshness(site)}T00:00:00Z`,
-    tags: [site.category, ...site.tags],
+    tags: [site.category, ...site.tags, ...(site.keywords || [])],
     _coolsites_category: site.category,
     _coolsites_slug: slug(site.name)
   }))

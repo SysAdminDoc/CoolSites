@@ -9,9 +9,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "speed",
-      "latency",
-      "jitter",
       "cloudflare"
+    ],
+    "keywords": [
+      "latency",
+      "jitter"
     ],
     "editorsPick": true
   },
@@ -25,8 +27,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "speed",
-      "netflix",
       "bandwidth"
+    ],
+    "keywords": [
+      "netflix"
     ]
   },
   {
@@ -37,7 +41,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "bufferbloat",
       "latency",
       "quality"
@@ -67,8 +72,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "speed",
-      "html5",
       "bandwidth"
+    ],
+    "keywords": [
+      "html5"
     ]
   },
   {
@@ -80,7 +87,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "speed",
+      "speed"
+    ],
+    "keywords": [
       "wifi",
       "ubiquiti"
     ]
@@ -122,7 +131,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ip",
+      "ip"
+    ],
+    "keywords": [
       "lookup",
       "classic"
     ]
@@ -137,8 +148,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "bgp",
-      "routing",
       "network"
+    ],
+    "keywords": [
+      "routing"
     ],
     "editorsPick": true
   },
@@ -152,8 +165,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "bgp",
-      "routing",
       "dns"
+    ],
+    "keywords": [
+      "routing"
     ]
   },
   {
@@ -180,9 +195,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ping",
-      "mtr",
       "global"
+    ],
+    "keywords": [
+      "ping",
+      "mtr"
     ]
   },
   {
@@ -209,7 +226,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dns",
-      "tools",
+      "tools"
+    ],
+    "keywords": [
       "port scan"
     ]
   },
@@ -223,8 +242,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "scanner",
-      "nmap",
       "tools"
+    ],
+    "keywords": [
+      "nmap"
     ]
   },
   {
@@ -236,9 +257,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ripe",
       "bgp",
       "data"
+    ],
+    "keywords": [
+      "ripe"
     ]
   },
   {
@@ -251,8 +274,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dns",
-      "propagation",
       "global"
+    ],
+    "keywords": [
+      "propagation"
     ]
   },
   {
@@ -264,9 +289,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dnssec",
       "visualization",
       "security"
+    ],
+    "keywords": [
+      "dnssec"
     ]
   },
   {
@@ -279,7 +306,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "email",
-      "blacklist",
+      "blacklist"
+    ],
+    "keywords": [
       "mx"
     ],
     "editorsPick": true
@@ -293,7 +322,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dns",
+      "dns"
+    ],
+    "keywords": [
       "lookup",
       "records"
     ]
@@ -308,9 +339,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dns",
-      "leak",
       "vpn",
       "privacy"
+    ],
+    "keywords": [
+      "leak"
     ]
   },
   {
@@ -322,7 +355,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dns",
+      "dns"
+    ],
+    "keywords": [
       "health",
       "audit"
     ]
@@ -336,9 +371,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "fingerprint",
       "privacy",
       "browser"
+    ],
+    "keywords": [
+      "fingerprint"
     ]
   },
   {
@@ -350,8 +387,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "tracking"
+    ],
+    "keywords": [
       "eff",
-      "tracking",
       "fingerprint"
     ]
   },
@@ -364,7 +403,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ssl",
+      "ssl"
+    ],
+    "keywords": [
       "tls",
       "certificate"
     ],
@@ -379,9 +420,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "headers",
       "http",
       "hardening"
+    ],
+    "keywords": [
+      "headers"
     ]
   },
   {
@@ -393,9 +436,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "mozilla",
       "scanner",
       "http"
+    ],
+    "keywords": [
+      "mozilla"
     ],
     "lastReviewedAt": "2026-08-25"
   },
@@ -409,8 +454,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "firewall",
-      "ports",
       "scanner"
+    ],
+    "keywords": [
+      "ports"
     ]
   },
   {
@@ -422,9 +469,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "phishing",
       "analysis",
       "scanner"
+    ],
+    "keywords": [
+      "phishing"
     ]
   },
   {
@@ -437,8 +486,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "hardening",
-      "assessment",
       "email"
+    ],
+    "keywords": [
+      "assessment"
     ]
   },
   {
@@ -450,9 +501,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "breach",
-      "password",
       "email"
+    ],
+    "keywords": [
+      "breach",
+      "password"
     ],
     "editorsPick": true
   },
@@ -465,7 +518,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "malware",
+      "malware"
+    ],
+    "keywords": [
       "antivirus",
       "scan"
     ]
@@ -478,7 +533,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "encode",
       "decode",
       "crypto",
@@ -496,8 +552,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "iot",
-      "devices",
       "search"
+    ],
+    "keywords": [
+      "devices"
     ],
     "editorsPick": true
   },
@@ -510,9 +568,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "scan",
-      "certificates",
       "search"
+    ],
+    "keywords": [
+      "scan",
+      "certificates"
     ]
   },
   {
@@ -524,9 +584,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "certificates",
-      "subdomains",
       "recon"
+    ],
+    "keywords": [
+      "certificates",
+      "subdomains"
     ]
   },
   {
@@ -539,7 +601,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dns",
-      "recon",
+      "recon"
+    ],
+    "keywords": [
       "subdomains"
     ]
   },
@@ -552,9 +616,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "abuse",
       "ip",
       "blacklist"
+    ],
+    "keywords": [
+      "abuse"
     ]
   },
   {
@@ -566,9 +632,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "noise",
-      "scanning",
       "threat"
+    ],
+    "keywords": [
+      "noise",
+      "scanning"
     ]
   },
   {
@@ -580,7 +648,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "threat",
+      "threat"
+    ],
+    "keywords": [
       "intelligence",
       "ioc"
     ]
@@ -594,9 +664,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "source code",
       "search",
       "analytics"
+    ],
+    "keywords": [
+      "source code"
     ]
   },
   {
@@ -609,7 +681,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "automation",
-      "recon",
+      "recon"
+    ],
+    "keywords": [
       "footprint"
     ],
     "editorsPick": true
@@ -623,8 +697,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "testing"
+    ],
+    "keywords": [
       "regex",
-      "testing",
       "patterns"
     ],
     "editorsPick": true
@@ -638,9 +714,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "utilities",
-      "hash",
       "converter"
+    ],
+    "keywords": [
+      "utilities",
+      "hash"
     ]
   },
   {
@@ -653,7 +731,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "api",
-      "testing",
+      "testing"
+    ],
+    "keywords": [
       "postman"
     ],
     "editorsPick": true,
@@ -670,9 +750,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "compiler",
-      "assembly",
       "optimization"
+    ],
+    "keywords": [
+      "compiler",
+      "assembly"
     ]
   },
   {
@@ -684,9 +766,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "webhook",
       "debug",
       "api"
+    ],
+    "keywords": [
+      "webhook"
     ]
   },
   {
@@ -712,7 +796,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "shell",
+      "shell"
+    ],
+    "keywords": [
       "bash",
       "learning"
     ]
@@ -726,9 +812,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "sql",
       "database",
       "playground"
+    ],
+    "keywords": [
+      "sql"
     ]
   },
   {
@@ -754,8 +842,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "scheduling"
+    ],
+    "keywords": [
       "cron",
-      "scheduling",
       "sysadmin"
     ]
   },
@@ -783,9 +873,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "developer",
-      "utilities",
       "offline",
       "windows"
+    ],
+    "keywords": [
+      "utilities"
     ]
   },
   {
@@ -798,7 +890,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "windows",
-      "productivity",
+      "productivity"
+    ],
+    "keywords": [
       "microsoft"
     ],
     "editorsPick": true
@@ -812,9 +906,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "file manager",
       "windows",
       "modern"
+    ],
+    "keywords": [
+      "file manager"
     ]
   },
   {
@@ -826,7 +922,7 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "package manager",
+      "package-manager",
       "windows",
       "gui"
     ]
@@ -841,8 +937,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "audio",
-      "volume",
       "windows"
+    ],
+    "keywords": [
+      "volume"
     ]
   },
   {
@@ -855,7 +953,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "screenshot",
-      "recording",
+      "recording"
+    ],
+    "keywords": [
       "capture"
     ],
     "editorsPick": true
@@ -869,9 +969,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "clipboard",
       "productivity",
       "windows"
+    ],
+    "keywords": [
+      "clipboard"
     ]
   },
   {
@@ -884,7 +986,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "search",
-      "files",
+      "files"
+    ],
+    "keywords": [
       "instant"
     ],
     "editorsPick": true
@@ -899,8 +1003,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "screenshot",
-      "annotation",
       "linux"
+    ],
+    "keywords": [
+      "annotation"
     ]
   },
   {
@@ -913,8 +1019,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "sync",
-      "p2p",
       "privacy"
+    ],
+    "keywords": [
+      "p2p"
     ]
   },
   {
@@ -955,7 +1063,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "disk",
+      "disk"
+    ],
+    "keywords": [
       "storage",
       "analyzer"
     ]
@@ -997,9 +1107,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "llm",
       "local",
       "privacy"
+    ],
+    "keywords": [
+      "llm"
     ],
     "editorsPick": true
   },
@@ -1027,9 +1139,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "llm",
       "desktop",
       "local"
+    ],
+    "keywords": [
+      "llm"
     ]
   },
   {
@@ -1056,7 +1170,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "api",
-      "self-hosted",
+      "self-hosted"
+    ],
+    "keywords": [
       "multimodal"
     ]
   },
@@ -1069,8 +1185,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "stable diffusion"
+    ],
+    "keywords": [
       "image generation",
-      "stable diffusion",
       "nodes"
     ]
   },
@@ -1084,7 +1202,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "stable diffusion",
-      "image",
+      "image"
+    ],
+    "keywords": [
       "webui"
     ]
   },
@@ -1098,8 +1218,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "models",
-      "datasets",
       "community"
+    ],
+    "keywords": [
+      "datasets"
     ],
     "editorsPick": true
   },
@@ -1112,8 +1234,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "visualization"
+    ],
+    "keywords": [
       "neural network",
-      "visualization",
       "learning"
     ]
   },
@@ -1125,7 +1249,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "benchmark",
       "comparison",
       "leaderboard"
@@ -1140,8 +1265,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "documents"
+    ],
+    "keywords": [
       "rag",
-      "documents",
       "assistant"
     ]
   },
@@ -1155,7 +1282,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "search",
-      "ai",
+      "ai"
+    ],
+    "keywords": [
       "citations"
     ],
     "editorsPick": true
@@ -1168,7 +1297,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "speech",
       "transcription",
       "openai"
@@ -1184,8 +1314,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "tts",
-      "voice",
       "lightweight"
+    ],
+    "keywords": [
+      "voice"
     ]
   },
   {
@@ -1197,7 +1329,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "tts",
+      "tts"
+    ],
+    "keywords": [
       "voice cloning",
       "emotion"
     ]
@@ -1211,9 +1345,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "color",
-      "palette",
       "ai"
+    ],
+    "keywords": [
+      "color",
+      "palette"
     ]
   },
   {
@@ -1225,7 +1361,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "image",
+      "image"
+    ],
+    "keywords": [
       "inpainting",
       "removal"
     ]
@@ -1282,8 +1420,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "tts"
+    ],
+    "keywords": [
       "voice",
-      "tts",
       "cloning"
     ],
     "editorsPick": true
@@ -1298,8 +1438,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "image",
-      "art",
       "generation"
+    ],
+    "keywords": [
+      "art"
     ],
     "editorsPick": true
   },
@@ -1328,8 +1470,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "iot",
-      "flow",
       "programming"
+    ],
+    "keywords": [
+      "flow"
     ],
     "editorsPick": true
   },
@@ -1343,7 +1487,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "agents",
-      "monitoring",
+      "monitoring"
+    ],
+    "keywords": [
       "scraping"
     ]
   },
@@ -1369,7 +1515,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "scripts",
       "workflows",
       "internal tools"
@@ -1384,9 +1531,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "list",
       "self-hosted",
       "directory"
+    ],
+    "keywords": [
+      "list"
     ]
   },
   {
@@ -1399,8 +1548,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "uptime",
       "dashboard"
+    ],
+    "keywords": [
+      "uptime"
     ],
     "editorsPick": true
   },
@@ -1413,9 +1564,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "nginx",
       "proxy",
       "ssl"
+    ],
+    "keywords": [
+      "nginx"
     ]
   },
   {
@@ -1427,7 +1580,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dashboard",
+      "dashboard"
+    ],
+    "keywords": [
       "homepage",
       "widgets"
     ]
@@ -1456,8 +1611,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "docker",
-      "compose",
       "management"
+    ],
+    "keywords": [
+      "compose"
     ]
   },
   {
@@ -1468,7 +1625,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "virtualization",
       "hypervisor",
       "enterprise"
@@ -1485,7 +1643,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "vpn",
-      "wireguard",
+      "wireguard"
+    ],
+    "keywords": [
       "mesh"
     ],
     "editorsPick": true
@@ -1499,8 +1659,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-08-25",
     "tags": [
+      "cloudflare"
+    ],
+    "keywords": [
       "tunnel",
-      "cloudflare",
       "zero-trust"
     ],
     "lastReviewedAt": "2026-08-25"
@@ -1514,9 +1676,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ad blocker",
       "dns",
       "network"
+    ],
+    "keywords": [
+      "ad blocker"
     ],
     "editorsPick": true
   },
@@ -1530,8 +1694,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "passwords",
-      "bitwarden",
       "self-hosted"
+    ],
+    "keywords": [
+      "bitwarden"
     ]
   },
   {
@@ -1544,8 +1710,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "3d",
+      "animation"
+    ],
+    "keywords": [
       "modeling",
-      "animation",
       "vfx"
     ],
     "editorsPick": true
@@ -1559,9 +1727,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "image editing",
-      "photoshop",
       "plugins"
+    ],
+    "keywords": [
+      "image editing",
+      "photoshop"
     ],
     "alternativeTo": [
       "Photoshop"
@@ -1590,9 +1760,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "painting",
       "drawing",
       "animation"
+    ],
+    "keywords": [
+      "painting"
     ]
   },
   {
@@ -1603,7 +1775,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "video editing",
       "multi-track",
       "effects"
@@ -1618,7 +1791,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "video",
+      "video"
+    ],
+    "keywords": [
       "color grading",
       "hollywood"
     ]
@@ -1633,7 +1808,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "audio",
-      "recording",
+      "recording"
+    ],
+    "keywords": [
       "editing"
     ]
   },
@@ -1661,7 +1838,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "svg",
+      "svg"
+    ],
+    "keywords": [
       "generators",
       "backgrounds"
     ]
@@ -1675,8 +1854,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "browser"
+    ],
+    "keywords": [
       "photoshop",
-      "browser",
       "psd"
     ],
     "editorsPick": true,
@@ -1707,9 +1888,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "whiteboard",
       "diagrams",
       "collaboration"
+    ],
+    "keywords": [
+      "whiteboard"
     ],
     "editorsPick": true
   },
@@ -1723,7 +1906,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "daw",
-      "recording",
+      "recording"
+    ],
+    "keywords": [
       "mixing"
     ],
     "editorsPick": true
@@ -1737,7 +1922,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "daw",
+      "daw"
+    ],
+    "keywords": [
       "beats",
       "synthesizer"
     ]
@@ -1764,7 +1951,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "synthesizer",
       "wavetable",
       "sound design"
@@ -1779,9 +1967,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dj",
-      "mixing",
       "live"
+    ],
+    "keywords": [
+      "dj",
+      "mixing"
     ]
   },
   {
@@ -1793,7 +1983,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "email",
+      "email"
+    ],
+    "keywords": [
       "aliases",
       "forwarding"
     ]
@@ -1808,8 +2000,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "email",
-      "aliases",
       "open source"
+    ],
+    "keywords": [
+      "aliases"
     ]
   },
   {
@@ -1821,8 +2015,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "encrypted"
+    ],
+    "keywords": [
       "pastebin",
-      "encrypted",
       "zero-knowledge"
     ]
   },
@@ -1835,9 +2031,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "office",
       "encrypted",
       "collaboration"
+    ],
+    "keywords": [
+      "office"
     ]
   },
   {
@@ -1850,8 +2048,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "search",
-      "metasearch",
       "self-hosted"
+    ],
+    "keywords": [
+      "metasearch"
     ]
   },
   {
@@ -1864,7 +2064,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "hardening",
-      "windows",
+      "windows"
+    ],
+    "keywords": [
       "scripts"
     ]
   },
@@ -1877,9 +2079,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "redirect",
-      "frontends",
       "browser"
+    ],
+    "keywords": [
+      "redirect",
+      "frontends"
     ]
   },
   {
@@ -1891,7 +2095,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "vpn",
+      "vpn"
+    ],
+    "keywords": [
       "anonymous",
       "audited"
     ],
@@ -1906,8 +2112,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "tor"
+    ],
+    "keywords": [
       "anonymity",
-      "tor",
       "onion"
     ]
   },
@@ -1920,8 +2128,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "monitoring"
+    ],
+    "keywords": [
       "cron",
-      "monitoring",
       "alerts"
     ]
   },
@@ -1948,9 +2158,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "nginx",
       "config",
       "generator"
+    ],
+    "keywords": [
+      "nginx"
     ]
   },
   {
@@ -1962,7 +2174,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ssl",
+      "ssl"
+    ],
+    "keywords": [
       "tls",
       "configuration"
     ]
@@ -1975,7 +2189,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "internet",
       "traffic",
       "intelligence"
@@ -1991,7 +2206,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "docker",
-      "logs",
+      "logs"
+    ],
+    "keywords": [
       "viewer"
     ]
   },
@@ -2020,7 +2237,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "real-time",
+      "real-time"
+    ],
+    "keywords": [
       "auto"
     ]
   },
@@ -2047,7 +2266,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "charts",
+      "charts"
+    ],
+    "keywords": [
       "maps",
       "journalism"
     ]
@@ -2061,7 +2282,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "interactive",
+      "interactive"
+    ],
+    "keywords": [
       "storytelling",
       "animated"
     ]
@@ -2075,9 +2298,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "notebooks",
-      "d3",
       "exploration"
+    ],
+    "keywords": [
+      "notebooks",
+      "d3"
     ]
   },
   {
@@ -2088,7 +2313,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "maps",
       "geospatial",
       "uber"
@@ -2103,9 +2329,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "algorithms",
       "visualization",
       "interactive"
+    ],
+    "keywords": [
+      "algorithms"
     ]
   },
   {
@@ -2117,9 +2345,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "algorithms",
-      "data structures",
       "animation"
+    ],
+    "keywords": [
+      "algorithms",
+      "data structures"
     ]
   },
   {
@@ -2131,7 +2361,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "coding",
+      "coding"
+    ],
+    "keywords": [
       "practice",
       "mentoring"
     ]
@@ -2144,7 +2376,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "science",
       "physics",
       "simulations"
@@ -2159,7 +2392,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "math",
+      "math"
+    ],
+    "keywords": [
       "graphing",
       "calculator"
     ]
@@ -2188,7 +2423,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "web dev",
+      "web dev"
+    ],
+    "keywords": [
       "full stack",
       "projects"
     ]
@@ -2202,9 +2439,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "roadmaps",
-      "career",
       "guides"
+    ],
+    "keywords": [
+      "roadmaps",
+      "career"
     ]
   },
   {
@@ -2216,9 +2455,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "languages",
-      "quick start",
       "reference"
+    ],
+    "keywords": [
+      "languages",
+      "quick start"
     ]
   },
   {
@@ -2230,7 +2471,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "diagrams",
+      "diagrams"
+    ],
+    "keywords": [
       "flowcharts",
       "uml"
     ]
@@ -2259,7 +2502,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "notes",
-      "markdown",
+      "markdown"
+    ],
+    "keywords": [
       "knowledge"
     ],
     "editorsPick": true,
@@ -2276,9 +2521,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "outliner",
-      "knowledge",
       "open source"
+    ],
+    "keywords": [
+      "outliner",
+      "knowledge"
     ],
     "alternativeTo": [
       "Notion"
@@ -2294,7 +2541,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "notes",
-      "encrypted",
+      "encrypted"
+    ],
+    "keywords": [
       "evernote"
     ],
     "alternativeTo": [
@@ -2324,11 +2573,13 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "pdf",
       "tools",
       "self-hosted",
-      "manipulation",
       "privacy"
+    ],
+    "keywords": [
+      "pdf",
+      "manipulation"
     ],
     "editorsPick": true,
     "repository": "https://github.com/Stirling-Tools/Stirling-PDF",
@@ -2343,8 +2594,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "database"
+    ],
+    "keywords": [
       "spreadsheet",
-      "database",
       "airtable"
     ]
   },
@@ -2358,8 +2611,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "database",
-      "spreadsheet",
       "no-code"
+    ],
+    "keywords": [
+      "spreadsheet"
     ]
   },
   {
@@ -2371,9 +2626,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "low-code",
-      "internal tools",
       "dashboard"
+    ],
+    "keywords": [
+      "low-code",
+      "internal tools"
     ]
   },
   {
@@ -2386,8 +2643,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "converter",
-      "formats",
       "media"
+    ],
+    "keywords": [
+      "formats"
     ]
   },
   {
@@ -2399,9 +2658,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "downloader",
       "video",
       "audio"
+    ],
+    "keywords": [
+      "downloader"
     ],
     "editorsPick": true
   },
@@ -2414,9 +2675,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "video",
+      "video"
+    ],
+    "keywords": [
       "downloader",
-      "command line"
+      "command-line"
     ],
     "editorsPick": true
   },
@@ -2429,7 +2692,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "media",
+      "media"
+    ],
+    "keywords": [
       "conversion",
       "encoding"
     ],
@@ -2445,8 +2710,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "video",
-      "transcoding",
       "compression"
+    ],
+    "keywords": [
+      "transcoding"
     ]
   },
   {
@@ -2459,8 +2726,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "interactive",
-      "educational",
       "creative"
+    ],
+    "keywords": [
+      "educational"
     ],
     "editorsPick": true
   },
@@ -2472,7 +2741,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "radio",
       "globe",
       "worldwide"
@@ -2488,8 +2758,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "gpu"
+    ],
+    "keywords": [
       "shaders",
-      "gpu",
       "creative coding"
     ]
   },
@@ -2501,7 +2773,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "random",
       "fun",
       "procrastination"
@@ -2516,7 +2789,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "windows",
+      "windows"
+    ],
+    "keywords": [
       "travel",
       "zen"
     ]
@@ -2545,8 +2820,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "archive",
-      "wayback",
       "library"
+    ],
+    "keywords": [
+      "wayback"
     ],
     "editorsPick": true
   },
@@ -2559,9 +2836,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "code golf",
       "javascript",
       "creative"
+    ],
+    "keywords": [
+      "code golf"
     ]
   },
   {
@@ -2572,7 +2851,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "hosting",
       "indie web",
       "geocities"
@@ -2588,7 +2868,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "history",
-      "design",
+      "design"
+    ],
+    "keywords": [
       "nostalgia"
     ]
   },
@@ -2601,8 +2883,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "news"
+    ],
+    "keywords": [
       "tech",
-      "news",
       "startups"
     ],
     "editorsPick": true
@@ -2616,9 +2900,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "tech",
       "news",
       "curated"
+    ],
+    "keywords": [
+      "tech"
     ]
   },
   {
@@ -2630,9 +2916,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "cheatsheets",
       "reference",
       "developer"
+    ],
+    "keywords": [
+      "cheatsheets"
     ]
   },
   {
@@ -2644,8 +2932,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "reference"
+    ],
+    "keywords": [
       "cheatsheets",
-      "reference",
       "quick"
     ]
   },
@@ -2658,9 +2948,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-09-05",
     "tags": [
-      "apis",
       "directory",
       "free"
+    ],
+    "keywords": [
+      "apis"
     ],
     "lastReviewedAt": "2026-09-05"
   },
@@ -2673,9 +2965,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "books",
       "programming",
       "free"
+    ],
+    "keywords": [
+      "books"
     ]
   },
   {
@@ -2687,7 +2981,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "hardware",
+      "hardware"
+    ],
+    "keywords": [
       "electronics",
       "diy"
     ]
@@ -2702,7 +2998,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "news",
-      "developer",
+      "developer"
+    ],
+    "keywords": [
       "feed"
     ]
   },
@@ -2715,9 +3013,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "packet loss",
-      "voip",
       "gaming"
+    ],
+    "keywords": [
+      "packet loss",
+      "voip"
     ]
   },
   {
@@ -2730,7 +3030,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "speed",
-      "history",
+      "history"
+    ],
+    "keywords": [
       "isp"
     ]
   },
@@ -2744,7 +3046,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ip",
-      "minimal",
+      "minimal"
+    ],
+    "keywords": [
       "curl"
     ]
   },
@@ -2758,7 +3062,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ip",
-      "api",
+      "api"
+    ],
+    "keywords": [
       "plain text"
     ]
   },
@@ -2770,7 +3076,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "whois",
       "domain",
       "registration"
@@ -2812,7 +3119,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "subnet",
       "cidr",
       "calculator"
@@ -2828,8 +3136,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dns",
-      "propagation",
       "global"
+    ],
+    "keywords": [
+      "propagation"
     ]
   },
   {
@@ -2841,9 +3151,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dig",
-      "query",
       "web"
+    ],
+    "keywords": [
+      "dig",
+      "query"
     ]
   },
   {
@@ -2855,7 +3167,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dns",
+      "dns"
+    ],
+    "keywords": [
       "validation",
       "rfc"
     ]
@@ -2869,8 +3183,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "email"
+    ],
+    "keywords": [
       "dmarc",
-      "email",
       "spoofing"
     ]
   },
@@ -2883,8 +3199,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "scanner"
+    ],
+    "keywords": [
       "pentest",
-      "scanner",
       "vulnerability"
     ]
   },
@@ -2898,7 +3216,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "iot",
+      "iot"
+    ],
+    "keywords": [
       "exposure"
     ]
   },
@@ -2911,8 +3231,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "search"
+    ],
+    "keywords": [
       "breach",
-      "search",
       "credentials"
     ]
   },
@@ -2925,9 +3247,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "jwt",
-      "tokens",
       "debug"
+    ],
+    "keywords": [
+      "jwt",
+      "tokens"
     ]
   },
   {
@@ -2939,7 +3263,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ssl",
+      "ssl"
+    ],
+    "keywords": [
       "certificate",
       "diagnostic"
     ]
@@ -2953,7 +3279,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ssl",
+      "ssl"
+    ],
+    "keywords": [
       "compliance",
       "pci"
     ]
@@ -2966,7 +3294,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "csp",
       "headers",
       "reporting"
@@ -2995,8 +3324,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "scanner"
+    ],
+    "keywords": [
       "owasp",
-      "scanner",
       "webapp"
     ]
   },
@@ -3009,7 +3340,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "search",
+      "search"
+    ],
+    "keywords": [
       "darknet",
       "leaks"
     ]
@@ -3051,7 +3384,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "link analysis",
       "graph",
       "investigation"
@@ -3066,7 +3400,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "email",
+      "email"
+    ],
+    "keywords": [
       "finder",
       "verification"
     ]
@@ -3080,9 +3416,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-09-05",
     "tags": [
-      "phone",
       "recon",
       "scanner"
+    ],
+    "keywords": [
+      "phone"
     ],
     "lastReviewedAt": "2026-09-05"
   },
@@ -3096,8 +3434,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "image",
-      "reverse search",
       "tracking"
+    ],
+    "keywords": [
+      "reverse search"
     ]
   },
   {
@@ -3108,7 +3448,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "wifi",
       "wardriving",
       "map"
@@ -3123,9 +3464,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "technology",
-      "profiler",
       "web"
+    ],
+    "keywords": [
+      "technology",
+      "profiler"
     ]
   },
   {
@@ -3137,7 +3480,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "email",
+      "email"
+    ],
+    "keywords": [
       "social",
       "accounts"
     ]
@@ -3166,8 +3511,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ide",
-      "online",
       "collaboration"
+    ],
+    "keywords": [
+      "online"
     ]
   },
   {
@@ -3179,7 +3526,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ide",
+      "ide"
+    ],
+    "keywords": [
       "node",
       "webcontainers"
     ],
@@ -3195,8 +3544,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "code",
-      "screenshots",
       "sharing"
+    ],
+    "keywords": [
+      "screenshots"
     ]
   },
   {
@@ -3208,7 +3559,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "browser",
+      "browser"
+    ],
+    "keywords": [
       "compatibility",
       "css"
     ]
@@ -3221,7 +3574,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "npm",
       "size",
       "performance"
@@ -3250,9 +3604,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "responsive",
       "testing",
       "browser"
+    ],
+    "keywords": [
+      "responsive"
     ]
   },
   {
@@ -3265,8 +3621,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "testing",
-      "e2e",
       "automation"
+    ],
+    "keywords": [
+      "e2e"
     ],
     "editorsPick": true
   },
@@ -3279,7 +3637,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "api",
+      "api"
+    ],
+    "keywords": [
       "rest",
       "graphql"
     ],
@@ -3297,8 +3657,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "metrics",
-      "time tracking",
       "productivity"
+    ],
+    "keywords": [
+      "time tracking"
     ]
   },
   {
@@ -3310,9 +3672,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "cloud ide",
       "git",
       "workspace"
+    ],
+    "keywords": [
+      "cloud ide"
     ]
   },
   {
@@ -3325,8 +3689,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "typescript",
-      "compiler",
       "playground"
+    ],
+    "keywords": [
+      "compiler"
     ]
   },
   {
@@ -3339,7 +3705,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "editor",
-      "rust",
+      "rust"
+    ],
+    "keywords": [
       "multiplayer"
     ]
   },
@@ -3353,7 +3721,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "editor",
-      "ai",
+      "ai"
+    ],
+    "keywords": [
       "vscode"
     ]
   },
@@ -3380,9 +3750,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ast",
-      "parser",
       "code"
+    ],
+    "keywords": [
+      "ast",
+      "parser"
     ]
   },
   {
@@ -3422,8 +3794,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "automation"
+    ],
+    "keywords": [
       "text expander",
-      "automation",
       "typing"
     ]
   },
@@ -3436,7 +3810,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "automation",
+      "automation"
+    ],
+    "keywords": [
       "macros",
       "scripting"
     ]
@@ -3465,7 +3841,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "compression",
-      "archive",
+      "archive"
+    ],
+    "keywords": [
       "zip"
     ]
   },
@@ -3478,9 +3856,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "media player",
       "video",
       "audio"
+    ],
+    "keywords": [
+      "media player"
     ],
     "editorsPick": true
   },
@@ -3493,9 +3873,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "media player",
       "minimal",
       "gpu"
+    ],
+    "keywords": [
+      "media player"
     ]
   },
   {
@@ -3506,7 +3888,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "bootable",
       "usb",
       "iso"
@@ -3520,7 +3903,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "bootable",
       "usb",
       "formatting"
@@ -3535,9 +3919,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "uninstaller",
-      "cleanup",
       "windows"
+    ],
+    "keywords": [
+      "uninstaller",
+      "cleanup"
     ]
   },
   {
@@ -3550,8 +3936,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "taskbar",
-      "transparency",
       "customization"
+    ],
+    "keywords": [
+      "transparency"
     ]
   },
   {
@@ -3564,8 +3952,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "customization",
-      "mods",
       "windows"
+    ],
+    "keywords": [
+      "mods"
     ]
   },
   {
@@ -3576,7 +3966,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "brightness",
       "monitor",
       "tray"
@@ -3590,7 +3981,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "preview",
       "quicklook",
       "macos"
@@ -3604,7 +3996,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "kvm",
       "mouse",
       "keyboard"
@@ -3619,9 +4012,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "text editor",
       "modern",
       "windows"
+    ],
+    "keywords": [
+      "text editor"
     ]
   },
   {
@@ -3633,7 +4028,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "disk",
+      "disk"
+    ],
+    "keywords": [
       "health",
       "smart"
     ]
@@ -3648,7 +4045,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "hardware",
-      "monitoring",
+      "monitoring"
+    ],
+    "keywords": [
       "sensors"
     ]
   },
@@ -3661,9 +4060,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "task manager",
-      "process",
       "system"
+    ],
+    "keywords": [
+      "task manager",
+      "process"
     ]
   },
   {
@@ -3675,7 +4076,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "api",
+      "api"
+    ],
+    "keywords": [
       "unified",
       "multi-model"
     ]
@@ -3689,9 +4092,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "inference",
       "fast",
       "api"
+    ],
+    "keywords": [
+      "inference"
     ]
   },
   {
@@ -3703,9 +4108,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "inference",
-      "fine-tune",
       "open source"
+    ],
+    "keywords": [
+      "inference",
+      "fine-tune"
     ]
   },
   {
@@ -3731,8 +4138,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "tracking"
+    ],
+    "keywords": [
       "experiment",
-      "tracking",
       "mlops"
     ]
   },
@@ -3745,8 +4154,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "research"
+    ],
+    "keywords": [
       "papers",
-      "research",
       "benchmarks"
     ]
   },
@@ -3774,8 +4185,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "stable diffusion",
-      "professional",
       "canvas"
+    ],
+    "keywords": [
+      "professional"
     ]
   },
   {
@@ -3787,9 +4200,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "langchain",
       "visual",
       "no-code"
+    ],
+    "keywords": [
+      "langchain"
     ]
   },
   {
@@ -3801,9 +4216,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "langchain",
       "agents",
       "visual"
+    ],
+    "keywords": [
+      "langchain"
     ]
   },
   {
@@ -3815,9 +4232,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "platform",
-      "rag",
       "agents"
+    ],
+    "keywords": [
+      "platform",
+      "rag"
     ]
   },
   {
@@ -3830,8 +4249,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "chat",
-      "multi-provider",
       "self-hosted"
+    ],
+    "keywords": [
+      "multi-provider"
     ]
   },
   {
@@ -3871,7 +4292,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "agents",
+      "agents"
+    ],
+    "keywords": [
       "multi-agent",
       "orchestration"
     ]
@@ -3899,7 +4322,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "local",
+      "local"
+    ],
+    "keywords": [
       "portable",
       "single-file"
     ],
@@ -3914,7 +4339,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "image",
+      "image"
+    ],
+    "keywords": [
       "text",
       "typography"
     ]
@@ -3929,8 +4356,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "gaming",
-      "art",
       "design"
+    ],
+    "keywords": [
+      "art"
     ]
   },
   {
@@ -3943,7 +4372,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "video",
-      "generation",
+      "generation"
+    ],
+    "keywords": [
       "editing"
     ]
   },
@@ -3984,8 +4415,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "editor"
+    ],
+    "keywords": [
       "photo",
-      "editor",
       "background"
     ]
   },
@@ -3997,7 +4430,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "background",
       "removal",
       "instant"
@@ -4028,7 +4462,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "workflow",
-      "visual",
+      "visual"
+    ],
+    "keywords": [
       "integrations"
     ]
   },
@@ -4054,7 +4490,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "durable",
       "workflows",
       "reliable"
@@ -4069,9 +4506,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "orchestration",
       "data",
       "python"
+    ],
+    "keywords": [
+      "orchestration"
     ]
   },
   {
@@ -4083,9 +4522,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "pipelines",
       "scheduling",
       "data"
+    ],
+    "keywords": [
+      "pipelines"
     ]
   },
   {
@@ -4098,8 +4539,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "os",
-      "personal cloud",
       "docker"
+    ],
+    "keywords": [
+      "personal cloud"
     ]
   },
   {
@@ -4111,7 +4554,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dashboard",
+      "dashboard"
+    ],
+    "keywords": [
       "widgets",
       "dark theme"
     ]
@@ -4138,7 +4583,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "sso",
       "identity",
       "authentication"
@@ -4154,8 +4600,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "proxy",
-      "load balancer",
       "docker"
+    ],
+    "keywords": [
+      "load balancer"
     ]
   },
   {
@@ -4168,7 +4616,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "vpn",
-      "fast",
+      "fast"
+    ],
+    "keywords": [
       "kernel"
     ]
   },
@@ -4225,9 +4675,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "photos",
-      "backup",
       "ai"
+    ],
+    "keywords": [
+      "photos",
+      "backup"
     ],
     "editorsPick": true
   },
@@ -4241,8 +4693,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "documents",
-      "ocr",
       "archive"
+    ],
+    "keywords": [
+      "ocr"
     ]
   },
   {
@@ -4255,8 +4709,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "notifications",
-      "push",
       "api"
+    ],
+    "keywords": [
+      "push"
     ]
   },
   {
@@ -4282,9 +4738,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "bookmarks",
       "archive",
       "collaborative"
+    ],
+    "keywords": [
+      "bookmarks"
     ]
   },
   {
@@ -4295,7 +4753,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "recipes",
       "meal planning",
       "food"
@@ -4310,9 +4769,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "budget",
-      "finance",
       "privacy"
+    ],
+    "keywords": [
+      "budget",
+      "finance"
     ]
   },
   {
@@ -4324,9 +4785,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "rss",
       "reader",
       "news"
+    ],
+    "keywords": [
+      "rss"
     ]
   },
   {
@@ -4338,9 +4801,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "rss",
       "minimal",
       "fast"
+    ],
+    "keywords": [
+      "rss"
     ]
   },
   {
@@ -4353,7 +4818,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "music",
-      "streaming",
+      "streaming"
+    ],
+    "keywords": [
       "subsonic"
     ]
   },
@@ -4366,9 +4833,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "finance",
-      "budgeting",
       "self-hosted"
+    ],
+    "keywords": [
+      "finance",
+      "budgeting"
     ]
   },
   {
@@ -4381,7 +4850,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "design",
-      "ui",
+      "ui"
+    ],
+    "keywords": [
       "prototyping"
     ],
     "editorsPick": true
@@ -4396,7 +4867,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "design",
-      "templates",
+      "templates"
+    ],
+    "keywords": [
       "easy"
     ]
   },
@@ -4410,8 +4883,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "design",
-      "prototyping",
       "open source"
+    ],
+    "keywords": [
+      "prototyping"
     ],
     "alternativeTo": [
       "Figma"
@@ -4426,9 +4901,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "colors",
-      "palette",
       "generator"
+    ],
+    "keywords": [
+      "colors",
+      "palette"
     ]
   },
   {
@@ -4440,9 +4917,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "colors",
-      "preview",
       "website"
+    ],
+    "keywords": [
+      "colors",
+      "preview"
     ]
   },
   {
@@ -4454,9 +4933,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "illustrations",
       "svg",
       "free"
+    ],
+    "keywords": [
+      "illustrations"
     ]
   },
   {
@@ -4469,7 +4950,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "icons",
-      "svg",
+      "svg"
+    ],
+    "keywords": [
       "tailwind"
     ]
   },
@@ -4497,7 +4980,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "svg",
-      "icons",
+      "icons"
+    ],
+    "keywords": [
       "vectors"
     ]
   },
@@ -4510,9 +4995,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "mockups",
-      "screenshots",
       "browser"
+    ],
+    "keywords": [
+      "mockups",
+      "screenshots"
     ]
   },
   {
@@ -4525,8 +5012,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "animation",
-      "lottie",
       "json"
+    ],
+    "keywords": [
+      "lottie"
     ]
   },
   {
@@ -4552,7 +5041,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "svg",
+      "svg"
+    ],
+    "keywords": [
       "backgrounds",
       "generators"
     ]
@@ -4566,7 +5057,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "svg",
+      "svg"
+    ],
+    "keywords": [
       "dividers",
       "web design"
     ]
@@ -4579,7 +5072,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "sounds",
       "samples",
       "creative commons"
@@ -4594,8 +5088,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "music"
+    ],
+    "keywords": [
       "live coding",
-      "music",
       "ruby"
     ]
   },
@@ -4608,9 +5104,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "notation",
-      "sheet music",
       "free"
+    ],
+    "keywords": [
+      "notation",
+      "sheet music"
     ],
     "editorsPick": true
   },
@@ -4623,9 +5121,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "studio",
-      "online",
       "collaboration"
+    ],
+    "keywords": [
+      "studio",
+      "online"
     ]
   },
   {
@@ -4638,8 +5138,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "daw",
-      "social",
       "free"
+    ],
+    "keywords": [
+      "social"
     ]
   },
   {
@@ -4665,9 +5167,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "messaging",
       "encrypted",
       "open source"
+    ],
+    "keywords": [
+      "messaging"
     ],
     "editorsPick": true
   },
@@ -4681,7 +5185,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "email",
-      "encrypted",
+      "encrypted"
+    ],
+    "keywords": [
       "swiss"
     ],
     "editorsPick": true
@@ -4696,7 +5202,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "os",
-      "tor",
+      "tor"
+    ],
+    "keywords": [
       "portable"
     ]
   },
@@ -4710,7 +5218,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "os",
-      "tor",
+      "tor"
+    ],
+    "keywords": [
       "vm"
     ]
   },
@@ -4723,8 +5233,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "browser"
+    ],
+    "keywords": [
       "ad blocker",
-      "browser",
       "efficient"
     ],
     "editorsPick": true
@@ -4739,7 +5251,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "alternatives",
-      "directory",
+      "directory"
+    ],
+    "keywords": [
       "foss"
     ]
   },
@@ -4753,8 +5267,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "guides",
-      "recommendations",
       "community"
+    ],
+    "keywords": [
+      "recommendations"
     ]
   },
   {
@@ -4767,8 +5283,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "android",
-      "degoogled",
       "mobile"
+    ],
+    "keywords": [
+      "degoogled"
     ]
   },
   {
@@ -4780,9 +5298,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ansible",
       "ui",
       "automation"
+    ],
+    "keywords": [
+      "ansible"
     ]
   },
   {
@@ -4794,9 +5314,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ansible",
-      "tower",
       "management"
+    ],
+    "keywords": [
+      "ansible",
+      "tower"
     ]
   },
   {
@@ -4808,8 +5330,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
+      "cloud"
+    ],
+    "keywords": [
       "iac",
-      "cloud",
       "provisioning"
     ],
     "editorsPick": true,
@@ -4839,7 +5363,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "linux",
-      "web",
+      "web"
+    ],
+    "keywords": [
       "administration"
     ]
   },
@@ -4853,8 +5379,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "enterprise",
       "open source"
+    ],
+    "keywords": [
+      "enterprise"
     ]
   },
   {
@@ -4867,7 +5395,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "metrics",
+      "metrics"
+    ],
+    "keywords": [
       "cloud-native"
     ],
     "editorsPick": true
@@ -4881,7 +5411,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "logs",
+      "logs"
+    ],
+    "keywords": [
       "aggregation",
       "grafana"
     ]
@@ -4895,9 +5427,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "access",
-      "zero-trust",
       "ssh"
+    ],
+    "keywords": [
+      "access",
+      "zero-trust"
     ]
   },
   {
@@ -4909,9 +5443,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "siem",
       "security",
       "threat"
+    ],
+    "keywords": [
+      "siem"
     ]
   },
   {
@@ -4924,8 +5460,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "monitoring",
-      "auto-discovery",
       "plugins"
+    ],
+    "keywords": [
+      "auto-discovery"
     ]
   },
   {
@@ -4951,7 +5489,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "terminal",
+      "terminal"
+    ],
+    "keywords": [
       "monitor",
       "beautiful"
     ]
@@ -4965,9 +5505,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "bi",
       "analytics",
       "no-code"
+    ],
+    "keywords": [
+      "bi"
     ],
     "editorsPick": true
   },
@@ -4981,8 +5523,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "dashboards",
-      "sql",
       "exploration"
+    ],
+    "keywords": [
+      "sql"
     ]
   },
   {
@@ -4995,7 +5539,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "library",
-      "javascript",
+      "javascript"
+    ],
+    "keywords": [
       "custom"
     ],
     "editorsPick": true
@@ -5023,7 +5569,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "diagrams",
+      "diagrams"
+    ],
+    "keywords": [
       "text",
       "flowcharts"
     ]
@@ -5038,8 +5586,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "database",
-      "erd",
       "diagrams"
+    ],
+    "keywords": [
+      "erd"
     ]
   },
   {
@@ -5065,8 +5615,10 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "interactive"
+    ],
+    "keywords": [
       "stem",
-      "interactive",
       "puzzles"
     ]
   },
@@ -5079,7 +5631,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "free",
+      "free"
+    ],
+    "keywords": [
       "comprehensive",
       "courses"
     ],
@@ -5093,7 +5647,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "mit",
       "courses",
       "lectures"
@@ -5123,7 +5678,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "coding",
+      "coding"
+    ],
+    "keywords": [
       "interview",
       "practice"
     ]
@@ -5137,7 +5694,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "coding",
+      "coding"
+    ],
+    "keywords": [
       "challenges",
       "certification"
     ]
@@ -5152,7 +5711,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "interactive",
-      "coding",
+      "coding"
+    ],
+    "keywords": [
       "lessons"
     ]
   },
@@ -5166,8 +5727,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "web",
-      "tutorials",
       "reference"
+    ],
+    "keywords": [
+      "tutorials"
     ]
   },
   {
@@ -5178,7 +5741,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "full stack",
       "react",
       "university"
@@ -5193,9 +5757,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "harvard",
-      "cs",
       "programming"
+    ],
+    "keywords": [
+      "harvard",
+      "cs"
     ],
     "editorsPick": true
   },
@@ -5209,8 +5775,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "interactive",
-      "screencasts",
       "coding"
+    ],
+    "keywords": [
+      "screencasts"
     ]
   },
   {
@@ -5222,7 +5790,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "hardware",
+      "hardware"
+    ],
+    "keywords": [
       "computer science",
       "fundamentals"
     ]
@@ -5237,7 +5807,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "workspace",
-      "notes",
+      "notes"
+    ],
+    "keywords": [
       "databases"
     ],
     "editorsPick": true
@@ -5252,7 +5824,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "workspace",
-      "encrypted",
+      "encrypted"
+    ],
+    "keywords": [
       "local-first"
     ],
     "alternativeTo": [
@@ -5268,9 +5842,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "issues",
       "tracking",
       "project management"
+    ],
+    "keywords": [
+      "issues"
     ]
   },
   {
@@ -5283,8 +5859,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "scheduling",
-      "calendar",
       "open source"
+    ],
+    "keywords": [
+      "calendar"
     ],
     "editorsPick": true
   },
@@ -5297,9 +5875,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "signing",
       "documents",
       "open source"
+    ],
+    "keywords": [
+      "signing"
     ],
     "lastReviewedAt": "2026-08-25"
   },
@@ -5313,8 +5893,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "project management",
-      "issues",
       "open source"
+    ],
+    "keywords": [
+      "issues"
     ],
     "alternativeTo": [
       "Linear",
@@ -5331,8 +5913,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "project management",
-      "all-in-one",
       "open source"
+    ],
+    "keywords": [
+      "all-in-one"
     ]
   },
   {
@@ -5343,7 +5927,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "latex",
       "typesetting",
       "academic"
@@ -5358,9 +5943,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "latex",
-      "academic",
       "collaboration"
+    ],
+    "keywords": [
+      "latex",
+      "academic"
     ]
   },
   {
@@ -5372,7 +5959,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "notes",
+      "notes"
+    ],
+    "keywords": [
       "hierarchical",
       "scripting"
     ],
@@ -5401,9 +5990,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "messaging",
-      "team",
       "self-hosted"
+    ],
+    "keywords": [
+      "messaging",
+      "team"
     ],
     "alternativeTo": [
       "Slack"
@@ -5419,8 +6010,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "chat",
-      "threaded",
       "open source"
+    ],
+    "keywords": [
+      "threaded"
     ]
   },
   {
@@ -5433,7 +6026,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "project management",
-      "simple",
+      "simple"
+    ],
+    "keywords": [
       "lean"
     ]
   },
@@ -5447,8 +6042,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "sharing",
-      "ephemeral",
       "privacy"
+    ],
+    "keywords": [
+      "ephemeral"
     ]
   },
   {
@@ -5461,8 +6058,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "transfer",
-      "large files",
       "simple"
+    ],
+    "keywords": [
+      "large files"
     ]
   },
   {
@@ -5475,7 +6074,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "encrypted",
-      "sharing",
+      "sharing"
+    ],
+    "keywords": [
       "auto-expire"
     ]
   },
@@ -5489,7 +6090,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "tor",
-      "sharing",
+      "sharing"
+    ],
+    "keywords": [
       "anonymous"
     ]
   },
@@ -5517,7 +6120,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "images",
-      "cli",
+      "cli"
+    ],
+    "keywords": [
       "batch"
     ]
   },
@@ -5530,9 +6135,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "pdf",
       "tools",
       "free"
+    ],
+    "keywords": [
+      "pdf"
     ]
   },
   {
@@ -5545,7 +6152,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "converter",
-      "documents",
+      "documents"
+    ],
+    "keywords": [
       "universal"
     ],
     "editorsPick": true
@@ -5574,7 +6183,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "transfer",
-      "cli",
+      "cli"
+    ],
+    "keywords": [
       "codes"
     ]
   },
@@ -5587,7 +6198,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ai",
+      "ai"
+    ],
+    "keywords": [
       "faces",
       "generative"
     ]
@@ -5600,7 +6213,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "pointer",
       "photos",
       "weird"
@@ -5615,8 +6229,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "game"
+    ],
+    "keywords": [
       "geography",
-      "game",
       "streetview"
     ]
   },
@@ -5629,7 +6245,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "game",
+      "game"
+    ],
+    "keywords": [
       "puzzle",
       "elements"
     ]
@@ -5643,7 +6261,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ai",
+      "ai"
+    ],
+    "keywords": [
       "crafting",
       "infinite"
     ]
@@ -5656,7 +6276,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "astronomy",
       "stars",
       "planetarium"
@@ -5685,9 +6306,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "science",
-      "scale",
       "interactive"
+    ],
+    "keywords": [
+      "science",
+      "scale"
     ]
   },
   {
@@ -5714,7 +6337,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "comics",
-      "math",
+      "math"
+    ],
+    "keywords": [
       "humor"
     ]
   },
@@ -5726,7 +6351,8 @@
     "openSource": false,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "hacker",
       "typing",
       "fake"
@@ -5742,7 +6368,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "music",
-      "retro",
+      "retro"
+    ],
+    "keywords": [
       "vaporwave"
     ]
   },
@@ -5756,7 +6384,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "retro",
-      "os",
+      "os"
+    ],
+    "keywords": [
       "simulation"
     ]
   },
@@ -5769,9 +6399,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "blogs",
       "directory",
       "indie"
+    ],
+    "keywords": [
+      "blogs"
     ]
   },
   {
@@ -5784,7 +6416,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "search",
-      "indie",
+      "indie"
+    ],
+    "keywords": [
       "non-commercial"
     ]
   },
@@ -5797,7 +6431,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "search",
+      "search"
+    ],
+    "keywords": [
       "old web",
       "nostalgia"
     ]
@@ -5826,9 +6462,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "qa",
       "programming",
       "community"
+    ],
+    "keywords": [
+      "qa"
     ]
   },
   {
@@ -5839,7 +6477,8 @@
     "openSource": false,
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "products",
       "launches",
       "discovery"
@@ -5855,8 +6494,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "alternatives",
-      "software",
       "directory"
+    ],
+    "keywords": [
+      "software"
     ]
   },
   {
@@ -5868,9 +6509,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "recommendations",
-      "comparisons",
       "community"
+    ],
+    "keywords": [
+      "recommendations",
+      "comparisons"
     ]
   },
   {
@@ -5883,7 +6526,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "google",
-      "history",
+      "history"
+    ],
+    "keywords": [
       "discontinued"
     ]
   },
@@ -5896,9 +6541,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "xkcd",
-      "explanations",
       "wiki"
+    ],
+    "keywords": [
+      "xkcd",
+      "explanations"
     ]
   },
   {
@@ -5910,9 +6557,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "podcasts",
       "open source",
       "news"
+    ],
+    "keywords": [
+      "podcasts"
     ]
   },
   {
@@ -5925,7 +6574,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "web dev",
-      "design",
+      "design"
+    ],
+    "keywords": [
       "articles"
     ]
   },
@@ -5938,8 +6589,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "web"
+    ],
+    "keywords": [
       "css",
-      "web",
       "tutorials"
     ]
   },
@@ -5952,9 +6605,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "free tier",
-      "saas",
       "directory"
+    ],
+    "keywords": [
+      "free tier",
+      "saas"
     ],
     "editorsPick": true
   },
@@ -5967,8 +6622,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "retro"
+    ],
+    "keywords": [
       "emulation",
-      "retro",
       "multi-platform"
     ],
     "editorsPick": true
@@ -5983,7 +6640,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "indie",
-      "free",
+      "free"
+    ],
+    "keywords": [
       "marketplace"
     ]
   },
@@ -5997,8 +6656,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "emulator",
-      "gba",
       "browser"
+    ],
+    "keywords": [
+      "gba"
     ]
   },
   {
@@ -6010,9 +6671,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "chess",
       "open source",
       "free"
+    ],
+    "keywords": [
+      "chess"
     ],
     "editorsPick": true
   },
@@ -6025,9 +6688,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "board games",
-      "multiplayer",
       "free"
+    ],
+    "keywords": [
+      "board games",
+      "multiplayer"
     ]
   },
   {
@@ -6039,9 +6704,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "simulation",
-      "tycoon",
       "open source"
+    ],
+    "keywords": [
+      "simulation",
+      "tycoon"
     ]
   },
   {
@@ -6053,7 +6720,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "emulator",
+      "emulator"
+    ],
+    "keywords": [
       "3ds",
       "enhanced"
     ]
@@ -6068,8 +6737,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "emulator",
-      "ps3",
       "playstation"
+    ],
+    "keywords": [
+      "ps3"
     ]
   },
   {
@@ -6081,9 +6752,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "fuzzy",
       "search",
       "terminal"
+    ],
+    "keywords": [
+      "fuzzy"
     ],
     "editorsPick": true
   },
@@ -6097,8 +6770,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "search",
-      "grep",
       "fast"
+    ],
+    "keywords": [
+      "grep"
     ],
     "editorsPick": true
   },
@@ -6110,7 +6785,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "cat",
       "syntax",
       "highlighting"
@@ -6125,9 +6801,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ls",
       "files",
       "modern"
+    ],
+    "keywords": [
+      "ls"
     ]
   },
   {
@@ -6139,9 +6817,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "find",
       "search",
       "fast"
+    ],
+    "keywords": [
+      "find"
     ]
   },
   {
@@ -6154,8 +6834,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "disk",
-      "usage",
       "visual"
+    ],
+    "keywords": [
+      "usage"
     ]
   },
   {
@@ -6167,7 +6849,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "git",
+      "git"
+    ],
+    "keywords": [
       "diff",
       "syntax"
     ]
@@ -6180,7 +6864,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "cd",
       "navigation",
       "smart"
@@ -6195,10 +6880,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "man pages",
-      "examples",
       "community",
       "cli"
+    ],
+    "keywords": [
+      "man pages",
+      "examples"
     ],
     "repository": "https://github.com/tldr-pages/tldr",
     "lastReviewedAt": "2026-08-25"
@@ -6213,8 +6900,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "git",
-      "tui",
       "interactive"
+    ],
+    "keywords": [
+      "tui"
     ],
     "editorsPick": true
   },
@@ -6228,8 +6917,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "docker",
-      "tui",
       "management"
+    ],
+    "keywords": [
+      "tui"
     ]
   },
   {
@@ -6242,7 +6933,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "http",
-      "api",
+      "api"
+    ],
+    "keywords": [
       "curl"
     ]
   },
@@ -6255,7 +6948,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "json",
+      "json"
+    ],
+    "keywords": [
       "processor",
       "filter"
     ],
@@ -6270,9 +6965,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "yaml",
-      "processor",
       "config"
+    ],
+    "keywords": [
+      "yaml",
+      "processor"
     ]
   },
   {
@@ -6283,7 +6980,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "multiplexer",
       "sessions",
       "panes"
@@ -6298,7 +6996,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "editor",
+      "editor"
+    ],
+    "keywords": [
       "vim",
       "lua"
     ],
@@ -6313,9 +7013,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "prompt",
       "shell",
       "rust"
+    ],
+    "keywords": [
+      "prompt"
     ],
     "editorsPick": true
   },
@@ -6329,8 +7031,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "shell",
-      "structured",
       "modern"
+    ],
+    "keywords": [
+      "structured"
     ]
   },
   {
@@ -6356,9 +7060,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "dotfiles",
       "management",
       "sync"
+    ],
+    "keywords": [
+      "dotfiles"
     ]
   },
   {
@@ -6370,8 +7076,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "analysis"
+    ],
+    "keywords": [
       "packet",
-      "analysis",
       "protocol"
     ],
     "editorsPick": true
@@ -6386,8 +7094,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "scanner",
-      "ports",
       "security"
+    ],
+    "keywords": [
+      "ports"
     ],
     "editorsPick": true
   },
@@ -6399,7 +7109,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "traceroute",
       "ping",
       "diagnostic"
@@ -6415,8 +7126,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "bandwidth",
-      "throughput",
       "testing"
+    ],
+    "keywords": [
+      "throughput"
     ]
   },
   {
@@ -6442,8 +7155,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "gui"
+    ],
+    "keywords": [
       "nmap",
-      "gui",
       "topology"
     ]
   },
@@ -6457,8 +7172,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ssh",
-      "telnet",
       "windows"
+    ],
+    "keywords": [
+      "telnet"
     ]
   },
   {
@@ -6470,7 +7187,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "remote",
+      "remote"
+    ],
+    "keywords": [
       "multi-protocol",
       "tabs"
     ]
@@ -6497,7 +7216,8 @@
     "openSource": true,
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
-    "tags": [
+    "tags": [],
+    "keywords": [
       "sftp",
       "ftp",
       "file transfer"
@@ -6512,9 +7232,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ftp",
-      "sftp",
       "cross-platform"
+    ],
+    "keywords": [
+      "ftp",
+      "sftp"
     ]
   },
   {
@@ -6526,9 +7248,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ipam",
-      "dcim",
       "documentation"
+    ],
+    "keywords": [
+      "ipam",
+      "dcim"
     ],
     "editorsPick": true
   },
@@ -6542,7 +7266,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "vpn",
-      "wireguard",
+      "wireguard"
+    ],
+    "keywords": [
       "mesh"
     ]
   },
@@ -6556,7 +7282,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "docker",
-      "containers",
+      "containers"
+    ],
+    "keywords": [
       "platform"
     ],
     "editorsPick": true
@@ -6571,8 +7299,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "containers",
-      "rootless",
       "docker"
+    ],
+    "keywords": [
+      "rootless"
     ],
     "alternativeTo": [
       "Docker"
@@ -6588,7 +7318,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "kubernetes",
-      "management",
+      "management"
+    ],
+    "keywords": [
       "multi-cluster"
     ]
   },
@@ -6602,7 +7334,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "kubernetes",
-      "lightweight",
+      "lightweight"
+    ],
+    "keywords": [
       "edge"
     ],
     "editorsPick": true
@@ -6630,7 +7364,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "kubernetes",
+      "kubernetes"
+    ],
+    "keywords": [
       "docker compose",
       "migration"
     ]
@@ -6645,8 +7381,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "kubernetes",
-      "packages",
       "charts"
+    ],
+    "keywords": [
+      "packages"
     ]
   },
   {
@@ -6658,9 +7396,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "gitops",
-      "cd",
       "kubernetes"
+    ],
+    "keywords": [
+      "gitops",
+      "cd"
     ],
     "editorsPick": true
   },
@@ -6673,9 +7413,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "registry",
       "images",
       "security"
+    ],
+    "keywords": [
+      "registry"
     ]
   },
   {
@@ -6689,9 +7431,11 @@
     "tags": [
       "torrent",
       "client",
-      "p2p",
       "download",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "p2p"
     ]
   },
   {
@@ -6722,7 +7466,9 @@
       "torrent",
       "client",
       "minimal",
-      "linux",
+      "linux"
+    ],
+    "keywords": [
       "macos"
     ]
   },
@@ -6737,9 +7483,11 @@
     "tags": [
       "torrent",
       "client",
+      "open source"
+    ],
+    "keywords": [
       "i2p",
-      "swarm",
-      "open-source"
+      "swarm"
     ]
   },
   {
@@ -6769,8 +7517,10 @@
     "tags": [
       "torrent",
       "search",
-      "aggregator",
-      "meta-search"
+      "aggregator"
+    ],
+    "keywords": [
+      "metasearch"
     ]
   },
   {
@@ -6784,8 +7534,10 @@
     "tags": [
       "torrent",
       "search",
-      "dht",
       "index"
+    ],
+    "keywords": [
+      "dht"
     ]
   },
   {
@@ -6844,7 +7596,9 @@
     "tags": [
       "torrent",
       "streaming",
-      "browser",
+      "browser"
+    ],
+    "keywords": [
       "no-install"
     ]
   },
@@ -6859,8 +7613,10 @@
     "tags": [
       "torrent",
       "cloud",
-      "debrid",
       "remote"
+    ],
+    "keywords": [
+      "debrid"
     ]
   },
   {
@@ -6873,7 +7629,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "torrent",
-      "editor",
+      "editor"
+    ],
+    "keywords": [
       "metadata",
       "inspect"
     ]
@@ -6888,9 +7646,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "streaming",
-      "media-center",
-      "addons",
       "torrent"
+    ],
+    "keywords": [
+      "media-center",
+      "addons"
     ]
   },
   {
@@ -6903,9 +7663,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "torrent",
-      "cross-seed",
-      "ratio",
       "automation"
+    ],
+    "keywords": [
+      "cross-seed",
+      "ratio"
     ]
   },
   {
@@ -6920,7 +7682,7 @@
       "torrent",
       "search",
       "self-hosted",
-      "open-source"
+      "open source"
     ]
   },
   {
@@ -6933,7 +7695,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "torrent",
-      "self-hosted",
+      "self-hosted"
+    ],
+    "keywords": [
       "dht",
       "crawler"
     ]
@@ -6948,9 +7712,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "torrent",
-      "webui",
       "frontend",
       "management"
+    ],
+    "keywords": [
+      "webui"
     ]
   },
   {
@@ -6963,9 +7729,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "download",
-      "manager",
-      "file-host",
       "automation"
+    ],
+    "keywords": [
+      "manager",
+      "file-host"
     ]
   },
   {
@@ -6979,8 +7747,10 @@
     "tags": [
       "download",
       "images",
-      "gallery",
       "cli"
+    ],
+    "keywords": [
+      "gallery"
     ]
   },
   {
@@ -6992,9 +7762,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "spotify",
       "music",
-      "download",
+      "download"
+    ],
+    "keywords": [
+      "spotify",
       "metadata"
     ]
   },
@@ -7009,7 +7781,9 @@
     "tags": [
       "download",
       "video",
-      "gui",
+      "gui"
+    ],
+    "keywords": [
       "yt-dlp"
     ]
   },
@@ -7022,10 +7796,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "open source"
+    ],
+    "keywords": [
       "media-center",
       "player",
-      "addons",
-      "open-source"
+      "addons"
     ]
   },
   {
@@ -7067,7 +7843,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "windows",
+      "windows"
+    ],
+    "keywords": [
       "activation",
       "office",
       "iso"
@@ -7082,8 +7860,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "customization"
+    ],
+    "keywords": [
       "spotify",
-      "customization",
       "themes",
       "extensions"
     ]
@@ -7099,7 +7879,9 @@
     "tags": [
       "android",
       "youtube",
-      "adblock",
+      "adblock"
+    ],
+    "keywords": [
       "patching"
     ]
   },
@@ -7130,7 +7912,7 @@
       "youtube",
       "privacy",
       "desktop",
-      "open-source"
+      "open source"
     ]
   },
   {
@@ -7189,8 +7971,10 @@
     "tags": [
       "comics",
       "manga",
-      "server",
       "self-hosted"
+    ],
+    "keywords": [
+      "server"
     ]
   },
   {
@@ -7203,7 +7987,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ebooks",
-      "free",
+      "free"
+    ],
+    "keywords": [
       "public-domain",
       "classics"
     ]
@@ -7218,7 +8004,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ebooks",
-      "free",
+      "free"
+    ],
+    "keywords": [
       "public-domain",
       "typography"
     ]
@@ -7233,7 +8021,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ebooks",
-      "library",
+      "library"
+    ],
+    "keywords": [
       "borrow",
       "catalog"
     ]
@@ -7249,7 +8039,9 @@
     "tags": [
       "manga",
       "android",
-      "reader",
+      "reader"
+    ],
+    "keywords": [
       "extensions"
     ]
   },
@@ -7263,9 +8055,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ebooks",
-      "audiobooks",
       "automation",
       "arr"
+    ],
+    "keywords": [
+      "audiobooks"
     ]
   },
   {
@@ -7277,10 +8071,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "anime",
       "manga",
       "index",
       "wiki"
+    ],
+    "keywords": [
+      "anime"
     ]
   },
   {
@@ -7293,9 +8089,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "ebooks",
-      "audiobooks",
       "library",
       "free"
+    ],
+    "keywords": [
+      "audiobooks"
     ]
   },
   {
@@ -7309,7 +8107,9 @@
     "tags": [
       "ebooks",
       "reader",
-      "cross-platform",
+      "cross-platform"
+    ],
+    "keywords": [
       "epub"
     ]
   },
@@ -7325,8 +8125,10 @@
       "index",
       "wiki",
       "free",
-      "resources",
       "curated"
+    ],
+    "keywords": [
+      "resources"
     ]
   },
   {
@@ -7340,8 +8142,10 @@
     "tags": [
       "privacy",
       "index",
-      "awesome",
       "alternatives"
+    ],
+    "keywords": [
+      "awesome"
     ]
   },
   {
@@ -7354,7 +8158,9 @@
     "updatedAt": "2026-09-05",
     "tags": [
       "windows",
-      "index",
+      "index"
+    ],
+    "keywords": [
       "awesome",
       "apps"
     ],
@@ -7369,9 +8175,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "open-source",
+      "open source",
       "index",
-      "search",
+      "search"
+    ],
+    "keywords": [
       "projects"
     ]
   },
@@ -7384,10 +8192,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-09-05",
     "tags": [
-      "safety",
       "extension",
-      "blocklist",
       "malware"
+    ],
+    "keywords": [
+      "safety",
+      "blocklist"
     ],
     "lastReviewedAt": "2026-09-05"
   },
@@ -7400,10 +8210,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "piracy",
       "index",
       "tools",
       "curated"
+    ],
+    "keywords": [
+      "piracy"
     ]
   },
   {
@@ -7417,7 +8229,9 @@
     "tags": [
       "google",
       "alternatives",
-      "privacy",
+      "privacy"
+    ],
+    "keywords": [
       "degoogle"
     ]
   },
@@ -7432,8 +8246,10 @@
     "tags": [
       "media",
       "wiki",
-      "piracy",
       "guides"
+    ],
+    "keywords": [
+      "piracy"
     ]
   },
   {
@@ -7446,9 +8262,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "automation",
-      "tv",
       "download",
       "media"
+    ],
+    "keywords": [
+      "tv"
     ]
   },
   {
@@ -7461,9 +8279,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "automation",
-      "movies",
       "download",
       "media"
+    ],
+    "keywords": [
+      "movies"
     ]
   },
   {
@@ -7475,9 +8295,11 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "indexer",
       "automation",
-      "torrent",
+      "torrent"
+    ],
+    "keywords": [
+      "indexer",
       "usenet"
     ]
   },
@@ -7505,10 +8327,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "subtitles",
       "automation",
-      "companion",
       "media"
+    ],
+    "keywords": [
+      "subtitles",
+      "companion"
     ]
   },
   {
@@ -7520,10 +8344,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "requests",
-      "plex",
       "management",
       "media"
+    ],
+    "keywords": [
+      "requests",
+      "plex"
     ]
   },
   {
@@ -7535,10 +8361,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "plex",
       "monitoring",
-      "statistics",
       "dashboard"
+    ],
+    "keywords": [
+      "plex",
+      "statistics"
     ]
   },
   {
@@ -7551,9 +8379,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "automation",
-      "quality",
-      "profiles",
       "arr"
+    ],
+    "keywords": [
+      "quality",
+      "profiles"
     ]
   },
   {
@@ -7567,8 +8397,10 @@
     "tags": [
       "proxy",
       "cloudflare",
-      "bypass",
       "arr"
+    ],
+    "keywords": [
+      "bypass"
     ]
   },
   {
@@ -7580,10 +8412,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "extraction",
       "automation",
-      "archives",
       "arr"
+    ],
+    "keywords": [
+      "extraction",
+      "archives"
     ]
   },
   {
@@ -7597,7 +8431,9 @@
     "tags": [
       "windows",
       "system",
-      "tools",
+      "tools"
+    ],
+    "keywords": [
       "microsoft"
     ]
   },
@@ -7611,8 +8447,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "windows",
+      "customization"
+    ],
+    "keywords": [
       "start-menu",
-      "customization",
       "classic"
     ]
   },
@@ -7626,9 +8464,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "windows",
-      "tiling",
-      "window-manager",
       "productivity"
+    ],
+    "keywords": [
+      "tiling",
+      "window-manager"
     ]
   },
   {
@@ -7670,10 +8510,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "cleaner",
       "privacy",
-      "disk-space",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "cleaner",
+      "disk-space"
     ]
   },
   {
@@ -7686,9 +8528,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "hardware",
-      "fans",
-      "cooling",
       "monitoring"
+    ],
+    "keywords": [
+      "fans",
+      "cooling"
     ]
   },
   {
@@ -7701,8 +8545,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "windows",
+      "productivity"
+    ],
+    "keywords": [
       "window-management",
-      "productivity",
       "utility"
     ]
   },
@@ -7732,7 +8578,9 @@
     "tags": [
       "remote-desktop",
       "gaming",
-      "streaming",
+      "streaming"
+    ],
+    "keywords": [
       "low-latency"
     ]
   },
@@ -7746,8 +8594,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "remote-desktop",
-      "open-source",
-      "self-hosted",
+      "open source",
+      "self-hosted"
+    ],
+    "keywords": [
       "teamviewer"
     ]
   },
@@ -7760,10 +8610,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "virtualization",
-      "vm",
-      "open-source",
+      "open source",
       "cross-platform"
+    ],
+    "keywords": [
+      "virtualization",
+      "vm"
     ]
   },
   {
@@ -7792,8 +8644,10 @@
     "tags": [
       "windows",
       "taskbar",
-      "start-menu",
       "customization"
+    ],
+    "keywords": [
+      "start-menu"
     ]
   },
   {
@@ -7806,9 +8660,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "windows",
-      "context-menu",
       "customization",
       "shell"
+    ],
+    "keywords": [
+      "context-menu"
     ]
   },
   {
@@ -7837,8 +8693,10 @@
     "tags": [
       "firewall",
       "dns",
-      "tracker-blocking",
       "network"
+    ],
+    "keywords": [
+      "tracker-blocking"
     ]
   },
   {
@@ -7852,7 +8710,9 @@
     "tags": [
       "browser",
       "extension",
-      "tracking",
+      "tracking"
+    ],
+    "keywords": [
       "urls"
     ]
   },
@@ -7865,10 +8725,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "encryption",
       "cloud",
       "files",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "encryption"
     ]
   },
   {
@@ -7880,10 +8742,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "encryption",
       "disk",
-      "volumes",
       "security"
+    ],
+    "keywords": [
+      "encryption",
+      "volumes"
     ],
     "lastReviewedAt": "2026-08-25"
   },
@@ -7898,8 +8762,10 @@
     "tags": [
       "android",
       "mobile",
-      "hardened",
       "security"
+    ],
+    "keywords": [
+      "hardened"
     ]
   },
   {
@@ -7911,9 +8777,11 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
+      "encrypted"
+    ],
+    "keywords": [
       "password",
       "manager",
-      "encrypted",
       "proton"
     ]
   },
@@ -7926,10 +8794,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "open source"
+    ],
+    "keywords": [
       "storage",
       "nas",
-      "zfs",
-      "open-source"
+      "zfs"
     ]
   },
   {
@@ -7941,10 +8811,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "pxe",
-      "boot",
       "network",
       "installer"
+    ],
+    "keywords": [
+      "pxe",
+      "boot"
     ]
   },
   {
@@ -7973,7 +8845,9 @@
     "tags": [
       "monitoring",
       "docker",
-      "lightweight",
+      "lightweight"
+    ],
+    "keywords": [
       "alerts"
     ]
   },
@@ -7988,8 +8862,10 @@
     "tags": [
       "self-hosted",
       "security",
-      "marketplace",
       "docker"
+    ],
+    "keywords": [
+      "marketplace"
     ]
   },
   {
@@ -8001,10 +8877,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "tunnel",
-      "reverse-proxy",
       "self-hosted",
       "wireguard"
+    ],
+    "keywords": [
+      "tunnel",
+      "reverse-proxy"
     ]
   },
   {
@@ -8018,8 +8896,10 @@
     "tags": [
       "monitoring",
       "website",
-      "changes",
       "notifications"
+    ],
+    "keywords": [
+      "changes"
     ]
   },
   {
@@ -8034,7 +8914,7 @@
       "games",
       "library",
       "launcher",
-      "open-source"
+      "open source"
     ]
   },
   {
@@ -8048,7 +8928,9 @@
     "tags": [
       "games",
       "launcher",
-      "linux",
+      "linux"
+    ],
+    "keywords": [
       "epic"
     ]
   },
@@ -8063,7 +8945,9 @@
     "tags": [
       "games",
       "linux",
-      "launcher",
+      "launcher"
+    ],
+    "keywords": [
       "wine"
     ]
   },
@@ -8076,8 +8960,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "linux"
+    ],
+    "keywords": [
       "steam",
-      "linux",
       "proton",
       "compatibility"
     ]
@@ -8093,8 +8979,10 @@
     "tags": [
       "emulator",
       "playstation",
-      "ps2",
       "retro"
+    ],
+    "keywords": [
+      "ps2"
     ]
   },
   {
@@ -8106,7 +8994,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "emulator",
+      "emulator"
+    ],
+    "keywords": [
       "gamecube",
       "wii",
       "nintendo"
@@ -8123,8 +9013,10 @@
     "tags": [
       "emulator",
       "playstation",
-      "ps1",
       "retro"
+    ],
+    "keywords": [
+      "ps1"
     ]
   },
   {
@@ -8136,10 +9028,12 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "steam",
-      "artwork",
       "customization",
       "community"
+    ],
+    "keywords": [
+      "steam",
+      "artwork"
     ]
   },
   {
@@ -8152,7 +9046,9 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "remote-desktop",
-      "ssh",
+      "ssh"
+    ],
+    "keywords": [
       "vnc",
       "web-gateway"
     ]
@@ -8166,10 +9062,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "remote-management",
       "self-hosted",
-      "rdp",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "remote-management",
+      "rdp"
     ]
   },
   {
@@ -8181,10 +9079,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "logging",
       "analysis",
-      "siem",
       "monitoring"
+    ],
+    "keywords": [
+      "logging",
+      "siem"
     ]
   },
   {
@@ -8196,10 +9096,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ids",
       "firewall",
       "collaborative",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "ids"
     ]
   },
   {
@@ -8211,7 +9113,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "reference",
+      "reference"
+    ],
+    "keywords": [
       "command-line",
       "powershell",
       "bash"
@@ -8226,7 +9130,9 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "automation",
+      "automation"
+    ],
+    "keywords": [
       "runbook",
       "jobs",
       "operations"
@@ -8241,10 +9147,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "static-site",
-      "go",
       "generator",
       "fast"
+    ],
+    "keywords": [
+      "static-site",
+      "go"
     ]
   },
   {
@@ -8257,8 +9165,10 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "framework",
+      "javascript"
+    ],
+    "keywords": [
       "static-site",
-      "javascript",
       "performance"
     ]
   },
@@ -8273,8 +9183,10 @@
     "tags": [
       "deployment",
       "self-hosted",
-      "paas",
       "docker"
+    ],
+    "keywords": [
+      "paas"
     ]
   },
   {
@@ -8288,8 +9200,10 @@
     "tags": [
       "git",
       "self-hosted",
-      "github",
       "lightweight"
+    ],
+    "keywords": [
+      "github"
     ]
   },
   {
@@ -8303,8 +9217,10 @@
     "tags": [
       "git",
       "self-hosted",
-      "forge",
       "community"
+    ],
+    "keywords": [
+      "forge"
     ]
   },
   {
@@ -8316,10 +9232,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
-      "ci-cd",
       "automation",
       "containers",
-      "open-source"
+      "open source"
+    ],
+    "keywords": [
+      "ci-cd"
     ]
   },
   {
@@ -8331,10 +9249,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-09-05",
     "tags": [
-      "intrusion-prevention",
       "firewall",
-      "banning",
       "logs"
+    ],
+    "keywords": [
+      "intrusion-prevention",
+      "banning"
     ],
     "lastReviewedAt": "2026-09-05"
   },
@@ -8349,8 +9269,10 @@
     "tags": [
       "scanner",
       "containers",
-      "vulnerabilities",
       "kubernetes"
+    ],
+    "keywords": [
+      "vulnerabilities"
     ]
   },
   {
@@ -8362,7 +9284,9 @@
     "requiresAuth": true,
     "updatedAt": "2026-06-25",
     "tags": [
-      "security",
+      "security"
+    ],
+    "keywords": [
       "dependencies",
       "vulnerabilities",
       "devsecops"
@@ -8377,8 +9301,10 @@
     "requiresAuth": false,
     "updatedAt": "2026-06-25",
     "tags": [
+      "recon"
+    ],
+    "keywords": [
       "fingerprinting",
-      "recon",
       "technology",
       "detection"
     ]
@@ -8393,9 +9319,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "scanner",
-      "vulnerability",
       "templates",
       "automation"
+    ],
+    "keywords": [
+      "vulnerability"
     ]
   },
   {
@@ -8407,10 +9335,12 @@
     "requiresAuth": false,
     "updatedAt": "2026-08-25",
     "tags": [
-      "photo-editing",
       "windows",
-      "layers",
       "plugins"
+    ],
+    "keywords": [
+      "photo-editing",
+      "layers"
     ],
     "lastReviewedAt": "2026-08-25"
   },
@@ -8424,9 +9354,11 @@
     "updatedAt": "2026-06-25",
     "tags": [
       "animation",
-      "code-driven",
       "video",
       "typescript"
+    ],
+    "keywords": [
+      "code-driven"
     ]
   },
   {
@@ -8440,7 +9372,9 @@
     "tags": [
       "animation",
       "interactive",
-      "design",
+      "design"
+    ],
+    "keywords": [
       "runtime"
     ]
   },
@@ -8455,7 +9389,9 @@
     "tags": [
       "vector",
       "design",
-      "illustration",
+      "illustration"
+    ],
+    "keywords": [
       "logos"
     ]
   },
@@ -8470,9 +9406,11 @@
     "updatedAt": "2026-08-16",
     "tags": [
       "ai",
-      "qa",
       "testing",
-      "automation",
+      "automation"
+    ],
+    "keywords": [
+      "qa",
       "mcp"
     ],
     "lastReviewedAt": "2026-08-16"

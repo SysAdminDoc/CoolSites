@@ -2823,6 +2823,7 @@ async function loadAppData() {
   SITES = sites.map(site => ({
     ...site,
     tags: Array.isArray(site.tags) ? site.tags : [],
+    keywords: Array.isArray(site.keywords) ? site.keywords : [],
     alternativeTo: Array.isArray(site.alternativeTo) ? site.alternativeTo : []
   }));
   SITE_BY_URL = new Map(SITES.map(site => [site.url, site]));
@@ -3076,8 +3077,8 @@ const MIN_FUZZY_TOKEN = 3;
 function buildSearchIndex(site) {
   return {
     name: site.name.toLowerCase(),
-    tags: site.tags.map(tag => String(tag).toLowerCase()),
-    short: [site.name, site.category, ...site.tags].join(' ').toLowerCase(),
+    tags: [...site.tags, ...site.keywords].map(tag => String(tag).toLowerCase()),
+    short: [site.name, site.category, ...site.tags, ...site.keywords].join(' ').toLowerCase(),
     haystack: [
       site.description,
       site.category,
@@ -3085,7 +3086,8 @@ function buildSearchIndex(site) {
       site.openSource ? 'open source oss foss' : 'proprietary closed source',
       site.requiresAuth ? 'account required login sign in' : 'no account no login',
       ...(site.alternativeTo || []).map(item => `alternative to ${item}`),
-      ...site.tags
+      ...site.tags,
+      ...site.keywords
     ].join(' ').toLowerCase()
   };
 }
@@ -3594,7 +3596,7 @@ function openCompareModal() {
     ['Alternative to', site => site.alternativeTo?.length ? site.alternativeTo.join(', ') : ''],
     ['Updated', site => site.updatedAt || ''],
     ['Last reviewed', site => site.lastReviewedAt || 'not since the import'],
-    ['Tags', site => site.tags.slice(0, 5).join(', ')]
+    ['Tags', site => [...site.tags, ...site.keywords].slice(0, 5).join(', ')]
   ];
   document.getElementById('compareTableWrap').innerHTML = `
     <table class="compare-table">

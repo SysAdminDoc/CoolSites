@@ -319,16 +319,33 @@ To contribute directly, add an entry to `sites.json` and run `npm run build`:
   "openSource": true,
   "requiresAuth": false,
   "updatedAt": "2026-08-25",
-  "tags": ["tag1", "tag2", "tag3"],
+  "tags": ["self-hosted", "docker"],
+  "keywords": ["reverse proxy", "acme"],
   "editorsPick": true,
   "alternativeTo": ["Some Paid Thing"]
 }
 ```
 
-`editorsPick` and `alternativeTo` are optional; everything else is required and
-enforced by `schemas/site.schema.json`. `category` has to be one of the names in
-`categories.json`, and `npm run build` updates the per-category counts, the
-feeds, and the counts in this README for you.
+`keywords`, `editorsPick`, `alternativeTo` and `repository` are optional;
+everything else is required and enforced by `schemas/site.schema.json`.
+`category` has to be one of the names in `categories.json`, and `npm run build`
+updates the per-category counts, the feeds, and the counts in this README for
+you.
+
+**Tags and keywords are different things.** `tags` is a shared vocabulary and
+every value has to already exist in `tags.json`, which only admits a term three
+or more entries have in common. That floor is what keeps it a browsing structure
+instead of a second description. Everything else an entry is about goes in
+`keywords`: search reads both at the same weight, so nothing becomes harder to
+find, but a term only one site uses never becomes a filter that returns one
+result. If a keyword grows to three entries, promote it by adding it to
+`tags.json` and moving it. Lint fails if a tag is missing from the vocabulary,
+if a vocabulary tag has fallen below the floor, if the same word appears in both
+fields, or if two spellings of one term both get in.
+
+`repository` is where the source lives when that is not the main link. A project
+gets one entry, and lint treats `url` and `repository` as one address space, so
+listing a project twice fails the build.
 
 ## Tech Stack
 

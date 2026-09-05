@@ -29,10 +29,10 @@
       "date_modified": "2026-09-05T00:00:00Z",
       "tags": [
         "Security",
-        "intrusion-prevention",
         "firewall",
-        "banning",
-        "logs"
+        "logs",
+        "intrusion-prevention",
+        "banning"
       ],
       "_coolsites_category": "Security",
       "_coolsites_slug": "fail2ban"
@@ -45,10 +45,10 @@
       "date_modified": "2026-09-05T00:00:00Z",
       "tags": [
         "Indexes & Wikis",
-        "safety",
         "extension",
-        "blocklist",
-        "malware"
+        "malware",
+        "safety",
+        "blocklist"
       ],
       "_coolsites_category": "Indexes & Wikis",
       "_coolsites_slug": "fmhy-safeguard"
@@ -61,9 +61,9 @@
       "date_modified": "2026-09-05T00:00:00Z",
       "tags": [
         "OSINT",
-        "phone",
         "recon",
-        "scanner"
+        "scanner",
+        "phone"
       ],
       "_coolsites_category": "OSINT",
       "_coolsites_slug": "phoneinfoga"
@@ -76,9 +76,9 @@
       "date_modified": "2026-09-05T00:00:00Z",
       "tags": [
         "News & Reference",
-        "apis",
         "directory",
-        "free"
+        "free",
+        "apis"
       ],
       "_coolsites_category": "News & Reference",
       "_coolsites_slug": "public-apis"
@@ -91,8 +91,8 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Homelab",
-        "tunnel",
         "cloudflare",
+        "tunnel",
         "zero-trust"
       ],
       "_coolsites_category": "Homelab",
@@ -106,9 +106,9 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Productivity",
-        "signing",
         "documents",
-        "open source"
+        "open source",
+        "signing"
       ],
       "_coolsites_category": "Productivity",
       "_coolsites_slug": "docuseal"
@@ -151,9 +151,9 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Security",
-        "mozilla",
         "scanner",
-        "http"
+        "http",
+        "mozilla"
       ],
       "_coolsites_category": "Security",
       "_coolsites_slug": "mozilla-observatory"
@@ -166,10 +166,10 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Creative",
-        "photo-editing",
         "windows",
-        "layers",
-        "plugins"
+        "plugins",
+        "photo-editing",
+        "layers"
       ],
       "_coolsites_category": "Creative",
       "_coolsites_slug": "paint-net"
@@ -197,11 +197,11 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Productivity",
-        "pdf",
         "tools",
         "self-hosted",
-        "manipulation",
-        "privacy"
+        "privacy",
+        "pdf",
+        "manipulation"
       ],
       "_coolsites_category": "Productivity",
       "_coolsites_slug": "stirling-pdf"
@@ -214,8 +214,8 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Sysadmin",
-        "iac",
         "cloud",
+        "iac",
         "provisioning"
       ],
       "_coolsites_category": "Sysadmin",
@@ -229,10 +229,10 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "CLI Tools",
-        "man pages",
-        "examples",
         "community",
-        "cli"
+        "cli",
+        "man pages",
+        "examples"
       ],
       "_coolsites_category": "CLI Tools",
       "_coolsites_slug": "tldr-pages"
@@ -260,10 +260,10 @@
       "date_modified": "2026-08-25T00:00:00Z",
       "tags": [
         "Privacy",
-        "encryption",
         "disk",
-        "volumes",
-        "security"
+        "security",
+        "encryption",
+        "volumes"
       ],
       "_coolsites_category": "Privacy",
       "_coolsites_slug": "veracrypt"
@@ -277,9 +277,9 @@
       "tags": [
         "Dev Tools",
         "ai",
-        "qa",
         "testing",
         "automation",
+        "qa",
         "mcp"
       ],
       "_coolsites_category": "Dev Tools",

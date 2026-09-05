@@ -34,8 +34,15 @@
     },
     "tags": {
       "type": "array",
+      "minItems": 0,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Facet vocabulary. Every value must appear in tags.json, which only admits a tag three or more entries share. An entry with no shared facet carries none, and is still reachable by category and by keywords."
+    },
+    "keywords": {
+      "type": "array",
       "minItems": 1,
-      "items": { "type": "string", "minLength": 1 }
+      "items": { "type": "string", "minLength": 1 },
+      "description": "The descriptive long tail: terms too specific to be a facet, but the words someone would actually search for. Fed to search at the same weight as tags."
     },
     "editorsPick": { "type": "boolean" },
     "alternativeTo": {

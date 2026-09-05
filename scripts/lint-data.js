@@ -166,6 +166,33 @@ function validateSourceData() {
   const canonicalUrls = new Map();
   let legacyDated = 0;
   const projectAddresses = [];
+
+  // tags.json is the whole facet vocabulary. Keeping it in its own file is the
+  // point: a new tag becomes a deliberate edit to a shared list instead of a
+  // word someone typed into one entry, which is how 586 entries came to carry
+  // 836 distinct tags, 639 of them shared by fewer than three sites.
+  const tagList = readJson('tags.json');
+  const tagVocabulary = new Set(Array.isArray(tagList) ? tagList : []);
+  const tagUse = new Map();
+  if (!Array.isArray(tagList)) {
+    addError('tags.json must be an array of tag names');
+  } else {
+    if (tagVocabulary.size !== tagList.length) addError('tags.json: duplicate tag');
+    const sorted = [...tagList].sort();
+    if (tagList.some((tag, index) => tag !== sorted[index])) addError('tags.json must be sorted');
+    const byShape = new Map();
+    for (const tag of tagList) {
+      if (typeof tag !== 'string' || tag.trim() !== tag || !tag.length || tag.length > 40) {
+        addError(`tags.json: invalid tag ${JSON.stringify(tag)}`);
+        continue;
+      }
+      // "open source" and "open-source" both shipped, and so did three other
+      // pairs. Same word, two records, half the entries under each.
+      const shape = tag.toLowerCase().replace(/[-_ ]/g, '');
+      if (byShape.has(shape)) addError(`tags.json: ${byShape.get(shape)} and ${tag} are the same tag spelled two ways`);
+      else byShape.set(shape, tag);
+    }
+  }
   // Compared as a plain string against the YYYY-MM-DD the data uses, so a
   // timezone never turns a same-day stamp into a future date.
   const today = new Date().toISOString().slice(0, 10);
@@ -195,6 +222,21 @@ function validateSourceData() {
     if (!isDate(site?.updatedAt)) addError(`${label}: updatedAt must be YYYY-MM-DD`);
     if (!Array.isArray(site?.tags) || new Set(site.tags).size !== site.tags.length) addError(`${label}: tags must be unique`);
     if (site?.tags?.some(tag => tag.length > 40 || tag.trim() !== tag)) addError(`${label}: tag length/whitespace invalid`);
+    if (site?.keywords && new Set(site.keywords).size !== site.keywords.length) addError(`${label}: keywords must be unique`);
+    if (site?.keywords?.some(word => word.length > 40 || word.trim() !== word)) addError(`${label}: keyword length/whitespace invalid`);
+
+    // tags is the facet vocabulary and keywords is the descriptive tail. A term
+    // in both would be filtered on and searched twice, and it would be unclear
+    // which copy is authoritative.
+    for (const word of site?.keywords || []) {
+      if (site.tags.includes(word)) addError(`${label}: ${word} is both a tag and a keyword`);
+      if (tagVocabulary.has(word)) addError(`${label}: keyword ${word} is in the tag vocabulary, so it belongs in tags`);
+      tagUse.set(word, tagUse.get(word) || 0);
+    }
+    for (const tag of site?.tags || []) {
+      if (!tagVocabulary.has(tag)) addError(`${label}: tag ${tag} is not in tags.json. Add it there if three or more entries share it, otherwise make it a keyword.`);
+      tagUse.set(tag, (tagUse.get(tag) || 0) + 1);
+    }
     if ('lastReviewedAt' in (site || {}) && !isDate(site.lastReviewedAt)) addError(`${label}: lastReviewedAt must be YYYY-MM-DD`);
     if (site?.updatedAt && site.updatedAt > today) addError(`${label}: updatedAt ${site.updatedAt} is in the future`);
     if (site?.lastReviewedAt && site.lastReviewedAt > today) addError(`${label}: lastReviewedAt ${site.lastReviewedAt} is in the future`);
@@ -245,6 +287,15 @@ function validateSourceData() {
       addError(`${entry.label}: ${entry.field} ${entry.address} is already listed by ${previous.label} as its ${previous.field}. A project gets one entry.`);
     }
     if (!previous) seenAddress.set(entry.address, entry);
+  }
+
+  // A tag nobody shares is a keyword wearing a facet's clothes: it would render
+  // a filter that returns one or two entries. The floor is what keeps the
+  // vocabulary a browsing structure rather than a second description.
+  const TAG_FLOOR = 3;
+  for (const tag of tagVocabulary) {
+    const used = tagUse.get(tag) || 0;
+    if (used < TAG_FLOOR) addError(`tags.json: ${tag} is used by ${used} ${used === 1 ? 'entry' : 'entries'}, fewer than the ${TAG_FLOOR} a facet needs. Move it to keywords, or drop it from tags.json.`);
   }
 
   // Exact, not a ceiling. Slack between the two is room a new entry could be
@@ -380,4 +431,6 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Validated ${data.sites.length} sites, ${data.categories.length} categories, ${data.collections.length} collections${sourceOnly ? ' (source only)' : ', caches, and feeds'}`);
+const tagCount = readOptionalJson('tags.json', []).length;
+const keywordCount = new Set(data.sites.flatMap(site => site.keywords || [])).size;
+console.log(`Validated ${data.sites.length} sites, ${data.categories.length} categories, ${data.collections.length} collections, ${tagCount} tags, ${keywordCount} keywords${sourceOnly ? ' (source only)' : ', caches, and feeds'}`);

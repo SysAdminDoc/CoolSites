@@ -6,7 +6,7 @@
   "type": "commonjs",
   "private": false,
   "scripts": {
-    "test": "node --test test/*.test.js",
+    "test": "node --test --test-concurrency=1 test/*.test.js",
     "lint": "node scripts/lint-data.js",
     "lint:source": "node scripts/lint-data.js --source-only",
     "generate": "node scripts/generate-assets.js",

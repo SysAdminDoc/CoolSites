@@ -9,6 +9,14 @@ All notable changes to CoolSites will be documented in this file.
 - **Five entries said they were closed source while pointing straight at their own repository.** Fail2ban, PhoneInfoga, public-apis, Awesome Windows 11 and FMHY SafeGuard all read `openSource: false`, so the open-source-only filter hid tools whose code is one click away. Each licence was read from the project's own repository before the flag was changed. Agent QA keeps `openSource: false` and now says why: it is source-available under FSL-1.1-ALv2, which the OSI has not approved, and each release converts to Apache-2.0 after two years.
 - A project gets one entry. Stirling PDF and tldr pages were each listed twice, once by homepage and once by repository, which inflated the count and showed the same tool twice in a combined view. An optional `repository` field now carries both addresses on one entry, and lint treats `url` and `repository` as one address space so a second entry for a listed project fails the gate.
 
+### Changed
+
+- **Tags are a shared vocabulary now, and everything else an entry is about moved to `keywords`.** 586 entries had grown 836 distinct tags, 639 of them shared by fewer than three sites, and four terms were in the list twice under two spellings: "open source" and "open-source", "package manager" and "package-manager", "metasearch" and "meta-search", "command line" and "command-line". A facet list shaped like that is not a way to browse, it is a second description, and it was the thing standing between the directory and tag filtering.
+
+  The four pairs were merged into whichever spelling was already more common. What survives a floor of three entries is now `tags.json`, a 196-term list, and `tags` may only contain terms from it. The other 783 applications moved to a new `keywords` field rather than being deleted: search reads tags and keywords at the same weight, so no entry became harder to find, and the compare view still shows both. 42 entries share no term with three others and carry keywords alone.
+
+  Adding a tag is now a deliberate edit to a shared file. Lint fails if an entry uses a tag that is not in the vocabulary, if a vocabulary tag falls below the floor, if the same word is in both fields, if two spellings of one term both get in, or if the file is unsorted.
+
 ### Added
 
 - **Every link out to a listed site now carries `rel="nofollow ugc"`.** A directory that passes ranking signal to its entries is a commodity people buy, and two of the three submissions this repository has received were promotional. This changes nothing a reader can see. It removes the reason to submit here for anything other than the listing itself, and it has to be in place before the directory is ever pre-rendered to crawlable HTML. Links to the CoolSites repository and the Wayback Machine are ours and stay plain.

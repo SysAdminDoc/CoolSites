@@ -66,6 +66,24 @@ test('CoolSites golden path works in a real browser', { timeout: 90000 }, async 
     await waitFor(page, "document.activeElement.id === 'newGroupBtn'");
     assert.equal(await page.evaluate("document.activeElement.id"), 'newGroupBtn', 'closing the group dialog should restore focus');
 
+    // Splitting tags into a facet vocabulary and a keyword tail is only safe if
+    // the tail is still searchable. These five terms exist nowhere in their
+    // entry's name, description or tags: keywords is the only thing that can
+    // find them, so they fail closed if a later edit drops the field from the
+    // search index.
+    for (const [term, expected] of [
+      ['gchq', 'CyberChef'],
+      ['wavetable', 'Vital'],
+      ['bufferbloat', 'Waveform Bufferbloat Test'],
+      ['transcription', 'Whisper'],
+      ['hypervisor', 'Proxmox VE']
+    ]) {
+      await searchFor(page, term);
+      await waitFor(page, "document.querySelectorAll('#grid .card').length < 100");
+      const titles = await page.evaluate("[...document.querySelectorAll('#grid .card .card-title')].map(node => node.textContent.trim())");
+      assert.ok(titles.some(title => title.startsWith(expected)), `searching "${term}" should find ${expected}, got ${titles.slice(0, 5).join(', ') || 'nothing'}`);
+    }
+
     // Wait past the input debounce, or this measures the unfiltered grid: the
     // first card is already a Cloudflare entry in the default order, so a
     // content check alone returns before the search has run.
