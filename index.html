@@ -6,7 +6,7 @@
      the site, so nothing but 'self' and inline data URIs is needed. Delivered as
      a meta tag because GitHub Pages cannot send response headers, which means
      frame-ancestors, report-uri and sandbox are ignored here by spec. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-X51WADwdv0jcDQXuHXtPl2DP258j/aI5tc9W9sk7mOQ=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-efCg1qvcMKFJuuMIy7wvZbUH4VzxyGxvhrS08zc9sJc=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-D4E8TR+jxiH1Jy2IZFAJ2kSMUi1KnDpiq17ZarKsM7I=' 'sha256-E9sqw8RvZtPy+znNT+2vh3hTY8RRlSspSvyi3q/xp7o=' 'sha256-wuAfjw/4YwK0WQmUJUIDObZFF1ynv0Cajdhj55I6mOI='; style-src 'self' 'sha256-ELPl8c8+OTigeexdryYgLPft1HjbW0xG7YJri5tZpMQ=' 'sha256-efCg1qvcMKFJuuMIy7wvZbUH4VzxyGxvhrS08zc9sJc=' 'sha256-xBuLAJlLB9wbC/ABGP8ZjJFvQXuEH33oVroixe5ZoDg='; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#08090d" id="metaThemeColor">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2952,6 +2952,7 @@ let CATEGORY_META = new Map();
 let SITE_BY_URL = new Map();
 let STAR_COUNTS = {};
 let FAVICON_CACHE = {};
+let CACHE_MANIFEST = {};
 let DATA_SOURCE = 'network';
 
 // Everything the diagnostics panel reports. Kept in memory only: no beacon, no
@@ -2981,6 +2982,7 @@ const DATA_FILES = {
   sites: './sites.json',
   categories: './categories.json',
   stars: './stars.json',
+  cacheManifest: './cache-manifest.json',
   favicons: './favicons.json'
 };
 
@@ -3014,9 +3016,10 @@ async function loadAppData() {
   SITE_BY_URL = new Map(SITES.map(site => [site.url, site]));
   CATEGORIES = categories;
   CATEGORY_META = new Map(CATEGORIES.map(category => [category.name, category]));
-  [STAR_COUNTS, FAVICON_CACHE] = await Promise.all([
+  [STAR_COUNTS, FAVICON_CACHE, CACHE_MANIFEST] = await Promise.all([
     loadJson(DATA_FILES.stars, {}),
-    loadJson(DATA_FILES.favicons, {})
+    loadJson(DATA_FILES.favicons, {}),
+    loadJson(DATA_FILES.cacheManifest, {})
   ]);
   DIAGNOSTICS.lastLoadAt = new Date().toISOString();
 }
@@ -3279,7 +3282,26 @@ function getGitHubRepo(url) {
   }
 }
 
+// How old the star cache may be before the page stops repeating it. A star
+// count is the kind of number that looks current whatever its age, so past this
+// the card shows none rather than one nobody stands behind. Ninety days is long
+// enough that refreshing is a habit rather than a chore.
+const CACHE_MAX_AGE_DAYS = 90;
+
+function cacheAgeDays(key) {
+  const fetchedAt = Date.parse(CACHE_MANIFEST?.[key]?.fetchedAt || '');
+  return Number.isFinite(fetchedAt) ? (Date.now() - fetchedAt) / 86400000 : null;
+}
+
+// A cache with no manifest entry is one nobody can date, which is the same
+// problem as one that is too old.
+function starsAreStale() {
+  const age = cacheAgeDays('stars');
+  return age === null || age > CACHE_MAX_AGE_DAYS;
+}
+
 function getStarRecord(site) {
+  if (starsAreStale()) return null;
   // An entry whose primary link is the project's own site still has a repo
   // worth counting, which is what the repository field is for.
   const repo = getGitHubRepo(site.repository || site.url);
@@ -5530,6 +5552,17 @@ document.getElementById('compareModal').addEventListener('click', (e) => { if (e
 // Reads the state of this browser and shows it. It sends nothing anywhere,
 // which is the whole point: a self-hosted copy has no other way to explain
 // itself when the data is stale or the worker is stuck on an old cache.
+// "68" says nothing about whether 68 is what a reader is looking at. The count,
+// when it was fetched, and how old that makes it are one fact, so they are one
+// row: a cache with no manifest entry reports that rather than looking healthy.
+function describeCache(key, count, note) {
+  const age = cacheAgeDays(key);
+  if (age === null) return `${count}, no refresh on record`;
+  const days = Math.floor(age);
+  const when = `${CACHE_MANIFEST[key].fetchedAt.slice(0, 10)}, ${days} day${days === 1 ? '' : 's'} ago`;
+  return `${count}, cached ${when}${note ? ` (${note})` : ''}`;
+}
+
 async function collectDiagnostics() {
   const generator = document.querySelector('meta[name="generator"]');
   const report = {
@@ -5542,10 +5575,11 @@ async function collectDiagnostics() {
       source: DATA_SOURCE === 'cache' ? 'service worker cache' : 'network',
       sites: SITES.length,
       categories: CATEGORIES.length,
-      stars: Object.keys(STAR_COUNTS).length,
+      stars: describeCache('stars', Object.keys(STAR_COUNTS).length,
+        starsAreStale() ? `past the ${CACHE_MAX_AGE_DAYS}-day limit, so counts are hidden` : ''),
       // Only the real ones: a false records a domain checked and found to have
       // none, and counting those as coverage overstates what actually renders.
-      favicons: Object.values(FAVICON_CACHE).filter(value => typeof value === 'string').length,
+      favicons: describeCache('favicons', Object.values(FAVICON_CACHE).filter(value => typeof value === 'string').length, ''),
       lastLoad: DIAGNOSTICS.lastLoadAt || 'never completed',
       newestEntry: SITES.length ? formatDataAge() : 'no data'
     },

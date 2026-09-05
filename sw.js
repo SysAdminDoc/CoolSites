@@ -15,6 +15,7 @@ const ASSETS = [
   './categories.json',
   './collections.json',
   './stars.json',
+  './cache-manifest.json',
   './favicons.json',
   './feeds/recent.atom',
   './feeds/recent.json',

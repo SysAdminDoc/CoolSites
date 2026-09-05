@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { record } = require('./lib/cache-manifest');
 
 const root = path.resolve(__dirname, '..');
 const sites = JSON.parse(fs.readFileSync(path.join(root, 'sites.json'), 'utf8'));
@@ -83,6 +84,19 @@ async function fetchRepo(fullName) {
 
   const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
   fs.writeFileSync(cachePath, `${JSON.stringify(ordered, null, 2)}\n`);
+  // Whether the run was authenticated belongs in the provenance rather than only
+  // in a warning nobody kept: unauthenticated, this stops at the first 403 and
+  // writes a partial refresh wearing today's date.
+  record('stars', {
+    file: 'stars.json',
+    command: 'npm run update:stars',
+    sources: ['https://api.github.com/repos/{owner}/{name}'],
+    fetchedAt,
+    entries: Object.keys(ordered).length,
+    repositories: repos.length,
+    failed,
+    authenticated: Boolean(token)
+  });
   console.log(`Updated ${updated}/${repos.length} GitHub star records (${failed} failed, ${pruned} stale removed)`);
 
   // The removal bar, reported rather than acted on. The README says a project

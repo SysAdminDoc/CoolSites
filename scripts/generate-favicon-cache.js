@@ -16,6 +16,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { reencodeAll, RENDER_SIZE } = require('./lib/reencode-icons');
+const { record } = require('./lib/cache-manifest');
 
 const root = path.resolve(__dirname, '..');
 const sites = JSON.parse(fs.readFileSync(path.join(root, 'sites.json'), 'utf8'));
@@ -253,6 +254,17 @@ if (require.main !== module) return;
   const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
   fs.writeFileSync(output, `${JSON.stringify(ordered, null, 2)}\n`);
   const covered = Object.values(ordered).filter(value => typeof value === 'string').length;
+  // favicons.json holds 500-odd data URIs and not one date. The manifest is the
+  // only record of when this ran and what came back.
+  record('favicons', {
+    file: 'favicons.json',
+    command: 'npm run update:favicons',
+    sources: ['google s2', 'duckduckgo ip3', 'the site\'s own <link rel="icon">', '/favicon.ico'],
+    fetchedAt: new Date().toISOString(),
+    entries: Object.keys(ordered).length,
+    covered,
+    failed: failed.length
+  });
   console.log(`Cached ${updated} new favicons (${failed.length} without one, ${skipped} of those already known, ${pruned} stale removed); ${covered}/${domains.length} domains available`);
   if (failed.length) {
     console.log(`No icon found for: ${failed.join(', ')}`);

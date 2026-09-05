@@ -1,0 +1,30 @@
+{
+  "favicons": {
+    "file": "favicons.json",
+    "command": "npm run update:favicons",
+    "sources": [
+      "google s2",
+      "duckduckgo ip3",
+      "the site's own <link rel=\"icon\">",
+      "/favicon.ico"
+    ],
+    "fetchedAt": "2026-09-05T18:00:42.572Z",
+    "entries": 535,
+    "covered": 522,
+    "failed": 13,
+    "sha256": "d2354e0e2d8471da3ea5084bf2b92f6055f25095a8a7f988515b355bef7b6fec"
+  },
+  "stars": {
+    "file": "stars.json",
+    "command": "npm run update:stars",
+    "sources": [
+      "https://api.github.com/repos/{owner}/{name}"
+    ],
+    "fetchedAt": "2026-09-05T18:00:22.674Z",
+    "entries": 68,
+    "repositories": 68,
+    "failed": 0,
+    "authenticated": true,
+    "sha256": "c373983d6d297d3685ceae3634ce5de097b53ce3f5b88fe153fb918a3e4b60c5"
+  }
+}

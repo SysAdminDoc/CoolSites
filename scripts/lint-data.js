@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { computeMetadata, renderTargets, LEGACY_IMPORT_DATE, MAX_LEGACY_DATED, freshness, hasRealProvenance } = require('./lib/metadata');
+const { MANIFEST_FILE, hashOf } = require('./lib/cache-manifest');
 
 const root = path.resolve(__dirname, '..');
 const sourceOnly = process.argv.includes('--source-only');
@@ -443,7 +444,49 @@ function validateSourceData() {
     addError(`favicons.json is ${(faviconBytes / 1024).toFixed(0)}KB, over the ${(MAX_FAVICON_FILE_BYTES / 1024)}KB ceiling. Every reader downloads this file in full.`);
   }
 
+  checkCacheManifest({ stars, favicons });
+
   return { sites: Array.isArray(sites) ? sites : [], categories: Array.isArray(categories) ? categories : [], collections: Array.isArray(collections) ? collections : [], urls };
+}
+
+// A manifest that only carried a date would still read "fetched today" after
+// somebody hand-edited the file it describes, so the hash is the part that makes
+// it worth having. The count is here for the same reason: a cache that lost half
+// its records to a rate limit and a cache that was refreshed are otherwise
+// indistinguishable.
+function checkCacheManifest({ stars, favicons }) {
+  const manifest = readOptionalJson(MANIFEST_FILE, null);
+  if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)) {
+    addError(`${MANIFEST_FILE} is missing or is not an object. Run npm run update:stars and npm run update:favicons to write it.`);
+    return;
+  }
+  const described = { stars: { file: 'stars.json', data: stars }, favicons: { file: 'favicons.json', data: favicons } };
+  for (const [key, { file, data }] of Object.entries(described)) {
+    const entry = manifest[key];
+    if (!entry || typeof entry !== 'object') {
+      addError(`${MANIFEST_FILE}: no record for ${file}. A cache nobody can date is a cache nobody can trust.`);
+      continue;
+    }
+    for (const field of ['file', 'command', 'fetchedAt', 'entries', 'sha256']) {
+      if (entry[field] === undefined) addError(`${MANIFEST_FILE}.${key}: missing ${field}`);
+    }
+    if (entry.file !== file) addError(`${MANIFEST_FILE}.${key}.file is ${entry.file}, expected ${file}`);
+    if (!/^\d{4}-\d{2}-\d{2}T/.test(String(entry.fetchedAt || ''))) {
+      addError(`${MANIFEST_FILE}.${key}.fetchedAt must be an ISO timestamp`);
+    }
+    if (!Array.isArray(entry.sources) || !entry.sources.length) {
+      addError(`${MANIFEST_FILE}.${key}: sources has to say where the data came from`);
+    }
+    const actual = Object.keys(data || {}).length;
+    if (entry.entries !== actual) {
+      addError(`${MANIFEST_FILE}.${key}.entries says ${entry.entries}, ${file} holds ${actual}. Re-run ${entry.command || 'the refresh command'}.`);
+    }
+    if (!fs.existsSync(path.join(root, file))) continue;
+    const digest = hashOf(file);
+    if (entry.sha256 !== digest) {
+      addError(`${MANIFEST_FILE}.${key}.sha256 does not match ${file}. It was edited without a refresh, so its fetch date is a claim about data that is no longer there.`);
+    }
+  }
 }
 
 // The submission form lists categories by hand; when a category is added or
