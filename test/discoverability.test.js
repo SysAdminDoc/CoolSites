@@ -80,3 +80,29 @@ test('robots.txt points at the sitemap and hides only local output', () => {
   const disallowed = [...robots.matchAll(/^Disallow: (.+)$/gm)].map(match => match[1].trim());
   assert.deepEqual(disallowed, ['/work/']);
 });
+
+// The badge is the one file here meant to be hotlinked from somebody else's
+// page. That makes every external reference in it a request their reader pays
+// for and a third party gets to see, so there may not be any.
+test('the badge is self-contained and readable on either kind of page', () => {
+  const badge = read('badge.svg');
+  assert.match(badge, /^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/, 'it has to be a standalone SVG document');
+  for (const pattern of [/@font-face/i, /@import/i, /xlink:href/i, /<image\b/i, /<script\b/i, /<foreignObject\b/i]) {
+    assert.doesNotMatch(badge, pattern, `badge.svg must not carry ${pattern}`);
+  }
+  // href on an <a> would be a link, not a fetch, but there is none either: the
+  // link belongs to the host page's markup so the whole badge is clickable.
+  const urls = [...badge.matchAll(/(?:https?:)?\/\/[^\s"')]+/g)]
+    .map(match => match[0])
+    .filter(url => url !== 'http://www.w3.org/2000/svg');
+  assert.deepEqual(urls, [], 'badge.svg must reference nothing outside itself');
+  // Both halves paint their own background, which is what makes it legible on a
+  // white page and a black one. A transparent badge would vanish on one of them.
+  assert.match(badge, /<rect width="62" height="20" fill="#08090d"\/>/);
+  assert.match(badge, /<rect x="62" width="66" height="20" fill="#6e56cf"\/>/);
+  assert.match(badge, /aria-label="listed on CoolSites"/, 'it needs a name for anyone who cannot see it');
+
+  const readme = read('README.md');
+  assert.ok(readme.includes(`${SITE}badge.svg`), 'the README has to say where the badge is');
+  assert.match(readme, /\[!\[listed on CoolSites\]\(/, 'a Markdown snippet is the one people actually paste');
+});

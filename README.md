@@ -398,6 +398,23 @@ coolsites-widget {
 The element carries its contract version in `data-version`. Offline, a timeout
 and a failed load each say which one happened.
 
+### Badge
+
+If your project is listed here, `badge.svg` is yours to use. It is one static
+file, it loads no font and makes no request of its own, and it reads on a light
+or a dark page.
+
+```html
+<a href="https://sysadmindoc.github.io/CoolSites/"><img
+   src="https://sysadmindoc.github.io/CoolSites/badge.svg"
+   alt="listed on CoolSites" width="128" height="20"></a>
+```
+
+```markdown
+[![listed on CoolSites](https://sysadmindoc.github.io/CoolSites/badge.svg)](https://sysadmindoc.github.io/CoolSites/)
+```
+
+
 ## Adding Sites
 
 The easiest way is to [open a submission issue](https://github.com/SysAdminDoc/CoolSites/issues/new?template=submit-site.yml). Fill in the form and it gets reviewed from there.
