@@ -1,6 +1,7 @@
 *.bak
 .env
 *.log
+test-output.txt
 CLAUDE.md
 
 # Build output

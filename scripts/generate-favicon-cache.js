@@ -198,13 +198,23 @@ if (require.main !== module) return;
   // size the page renders. Skipped with --no-reencode, which is what you want
   // when Chrome is not available and you only need the fetch.
   if (!process.argv.includes('--no-reencode')) {
-    const result = await reencodeAll(cache, {
-      onProgress: (done, total) => process.stdout.write(`\r  re-encoding ${done}/${total}`)
-    });
-    if (result.checked) {
+    // A re-encode that cannot run must not cost the fetch that already worked.
+    // Chrome missing from the machine threw from here, past the point where
+    // every newly fetched icon was in memory and before the point where any of
+    // it was written, so an entire run was discarded to save nobody any bytes.
+    try {
+      const result = await reencodeAll(cache, {
+        onProgress: (done, total) => process.stdout.write(`\r  re-encoding ${done}/${total}`)
+      });
+      if (result.checked) {
+        process.stdout.write('\n');
+        console.log(`Re-encoded ${result.shrunk} of ${result.checked} oversized icons at ${RENDER_SIZE}px, saving ${(result.savedBytes / 1024).toFixed(0)}KB`);
+        for (const failure of result.failures) console.warn(`  could not re-encode ${failure}`);
+      }
+    } catch (error) {
       process.stdout.write('\n');
-      console.log(`Re-encoded ${result.shrunk} of ${result.checked} oversized icons at ${RENDER_SIZE}px, saving ${(result.savedBytes / 1024).toFixed(0)}KB`);
-      for (const failure of result.failures) console.warn(`  could not re-encode ${failure}`);
+      console.warn(`Could not re-encode: ${error.message}`);
+      console.warn('The icons this run fetched are still being saved. Re-run when Chrome is available, or pass --no-reencode to skip the step deliberately.');
     }
   }
 

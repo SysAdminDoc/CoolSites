@@ -28,6 +28,7 @@ const RENDER_SIZE = 32;
 // cached icon is about 1KB and already close to what 32px can be.
 const DEFAULT_THRESHOLD = 2048;
 const CHROME_START_TIMEOUT_MS = 20000;
+const EVALUATE_TIMEOUT_MS = 15000;
 
 function findChrome() {
   const candidates = [
@@ -66,8 +67,20 @@ async function startChrome() {
     if (child.exitCode !== null) break;
     await new Promise(resolve => setTimeout(resolve, 100));
   }
+  // Reached only when Chrome never announced itself. reencodeAll's finally
+  // block does not exist yet at this point, so the profile this function made
+  // is this function's to clean up.
   child.kill();
+  removeProfile(profile);
   throw new Error(`Chrome did not report a debugging endpoint:\n${output}`);
+}
+
+// Chrome holds the profile directory briefly after exit on Windows, so this
+// retries rather than reporting a failure nobody can act on.
+function removeProfile(profile) {
+  try {
+    fs.rmSync(profile, { recursive: true, force: true, maxRetries: 20, retryDelay: 250 });
+  } catch { /* a leftover temp profile is not worth failing a run over */ }
 }
 
 // The smallest CDP client that can run one expression and read the answer back.
@@ -105,11 +118,17 @@ async function connect(url) {
   return {
     close: () => socket.close(),
     async evaluate(expression) {
-      const result = await send('Runtime.evaluate', {
-        expression,
-        awaitPromise: true,
-        returnByValue: true
-      }, attached.sessionId);
+      // Decoding one 32px icon is milliseconds of work, so anything approaching
+      // this timeout is a hang. Without it an image that fires neither load nor
+      // error stalls the whole run with nothing to see and nothing to kill but
+      // the process.
+      let timer;
+      const result = await Promise.race([
+        send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, attached.sessionId),
+        new Promise((_, reject) => {
+          timer = setTimeout(() => reject(new Error(`the browser did not answer in ${EVALUATE_TIMEOUT_MS}ms`)), EVALUATE_TIMEOUT_MS);
+        })
+      ]).finally(() => clearTimeout(timer));
       if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || 'evaluation failed');
       return result.result.value;
     }
@@ -188,10 +207,7 @@ async function reencodeAll(cache, { threshold = DEFAULT_THRESHOLD, onProgress } 
   } finally {
     if (session) session.close();
     chrome.child.kill();
-    // Chrome holds the profile directory briefly after exit on Windows.
-    try {
-      fs.rmSync(chrome.profile, { recursive: true, force: true, maxRetries: 20, retryDelay: 250 });
-    } catch { /* a leftover temp profile is not worth failing a run over */ }
+    removeProfile(chrome.profile);
   }
 
   return { checked: targets.length, shrunk, savedBytes, failures };
