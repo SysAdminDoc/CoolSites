@@ -1,0 +1,8 @@
+# Everything here is meant to be found. There is nothing private to keep out of.
+User-agent: *
+Allow: /
+
+# Local report output, never part of the published site.
+Disallow: /work/
+
+Sitemap: https://sysadmindoc.github.io/CoolSites/sitemap.xml

@@ -97,6 +97,25 @@ if (countsChanged) {
   fs.writeFileSync(path.join(root, 'categories.json'), `${JSON.stringify(categories, null, 2)}\n`);
 }
 
+// A sitemap of two URLs is not much, but the alternative is none, and it is the
+// only machine-readable statement of what this site actually serves. lastmod is
+// the freshest entry the directory holds rather than the moment the build ran:
+// a timestamp that moves because someone regenerated a feed tells a crawler
+// nothing and teaches it to stop believing the field.
+const sitemapPages = [
+  { loc: siteUrl, lastmod: feedUpdated.slice(0, 10) },
+  { loc: `${siteUrl}collections.html`, lastmod: feedUpdated.slice(0, 10) }
+];
+const sitemap = `<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapPages.map(page => `  <url>
+    <loc>${xml(page.loc)}</loc>
+    <lastmod>${xml(page.lastmod)}</lastmod>
+  </url>`).join('\n')}
+</urlset>
+`;
+fs.writeFileSync(path.join(root, 'sitemap.xml'), sitemap);
+
 const meta = computeMetadata();
 const { results, problems } = renderTargets(meta);
 if (problems.length) {

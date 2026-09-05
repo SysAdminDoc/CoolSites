@@ -6,6 +6,7 @@ const ASSETS = [
   './collections.html',
   './widget.js',
   './manifest.json',
+  './social-card.png',
   './sites.json',
   './categories.json',
   './collections.json',
