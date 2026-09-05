@@ -63,12 +63,28 @@
     <summary>Creative AI toolkit for video. Gen-3 Alpha for video generation, motion brush, green screen, and more.</summary>
   </entry>
   <entry>
+    <title>Stirling PDF</title>
+    <id>https://stirlingpdf.io</id>
+    <link href="https://stirlingpdf.io"/>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <category term="Productivity"/>
+    <summary>Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR and convert. Every PDF operation in one tool.</summary>
+  </entry>
+  <entry>
     <title>Terraform</title>
     <id>https://developer.hashicorp.com/terraform</id>
     <link href="https://developer.hashicorp.com/terraform"/>
     <updated>2026-08-25T00:00:00Z</updated>
     <category term="Sysadmin"/>
     <summary>Infrastructure as code. Define cloud resources in declarative config files. The industry standard.</summary>
+  </entry>
+  <entry>
+    <title>tldr pages</title>
+    <id>https://tldr.sh</id>
+    <link href="https://tldr.sh"/>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <category term="CLI Tools"/>
+    <summary>Simplified, community-driven man pages. Practical examples for every command. Cut the noise.</summary>
   </entry>
   <entry>
     <title>Trilium Notes</title>

@@ -1,8 +1,10 @@
 'use strict';
 
-// Guards the date provenance rules. Most of the directory carries the date of a
-// single bulk import, so the job here is making sure nothing new can be filed
-// under that date and quietly inherit its false chronology.
+// Guards the rules lint enforces on sites.json. Mostly date provenance: the
+// directory carries the date of a single bulk import, so the job is making sure
+// nothing new can be filed under that date and quietly inherit its false
+// chronology. Also the one-entry-per-project rule, which lives here because it
+// needs the same run-lint-against-a-mutated-copy harness.
 
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -126,6 +128,49 @@ test('lint rejects a date in the future', () => {
   });
   assert.equal(result.passed, false);
   assert.match(result.output, /future/);
+});
+
+test('a project gets one entry', () => {
+  // Two projects used to be listed twice, once by homepage and once by
+  // repository. That inflated the count and showed the same tool twice in
+  // search, staff picks and the unfiltered view.
+  const addresses = new Map();
+  const clashes = [];
+  for (const site of SITES) {
+    for (const [field, value] of [['url', site.url], ['repository', site.repository]]) {
+      if (!value) continue;
+      const key = value.replace(/\/+$/, '').toLowerCase();
+      const previous = addresses.get(key);
+      if (previous && previous.name !== site.name) clashes.push(`${site.name}.${field} == ${previous.name}.${previous.field}`);
+      if (!previous) addresses.set(key, { name: site.name, field });
+    }
+  }
+  assert.deepEqual(clashes, []);
+});
+
+test('lint rejects a second entry for a project already listed', () => {
+  const result = lintWith(sites => {
+    const withRepo = sites.find(site => site.repository);
+    sites.push({
+      name: 'Duplicate Probe',
+      url: withRepo.repository,
+      description: 'A second entry pointing at an existing project.',
+      category: withRepo.category,
+      openSource: true,
+      requiresAuth: false,
+      updatedAt: '2026-08-25',
+      lastReviewedAt: '2026-08-25',
+      tags: ['probe']
+    });
+  });
+  assert.equal(result.passed, false, 'listing a project twice must not pass lint');
+  assert.match(result.output, /already listed by/);
+});
+
+test('lint rejects a repository that just repeats the url', () => {
+  const result = lintWith(sites => { sites[0].repository = sites[0].url; });
+  assert.equal(result.passed, false);
+  assert.match(result.output, /same address as url/);
 });
 
 test('the guard restores sites.json even when lint fails', () => {

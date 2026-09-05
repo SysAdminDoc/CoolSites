@@ -1,7 +1,7 @@
 {
   "name": "CoolSites — Curated Web Tools & Resources",
   "short_name": "CoolSites",
-  "description": "A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.",
+  "description": "A hand-checked directory of 586 free tools, open source projects, and hidden gems across 30 categories.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -146,6 +146,7 @@ function validateSourceData() {
   const urls = new Set();
   const canonicalUrls = new Map();
   let legacyDated = 0;
+  const projectAddresses = [];
   // Compared as a plain string against the YYYY-MM-DD the data uses, so a
   // timezone never turns a same-day stamp into a future date.
   const today = new Date().toISOString().slice(0, 10);
@@ -190,18 +191,49 @@ function validateSourceData() {
       addError(`${label}: updatedAt is ${site.updatedAt} but there is no lastReviewedAt saying who checked it`);
     }
     if (site?.updatedAt === LEGACY_IMPORT_DATE) legacyDated++;
+
+    // A project gets one entry. Two of them were listed twice, once by homepage
+    // and once by repository, which inflated the count and showed the same tool
+    // twice in any combined view. The repository field is how one entry links
+    // both, so it also has to be checked for collisions.
+    const repository = canonicalUrl(site?.repository);
+    if (site?.repository && !repository) addError(`${label}: repository must be a valid URL`);
+    if (repository) {
+      if (repository === canonical) addError(`${label}: repository is the same address as url`);
+      projectAddresses.push({ label, address: repository, field: 'repository' });
+    }
+    if (canonical) projectAddresses.push({ label, address: canonical, field: 'url' });
   });
 
-  // The ratchet. This may only fall, so nothing new can be filed under the
-  // import date to sidestep the rule above.
-  if (legacyDated > MAX_LEGACY_DATED) {
-    addError(`sites.json: ${legacyDated} entries still carry the ${LEGACY_IMPORT_DATE} import date, above the ceiling of ${MAX_LEGACY_DATED}. New entries need a real date and a lastReviewedAt.`);
+  // Checked after the loop because a collision can run in either direction:
+  // entry A's repository may be entry B's url, whichever comes first.
+  const seenAddress = new Map();
+  for (const entry of projectAddresses) {
+    const previous = seenAddress.get(entry.address);
+    if (previous && previous.label !== entry.label) {
+      addError(`${entry.label}: ${entry.field} ${entry.address} is already listed by ${previous.label} as its ${previous.field}. A project gets one entry.`);
+    }
+    if (!previous) seenAddress.set(entry.address, entry);
   }
 
-  (Array.isArray(categories) ? categories : []).forEach((category, index) => {
-    const actual = categoryCounts.get(category?.name) || 0;
-    if (category?.count !== actual) addError(`categories[${index}] ${category?.name}: count ${category?.count} does not match ${actual}`);
-  });
+  // Exact, not a ceiling. Slack between the two is room a new entry could be
+  // filed into under the import date, dodging the provenance rule above.
+  // npm run review lowers the recorded number as entries get checked.
+  if (legacyDated > MAX_LEGACY_DATED) {
+    addError(`sites.json: ${legacyDated} entries carry the ${LEGACY_IMPORT_DATE} import date, more than the ${MAX_LEGACY_DATED} on record. A new entry needs a real date and a lastReviewedAt.`);
+  } else if (legacyDated < MAX_LEGACY_DATED) {
+    addError(`sites.json: ${legacyDated} entries carry the ${LEGACY_IMPORT_DATE} import date but scripts/lib/metadata.js still says ${MAX_LEGACY_DATED}. Lower MAX_LEGACY_DATED to ${legacyDated}.`);
+  }
+
+  // Derived by the generator, so this is a drift guard and belongs with the
+  // other post-generate checks. Running it in --source-only mode would fail the
+  // build before the step that fixes it ever ran.
+  if (!sourceOnly) {
+    (Array.isArray(categories) ? categories : []).forEach((category, index) => {
+      const actual = categoryCounts.get(category?.name) || 0;
+      if (category?.count !== actual) addError(`categories[${index}] ${category?.name}: count ${category?.count} does not match ${actual}; run npm run generate`);
+    });
+  }
 
   (Array.isArray(collections) ? collections : []).forEach((collection, index) => {
     const label = `collections[${index}] ${collection?.name || ''}`.trim();

@@ -74,7 +74,7 @@
     "slug": "homelab",
     "color": "#64b4ff",
     "blurb": "Self-hosted infrastructure, dashboards, storage, and service management.",
-    "count": 39
+    "count": 38
   },
   {
     "name": "Creative",
@@ -144,7 +144,7 @@
     "slug": "news-and-reference",
     "color": "#b4b4c8",
     "blurb": "Technical references, indexes, documentation, and discovery sources.",
-    "count": 20
+    "count": 19
   },
   {
     "name": "Gaming",

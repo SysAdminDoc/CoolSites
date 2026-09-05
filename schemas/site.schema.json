@@ -8,6 +8,11 @@
   "properties": {
     "name": { "type": "string", "minLength": 1 },
     "url": { "type": "string", "format": "uri" },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "description": "Where the source lives, when that is somewhere other than the main link. A project gets one entry, so this is how it links both."
+    },
     "description": { "type": "string", "minLength": 12 },
     "category": { "type": "string", "minLength": 1 },
     "openSource": { "type": "boolean" },

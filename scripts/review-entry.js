@@ -100,6 +100,22 @@ function main() {
   for (const entry of touched) {
     console.log(`${entry.name}: reviewed ${entry.lastReviewedAt}${options.changed ? `, updated ${entry.updatedAt}` : ''}`);
   }
+
+  // Lint requires the recorded number to match exactly, because slack between
+  // the two is room a new entry could be filed into under the import date. Keep
+  // it tight here rather than making every reviewer remember.
+  const remaining = sites.filter(site => site.updatedAt === LEGACY_IMPORT_DATE).length;
+  const metadataPath = path.join(ROOT, 'scripts', 'lib', 'metadata.js');
+  const metadata = fs.readFileSync(metadataPath, 'utf8');
+  const recorded = /const MAX_LEGACY_DATED = (\d+);/.exec(metadata);
+  if (!recorded) {
+    console.error('Could not find MAX_LEGACY_DATED in scripts/lib/metadata.js. Update it by hand to ' + remaining + '.');
+    process.exitCode = 1;
+  } else if (Number(recorded[1]) !== remaining) {
+    fs.writeFileSync(metadataPath, metadata.replace(recorded[0], `const MAX_LEGACY_DATED = ${remaining};`));
+    console.log(`Unreviewed entries: ${recorded[1]} -> ${remaining}`);
+  }
+
   console.log(`\n${touched.length} ${touched.length === 1 ? 'entry' : 'entries'} stamped. Run npm run build to refresh the feeds.`);
 }
 

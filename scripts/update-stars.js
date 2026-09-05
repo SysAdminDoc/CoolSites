@@ -35,7 +35,9 @@ async function fetchRepo(fullName) {
 }
 
 (async () => {
-  const repos = [...new Set(sites.map(site => repoFromUrl(site.url)).filter(Boolean))].sort();
+  // repository wins where it is set: the entry's main link may be the project's
+  // own site while the code still lives on GitHub.
+  const repos = [...new Set(sites.map(site => repoFromUrl(site.repository || site.url)).filter(Boolean))].sort();
   const known = new Set(repos.map(fullName => fullName.toLowerCase()));
   const fetchedAt = new Date().toISOString();
   let updated = 0;

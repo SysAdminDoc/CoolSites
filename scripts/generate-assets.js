@@ -79,6 +79,23 @@ const jsonFeed = {
 
 fs.writeFileSync(path.join(feedsDir, 'recent.atom'), atom);
 fs.writeFileSync(path.join(feedsDir, 'recent.json'), `${JSON.stringify(jsonFeed, null, 2)}\n`);
+
+// Category counts are derived, so derive them. Lint has always verified them,
+// which meant anyone adding a site had to hand-edit a number to match, and the
+// README claimed the build did it. Now it does, and lint's check becomes a
+// drift guard like every other one.
+const categories = readJson('categories.json');
+const actual = new Map();
+for (const site of sites) actual.set(site.category, (actual.get(site.category) || 0) + 1);
+let countsChanged = 0;
+for (const category of categories) {
+  const count = actual.get(category.name) || 0;
+  if (category.count !== count) { category.count = count; countsChanged++; }
+}
+if (countsChanged) {
+  fs.writeFileSync(path.join(root, 'categories.json'), `${JSON.stringify(categories, null, 2)}\n`);
+}
+
 const meta = computeMetadata();
 const { results, problems } = renderTargets(meta);
 if (problems.length) {
@@ -89,6 +106,7 @@ const rewritten = results.filter(result => result.changed);
 for (const result of rewritten) fs.writeFileSync(result.absolute, result.next);
 
 console.log(`Generated feeds for ${recent.length} recent entries`);
+if (countsChanged) console.log(`Updated ${countsChanged} category ${countsChanged === 1 ? 'count' : 'counts'}`);
 console.log(rewritten.length
   ? `Synced v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories into ${rewritten.map(result => result.file).join(', ')}`
   : `Metadata already in sync (v${meta.version}, ${meta.siteCount} sites, ${meta.categoryCount} categories)`);

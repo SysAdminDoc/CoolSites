@@ -12,14 +12,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="CoolSites v2.4.0">
 <title>CoolSites | Curated Web Tools & Resources</title>
-<meta name="description" content="A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.">
+<meta name="description" content="A hand-checked directory of 586 free tools, open source projects, and hidden gems across 30 categories.">
 <meta property="og:title" content="CoolSites — Curated Web Tools & Resources">
-<meta property="og:description" content="588 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
+<meta property="og:description" content="586 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sysadmindoc.github.io/CoolSites/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoolSites — Curated Web Tools & Resources">
-<meta name="twitter:description" content="588 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
+<meta name="twitter:description" content="586 hand-checked free tools, open source projects, and hidden gems, sorted into 30 categories.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236e56cf'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='16' fill='white'%3E//%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <link rel="alternate" type="application/atom+xml" title="CoolSites Recently Added" href="feeds/recent.atom">
@@ -28,7 +28,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"CoolSites","url":"https://sysadmindoc.github.io/CoolSites/","description":"A hand-checked directory of 588 free tools, open source projects, and hidden gems across 30 categories.","potentialAction":{"@type":"SearchAction","target":"https://sysadmindoc.github.io/CoolSites/?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"CoolSites","url":"https://sysadmindoc.github.io/CoolSites/","description":"A hand-checked directory of 586 free tools, open source projects, and hidden gems across 30 categories.","potentialAction":{"@type":"SearchAction","target":"https://sysadmindoc.github.io/CoolSites/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <style>
   /* Self-hosted fonts — eliminates Google Fonts CDN dependency */
@@ -2685,7 +2685,7 @@
 <section class="hero">
   <span class="hero-eyebrow">Curated directory</span>
   <h1>The Internet's Best Kept Secrets</h1>
-  <p id="heroTagline">A hand-picked directory of 588 free tools and hidden gems across 30 categories.</p>
+  <p id="heroTagline">A hand-picked directory of 586 free tools and hidden gems across 30 categories.</p>
 
   <div class="search-container">
     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -2986,7 +2986,9 @@ function getGitHubRepo(url) {
 }
 
 function getStarRecord(site) {
-  const repo = getGitHubRepo(site.url);
+  // An entry whose primary link is the project's own site still has a repo
+  // worth counting, which is what the repository field is for.
+  const repo = getGitHubRepo(site.repository || site.url);
   return repo ? STAR_COUNTS[repo] : null;
 }
 

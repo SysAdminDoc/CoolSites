@@ -2322,13 +2322,17 @@
     "category": "Productivity",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "pdf",
       "tools",
-      "self-hosted"
+      "self-hosted",
+      "manipulation",
+      "privacy"
     ],
-    "editorsPick": true
+    "editorsPick": true,
+    "repository": "https://github.com/Stirling-Tools/Stirling-PDF",
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "Grist",
@@ -5797,20 +5801,6 @@
     ]
   },
   {
-    "name": "tldr pages",
-    "url": "https://tldr.sh",
-    "description": "Simplified man pages with practical examples. Community-maintained, covers 1000+ commands.",
-    "category": "News & Reference",
-    "openSource": false,
-    "requiresAuth": false,
-    "updatedAt": "2026-06-25",
-    "tags": [
-      "man pages",
-      "cli",
-      "examples"
-    ]
-  },
-  {
     "name": "ArchWiki",
     "url": "https://wiki.archlinux.org",
     "description": "The best Linux documentation on the internet. Useful regardless of which distro you run.",
@@ -6195,18 +6185,21 @@
     ]
   },
   {
-    "name": "tldr",
-    "url": "https://github.com/tldr-pages/tldr",
+    "name": "tldr pages",
+    "url": "https://tldr.sh",
     "description": "Simplified, community-driven man pages. Practical examples for every command. Cut the noise.",
     "category": "CLI Tools",
     "openSource": true,
     "requiresAuth": false,
-    "updatedAt": "2026-06-25",
+    "updatedAt": "2026-08-25",
     "tags": [
       "man pages",
       "examples",
-      "community"
-    ]
+      "community",
+      "cli"
+    ],
+    "repository": "https://github.com/tldr-pages/tldr",
+    "lastReviewedAt": "2026-08-25"
   },
   {
     "name": "lazygit",
@@ -7978,21 +7971,6 @@
       "docker",
       "lightweight",
       "alerts"
-    ]
-  },
-  {
-    "name": "Stirling-PDF",
-    "url": "https://github.com/Stirling-Tools/Stirling-PDF",
-    "description": "Self-hosted PDF manipulation tool. Merge, split, convert, compress, sign, and OCR your PDFs. No data leaves your server.",
-    "category": "Homelab",
-    "openSource": true,
-    "requiresAuth": false,
-    "updatedAt": "2026-06-25",
-    "tags": [
-      "pdf",
-      "self-hosted",
-      "manipulation",
-      "privacy"
     ]
   },
   {

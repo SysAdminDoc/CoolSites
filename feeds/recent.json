@@ -112,6 +112,23 @@
       "_coolsites_slug": "runway"
     },
     {
+      "id": "https://stirlingpdf.io",
+      "url": "https://stirlingpdf.io",
+      "title": "Stirling PDF",
+      "summary": "Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR and convert. Every PDF operation in one tool.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "Productivity",
+        "pdf",
+        "tools",
+        "self-hosted",
+        "manipulation",
+        "privacy"
+      ],
+      "_coolsites_category": "Productivity",
+      "_coolsites_slug": "stirling-pdf"
+    },
+    {
       "id": "https://developer.hashicorp.com/terraform",
       "url": "https://developer.hashicorp.com/terraform",
       "title": "Terraform",
@@ -125,6 +142,22 @@
       ],
       "_coolsites_category": "Sysadmin",
       "_coolsites_slug": "terraform"
+    },
+    {
+      "id": "https://tldr.sh",
+      "url": "https://tldr.sh",
+      "title": "tldr pages",
+      "summary": "Simplified, community-driven man pages. Practical examples for every command. Cut the noise.",
+      "date_modified": "2026-08-25T00:00:00Z",
+      "tags": [
+        "CLI Tools",
+        "man pages",
+        "examples",
+        "community",
+        "cli"
+      ],
+      "_coolsites_category": "CLI Tools",
+      "_coolsites_slug": "tldr-pages"
     },
     {
       "id": "https://github.com/TriliumNext/Trilium",

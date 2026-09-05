@@ -20,11 +20,11 @@ function readJson(file) {
 // feeds alphabetical tie-breaks dressed up as chronology.
 const LEGACY_IMPORT_DATE = '2026-06-25';
 
-// A ratchet, not a target. The number of entries still carrying the import date
-// may fall as they get reviewed, and lint fails if it ever rises, so nothing new
-// can be filed under the legacy date to dodge the provenance rule. Lowering this
-// is a deliberate edit.
-const MAX_LEGACY_DATED = 577;
+// How many entries still carry the import date. Lint requires this to match
+// exactly, so it can only go down, and it goes down on its own: npm run review
+// lowers it as entries get checked. An approximate ceiling would leave slack
+// that a new entry could be filed into, which is the hole this closes.
+const MAX_LEGACY_DATED = 573;
 
 // The date a human last actually looked at the entry, as opposed to updatedAt,
 // which is when its content changed. Either can be the more recent one.

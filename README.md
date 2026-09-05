@@ -2,12 +2,12 @@
 
 ![Version](https://img.shields.io/badge/version-2.4.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Sites](https://img.shields.io/badge/sites-588-blueviolet)
+![Sites](https://img.shields.io/badge/sites-586-blueviolet)
 ![Categories](https://img.shields.io/badge/categories-30-orange)
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
-> A curated directory of 588 free tools, open source projects, and hidden gems across 30 categories, built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
+> A curated directory of 586 free tools, open source projects, and hidden gems across 30 categories, built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 **[Browse the directory](https://sysadmindoc.github.io/CoolSites/)**
 
@@ -17,7 +17,7 @@ backend and no tracking of any kind.
 
 ## Features
 
-- **588 curated sites** across 30 categories, every entry hand-picked and described
+- **586 curated sites** across 30 categories, every entry hand-picked and described
 - **A browse workspace.** Bookmarks stay in the fixed rail beside the category and metadata filters, leaving the rest of the screen for search and results.
 - **Focused collections.** Pick a starting point in the rail, scan every member, then move to another collection without leaving the page.
 - **Search that narrows.** Every word you type has to match. Names tolerate typos, longer fields need a real match, and hits are highlighted.
@@ -43,7 +43,7 @@ backend and no tracking of any kind.
 | Category         | Sites | Highlights |
 |------------------|:-----:|-----------|
 | Desktop Software | 50    | DevToys, PowerToys, Files, Everything, ShareX, VLC, Ventoy, HWiNFO |
-| Homelab          | 39    | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
+| Homelab          | 38    | Uptime Kuma, Proxmox, Tailscale, Pi-hole, Jellyfin, Immich, Paperless-ngx |
 | Dev Tools        | 35    | Regex101, Hoppscotch, CodePen, StackBlitz, Zed, Cursor, Playwright |
 | AI & ML          | 32    | Ollama, Open WebUI, LM Studio, ComfyUI, Hugging Face, Groq, Dify |
 | Creative         | 30    | Blender, Figma, Photopea, Excalidraw, Penpot, Coolors, fffuel.co |
@@ -54,7 +54,7 @@ backend and no tracking of any kind.
 | Productivity     | 24    | Obsidian, Notion, Linear, Cal.com, Stirling PDF, NocoDB, Typst |
 | Education        | 21    | freeCodeCamp, Khan Academy, MIT OCW, CS50, LeetCode, Nand2Tetris |
 | CLI Tools        | 20    | fzf, ripgrep, bat, eza, lazygit, lazydocker, neovim, starship |
-| News & Reference | 20    | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
+| News & Reference | 19    | Hacker News, ArchWiki, Stack Overflow, AlternativeTo, free-for.dev |
 | OSINT            | 19    | Shodan, Censys, Wayback Machine, SpiderFoot, TinEye, BuiltWith |
 | Torrenting       | 18    | qBittorrent, Transmission, Deluge, Jackett, Prowlarr, Stremio |
 | Gaming           | 16    | RetroArch, itch.io, Lichess, Board Game Arena, OpenTTD, RPCS3 |
@@ -375,4 +375,4 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** with all 588 sites.
+**[Browse the full directory](https://sysadmindoc.github.io/CoolSites/)** with all 586 sites.
