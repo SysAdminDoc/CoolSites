@@ -29,6 +29,7 @@ const OURS = [
   /^\.\/$/,
   /^collections\.html$/,
   /^feeds\/recent\.atom$/,
+  /^feeds\/directory\.opml$/,
   /^https:\/\/github\.com\/SysAdminDoc\/CoolSites(\/|$)/,
   /^https:\/\/web\.archive\.org\//,
   /^\$\{escapeAttr\(rootUrl\.href\)\}$/

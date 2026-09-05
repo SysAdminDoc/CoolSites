@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>CoolSites</title>
+    <dateModified>Sat, 05 Sep 2026 00:00:00 GMT</dateModified>
+    <ownerName>SysAdminDoc</ownerName>
+    <docs>http://opml.org/spec2.opml</docs>
+  </head>
+  <body>
+    <outline text="AI &amp; ML" title="AI &amp; ML">
+      <outline type="link" text="Agno" title="Agno" description="Build AI agents with memory, knowledge and tools. Python framework for production agents, formerly Phidata." htmlUrl="https://www.agno.com"/>
+      <outline type="link" text="AnythingLLM" title="AnythingLLM" description="All-in-one AI desktop app. Chat with documents, RAG, multiple model support. Self-hosted knowledge assistant." htmlUrl="https://anythingllm.com"/>
+      <outline type="link" text="Arena AI" title="Arena AI" description="Head-to-head LLM comparisons with blind voting. The most credible LLM benchmark based on human preference." htmlUrl="https://arena.ai"/>
+      <outline type="link" text="AUTOMATIC1111 WebUI" title="AUTOMATIC1111 WebUI" description="The most popular Stable Diffusion interface. ControlNet, LoRA, inpainting and upscaling, all in one UI." htmlUrl="https://github.com/AUTOMATIC1111/stable-diffusion-webui"/>
+      <outline type="link" text="Chatterbox TTS" title="Chatterbox TTS" description="High-quality open source TTS with emotion control and voice cloning from short samples. MIT licensed." htmlUrl="https://github.com/resemble-ai/chatterbox"/>
+      <outline type="link" text="Civitai" title="Civitai" description="Community hub for Stable Diffusion models. LoRAs, checkpoints and embeddings. The modding scene for AI art." htmlUrl="https://civitai.com"/>
+      <outline type="link" text="ComfyUI" title="ComfyUI" description="Node-based Stable Diffusion GUI. Visual workflow editor for AI image generation pipelines. Infinitely extensible." htmlUrl="https://www.comfy.org"/>
+      <outline type="link" text="CrewAI" title="CrewAI" description="Framework for orchestrating AI agents working together. Define roles, goals, and tasks for multi-agent systems." htmlUrl="https://www.crewai.com"/>
+      <outline type="link" text="Dify" title="Dify" description="Open source LLM app development platform. RAG, agents, workflow orchestration with a visual canvas." htmlUrl="https://dify.ai"/>
+      <outline type="link" text="Flowise" title="Flowise" description="Visual LangChain builder. Drag and drop LLM apps with RAG, agents, and chains. No code needed." htmlUrl="https://flowiseai.com"/>
+      <outline type="link" text="GPT4All" title="GPT4All" description="Run LLMs on consumer hardware. Simple installer, offline-capable, privacy-focused. By Nomic AI." htmlUrl="https://www.nomic.ai/gpt4all"/>
+      <outline type="link" text="Groq" title="Groq" description="LLM inference at insane speeds on custom LPU chips. Free API tier with blazing-fast Llama and Mixtral." htmlUrl="https://groq.com"/>
+      <outline type="link" text="Hugging Face" title="Hugging Face" description="The GitHub of AI. Millions of models, datasets, and spaces. The open source AI community hub." htmlUrl="https://huggingface.co"/>
+      <outline type="link" text="InvokeAI" title="InvokeAI" description="Professional creative AI platform. Polished Stable Diffusion interface with canvas, layers, and ControlNet." htmlUrl="https://invoke.ai"/>
+      <outline type="link" text="Jan" title="Jan" description="Open source ChatGPT alternative that runs 100% offline. Privacy-first, supports multiple models, clean interface." htmlUrl="https://jan.ai"/>
+      <outline type="link" text="Kokoro TTS" title="Kokoro TTS" description="Ultra-lightweight text-to-speech. Runs on a Raspberry Pi at real-time speed. 14 voices, no GPU needed." htmlUrl="https://huggingface.co/hexgrad/Kokoro-82M"/>
+      <outline type="link" text="LangFlow" title="LangFlow" description="Visual framework for building multi-agent and RAG applications. React Flow-based editor for AI pipelines." htmlUrl="https://www.langflow.org"/>
+      <outline type="link" text="LibreChat" title="LibreChat" description="Self-hosted multi-provider chat UI. Connect OpenAI, Anthropic, Google and local models in one interface." htmlUrl="https://www.librechat.ai"/>
+      <outline type="link" text="Llamafile" title="Llamafile" description="Single-file executable LLMs. Download one file and run a chatbot. No Python, no Docker, no dependencies." htmlUrl="https://github.com/mozilla-ai/llamafile"/>
+      <outline type="link" text="LM Studio" title="LM Studio" description="Desktop app to discover, download, and run local LLMs. Clean UI, no command line needed, OpenAI-compatible API." htmlUrl="https://lmstudio.ai"/>
+      <outline type="link" text="LocalAI" title="LocalAI" description="Self-hosted OpenAI-compatible API. Text, image, audio, video, voice cloning. Drop-in replacement, runs on CPU." htmlUrl="https://localai.io"/>
+      <outline type="link" text="NotebookLM" title="NotebookLM" description="Google&apos;s AI research assistant. Upload documents and chat with them. Generates podcast-style audio summaries." htmlUrl="https://notebooklm.google.com"/>
+      <outline type="link" text="Ollama" title="Ollama" description="Run large language models locally with one command. Dead simple CLI. Supports Llama, Mistral, Gemma, and dozens more." htmlUrl="https://ollama.com"/>
+      <outline type="link" text="Open WebUI" title="Open WebUI" description="Beautiful self-hosted ChatGPT-like interface for local LLMs. Connects to Ollama and adds RAG, web search and voice." htmlUrl="https://openwebui.com"/>
+      <outline type="link" text="OpenRouter" title="OpenRouter" description="Unified API for 200+ LLMs. One endpoint to access Claude, GPT, Gemini, Llama, Mistral, and more. Pay-as-you-go." htmlUrl="https://openrouter.ai"/>
+      <outline type="link" text="Papers With Code" title="Papers With Code" description="Every ML paper with its code implementation. Benchmarks, leaderboards, and state-of-the-art tracker." htmlUrl="https://paperswithcode.com"/>
+      <outline type="link" text="Perplexity" title="Perplexity" description="AI-powered search engine that cites its sources. Combines web search with LLM synthesis. Free tier available." htmlUrl="https://perplexity.ai"/>
+      <outline type="link" text="Replicate" title="Replicate" description="Run ML models in the cloud with one line of code. Huge library of open source models on demand." htmlUrl="https://replicate.com"/>
+      <outline type="link" text="TensorFlow Playground" title="TensorFlow Playground" description="Tinker with neural networks in your browser. Visualize how layers, neurons, and features affect learning." htmlUrl="https://playground.tensorflow.org"/>
+      <outline type="link" text="Together AI" title="Together AI" description="Run and fine-tune open source models. Fast inference API with competitive pricing. Research-friendly." htmlUrl="https://www.together.ai"/>
+      <outline type="link" text="Weights &amp; Biases" title="Weights &amp; Biases" description="ML experiment tracking and visualization. Log metrics, compare runs, and share results. Free for individuals." htmlUrl="https://wandb.ai"/>
+      <outline type="link" text="Whisper" title="Whisper" description="OpenAI&apos;s speech-to-text model. Runs locally, supports 99 languages, incredibly accurate transcription." htmlUrl="https://github.com/openai/whisper"/>
+    </outline>
+    <outline text="AI Creative" title="AI Creative">
+      <outline type="link" text="Cleanup.pictures" title="Cleanup.pictures" description="AI-powered object removal from photos. Just brush over what you want gone. Magic inpainting." htmlUrl="https://cleanup.pictures"/>
+      <outline type="link" text="ElevenLabs" title="ElevenLabs" description="Hyper-realistic AI voice synthesis and cloning. Free tier for personal projects." htmlUrl="https://elevenlabs.io"/>
+      <outline type="link" text="Ideogram" title="Ideogram" description="AI image generator that excels at typography and text rendering in images. Free tier available." htmlUrl="https://ideogram.ai"/>
+      <outline type="link" text="Khroma" title="Khroma" description="AI color palette generator. Learns your preferences and generates infinite palettes you&apos;ll actually like." htmlUrl="https://www.khroma.co"/>
+      <outline type="link" text="Krea.ai" title="Krea.ai" description="Real-time AI image generation. See results update as you type. Canvas mode for editing." htmlUrl="https://www.krea.ai"/>
+      <outline type="link" text="Leonardo.ai" title="Leonardo.ai" description="AI creative suite for game assets, concept art, and design. Fine-tuned models, real-time canvas." htmlUrl="https://leonardo.ai"/>
+      <outline type="link" text="Luma AI" title="Luma AI" description="3D capture and generation from photos and text. Dream Machine for video generation." htmlUrl="https://lumalabs.ai"/>
+      <outline type="link" text="Midjourney" title="Midjourney" description="AI image generation with extraordinary artistic quality. The standard for creative AI imagery." htmlUrl="https://www.midjourney.com"/>
+      <outline type="link" text="Pika" title="Pika" description="AI video generation from text or images. Create and edit videos with simple prompts." htmlUrl="https://pika.art"/>
+      <outline type="link" text="Pixlr" title="Pixlr" description="AI-powered online photo editor. Background removal, object eraser, batch editing. Free tier." htmlUrl="https://pixlr.com"/>
+      <outline type="link" text="Recraft" title="Recraft" description="AI vector and raster image generation with style control. Create icons, illustrations, and 3D renders from text." htmlUrl="https://www.recraft.ai"/>
+      <outline type="link" text="Remove.bg" title="Remove.bg" description="Instant background removal from photos using AI. One click, perfect results, free for preview quality." htmlUrl="https://www.remove.bg"/>
+      <outline type="link" text="Runway" title="Runway" description="Creative AI toolkit for video. Gen-3 Alpha for video generation, motion brush, green screen, and more." htmlUrl="https://runway.com/"/>
+      <outline type="link" text="Suno" title="Suno" description="AI music generation from text prompts. Create full songs with vocals, instruments, and structure. Free tier." htmlUrl="https://suno.com"/>
+      <outline type="link" text="Udio" title="Udio" description="AI music creation platform. Generate high-quality tracks in any genre from text descriptions." htmlUrl="https://www.udio.com"/>
+    </outline>
+    <outline text="Arr Stack" title="Arr Stack">
+      <outline type="link" text="Bazarr" title="Bazarr" description="Automated subtitle downloader. Companion app for Sonarr and Radarr that finds and downloads matching subtitles for your media." htmlUrl="https://www.bazarr.media/"/>
+      <outline type="link" text="Flaresolverr" title="Flaresolverr" description="Proxy server to bypass Cloudflare protection for Prowlarr and Jackett. Enables *arr apps to access protected indexers." htmlUrl="https://github.com/FlareSolverr/FlareSolverr"/>
+      <outline type="link" text="Lidarr" title="Lidarr" description="Automated music collection manager. Monitors for new albums, downloads, tags, and organizes your music library. Sonarr for music." htmlUrl="https://lidarr.audio/"/>
+      <outline type="link" text="Prowlarr" title="Prowlarr" description="Indexer manager for the *arr stack. One place to configure all your torrent and Usenet indexers, syncs with Sonarr/Radarr." htmlUrl="https://prowlarr.com/"/>
+      <outline type="link" text="Radarr" title="Radarr" description="Automated movie management. Monitors for releases, grabs the best quality, and organizes your movie collection. Sonarr for films." htmlUrl="https://radarr.video/"/>
+      <outline type="link" text="Recyclarr" title="Recyclarr" description="Automatically sync TRaSH Guides quality profiles and custom formats to Sonarr and Radarr. Set and forget optimal settings." htmlUrl="https://recyclarr.dev/"/>
+      <outline type="link" text="Seerr" title="Seerr" description="Media request management for Plex. Users browse and request films and shows; you approve. Formerly Overseerr." htmlUrl="https://seerr.dev"/>
+      <outline type="link" text="Sonarr" title="Sonarr" description="Automated TV show management. Monitors for new episodes, downloads them, renames files, and organizes your media library." htmlUrl="https://sonarr.tv/"/>
+      <outline type="link" text="Tautulli" title="Tautulli" description="Plex server monitoring and statistics dashboard. Track who&apos;s watching what, server performance, and viewing history." htmlUrl="https://tautulli.com/"/>
+      <outline type="link" text="Unpackerr" title="Unpackerr" description="Extracts downloaded archives for the *arr stack. Watches download folders and automatically unpacks compressed media files." htmlUrl="https://unpackerr.zip/"/>
+    </outline>
+    <outline text="Automation" title="Automation">
+      <outline type="link" text="Activepieces" title="Activepieces" description="Open source no-code automation platform. Clean UI, 100+ integrations, self-hostable Zapier alternative." htmlUrl="https://www.activepieces.com"/>
+      <outline type="link" text="Apache Airflow" title="Apache Airflow" description="The industry standard for data pipeline orchestration. Schedule, monitor, and manage complex workflows." htmlUrl="https://airflow.apache.org"/>
+      <outline type="link" text="Huginn" title="Huginn" description="Build agents that monitor the web and act on your behalf. The self-hosted IFTTT for power users." htmlUrl="https://github.com/huginn/huginn"/>
+      <outline type="link" text="Make (Integromat)" title="Make (Integromat)" description="Visual automation platform. Connect apps and design workflows with a flowchart-style interface. Generous free tier." htmlUrl="https://www.make.com"/>
+      <outline type="link" text="n8n" title="n8n" description="Self-hosted workflow automation with 400+ integrations. Visual node editor. The open source Zapier killer." htmlUrl="https://n8n.io"/>
+      <outline type="link" text="Node-RED" title="Node-RED" description="Flow-based programming for IoT and automation. Wire together APIs, devices, and services visually." htmlUrl="https://nodered.org"/>
+      <outline type="link" text="Pipedream" title="Pipedream" description="Developer-first automation platform. Connect APIs with code steps. Free tier with 100+ connectors." htmlUrl="https://pipedream.com"/>
+      <outline type="link" text="Prefect" title="Prefect" description="Modern workflow orchestration. Schedule, monitor, and manage data pipelines. Python-native." htmlUrl="https://www.prefect.io"/>
+      <outline type="link" text="Temporal" title="Temporal" description="Durable execution platform. Build reliable workflows that survive failures. Open source core." htmlUrl="https://temporal.io"/>
+      <outline type="link" text="Windmill" title="Windmill" description="Open source developer platform for scripts, workflows, and UIs. Turn scripts into production-grade internal tools." htmlUrl="https://www.windmill.dev"/>
+    </outline>
+    <outline text="CLI Tools" title="CLI Tools">
+      <outline type="link" text="atuin" title="atuin" description="Magical shell history. Search, sync, and analyze your command history across machines. Encrypted." htmlUrl="https://atuin.sh"/>
+      <outline type="link" text="bat" title="bat" description="A cat clone with wings. Syntax highlighting, line numbers, git integration, and automatic paging." htmlUrl="https://github.com/sharkdp/bat"/>
+      <outline type="link" text="chezmoi" title="chezmoi" description="Manage your dotfiles across multiple machines. Templates, secrets, encryption. The dotfile manager." htmlUrl="https://www.chezmoi.io"/>
+      <outline type="link" text="delta" title="delta" description="Syntax-highlighting pager for git, diff, and grep. Beautiful side-by-side diffs in your terminal." htmlUrl="https://github.com/dandavison/delta"/>
+      <outline type="link" text="dust" title="dust" description="Intuitive disk usage tool. Like du but with a visual bar chart. Instantly see what&apos;s eating your disk." htmlUrl="https://github.com/bootandy/dust"/>
+      <outline type="link" text="exa / eza" title="exa / eza" description="Modern replacement for ls. Colors, icons, git integration, tree view. Makes directory listings beautiful." htmlUrl="https://github.com/eza-community/eza"/>
+      <outline type="link" text="fd" title="fd" description="Simple, fast alternative to find. Intuitive syntax, colorized output, respects .gitignore." htmlUrl="https://github.com/sharkdp/fd"/>
+      <outline type="link" text="fzf" title="fzf" description="Command-line fuzzy finder. Search interactively through any list, whether that&apos;s files, history or processes." htmlUrl="https://github.com/junegunn/fzf"/>
+      <outline type="link" text="httpie" title="httpie" description="Human-friendly CLI HTTP client. Colorized output, intuitive syntax, JSON support. Better than curl for APIs." htmlUrl="https://httpie.io"/>
+      <outline type="link" text="jq" title="jq" description="Command-line JSON processor. Slice, filter, map, and transform JSON data. Essential for API work." htmlUrl="https://jqlang.org/"/>
+      <outline type="link" text="lazydocker" title="lazydocker" description="Terminal UI for Docker. Manage containers, images, volumes, and networks without memorizing commands." htmlUrl="https://github.com/jesseduffield/lazydocker"/>
+      <outline type="link" text="lazygit" title="lazygit" description="Terminal UI for git commands. Stage, commit, rebase and cherry-pick from an interactive TUI." htmlUrl="https://github.com/jesseduffield/lazygit"/>
+      <outline type="link" text="neovim" title="neovim" description="Vim-based text editor with Lua extensibility. Modern features, LSP support, massive plugin ecosystem." htmlUrl="https://neovim.io"/>
+      <outline type="link" text="nushell" title="nushell" description="Modern shell that treats data as structured tables. Pipelines output real data, not text. Mind-bending." htmlUrl="https://www.nushell.sh"/>
+      <outline type="link" text="ripgrep" title="ripgrep" description="Line-oriented search tool (like grep but way faster). Respects .gitignore, Unicode-aware, blazing fast." htmlUrl="https://github.com/BurntSushi/ripgrep"/>
+      <outline type="link" text="starship" title="starship" description="Minimal, blazing-fast, infinitely customizable prompt for any shell. Written in Rust. Beautiful defaults." htmlUrl="https://starship.rs"/>
+      <outline type="link" text="tldr pages" title="tldr pages" description="Simplified, community-driven man pages. Practical examples for every command. Cut the noise." htmlUrl="https://tldr.sh"/>
+      <outline type="link" text="tmux" title="tmux" description="Terminal multiplexer. Split panes, multiple windows, session persistence. Essential for remote work." htmlUrl="https://github.com/tmux/tmux"/>
+      <outline type="link" text="yq" title="yq" description="Like jq but for YAML, XML, and TOML. Process config files from the command line." htmlUrl="https://github.com/mikefarah/yq"/>
+      <outline type="link" text="zoxide" title="zoxide" description="Smarter cd command. Learns your habits and jumps to directories with fuzzy matching." htmlUrl="https://github.com/ajeetdsouza/zoxide"/>
+    </outline>
+    <outline text="Containers" title="Containers">
+      <outline type="link" text="ArgoCD" title="ArgoCD" description="Declarative GitOps CD for Kubernetes. Auto-sync your cluster state with Git repositories." htmlUrl="https://argo-cd.readthedocs.io"/>
+      <outline type="link" text="Docker" title="Docker" description="The platform that started the container revolution. Build, ship, and run applications in containers." htmlUrl="https://www.docker.com"/>
+      <outline type="link" text="Harbor" title="Harbor" description="Open source container registry. Store, sign, and scan container images. Enterprise features, CNCF graduated." htmlUrl="https://goharbor.io"/>
+      <outline type="link" text="Helm" title="Helm" description="The package manager for Kubernetes. Define, install, and upgrade applications with charts." htmlUrl="https://helm.sh"/>
+      <outline type="link" text="k3s" title="k3s" description="Lightweight Kubernetes. Perfect for edge, IoT, CI, ARM. Single binary under 100MB." htmlUrl="https://k3s.io"/>
+      <outline type="link" text="Kompose" title="Kompose" description="Convert Docker Compose files to Kubernetes manifests. Migrate from Docker to K8s with one command." htmlUrl="https://kompose.io"/>
+      <outline type="link" text="Lens" title="Lens" description="The Kubernetes IDE. Manage clusters, workloads, and Helm charts with a beautiful desktop app." htmlUrl="https://lenshq.io"/>
+      <outline type="link" text="Podman" title="Podman" description="Daemonless container engine. Drop-in Docker replacement that runs rootless. No daemon required." htmlUrl="https://podman.io"/>
+      <outline type="link" text="Rancher" title="Rancher" description="Complete container management platform. Deploy and manage Kubernetes clusters anywhere." htmlUrl="https://www.rancher.com"/>
+    </outline>
+    <outline text="Creative" title="Creative">
+      <outline type="link" text="Audacity" title="Audacity" description="The classic audio editor. Record, edit, mix, and process audio. Simple enough for beginners, powerful enough for pros." htmlUrl="https://www.audacityteam.org"/>
+      <outline type="link" text="Blender" title="Blender" description="The free 3D creation suite. Modeling, animation, rendering, VFX and video editing in one app. An entire studio." htmlUrl="https://www.blender.org"/>
+      <outline type="link" text="Canva" title="Canva" description="Design presentations, social media posts, posters and logos. Drag-and-drop with a massive template library." htmlUrl="https://www.canva.com"/>
+      <outline type="link" text="Coolors" title="Coolors" description="Super fast color palette generator. Press space for new combos. Export to any format. Wildly addictive." htmlUrl="https://coolors.co"/>
+      <outline type="link" text="DaVinci Resolve" title="DaVinci Resolve" description="Hollywood-grade video editing, color grading, VFX and audio. The free version is insanely powerful." htmlUrl="https://www.blackmagicdesign.com/products/davinciresolve/"/>
+      <outline type="link" text="Excalidraw" title="Excalidraw" description="Virtual whiteboard with a hand-drawn feel. Perfect for diagrams, wireframes, and collaborative sketching." htmlUrl="https://excalidraw.com"/>
+      <outline type="link" text="fffuel.co" title="fffuel.co" description="Collection of SVG generators for gradients, patterns, shapes, and backgrounds. Beautiful, customizable assets." htmlUrl="https://fffuel.co"/>
+      <outline type="link" text="Figma" title="Figma" description="Collaborative interface design tool. Real-time multiplayer editing, prototyping, and developer handoff. Free tier." htmlUrl="https://www.figma.com"/>
+      <outline type="link" text="GIMP" title="GIMP" description="The open source Photoshop. Advanced image editing, retouching, and composition. Endlessly extensible with plugins." htmlUrl="https://www.gimp.org"/>
+      <outline type="link" text="Haikei" title="Haikei" description="Generate unique SVG backgrounds and design assets. Waves, blobs, gradients, stacked layers." htmlUrl="https://haikei.app"/>
+      <outline type="link" text="Heroicons" title="Heroicons" description="Beautiful hand-crafted SVG icons by Tailwind CSS creators. Free, MIT licensed, ready for React and Vue." htmlUrl="https://heroicons.com"/>
+      <outline type="link" text="Inkscape" title="Inkscape" description="Professional vector graphics editor. Create logos, icons, illustrations, and diagrams. SVG-native." htmlUrl="https://inkscape.org"/>
+      <outline type="link" text="Kdenlive" title="Kdenlive" description="Professional non-linear video editor. Multi-track, effects, transitions, proxy editing. Cross-platform." htmlUrl="https://kdenlive.org"/>
+      <outline type="link" text="Krita" title="Krita" description="Digital painting and 2D animation. Built by artists for artists. Brushes, layers, and animation timeline." htmlUrl="https://krita.org"/>
+      <outline type="link" text="Lottiefiles" title="Lottiefiles" description="Lightweight animations for web and mobile. Thousands of free JSON animations. Tiny file sizes." htmlUrl="https://lottiefiles.com"/>
+      <outline type="link" text="Lucide" title="Lucide" description="Beautiful and consistent icon set. Fork of Feather Icons with more icons and active development." htmlUrl="https://lucide.dev"/>
+      <outline type="link" text="Motion Canvas" title="Motion Canvas" description="Create code-driven animations and videos programmatically. TypeScript-based with a live preview editor. Perfect for explainer and tech videos." htmlUrl="https://motioncanvas.io/"/>
+      <outline type="link" text="OBS Studio" title="OBS Studio" description="Open source streaming and recording. The industry standard for live streaming and screen capture." htmlUrl="https://obsproject.com"/>
+      <outline type="link" text="Paint.NET" title="Paint.NET" description="Fast, intuitive image editor for Windows. Layers, effects, plugins, and GPU acceleration. Lighter than Photoshop, more powerful than Paint." htmlUrl="https://paint.net/"/>
+      <outline type="link" text="Penpot" title="Penpot" description="Open source design and prototyping platform. Figma alternative that&apos;s web-based and self-hostable." htmlUrl="https://penpot.app"/>
+      <outline type="link" text="Photopea" title="Photopea" description="Full Photoshop clone that runs entirely in your browser. Supports PSD, XCF, Sketch files. Free." htmlUrl="https://www.photopea.com"/>
+      <outline type="link" text="Realtime Colors" title="Realtime Colors" description="Visualize your color palette on a real website layout. See how your colors actually look before committing." htmlUrl="https://www.realtimecolors.com"/>
+      <outline type="link" text="Rive" title="Rive" description="Create interactive animations for apps and games. State machines, runtime integration, and real-time collaboration. Free tier available." htmlUrl="https://rive.app/"/>
+      <outline type="link" text="Shape Divider" title="Shape Divider" description="Generate custom section dividers for your website. Waves, curves and triangles, exported as SVG or CSS." htmlUrl="https://www.shapedivider.app"/>
+      <outline type="link" text="Shots.so" title="Shots.so" description="Create beautiful mockups for your screenshots. Browser frames, device mockups, custom backgrounds." htmlUrl="https://shots.so"/>
+      <outline type="link" text="Squoosh" title="Squoosh" description="Google&apos;s image compression tool. Compare codecs side by side, resize and optimize, all in the browser." htmlUrl="https://squoosh.app"/>
+      <outline type="link" text="SVG Repo" title="SVG Repo" description="500,000+ free SVG icons and vectors. Searchable, customizable, and categorized." htmlUrl="https://www.svgrepo.com"/>
+      <outline type="link" text="TinyPNG" title="TinyPNG" description="Smart lossy compression for PNG and JPEG. Dramatically reduces file size with minimal quality loss." htmlUrl="https://tinypng.com"/>
+      <outline type="link" text="unDraw" title="unDraw" description="Free SVG illustrations that you can customize colors on. Huge library of modern, flat-style graphics." htmlUrl="https://undraw.co"/>
+      <outline type="link" text="Vectornator (Linearity Curve)" title="Vectornator (Linearity Curve)" description="Free vector design tool with pen, node, and shape tools. Create illustrations, logos, and UI designs with a modern, intuitive interface." htmlUrl="https://www.linearity.io/curve/"/>
+    </outline>
+    <outline text="DNS Tools" title="DNS Tools">
+      <outline type="link" text="dig (web)" title="dig (web)" description="Web-based dig command. Query DNS records from multiple nameservers without touching the CLI." htmlUrl="https://www.digwebinterface.com"/>
+      <outline type="link" text="DMARC Analyzer" title="DMARC Analyzer" description="Check your DMARC record configuration. Essential for preventing email spoofing of your domain." htmlUrl="https://mxtoolbox.com/dmarc.aspx"/>
+      <outline type="link" text="DNS Leak Test" title="DNS Leak Test" description="Tests whether your VPN is leaking DNS queries. Essential for privacy verification." htmlUrl="https://www.dnsleaktest.com"/>
+      <outline type="link" text="DNSChecker" title="DNSChecker" description="Check DNS propagation across 100+ global servers. Supports all record types with map visualization." htmlUrl="https://dnschecker.org"/>
+      <outline type="link" text="DNSViz" title="DNSViz" description="Visualizes DNSSEC authentication chains. See exactly where validation breaks down." htmlUrl="https://dnsviz.net"/>
+      <outline type="link" text="IntoDNS" title="IntoDNS" description="Full DNS health check for your domain. Reports configuration issues and best practices." htmlUrl="https://intodns.com"/>
+      <outline type="link" text="MXToolbox" title="MXToolbox" description="The go-to for email deliverability. Blacklist checks, MX lookups, SPF/DKIM validation." htmlUrl="https://mxtoolbox.com"/>
+      <outline type="link" text="nslookup.io" title="nslookup.io" description="Clean, modern DNS lookup tool. Shows all record types with a beautiful interface." htmlUrl="https://www.nslookup.io"/>
+      <outline type="link" text="whatsmydns.net" title="whatsmydns.net" description="Global DNS propagation checker. See how your DNS changes have spread across the world." htmlUrl="https://www.whatsmydns.net"/>
+      <outline type="link" text="Zonemaster" title="Zonemaster" description="AFNIC&apos;s DNS testing tool. Validates your zone configuration against best practices and RFCs." htmlUrl="https://www.zonemaster.net"/>
+    </outline>
+    <outline text="Data &amp; Viz" title="Data &amp; Viz">
+      <outline type="link" text="Apache Superset" title="Apache Superset" description="Modern data exploration and visualization platform. Create dashboards from any SQL database." htmlUrl="https://superset.apache.org"/>
+      <outline type="link" text="Chartbrew" title="Chartbrew" description="Open source platform to connect databases and APIs and create live dashboards and charts." htmlUrl="https://chartbrew.com"/>
+      <outline type="link" text="D3.js" title="D3.js" description="The most powerful data visualization library for the web. Complete control over every pixel." htmlUrl="https://d3js.org"/>
+      <outline type="link" text="Datawrapper" title="Datawrapper" description="Create beautiful charts, maps, and tables. Used by the New York Times, Washington Post, and others." htmlUrl="https://www.datawrapper.de"/>
+      <outline type="link" text="DB Diagram" title="DB Diagram" description="Draw database relationship diagrams using simple DSL. Export to SQL, PDF, or image." htmlUrl="https://dbdiagram.io"/>
+      <outline type="link" text="Flourish" title="Flourish" description="Interactive data visualization and storytelling. Race charts, network graphs, 3D maps. Free for public data." htmlUrl="https://flourish.studio"/>
+      <outline type="link" text="Kepler.gl" title="Kepler.gl" description="Uber&apos;s open source geospatial analysis tool. Visualize large datasets on maps with zero coding." htmlUrl="https://kepler.gl"/>
+      <outline type="link" text="Mermaid Live" title="Mermaid Live" description="Create diagrams and flowcharts from text. Markdown-like syntax renders as beautiful SVG diagrams." htmlUrl="https://mermaid.live"/>
+      <outline type="link" text="Metabase" title="Metabase" description="Open source business intelligence. Ask questions about your data and get answers as charts. No SQL needed." htmlUrl="https://www.metabase.com"/>
+      <outline type="link" text="Observable" title="Observable" description="Reactive notebook for data exploration and visualization. D3.js-powered, collaborative, and shareable." htmlUrl="https://observablehq.com"/>
+      <outline type="link" text="Plotly" title="Plotly" description="Interactive charts for the web. Scatter, bar, 3D, maps and financial, gorgeous out of the box." htmlUrl="https://plotly.com/javascript/"/>
+      <outline type="link" text="RAWGraphs" title="RAWGraphs" description="Open source data visualization. Paste your data, choose a chart type, customize, and export. No coding." htmlUrl="https://www.rawgraphs.io"/>
+    </outline>
+    <outline text="Desktop Software" title="Desktop Software">
+      <outline type="link" text="7-Zip" title="7-Zip" description="The file archiver with the highest compression ratio. Supports every format. Free, open source, legendary." htmlUrl="https://www.7-zip.org"/>
+      <outline type="link" text="Alacritty" title="Alacritty" description="GPU-accelerated terminal emulator. Blazing fast, minimal, and cross-platform. Written in Rust." htmlUrl="https://alacritty.org"/>
+      <outline type="link" text="AltSnap" title="AltSnap" description="Hold Alt to drag, resize, minimize, or snap any window. Lightweight Linux-style window management for Windows." htmlUrl="https://github.com/RamonUnch/AltSnap"/>
+      <outline type="link" text="AutoHotkey" title="AutoHotkey" description="Scripting language for Windows automation. Hotkeys, macros, text expansion and GUI automation. Infinitely flexible." htmlUrl="https://www.autohotkey.com"/>
+      <outline type="link" text="Barrier" title="Barrier" description="Open source KVM software. Share mouse and keyboard between multiple computers. Cross-platform." htmlUrl="https://github.com/debauchee/barrier"/>
+      <outline type="link" text="Bitwarden" title="Bitwarden" description="Open source password manager. Self-hostable, cross-platform, with browser extensions and auto-fill." htmlUrl="https://bitwarden.com"/>
+      <outline type="link" text="BleachBit" title="BleachBit" description="Open source system cleaner. Free disk space, reduce clutter, and protect privacy by clearing caches, logs, and temp files." htmlUrl="https://www.bleachbit.org/"/>
+      <outline type="link" text="Bulk Crap Uninstaller" title="Bulk Crap Uninstaller" description="Remove programs in bulk, clean leftovers, detect orphaned entries. The uninstaller Windows deserves." htmlUrl="https://www.bcuninstaller.com"/>
+      <outline type="link" text="Chocolatey" title="Chocolatey" description="Software management for Windows. Install, upgrade, and manage thousands of packages from the command line or GUI." htmlUrl="https://chocolatey.org/"/>
+      <outline type="link" text="CrystalDiskInfo" title="CrystalDiskInfo" description="Monitor SSD and HDD health. SMART data, temperature, and remaining lifespan at a glance." htmlUrl="https://crystalmark.info/en/software/crystaldiskinfo/"/>
+      <outline type="link" text="DevToys" title="DevToys" description="Swiss Army knife for developers. Over 30 offline tools in one native app: JSON formatter, JWT decoder, hash generator, regex tester." htmlUrl="https://devtoys.app"/>
+      <outline type="link" text="Ditto" title="Ditto" description="Clipboard manager that saves everything you copy. Search history, paste formatted, sync across machines." htmlUrl="https://ditto-cp.sourceforge.io"/>
+      <outline type="link" text="EarTrumpet" title="EarTrumpet" description="Per-app volume control for Windows. The volume mixer Microsoft should have built. Lives in your system tray." htmlUrl="https://eartrumpet.app"/>
+      <outline type="link" text="Espanso" title="Espanso" description="Cross-platform text expander. Define abbreviations that auto-expand into anything. Open source, privacy-first." htmlUrl="https://espanso.org"/>
+      <outline type="link" text="Everything" title="Everything" description="Instant file search for Windows. Indexes your entire drive in seconds. Finds any file by name instantly." htmlUrl="https://www.voidtools.com"/>
+      <outline type="link" text="EverythingToolbar" title="EverythingToolbar" description="Replace the Windows taskbar search with Everything&apos;s instant file search. Find any file on your system in milliseconds." htmlUrl="https://github.com/srwi/EverythingToolbar"/>
+      <outline type="link" text="FanControl" title="FanControl" description="Highly customizable PC fan controller. Create custom fan curves based on any temperature sensor. Clean modern interface." htmlUrl="https://getfancontrol.com/"/>
+      <outline type="link" text="Files" title="Files" description="Beautiful open source file manager for Windows. Tabs, dual pane, cloud integration, and a gorgeous modern UI." htmlUrl="https://files.community"/>
+      <outline type="link" text="Flameshot" title="Flameshot" description="Powerful screenshot tool with built-in annotation. Open source, works on Linux and Windows." htmlUrl="https://flameshot.org"/>
+      <outline type="link" text="Flow Launcher" title="Flow Launcher" description="Quick file search and app launcher for Windows. Plugin ecosystem, everything search integration." htmlUrl="https://www.flowlauncher.com"/>
+      <outline type="link" text="GlazeWM" title="GlazeWM" description="Tiling window manager for Windows inspired by i3wm. Keyboard-driven workflow with workspaces and customizable layouts." htmlUrl="https://github.com/glzr-io/glazewm"/>
+      <outline type="link" text="Greenshot" title="Greenshot" description="Lightweight screenshot tool for Windows. Capture, annotate, and export in seconds. No bloat." htmlUrl="https://greenshot.org"/>
+      <outline type="link" text="HWiNFO" title="HWiNFO" description="Comprehensive hardware analysis and monitoring. Every sensor, every component, real-time data." htmlUrl="https://www.hwinfo.com"/>
+      <outline type="link" text="KeePassXC" title="KeePassXC" description="Offline-first password manager. Full control over your vault. No cloud dependency, cross-platform." htmlUrl="https://keepassxc.org"/>
+      <outline type="link" text="mpv" title="mpv" description="Minimalist media player for the power user. GPU-accelerated, scriptable, supports every format." htmlUrl="https://mpv.io"/>
+      <outline type="link" text="Notepads" title="Notepads" description="Modern, lightweight text editor for Windows. Tabs, Markdown preview, clean fluent design." htmlUrl="https://github.com/0x7c13/Notepads"/>
+      <outline type="link" text="Open Shell" title="Open Shell" description="Bring back the classic Windows Start Menu. Fully customizable with skinning support. Works on Windows 10 and 11." htmlUrl="https://open-shell.github.io/Open-Shell-Menu/"/>
+      <outline type="link" text="Parsec" title="Parsec" description="Ultra-low latency remote desktop for gaming and work. Stream your PC at 60fps with near-zero lag. Free for personal use." htmlUrl="https://parsec.app/"/>
+      <outline type="link" text="PowerToys" title="PowerToys" description="Microsoft&apos;s power-user toolkit for Windows. FancyZones, PowerRename, Color Picker, Run launcher, and 25+ more utilities." htmlUrl="https://learn.microsoft.com/en-us/windows/powertoys/"/>
+      <outline type="link" text="Process Hacker" title="Process Hacker" description="Advanced task manager and system monitor. See everything running, memory usage, disk I/O, and network." htmlUrl="https://processhacker.sourceforge.io"/>
+      <outline type="link" text="QuickLook" title="QuickLook" description="Bring macOS-style Quick Look to Windows. Press Space to preview any file instantly." htmlUrl="https://github.com/QL-Win/QuickLook"/>
+      <outline type="link" text="Rufus" title="Rufus" description="Create bootable USB drives fast. Format, partition, and write ISOs. The Windows USB tool standard." htmlUrl="https://rufus.ie"/>
+      <outline type="link" text="RustDesk" title="RustDesk" description="Open source remote desktop with self-hosted relay server option. TeamViewer/AnyDesk alternative with full control over your data." htmlUrl="https://rustdesk.com/"/>
+      <outline type="link" text="Scoop" title="Scoop" description="Command-line package manager for Windows. Installs apps from the command line, keeps them updated, and avoids PATH pollution." htmlUrl="https://scoop.sh/"/>
+      <outline type="link" text="ShareX" title="ShareX" description="Screenshot and screen recording powerhouse. Auto-upload, annotation, OCR, GIF capture, and workflows." htmlUrl="https://getsharex.com"/>
+      <outline type="link" text="Shell (Nilesoft)" title="Shell (Nilesoft)" description="Powerful custom context menu manager for Windows. Add, remove, and restyle right-click menu items with a simple config." htmlUrl="https://nilesoft.org/"/>
+      <outline type="link" text="StartAllBack" title="StartAllBack" description="Restore the classic taskbar and Start Menu on Windows 11. Customizable styling, drag-and-drop, and uncombined buttons." htmlUrl="https://www.startallback.com/"/>
+      <outline type="link" text="Syncthing" title="Syncthing" description="Peer-to-peer file synchronization. No cloud, no accounts, just encrypted sync between your devices." htmlUrl="https://syncthing.net"/>
+      <outline type="link" text="Sysinternals" title="Sysinternals" description="Microsoft&apos;s legendary advanced system tools. Process Explorer, Autoruns, TCPView, and dozens more. Every sysadmin&apos;s must-have." htmlUrl="https://learn.microsoft.com/en-us/sysinternals/"/>
+      <outline type="link" text="Tabby" title="Tabby" description="Modern terminal emulator. SSH client, serial port, tabs, splits, themes. Cross-platform and highly customizable." htmlUrl="https://tabby.sh"/>
+      <outline type="link" text="TranslucentTB" title="TranslucentTB" description="Make your Windows taskbar transparent, blur, or acrylic. Lightweight, open source customization." htmlUrl="https://github.com/TranslucentTB/TranslucentTB"/>
+      <outline type="link" text="Twinkle Tray" title="Twinkle Tray" description="Control monitor brightness from your system tray. Essential for multi-monitor setups." htmlUrl="https://twinkletray.com"/>
+      <outline type="link" text="UniGetUI" title="UniGetUI" description="Beautiful GUI for Windows package managers. Manage winget, Scoop, Chocolatey, pip, and npm packages from one interface." htmlUrl="https://www.marticliment.com/unigetui/"/>
+      <outline type="link" text="Ventoy" title="Ventoy" description="Create a bootable USB with multiple ISOs. Just copy ISO files onto the USB. No reformatting needed." htmlUrl="https://www.ventoy.net"/>
+      <outline type="link" text="VirtualBox" title="VirtualBox" description="Free and open source virtualization for x86 hardware. Run multiple operating systems simultaneously on your machine." htmlUrl="https://www.virtualbox.org/"/>
+      <outline type="link" text="VLC" title="VLC" description="The universal media player. It plays everything: every format, every codec, every protocol. No questions asked." htmlUrl="https://www.videolan.org"/>
+      <outline type="link" text="Warp" title="Warp" description="AI-powered terminal for Mac and Linux. Block-based interface, command search, workflows. Modern shell experience." htmlUrl="https://www.warp.dev"/>
+      <outline type="link" text="WindHawk" title="WindHawk" description="Customize Windows programs and the OS itself. Community-made mods for Explorer, taskbar, and more." htmlUrl="https://windhawk.net"/>
+      <outline type="link" text="WingetUI" title="WingetUI" description="GUI for Windows package managers (winget, Scoop, Chocolatey). Install, update, and manage all your software from one interface." htmlUrl="https://www.marticliment.com/wingetui/"/>
+      <outline type="link" text="WizTree" title="WizTree" description="Fastest disk space analyzer for Windows. It reads the MFT directly, so a 1TB drive scans in seconds." htmlUrl="https://diskanalyzer.com"/>
+    </outline>
+    <outline text="Dev Tools" title="Dev Tools">
+      <outline type="link" text="Agent QA" title="Agent QA" description="Natural-language web and mobile regression QA with CLI and MCP workflows, retained artifacts, and failure triage." htmlUrl="https://github.com/vostride/agent-qa"/>
+      <outline type="link" text="AST Explorer" title="AST Explorer" description="Explore the abstract syntax tree of your code. Supports JavaScript, TypeScript, CSS, HTML, and more." htmlUrl="https://astexplorer.net"/>
+      <outline type="link" text="Astro" title="Astro" description="The web framework for content-driven sites. Ship zero JavaScript by default, use any UI framework, and get insane performance." htmlUrl="https://astro.build/"/>
+      <outline type="link" text="Bundlephobia" title="Bundlephobia" description="Know the cost of adding a npm package before you install it. See size, download time, and composition." htmlUrl="https://bundlephobia.com"/>
+      <outline type="link" text="Can I Use" title="Can I Use" description="Browser compatibility tables for every web feature. Essential before using any modern API or CSS property." htmlUrl="https://caniuse.com"/>
+      <outline type="link" text="Carbon" title="Carbon" description="Create beautiful images of your source code. Perfect for blog posts, presentations, and social media." htmlUrl="https://carbon.now.sh"/>
+      <outline type="link" text="CodePen" title="CodePen" description="Social development environment for frontend. Build, test, and share HTML/CSS/JS snippets. Huge community." htmlUrl="https://codepen.io"/>
+      <outline type="link" text="CodeSandbox" title="CodeSandbox" description="Instant online IDE for web development. Full Node.js environment, npm support, live collaboration." htmlUrl="https://codesandbox.io"/>
+      <outline type="link" text="Compiler Explorer" title="Compiler Explorer" description="See how compilers turn your code into assembly. Supports 30+ languages. Mind-blowing for understanding optimization." htmlUrl="https://godbolt.org"/>
+      <outline type="link" text="Coolify" title="Coolify" description="Self-hostable Heroku/Netlify/Vercel alternative. Deploy apps, databases, and services with Git push. No vendor lock-in." htmlUrl="https://coolify.io/"/>
+      <outline type="link" text="Crontab.guru" title="Crontab.guru" description="The cron expression editor. Translates cron syntax to plain English. Never get scheduling wrong again." htmlUrl="https://crontab.guru"/>
+      <outline type="link" text="Cursor" title="Cursor" description="AI-first code editor built on VS Code. Tab to complete, chat with your codebase, intelligent edits." htmlUrl="https://cursor.com"/>
+      <outline type="link" text="DB Fiddle" title="DB Fiddle" description="Online SQL playground. Test queries against MySQL, PostgreSQL, and SQLite without installing anything." htmlUrl="https://www.db-fiddle.com"/>
+      <outline type="link" text="DevDocs" title="DevDocs" description="Fast, offline-capable API documentation browser. Combines 500+ docs into one searchable interface." htmlUrl="https://devdocs.io"/>
+      <outline type="link" text="ExplainShell" title="ExplainShell" description="Paste any shell command and get a visual breakdown of every flag and argument. No more man page diving." htmlUrl="https://explainshell.com"/>
+      <outline type="link" text="Forgejo" title="Forgejo" description="Community-driven self-hosted Git forge. Gitea fork focused on sustainability and openness. Lightweight, fast, and fully featured." htmlUrl="https://forgejo.org/"/>
+      <outline type="link" text="Gitea" title="Gitea" description="Lightweight self-hosted Git service. Repositories, issues, pull requests, CI/CD, and packages. GitHub in a single binary." htmlUrl="https://about.gitea.com/"/>
+      <outline type="link" text="Gitpod" title="Gitpod" description="Self-hostable cloud development environments. Spin up a full dev workspace from any Git repo. The company now trades as Ona; the AGPL project kept the name." htmlUrl="https://github.com/gitpod-io/gitpod"/>
+      <outline type="link" text="Hoppscotch" title="Hoppscotch" description="Open source API development ecosystem. Lightweight, fast Postman alternative that runs in your browser." htmlUrl="https://hoppscotch.io"/>
+      <outline type="link" text="httpbin.org" title="httpbin.org" description="HTTP request and response testing service. Echoes back headers, methods and auth, so it&apos;s great for debugging." htmlUrl="https://httpbin.org"/>
+      <outline type="link" text="Hugo" title="Hugo" description="The world&apos;s fastest static site generator. Build sites in milliseconds with Go-powered templating and zero dependencies." htmlUrl="https://gohugo.io/"/>
+      <outline type="link" text="Insomnia" title="Insomnia" description="Open source API client and design tool. REST, GraphQL, gRPC testing with a beautiful interface." htmlUrl="https://insomnia.rest"/>
+      <outline type="link" text="IT-Tools" title="IT-Tools" description="70+ developer utilities in one clean interface. Hash generators, JWT decoders, cron parsers, UUID generators." htmlUrl="https://it-tools.tech"/>
+      <outline type="link" text="JSONCrack" title="JSONCrack" description="Visualize JSON, YAML, and XML as interactive graphs. Makes complex nested data instantly readable." htmlUrl="https://jsoncrack.com"/>
+      <outline type="link" text="Playwright" title="Playwright" description="Microsoft&apos;s end-to-end testing framework. Test across Chromium, Firefox, WebKit with one API." htmlUrl="https://playwright.dev"/>
+      <outline type="link" text="ray.so" title="ray.so" description="Create beautiful code images with syntax highlighting, custom themes, backgrounds, and padding." htmlUrl="https://ray.so"/>
+      <outline type="link" text="Regex101" title="Regex101" description="The best regex tester. Real-time matching, explanation of every token, and a massive community library." htmlUrl="https://regex101.com"/>
+      <outline type="link" text="Responsively" title="Responsively" description="Modified browser for responsive web development. Preview across multiple devices simultaneously." htmlUrl="https://responsively.app"/>
+      <outline type="link" text="StackBlitz" title="StackBlitz" description="Full-stack web IDE powered by WebContainers. Run Node.js natively in the browser. Instant environments." htmlUrl="https://stackblitz.com"/>
+      <outline type="link" text="Transform.tools" title="Transform.tools" description="Convert between code formats. JSON to TypeScript, HTML to JSX, GraphQL to TypeScript, and dozens more." htmlUrl="https://transform.tools"/>
+      <outline type="link" text="TypeScript Playground" title="TypeScript Playground" description="Official TypeScript compiler in the browser. Test types, explore compiler options, share snippets." htmlUrl="https://www.typescriptlang.org/play"/>
+      <outline type="link" text="WakaTime" title="WakaTime" description="Automatic programming metrics. Tracks time spent coding by project, language, and editor. Free tier." htmlUrl="https://wakatime.com"/>
+      <outline type="link" text="Webhook.site" title="Webhook.site" description="Instantly creates unique webhook URLs to inspect incoming requests. Debug APIs without writing a server." htmlUrl="https://webhook.site"/>
+      <outline type="link" text="Woodpecker CI" title="Woodpecker CI" description="Simple yet powerful open source CI/CD engine. Container-native, multi-platform, and compatible with Gitea, Forgejo, and GitHub." htmlUrl="https://woodpecker-ci.org/"/>
+      <outline type="link" text="Zed" title="Zed" description="High-performance code editor from the creators of Atom. Built in Rust, multiplayer editing, AI-powered." htmlUrl="https://zed.dev"/>
+    </outline>
+    <outline text="Education" title="Education">
+      <outline type="link" text="3Blue1Brown" title="3Blue1Brown" description="Math videos that make your brain tingle. Beautiful animations that build deep understanding." htmlUrl="https://www.3blue1brown.com"/>
+      <outline type="link" text="Algorithm Visualizer" title="Algorithm Visualizer" description="Interactive animations of algorithms and data structures, with the code beside them. The hosted demo is offline, so this runs locally." htmlUrl="https://github.com/algorithm-visualizer/algorithm-visualizer"/>
+      <outline type="link" text="Brilliant" title="Brilliant" description="Interactive STEM learning. Math, science, CS through visual puzzles and problems. Builds intuition." htmlUrl="https://brilliant.org"/>
+      <outline type="link" text="Codecademy" title="Codecademy" description="Interactive coding lessons. Learn Python, JavaScript, SQL, and more with hands-on exercises. Free tier." htmlUrl="https://www.codecademy.com"/>
+      <outline type="link" text="CS50" title="CS50" description="Harvard&apos;s legendary intro to CS. The most popular course at Harvard, available free online." htmlUrl="https://cs50.harvard.edu"/>
+      <outline type="link" text="Desmos" title="Desmos" description="The best graphing calculator on the internet. Instant, interactive, beautiful mathematical visualization." htmlUrl="https://www.desmos.com"/>
+      <outline type="link" text="Exercism" title="Exercism" description="Code practice in 70+ languages with mentored feedback. Structured tracks from beginner to advanced." htmlUrl="https://exercism.org"/>
+      <outline type="link" text="freeCodeCamp" title="freeCodeCamp" description="Learn to code for free. 11,000+ hours of curriculum covering web dev, data science, and more. Fully interactive." htmlUrl="https://www.freecodecamp.org"/>
+      <outline type="link" text="Full Stack Open" title="Full Stack Open" description="University of Helsinki&apos;s full-stack web dev course covering React, Node, TypeScript and GraphQL. Completely free." htmlUrl="https://fullstackopen.com"/>
+      <outline type="link" text="HackerRank" title="HackerRank" description="Coding challenges and skill certification. Practice algorithms, data structures, and domain-specific skills." htmlUrl="https://www.hackerrank.com"/>
+      <outline type="link" text="Khan Academy" title="Khan Academy" description="Free world-class education in math, science, computing and the arts, from kindergarten to college level." htmlUrl="https://www.khanacademy.org"/>
+      <outline type="link" text="Learn X in Y Minutes" title="Learn X in Y Minutes" description="Quick-start guides for every programming language. See all the syntax in one page, learn the basics fast." htmlUrl="https://learnxinyminutes.com"/>
+      <outline type="link" text="LeetCode" title="LeetCode" description="Coding interview preparation platform. 3000+ problems, contests, and discussion. Industry standard." htmlUrl="https://leetcode.com"/>
+      <outline type="link" text="MIT OpenCourseWare" title="MIT OpenCourseWare" description="Free lecture notes, exams, and videos from MIT. Almost every course MIT has ever taught." htmlUrl="https://ocw.mit.edu"/>
+      <outline type="link" text="Nand2Tetris" title="Nand2Tetris" description="Build a computer from scratch. Start with logic gates, end with a full operating system. Mind-expanding." htmlUrl="https://www.nand2tetris.org"/>
+      <outline type="link" text="PhET Simulations" title="PhET Simulations" description="Free interactive science simulations from CU Boulder covering physics, chemistry, math and biology." htmlUrl="https://phet.colorado.edu"/>
+      <outline type="link" text="Roadmap.sh" title="Roadmap.sh" description="Developer roadmaps, guides, and skill trees. Visual paths for frontend, backend, DevOps, and more." htmlUrl="https://roadmap.sh"/>
+      <outline type="link" text="Scrimba" title="Scrimba" description="Interactive coding screencasts. Pause the video and edit the code directly. Revolutionary format." htmlUrl="https://scrimba.com"/>
+      <outline type="link" text="The Odin Project" title="The Odin Project" description="Full-stack web development curriculum. Project-based learning path from zero to job-ready." htmlUrl="https://www.theodinproject.com"/>
+      <outline type="link" text="VisuAlgo" title="VisuAlgo" description="Animated visualizations for data structures and algorithms. Step through operations one at a time." htmlUrl="https://visualgo.net"/>
+      <outline type="link" text="W3Schools" title="W3Schools" description="Web development tutorials and references for HTML, CSS, JavaScript, Python and SQL. The classic learning resource." htmlUrl="https://www.w3schools.com"/>
+    </outline>
+    <outline text="File Tools" title="File Tools">
+      <outline type="link" text="CloudConvert" title="CloudConvert" description="Convert anything to anything. 200+ formats supported. Audio, video, documents, images, ebooks." htmlUrl="https://cloudconvert.com"/>
+      <outline type="link" text="Cobalt" title="Cobalt" description="Clean media downloader. Save videos and audio from YouTube, Twitter, Reddit, and more. No ads, no tracking." htmlUrl="https://cobalt.tools"/>
+      <outline type="link" text="Croc" title="Croc" description="Send files securely between computers from the CLI. End-to-end encrypted, cross-platform, dead simple." htmlUrl="https://github.com/schollz/croc"/>
+      <outline type="link" text="FFmpeg" title="FFmpeg" description="The universal media Swiss Army knife. Record, convert, and stream audio and video. Powers most media tools." htmlUrl="https://ffmpeg.org"/>
+      <outline type="link" text="file.io" title="file.io" description="Ephemeral file sharing. Upload a file and share the link; it deletes after the first download. Zero knowledge." htmlUrl="https://www.file.io"/>
+      <outline type="link" text="HandBrake" title="HandBrake" description="Open source video transcoder. Convert nearly any format with presets optimized for every device." htmlUrl="https://handbrake.fr"/>
+      <outline type="link" text="ImageMagick" title="ImageMagick" description="Command-line image manipulation powerhouse. Convert, resize, crop and transform, batch processing thousands at a time." htmlUrl="https://imagemagick.org"/>
+      <outline type="link" text="Magic Wormhole" title="Magic Wormhole" description="Get things from one computer to another, safely. Simple CLI file transfer with human-pronounceable codes." htmlUrl="https://magic-wormhole.readthedocs.io"/>
+      <outline type="link" text="OnionShare" title="OnionShare" description="Securely share files, host websites, and chat using the Tor network. Complete anonymity." htmlUrl="https://onionshare.org"/>
+      <outline type="link" text="Pandoc" title="Pandoc" description="Universal document converter. Markdown, LaTeX, HTML, DOCX and EPUB, converting between more than 40 formats." htmlUrl="https://pandoc.org"/>
+      <outline type="link" text="PDF24" title="PDF24" description="Free online PDF tools. Merge, compress, convert, edit, sign and protect. Every PDF operation imaginable." htmlUrl="https://tools.pdf24.org"/>
+      <outline type="link" text="Send (Mozilla)" title="Send (Mozilla)" description="Community-maintained fork of Firefox Send. Encrypted file sharing with auto-expiring links." htmlUrl="https://send.vis.ee"/>
+      <outline type="link" text="WeTransfer" title="WeTransfer" description="Send large files up to 2GB for free. No signup required. Simple, clean, just works." htmlUrl="https://wetransfer.com"/>
+      <outline type="link" text="Wormhole" title="Wormhole" description="End-to-end encrypted file transfer. Files get a shareable link that auto-expires. Simple and secure." htmlUrl="https://wormhole.app"/>
+      <outline type="link" text="yt-dlp" title="yt-dlp" description="The definitive video downloader. Fork of youtube-dl with tons of fixes and features. Supports 1000+ sites." htmlUrl="https://github.com/yt-dlp/yt-dlp"/>
+    </outline>
+    <outline text="Fun &amp; Culture" title="Fun &amp; Culture">
+      <outline type="link" text="Dwitter" title="Dwitter" description="Social network for JavaScript demos in 140 characters. Incredible creativity in minimal code." htmlUrl="https://www.dwitter.net"/>
+      <outline type="link" text="Geoguessr" title="Geoguessr" description="Guess your location from Google Street View. Addictive geography game. Free limited daily plays." htmlUrl="https://www.geoguessr.com"/>
+      <outline type="link" text="Hacker Typer" title="Hacker Typer" description="Mash the keyboard and look like a movie hacker. Streams realistic-looking code as you type random keys." htmlUrl="https://hackertyper.net"/>
+      <outline type="link" text="Infinite Craft" title="Infinite Craft" description="Combine words to create anything. AI-powered element crafting with infinite possibilities." htmlUrl="https://neal.fun/infinite-craft"/>
+      <outline type="link" text="Internet Archive" title="Internet Archive" description="The library of the internet. Wayback Machine, millions of free books, movies, music, software, and games." htmlUrl="https://archive.org"/>
+      <outline type="link" text="Little Alchemy 2" title="Little Alchemy 2" description="Combine elements to discover new ones. Start with earth, fire, water and air, and end with 720 items." htmlUrl="https://littlealchemy2.com"/>
+      <outline type="link" text="Marginalia" title="Marginalia" description="Search engine that favors text-heavy, non-commercial content. Find the indie web that Google ignores." htmlUrl="https://search.marginalia.nu"/>
+      <outline type="link" text="Neal.fun" title="Neal.fun" description="Mind-bending interactive experiences. The Deep Sea, Size of Space and Spend Bill Gates&apos; Money, among many others." htmlUrl="https://neal.fun"/>
+      <outline type="link" text="Neocities" title="Neocities" description="Free web hosting inspired by GeoCities. The indie web revival. Build weird personal sites again." htmlUrl="https://neocities.org"/>
+      <outline type="link" text="Noclip" title="Noclip" description="Explore video game levels in your browser. Wander through Zelda, Mario, Metroid worlds freely." htmlUrl="https://noclip.website"/>
+      <outline type="link" text="ooh.directory" title="ooh.directory" description="Directory of blogs that are still being updated. Discover real people writing about real things." htmlUrl="https://ooh.directory"/>
+      <outline type="link" text="Patatap" title="Patatap" description="Portable animation and sound kit. Each key triggers a unique animation and sound. Pure audiovisual joy." htmlUrl="https://www.patatap.com"/>
+      <outline type="link" text="Pointer Pointer" title="Pointer Pointer" description="Point your cursor anywhere and a photo appears with someone pointing at it. Internet magic." htmlUrl="https://pointerpointer.com"/>
+      <outline type="link" text="Poolsuite" title="Poolsuite" description="Retro-styled internet radio and video player. 90s aesthetics, vaporwave vibes, poolside relaxation." htmlUrl="https://poolsuite.net"/>
+      <outline type="link" text="Quick Draw (Google)" title="Quick Draw (Google)" description="You draw, neural network guesses. Google&apos;s AI doodle recognition game. Simple, addictive, and educational." htmlUrl="https://quickdraw.withgoogle.com"/>
+      <outline type="link" text="Radio Garden" title="Radio Garden" description="Spin a 3D globe and tune into live radio stations worldwide. Like Google Earth for radio. Mesmerizing." htmlUrl="https://radio.garden"/>
+      <outline type="link" text="Scale of the Universe" title="Scale of the Universe" description="Interactive visualization from quantum foam to the observable universe. Zoom through 60+ orders of magnitude." htmlUrl="https://scaleofuniverse.com"/>
+      <outline type="link" text="Shadertoy" title="Shadertoy" description="Create and share real-time GPU shaders. Mind-blowing visual experiments in fragment shaders." htmlUrl="https://www.shadertoy.com"/>
+      <outline type="link" text="Stellarium Web" title="Stellarium Web" description="Online planetarium. See exactly what&apos;s in the sky right now from your location. Stars, planets, constellations." htmlUrl="https://stellarium-web.org"/>
+      <outline type="link" text="The Useless Web" title="The Useless Web" description="Takes you to a random useless website. Perfect for procrastination. A time-honored internet tradition." htmlUrl="https://theuselessweb.com"/>
+      <outline type="link" text="This Person Does Not Exist" title="This Person Does Not Exist" description="AI-generated human faces. Refresh for a new person who has never existed. Fascinating and unsettling." htmlUrl="https://thispersondoesnotexist.com"/>
+      <outline type="link" text="Web Design Museum" title="Web Design Museum" description="Archive of vintage web design. See how the internet looked from the 90s to the 2000s. Pure nostalgia." htmlUrl="https://www.webdesignmuseum.org"/>
+      <outline type="link" text="Wiby" title="Wiby" description="Search engine for the old web. Returns classic-style personal homepages and hand-crafted websites." htmlUrl="https://wiby.me"/>
+      <outline type="link" text="Window Swap" title="Window Swap" description="Look through random windows around the world. Simple, meditative, surprisingly moving." htmlUrl="https://www.window-swap.com"/>
+      <outline type="link" text="Windows93" title="Windows93" description="Simulates a fictional Windows 93 in your browser. Fully interactive OS with apps, games, and secrets." htmlUrl="https://www.windows93.net"/>
+      <outline type="link" text="xkcd" title="xkcd" description="A webcomic of romance, sarcasm, math, and language. Randall Munroe&apos;s beloved stick-figure comics." htmlUrl="https://xkcd.com"/>
+    </outline>
+    <outline text="Gaming" title="Gaming">
+      <outline type="link" text="Board Game Arena" title="Board Game Arena" description="Play more than 800 board games online for free. Catan, Azul and Terraforming Mars, all in your browser." htmlUrl="https://boardgamearena.com"/>
+      <outline type="link" text="Citra / Lime3DS" title="Citra / Lime3DS" description="Nintendo 3DS emulator. Play 3DS games on PC with enhanced graphics and controls." htmlUrl="https://lime3ds.github.io"/>
+      <outline type="link" text="Dolphin Emulator" title="Dolphin Emulator" description="GameCube and Wii emulator with excellent compatibility. HD rendering, netplay, and save states. Runs on most platforms." htmlUrl="https://dolphin-emu.org/"/>
+      <outline type="link" text="DuckStation" title="DuckStation" description="PlayStation 1 emulator focused on accuracy, speed, and modern features. PGXP, upscaling, widescreen hacks, and more." htmlUrl="https://www.duckstation.org/"/>
+      <outline type="link" text="GBA Online" title="GBA Online" description="Play Game Boy Advance games in your browser. JavaScript-based emulator, nothing to install." htmlUrl="https://gba.js.org"/>
+      <outline type="link" text="Heroic Games Launcher" title="Heroic Games Launcher" description="Open source launcher for Epic Games, GOG, and Amazon Games on Linux, macOS, and Windows. Wine/Proton integration." htmlUrl="https://heroicgameslauncher.com/"/>
+      <outline type="link" text="itch.io" title="itch.io" description="Indie game marketplace. Thousands of free games from independent creators. Weird, wonderful, and experimental." htmlUrl="https://itch.io"/>
+      <outline type="link" text="Lichess" title="Lichess" description="Free, open source chess server. No ads, no premium tiers, just chess. Puzzles, tournaments, analysis." htmlUrl="https://lichess.org"/>
+      <outline type="link" text="Lutris" title="Lutris" description="Open source gaming platform for Linux. Install and manage games from Steam, GOG, Humble, and community scripts." htmlUrl="https://lutris.net/"/>
+      <outline type="link" text="OpenTTD" title="OpenTTD" description="Open source simulation of Transport Tycoon Deluxe. Build transport empires. Endlessly replayable." htmlUrl="https://www.openttd.org"/>
+      <outline type="link" text="PCSX2" title="PCSX2" description="PlayStation 2 emulator with high compatibility. Upscale to 4K, use custom shaders, and play with modern controllers." htmlUrl="https://pcsx2.net/"/>
+      <outline type="link" text="Playnite" title="Playnite" description="Open source game library manager. Unifies Steam, GOG, Epic, Origin, and emulator games into one beautiful interface." htmlUrl="https://playnite.link/"/>
+      <outline type="link" text="ProtonDB" title="ProtonDB" description="Community reports on Steam game compatibility with Proton on Linux. Check if your games work before buying." htmlUrl="https://www.protondb.com/"/>
+      <outline type="link" text="RetroArch" title="RetroArch" description="Frontend for emulators, game engines, and media players. Play classics from every console ever made." htmlUrl="https://www.retroarch.com"/>
+      <outline type="link" text="RPCS3" title="RPCS3" description="PlayStation 3 emulator for PC. Thousands of PS3 games playable with active development." htmlUrl="https://rpcs3.net"/>
+      <outline type="link" text="SteamGridDB" title="SteamGridDB" description="Community-driven database of custom game artwork. Grids, heroes, logos, and icons for your Steam and Playnite libraries." htmlUrl="https://www.steamgriddb.com/"/>
+    </outline>
+    <outline text="Homelab" title="Homelab">
+      <outline type="link" text="Actual Budget" title="Actual Budget" description="Privacy-focused budgeting app. Envelope budgeting, bank sync, self-hostable. YNAB alternative." htmlUrl="https://actualbudget.org"/>
+      <outline type="link" text="Ansible" title="Ansible" description="IT automation that everyone can use. Agentless, YAML-based configuration management and deployment." htmlUrl="https://www.ansible.com"/>
+      <outline type="link" text="Authentik" title="Authentik" description="Open source identity provider. SSO, MFA, user management for all your self-hosted services." htmlUrl="https://goauthentik.io"/>
+      <outline type="link" text="Awesome-Selfhosted" title="Awesome-Selfhosted" description="The definitive list of self-hostable software. Hundreds of categorized alternatives to commercial services." htmlUrl="https://awesome-selfhosted.net"/>
+      <outline type="link" text="Beszel" title="Beszel" description="Lightweight server monitoring hub with Docker stats, historical data, and alerts. Agent-based with a minimal resource footprint." htmlUrl="https://beszel.dev/"/>
+      <outline type="link" text="CasaOS" title="CasaOS" description="Beautiful personal cloud OS. One-click app installs, file management, Docker container GUI. Perfect for beginners." htmlUrl="https://casaos.zimaspace.com"/>
+      <outline type="link" text="Changedetection.io" title="Changedetection.io" description="Self-hosted website change detection and notification tool. Monitor any webpage for changes and get alerted instantly." htmlUrl="https://changedetection.io/"/>
+      <outline type="link" text="Cloudflare Tunnel" title="Cloudflare Tunnel" description="Expose local services to the internet securely without port forwarding. Free, encrypted, and zero-trust." htmlUrl="https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/"/>
+      <outline type="link" text="Cosmos Cloud" title="Cosmos Cloud" description="Self-hosted platform that auto-secures your apps with HTTPS, authentication, and firewall. One-click app marketplace included." htmlUrl="https://cosmos-cloud.io/"/>
+      <outline type="link" text="Dockge" title="Dockge" description="Beautiful Docker Compose manager. Edit, create, start, and stop compose stacks from a clean web UI." htmlUrl="https://dockge.kuma.pet"/>
+      <outline type="link" text="Firefly III" title="Firefly III" description="Free, open source personal finance manager. Track expenses, budgets, and accounts. Self-hosted." htmlUrl="https://www.firefly-iii.org"/>
+      <outline type="link" text="FreshRSS" title="FreshRSS" description="Self-hosted RSS aggregator. Follow any website or blog. Fast, lightweight, and extensible." htmlUrl="https://freshrss.org"/>
+      <outline type="link" text="Gotify" title="Gotify" description="Self-hosted push notifications. Simple REST API to send messages to your devices. No third-party dependencies." htmlUrl="https://gotify.net"/>
+      <outline type="link" text="Homarr" title="Homarr" description="Customizable homelab dashboard. Drag-and-drop widgets, service integrations, and a gorgeous dark theme." htmlUrl="https://homarr.dev"/>
+      <outline type="link" text="Homepage" title="Homepage" description="Highly customizable homelab dashboard. Service widgets, bookmarks, and real-time stats from your stack." htmlUrl="https://gethomepage.dev"/>
+      <outline type="link" text="Immich" title="Immich" description="Self-hosted Google Photos alternative. AI-powered face recognition, mobile backup, beautiful timeline." htmlUrl="https://immich.app"/>
+      <outline type="link" text="Jellyfin" title="Jellyfin" description="Free open source media system. The privacy-respecting Plex alternative with no accounts or tracking." htmlUrl="https://jellyfin.org"/>
+      <outline type="link" text="Komodo" title="Komodo" description="Open source tool to build and manage infrastructure. Deploy Docker containers, manage servers, and automate with a beautiful UI." htmlUrl="https://komo.do/"/>
+      <outline type="link" text="Linkwarden" title="Linkwarden" description="Self-hosted collaborative bookmark manager. Archive pages, tag links, share collections." htmlUrl="https://linkwarden.app"/>
+      <outline type="link" text="Mealie" title="Mealie" description="Self-hosted recipe manager. Import recipes from URLs, meal planning, shopping lists. Beautiful UI." htmlUrl="https://mealie.io"/>
+      <outline type="link" text="Miniflux" title="Miniflux" description="Minimalist and opinionated RSS reader. Fast, clean, no tracking. The RSS reader for purists." htmlUrl="https://miniflux.app"/>
+      <outline type="link" text="Navidrome" title="Navidrome" description="Self-hosted music server compatible with Subsonic apps. Stream your music library from anywhere." htmlUrl="https://www.navidrome.org"/>
+      <outline type="link" text="Netboot.xyz" title="Netboot.xyz" description="PXE boot various operating system installers and utilities over the network. Boot ISOs without USB drives." htmlUrl="https://netboot.xyz/"/>
+      <outline type="link" text="Nginx Proxy Manager" title="Nginx Proxy Manager" description="Dead simple reverse proxy with free SSL. Beautiful web UI for managing Nginx without touching config files." htmlUrl="https://nginxproxymanager.com"/>
+      <outline type="link" text="Ntfy" title="Ntfy" description="Simple push notifications via HTTP PUT/POST. Subscribe to topics, send from any tool. Self-hostable." htmlUrl="https://ntfy.sh"/>
+      <outline type="link" text="Pangolin" title="Pangolin" description="Expose your self-hosted services to the internet without port forwarding. Free, encrypted tunnels through Cloudflare&apos;s network." htmlUrl="https://github.com/fosrl/pangolin"/>
+      <outline type="link" text="Paperless-ngx" title="Paperless-ngx" description="Document management system that transforms physical docs into searchable digital archives. OCR and tagging." htmlUrl="https://docs.paperless-ngx.com"/>
+      <outline type="link" text="Pi-hole" title="Pi-hole" description="Network-wide ad blocker. DNS sinkhole that blocks ads and trackers for every device on your network." htmlUrl="https://pi-hole.net"/>
+      <outline type="link" text="Plex" title="Plex" description="Organize and stream your personal media library. Movies, TV, music and photos, beautifully presented." htmlUrl="https://watch.plex.tv"/>
+      <outline type="link" text="Portainer" title="Portainer" description="Docker and Kubernetes management GUI. Deploy, manage, and troubleshoot containers without CLI." htmlUrl="https://www.portainer.io"/>
+      <outline type="link" text="Proxmox VE" title="Proxmox VE" description="Enterprise-grade virtualization platform. VMs, containers, clustering and backups, all open source and free." htmlUrl="https://www.proxmox.com/en/proxmox-virtual-environment"/>
+      <outline type="link" text="Tailscale" title="Tailscale" description="Zero-config mesh VPN built on WireGuard. Connect all your devices like they&apos;re on one LAN. Generous free tier." htmlUrl="https://tailscale.com"/>
+      <outline type="link" text="Traefik" title="Traefik" description="Cloud-native reverse proxy and load balancer. Auto-discovers services, auto-provisions SSL. Docker-native." htmlUrl="https://traefik.io"/>
+      <outline type="link" text="TrueNAS" title="TrueNAS" description="Enterprise-grade open source storage OS. ZFS file system, snapshots, replication, plugins, and a powerful web UI." htmlUrl="https://www.truenas.com/"/>
+      <outline type="link" text="Uptime Kuma" title="Uptime Kuma" description="Beautiful self-hosted monitoring. Track uptime, ping, HTTP, DNS, and more. Gorgeous dashboard with notifications." htmlUrl="https://uptime.kuma.pet"/>
+      <outline type="link" text="Vaultwarden" title="Vaultwarden" description="Lightweight self-hosted Bitwarden server. Full compatibility with all Bitwarden clients using minimal resources." htmlUrl="https://github.com/dani-garcia/vaultwarden"/>
+      <outline type="link" text="WireGuard" title="WireGuard" description="Modern, fast VPN protocol. Simple, lean, and cryptographically sound. Built into the Linux kernel." htmlUrl="https://www.wireguard.com"/>
+      <outline type="link" text="Yacht" title="Yacht" description="Docker container management with templates. Deploy popular self-hosted apps in one click." htmlUrl="https://dev.yacht.sh"/>
+    </outline>
+    <outline text="IP &amp; Network" title="IP &amp; Network">
+      <outline type="link" text="BGP.Tools" title="BGP.Tools" description="Beautiful BGP looking glass. Visualize AS paths, prefix announcements, and routing in real time." htmlUrl="https://bgp.tools"/>
+      <outline type="link" text="HackerTarget" title="HackerTarget" description="Free online vulnerability scanners and network tools. Nmap, traceroute, subnet calculator, and more." htmlUrl="https://hackertarget.com"/>
+      <outline type="link" text="Hurricane Electric BGP" title="Hurricane Electric BGP" description="The most comprehensive BGP toolkit available. AS info, prefix lists, IRR data and DNS, all in one place." htmlUrl="https://bgp.he.net"/>
+      <outline type="link" text="icanhazip.com" title="icanhazip.com" description="Returns just your IP as plain text. The go-to for scripts and automation. Created by Major Hayden." htmlUrl="https://icanhazip.com"/>
+      <outline type="link" text="IP.me" title="IP.me" description="Minimalist IP lookup. Just your IP, nothing else. Also works perfectly with curl from the command line." htmlUrl="https://ip.me"/>
+      <outline type="link" text="IPChicken" title="IPChicken" description="The classic. Just your IP address and a chicken. A sysadmin tradition." htmlUrl="https://ipchicken.com"/>
+      <outline type="link" text="IPinfo.io" title="IPinfo.io" description="IP geolocation, ASN data, and network details. Generous free tier with a clean API." htmlUrl="https://ipinfo.io"/>
+      <outline type="link" text="IPVoid" title="IPVoid" description="30+ IP tools in one place. Blacklist check, geolocation, reverse DNS, WHOIS, port scan, and more." htmlUrl="https://www.ipvoid.com"/>
+      <outline type="link" text="ping.pe" title="ping.pe" description="Global ping and MTR from 30+ worldwide locations simultaneously. Instant network reachability check." htmlUrl="https://ping.pe"/>
+      <outline type="link" text="RIPEstat" title="RIPEstat" description="RIPE NCC&apos;s data dashboard. Visualize routing, DNS, abuse contacts, and geolocation for any IP or ASN." htmlUrl="https://stat.ripe.net"/>
+      <outline type="link" text="Robtex" title="Robtex" description="Swiss army knife for DNS and IP research. Visualizes relationships between IPs, domains, and ASNs." htmlUrl="https://www.robtex.com"/>
+      <outline type="link" text="Subnet Calculator" title="Subnet Calculator" description="Visual subnet calculator. Plan IP addressing schemes with CIDR notation breakdown." htmlUrl="https://www.subnet-calculator.com"/>
+      <outline type="link" text="ViewDNS.info" title="ViewDNS.info" description="20+ DNS and network tools in one place. Reverse IP, port scanner, firewall test, and more." htmlUrl="https://viewdns.info"/>
+      <outline type="link" text="WhatIsMyIPAddress" title="WhatIsMyIPAddress" description="IP lookup with detailed geolocation, proxy detection, and email header analysis tools." htmlUrl="https://whatismyipaddress.com"/>
+      <outline type="link" text="Whois Lookup" title="Whois Lookup" description="Complete WHOIS records for any domain. Registration dates, nameservers, registrar info at a glance." htmlUrl="https://who.is"/>
+    </outline>
+    <outline text="Indexes &amp; Wikis" title="Indexes &amp; Wikis">
+      <outline type="link" text="Awesome Open Source" title="Awesome Open Source" description="Find and compare open source projects across every language and category. Millions of projects indexed and searchable." htmlUrl="https://awesomeopensource.com/"/>
+      <outline type="link" text="Awesome Piracy" title="Awesome Piracy" description="Curated directory of piracy tools, sites, and communities. VPNs, torrenting, Usenet, streaming, automation, and privacy resources." htmlUrl="https://shakil-shahadat.github.io/awesome-piracy/"/>
+      <outline type="link" text="Awesome Privacy" title="Awesome Privacy" description="Curated list of privacy-respecting software, tools, and services. Covers every category from browsers to cloud storage." htmlUrl="https://awesome-privacy.xyz/"/>
+      <outline type="link" text="Awesome Windows 11" title="Awesome Windows 11" description="Curated list of the best apps, tools, tweaks, and resources for Windows 11. Community-maintained on GitHub." htmlUrl="https://github.com/awesome-windows11/windows11"/>
+      <outline type="link" text="degoogle" title="degoogle" description="Massive list of Google alternatives for every service. Search, email, maps, drive, docs, photos, and more. All privacy-focused." htmlUrl="https://tycrek.github.io/degoogle/"/>
+      <outline type="link" text="FMHY" title="FMHY" description="The largest collection of free stuff on the internet. Massive curated wiki of tools, apps, sites, and resources across every category." htmlUrl="https://fmhy.net/"/>
+      <outline type="link" text="FMHY SafeGuard" title="FMHY SafeGuard" description="Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY&apos;s unsafe sites list." htmlUrl="https://github.com/fmhy/FMHY-SafeGuard"/>
+      <outline type="link" text="MediaSavvy" title="MediaSavvy" description="Quality-focused wiki for piracy and media management. Guides on torrent clients, formats, VPNs, anonymity, and media servers." htmlUrl="https://mediasavvy.pages.dev/"/>
+    </outline>
+    <outline text="Media Downloads" title="Media Downloads">
+      <outline type="link" text="FreeTube" title="FreeTube" description="Open source desktop YouTube client focused on privacy. No ads, subscriptions without an account, and local data storage." htmlUrl="https://freetubeapp.io/"/>
+      <outline type="link" text="gallery-dl" title="gallery-dl" description="Command-line tool for downloading image galleries and collections from hundreds of sites. Supports DeviantArt, Imgur, Reddit, and more." htmlUrl="https://github.com/mikf/gallery-dl"/>
+      <outline type="link" text="Invidious" title="Invidious" description="Privacy-respecting frontend for YouTube. No tracking, no ads, lightweight. Self-hostable with many public instances available." htmlUrl="https://invidious.io/"/>
+      <outline type="link" text="JDownloader" title="JDownloader" description="Open source download manager with support for hundreds of file hosts. Auto-extracts, CAPTCHA solving, and link decryption." htmlUrl="https://jdownloader.org/"/>
+      <outline type="link" text="Kodi" title="Kodi" description="Open source media center for organizing and playing local and network media. Massive addon ecosystem with thousands of plugins." htmlUrl="https://kodi.tv/"/>
+      <outline type="link" text="MAS (Microsoft Activation)" title="MAS (Microsoft Activation)" description="Open source Windows and Office activation scripts. Also provides genuine Windows ISO downloads and clean install guides." htmlUrl="https://massgrave.dev/"/>
+      <outline type="link" text="NewPipe" title="NewPipe" description="Lightweight YouTube frontend for Android. No ads, background playback, downloads, and no Google account needed." htmlUrl="https://newpipe.net/"/>
+      <outline type="link" text="Parabolic" title="Parabolic" description="Beautiful GTK GUI for yt-dlp. Download video and audio from thousands of sites with a clean, native interface." htmlUrl="https://nickvision.org/parabolic.html"/>
+      <outline type="link" text="ReVanced Manager" title="ReVanced Manager" description="Patch Android apps like YouTube, Reddit, and Twitter to remove ads and add features. Open source Vanced successor." htmlUrl="https://revanced.app/"/>
+      <outline type="link" text="Spicetify" title="Spicetify" description="Command-line tool to customize Spotify. Themes, extensions, custom apps, and ad-blocking for the desktop client." htmlUrl="https://spicetify.app/"/>
+      <outline type="link" text="SponsorBlock" title="SponsorBlock" description="Community-driven browser extension that auto-skips sponsored segments, intros, and outros on YouTube. Open source and crowdsourced." htmlUrl="https://sponsor.ajay.app/"/>
+      <outline type="link" text="SpotDL" title="SpotDL" description="Download Spotify playlists, albums, and songs with metadata. Matches tracks from YouTube and downloads with proper tags and artwork." htmlUrl="https://spotdl.readthedocs.io/"/>
+      <outline type="link" text="Video DownloadHelper" title="Video DownloadHelper" description="Browser extension for downloading videos from any website. Detects video streams and offers multiple quality and format options." htmlUrl="https://www.downloadhelper.net/"/>
+    </outline>
+    <outline text="Music &amp; Audio" title="Music &amp; Audio">
+      <outline type="link" text="Ardour" title="Ardour" description="Professional digital audio workstation. Full multi-track recording, editing, and mixing. Open source." htmlUrl="https://ardour.org"/>
+      <outline type="link" text="AudioMass" title="AudioMass" description="Full audio editor right in your browser. Cut, trim and apply effects with no install, no account and no ads." htmlUrl="https://audiomass.co"/>
+      <outline type="link" text="Bandlab" title="Bandlab" description="Free online DAW and music social network. Record, produce, and share music. No limits, no subscriptions." htmlUrl="https://www.bandlab.com"/>
+      <outline type="link" text="Freesound" title="Freesound" description="Collaborative database of Creative Commons licensed sounds. 500,000+ clips for any project." htmlUrl="https://freesound.org"/>
+      <outline type="link" text="LMMS" title="LMMS" description="Free digital audio workstation for music production. Beat sequencer, synthesizers, and effects. Cross-platform." htmlUrl="https://lmms.io"/>
+      <outline type="link" text="Mixxx" title="Mixxx" description="Open source DJ software. Beat matching, effects, vinyl control. Everything you need to perform live mixes." htmlUrl="https://mixxx.org"/>
+      <outline type="link" text="MuseScore" title="MuseScore" description="Free music notation software. Write, play, and print sheet music. Massive community sheet music library." htmlUrl="https://musescore.org"/>
+      <outline type="link" text="Sonic Pi" title="Sonic Pi" description="Code-based music creation. Live code beats and melodies with Ruby. Used from classrooms to clubs." htmlUrl="https://sonic-pi.net"/>
+      <outline type="link" text="Soundtrap" title="Soundtrap" description="Online collaborative music studio. Record, mix, and share music directly in the browser." htmlUrl="https://www.soundtrap.com/musicmakers"/>
+      <outline type="link" text="Vital" title="Vital" description="Spectral warping wavetable synthesizer. Stunning visuals, professional sound design. Free version is full-featured." htmlUrl="https://vital.audio"/>
+    </outline>
+    <outline text="Networking" title="Networking">
+      <outline type="link" text="Angry IP Scanner" title="Angry IP Scanner" description="Fast network scanner. Ping IPs, resolve hostnames, detect MAC addresses, scan ports." htmlUrl="https://angryip.org"/>
+      <outline type="link" text="FileZilla" title="FileZilla" description="Cross-platform FTP, FTPS, and SFTP client. Drag-and-drop file transfers with queue management." htmlUrl="https://filezilla-project.org"/>
+      <outline type="link" text="iperf3" title="iperf3" description="Network bandwidth measurement tool. Test throughput between two endpoints. The standard for LAN testing." htmlUrl="https://iperf.fr"/>
+      <outline type="link" text="mRemoteNG" title="mRemoteNG" description="Multi-remote connection manager. SSH, RDP, VNC and Telnet in one tabbed interface." htmlUrl="https://mremoteng.org"/>
+      <outline type="link" text="mtr" title="mtr" description="Combines traceroute and ping. Continuous monitoring shows exactly where packets are dropping." htmlUrl="https://github.com/traviscross/mtr"/>
+      <outline type="link" text="Netbird" title="Netbird" description="Open source WireGuard-based VPN. Zero-config mesh networking with SSO integration. Tailscale alternative." htmlUrl="https://netbird.io"/>
+      <outline type="link" text="NetBox" title="NetBox" description="Open source IPAM and DCIM. Document networks, racks, devices, IP addresses, VLANS, circuits." htmlUrl="https://netboxlabs.com"/>
+      <outline type="link" text="nmap" title="nmap" description="Network discovery and security auditing. Port scanning, OS detection, service versioning. The classic." htmlUrl="https://nmap.org"/>
+      <outline type="link" text="PuTTY" title="PuTTY" description="The classic SSH and telnet client for Windows. Lightweight, portable, battle-tested for decades." htmlUrl="https://www.putty.org"/>
+      <outline type="link" text="Termius" title="Termius" description="Modern SSH client. Cross-platform, sync between devices, SFTP, port forwarding. Free tier." htmlUrl="https://termius.com"/>
+      <outline type="link" text="WinSCP" title="WinSCP" description="SFTP, FTP, and SCP client for Windows. File transfer and remote editing with a dual-pane interface." htmlUrl="https://winscp.net"/>
+      <outline type="link" text="Wireshark" title="Wireshark" description="The world&apos;s foremost network protocol analyzer. Deep packet inspection for troubleshooting and analysis." htmlUrl="https://www.wireshark.org"/>
+      <outline type="link" text="Zenmap" title="Zenmap" description="Official nmap GUI. Visual topology maps, host details, saved scans. Makes nmap accessible." htmlUrl="https://nmap.org/zenmap/"/>
+    </outline>
+    <outline text="News &amp; Reference" title="News &amp; Reference">
+      <outline type="link" text="AlternativeTo" title="AlternativeTo" description="Find alternatives to any software. Community-driven recommendations with platform and license filters." htmlUrl="https://alternativeto.net"/>
+      <outline type="link" text="ArchWiki" title="ArchWiki" description="The best Linux documentation on the internet. Useful regardless of which distro you run." htmlUrl="https://wiki.archlinux.org"/>
+      <outline type="link" text="CSS-Tricks" title="CSS-Tricks" description="Tips, tricks, and techniques on using CSS. Almanac of every CSS property. Now part of DigitalOcean." htmlUrl="https://css-tricks.com"/>
+      <outline type="link" text="daily.dev" title="daily.dev" description="Developer news aggregator. Personalized feed from tech blogs, GitHub trending, and community picks." htmlUrl="https://daily.dev"/>
+      <outline type="link" text="Devhints.io" title="Devhints.io" description="Beautiful cheatsheets for developers. Bash, React, Git, Vim and CSS as gorgeous one-page references." htmlUrl="https://devhints.io"/>
+      <outline type="link" text="Explain XKCD" title="Explain XKCD" description="Wiki explaining every XKCD comic. Because sometimes the math jokes need a footnote." htmlUrl="https://www.explainxkcd.com"/>
+      <outline type="link" text="Free Programming Books" title="Free Programming Books" description="Thousands of free programming books and resources. Every language and framework. Community-maintained." htmlUrl="https://ebookfoundation.github.io/free-programming-books/"/>
+      <outline type="link" text="free-for.dev" title="free-for.dev" description="Massive list of free-tier developer services covering SaaS, PaaS and IaaS. Everything with a free option." htmlUrl="https://free-for.dev"/>
+      <outline type="link" text="Hackaday" title="Hackaday" description="Hardware hacking and electronics projects. Fresh builds, teardowns, and tutorials daily." htmlUrl="https://hackaday.com"/>
+      <outline type="link" text="Hacker News" title="Hacker News" description="Y Combinator&apos;s tech news aggregator. The front page of the startup and hacker world." htmlUrl="https://news.ycombinator.com"/>
+      <outline type="link" text="Killed by Google" title="Killed by Google" description="Graveyard of Google products and services. 290+ discontinued projects, with dates and descriptions." htmlUrl="https://killedbygoogle.com"/>
+      <outline type="link" text="Lobsters" title="Lobsters" description="Computing-focused link aggregation. Invite-only community means higher signal-to-noise than most." htmlUrl="https://lobste.rs"/>
+      <outline type="link" text="Product Hunt" title="Product Hunt" description="Discover new tech products daily. Launches, votes, and reviews. Where new tools get their first users." htmlUrl="https://www.producthunt.com"/>
+      <outline type="link" text="public-apis" title="public-apis" description="Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there&apos;s an API for it." htmlUrl="https://github.com/public-apis/public-apis"/>
+      <outline type="link" text="QuickRef.ME" title="QuickRef.ME" description="Quick reference cheatsheets for everything. Programming, tools, and Linux commands in clean format." htmlUrl="https://quickref.me"/>
+      <outline type="link" text="Slant" title="Slant" description="Product recommendation community. Compare tools with ranked pros and cons from real users." htmlUrl="https://www.slant.co"/>
+      <outline type="link" text="Smashing Magazine" title="Smashing Magazine" description="Professional web design and development articles. In-depth guides, tutorials, and resources." htmlUrl="https://www.smashingmagazine.com"/>
+      <outline type="link" text="Stack Overflow" title="Stack Overflow" description="Q&amp;A for programmers. 23 million questions answered. The bedrock of developer knowledge sharing." htmlUrl="https://stackoverflow.com"/>
+      <outline type="link" text="The Changelog" title="The Changelog" description="News and podcasts for developers. Open source, software development, and the people behind it." htmlUrl="https://changelog.com"/>
+    </outline>
+    <outline text="OSINT" title="OSINT">
+      <outline type="link" text="AbuseIPDB" title="AbuseIPDB" description="Community-driven IP abuse database. Check and report malicious IPs. Essential for firewall rules." htmlUrl="https://www.abuseipdb.com"/>
+      <outline type="link" text="BuiltWith" title="BuiltWith" description="Technology profiler for websites. See what CMS, analytics, CDN, hosting, and frameworks any site uses." htmlUrl="https://builtwith.com"/>
+      <outline type="link" text="Censys" title="Censys" description="Internet-wide scan data. Search every public-facing device and certificate on the internet." htmlUrl="https://search.censys.io"/>
+      <outline type="link" text="crt.sh" title="crt.sh" description="Certificate transparency log search. Find every SSL cert ever issued for a domain, which also reveals subdomains." htmlUrl="https://crt.sh"/>
+      <outline type="link" text="DNSDumpster" title="DNSDumpster" description="Domain research tool. Maps DNS records, finds subdomains, and visualizes a domain&apos;s infrastructure." htmlUrl="https://dnsdumpster.com"/>
+      <outline type="link" text="Epieos" title="Epieos" description="Find accounts linked to an email address or phone number across social platforms. Free OSINT tool." htmlUrl="https://epieos.com"/>
+      <outline type="link" text="GreyNoise" title="GreyNoise" description="Separates targeted attacks from internet background noise. Identifies mass scanners and benign crawlers." htmlUrl="https://viz.greynoise.io"/>
+      <outline type="link" text="Hunter.io" title="Hunter.io" description="Find professional email addresses associated with any domain. Verify deliverability too." htmlUrl="https://hunter.io"/>
+      <outline type="link" text="IntelligenceX" title="IntelligenceX" description="Search engine for leaked databases, darknet, WHOIS, and more. Powerful for deep OSINT investigations." htmlUrl="https://intelx.io"/>
+      <outline type="link" text="Maltego" title="Maltego" description="Visual link analysis for OSINT investigations. Map relationships between people, companies, domains and IPs. The Community Edition is still free." htmlUrl="https://www.maltego.com/pricing/"/>
+      <outline type="link" text="OSINT Framework" title="OSINT Framework" description="Interactive tree of OSINT tools organized by category. The starting point for any investigation." htmlUrl="https://osintframework.com"/>
+      <outline type="link" text="PhoneInfoga" title="PhoneInfoga" description="Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources." htmlUrl="https://github.com/sundowndev/phoneinfoga"/>
+      <outline type="link" text="PublicWWW" title="PublicWWW" description="Source code search engine. Find websites using specific JavaScript, analytics codes, or HTML snippets." htmlUrl="https://publicwww.com"/>
+      <outline type="link" text="Pulsedive" title="Pulsedive" description="Threat intelligence platform. Correlate IPs, domains, and URLs with known threat indicators." htmlUrl="https://pulsedive.com"/>
+      <outline type="link" text="Shodan" title="Shodan" description="The search engine for internet-connected devices. Find exposed services, cameras, databases, and more." htmlUrl="https://www.shodan.io"/>
+      <outline type="link" text="SpiderFoot" title="SpiderFoot" description="Open source OSINT automation. Scans 200+ data sources to map an entity&apos;s digital footprint." htmlUrl="https://github.com/smicallef/spiderfoot"/>
+      <outline type="link" text="TinEye" title="TinEye" description="Reverse image search engine. Find where an image appears online, track modifications, and find higher resolutions." htmlUrl="https://tineye.com"/>
+      <outline type="link" text="Wayback Machine" title="Wayback Machine" description="See how any website looked at any point in history. Billions of pages archived since 1996." htmlUrl="https://web.archive.org"/>
+      <outline type="link" text="Wigle.net" title="Wigle.net" description="Worldwide map of wireless networks. Database of Wi-Fi and cell towers submitted by wardrivers." htmlUrl="https://wigle.net"/>
+    </outline>
+    <outline text="Privacy" title="Privacy">
+      <outline type="link" text="addy.io" title="addy.io" description="Anonymous email forwarding. Create unlimited aliases to protect your real email from spam and tracking." htmlUrl="https://addy.io"/>
+      <outline type="link" text="AdGuard Home" title="AdGuard Home" description="Network-wide ad and tracker blocker. Self-hosted DNS server that filters ads for every device on your network. Pi-hole alternative." htmlUrl="https://adguard.com/en/adguard-home/overview.html"/>
+      <outline type="link" text="CalyxOS" title="CalyxOS" description="Privacy-focused Android alternative. De-Googled, includes a built-in VPN. For Pixel phones." htmlUrl="https://calyxos.org"/>
+      <outline type="link" text="ClearURLs" title="ClearURLs" description="Browser extension that removes tracking parameters from URLs automatically. Clean links when you copy, share, or click." htmlUrl="https://clearurls.xyz/"/>
+      <outline type="link" text="Cryptomator" title="Cryptomator" description="Client-side encryption for your cloud storage. Encrypt files before they leave your device. Works with Dropbox, Drive, and more." htmlUrl="https://cryptomator.org/"/>
+      <outline type="link" text="CryptPad" title="CryptPad" description="Encrypted collaborative office suite. Docs, sheets, slides and polls, all zero-knowledge encrypted." htmlUrl="https://cryptpad.org"/>
+      <outline type="link" text="GrapheneOS" title="GrapheneOS" description="Hardened Android-based mobile OS focused on privacy and security. Sandboxed Google Play, per-app permissions, and exploit mitigations." htmlUrl="https://grapheneos.org/"/>
+      <outline type="link" text="LibRedirect" title="LibRedirect" description="Browser extension that redirects popular sites to privacy-respecting frontends (Invidious, Nitter, etc.)." htmlUrl="https://github.com/libredirect/browser_extension"/>
+      <outline type="link" text="Mullvad VPN" title="Mullvad VPN" description="Privacy-focused VPN. No email and no accounts, just a number. Pay with cash or crypto. Audited and trusted." htmlUrl="https://mullvad.net"/>
+      <outline type="link" text="Portmaster" title="Portmaster" description="Free application firewall with built-in DNS privacy, tracker blocking, and per-app network controls. Beautiful dashboard." htmlUrl="https://safing.io/portmaster/"/>
+      <outline type="link" text="Prism Break" title="Prism Break" description="Directory of privacy-respecting alternatives to proprietary software. Organized by platform and use case." htmlUrl="https://prism-break.org"/>
+      <outline type="link" text="Privacy Guides" title="Privacy Guides" description="Community-driven resource for digital privacy. Recommendations for VPNs, browsers, email, and more." htmlUrl="https://www.privacyguides.org"/>
+      <outline type="link" text="privacy.sexy" title="privacy.sexy" description="Scripts to harden Windows and macOS privacy settings. Checkbox UI generates ready-to-run scripts." htmlUrl="https://privacy.sexy"/>
+      <outline type="link" text="PrivateBin" title="PrivateBin" description="Encrypted pastebin built on zero knowledge, so the server never sees your content. Self-hostable." htmlUrl="https://privatebin.info"/>
+      <outline type="link" text="Proton Pass" title="Proton Pass" description="End-to-end encrypted password manager from Proton. Built-in 2FA, email aliases, and dark web monitoring. Free tier with unlimited passwords." htmlUrl="https://proton.me/pass"/>
+      <outline type="link" text="ProtonMail" title="ProtonMail" description="Encrypted email, calendar, drive, and VPN. Swiss privacy, open source apps, zero-access encryption." htmlUrl="https://proton.me"/>
+      <outline type="link" text="SearXNG" title="SearXNG" description="Privacy-respecting metasearch engine. Aggregates results from 70+ engines without tracking you." htmlUrl="https://searxng.org"/>
+      <outline type="link" text="Signal" title="Signal" description="The gold standard for private messaging. End-to-end encrypted, open source, no ads, no tracking." htmlUrl="https://signal.org"/>
+      <outline type="link" text="SimpleLogin" title="SimpleLogin" description="Email alias service. Generate unique emails for every service. Open source, self-hostable." htmlUrl="https://simplelogin.io"/>
+      <outline type="link" text="Standard Notes" title="Standard Notes" description="End-to-end encrypted notes. 100% open source, extensible with editors and themes. Free sync." htmlUrl="https://standardnotes.com"/>
+      <outline type="link" text="Tails" title="Tails" description="Portable Linux OS that routes everything through Tor. Boots from USB, leaves no trace on the host." htmlUrl="https://tails.net"/>
+      <outline type="link" text="Tor Project" title="Tor Project" description="Anonymous browsing network. Onion routing prevents anyone from tracing your internet activity." htmlUrl="https://www.torproject.org"/>
+      <outline type="link" text="uBlock Origin" title="uBlock Origin" description="The most efficient ad and content blocker. Low CPU and memory usage. Open source, community-maintained." htmlUrl="https://ublockorigin.com"/>
+      <outline type="link" text="VeraCrypt" title="VeraCrypt" description="Disk encryption software based on TrueCrypt. Create encrypted volumes, encrypt entire drives, or set up hidden operating systems." htmlUrl="https://veracrypt.io/"/>
+      <outline type="link" text="Whonix" title="Whonix" description="Desktop OS designed for advanced security and privacy. Runs inside a VM, all traffic through Tor." htmlUrl="https://www.whonix.org"/>
+    </outline>
+    <outline text="Productivity" title="Productivity">
+      <outline type="link" text="Anytype" title="Anytype" description="Local-first, encrypted alternative to Notion. Offline-capable, peer-to-peer sync. Privacy-respecting." htmlUrl="https://anytype.io"/>
+      <outline type="link" text="Appsmith" title="Appsmith" description="Open source low-code platform. Build internal tools with drag-and-drop, connected to any database or API." htmlUrl="https://www.appsmith.com"/>
+      <outline type="link" text="Cal.com" title="Cal.com" description="Open source Calendly alternative. Self-hostable scheduling with deep calendar integrations." htmlUrl="https://cal.com"/>
+      <outline type="link" text="Docuseal" title="Docuseal" description="Open source document signing platform. Create, fill, and sign documents. DocuSign alternative." htmlUrl="https://www.docuseal.com"/>
+      <outline type="link" text="Draw.io" title="Draw.io" description="Full-featured diagramming tool. Flowcharts, network diagrams, UML and wireframes, all in the browser and all free." htmlUrl="https://app.diagrams.net"/>
+      <outline type="link" text="Grist" title="Grist" description="Open source spreadsheet-database hybrid. Like Airtable but self-hostable. Formulas, dashboards, APIs." htmlUrl="https://www.getgrist.com"/>
+      <outline type="link" text="HedgeDoc" title="HedgeDoc" description="Real-time collaborative Markdown editor. Open source, self-hosted. CodiMD successor." htmlUrl="https://hedgedoc.org"/>
+      <outline type="link" text="Huly" title="Huly" description="Open source all-in-one project management. Combines Linear, Jira, Slack, and Notion concepts." htmlUrl="https://huly.io"/>
+      <outline type="link" text="Joplin" title="Joplin" description="Open source note-taking with end-to-end encryption. Markdown, sync, web clipper. Evernote alternative." htmlUrl="https://joplinapp.org"/>
+      <outline type="link" text="Leantime" title="Leantime" description="Open source project management for non-project managers. Designed for teams that find Jira overwhelming." htmlUrl="https://leantime.io"/>
+      <outline type="link" text="Linear" title="Linear" description="Issue tracking that doesn&apos;t suck. Fast, keyboard-driven, opinionated. Free for small teams." htmlUrl="https://linear.app"/>
+      <outline type="link" text="Logseq" title="Logseq" description="Open source outliner and knowledge management. Block-based, bidirectional links, privacy-first." htmlUrl="https://logseq.com"/>
+      <outline type="link" text="Mattermost" title="Mattermost" description="Open source Slack alternative. Self-hosted team messaging with integrations, bots, and DevOps workflows." htmlUrl="https://mattermost.com"/>
+      <outline type="link" text="NocoDB" title="NocoDB" description="Turn any database into a smart spreadsheet. Open source Airtable alternative with API generation." htmlUrl="https://nocodb.com"/>
+      <outline type="link" text="Notion" title="Notion" description="All-in-one workspace. Notes, docs, wikis, databases, kanban boards. The productivity Swiss Army knife." htmlUrl="https://www.notion.so"/>
+      <outline type="link" text="Obsidian" title="Obsidian" description="Knowledge base on local markdown files. Graph view, backlinks, plugins. Your second brain, offline-first." htmlUrl="https://obsidian.md"/>
+      <outline type="link" text="Overleaf" title="Overleaf" description="Online LaTeX editor with real-time collaboration. The standard for academic papers and technical documents." htmlUrl="https://www.overleaf.com"/>
+      <outline type="link" text="Plane" title="Plane" description="Open source project management. Issues, cycles, modules, analytics. Jira and Linear alternative." htmlUrl="https://plane.so"/>
+      <outline type="link" text="StackEdit" title="StackEdit" description="In-browser Markdown editor. WYSIWYG, sync with Google Drive and GitHub, LaTeX math support." htmlUrl="https://stackedit.io"/>
+      <outline type="link" text="Stirling PDF" title="Stirling PDF" description="Self-hosted PDF toolkit. Merge, split, rotate, compress, OCR and convert. Every PDF operation in one tool." htmlUrl="https://stirlingpdf.io"/>
+      <outline type="link" text="tldraw" title="tldraw" description="Infinite canvas drawing tool. A collaborative whiteboard with shapes, arrows and text. Clean and fast." htmlUrl="https://www.tldraw.com"/>
+      <outline type="link" text="Trilium Notes" title="Trilium Notes" description="Hierarchical note-taking app with powerful scripting. Relation maps, book notes, task management. Self-hostable." htmlUrl="https://github.com/TriliumNext/Trilium"/>
+      <outline type="link" text="Typst" title="Typst" description="Modern LaTeX alternative. Write papers and documents with a clean syntax. Real-time collaboration." htmlUrl="https://typst.app"/>
+      <outline type="link" text="Zulip" title="Zulip" description="Chat with threaded conversations. Open source, combines the immediacy of chat with email-style organization." htmlUrl="https://zulip.com"/>
+    </outline>
+    <outline text="Reading" title="Reading">
+      <outline type="link" text="Calibre" title="Calibre" description="The ultimate ebook management tool. Convert between formats, edit metadata, sync to devices, and host your own ebook server." htmlUrl="https://calibre-ebook.com/"/>
+      <outline type="link" text="Kavita" title="Kavita" description="Self-hosted digital library for manga, comics, and ebooks. Beautiful reading UI with OPDS support and user management." htmlUrl="https://www.kavitareader.com/"/>
+      <outline type="link" text="Komga" title="Komga" description="Free and open source comics and manga server. OPDS feed, web reader, metadata editing, and multi-user support." htmlUrl="https://komga.org/"/>
+      <outline type="link" text="Koodo Reader" title="Koodo Reader" description="Cross-platform ebook reader supporting EPUB, PDF, MOBI, and more. Highlights, notes, syncing, and a beautiful reading UI." htmlUrl="https://koodo.960960.xyz/"/>
+      <outline type="link" text="Libby" title="Libby" description="Borrow ebooks and audiobooks free from your local library. Beautiful reading experience on any device with your library card." htmlUrl="https://libbyapp.com/"/>
+      <outline type="link" text="Mihon" title="Mihon" description="Free and open source manga reader for Android. Tachiyomi successor with extension support for hundreds of manga sources." htmlUrl="https://mihon.app/"/>
+      <outline type="link" text="Open Library" title="Open Library" description="Internet Archive&apos;s library catalog with millions of records. Borrow and read ebooks online for free with a library card." htmlUrl="https://openlibrary.org/"/>
+      <outline type="link" text="Project Gutenberg" title="Project Gutenberg" description="Over 70,000 free ebooks. Public domain classics in every format. The oldest digital library, running since 1971." htmlUrl="https://www.gutenberg.org/"/>
+      <outline type="link" text="Readarr" title="Readarr" description="Ebook and audiobook collection manager. Automated downloading, organization, and metadata management. Part of the *arr stack." htmlUrl="https://readarr.com/"/>
+      <outline type="link" text="Standard Ebooks" title="Standard Ebooks" description="Beautifully formatted public domain ebooks. Professional typography, cover art, and metadata. The premium Gutenberg alternative." htmlUrl="https://standardebooks.org/"/>
+      <outline type="link" text="Wotaku" title="Wotaku" description="Comprehensive index for anime, manga, and Japanese media. Curated guides, tools, and resource lists for otaku culture." htmlUrl="https://wotaku.wiki/"/>
+    </outline>
+    <outline text="Security" title="Security">
+      <outline type="link" text="BrowserLeaks" title="BrowserLeaks" description="Shows everything your browser reveals about you: canvas fingerprint, WebGL, fonts and WebRTC leaks." htmlUrl="https://browserleaks.com"/>
+      <outline type="link" text="Cover Your Tracks (EFF)" title="Cover Your Tracks (EFF)" description="EFF&apos;s tracker testing tool. See how unique your browser fingerprint is and how trackable you are." htmlUrl="https://coveryourtracks.eff.org"/>
+      <outline type="link" text="CyberChef" title="CyberChef" description="GCHQ&apos;s data Swiss Army knife. Encode, decode, encrypt, compress and parse by chaining operations visually." htmlUrl="https://gchq.github.io/CyberChef"/>
+      <outline type="link" text="DeHashed" title="DeHashed" description="Breach database search engine. Search by email, username, IP, name, phone, or address." htmlUrl="https://dehashed.com"/>
+      <outline type="link" text="Fail2ban" title="Fail2ban" description="Intrusion prevention that bans IPs showing malicious signs. Monitors logs and updates firewall rules automatically." htmlUrl="https://github.com/fail2ban/fail2ban"/>
+      <outline type="link" text="GRC ShieldsUP!" title="GRC ShieldsUP!" description="Steve Gibson&apos;s classic port scanner. Tests your firewall from the outside. A legend since 2001." htmlUrl="https://www.grc.com/shieldsup"/>
+      <outline type="link" text="Hardenize" title="Hardenize" description="Comprehensive security assessment. Tests email, web, DNS, and network security in one sweep." htmlUrl="https://www.hardenize.com"/>
+      <outline type="link" text="Have I Been Pwned" title="Have I Been Pwned" description="Troy Hunt&apos;s breach database. Check if your email or password has appeared in data breaches." htmlUrl="https://haveibeenpwned.com"/>
+      <outline type="link" text="Immuniweb" title="Immuniweb" description="Free SSL/TLS test with PCI DSS and HIPAA compliance checking. Goes beyond basic cert validation." htmlUrl="https://www.immuniweb.com/ssl/"/>
+      <outline type="link" text="JWT.io" title="JWT.io" description="JSON Web Token decoder and debugger. Paste a JWT and instantly see its header, payload, and verify signatures." htmlUrl="https://jwt.io"/>
+      <outline type="link" text="Mozilla Observatory" title="Mozilla Observatory" description="Mozilla&apos;s website security scanner. Tests headers, TLS, cookies, and content security policies." htmlUrl="https://developer.mozilla.org/en-US/observatory"/>
+      <outline type="link" text="Nuclei" title="Nuclei" description="Fast vulnerability scanner driven by YAML templates. Community-powered with thousands of detection templates for every CVE." htmlUrl="https://projectdiscovery.io/"/>
+      <outline type="link" text="OWASP ZAP" title="OWASP ZAP" description="World&apos;s most popular free security tool for finding vulnerabilities in web applications." htmlUrl="https://www.zaproxy.org"/>
+      <outline type="link" text="Pentest-Tools" title="Pentest-Tools" description="Online penetration testing toolkit. Subdomain finder, port scanner, CMS detection, and vulnerability scanning." htmlUrl="https://pentest-tools.com"/>
+      <outline type="link" text="Qualys SSL Labs" title="Qualys SSL Labs" description="The gold standard for SSL/TLS testing. Deep analysis of certificate chains and configuration." htmlUrl="https://www.ssllabs.com/ssltest/"/>
+      <outline type="link" text="Report URI" title="Report URI" description="Collect and analyze CSP, HPKP, and other security header violation reports. Free tier available." htmlUrl="https://report-uri.com"/>
+      <outline type="link" text="SecurityHeaders" title="SecurityHeaders" description="Grades your HTTP security headers. Quick way to find missing CSP, HSTS, and other protections." htmlUrl="https://securityheaders.com"/>
+      <outline type="link" text="Shodan Monitor" title="Shodan Monitor" description="Keep tabs on your organization&apos;s internet-facing devices. Alerts when new services appear." htmlUrl="https://monitor.shodan.io"/>
+      <outline type="link" text="Snyk" title="Snyk" description="Developer security platform. Find and fix vulnerabilities in code, open source dependencies, containers, and infrastructure." htmlUrl="https://snyk.io/"/>
+      <outline type="link" text="SSL Checker" title="SSL Checker" description="Quick SSL certificate diagnostic. Shows cert chain, expiration dates, and common configuration problems." htmlUrl="https://www.sslshopper.com/ssl-checker.html"/>
+      <outline type="link" text="Sucuri SiteCheck" title="Sucuri SiteCheck" description="Free website malware and security scanner. Checks for blocklisting, injections, and defacements." htmlUrl="https://sitecheck.sucuri.net"/>
+      <outline type="link" text="Trivy" title="Trivy" description="Comprehensive security scanner for containers, filesystems, Git repos, and Kubernetes. Find vulnerabilities and misconfigurations." htmlUrl="https://trivy.dev/"/>
+      <outline type="link" text="urlscan.io" title="urlscan.io" description="Scans and analyzes websites. See every request, cookie, and connection a page makes. Catches phishing." htmlUrl="https://urlscan.io"/>
+      <outline type="link" text="VirusTotal" title="VirusTotal" description="Scan files and URLs with 70+ antivirus engines simultaneously. The definitive malware checker." htmlUrl="https://www.virustotal.com"/>
+      <outline type="link" text="Wappalyzer" title="Wappalyzer" description="Identify technologies used on any website. Detect CMS, frameworks, analytics, CDNs, and more. Essential for recon and research." htmlUrl="https://www.wappalyzer.com/"/>
+    </outline>
+    <outline text="Speed Tests" title="Speed Tests">
+      <outline type="link" text="Cloudflare Speed Test" title="Cloudflare Speed Test" description="Comprehensive speed test with jitter, latency, packet loss, and download/upload metrics. Goes way beyond a single number." htmlUrl="https://speed.cloudflare.com"/>
+      <outline type="link" text="Fast.com" title="Fast.com" description="Netflix-powered speed test. Zero clutter. Useful for detecting content-based throttling since it tests against Netflix servers." htmlUrl="https://fast.com"/>
+      <outline type="link" text="LibreSpeed" title="LibreSpeed" description="Self-hostable speed test. Run your own instance for LAN/WAN testing. Truly private." htmlUrl="https://librespeed.org"/>
+      <outline type="link" text="M-Lab NDT" title="M-Lab NDT" description="Google-backed network diagnostic tool. Feeds into open data research on global internet performance." htmlUrl="https://speed.measurementlab.net"/>
+      <outline type="link" text="OpenSpeedTest" title="OpenSpeedTest" description="Open source HTML5 speed test. No ads. You can deploy your own server for internal network testing." htmlUrl="https://openspeedtest.com"/>
+      <outline type="link" text="Packet Loss Test" title="Packet Loss Test" description="Tests for packet loss between you and the server. Critical for diagnosing VoIP and gaming issues." htmlUrl="https://packetlosstest.com"/>
+      <outline type="link" text="Speedof.me" title="Speedof.me" description="HTML5-based speed test with a clean visual graph showing your speed over time. Pure browser-based." htmlUrl="https://speedof.me"/>
+      <outline type="link" text="TestMy.net" title="TestMy.net" description="Independent speed test with historical tracking. Compare your results over time and against your ISP&apos;s claims." htmlUrl="https://testmy.net"/>
+      <outline type="link" text="Waveform Bufferbloat Test" title="Waveform Bufferbloat Test" description="Tests for bufferbloat, the hidden cause of laggy connections even on fast links. Measures loaded against unloaded latency." htmlUrl="https://www.waveform.com/tools/bufferbloat"/>
+      <outline type="link" text="WiFiman" title="WiFiman" description="Ubiquiti&apos;s speed test tool. Clean interface, no ads. Powerful with UniFi gear but works standalone." htmlUrl="https://wifiman.com"/>
+    </outline>
+    <outline text="Sysadmin" title="Sysadmin">
+      <outline type="link" text="AWX" title="AWX" description="Open source version of Ansible Tower. Web interface for Ansible with RBAC, scheduling, and inventories." htmlUrl="https://github.com/ansible/awx"/>
+      <outline type="link" text="btop" title="btop" description="Resource monitor with a gorgeous TUI. CPU, memory, disk and network, beautifully rendered in the terminal." htmlUrl="https://github.com/aristocratos/btop"/>
+      <outline type="link" text="Checkmk" title="Checkmk" description="IT monitoring that works. Auto-discovery, 2000+ plugins, beautiful dashboards. Free raw edition." htmlUrl="https://checkmk.com"/>
+      <outline type="link" text="Cloudflare Radar" title="Cloudflare Radar" description="Real-time internet intelligence. Traffic patterns, outages, routing changes, and attack trends globally." htmlUrl="https://radar.cloudflare.com"/>
+      <outline type="link" text="Cockpit" title="Cockpit" description="Web-based Linux server administration. Manage storage, networking, containers, and users through your browser." htmlUrl="https://cockpit-project.org"/>
+      <outline type="link" text="CrowdSec" title="CrowdSec" description="Open source collaborative security engine. Detect attacks, share threat intelligence, and protect your infrastructure with the crowd." htmlUrl="https://www.crowdsec.net/"/>
+      <outline type="link" text="Dozzle" title="Dozzle" description="Real-time Docker log viewer in the browser. Lightweight, no database, just instant container logs." htmlUrl="https://dozzle.dev"/>
+      <outline type="link" text="Glances" title="Glances" description="Cross-platform system monitoring tool. All your metrics in one terminal view. Written in Python." htmlUrl="https://nicolargo.github.io/glances/"/>
+      <outline type="link" text="GoAccess" title="GoAccess" description="Real-time web log analyzer. Beautiful terminal and HTML dashboards from your access logs." htmlUrl="https://goaccess.io"/>
+      <outline type="link" text="Grafana" title="Grafana" description="The observability platform. Beautiful dashboards for metrics, logs, and traces. Connects to everything." htmlUrl="https://grafana.com"/>
+      <outline type="link" text="Graylog" title="Graylog" description="Open source log management platform. Collect, index, and analyze structured and unstructured data from any source." htmlUrl="https://graylog.org/"/>
+      <outline type="link" text="Guacamole" title="Guacamole" description="Clientless remote desktop gateway. Access SSH, VNC, and RDP servers through your web browser with no plugins needed." htmlUrl="https://guacamole.apache.org/"/>
+      <outline type="link" text="Healthchecks.io" title="Healthchecks.io" description="Cron job monitoring. Get alerted when your scheduled tasks fail to check in. Open source, self-hostable." htmlUrl="https://healthchecks.io"/>
+      <outline type="link" text="Loki" title="Loki" description="Log aggregation system by Grafana Labs. Like Prometheus, but for logs. Pairs perfectly with Grafana." htmlUrl="https://grafana.com/oss/loki/"/>
+      <outline type="link" text="MeshCentral" title="MeshCentral" description="Full-featured open source remote management. Remote desktop, terminal, file transfer, and device management for any OS." htmlUrl="https://meshcentral.com/"/>
+      <outline type="link" text="Mozilla SSL Config" title="Mozilla SSL Config" description="SSL/TLS configuration generator. Best-practice configs for Apache, Nginx, HAProxy, and more." htmlUrl="https://ssl-config.mozilla.org"/>
+      <outline type="link" text="Netdata" title="Netdata" description="Real-time infrastructure monitoring. Zero-config, per-second granularity, gorgeous auto-generated dashboards." htmlUrl="https://www.netdata.cloud"/>
+      <outline type="link" text="NGINXConfig" title="NGINXConfig" description="DigitalOcean&apos;s NGINX config generator. Answer questions, get a production-ready config file." htmlUrl="https://www.digitalocean.com/community/tools/nginx"/>
+      <outline type="link" text="Prometheus" title="Prometheus" description="Monitoring and alerting toolkit. Time-series database with powerful query language. Cloud-native standard." htmlUrl="https://prometheus.io"/>
+      <outline type="link" text="Rundeck" title="Rundeck" description="Operations automation platform. Schedule and run jobs across your infrastructure with role-based access and audit logging." htmlUrl="https://www.rundeck.com/"/>
+      <outline type="link" text="Semaphore" title="Semaphore" description="Modern UI for Ansible. Schedule playbooks, manage inventories, track task history. Beautiful web interface." htmlUrl="https://semaphoreui.com"/>
+      <outline type="link" text="ss64" title="ss64" description="Command line reference for every platform. Bash, PowerShell, CMD, macOS, SQL, and more. The sysadmin&apos;s cheat sheet." htmlUrl="https://ss64.com/"/>
+      <outline type="link" text="Teleport" title="Teleport" description="Secure access to SSH, Kubernetes, databases, and web apps. Zero-trust, identity-aware proxy. Open source." htmlUrl="https://goteleport.com"/>
+      <outline type="link" text="Terraform" title="Terraform" description="Infrastructure as code. Define cloud resources in declarative config files. The industry standard." htmlUrl="https://developer.hashicorp.com/terraform"/>
+      <outline type="link" text="Wazuh" title="Wazuh" description="Open source security platform. SIEM, XDR, threat detection, compliance monitoring. Unified security." htmlUrl="https://wazuh.com"/>
+      <outline type="link" text="Webmin" title="Webmin" description="Web-based system administration for Unix. Manage users, disk quotas, services, config files, and more." htmlUrl="https://webmin.com"/>
+      <outline type="link" text="Zabbix" title="Zabbix" description="Enterprise-class monitoring solution for servers, networks, applications and cloud. All open source." htmlUrl="https://www.zabbix.com"/>
+    </outline>
+    <outline text="Torrenting" title="Torrenting">
+      <outline type="link" text="BiglyBT" title="BiglyBT" description="Feature-rich open source torrent client with swarm merging, I2P integration, and decentralized chat. Azureus/Vuze successor." htmlUrl="https://www.biglybt.com/"/>
+      <outline type="link" text="BitMagnet" title="BitMagnet" description="Self-hosted DHT torrent search engine and crawler. Indexes the DHT network and provides a modern web UI for searching." htmlUrl="https://bitmagnet.io/"/>
+      <outline type="link" text="BTDigg" title="BTDigg" description="DHT-based torrent search engine. Indexes the distributed hash table directly, great for finding rare and hard-to-find content." htmlUrl="https://btdig.com/"/>
+      <outline type="link" text="cross-seed" title="cross-seed" description="Automatically cross-seed torrents across multiple trackers. Maximizes your ratio by finding matching content you already have." htmlUrl="https://www.cross-seed.org/"/>
+      <outline type="link" text="Deluge" title="Deluge" description="Lightweight cross-platform torrent client with a powerful plugin system. Supports web UI and daemon mode for remote management." htmlUrl="https://www.deluge-torrent.org/"/>
+      <outline type="link" text="ExT" title="ExT" description="Torrent aggregator that searches across multiple indexes. Clean interface with filtering by category, size, and seeders." htmlUrl="https://ext.to/"/>
+      <outline type="link" text="Flood" title="Flood" description="Beautiful web UI for rTorrent, qBittorrent, and Transmission. Modern dark interface with real-time stats and management." htmlUrl="https://flood.js.org/"/>
+      <outline type="link" text="Knaben" title="Knaben" description="Torrent meta-search aggregator. Searches multiple torrent indexes simultaneously from one clean, ad-free interface." htmlUrl="https://knaben.org/"/>
+      <outline type="link" text="PikaTorrent" title="PikaTorrent" description="Modern cross-platform torrent client with a clean UI. Works on desktop and mobile with a built-in web interface." htmlUrl="https://www.pikatorrent.com/"/>
+      <outline type="link" text="qBittorrent" title="qBittorrent" description="Feature-rich open source torrent client with built-in search, RSS, sequential downloading, and IP filtering. The community&apos;s top pick." htmlUrl="https://www.qbittorrent.org/"/>
+      <outline type="link" text="Seedr" title="Seedr" description="Cloud-based torrent client. Download torrents in the cloud and stream or direct-download the files. 2GB free tier." htmlUrl="https://www.seedr.cc/"/>
+      <outline type="link" text="snowfl" title="snowfl" description="Real-time torrent aggregator with a clean, instant interface. Searches multiple sources and displays results as they come in." htmlUrl="https://snowfl.com/"/>
+      <outline type="link" text="Stremio" title="Stremio" description="Media center with a huge addon ecosystem. Supports torrent streaming, content discovery, and Trakt integration out of the box." htmlUrl="https://www.stremio.com/"/>
+      <outline type="link" text="TorBox" title="TorBox" description="Freemium cloud torrent service with 10GB free storage. Download and stream torrents remotely without a local client." htmlUrl="https://torbox.app/"/>
+      <outline type="link" text="Torrent Parts" title="Torrent Parts" description="Edit and inspect .torrent files directly in the browser. View trackers, file lists, piece sizes, and metadata." htmlUrl="https://torrent.parts/"/>
+      <outline type="link" text="Torrents CSV" title="Torrents CSV" description="Self-hostable torrent search engine built on a collaborative CSV database. Lightweight, fast, and completely open source." htmlUrl="https://torrents-csv.com/"/>
+      <outline type="link" text="Transmission" title="Transmission" description="Minimal, resource-efficient torrent client loved by Linux and macOS users. Clean interface, zero bloat, just works." htmlUrl="https://transmissionbt.com/"/>
+      <outline type="link" text="webtor" title="webtor" description="Stream torrent content directly in your browser. No client install, no sign-up, no limits. Just paste a magnet link." htmlUrl="https://webtor.io/"/>
+    </outline>
+  </body>
+</opml>

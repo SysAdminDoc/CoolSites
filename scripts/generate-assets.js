@@ -81,6 +81,41 @@ const jsonFeed = {
 fs.writeFileSync(path.join(feedsDir, 'recent.atom'), atom);
 fs.writeFileSync(path.join(feedsDir, 'recent.json'), `${JSON.stringify(jsonFeed, null, 2)}\n`);
 
+// OPML is what the webring and blogroll world reads, and it is the one format
+// that lets somebody take this directory somewhere else. Kagi's small-web list
+// and the XXIIVV webring both publish one; the attributes here are the subset
+// those files actually use rather than everything OPML 2.0 permits.
+//
+// Grouped by category, because a flat list of 586 outlines is a worse artefact
+// than the page it came from. Nothing carries an xmlUrl: these are sites, not
+// feeds, and claiming a feed where there is none breaks the reader that trusts
+// it.
+const opmlCategories = new Map();
+for (const site of [...sites].sort((a, b) => a.name.localeCompare(b.name))) {
+  if (!opmlCategories.has(site.category)) opmlCategories.set(site.category, []);
+  opmlCategories.get(site.category).push(site);
+}
+const opmlBody = [...opmlCategories.keys()].sort().map(category => {
+  const entries = opmlCategories.get(category)
+    .map(site => `      <outline type="link" text="${xml(site.name)}" title="${xml(site.name)}" description="${xml(site.description)}" htmlUrl="${xml(site.url)}"/>`)
+    .join('\n');
+  return `    <outline text="${xml(category)}" title="${xml(category)}">\n${entries}\n    </outline>`;
+}).join('\n');
+const opml = `<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>CoolSites</title>
+    <dateModified>${xml(new Date(feedUpdated).toUTCString())}</dateModified>
+    <ownerName>SysAdminDoc</ownerName>
+    <docs>http://opml.org/spec2.opml</docs>
+  </head>
+  <body>
+${opmlBody}
+  </body>
+</opml>
+`;
+fs.writeFileSync(path.join(feedsDir, 'directory.opml'), opml);
+
 // Category counts are derived, so derive them. Lint has always verified them,
 // which meant anyone adding a site had to hand-edit a number to match, and the
 // README claimed the build did it. Now it does, and lint's check becomes a

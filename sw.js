@@ -14,6 +14,7 @@ const ASSETS = [
   './favicons.json',
   './feeds/recent.atom',
   './feeds/recent.json',
+  './feeds/directory.opml',
   './fonts/outfit-latin.woff2',
   './fonts/outfit-latin-ext.woff2',
   './fonts/jetbrains-mono-latin.woff2',

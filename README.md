@@ -216,6 +216,18 @@ build, and it deliberately carries no site count: putting one on it would mean
 rewriting a 114KB binary on every commit that adds an entry, and git would keep
 every version of it forever.
 
+### Taking the directory elsewhere
+
+`npm run build` writes `feeds/directory.opml`, the whole directory grouped by
+category. OPML is what the webring and blogroll world reads, and it is the one
+format that lets somebody take this list somewhere else rather than only look at
+it here. Kagi's small-web list and the XXIIVV webring both publish one.
+
+No outline carries an `xmlUrl`. OPML's usual job is carrying feed subscriptions,
+so a reader that sees one will try to poll it, and most of these are sites with
+no feed at all. Claiming a feed where there is none breaks the reader that
+trusts you.
+
 ### Favicon weight
 
 `favicons.json` ships in full on every visit, so it is the largest single thing a
