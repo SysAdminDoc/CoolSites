@@ -6,6 +6,40 @@
   "description": "Recently added and updated CoolSites directory entries.",
   "items": [
     {
+      "id": "https://www.agno.com",
+      "url": "https://www.agno.com",
+      "title": "Agno",
+      "summary": "Build AI agents with memory, knowledge and tools. Python framework for production agents, formerly Phidata.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "AI & ML",
+        "agents",
+        "framework",
+        "python",
+        "phidata"
+      ],
+      "_coolsites_category": "AI & ML",
+      "_coolsites_slug": "agno"
+    },
+    {
+      "id": "https://arena.ai",
+      "url": "https://arena.ai",
+      "title": "Arena AI",
+      "summary": "Head-to-head LLM comparisons with blind voting. The most credible LLM benchmark based on human preference.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "AI & ML",
+        "benchmark",
+        "comparison",
+        "leaderboard",
+        "chatbot arena",
+        "lmarena",
+        "lmsys"
+      ],
+      "_coolsites_category": "AI & ML",
+      "_coolsites_slug": "arena-ai"
+    },
+    {
       "id": "https://github.com/awesome-windows11/windows11",
       "url": "https://github.com/awesome-windows11/windows11",
       "title": "Awesome Windows 11",
@@ -54,6 +88,38 @@
       "_coolsites_slug": "fmhy-safeguard"
     },
     {
+      "id": "https://github.com/gitpod-io/gitpod",
+      "url": "https://github.com/gitpod-io/gitpod",
+      "title": "Gitpod",
+      "summary": "Self-hostable cloud development environments. Spin up a full dev workspace from any Git repo. The company now trades as Ona; the AGPL project kept the name.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Dev Tools",
+        "git",
+        "workspace",
+        "cloud ide",
+        "ona"
+      ],
+      "_coolsites_category": "Dev Tools",
+      "_coolsites_slug": "gitpod"
+    },
+    {
+      "id": "https://www.maltego.com/pricing/",
+      "url": "https://www.maltego.com/pricing/",
+      "title": "Maltego",
+      "summary": "Visual link analysis for OSINT investigations. Map relationships between people, companies, domains and IPs. The Community Edition is still free.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "OSINT",
+        "link analysis",
+        "graph",
+        "investigation",
+        "community edition"
+      ],
+      "_coolsites_category": "OSINT",
+      "_coolsites_slug": "maltego"
+    },
+    {
       "id": "https://github.com/sundowndev/phoneinfoga",
       "url": "https://github.com/sundowndev/phoneinfoga",
       "title": "PhoneInfoga",
@@ -69,6 +135,22 @@
       "_coolsites_slug": "phoneinfoga"
     },
     {
+      "id": "https://poolsuite.net",
+      "url": "https://poolsuite.net",
+      "title": "Poolsuite",
+      "summary": "Retro-styled internet radio and video player. 90s aesthetics, vaporwave vibes, poolside relaxation.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "Fun & Culture",
+        "music",
+        "retro",
+        "vaporwave",
+        "poolside fm"
+      ],
+      "_coolsites_category": "Fun & Culture",
+      "_coolsites_slug": "poolsuite"
+    },
+    {
       "id": "https://github.com/public-apis/public-apis",
       "url": "https://github.com/public-apis/public-apis",
       "title": "public-apis",
@@ -82,6 +164,22 @@
       ],
       "_coolsites_category": "News & Reference",
       "_coolsites_slug": "public-apis"
+    },
+    {
+      "id": "https://github.com/smicallef/spiderfoot",
+      "url": "https://github.com/smicallef/spiderfoot",
+      "title": "SpiderFoot",
+      "summary": "Open source OSINT automation. Scans 200+ data sources to map an entity's digital footprint.",
+      "date_modified": "2026-09-05T00:00:00Z",
+      "tags": [
+        "OSINT",
+        "automation",
+        "recon",
+        "footprint",
+        "intel471"
+      ],
+      "_coolsites_category": "OSINT",
+      "_coolsites_slug": "spiderfoot"
     },
     {
       "id": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",

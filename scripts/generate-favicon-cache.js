@@ -6,6 +6,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { reencodeAll, RENDER_SIZE } = require('./lib/reencode-icons');
 
 const root = path.resolve(__dirname, '..');
 const sites = JSON.parse(fs.readFileSync(path.join(root, 'sites.json'), 'utf8'));

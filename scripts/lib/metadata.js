@@ -24,7 +24,7 @@ const LEGACY_IMPORT_DATE = '2026-06-25';
 // exactly, so it can only go down, and it goes down on its own: npm run review
 // lowers it as entries get checked. An approximate ceiling would leave slack
 // that a new entry could be filed into, which is the hole this closes.
-const MAX_LEGACY_DATED = 568;
+const MAX_LEGACY_DATED = 562;
 
 // The date a human last actually looked at the entry, as opposed to updatedAt,
 // which is when its content changed. Either can be the more recent one.

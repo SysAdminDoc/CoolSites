@@ -7,6 +7,22 @@
   <updated>2026-09-05T00:00:00Z</updated>
   <generator version="2.4.0">CoolSites</generator>
   <entry>
+    <title>Agno</title>
+    <id>https://www.agno.com</id>
+    <link href="https://www.agno.com"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="AI &amp; ML"/>
+    <summary>Build AI agents with memory, knowledge and tools. Python framework for production agents, formerly Phidata.</summary>
+  </entry>
+  <entry>
+    <title>Arena AI</title>
+    <id>https://arena.ai</id>
+    <link href="https://arena.ai"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="AI &amp; ML"/>
+    <summary>Head-to-head LLM comparisons with blind voting. The most credible LLM benchmark based on human preference.</summary>
+  </entry>
+  <entry>
     <title>Awesome Windows 11</title>
     <id>https://github.com/awesome-windows11/windows11</id>
     <link href="https://github.com/awesome-windows11/windows11"/>
@@ -31,6 +47,22 @@
     <summary>Browser extension that warns you about unsafe or malicious sites. Community-maintained blocklist based on FMHY&apos;s unsafe sites list.</summary>
   </entry>
   <entry>
+    <title>Gitpod</title>
+    <id>https://github.com/gitpod-io/gitpod</id>
+    <link href="https://github.com/gitpod-io/gitpod"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Dev Tools"/>
+    <summary>Self-hostable cloud development environments. Spin up a full dev workspace from any Git repo. The company now trades as Ona; the AGPL project kept the name.</summary>
+  </entry>
+  <entry>
+    <title>Maltego</title>
+    <id>https://www.maltego.com/pricing/</id>
+    <link href="https://www.maltego.com/pricing/"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="OSINT"/>
+    <summary>Visual link analysis for OSINT investigations. Map relationships between people, companies, domains and IPs. The Community Edition is still free.</summary>
+  </entry>
+  <entry>
     <title>PhoneInfoga</title>
     <id>https://github.com/sundowndev/phoneinfoga</id>
     <link href="https://github.com/sundowndev/phoneinfoga"/>
@@ -39,12 +71,28 @@
     <summary>Advanced information gathering tool for phone numbers. Scan international numbers with multiple sources.</summary>
   </entry>
   <entry>
+    <title>Poolsuite</title>
+    <id>https://poolsuite.net</id>
+    <link href="https://poolsuite.net"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="Fun &amp; Culture"/>
+    <summary>Retro-styled internet radio and video player. 90s aesthetics, vaporwave vibes, poolside relaxation.</summary>
+  </entry>
+  <entry>
     <title>public-apis</title>
     <id>https://github.com/public-apis/public-apis</id>
     <link href="https://github.com/public-apis/public-apis"/>
     <updated>2026-09-05T00:00:00Z</updated>
     <category term="News &amp; Reference"/>
     <summary>Massive categorized list of free APIs covering weather, music, sports and finance. If it exists, there&apos;s an API for it.</summary>
+  </entry>
+  <entry>
+    <title>SpiderFoot</title>
+    <id>https://github.com/smicallef/spiderfoot</id>
+    <link href="https://github.com/smicallef/spiderfoot"/>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <category term="OSINT"/>
+    <summary>Open source OSINT automation. Scans 200+ data sources to map an entity&apos;s digital footprint.</summary>
   </entry>
   <entry>
     <title>Cloudflare Tunnel</title>
