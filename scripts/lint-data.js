@@ -221,6 +221,29 @@ function validateSourceData() {
   // Compared as a plain string against the YYYY-MM-DD the data uses, so a
   // timezone never turns a same-day stamp into a future date.
   const today = new Date().toISOString().slice(0, 10);
+  // A removal has to leave something behind. Kagi's small-web list documents the
+  // failure directly: sites they had removed kept coming back, proposed in good
+  // faith by people who had no way to know the decision had already been made
+  // and why. Deleting a row records nothing except in a commit nobody reads.
+  const removed = readOptionalJson('removed.json', []);
+  const removedSchema = readJson('schemas/removed.schema.json');
+  const removedAddresses = new Map();
+  if (!Array.isArray(removed)) {
+    addError('removed.json must be an array');
+  } else {
+    removed.forEach((record, index) => {
+      const label = `removed[${index}]${record?.name ? ` ${record.name}` : ''}`;
+      validateSchema(record, removedSchema, label);
+      if (record?.removedAt && !isDate(record.removedAt)) addError(`${label}: removedAt must be YYYY-MM-DD`);
+      if (record?.removedAt && record.removedAt > today) addError(`${label}: removedAt ${record.removedAt} is in the future`);
+      const canonical = canonicalUrl(record?.url);
+      if (record?.url && !canonical) addError(`${label}: url must be a valid URL`);
+      if (canonical) {
+        if (removedAddresses.has(canonical)) addError(`${label}: ${record.url} is already recorded as removed`);
+        removedAddresses.set(canonical, label);
+      }
+    });
+  }
 
   (Array.isArray(categories) ? categories : []).forEach((category, index) => {
     const label = `categories[${index}]`;
@@ -240,6 +263,11 @@ function validateSourceData() {
     urls.add(site?.url);
     if (canonical && canonicalUrls.has(canonical)) addError(`${label}: canonical URL collides with ${canonicalUrls.get(canonical)}`);
     if (canonical) canonicalUrls.set(canonical, label);
+    // Matched the same way a duplicate is, so a trailing slash or an http to
+    // https swap cannot walk a removed entry back in.
+    if (canonical && removedAddresses.has(canonical)) {
+      addError(`${label}: ${site.url} was removed on purpose, see ${removedAddresses.get(canonical)} in removed.json. Delete that record if the decision has changed.`);
+    }
     if (!categoryNames.has(site?.category)) addError(`${label}: unknown category ${site?.category}`);
     categoryCounts.set(site?.category, (categoryCounts.get(site?.category) || 0) + 1);
     if (typeof site?.name === 'string' && (site.name.length > 120 || site.name.trim() !== site.name)) addError(`${label}: name length/whitespace invalid`);

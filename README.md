@@ -484,6 +484,12 @@ and using one.
 **No affiliate links, no sponsored entries, no ads.** There is no paid placement
 and there never will be.
 
+**Check `removed.json` first.** Anything taken out of the directory leaves a
+record there saying when and why. Deleting a row on its own records nothing you
+can read before opening a pull request, and the predictable result is that
+somebody proposes the same site again in good faith and gets turned down for a
+reason nobody wrote down. Reversing a decision means deleting the record.
+
 **Descriptions** say what it does and why it's worth knowing about. One or two
 sentences. Prefer open source when there's a reasonable alternative.
 

@@ -129,7 +129,7 @@ body:
       options:
         - label: Site is free to use, or the free tier stands on its own without the paid one
           required: true
-        - label: Site is not already in the directory
+        - label: Site is not already in the directory, and is not listed in removed.json
           required: true
         - label: I have verified the URL works
           required: true
