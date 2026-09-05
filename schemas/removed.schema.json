@@ -9,7 +9,7 @@
     "url": {
       "type": "string",
       "format": "uri",
-      "description": "The address that was listed. Lint rejects re-adding it, matched the same way duplicate URLs are, so a trailing slash or a http/https swap does not slip past."
+      "description": "The address that was listed. Lint rejects re-adding it under either url or repository, comparing host without www and path without a trailing slash, so a protocol swap, a www prefix or a tracking parameter does not slip past."
     },
     "name": { "type": "string", "minLength": 1 },
     "removedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },

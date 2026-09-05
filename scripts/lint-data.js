@@ -133,6 +133,25 @@ function forgeRepository(value) {
   }
 }
 
+// Deliberately blunter than canonicalUrl. That one decides whether two entries
+// are the same listing, where http and https really are different addresses and
+// a query string can be the whole difference between two pages. This one decides
+// whether somebody is re-adding a site that was removed on purpose, and there
+// the only useful question is "is this the same site". A review found three ways
+// past the stricter comparison: an http/https swap, a www prefix, and a
+// ?ref= parameter, each of which a contributor could add without any intent to
+// get around anything.
+function tombstoneKey(value) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase().replace(/^www\./, '');
+    const pathname = url.pathname.replace(/\/+$/, '');
+    return `${host}${pathname}`;
+  } catch {
+    return null;
+  }
+}
+
 function canonicalUrl(value) {
   try {
     const parsed = new URL(value);
@@ -236,11 +255,11 @@ function validateSourceData() {
       validateSchema(record, removedSchema, label);
       if (record?.removedAt && !isDate(record.removedAt)) addError(`${label}: removedAt must be YYYY-MM-DD`);
       if (record?.removedAt && record.removedAt > today) addError(`${label}: removedAt ${record.removedAt} is in the future`);
-      const canonical = canonicalUrl(record?.url);
-      if (record?.url && !canonical) addError(`${label}: url must be a valid URL`);
-      if (canonical) {
-        if (removedAddresses.has(canonical)) addError(`${label}: ${record.url} is already recorded as removed`);
-        removedAddresses.set(canonical, label);
+      const key = tombstoneKey(record?.url);
+      if (record?.url && !key) addError(`${label}: url must be a valid URL`);
+      if (key) {
+        if (removedAddresses.has(key)) addError(`${label}: ${record.url} is already recorded as removed`);
+        removedAddresses.set(key, label);
       }
     });
   }
@@ -263,10 +282,13 @@ function validateSourceData() {
     urls.add(site?.url);
     if (canonical && canonicalUrls.has(canonical)) addError(`${label}: canonical URL collides with ${canonicalUrls.get(canonical)}`);
     if (canonical) canonicalUrls.set(canonical, label);
-    // Matched the same way a duplicate is, so a trailing slash or an http to
-    // https swap cannot walk a removed entry back in.
-    if (canonical && removedAddresses.has(canonical)) {
-      addError(`${label}: ${site.url} was removed on purpose, see ${removedAddresses.get(canonical)} in removed.json. Delete that record if the decision has changed.`);
+    // Both addresses, because repository is a link the entry publishes too, and
+    // it feeds the star badge: a removed project could otherwise be reattached
+    // to a new front door and have its stars shown again.
+    for (const [field, value] of [['url', site?.url], ['repository', site?.repository]]) {
+      const key = tombstoneKey(value);
+      if (!key || !removedAddresses.has(key)) continue;
+      addError(`${label}: ${field} ${value} was removed on purpose, see ${removedAddresses.get(key)} in removed.json. Delete that record if the decision has changed.`);
     }
     if (!categoryNames.has(site?.category)) addError(`${label}: unknown category ${site?.category}`);
     categoryCounts.set(site?.category, (categoryCounts.get(site?.category) || 0) + 1);

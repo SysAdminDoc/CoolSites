@@ -160,13 +160,25 @@ async function fetchFavicon(domain, pageUrl) {
     failures.push(`page: ${error.message}`);
   }
 
-  throw new Error(`${domain} (${failures.join('; ')})`);
+  const error = new Error(`${domain} (${failures.join('; ')})`);
+  // A 404 from every source and a page declaring no icon is a fact about the
+  // site. A timeout, a rate limit or a server error is a fact about this
+  // minute. Recording the second as "there is no icon here" freezes a domain at
+  // the fallback initial until somebody remembers to pass --retry-missing.
+  error.definitive = !failures.some(isTransient);
+  throw error;
+}
+
+const TRANSIENT = /\btimed out\b|\bHTTP (?:408|425|429|5\d\d)\b|ETIMEDOUT|ECONNRESET|ENOTFOUND|EAI_AGAIN|UND_ERR|fetch failed|socket/i;
+
+function isTransient(failure) {
+  return TRANSIENT.test(failure);
 }
 
 // Exported for the tests. Reading link tags out of arbitrary HTML with a regex
 // is the kind of thing that quietly matches nothing, so it gets exercised
 // against awkward markup rather than trusted.
-module.exports = { iconLinksFromHtml, looksLikeImage, domainFromUrl };
+module.exports = { iconLinksFromHtml, looksLikeImage, domainFromUrl, isTransient };
 
 if (require.main !== module) return;
 
@@ -186,6 +198,7 @@ if (require.main !== module) return;
 
   const retryMissing = process.argv.includes('--retry-missing');
   let skipped = 0;
+  const transient = [];
   for (const domain of domains) {
     if (cache[domain]) continue;
     // Recorded as having no icon by a previous run. A site can start publishing
@@ -196,7 +209,10 @@ if (require.main !== module) return;
       cache[domain] = await fetchFavicon(domain, pageForDomain.get(domain));
       updated++;
     } catch (error) {
-      cache[domain] = false;
+      // Only a definitive "there is no icon here" is worth remembering. A
+      // transient failure is left unrecorded so the next run asks again.
+      if (error.definitive) cache[domain] = false;
+      else transient.push(domain);
       failed.push(domain);
       console.warn(error.message);
     }
@@ -242,6 +258,9 @@ if (require.main !== module) return;
     console.log(`No icon found for: ${failed.join(', ')}`);
     console.log('Those entries render the site initial instead. The page makes no third-party request for them.');
     if (skipped && !retryMissing) console.log('Pass --retry-missing to ask again for the ones already recorded as having none.');
+  }
+  if (transient.length) {
+    console.log(`Not recorded as missing, because the failure looked temporary: ${transient.join(', ')}. The next run will ask again.`);
   }
 })().catch(error => {
   console.error(error);

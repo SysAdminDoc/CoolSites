@@ -98,3 +98,37 @@ test('the guard restores both files even when lint fails', () => {
   assert.doesNotThrow(() => JSON.parse(fs.readFileSync(SITES_PATH, 'utf8')));
   assert.doesNotThrow(() => JSON.parse(fs.readFileSync(REMOVED_PATH, 'utf8')));
 });
+
+// Every shape below walked past the first version of the tombstone check, which
+// reused the duplicate-URL comparison. That one exists to decide whether two
+// entries are the same listing, where http and https really are different
+// addresses. This one decides whether somebody is re-adding a site that was
+// removed on purpose, and none of these is a different site.
+for (const [shape, url] of [
+  ['a protocol swap', 'http://example.invalid/gone'],
+  ['a www prefix', 'https://www.example.invalid/gone'],
+  ['a tracking parameter', 'https://example.invalid/gone?ref=newsletter'],
+  ['a fragment', 'https://example.invalid/gone#top'],
+  ['an uppercase host', 'https://EXAMPLE.invalid/gone']
+]) {
+  test(`${shape} does not walk a removed entry back in`, () => {
+    const result = lintWith((sites, removed) => {
+      removed.push(TOMBSTONE);
+      sites[1].url = url;
+    });
+    assert.equal(result.passed, false, `${url} was accepted`);
+    assert.match(result.output, /was removed on purpose/);
+  });
+}
+
+test('a removed project cannot come back through the repository field', () => {
+  // repository is a link the entry publishes too, and it drives the star badge,
+  // so a removed project could otherwise be reattached to a new front door and
+  // have its stars shown again.
+  const result = lintWith((sites, removed) => {
+    removed.push(TOMBSTONE);
+    sites[1].repository = TOMBSTONE.url;
+  });
+  assert.equal(result.passed, false);
+  assert.match(result.output, /repository .* was removed on purpose/);
+});

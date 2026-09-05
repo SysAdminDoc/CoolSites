@@ -135,3 +135,30 @@ test('a domain with no icon anywhere is recorded, not just skipped', () => {
     assert.ok(value === false || typeof value === 'string', `${domain}: an entry is a data URI or false, nothing else`);
   }
 });
+
+test('a temporary failure is not recorded as having no icon', () => {
+  // false means "checked, none exists". A timeout, a rate limit or a server
+  // error is a fact about this minute, not about the site, and recording one as
+  // an absence freezes the domain at the fallback initial until somebody
+  // remembers to pass --retry-missing.
+  const { isTransient } = require('../scripts/generate-favicon-cache.js');
+  for (const failure of [
+    'icons.duckduckgo.com: HTTP 429',
+    'host: timed out',
+    'x: HTTP 503',
+    'y: HTTP 500',
+    'z: ETIMEDOUT',
+    'w: UND_ERR_CONNECT_TIMEOUT'
+  ]) {
+    assert.equal(isTransient(failure), true, `${failure} should not be recorded as a permanent absence`);
+  }
+  for (const failure of [
+    'www.google.com: HTTP 404',
+    'page: page declares no icon',
+    'z: HTTP 403',
+    'q: payload is not an image (starts 626f6f6b)',
+    'w: unsupported content type text/html'
+  ]) {
+    assert.equal(isTransient(failure), false, `${failure} is a fact about the site, so it should be recorded`);
+  }
+});
