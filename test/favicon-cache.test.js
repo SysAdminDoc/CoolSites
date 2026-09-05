@@ -82,7 +82,9 @@ test('the cached icons are all really images', () => {
   const entries = Object.entries(cache);
   assert.ok(entries.length > 100, 'the cache should not be nearly empty');
   const bad = entries.filter(([, uri]) => {
-    if (!uri.startsWith('data:image/')) return true;
+    // false records a domain checked and found to have no icon anywhere.
+    if (uri === false) return false;
+    if (typeof uri !== 'string' || !uri.startsWith('data:image/')) return true;
     const bytes = Buffer.from(uri.slice(uri.indexOf(',') + 1), 'base64');
     return !looksLikeImage(bytes);
   }).map(([domain]) => domain);
@@ -103,7 +105,7 @@ test('no single icon is fat enough to matter on its own', () => {
   // the fetch path stopped them, because the size only shows up in aggregate.
   const cache = JSON.parse(fs.readFileSync(path.join(ROOT, 'favicons.json'), 'utf8'));
   const fat = Object.entries(cache)
-    .filter(([, value]) => value.length > 8 * 1024 && !value.startsWith('data:image/svg+xml'))
+    .filter(([, value]) => typeof value === 'string' && value.length > 8 * 1024 && !value.startsWith('data:image/svg+xml'))
     .map(([domain, value]) => `${domain} ${(value.length / 1024).toFixed(1)}KB`);
   assert.deepEqual(fat, [], 'run npm run update:favicons to re-encode these at 32px');
 });
@@ -113,4 +115,23 @@ test('the whole cache stays inside its download budget', () => {
   // number is the largest single thing a reader waits for.
   const bytes = fs.readFileSync(path.join(ROOT, 'favicons.json'), 'utf8').length;
   assert.ok(bytes <= 700 * 1024, `favicons.json is ${(bytes / 1024).toFixed(0)}KB, over the 700KB budget`);
+});
+
+test('a domain with no icon anywhere is recorded, not just skipped', () => {
+  // Thirteen domains have no icon and never will: putty.org serves no link tags
+  // at all, retroarch.com has seven and none is an icon. Recording only
+  // successes meant every refresh re-attempted all thirteen and paid four
+  // requests each to learn what the previous run already knew.
+  const cache = JSON.parse(fs.readFileSync(path.join(ROOT, 'favicons.json'), 'utf8'));
+  const sites = JSON.parse(fs.readFileSync(path.join(ROOT, 'sites.json'), 'utf8'));
+  const domains = new Set(sites.map(site => domainFromUrl(site.url)).filter(Boolean));
+
+  const unrecorded = [...domains].filter(domain => !(domain in cache));
+  assert.deepEqual(unrecorded, [], 'every listed domain should be either an icon or a recorded absence');
+
+  const values = Object.values(cache);
+  assert.ok(values.some(value => value === false), 'the absence state should actually be in use');
+  for (const [domain, value] of Object.entries(cache)) {
+    assert.ok(value === false || typeof value === 'string', `${domain}: an entry is a data URI or false, nothing else`);
+  }
 });

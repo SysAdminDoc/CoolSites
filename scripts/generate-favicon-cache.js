@@ -3,6 +3,15 @@
 // Fills favicons.json so the browser never has to ask a third party for an icon.
 // Google's favicon service 404s for a long tail of domains, so this falls back
 // to DuckDuckGo and then to the site's own /favicon.ico before giving up.
+//
+// An entry is one of three things, and the difference matters. A data URI means
+// an icon was found. `false` means all four sources were tried and there is
+// nothing to find: putty.org serves no link tags at all, retroarch.com has
+// seven and none of them is an icon. Absent means nobody has looked yet. Without
+// the middle state every run re-attempted the same thirteen domains and paid
+// four requests each to learn what the last run already knew.
+//
+//   node scripts/generate-favicon-cache.js [--no-reencode] [--retry-missing]
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -175,12 +184,19 @@ if (require.main !== module) return;
   let updated = 0;
   const failed = [];
 
+  const retryMissing = process.argv.includes('--retry-missing');
+  let skipped = 0;
   for (const domain of domains) {
     if (cache[domain]) continue;
+    // Recorded as having no icon by a previous run. A site can start publishing
+    // one, so --retry-missing exists, but doing it every run is four requests
+    // per domain to be told the same thing again.
+    if (cache[domain] === false && !retryMissing) { skipped++; failed.push(domain); continue; }
     try {
       cache[domain] = await fetchFavicon(domain, pageForDomain.get(domain));
       updated++;
     } catch (error) {
+      cache[domain] = false;
       failed.push(domain);
       console.warn(error.message);
     }
@@ -220,11 +236,12 @@ if (require.main !== module) return;
 
   const ordered = Object.fromEntries(Object.keys(cache).sort().map(key => [key, cache[key]]));
   fs.writeFileSync(output, `${JSON.stringify(ordered, null, 2)}\n`);
-  const covered = Object.keys(ordered).length;
-  console.log(`Cached ${updated} new favicons (${failed.length} failed, ${pruned} stale removed); ${covered}/${domains.length} domains available`);
+  const covered = Object.values(ordered).filter(value => typeof value === 'string').length;
+  console.log(`Cached ${updated} new favicons (${failed.length} without one, ${skipped} of those already known, ${pruned} stale removed); ${covered}/${domains.length} domains available`);
   if (failed.length) {
     console.log(`No icon found for: ${failed.join(', ')}`);
     console.log('Those entries render the site initial instead. The page makes no third-party request for them.');
+    if (skipped && !retryMissing) console.log('Pass --retry-missing to ask again for the ones already recorded as having none.');
   }
 })().catch(error => {
   console.error(error);

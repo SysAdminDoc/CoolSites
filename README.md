@@ -225,6 +225,14 @@ when Chrome is unavailable and you only need the fetch.
 Two ceilings stop it creeping back: 8KB for any one raster icon, and 700KB for
 the file. Both fail the lint rather than warn.
 
+An entry in `favicons.json` is one of three things. A data URI means an icon was
+found. `false` means all four sources were tried and there is nothing to find:
+putty.org serves no `<link>` tags at all, retroarch.com has seven and none of
+them is an icon. Absent means nobody has looked yet. Without that middle state
+every refresh re-attempted the same thirteen domains and spent four requests each
+learning what the last run already knew. `--retry-missing` asks again, for when
+one of them starts publishing an icon.
+
 `npm run lint` is the gate that matters. It validates every data file against
 the schemas, rejects duplicate and colliding URLs, checks the generated feeds
 match the data, and fails when any version or count string in `index.html`,

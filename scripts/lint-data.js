@@ -362,8 +362,13 @@ function validateSourceData() {
 
   Object.entries(favicons || {}).forEach(([domain, data]) => {
     if (!/^[a-z0-9.-]+$/i.test(domain)) addError(`favicons.${domain}: invalid domain key`);
+    // false records a domain that was checked and has no icon anywhere, so the
+    // next run does not spend four requests learning it again. The page reads
+    // it as falsy and renders the site initial, exactly as it does for a domain
+    // nobody has looked at yet.
+    if (data === false) return;
     if (typeof data !== 'string' || !/^data:image\/(?:png|jpeg|gif|webp|x-icon|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(data)) {
-      addError(`favicons.${domain}: invalid data URI`);
+      addError(`favicons.${domain}: invalid data URI, or false for a domain with none`);
       return;
     }
     // 300KB was a sanity check against a corrupt payload, not a budget. The
