@@ -7,6 +7,16 @@
 ![Status](https://img.shields.io/badge/status-active-success)
 ![GitHub Pages](https://img.shields.io/badge/hosted-GitHub%20Pages-222?logo=github&logoColor=white)
 
+<p align="center">
+  <a href="https://ko-fi.com/X8K126YVER">
+    <img height="42" src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy me a coffee on Ko-fi" />
+  </a>
+</p>
+
+<p align="center">
+  <sub><em>If CoolSites helps you find something useful, a coffee helps me keep the directory curated and current.</em></sub>
+</p>
+
 > A curated directory of 586 free tools, open source projects, and hidden gems across 30 categories, built for sysadmins, devs, creators, homelabbers, and the endlessly curious.
 
 **[Browse the directory](https://sysadmindoc.github.io/CoolSites/)**
